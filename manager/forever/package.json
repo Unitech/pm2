@@ -1,0 +1,50 @@
+{
+  "name": "forever-custom",
+  "description": "A simple CLI tool for ensuring that a given node script runs continuously (i.e. forever)",
+  "version": "0.10.7",
+  "author": {
+    "name": "Nodejitsu Inc.",
+    "email": "info@nodejitsu.com"
+  },
+  "maintainers": [
+    {
+      "name": "indexzero",
+      "email": "charlie@nodejitsu.com"
+    },
+    {
+      "name": "mmalecki",
+      "email": "maciej@nodejitsu.com"
+    },
+    {
+      "name": "avianflu",
+      "email": "charlie@charlieistheman.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/nodejitsu/forever.git"
+  },
+  "keywords": [
+    "cli",
+    "fault tolerant",
+    "sysadmin",
+    "tools"
+  ],
+  "devDependencies": {
+    "broadway": "0.2.x",
+    "eventemitter2": "0.4.x",
+    "request": "2.x.x",
+    "vows": "0.7.x"
+  },
+  "main": "./lib/forever",
+  "scripts": {
+    "test": "vows test/**/*-test.js --spec -i"
+  },
+  "engines": {
+    "node": ">= 0.8.x"
+  },
+  "readme": "# forever [![Build Status](https://secure.travis-ci.org/nodejitsu/forever.png)](http://travis-ci.org/nodejitsu/forever)\n\nA simple CLI tool for ensuring that a given script runs continuously (i.e. forever).\n\n## Installation\n\n``` bash\n  $ [sudo] npm install forever -g\n```\n\n**Note:** If you are using forever _programatically_ you should install [forever-monitor][0].\n\n``` bash\n  $ cd /path/to/your/project\n  $ [sudo] npm install forever-monitor\n```\n\n## Usage\nThere are two distinct ways to use forever: through the command line interface, or by requiring the forever module in your own code. **Note:** If you are using forever _programatically_ you should install [forever-monitor][0].\n\n### Using forever from the command line\nYou can use forever to run any kind of script continuously (whether it is written in node.js or not). The usage options are simple:\n\n```\n  $ forever --help\n  usage: forever [action] [options] SCRIPT [script-options]\n\n  Monitors the script specified in the current process or as a daemon\n\n  actions:\n    start               Start SCRIPT as a daemon\n    stop                Stop the daemon SCRIPT\n    stopall             Stop all running forever scripts\n    restart             Restart the daemon SCRIPT\n    restartall          Restart all running forever scripts\n    list                List all running forever scripts\n    config              Lists all forever user configuration\n    set <key> <val>     Sets the specified forever config <key>\n    clear <key>         Clears the specified forever config <key>\n    logs                Lists log files for all forever processes\n    logs <script|index> Tails the logs for <script|index>\n    columns add <col>   Adds the specified column to the output in `forever list`\n    columns rm <col>    Removed the specified column from the output in `forever list`\n    columns set <cols>  Set all columns for the output in `forever list`\n    cleanlogs           [CAREFUL] Deletes all historical forever log files\n\n  options:\n    -m  MAX          Only run the specified script MAX times\n    -l  LOGFILE      Logs the forever output to LOGFILE\n    -o  OUTFILE      Logs stdout from child script to OUTFILE\n    -e  ERRFILE      Logs stderr from child script to ERRFILE\n    -p  PATH         Base path for all forever related files (pid files, etc.)\n    -c  COMMAND      COMMAND to execute (defaults to node)\n    -a, --append     Append logs\n    -f, --fifo       Stream logs to stdout\n    -n, --number     Number of log lines to print\n    --pidFile        The pid file\n    --sourceDir      The source directory for which SCRIPT is relative to\n    --minUptime      Minimum uptime (millis) for a script to not be considered \"spinning\"\n    --spinSleepTime  Time to wait (millis) between launches of a spinning script.\n    --plain          Disable command line colors\n    -d, --debug      Forces forever to log debug output\n    -v, --verbose    Turns on the verbose messages from Forever\n    -s, --silent     Run the child script silencing stdout and stderr\n    -w, --watch      Watch for file changes\n    --watchDirectory Top-level directory to watch from\n    -h, --help       You're staring at it\n\n  [Long Running Process]\n    The forever process will continue to run outputting log messages to the console.\n    ex. forever -o out.log -e err.log my-script.js\n\n  [Daemon]\n    The forever process will run as a daemon which will make the target process start\n    in the background. This is extremely useful for remote starting simple node.js scripts\n    without using nohup. It is recommended to run start with -o -l, & -e.\n    ex. forever start -l forever.log -o out.log -e err.log my-daemon.js\n        forever stop my-daemon.js\n```\n\nThere are [several examples][1] designed to test the fault tolerance of forever. Here's a simple usage example:\n\n``` bash\n  $ forever -m 5 examples/error-on-timer.js\n```\n\n## Using forever module from node.js\nIn addition to using a Forever object, the forever module also exposes some useful methods. Each method returns an instance of an EventEmitter which emits when complete. See the [forever cli commands][2] for sample usage.\n\n**Remark:** As of `forever@0.6.0` processes will not automatically be available in `forever.list()`. In order to get your processes into `forever.list()` or `forever list` you must instantiate the `forever` socket server:\n\n``` js\n  forever.startServer(child);\n```\n\n### forever.load (config)\n_Synchronously_ sets the specified configuration (config) for the forever module. There are two important options:\n\n* root:    Directory to put all default forever log files\n* pidPath: Directory to put all forever *.pid files\n\n### forever.start (file, options)\nStarts a script with forever.\n\n### forever.startDaemon (file, options)\nStarts a script with forever as a daemon. WARNING: Will daemonize the current process.\n\n### forever.stop (index)\nStops the forever daemon script at the specified index. These indices are the same as those returned by forever.list(). This method returns an EventEmitter that raises the 'stop' event when complete.\n\n### forever.stopAll (format)\nStops all forever scripts currently running. This method returns an EventEmitter that raises the 'stopAll' event when complete.\n\n### forever.list (format, callback)\nReturns a list of metadata objects about each process that is being run using forever. This method is synchronous and will return the list of metadata as such. Only processes which have invoked `forever.startServer()` will be available from `forever.list()`\n\n### forever.tail (target, options, callback)\nResponds with the logs from the target script(s) from `tail`. There are two important options:\n\n* `length` (numeric): is is used as the `-n` parameter to `tail`.\n* `stream` (boolean): is is used as the `-f` parameter to `tail`.\n\n### forever.cleanUp ()\nCleans up any extraneous forever *.pid files that are on the target system. This method returns an EventEmitter that raises the 'cleanUp' event when complete.\n\n### forever.cleanLogsSync (processes)\nRemoves all log files from the root forever directory that do not belong to current running forever processes.\n\n## Run Tests\n\n``` bash\n  $ npm test\n```\n\n#### License: MIT\n#### Author: [Charlie Robbins](http://github.com/indexzero)\n#### Contributors: [Fedor Indutny](http://github.com/indutny), [James Halliday](http://substack.net/), [Charlie McConnell](http://github.com/avianflu), [Maciej Malecki](http://github.com/mmalecki), [John Lancaster](http://jlank.com)\n\n[0]: http://github.com/nodejitsu/forever-monitor\n[1]: http://github.com/nodejitsu/forever-monitor/tree/master/examples\n[2]: https://github.com/nodejitsu/forever/blob/master/lib/forever/cli.js\n",
+  "readmeFilename": "README.md",
+  "_id": "forever@0.10.7",
+  "_from": "forever@*"
+}

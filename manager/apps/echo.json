@@ -1,0 +1,7 @@
+{
+    "path" : "bin/echo.js",
+    "outFile" : "out-echo.log",
+    "errFile" : "err-echo.log",
+    "pidFile" : "echo.log",
+    "options" : ""
+}

@@ -1,0 +1,7 @@
+{
+    "path" : "../bus/index.js",
+    "outFile" : "out-bus.log",
+    "errFile" : "err-bus.log",
+    "pidFile" : "bus.pid",
+    "options" : ""
+}

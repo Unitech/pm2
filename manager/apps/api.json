@@ -1,0 +1,7 @@
+{
+    "path" : "../index.js",
+    "outFile" : "out-api.log",
+    "errFile" : "err-api.log",
+    "pidFile" : "api.log",
+    "options" : ""
+}

@@ -1,0 +1,46 @@
+{
+    "name": "god",
+    "preferGlobal": "true",
+    "version": "0.4.0",
+    "description": "Manage processes with JSON files, reload, monitor, show logs and manage process programaticaly",
+    "main": "index.js",
+    "scripts": {
+        "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test ; bash test/cli-test.sh",
+        "froze": "npm shrinkwrap"
+    },
+    "keywords": [
+        "cli",
+        "fault tolerant",
+        "sysadmin",
+        "tools",
+        "monitoring",
+        "process manager",
+        "forever",
+        "process configuration"],
+    "bin": {
+        "pm2": "./bin/cli"
+    },
+    "dependencies": {
+        "commander": "*",
+	"cli-table" : "*",
+        "multimeter": "*",
+	"usage" : "*",
+        "watch": "*",
+	"axon-rpc" : "*",
+	"axon" : "*"
+    },
+    "devDependencies": {
+        "mocha": "1.x",
+        "should": "1.x"
+    },
+    "repository": "",
+    "author": {
+        "name": "AS"
+    },
+    "contributors": [{
+        "name": "Strzelewicz Alexandre",
+        "email": "strzelewicz.alexandre@gmail.com",
+        "website": "http://apps.hemca.com"
+    }],
+    "license": "MIT"
+}

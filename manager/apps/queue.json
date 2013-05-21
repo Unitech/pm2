@@ -1,0 +1,7 @@
+{
+    "path" : "../queue/worker.js",
+    "outFile" : "out-api.log",
+    "errFile" : "err-api.log",
+    "pidFile" : "queue.log",
+    "options" : ""
+} 

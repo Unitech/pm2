@@ -1,0 +1,12 @@
+{
+    "path" : "echo.js",
+    "outFile" : "out-echo.log",
+    "errFile" : "err-echo.log",
+    "pidFile" : "exec-echo.pid",
+    "options": ["foo"],
+    "env": {
+	"DEBUG": "*",
+	"PM_APP_TITLE" : "echo"
+    }
+}
+

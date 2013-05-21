@@ -1,0 +1,126 @@
+#!/usr/bin/env node
+
+var Satan = require('../satan.js');
+var commander = require('commander');
+var Table = require('cli-table');
+var Monit = require('../lib/monit');
+
+const VERSION      = '0.0.1';
+const SUCCESS_EXIT = 0;
+const ERROR_EXIT   = 1;
+
+// var logStream = process.stdout;
+
+// var log = function(level, summary, info) {
+//     logStream.write(JSON.stringify([(new Date()).toISOString(), level.toUpperCase(), summary, info]) + "\n");
+// };
+
+// ["debug", "info", "warning", "error"].forEach(function(level) {
+//   log[level] = log.bind(null, level);
+// });
+
+
+commander.version(VERSION)
+    .option('-v --verbose', 'Display all data')
+    .option('-f --force', 'Force actions')
+    .usage('[cmd] app');
+
+commander.command('start <part>')
+    .description('start specific part')
+    .action(function(cmd) {
+
+        Satan.executeRemote('prepare', {
+	    script : './examples/child.js',
+	    fileError : 'logs/errLog.log',
+	    fileOutput : 'logs/outLog.log',
+	    pidFile : 'pids/child',
+	    max : 10,
+	    instances : 'max'	    
+	}, function() {
+	    console.log('All process launched');
+	    process.exit(1);
+	});
+	//
+    });
+
+commander.command('stop')
+    .description('stop all processes')
+    .action(function(opts, cmd) {
+	console.log('Stopping all processes');
+
+	
+	Satan.executeRemote('stop', {}, function(err, list) {
+	    if (err) process.exit(ERROR_EXIT);
+	    dispAsTable(list);
+	    process.exit(SUCCESS_EXIT);
+	});
+    });
+
+commander.command('list')
+    .description('list all processes')
+    .action(function(opts, cmd) {
+
+	
+        Satan.executeRemote('list', {}, function(err, list) {
+	    if (err) process.exit(ERROR_EXIT);
+	    dispAsTable(list);
+	    process.exit(SUCCESS_EXIT);
+	});
+	//
+    });
+
+// Logs
+commander.command('monit')
+    .description('list all processes')
+    .action(function(opts, cmd) {
+
+	Satan.executeRemote('list', {}, function(err, list) {
+	    if (err) process.exit(ERROR_EXIT);
+	    Monit.init(list);
+	    
+	    function refresh(cb) {
+		Satan.executeRemote('list', {}, function(err, list) {
+		    setTimeout(function() {
+			Monit.refresh(list);
+			refresh();
+		    }, 500);
+		});
+	    }
+	    refresh();
+	    
+	});
+	
+    });
+
+
+commander.command('launch')
+    .description('manual launch of God')
+    .action(function(cmd) {
+	process.exit(1);
+    });
+
+//
+// Wait Satan is connected to God to launch parsing
+//
+process.on('satan:ready', function() {
+    commander.parse(process.argv);
+});
+
+function dispAsTable(list) {
+    var table = new Table({ head: ["Script", "id", "PID","status", "memory"] });
+    list.forEach(function(l) {
+	var u =  l.opts.script;
+	var obj = {};
+	
+	obj[l.opts.script] = [
+	    l.pm_id,
+	    l.pid,
+	    l.status,
+	    l.monit ? l.monit.memory : ''
+	];
+	
+	table.push(obj);
+    });
+    
+    console.log(table.toString());
+}

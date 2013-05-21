@@ -1,0 +1,82 @@
+#!/bin/bash
+#
+# initd-example      Node init.d 
+#
+# chkconfig: 345 80 20
+# description: Node init.d example
+# processname: node
+# pidfile: /var/run/initd-example.pid
+# logfile: /var/log/initd-example.log
+#
+
+# Source function library.
+. /lib/lsb/init-functions
+PATH=$PATH:/usr/local/bin
+
+NAME=foreverd
+pidfile=/var/run/$NAME.pid
+logfile=/var/log/$NAME.log
+forever_dir=/var/local/forever        # Forever root directory.
+
+node=node
+foreverd=`which foreverd`
+awk=awk
+sed=sed
+
+start() {
+    echo "Starting $NAME: "
+
+    if [ "$id" = "" ]; then
+        # Launch the application
+        $foreverd -p $forever_dir run
+    else
+        echo "Instance already running"
+    fi
+    RETVAL=$?
+}
+
+restart() {
+    echo -n "Restarting $NAME: "
+    if [ "$id" != "" ]; then
+        $foreverd -p $forever_dir restart
+        RETVAL=$?
+    else
+        start
+    fi
+}
+
+stop() {
+    echo -n "Shutting down $NAME: "
+    if [ "$id" != "" ]; then
+        $foreverd -p $forever_dir stop
+    else
+        echo "Instance is not running";
+    fi
+    RETVAL=$?
+}
+
+getForeverId() {
+    local pid=$(pidofproc -p $pidfile)
+    $foreverd list -p $forever_dir | $sed -e 's/\x1b\[[0-9; ]*m//g' | $awk "\$4 == \"$pid]\" { gsub(/[\[\]]/, \"\", \$1); print \$1; }"
+}
+id=$(getForeverId)
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        $foreverd -p $forever_dir list
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage:  {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
+exit $RETVAL
