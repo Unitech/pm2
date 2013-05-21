@@ -1,0 +1,88 @@
+
+var Satan;
+var should = require('should');
+var assert = require('better-assert');
+
+describe('Satan', function() {
+
+  after(function(done) {
+    Satan.killDaemon(function() {
+      done();
+    });
+  });
+
+  it('should auto instancy itself, fire event and kill daemon', function(done) {
+    Satan = require('../satan.js');
+    process.once('satan:client:ready', function() {
+      console.log('Client ready');
+      Satan.killDaemon(function() {
+        done();
+      })
+    });
+  });
+
+  it('should start daemon', function(done) {
+    Satan.launchDaemon(function(child) {
+      assert(typeof child.pid == 'number');
+      Satan.pingDaemon(function(online) {
+        console.log(online);
+        assert(online == true);
+        done();
+      });
+    });
+  });
+
+  it('should have right properties', function() {
+    Satan.should.have.property('remoteWrapper');
+    Satan.should.have.property('onReady');
+    Satan.should.have.property('launchRPC');
+    Satan.should.have.property('executeRemote');
+    Satan.should.have.property('launchDaemon');
+    Satan.should.have.property('getExposedMethods');
+    Satan.should.have.property('pingDaemon');
+    Satan.should.have.property('killDaemon');
+  });
+
+
+  describe('DAEMON', function() {
+    it('should have the right exposed methods via RPC', function(done) {
+      Satan.getExposedMethods(function(err, methods) {
+        assert(err == null);
+        methods.should.have.property('prepare');
+        methods.should.have.property('list');
+        methods.should.have.property('stop');
+        methods.should.have.property('killMe');
+        methods.should.have.property('daemonData');
+        done();
+      });
+    });
+
+    it('should get an empty process list', function(done) {
+      Satan.executeRemote('list', {}, function(err, res) {
+        assert(res.length === 0);
+        done();
+      });
+    });
+
+    it('should launch a process', function(done) {
+      Satan.executeRemote('prepare', {
+        script : './test/fixtures/child.js',
+        fileError : 'logs/errLog.log',
+        fileOutput : 'logs/outLog.log',
+        pidFile : 'pids/child',
+        instances : 'max'
+      }, function(err, procs) {
+	   assert(err == null);
+           assert(JSON.parse(procs).length == 4);
+	   done();
+         });
+    });
+
+    it('should list 4 processes', function(done) {
+      Satan.executeRemote('list', {}, function(err, res) {
+        assert(res.length === 4);
+        done();
+      });
+    });
+  });
+});

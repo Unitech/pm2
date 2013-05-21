@@ -1,0 +1,7 @@
+{
+  "script" : "examples/echo.js",
+  "fileError" : "logs/errEcho.log",
+  "fileOutput" : "logs/outEcho.log",
+  "pidFile" : "pids/echo",
+  "max" : "1"
+}

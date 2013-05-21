@@ -2,12 +2,253 @@
 
 var Satan = require('../satan.js');
 var commander = require('commander');
-var Table = require('cli-table');
 var Monit = require('../lib/monit');
+var UX = require('../lib/cli-ux.js');
+var Log = require('../lib/Log.js');
+var fs = require('fs');
+var path = require('path');
 
-const VERSION      = '0.0.1';
-const SUCCESS_EXIT = 0;
-const ERROR_EXIT   = 1;
+const VERSION           = '1.0.1';
+const SUCCESS_EXIT      = 0;
+const ERROR_EXIT        = 1;
+const SAMPLE_FILE_PATH  = '../lib/sample.json';
+const DEFAULT_FILE_PATH = path.resolve(process.env.HOME, '.pm2');
+const DEFAULT_LOG_PATH  = path.join(DEFAULT_FILE_PATH, 'logs');
+const DEFAULT_PID_PATH  = path.join(DEFAULT_FILE_PATH, 'pids');
+
+commander.version(VERSION)
+         .option('-v --verbose', 'Display all data')
+         .option('-f --force', 'Force actions')
+         .usage('[cmd] app');
+
+//
+// Start command
+//
+commander.command('start <part>')
+         .description('start specific part')
+         .action(function(cmd) {
+
+  var data = fs.readFileSync(cmd);
+  var appConf = JSON.parse(data);
+
+
+  if (Array.isArray(appConf)) {
+    (function ex(apps) {
+      if (!apps[0]) return speedList();
+      Satan.executeRemote('prepare', preProcess(apps[0]), function() {
+        apps.shift();
+        return ex(apps);
+      });
+    })(appConf);
+  }
+  else {
+    Satan.executeRemote('findByScript', {script : appConf.script}, function(err, exec) {
+      if (exec && !commander.force) {
+        console.log('Script already launched, add -f option to force re execution');
+        process.exit(ERROR_EXIT);
+      }
+
+      Satan.executeRemote('prepare', preProcess(appConf), function() {
+        console.log('Process launched');
+        speedList();
+      });
+    });
+  }
+
+});
+
+//
+// Stop All processes
+//
+commander.command('stop')
+         .description('stop all processes')
+         .action(function(opts, cmd) {
+  console.log('Stopping all processes');
+
+  Satan.executeRemote('stop', {}, function(err, list) {
+    if (err) process.exit(ERROR_EXIT);
+    UX.dispAsTable(list);
+    process.exit(SUCCESS_EXIT);
+  });
+});
+
+//
+// Sample generate
+//
+commander.command('generate <name>')
+         .description('generate sample JSON')
+         .action(function(name) {
+
+  var sample = fs.readFileSync(path.join(__dirname, SAMPLE_FILE_PATH));
+  var dt = sample.toString().replace(/VARIABLE/g, name);
+  var f_name = name + '-pm2.json';
+
+  fs.writeFileSync(path.join(process.env.PWD, f_name), dt);
+  console.info('Sample generated on current folder\n%s :\n', f_name);
+  console.info(dt);
+  process.exit(SUCCESS_EXIT);
+});
+
+//
+// List command
+//
+commander.command('list')
+         .description('list all processes')
+         .action(function(opts, cmd) {
+
+  Satan.executeRemote('list', {}, function(err, list) {
+    if (err) process.exit(ERROR_EXIT);
+    UX.dispAsTable(list);
+    process.exit(SUCCESS_EXIT);
+  });
+});
+
+//
+// Monitoring command
+//
+commander.command('monit')
+         .description('list all processes')
+         .action(function(opts, cmd) {
+
+  Satan.executeRemote('list', {}, function(err, list) {
+    if (err) process.exit(ERROR_EXIT);
+    Monit.init(list);
+
+    function refresh(cb) {
+      Satan.executeRemote('list', {}, function(err, list) {
+	setTimeout(function() {
+	  Monit.refresh(list);
+	  refresh();
+	}, 400);
+      });
+    }
+    refresh();
+  });
+});
+
+//
+// Log streaming
+//
+commander.command('logs')
+         .description('stream logs file')
+         .action(function(opts, cmd) {
+
+  Satan.executeRemote('list', {}, function(err, list) {
+    if (err) process.exit(ERROR_EXIT);
+    if (list && list.length == 0) {
+      console.log('No processes online');
+    }
+    list.forEach(function(l) {
+      if (l.opts.fileOutput) Log.stream(l.opts.fileOutput, l.opts.script + ' ' + l.pid);
+      if (l.opts.fileError) Log.stream(l.opts.fileError);
+    });
+  });
+});
+
+//
+// Kill
+//
+commander.command('kill')
+         .description('kill daemon')
+         .action(function() {
+
+  Satan.killDaemon(function(err, res) {
+    if (err) {
+      console.error('Error when killing daemon');
+      process.exit(ERROR_EXIT);
+    }
+    console.info('Daemon killed');
+    process.exit(SUCCESS_EXIT);
+  });
+});
+
+commander.command('*')
+         .action(function() {
+  console.log('\nCommand not found');
+  commander.outputHelp();
+  process.exit(ERROR_EXIT);
+});
+
+if (process.argv.length == 2) {
+  commander.outputHelp();
+  process.exit(ERROR_EXIT);
+}
+
+
+//
+// Wait Satan is connected to God to launch parsing
+//
+process.on('satan:client:ready', function() {
+  commander.parse(process.argv);
+});
+
+
+
+//
+// Init
+//
+(function init() {
+  fs.exists(DEFAULT_FILE_PATH, function(exist) {
+    if (!exist) {
+      fs.mkdirSync(DEFAULT_FILE_PATH);
+      fs.mkdirSync(DEFAULT_LOG_PATH);
+      fs.mkdirSync(DEFAULT_PID_PATH);
+    }
+  });
+})();
+
+
+//
+// Private methods
+//
+function speedList() {
+  Satan.executeRemote('list', {}, function(err, list) {
+    UX.dispAsTable(list);
+    process.exit(SUCCESS_EXIT);
+  });
+}
+
+//
+// Resolving path, seing if default ...
+//
+function preProcess(app) {
+  app["pm_exec_path"]    = path.resolve(process.cwd(), app.script);
+
+  fs.statSync(app.pm_exec_path);
+
+  if (app.fileOutput)
+    app["pm_out_log_path"] = path.resolve(process.cwd(), app.fileOutput);
+  else {
+    if (!app.name) {
+      console.log('You havent specified log path, please specify at least a "name" field in the JSON');
+      process.exit(ERROR_EXIT);
+    }
+    app["pm_out_log_path"] = path.resolve(DEFAULT_LOG_PATH, [app.name, '-out.log'].join(''));
+    app.fileOutput = app["pm_out_log_path"];
+  }
+
+  if (app.fileError)
+    app["pm_err_log_path"] = path.resolve(process.cwd(), app.fileError);
+  else {
+    app["pm_err_log_path"] = path.resolve(DEFAULT_LOG_PATH, [app.name, '-err.log'].join(''));
+    app.fileError          = app["pm_err_log_path"];
+  }
+
+  if (app.pidFile)
+    app["pm_pid_path"]     = path.resolve(process.cwd(), app.pidFile);
+  else {
+    app["pm_pid_path"]     = path.resolve(DEFAULT_PID_PATH, [app.name, '.pid'].join(''));
+    app.pidFile            = app["pm_pid_path"];
+  }
+
+
+  fs.existsSync(app.pm_out_log_path);
+  fs.existsSync(app.pm_err_log_path);
+
+  return app;
+}
+
+
 
 // var logStream = process.stdout;
 
@@ -18,109 +259,3 @@ const ERROR_EXIT   = 1;
 // ["debug", "info", "warning", "error"].forEach(function(level) {
 //   log[level] = log.bind(null, level);
 // });
-
-
-commander.version(VERSION)
-    .option('-v --verbose', 'Display all data')
-    .option('-f --force', 'Force actions')
-    .usage('[cmd] app');
-
-commander.command('start <part>')
-    .description('start specific part')
-    .action(function(cmd) {
-
-        Satan.executeRemote('prepare', {
-	    script : './examples/child.js',
-	    fileError : 'logs/errLog.log',
-	    fileOutput : 'logs/outLog.log',
-	    pidFile : 'pids/child',
-	    max : 10,
-	    instances : 'max'	    
-	}, function() {
-	    console.log('All process launched');
-	    process.exit(1);
-	});
-	//
-    });
-
-commander.command('stop')
-    .description('stop all processes')
-    .action(function(opts, cmd) {
-	console.log('Stopping all processes');
-
-	
-	Satan.executeRemote('stop', {}, function(err, list) {
-	    if (err) process.exit(ERROR_EXIT);
-	    dispAsTable(list);
-	    process.exit(SUCCESS_EXIT);
-	});
-    });
-
-commander.command('list')
-    .description('list all processes')
-    .action(function(opts, cmd) {
-
-	
-        Satan.executeRemote('list', {}, function(err, list) {
-	    if (err) process.exit(ERROR_EXIT);
-	    dispAsTable(list);
-	    process.exit(SUCCESS_EXIT);
-	});
-	//
-    });
-
-// Logs
-commander.command('monit')
-    .description('list all processes')
-    .action(function(opts, cmd) {
-
-	Satan.executeRemote('list', {}, function(err, list) {
-	    if (err) process.exit(ERROR_EXIT);
-	    Monit.init(list);
-	    
-	    function refresh(cb) {
-		Satan.executeRemote('list', {}, function(err, list) {
-		    setTimeout(function() {
-			Monit.refresh(list);
-			refresh();
-		    }, 500);
-		});
-	    }
-	    refresh();
-	    
-	});
-	
-    });
-
-
-commander.command('launch')
-    .description('manual launch of God')
-    .action(function(cmd) {
-	process.exit(1);
-    });
-
-//
-// Wait Satan is connected to God to launch parsing
-//
-process.on('satan:ready', function() {
-    commander.parse(process.argv);
-});
-
-function dispAsTable(list) {
-    var table = new Table({ head: ["Script", "id", "PID","status", "memory"] });
-    list.forEach(function(l) {
-	var u =  l.opts.script;
-	var obj = {};
-	
-	obj[l.opts.script] = [
-	    l.pm_id,
-	    l.pid,
-	    l.status,
-	    l.monit ? l.monit.memory : ''
-	];
-	
-	table.push(obj);
-    });
-    
-    console.log(table.toString());
-}

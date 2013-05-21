@@ -1,0 +1,20 @@
+[{
+  "script" : "examples/echo.js",
+  "fileError" : "logs/errEcho.log",
+  "fileOutput" : "logs/outEcho.log",
+  "pidFile" : "pids/echo",
+  "max" : "1"
+},{
+  "script" : "./examples/child.js",
+  "fileError" : "logs/errLog.log",
+  "fileOutput" : "logs/outLog.log",
+  "pidFile" : "pids/child",
+  "max" : "10",
+  "instances" : "max"
+},{
+  "script" : "./examples/echokill.js",
+  "fileError" : "logs/rLog.log",
+  "fileOutput" : "logs/tLog.log",
+  "pidFile" : "pids/kiii",
+  "max" : "10"
+}]

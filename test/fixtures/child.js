@@ -10,8 +10,9 @@ console.log(process.env.NODE_UNIQUE_ID, cluster.isWorker);
 var i = 0;
 
 http.createServer(function(req, res) {
-    res.writeHead(200);
-    res.end("hello world\n" + i++);
+  res.writeHead(200);
+  console.log('rcv', process.pid);
+  res.end("hello world\n" + i++);
 }).listen(8000);
 
 // setTimeout(function() {

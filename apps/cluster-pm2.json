@@ -1,0 +1,8 @@
+{
+  "script" : "./examples/child.js",
+  "fileError" : "logs/errLog.log",
+  "fileOutput" : "logs/outLog.log",
+  "pidFile" : "pids/child",
+  "max" : "10",
+  "instances" : "max"
+}
