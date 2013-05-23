@@ -1,9 +1,0 @@
-/node_modules
-node_modules
-/node_modules/*
-/node_modules/forever/node_modules
-!/node_modules/forever
-*/tmp/*
-*.log
-*.pid
-**tmp_exec**

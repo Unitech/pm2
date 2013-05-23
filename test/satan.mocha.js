@@ -2,6 +2,7 @@
 var Satan;
 var should = require('should');
 var assert = require('better-assert');
+var path = require('path');
 
 describe('Satan', function() {
 
@@ -66,10 +67,10 @@ describe('Satan', function() {
 
     it('should launch a process', function(done) {
       Satan.executeRemote('prepare', {
-        script : './test/fixtures/child.js',
-        fileError : 'logs/errLog.log',
-        fileOutput : 'logs/outLog.log',
-        pidFile : 'pids/child',
+        pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        pm_err_log_path : path.resolve(process.cwd(), 'test/logpid/errLog.log'),
+        pm_out_log_path : path.resolve(process.cwd(), 'test/logpid/outLog.log'),
+        pm_pid_path : path.resolve(process.cwd(), 'test/logpid/child'),
         instances : 'max'
       }, function(err, procs) {
 	   assert(err == null);

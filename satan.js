@@ -112,10 +112,10 @@ Satan.killDaemon = function(fn) {
 Satan.launchDaemon = function(cb) {
   debug('Launching daemon');
 
-  var path = require('path');
+  var p = require('path');
 
   // Todo : Redirect daemon logs
-  var child = require("child_process").fork(path.resolve("./satan.js"), [], {
+  var child = require("child_process").fork(p.resolve(p.dirname(module.filename), 'satan.js'), [], {
     silent : false,
     detached: true,
     cwd: process.cwd(),
@@ -182,6 +182,6 @@ function stringifyOnce(obj, replacer, indent){
     }
   }
   return JSON.stringify(obj, printOnceReplacer, indent);
-}
+};
 
 Satan.onReady();

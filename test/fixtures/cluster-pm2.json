@@ -1,0 +1,6 @@
+{
+  "name" : "serv-clust",
+  "script" : "server.js",
+  "max" : "10",
+  "instances" : "max"
+}

@@ -1,7 +1,5 @@
 {
-  "path" : "VARIABLE.js",
-  "fileError" : "out-VARIABLE.log",
-  "fileOutput" : "err-VARIABLE.log",
-  "pidFile" : "exec-VARIABLE.pid",
+  "name" : "VARIABLE",
+  "script" : "VARIABLE.js",
   "options": [""]
 }

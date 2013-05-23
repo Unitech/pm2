@@ -1,6 +1,8 @@
 
 # R&D
 
+[![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Alexandre-Strzelewicz/PM2)
+
 ## God.
 
 Clusterize app and monitor them without adding nothing.

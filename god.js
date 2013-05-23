@@ -4,11 +4,10 @@
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 var usage = require('usage');
-var async = require('async');
-var path = require('path');
+var path = p = require('path');
 
 cluster.setupMaster({
-  exec : path.resolve('child_wrapper.js')
+  exec : p.resolve(p.dirname(module.filename), 'child_wrapper.js')
 });
 
 var God = module.exports = {
@@ -22,14 +21,14 @@ var God = module.exports = {
 (function initEngine() {
   cluster.on('online', function(clu) {
     console.log("%s - id%d worker online",
-		clu.opts.script,
+		clu.opts.pm_exec_path,
 		clu.pm_id);
     God.clusters_db[clu.pm_id].status = 'online';
   });
 
   cluster.on('exit', function(clu, code, signal) {
     console.log('Script %s %d exited code %d',
-		clu.opts.script,
+		clu.opts.pm_exec_path,
 		clu.pm_id,
 		code);
 
@@ -48,8 +47,6 @@ var God = module.exports = {
     execute(clu.opts);
 
   });
-
-
 })();
 
 God.stopAll = function(cb) {
@@ -181,12 +178,12 @@ God.prepare = function(opts, cb) {
 // Private methods
 //
 function execute(opts, cb) {
-  var id, exec_path, out_log_path, err_log_path, pid_path;
+  var id;
 
   id = God.next_id;
   God.next_id += 1;
 
-
+  // This variables are set in the cli part (preProcess function)
   var clu = cluster.fork({
     pm_script  : opts["pm_exec_path"],
     pm_errFile : opts["pm_err_log_path"],

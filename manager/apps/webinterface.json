@@ -1,7 +1,0 @@
-{
-    "path" : "lib/web-interface.js",
-    "outFile" : "web-api.log",    
-    "errFile" : "web-api.log",
-    "pidFile" : "web.pid",
-    "options" : ""
-}

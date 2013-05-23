@@ -10,8 +10,7 @@
   "description": "Manage apps with a declarative approach (JSON). Clusterize network apps in 0 lines of code.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test",
-    "testc": "NODE_ENV=test ./node_modules/mocha/bin/mocha test ; bash ./test/cli.sh",
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test; bash ./test/cli.sh",
     "froze": "npm shrinkwrap"
   },
   "keywords": [
@@ -28,7 +27,7 @@
     "cluster"
   ],
   "bin": {
-    "pm2": "./bin/god"
+    "pm2": "./bin/pm2"
   },
   "dependencies": {
     "commander": "*",
@@ -37,7 +36,8 @@
     "usage" : "*",
     "watch": "*",
     "axon-rpc" : "*",
-    "axon" : "*"
+    "axon" : "*",
+    "debug" : "*"
   },
   "devDependencies": {
     "mocha": "1.x",

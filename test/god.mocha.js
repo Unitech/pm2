@@ -2,6 +2,8 @@
 
 var God = require('..');
 var numCPUs = require('os').cpus().length;
+var fs = require('fs');
+var path = require('path');
 
 describe('God', function() {
   it('should have right properties', function() {
@@ -23,10 +25,10 @@ describe('God', function() {
 
     it('should fork one process', function(done) {
       God.prepare({
-	script : './test/fixtures/echo.js',
-	fileError : 'logs/echoErr.log',
-	fileOutput : 'logs/echoLog.log',
-	pidFile : 'pids/child'
+	pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+	pm_err_log_path : path.resolve(process.cwd(), 'test/logpid/echoErr.log'),
+	pm_out_log_path : path.resolve(process.cwd(), 'test/logpid/echoLog.log'),
+	pm_pid_file : path.resolve(process.cwd(), 'test/logpid/echopid')
       }, function(err, proce) {
 	   proc = proce;
 	   proc.status.should.be.equal('online');
@@ -60,10 +62,10 @@ describe('God', function() {
   describe('Multi launching', function() {
     it('should launch multiple processes depending on CPUs available', function(done) {
       God.prepare({
-        script : './test/fixtures/child.js',
-        fileError : 'logs/errLog.log',
-        fileOutput : 'logs/outLog.log',
-        pidFile : 'pids/child',
+        pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        pm_err_log_path : path.resolve(process.cwd(), 'test/logpid/errLog.log'),
+        pm_out_log_path : path.resolve(process.cwd(), 'test/logpid/outLog.log'),
+        pm_pid_path : path.resolve(process.cwd(), 'test/logpid/child'),
         instances : 'max'
       }, function(err, procs) {
 	   God.getFormatedProcesses().length.should.equal(numCPUs);
