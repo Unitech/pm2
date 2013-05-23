@@ -1,2 +1,2 @@
 
-module.exports = require('./god');
+module.exports = require('./lib/God');

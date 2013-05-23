@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 var commander = require('commander');
-var Monit = require('../lib/monit');
-var UX = require('../lib/cli-ux.js');
-var Log = require('../lib/Log.js');
-var Satan = require('../satan.js');
+var Monit = require('../lib/Monit');
+var UX = require('../lib/CliUx');
+var Log = require('../lib/Log');
+var Satan = require('../lib/Satan');
 var fs = require('fs');
 var path = require('path');
 

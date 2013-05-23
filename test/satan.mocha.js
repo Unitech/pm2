@@ -13,7 +13,7 @@ describe('Satan', function() {
   });
 
   it('should auto instancy itself, fire event and kill daemon', function(done) {
-    Satan = require('../satan.js');
+    Satan = require('../lib/Satan');
     process.once('satan:client:ready', function() {
       console.log('Client ready');
       Satan.killDaemon(function() {

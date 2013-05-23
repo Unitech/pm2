@@ -1,5 +1,5 @@
 
-var Monit = require('../lib/monit.js');
+var Monit = require('../lib/Monit');
 var should = require('should');
 var assert = require('better-assert');
 
