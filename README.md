@@ -1,33 +1,49 @@
+# PM2
 
-# R&D
+The next generation process manager for Node.js.
 
 [![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Alexandre-Strzelewicz/PM2)
 
-## God.
+# Features
 
-Clusterize app and monitor them without adding nothing.
+- Clusterize your Node networked script natively
+- Monitor process/clustered processes health (status, memory, cpu usage, restarted time) via CLI
+- Monitor server health (processes, cpu core...) via JSON api
+- Manage your applications configuration via JSON or via CLI
+- Forever keep alive process
+- Log streaming in realtime
+- Builtin log uncaughtException
 
-Process manager with monitoring capabilities, forever restart, shared socket with Node.js cluster, everything automatic.
+# Installation
 
-All std redirected to files (uncaughtException also);
+```
+npm install -g pm2
+```
 
+# Quick start
 
+# Test
 
+```
+npm test
+```
 
-Forever in better ?
+# A new paradigm
 
-Using cluster to maintain a persistant connection seamless.
+Javascript is single core processing. PM2 bring the creation of multi core JS, very easily.
 
-- require with socket/ipc ?
+# Requirements
 
-- comme child_process.fork - mais avec cluster pour avoir une connection 
-seemless en nodejs
+- Script must be "stateless"
+- Node version must be > 0.8
+- Doesn't work (not tried) on Win
 
-## Remote require
+# Roadmap
 
-- Fork the required file to another process (or remote ?)
+- Remote administration
+- Inter process communication channel (message bus)
+- Remote require
+- Auto start of the script at start (upstart)
 
-## PB
+# License
 
-- err, out file ? redirecting output when forking ?stream ?
-- Redirect stdou to file by modifing references http://pastebin.com/tpNvgv2a

@@ -46,12 +46,9 @@
   },
   "repository": "",
   "author": {
-    "name": "AS"
-  },
-  "contributors": [{
     "name": "Strzelewicz Alexandre",
     "email": "strzelewicz.alexandre@gmail.com",
     "url": "http://apps.hemca.com"
-  }],
+  },
   "license": "MIT"
 }
