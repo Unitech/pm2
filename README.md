@@ -40,10 +40,13 @@ Javascript is single core processing. PM2 bring the creation of multi core JS, v
 
 # Roadmap
 
-- Remote administration
+- Remote administration via CLI
 - Inter process communication channel (message bus)
 - Remote require
 - Auto start of the script at start (upstart)
+- V8 GC memory leak detection
+- Monitoring on full time
+- Api endpoint benchmark
 
 # License
 
