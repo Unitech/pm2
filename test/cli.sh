@@ -102,6 +102,7 @@ wget -q http://localhost:9615/ -O $JSON_FILE
 cat $JSON_FILE | grep "restart_time\":1" > /dev/null
 spec "Should display restarted 1 when process restarted"
 
+$pm2 list
 
 $pm2 dump
 spec "Should dump current processes"
@@ -119,7 +120,6 @@ spec "Should resurect all apps"
 
 $pm2 stop
 spec "Should stop all processes"
-
 
 $pm2 kill
 spec "Should kill daemon"

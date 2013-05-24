@@ -30,13 +30,13 @@
     "pm2": "./bin/pm2"
   },
   "dependencies": {
-    "commander": "*",
-    "cli-table" : "*",
+    "commander": "1.1.0",
+    "cli-table" : "0.2.0",
     "multimeter": "git://github.com/Alexandre-Strzelewicz/node-multimeter.git",
-    "usage" : "*",
-    "watch": "*",
-    "axon-rpc" : "*",
-    "axon" : "*",
+    "usage" : "0.3.4",
+    "axon-rpc" : "0.0.2",
+    "watch" : "0.7.0",
+    "axon" : "0.6.1",
     "debug" : "*"
   },
   "devDependencies": {

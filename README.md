@@ -13,12 +13,14 @@ The next generation process manager for Node.js.
 - Forever keep alive process
 - Log streaming in realtime
 - Builtin log uncaughtException
+- Development mode (display logs and auto reload on change)
 
+
+- JS MUST BE STATELESS FUCK HELL !
 - Log code grabbed from log.io
 - Log uncaught exception
 - Track restarted time
 - Dump current processes and resurect (upstart)
-
 
 # Installation
 

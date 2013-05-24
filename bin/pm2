@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = p = require('path');
 var cst = require('../constants.js');
 var util = require('util');
+var watch = require('watch');
 
 const PREFIX_MSG        = '\x1B[32m% PM2\x1B[39m ';
 const SUCCESS_EXIT      = 0;
@@ -46,6 +47,26 @@ commander.command('stop')
   console.log(PREFIX_MSG + 'Stopping all processes');
   UX.processing.start();
   CLI.stopAll();
+});
+
+//
+// Development mode
+//
+commander.command('dev <script>')
+         .description('run script in development mode. Display log and reload files when changes')
+         .action(function(script) {
+  console.log(PREFIX_MSG + 'Launching development mode');
+  CLI.developmentMode(script);
+});
+
+//
+// Web interface
+//
+commander.command('web')
+         .description('launch process/server monit api on ' + cst.WEB_INTERFACE)
+         .action(function() {
+  console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
+  CLI.web();
 });
 
 //
@@ -132,15 +153,6 @@ commander.command('logs')
   CLI.streamLogs();
 });
 
-//
-// Web interface
-//
-commander.command('web')
-         .description('kill daemon')
-         .action(function() {
-  console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
-  CLI.web();
-});
 
 //
 // Kill
@@ -236,46 +248,6 @@ CLI.startFile = function(script, instances) {
     });
 };
 
-CLI.resurect = function() {
-  try {
-    fs.existsSync(cst.DUMP_FILE_PATH);
-  } catch(e) {
-    console.log(PREFIX_MSG + 'No processes saved');
-  }
-
-  var apps = fs.readFileSync(cst.DUMP_FILE_PATH);
-
-  (function ex(apps) {
-    if (!apps[0]) return speedList();
-    Satan.executeRemote('prepare', apps[0], function() {
-      console.log('\n' + PREFIX_MSG + 'Process %s launched', apps[0].pm_exec_path);
-      apps.shift();
-      return ex(apps);
-    });
-  })(JSON.parse(apps));
-};
-
-CLI.dumped = function() {
-};
-
-CLI.dump = function() {
-  var opts_arr = [];
-  Satan.executeRemote('list', {}, function(err, list) {
-    function fin(err) {
-      fs.writeFileSync(cst.DUMP_FILE_PATH, JSON.stringify(opts_arr));
-      UX.processing.stop();
-      process.exit(SUCCESS_EXIT);
-    }
-
-    (function ex(apps) {
-      if (!apps[0]) return fin(null);
-      opts_arr.push(apps[0].opts);
-      apps.shift();
-      return ex(apps);
-    })(list);
-  });
-};
-
 CLI.startFromJson = function(cmd) {
   var data = fs.readFileSync(cmd);
   var appConf = JSON.parse(data);
@@ -304,6 +276,87 @@ CLI.startFromJson = function(cmd) {
       });
     });
   }
+};
+
+CLI.developmentMode = function(script) {
+  var appConf = resolvePaths({
+    script : script,
+    name : p.basename(script, '.js')
+  });
+
+  Satan.executeRemote('prepare', appConf, function(err, proc) {
+    console.log(PREFIX_MSG + 'Process launched');
+    var jProc = JSON.parse(proc);
+
+    fs.openSync(jProc.opts.pm_out_log_path, 'w');
+    fs.openSync(jProc.opts.pm_err_log_path, 'w');
+
+    Log.stream(jProc.opts.pm_out_log_path, p.basename(script, '.js') + ' out');
+    Log.stream(jProc.opts.pm_err_log_path, p.basename(script, '.js') + ' err');
+
+    watch.watchTree(p.dirname(jProc.opts.pm_exec_path), {
+      'ignoreDotFiles' : true
+    }, function(f, curr, prev) {
+         console.log(PREFIX_MSG + 'File changed. Reloading.');
+         Satan.executeRemote('list', {}, function(err, list) {
+           list.forEach(function(l) {
+             process.kill(l.pid);
+           });
+         });
+       });
+  });
+
+  process.on('SIGINT', function() {
+    console.log(PREFIX_MSG + 'Exiting development mode, killing pm2 processes');
+    UX.processing.start();
+    Satan.executeRemote('stop', {}, function(err, list) {
+      process.exit(0);
+    });
+  });
+};
+
+CLI.resurect = function() {
+  try {
+    fs.existsSync(cst.DUMP_FILE_PATH);
+  } catch(e) {
+    console.log(PREFIX_MSG + 'No processes saved');
+  }
+
+  var apps = fs.readFileSync(cst.DUMP_FILE_PATH);
+
+  (function ex(apps) {
+    if (!apps[0]) return speedList();
+    Satan.executeRemote('prepare', apps[0], function() {
+      console.log('\n' + PREFIX_MSG + 'Process %s launched', apps[0].pm_exec_path);
+      apps.shift();
+      return ex(apps);
+    });
+  })(JSON.parse(apps));
+};
+
+CLI.dumped = function() {
+};
+
+CLI.upstart = function() {
+};
+
+CLI.dump = function() {
+  var opts_arr = [];
+  Satan.executeRemote('list', {}, function(err, list) {
+    function fin(err) {
+      fs.writeFileSync(cst.DUMP_FILE_PATH, JSON.stringify(opts_arr));
+      UX.processing.stop();
+      process.exit(SUCCESS_EXIT);
+    }
+
+    (function ex(apps) {
+      if (!apps[0]) return fin(null);
+      delete apps[0].opts.instances;
+      opts_arr.push(apps[0].opts);
+      apps.shift();
+      return ex(apps);
+    })(list);
+  });
 };
 
 CLI.web = function() {
@@ -445,7 +498,7 @@ function speedList() {
 function resolvePaths(app) {
   app["pm_exec_path"]    = path.resolve(process.cwd(), app.script);
 
-  fs.statSync(app.pm_exec_path);
+  fs.existsSync(app.pm_exec_path);
 
   // Set current env
   util._extend(app, process.env);
