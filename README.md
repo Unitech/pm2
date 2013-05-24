@@ -4,17 +4,21 @@ The next generation process manager for Node.js.
 
 [![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Alexandre-Strzelewicz/PM2)
 
-- **Rebind env when killed**
-
 # Features
 
 - Clusterize your Node networked script natively
-- Monitor process/clustered processes health (status, memory, cpu usage, restarted time) via CLI
+- Monitor process/clustered processes health (status, memory, cpu usage, restarted time) via CLI (htop like)
 - Monitor server health (processes, cpu core...) via JSON api
 - Manage your applications configuration via JSON or via CLI
 - Forever keep alive process
 - Log streaming in realtime
 - Builtin log uncaughtException
+
+- Log code grabbed from log.io
+- Log uncaught exception
+- Track restarted time
+- Dump current processes and resurect (upstart)
+
 
 # Installation
 

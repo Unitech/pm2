@@ -100,17 +100,26 @@ $pm2 restart
 sleep 0.3
 wget -q http://localhost:9615/ -O $JSON_FILE
 cat $JSON_FILE | grep "restart_time\":1" > /dev/null
-spec "Should get the right JSON with HttpInterface file launched"
+spec "Should display restarted 1 when process restarted"
 
+
+$pm2 dump
+spec "Should dump current processes"
+
+ls ~/.pm2/dump.pm2
+spec "Dump file should be present"
 
 $pm2 stop
 spec "Should stop all processes"
 
-$pm2 list
-spec "Should list nothing"
+$pm2 kill
 
-$pm2 jlist
-spec "Should list in json"
+$pm2 resurect
+spec "Should resurect all apps"
+
+$pm2 stop
+spec "Should stop all processes"
+
 
 $pm2 kill
 spec "Should kill daemon"

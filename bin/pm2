@@ -49,6 +49,28 @@ commander.command('stop')
 });
 
 //
+// Save processes to file
+//
+commander.command('dump')
+         .description('dump all processes for auto restart')
+         .action(function() {
+  console.log(PREFIX_MSG + 'Dumping processes');
+  UX.processing.start();
+  CLI.dump();
+});
+
+//
+// Save processes to file
+//
+commander.command('resurect')
+         .description('resurect previously dumped processes')
+         .action(function() {
+  console.log(PREFIX_MSG + 'Resurecting');
+  UX.processing.start();
+  CLI.resurect();
+});
+
+//
 // Stop All processes
 //
 commander.command('restart')
@@ -167,6 +189,12 @@ process.on('satan:client:ready', function() {
   });
 })();
 
+
+//
+//
+// CLI Class
+//
+//
 var CLI = module.exports = {};
 
 CLI.startFile = function(script, instances) {
@@ -201,11 +229,51 @@ CLI.startFile = function(script, instances) {
         process.exit(ERROR_EXIT);
       }
 
-      Satan.executeRemote('prepare', resolvePaths(appConf), function() {
+    Satan.executeRemote('prepare', resolvePaths(appConf), function() {
         console.log(PREFIX_MSG + 'Process launched');
         speedList();
       });
     });
+};
+
+CLI.resurect = function() {
+  try {
+    fs.existsSync(cst.DUMP_FILE_PATH);
+  } catch(e) {
+    console.log(PREFIX_MSG + 'No processes saved');
+  }
+
+  var apps = fs.readFileSync(cst.DUMP_FILE_PATH);
+
+  (function ex(apps) {
+    if (!apps[0]) return speedList();
+    Satan.executeRemote('prepare', apps[0], function() {
+      console.log('\n' + PREFIX_MSG + 'Process %s launched', apps[0].pm_exec_path);
+      apps.shift();
+      return ex(apps);
+    });
+  })(JSON.parse(apps));
+};
+
+CLI.dumped = function() {
+};
+
+CLI.dump = function() {
+  var opts_arr = [];
+  Satan.executeRemote('list', {}, function(err, list) {
+    function fin(err) {
+      fs.writeFileSync(cst.DUMP_FILE_PATH, JSON.stringify(opts_arr));
+      UX.processing.stop();
+      process.exit(SUCCESS_EXIT);
+    }
+
+    (function ex(apps) {
+      if (!apps[0]) return fin(null);
+      opts_arr.push(apps[0].opts);
+      apps.shift();
+      return ex(apps);
+    })(list);
+  });
 };
 
 CLI.startFromJson = function(cmd) {
@@ -255,7 +323,7 @@ CLI.restartAll = function() {
     });
     setTimeout(function() {
       console.log('\n' + PREFIX_MSG + 'Process restarted');
-      process.exit(1);
+      process.exit(SUCCESS_EXIT);
     }, 1000);
   });
 };
@@ -300,6 +368,9 @@ CLI.jlist = function() {
 };
 
 CLI.flush = function() {
+  console.log(PREFIX_MSG + 'Flushing ' + cst.PM2_LOG_FILE_PATH);
+  fs.openSync(cst.PM2_LOG_FILE_PATH, 'w');
+
   Satan.executeRemote('list', {}, function(err, list) {
     if (err) process.exit(ERROR_EXIT);
     list.forEach(function(l) {
@@ -336,8 +407,12 @@ CLI.streamLogs = function() {
     Log.stream(cst.PM2_LOG_FILE_PATH, 'PM2 DAEMON');
     if (err) process.exit(ERROR_EXIT);
     list.forEach(function(l) {
-      if (l.opts.fileOutput) Log.stream(l.opts.fileOutput, p.basename(l.opts.script, '.js') + ' out');
-      if (l.opts.fileError) Log.stream(l.opts.fileError, p.basename(l.opts.script, '.js') + ' err');
+      if (l.opts.pm_out_log_path)
+        Log.stream(l.opts.pm_out_log_path,
+                   p.basename(l.opts.script, '.js') + ' out');
+      if (l.opts.pm_err_log_path)
+        Log.stream(l.opts.pm_err_log_path,
+                   p.basename(l.opts.script, '.js') + ' err');
     });
   });
 };
