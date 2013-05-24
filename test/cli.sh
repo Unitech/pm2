@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 #
@@ -19,12 +18,12 @@ script="echo"
 file_path="test/fixtures"
 
 function fail {
-  echo -e "\033[31m  ✘ $1\033[0m"
+  echo -e "######## \033[31m  ✘ $1\033[0m"
   exit 1
 }
 
 function success {
-  echo -e "\033[32m  ✔ $1\033[0m"
+  echo -e "\033[32m------------> ✔ $1\033[0m"
 }
 
 function spec {
@@ -36,7 +35,6 @@ function ispec {
   [ $? -eq 1 ] || fail "$1"
   success "$1"
 }
-
 
 echo -e "\033[1mRunning tests:\033[0m"
 
@@ -70,10 +68,40 @@ $pm2 logs &
 spec "Should display logs"
 TMPPID=$!
 
-sleep 2
+sleep 1
 
 kill $!
 spec "Should kill logs"
+
+$pm2 web
+spec "Should start web interface"
+
+sleep 0.3
+
+JSON_FILE='/tmp/web-json'
+
+wget -q http://localhost:9615/ -O $JSON_FILE
+cat $JSON_FILE | grep "HttpInterface.js" > /dev/null
+spec "Should get the right JSON with HttpInterface file launched"
+
+$pm2 flush
+spec "Should clean logs"
+
+cat ~/.pm2/logs/echo-out.log | wc -l
+spec "File Log should be cleaned"
+
+sleep 0.3
+wget -q http://localhost:9615/ -O $JSON_FILE
+cat $JSON_FILE | grep "restart_time\":0" > /dev/null
+spec "Should get the right JSON with HttpInterface file launched"
+
+$pm2 restart
+
+sleep 0.3
+wget -q http://localhost:9615/ -O $JSON_FILE
+cat $JSON_FILE | grep "restart_time\":1" > /dev/null
+spec "Should get the right JSON with HttpInterface file launched"
+
 
 $pm2 stop
 spec "Should stop all processes"
@@ -81,9 +109,8 @@ spec "Should stop all processes"
 $pm2 list
 spec "Should list nothing"
 
-$pm2 flush
-spec "Should clean logs"
+$pm2 jlist
+spec "Should list in json"
 
 $pm2 kill
 spec "Should kill daemon"
-

@@ -10,6 +10,6 @@ module.exports = {
   DEFAULT_PID_PATH  : p.join(DEFAULT_FILE_PATH, 'pids'),
   DEFAULT_LOG_PATH  : p.join(DEFAULT_FILE_PATH, 'logs'),
   DAEMON_PORT       : 66666,
-  DEBUG             : false,
+  DEBUG             : true,
   WEB_INTERFACE     : 9615
 };

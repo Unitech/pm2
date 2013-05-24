@@ -8,6 +8,7 @@ var Satan = require('../lib/Satan');
 var fs = require('fs');
 var path = p = require('path');
 var cst = require('../constants.js');
+var util = require('util');
 
 const PREFIX_MSG        = '\x1B[32m% PM2\x1B[39m ';
 const SUCCESS_EXIT      = 0;
@@ -74,6 +75,12 @@ commander.command('list')
          .description('list all processes')
          .action(function() {
   CLI.list();
+});
+
+commander.command('jlist')
+         .description('json list all processes')
+         .action(function() {
+  CLI.jlist();
 });
 
 //
@@ -284,6 +291,14 @@ CLI.list = function() {
   });
 };
 
+CLI.jlist = function() {
+  Satan.executeRemote('list', {}, function(err, list) {
+    if (err) process.exit(ERROR_EXIT);
+    console.log(list);
+    process.exit(SUCCESS_EXIT);
+  });
+};
+
 CLI.flush = function() {
   Satan.executeRemote('list', {}, function(err, list) {
     if (err) process.exit(ERROR_EXIT);
@@ -356,6 +371,9 @@ function resolvePaths(app) {
   app["pm_exec_path"]    = path.resolve(process.cwd(), app.script);
 
   fs.statSync(app.pm_exec_path);
+
+  // Set current env
+  util._extend(app, process.env);
 
   if (app.fileOutput)
     app["pm_out_log_path"] = path.resolve(process.cwd(), app.fileOutput);

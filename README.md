@@ -4,6 +4,8 @@ The next generation process manager for Node.js.
 
 [![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Alexandre-Strzelewicz/PM2)
 
+- **Rebind env when killed**
+
 # Features
 
 - Clusterize your Node networked script natively
