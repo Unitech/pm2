@@ -71,7 +71,7 @@ describe('Satan', function() {
         pm_err_log_path : path.resolve(process.cwd(), 'test/logpid/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/logpid/outLog.log'),
         pm_pid_path : path.resolve(process.cwd(), 'test/logpid/child'),
-        instances : 'max'
+        instances : 4
       }, function(err, procs) {
 	   assert(err == null);
            assert(JSON.parse(procs).length == 4);

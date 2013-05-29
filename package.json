@@ -1,5 +1,5 @@
 {
-  "name": "god",
+  "name": "pm2",
   "preferGlobal": "true",
   "version": "0.4.0",
   "os" : [ "!win32" ],
@@ -7,7 +7,7 @@
     "node" : ">=0.8"
   },
   "homepage" : "http://unitech.io/",
-  "description": "Manage apps with a declarative approach (JSON). Clusterize network apps in 0 lines of code.",
+  "description": "The next generation process manager for Node.js. Clusterize app with 0 lines of code more.",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test; bash ./test/cli.sh",
@@ -44,7 +44,10 @@
     "should": "1.x",
     "better-assert" : "*"
   },
-  "repository": "",
+  "repository": {
+    "type" : "git",
+    "url" : "git://github.com/unitech/pm2.git"
+  },
   "author": {
     "name": "Strzelewicz Alexandre",
     "email": "strzelewicz.alexandre@gmail.com",

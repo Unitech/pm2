@@ -1,9 +1,10 @@
 
 
 setInterval(function() {
-  console.log('ok');
+  console.log('log message from echo auto kill');
 }, 800);
 
 setTimeout(function() {
+  console.error('error message, killing my self');
   process.exit(-1);
 }, 3000);

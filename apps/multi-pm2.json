@@ -1,20 +1,12 @@
 [{
-  "script" : "examples/echo.js",
-  "fileError" : "logs/errEcho.log",
-  "fileOutput" : "logs/outEcho.log",
-  "pidFile" : "pids/echo",
-  "max" : "1"
+    "name" : "echo",
+    "script" : "./examples/echo.js",
+    "max" : "10"
 },{
-  "script" : "./examples/child.js",
-  "fileError" : "logs/errLog.log",
-  "fileOutput" : "logs/outLog.log",
-  "pidFile" : "pids/child",
-  "max" : "10",
-  "instances" : "max"
+    "name" : "api",
+    "script" : "./examples/child.js",
+    "instances" : "4"
 },{
-  "script" : "./examples/echokill.js",
-  "fileError" : "logs/rLog.log",
-  "fileOutput" : "logs/tLog.log",
-  "pidFile" : "pids/kiii",
-  "max" : "10"
+    "name" : "bus",
+    "script" : "./examples/echokill.js"
 }]

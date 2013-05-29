@@ -35,7 +35,7 @@ commander.command('start <part>')
   if (cmd.indexOf('.json') > 0)
     CLI.startFromJson(cmd);
   else
-    CLI.startFile(cmd, commander.instances);
+    CLI.startFile(cmd);
 });
 
 //
@@ -209,14 +209,14 @@ process.on('satan:client:ready', function() {
 //
 var CLI = module.exports = {};
 
-CLI.startFile = function(script, instances) {
+CLI.startFile = function(script) {
   var appConf = {
     script : script,
     name : p.basename(script, '.js')
   };
 
-  if (instances)
-    appConf['instances'] = instances;
+  if (commander.instances)
+    appConf['instances'] = commander.instances;
   if (commander.error)
     appConf['fileError'] = commander.error;
   if (commander.output)
@@ -372,7 +372,9 @@ CLI.web = function() {
 CLI.restartAll = function() {
   Satan.executeRemote('list', {}, function(err, list) {
     list.forEach(function(l) {
-      process.kill(l.pid);
+      try {
+        process.kill(l.pid);
+      } catch(e) { }
     });
     setTimeout(function() {
       console.log('\n' + PREFIX_MSG + 'Process restarted');

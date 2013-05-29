@@ -1,10 +1,9 @@
 
 
 setInterval(function() {
-  console.log('oke mon gardssss raightasdasd kasdksa;ldkas;dksa;dl ');
-
+  console.log('log message from echo.js');
 }, 800);
 
 setInterval(function() {
-  console.error('heheh');
+  console.error('err msg from echo.js');
 }, 1500);
