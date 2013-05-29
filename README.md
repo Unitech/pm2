@@ -1,6 +1,7 @@
 # PM2
 
-[![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Alexandre-Strzelewicz/PM2)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2.png)
+
 
 The next generation process manager for Node.js with automatic clusterisation.
 
@@ -22,10 +23,23 @@ $ pm2 dev app.js         // Run app.js in dev mode with auto reload
 $ pm2 generate app       // Generate a JSON process configuration
 ```
 
+## pm2 list
+
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
+
+## pm2 monit
+
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
+
+## pm2 logs
+
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
+
+## pm2 dump/resurect
+
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
+
+[![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Alexandre-Strzelewicz/PM2)
 
 # Features
 
