@@ -22,6 +22,11 @@ $ pm2 dev app.js         // Run app.js in dev mode with auto reload
 $ pm2 generate app       // Generate a JSON process configuration
 ```
 
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
+
 # Features
 
 - Clusterize your Node networked script without adding one line of code
