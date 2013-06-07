@@ -15,6 +15,9 @@ const PREFIX_MSG        = '\x1B[32m% PM2\x1B[39m ';
 const SUCCESS_EXIT      = 0;
 const ERROR_EXIT        = 1;
 const SAMPLE_FILE_PATH  = '../lib/sample.json';
+const STARTUP_SCRIPT    = '../lib/scripts/pm2-init.sh';
+
+//console.log();
 
 commander.version(cst.VERSION)
          .option('-v --verbose', 'Display all data')
@@ -100,6 +103,15 @@ commander.command('restart')
   console.log(PREFIX_MSG + 'Restarting all processes');
   UX.processing.start();
   CLI.restartAll();
+});
+
+//
+// Set pm2 to startup
+//
+commander.command('startup')
+         .description('auto resurect process at startup')
+         .action(function() {
+  CLI.upstart();
 });
 
 //
@@ -331,6 +343,7 @@ CLI.resurect = function() {
       apps.shift();
       return ex(apps);
     });
+    return false;
   })(JSON.parse(apps));
 };
 
@@ -338,6 +351,31 @@ CLI.dumped = function() {
 };
 
 CLI.upstart = function() {
+  if (process.getuid() != 0) {
+    console.log(PREFIX_MSG + 'You have to run this command as root');
+    console.log(PREFIX_MSG + 'Execute the following command :');
+    console.log(PREFIX_MSG + 'sudo PATH=' + p.dirname(process.execPath) + ':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin pm2 startup');
+    process.exit(ERROR_EXIT);
+  }
+
+  var script = fs.readFileSync(path.join(__dirname, STARTUP_SCRIPT));
+  script = script.toString().replace(/%PM2_PATH%/g, process.mainModule.filename);
+  script = script.toString().replace(/%HOME_PATH%/g, process.env.HOME);
+  script = script.toString().replace(/%NODE_PATH%/g, process.execPath);
+
+
+  var INIT_SCRIPT = "/etc/init.d/pm2-init.sh";
+  fs.writeFileSync(INIT_SCRIPT, script);
+  var exec = require('child_process').exec;
+
+  exec('chmod +x ' + INIT_SCRIPT + '; update-rc.d ' + p.basename(INIT_SCRIPT) + ' defaults', function(err, stdo, stde) {
+    if (err) {
+      console.error(err);
+      process.exit(ERROR_EXIT);
+    }
+    console.log(stdo);
+    process.exit(SUCCESS_EXIT);
+  });
 };
 
 CLI.dump = function() {

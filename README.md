@@ -1,9 +1,16 @@
-# PM2
-
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2.png)
 
+[![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Unitech/pm2)
 
-The next generation process manager for Node.js with automatic clusterisation.
+The next generation process manager for Node.js.
+
+Automatic clusterisation, upstart scripts, keep alive process, process monitoring, logs aggregation.
+
+# Installation
+
+```
+npm install -g pm2
+```
 
 # Quick start
 
@@ -11,35 +18,41 @@ The next generation process manager for Node.js with automatic clusterisation.
 $ npm install pm2 -g     // Install pm2 command line globally
 $ pm2 start app.js -i 4  // Start 4 clustered instances of app.js
 
-$ pm2 list               // Display the 4 processes
-$ pm2 monit              // Monitor the 4 processes
+$ pm2 list               // Display the status of the processes
+$ pm2 monit              // Monitor all processes
 $ pm2 logs               // Display all processes logs in streaming
 $ pm2 dump               // Dump the states of all processes
 $ pm2 stop               // Stop all processes
 $ pm2 resurect           // Put online previously dumped processes
 $ pm2 restart            // Restart all proccesses
 $ pm2 stop
-$ pm2 dev app.js         // Run app.js in dev mode with auto reload
 $ pm2 generate app       // Generate a JSON process configuration
 ```
 
 ## pm2 list
 
+List infos about all processes managed by pm2. It shows also how many times a process has been restarted because of an unhandled exception.
+
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
 
 ## pm2 monit
+
+Monitor CPU and memory usage of every node process (and also clustered processes) managed by pm2.
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
 
 ## pm2 logs
 
+Display logs in streaming of all processes, without having to do a tail -f or something else.
+
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
 ## pm2 dump/resurect
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
+You can dump all currently running processes, including their environment and execution path.
+After restarting or stopping PM2 you can `resurect` them. 
 
-[![Build Status](https://travis-ci.org/Alexandre-Strzelewicz/PM2.png)](https://travis-ci.org/Alexandre-Strzelewicz/PM2)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
 
 # Features
 
@@ -51,16 +64,9 @@ $ pm2 generate app       // Generate a JSON process configuration
 - Forever keep alive processes
 - Log streaming in realtime (pm2 logs)
 - Log uncaught exceptions in error logs
-- Development mode (display logs and auto reload on change)
 - Track restarted time
 - Auto stop processes who exit too fast
 - Dump current processes and resurect (upstart)
-
-# Installation
-
-```
-npm install -g pm2
-```
 
 # Multi process JSON declaration
 
@@ -81,7 +87,7 @@ processes.json :
 }]
 ```
 
-Then in with the cli :
+Then with the cli :
 ```
 $ pm2 start processes.json
 ```
@@ -102,11 +108,23 @@ npm test
 - Keeping monitoring data
 - Integrated wrk utils endpoint benchmark
 
+# Install a process (draft, not implemented)
+
+You can install processes and communicate with them
+```
+$ m2 install web-pm2
+$ m2 list
+$ m2 start web-pm2
+$ m2 info web-pm2    // list 
+```
+
+- Add homogen communication channel (pubsub/eventemitter2 - wildcard events) (axon pub/sub-message.js)
+
 # License
 
 (The MIT License)
 
-Copyright (c) 2011-2013 Strzelewicz Alexandre <strzelewicz.alexandre@gmail.com>
+Copyright (c) 2011-2013 Strzelewicz Alexandre <as@unitech.io>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
