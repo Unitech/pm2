@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 
-The next generation process manager for Node.js.
+The next generation process manager for Node.js with native clusterization.
 
 Automatic clusterisation, upstart scripts, keep alive process, process monitoring, logs aggregation.
 
