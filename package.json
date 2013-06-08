@@ -10,7 +10,7 @@
   "description": "The next generation process manager for Node.js. Clusterize app with 0 lines of code more.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test; bash ./test/cli.sh",
+    "test": "bash ./test/cli.sh ; NODE_ENV=test ./node_modules/mocha/bin/mocha test",
     "froze": "npm shrinkwrap"
   },
   "keywords": [
