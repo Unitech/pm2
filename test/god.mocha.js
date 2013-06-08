@@ -26,9 +26,9 @@ describe('God', function() {
     it('should fork one process', function(done) {
       God.prepare({
 	pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-	pm_err_log_path : path.resolve(process.cwd(), 'test/logpid/echoErr.log'),
-	pm_out_log_path : path.resolve(process.cwd(), 'test/logpid/echoLog.log'),
-	pm_pid_file : path.resolve(process.cwd(), 'test/logpid/echopid')
+	pm_err_log_path : path.resolve(process.cwd(), 'test/echoErr.log'),
+	pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
+	pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
       }, function(err, proce) {
 	   proc = proce;
 	   proc.status.should.be.equal('online');
@@ -63,9 +63,9 @@ describe('God', function() {
     it('should launch multiple processes depending on CPUs available', function(done) {
       God.prepare({
         pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-        pm_err_log_path : path.resolve(process.cwd(), 'test/logpid/errLog.log'),
-        pm_out_log_path : path.resolve(process.cwd(), 'test/logpid/outLog.log'),
-        pm_pid_path : path.resolve(process.cwd(), 'test/logpid/child'),
+        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
+        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
+        pm_pid_path : path.resolve(process.cwd(), 'test/child'),
         instances : 3
       }, function(err, procs) {
 	   God.getFormatedProcesses().length.should.equal(3);
