@@ -1,13 +1,12 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.4.0",
-  "os" : [ "!win32" ],
+  "version": "0.4.1",
   "engines" : {
     "node" : ">=0.8"
   },
   "homepage" : "http://unitech.io/",
-  "description": "The next generation process manager for Node.js. Clusterize app with 0 lines of code more.",
+  "description": "The next generation process manager for Node.js with native clusterization",
   "main": "index.js",
   "scripts": {
     "test": "bash ./test/cli.sh ; NODE_ENV=test ./node_modules/mocha/bin/mocha test",
@@ -18,6 +17,7 @@
     "fault tolerant",
     "sysadmin",
     "tools",
+    "pm2",
     "monitoring",
     "process manager",
     "forever",
@@ -46,7 +46,7 @@
   },
   "repository": {
     "type" : "git",
-    "url" : "git://github.com/unitech/pm2.git"
+    "url" : "git://github.com/Unitech/pm2.git"
   },
   "author": {
     "name": "Strzelewicz Alexandre",

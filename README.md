@@ -4,9 +4,7 @@
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 
-The next generation process manager for Node.js with native clusterization.
-
-Automatic clusterisation, upstart scripts, keep alive process, process monitoring, logs aggregation.
+The next generation daemon process manager for Node.js with native clusterization.
 
 # Installation
 
@@ -14,13 +12,13 @@ Automatic clusterisation, upstart scripts, keep alive process, process monitorin
 npm install -g pm2
 ```
 
-# Quick start
+# Usage/Features
 
 ```
 $ npm install pm2 -g     // Install pm2 command line globally
-$ pm2 start app.js -i 4  // Start 4 clustered instances of app.js
+$ pm2 start app.js -i 4  // Daemonize pm2 and Start 4 clustered instances of app.js
 
-$ pm2 list               // Display the status of the processes
+$ pm2 list               // Display all processes status
 $ pm2 monit              // Monitor all processes
 $ pm2 logs               // Display all processes logs in streaming
 $ pm2 dump               // Dump the states of all processes
