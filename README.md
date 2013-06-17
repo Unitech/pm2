@@ -6,6 +6,8 @@
 
 The next generation daemon process manager for Node.js with native clusterization.
 
+PM2 is mainly a production module for Linux servers.
+
 # Installation
 
 ```
@@ -27,6 +29,7 @@ $ pm2 resurect           // Put online previously dumped processes
 $ pm2 restart            // Restart all proccesses
 $ pm2 stop
 $ pm2 generate app       // Generate a JSON process configuration
+$ pm2 web                // Health computer API endpoint (http://localhost:9615)
 ```
 
 ## pm2 list
@@ -53,6 +56,15 @@ You can dump all currently running processes, including their environment and ex
 After restarting or stopping PM2 you can `resurect` them. 
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
+
+## pm2 health web api endpoint
+
+PM2 can disserve an API endpoint to monitor processes and computer health (cpu usage, memory, network interfaces...)
+
+```
+pm2 web
+```
+
 
 # Features
 

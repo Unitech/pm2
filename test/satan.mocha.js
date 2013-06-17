@@ -18,7 +18,7 @@ describe('Satan', function() {
       console.log('Client ready');
       Satan.killDaemon(function() {
         done();
-      })
+      });
     });
   });
 
@@ -51,7 +51,8 @@ describe('Satan', function() {
         assert(err == null);
         methods.should.have.property('prepare');
         methods.should.have.property('list');
-        methods.should.have.property('stop');
+        methods.should.have.property('stopId');
+        methods.should.have.property('stopAll');
         methods.should.have.property('killMe');
         methods.should.have.property('daemonData');
         done();
@@ -67,11 +68,11 @@ describe('Satan', function() {
 
     it('should launch a process', function(done) {
       Satan.executeRemote('prepare', {
-        pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path : path.resolve(process.cwd(), 'test/child'),
-        instances : 4
+        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
+        instances       : 4
       }, function(err, procs) {
 	   assert(err == null);
            assert(JSON.parse(procs).length == 4);

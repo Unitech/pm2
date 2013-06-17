@@ -110,7 +110,7 @@ spec "Should dump current processes"
 ls ~/.pm2/dump.pm2
 spec "Dump file should be present"
 
-$pm2 stop
+$pm2 stopAll
 spec "Should stop all processes"
 
 $pm2 kill
@@ -118,7 +118,7 @@ $pm2 kill
 $pm2 resurect
 spec "Should resurect all apps"
 
-$pm2 stop
+$pm2 stopAll
 spec "Should stop all processes"
 
 $pm2 kill

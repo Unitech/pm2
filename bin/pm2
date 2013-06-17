@@ -44,13 +44,24 @@ commander.command('start <part>')
 //
 // Stop All processes
 //
-commander.command('stop')
+commander.command('stopAll')
          .description('stop all processes')
          .action(function() {
   console.log(PREFIX_MSG + 'Stopping all processes');
   UX.processing.start();
   CLI.stopAll();
 });
+
+//
+// Stop specific id
+//
+commander.command('stop <pm2_id>')
+  .description('stop specific process pm2 id')
+  .action(function(pm2_id) {    
+    console.log(PREFIX_MSG + 'Stopping process' + pm2_id);
+    UX.processing.start();
+    CLI.stopId(pm2_id);
+  });
 
 //
 // Development mode
@@ -422,10 +433,22 @@ CLI.restartAll = function() {
 };
 
 CLI.stopAll = function() {
-  Satan.executeRemote('stop', {}, function(err, list) {
+  Satan.executeRemote('stopAll', {}, function(err, list) {
     if (err) process.exit(ERROR_EXIT);
     console.log('\n');
     UX.dispAsTable(list);
+    UX.processing.stop();
+    process.exit(SUCCESS_EXIT);
+  });
+};
+
+CLI.stopId = function(pm2_id) {
+  Satan.executeRemote('stopId', {
+    id : pm2_id
+  }, function(err, list) {
+    if (err) process.exit(ERROR_EXIT);
+    console.log('\n');
+    console.log(PREFIX_MSG + 'Process stopped');
     UX.processing.stop();
     process.exit(SUCCESS_EXIT);
   });
