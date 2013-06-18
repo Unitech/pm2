@@ -513,10 +513,10 @@ CLI.monit = function() {
 
     function refresh(cb) {
       Satan.executeRemote('list', {}, function(err, list) {
-	setTimeout(function() {
-	  Monit.refresh(list);
-	  refresh();
-	}, 400);
+        setTimeout(function() {
+          Monit.refresh(list);
+          refresh();
+        }, 400);
       });
     }
     refresh();
