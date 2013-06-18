@@ -11,7 +11,7 @@ var cst = require('../constants.js');
 var util = require('util');
 var watch = require('watch');
 
-const PREFIX_MSG        = '\x1B[32m⌬ PM2\x1B[39m ';
+const PREFIX_MSG        = '\x1B[32m⌬ PM2 \x1B[39m';
 const SUCCESS_EXIT      = 0;
 const ERROR_EXIT        = 1;
 const SAMPLE_FILE_PATH  = '../lib/sample.json';
