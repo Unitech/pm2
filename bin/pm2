@@ -23,9 +23,9 @@ commander.version(cst.VERSION)
          .option('-v --verbose', 'Display all data')
          .option('-f --force', 'Force actions')
          .option('-i --instances <number>', 'Lunch [number] instances (clustered with same socket)', parseInt)
-         .option('-o --output [path]', 'Out log file output')
-         .option('-e --error [path]', 'Error log file output')
-         .option('-p --pid [pid]', 'Pid file')
+         .option('-o --output <path>', 'Out log file output')
+         .option('-e --error <path>', 'Error log file output')
+         .option('-p --pid <pid>', 'Pid file')
          .option('-w --write', 'Write configuration in local folder')
          .usage('[cmd] app');
 
