@@ -14,7 +14,7 @@ module.exports = {
   DEFAULT_PID_PATH  : p.join(DEFAULT_FILE_PATH, 'pids'),
   DEFAULT_LOG_PATH  : p.join(DEFAULT_FILE_PATH, 'logs'),
   DUMP_FILE_PATH    : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
-  DAEMON_PORT       : 66666,
+  DAEMON_BIND_ADDR  : 'localhost:66666',
   DEBUG             : false,
   WEB_INTERFACE     : 9615,
   MS_TO_STOP_SCRIPT : 1000
