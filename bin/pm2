@@ -192,14 +192,17 @@ commander.command('kill')
 commander.command('*')
          .action(function() {
   console.log(PREFIX_MSG + '\nCommand not found');
-  badArguments();
+  commander.outputHelp();
+  process.exit(ERROR_EXIT);
 });
 
 //
 // Display help
 //
 if (process.argv.length == 2) {
-  badArguments();
+  commander.parse(process.argv);
+  commander.outputHelp();
+  process.exit(ERROR_EXIT);
 }
 
 //
@@ -556,11 +559,6 @@ function speedList() {
     UX.dispAsTable(list);
     process.exit(SUCCESS_EXIT);
   });
-}
-
-function badArguments() {
-  commander.parse(process.argv).outputHelp();
-  process.exit(ERROR_EXIT);
 }
 
 //
