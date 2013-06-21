@@ -24,7 +24,8 @@ $ pm2 list               // Display all processes status
 $ pm2 monit              // Monitor all processes
 $ pm2 logs               // Display all processes logs in streaming
 $ pm2 dump               // Dump the states of all processes
-$ pm2 stop               // Stop all processes
+$ pm2 stop pm2_id        // Stop specific process id
+$ pm2 stopAll            // Stop all processes
 $ pm2 resurect           // Put online previously dumped processes
 $ pm2 restart            // Restart all proccesses
 $ pm2 stop
