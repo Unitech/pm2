@@ -8,6 +8,7 @@ var Satan = require('../lib/Satan');
 var fs = require('fs');
 var path = p = require('path');
 var cst = require('../constants.js');
+var pkg = require('../package.json');
 var util = require('util');
 var watch = require('watch');
 
@@ -19,7 +20,7 @@ const STARTUP_SCRIPT    = '../lib/scripts/pm2-init.sh';
 
 //console.log();
 
-commander.version(cst.VERSION)
+commander.version(pkg.version)
          .option('-v --verbose', 'Display all data')
          .option('-f --force', 'Force actions')
          .option('-i --instances <number>', 'Lunch [number] instances (clustered with same socket)', parseInt)
