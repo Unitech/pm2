@@ -92,7 +92,8 @@ processes.json :
 [{
     "name" : "echo",
     "script" : "./examples/echo.js",
-    "max" : "10"
+    "max" : "10",
+    "args" : "-d 1"
 },{
     "name" : "api",
     "script" : "./examples/child.js",

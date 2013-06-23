@@ -251,7 +251,8 @@ CLI.startFile = function(script) {
     name : p.basename(script, '.js')
   };
 
-  if (isNaN(parseInt(commander.instances)) &&
+  if (commander.instances &&
+      isNaN(parseInt(commander.instances)) &&
       commander.instances != 'max') {
     console.log(PREFIX_MSG + ' [ERROR] instance option must be an integer ot the "max" string');
     process.exit(ERROR_EXIT);
@@ -266,6 +267,10 @@ CLI.startFile = function(script) {
   if (commander.pid)
     appConf['pidFile'] = commander.pid;
 
+  // Script arguments
+  var opts = commander.rawArgs.indexOf('--') + 1;
+  if (opts > 1)
+    appConf['args'] = commander.rawArgs.slice(opts, commander.rawArgs.length);
 
   if (commander.write) {
     var dst_path = path.join(process.env.PWD, path.basename(script, '.js') + '-pm2.json');
