@@ -30,11 +30,11 @@ describe('God', function() {
 	pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
 	pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
       }, function(err, proce) {
-	   proc = proce;
-	   proc.status.should.be.equal('online');
-	   God.getFormatedProcesses().length.should.equal(1);
-	   done();
-	 });
+	proc = proce;
+	proc.status.should.be.equal('online');
+	God.getFormatedProcesses().length.should.equal(1);
+	done();
+      });
     });
 
     it('should stop process and no more present', function(done) {
@@ -68,11 +68,28 @@ describe('God', function() {
         pm_pid_path : path.resolve(process.cwd(), 'test/child'),
         instances : 3
       }, function(err, procs) {
-	   God.getFormatedProcesses().length.should.equal(3);
-           procs.length.should.equal(3);
-	   done();
-         });
+	God.getFormatedProcesses().length.should.equal(3);
+        procs.length.should.equal(3);
+        God.stopAll(done);
+      });
     });
+
+    it('should start maximum processes depending on CPU numbers', function(done) {
+      God.prepare({
+        pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
+        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
+        pm_pid_path : path.resolve(process.cwd(), 'test/child'),
+        instances : 'max'
+      }, function(err, procs) {
+	God.getFormatedProcesses().length.should.equal(numCPUs);
+        procs.length.should.equal(numCPUs);
+        God.stopAll(done);
+      });
+    });
+
   });
+
+  
 
 });

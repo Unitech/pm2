@@ -19,6 +19,8 @@ npm install -g pm2
 ```
 $ npm install pm2 -g     // Install pm2 command line globally
 $ pm2 start app.js -i 4  // Daemonize pm2 and Start 4 clustered instances of app.js
+                         // You can also pass the 'max' params to start 
+                         // the right numbers of processes depending of CPUs
 
 $ pm2 list               // Display all processes status
 $ pm2 monit              // Monitor all processes

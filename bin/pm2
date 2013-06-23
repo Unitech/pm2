@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 var commander = require('commander');
-var Monit = require('../lib/Monit');
-var UX = require('../lib/CliUx');
-var Log = require('../lib/Log');
-var Satan = require('../lib/Satan');
-var fs = require('fs');
-var path = p = require('path');
-var cst = require('../constants.js');
-var pkg = require('../package.json');
-var util = require('util');
-var watch = require('watch');
+var Monit     = require('../lib/Monit');
+var UX        = require('../lib/CliUx');
+var Log       = require('../lib/Log');
+var Satan     = require('../lib/Satan');
+var fs        = require('fs');
+var path      = p = require('path');
+var cst       = require('../constants.js');
+var pkg       = require('../package.json');
+var util      = require('util');
+var watch     = require('watch');
 
 const PREFIX_MSG        = '\x1B[32m⌬ PM2 \x1B[39m';
 const SUCCESS_EXIT      = 0;
@@ -23,7 +23,7 @@ const STARTUP_SCRIPT    = '../lib/scripts/pm2-init.sh';
 commander.version(pkg.version)
          .option('-v --verbose', 'Display all data')
          .option('-f --force', 'Force actions')
-         .option('-i --instances <number>', 'Lunch [number] instances (clustered with same socket)', parseInt)
+         .option('-i --instances <number>', 'Lunch [number] instances (clustered with same socket)')
          .option('-o --output <path>', 'Out log file output')
          .option('-e --error <path>', 'Error log file output')
          .option('-p --pid <pid>', 'Pid file')
@@ -251,8 +251,14 @@ CLI.startFile = function(script) {
     name : p.basename(script, '.js')
   };
 
+  if (isNaN(parseInt(commander.instances)) &&
+      commander.instances != 'max') {
+    console.log(PREFIX_MSG + ' [ERROR] instance option must be an integer ot the "max" string');
+    process.exit(ERROR_EXIT);
+  }
+
   if (commander.instances)
-    appConf['instances'] = commander.instances;
+    appConf['instances'] = commander.instances;    
   if (commander.error)
     appConf['fileError'] = commander.error;
   if (commander.output)
