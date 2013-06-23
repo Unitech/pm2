@@ -21,7 +21,6 @@ $ npm install pm2 -g     // Install pm2 command line globally
 $ pm2 start app.js -i 4  // Daemonize pm2 and Start 4 clustered instances of app.js
                          // You can also pass the 'max' params to start 
                          // the right numbers of processes depending of CPUs
-
 $ pm2 list               // Display all processes status
 $ pm2 monit              // Monitor all processes
 $ pm2 logs               // Display all processes logs in streaming
@@ -34,6 +33,18 @@ $ pm2 restartAll         // Restart all proccesses
 $ pm2 stopAll
 $ pm2 generate app       // Generate a JSON process configuration
 $ pm2 web                // Health computer API endpoint (http://localhost:9615)
+```
+
+## Differents way of starting a process
+
+```
+$ pm2 start app.js -i max  // Will start maximum processes depending on CPU availables
+$ pm2 start app.js -i 3    // Will start 3 processes
+$ pm2 start app.json       // Start processes with options declared in app.json
+                           // Go to chapter Multi process JSON declaration for more
+                           
+$ pm2 start app.js -i max -- -a 23 // Pass arguments after -- to app.js
+$ pm2 start app.js -i max -e err.log -o out.log -w // Will start and generate a configuration file
 ```
 
 ## pm2 list
@@ -90,17 +101,18 @@ processes.json :
 
 ```
 [{
-    "name" : "echo",
-    "script" : "./examples/echo.js",
-    "max" : "10",
-    "args" : "-d 1"
+    "name"      : "echo",
+    "script"    : "./examples/echo.js",
+    "max"       : "10",
+    "instances" : "max",
+    "args"      : "-d 1"
 },{
-    "name" : "api",
-    "script" : "./examples/child.js",
+    "name"      : "api",
+    "script"    : "./examples/child.js",
     "instances" : "4"
 },{
-    "name" : "bus",
-    "script" : "./examples/echokill.js"
+    "name"      : "bus",
+    "script"    : "./examples/echokill.js"
 }]
 ```
 

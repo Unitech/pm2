@@ -62,11 +62,11 @@ describe('God', function() {
   describe('Multi launching', function() {
     it('should launch multiple processes depending on CPUs available', function(done) {
       God.prepare({
-        pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path : path.resolve(process.cwd(), 'test/child'),
-        instances : 3
+        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
+        instances       : 3
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(3);
         procs.length.should.equal(3);
@@ -76,15 +76,31 @@ describe('God', function() {
 
     it('should start maximum processes depending on CPU numbers', function(done) {
       God.prepare({
-        pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path : path.resolve(process.cwd(), 'test/child'),
-        instances : 'max'
+        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
+        instances       : 'max'
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(numCPUs);
         procs.length.should.equal(numCPUs);
         God.stopAll(done);
+      });
+    });
+
+    it('should handle arguments', function(done) {
+      God.prepare({
+        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/args.js'),
+        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
+        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
+        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
+        args            : '-d -a',
+        instances       : '1'
+      }, function(err, procs) {
+        setTimeout(function() {
+          God.getFormatedProcesses()[0].opts.restart_time.should.eql(0);
+          God.stopAll(done);
+        }, 400);
       });
     });
 

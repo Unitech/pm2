@@ -270,7 +270,7 @@ CLI.startFile = function(script) {
   // Script arguments
   var opts = commander.rawArgs.indexOf('--') + 1;
   if (opts > 1)
-    appConf['args'] = commander.rawArgs.slice(opts, commander.rawArgs.length);
+    appConf['args'] = commander.rawArgs.slice(opts, commander.rawArgs.length).join(' ');
 
   if (commander.write) {
     var dst_path = path.join(process.env.PWD, path.basename(script, '.js') + '-pm2.json');
