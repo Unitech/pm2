@@ -108,7 +108,18 @@ commander.command('resurect')
 //
 // Stop All processes
 //
-commander.command('restart')
+commander.command('restart <pm2_id>')
+  .description('restart all processes')
+  .action(function(pm2_id) {
+    console.log(PREFIX_MSG + 'Restarting process ' + pm2_id);
+    UX.processing.start();
+    CLI.restart(pm2_id);
+  });
+
+//
+// Stop All processes
+//
+commander.command('restartAll')
          .description('restart all processes')
          .action(function() {
   console.log(PREFIX_MSG + 'Restarting all processes');
@@ -416,6 +427,22 @@ CLI.web = function() {
   }), function() {
     console.log(PREFIX_MSG + 'Process launched');
     speedList();
+  });
+};
+
+CLI.restart = function(pm2_id) {
+  Satan.executeRemote('list', {}, function(err, list) {
+    list.forEach(function(l) {
+      if (l.pm_id == pm2_id) {
+        try {
+          process.kill(l.pid);
+        } catch(e) { }
+      }
+    });
+    setTimeout(function() {
+      console.log('\n' + PREFIX_MSG + 'Process ' + pm2_id + ' restarted');
+      process.exit(SUCCESS_EXIT);
+    }, 1000);
   });
 };
 

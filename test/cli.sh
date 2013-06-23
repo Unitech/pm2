@@ -95,12 +95,27 @@ wget -q http://localhost:9615/ -O $JSON_FILE
 cat $JSON_FILE | grep "restart_time\":0" > /dev/null
 spec "Should get the right JSON with HttpInterface file launched"
 
-$pm2 restart
+#
+# Restart only one process
+#
+$pm2 restart 1
+sleep 0.3
+wget -q http://localhost:9615/ -O $JSON_FILE
+OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
+[ $OUT -eq 1 ] || fail "$1"
+success "$1"
+
+#
+# Restart all processes
+#
+$pm2 restartAll
+spec "Should restart all processes"
 
 sleep 0.3
 wget -q http://localhost:9615/ -O $JSON_FILE
-cat $JSON_FILE | grep "restart_time\":1" > /dev/null
-spec "Should display restarted 1 when process restarted"
+OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
+[ $OUT -eq 7 ] || fail "$1"
+success "$1"
 
 $pm2 list
 
