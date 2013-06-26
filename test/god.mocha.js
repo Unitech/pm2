@@ -80,10 +80,10 @@ describe('God', function() {
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        instances       : 'max'
+        instances       : 10
       }, function(err, procs) {
-	God.getFormatedProcesses().length.should.equal(numCPUs);
-        procs.length.should.equal(numCPUs);
+	God.getFormatedProcesses().length.should.equal(10);
+        procs.length.should.equal(10);
         God.stopAll(done);
       });
     });
