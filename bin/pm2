@@ -24,7 +24,7 @@ const STARTUP_SCRIPT    = '../lib/scripts/pm2-init.sh';
 commander.version(pkg.version)
          .option('-v --verbose', 'Display all data')
          .option('-f --force', 'Force actions')
-         .option('-i --instances <number>', 'Lunch [number] instances (clustered with same socket)')
+         .option('-i --instances <number>', 'Launch [number] instances (clustered with same socket)')
          .option('-o --output <path>', 'Out log file output')
          .option('-e --error <path>', 'Error log file output')
          .option('-p --pid <pid>', 'Pid file')
