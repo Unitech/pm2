@@ -1,0 +1,198 @@
+@import url(http://fonts.googleapis.com/css?family=Abel);
+@import url(font-awesome.min.css);
+@import url("reset.css");
+
+@blue: #9B9BAD;
+@lighterblue: #58EAE0;
+@lightblue: #EBF9FA;
+@sand: #FBE9E0;
+@cardboard: #ded9d5;
+@barelywhite: #f8f8fa;
+@green: #33B763;
+@lightergreen: #A2FBDC;
+@darkgray: #3A3A3B;
+@yellow: #FBF586;
+
+body {
+	background: url(../image/satinweave.png);
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: @darkgray;
+}
+
+.column {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.column.third { width: 33%; }
+.column.twothirds { width: 66%; }
+
+//Infoclasses
+.message { text-align: center; padding-top: 100px; }
+.neutral { color: lighten(@blue, 20%); }
+
+.wrapper {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.title {
+	font-size: 48px;
+	font-weight: bold;
+	margin: 12px 0;
+	font-family: 'Abel', sans-serif;
+	text-transform: uppercase;
+}
+
+.dashboard {
+	background: #fff;
+	padding: 18px;
+	border-radius: 6px;
+	box-shadow: 0 1px 0 darken(#fff, 10%), 0 2px 0 #eee, 0 3px 0 #ddd;
+
+	h3 {
+		font-size: 14px;
+		font-family: 'Abel', sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin: 0 0 12px;
+		padding: 6px 8px;
+		-webkit-border-bottom-left-radius: 6px;
+		-moz-border-radius-bottomleft: 6px;
+		border-bottom-left-radius: 6px;
+		color: @blue;
+	}
+}
+
+.process-list {
+	margin-bottom: 18px;
+
+	.list {
+		max-height: 200px;
+		overflow: scroll;
+	}
+
+	.process {
+		height: 40px;
+		padding: 4px;
+		border-radius: 6px;
+		cursor: pointer;
+
+		div {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		.pid {
+			height: 40px;
+			width: 8%;
+			border-right: 1px solid #ddd;
+			text-align: center;
+
+			span {
+				display: inline-block;
+				padding-top: 12px;
+				font-weight: bold;
+			}
+		}
+
+		.name {
+			width: 62%;
+
+			h4 {
+				font-size: 18px;
+				margin: 2px 12px 4px;
+				font-weight: bold;
+			}
+
+			h5 {
+				font-size: 14px;
+				margin: 0 12px;
+				font-family: Monaco, monospace;
+				color: darken(@cardboard, 10%);
+			}
+		}
+
+		.actions {
+			width: 20%;
+			padding-top: 8px;
+
+			i {
+				font-size: 24px;
+				margin: 6px;
+			}
+
+			.icon-remove {
+				color: darken(@sand, 30%);
+			}
+
+			.icon-refresh {
+				color: @green;
+			}
+		}
+
+		.status {
+			text-align: center;
+			width: 8%;
+			padding-top: 12px;
+
+			.online {
+				color: @lighterblue;
+			}
+		}
+	}
+
+	.process:hover {
+		background: @lightblue; //lighten(@sand, 4%);
+	}
+
+	.process.selected {
+
+	}
+
+	//This is a bit messy
+	.process.head {
+		height: 20px;
+		cursor: auto;
+
+		span {
+			color: #ccc;
+			font-weight: bold;
+			font-size: 12px;
+			margin-left: 12px;
+		}
+
+		.pid {
+			height: 20px;
+
+			span {
+				padding-top: 0;
+				margin-left: 0;
+			}
+		}
+
+		.actions {
+			padding-top: 0;
+
+			span {
+				margin-left: 0;
+			}
+		}
+
+		.status {
+			padding-top: 0;
+
+			span {
+				margin-left: 0;
+			}
+		}
+	}
+
+	.process.head {
+		background: inherit;
+	}
+}
+
+.process-log {
+	min-height: 200px;
+}

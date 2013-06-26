@@ -1,0 +1,3 @@
+{{#person?}}
+  Hi {{name}}!
+{{/person?}}

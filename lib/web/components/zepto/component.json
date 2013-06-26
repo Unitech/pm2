@@ -1,0 +1,21 @@
+{
+  "name": "zepto",
+  "description": "Shim repository for the Zepto.js JavaScript library.",
+  "version": "1.0.0",
+  "main": "./zepto.js",
+  "dependencies": {},
+  "scripts": [
+    "zepto.js"
+  ],
+  "files": [
+    "zepto.min.js"
+  ],
+  "gitHead": "040d1f488926b693ca5f5d9b712043e5409dbf17",
+  "readme": "Zepto.js\n========\n\nShim repository for the [Zepto.js](http://zeptojs.com/) JavaScript library.\n\nPackage Managers\n----------------\n\n* [Bower](http://twitter.github.com/bower/): `zepto`\n* [Component](https://github.com/component/component): `components/zepto`\n* [Composer](http://packagist.org/packages/components/zepto): `components/zepto`\n",
+  "readmeFilename": "README.md",
+  "_id": "zepto@1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/components/zepto.git"
+  }
+}

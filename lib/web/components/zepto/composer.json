@@ -1,0 +1,32 @@
+{
+  "name": "components/zepto",
+  "description": "Shim repository for the Zepto.js JavaScript library.",
+  "type": "component",
+  "keywords": [
+    "JavaScript"
+  ],
+  "homepage": "http://zeptojs.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thomas Fuchs",
+      "homepage": "https://github.com/madrobby"
+    }
+  ],
+  "require": {
+      "robloach/component-installer": "*"
+  },
+  "extra": {
+    "component": {
+      "scripts": [
+        "zepto.js"
+      ],
+      "files": [
+        "zepto.min.js"
+      ],
+      "shim": {
+        "exports": "Zepto"
+      }
+    }
+  }
+}

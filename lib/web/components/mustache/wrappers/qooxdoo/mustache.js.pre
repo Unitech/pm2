@@ -1,0 +1,134 @@
+/* ************************************************************************
+
+   qooxdoo - the new era of web development
+
+   http://qooxdoo.org
+
+   Copyright:
+     2004-2012 1&1 Internet AG, Germany, http://www.1und1.de
+
+   License:
+     LGPL: http://www.gnu.org/licenses/lgpl.html
+     EPL: http://www.eclipse.org/org/documents/epl-v10.php
+     See the LICENSE file in the project's top-level directory for details.
+
+   Authors:
+     * Martin Wittemann (martinwittemann)
+
+   ======================================================================
+
+   This class contains code based on the following work:
+
+   * Mustache.js version 0.5.1-dev
+
+     Code:
+       https://github.com/janl/mustache.js
+
+     Copyright:
+       (c) 2009 Chris Wanstrath (Ruby)
+       (c) 2010 Jan Lehnardt (JavaScript)
+
+     License:
+       MIT: http://www.opensource.org/licenses/mit-license.php
+
+   ----------------------------------------------------------------------
+
+   Copyright (c) 2009 Chris Wanstrath (Ruby)
+   Copyright (c) 2010 Jan Lehnardt (JavaScript)
+
+   Permission is hereby granted, free of charge, to any person obtaining
+   a copy of this software and associated documentation files (the
+   "Software"), to deal in the Software without restriction, including
+   without limitation the rights to use, copy, modify, merge, publish,
+   distribute, sublicense, and/or sell copies of the Software, and to
+   permit persons to whom the Software is furnished to do so, subject to
+   the following conditions:
+
+   The above copyright notice and this permission notice shall be
+   included in all copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+   NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+   LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+   OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+************************************************************************ */
+
+/**
+ * The is a template class which can be used for HTML templating. In fact, 
+ * this is a wrapper for mustache.js which is a "framework-agnostic way to 
+ * render logic-free views".
+ * 
+ * Here is a basic example how to use it:
+ * Template:
+ * <pre>
+ * var template = "Hi, my name is {{name}}!";
+ * var view = {name: "qooxdoo"};
+ * qx.bom.Template.toHtml(template, view);
+ * // return "Hi, my name is qooxdoo!"
+ * </pre>
+ * 
+ * For further details, please visit the mustache.js documentation here:
+ *   https://github.com/janl/mustache.js/blob/master/README.md
+ */
+qx.Bootstrap.define("qx.bom.Template", {
+  statics : {
+    /** Contains the mustache.js version. */
+    version: null,
+
+    /**
+     * Original and only template method of mustache.js. For further
+     * documentation, please visit https://github.com/janl/mustache.js
+     *
+     * @signature function(template, view, partials)
+     * @param template {String} The String containing the template.
+     * @param view {Object} The object holding the data to render.
+     * @param partials {Object} Object holding parts of a template.
+     * @return {String} The parsed template.
+     */
+    render: null,
+
+
+    /**
+     * Helper method which provides you with a direct access to templates 
+     * stored as HTML in the DOM. The DOM node with the given ID will be used 
+     * as a template, parsed and a new DOM node will be returned containing the 
+     * parsed data. Keep in mind to have only one root DOM element in the the 
+     * template.
+     *
+     * @param id {String} The id of the HTML template in the DOM.
+     * @param view {Object} The object holding the data to render.
+     * @param partials {Object} Object holding parts of a template.
+     * @return {DomNode} A DOM element holding the parsed template data.
+     */
+    get : function(id, view, partials) {
+      // get the content stored in the DOM
+      var template = document.getElementById(id);
+      var inner = template.innerHTML;
+
+      // apply the view
+      inner = this.toHtml(inner, view, partials);
+
+      // special case for text only conversion
+      if (inner.search(/<|>/) === -1) {
+        return inner;
+      }
+
+      // create a helper to convert the string into DOM nodes
+      var helper = qx.bom.Element.create("div");
+      helper.innerHTML = inner;
+
+      return helper.children[0];
+    }
+  }
+});
+
+(function() {
+
+/**
+ * Below is the original mustache.js code. Snapshot date is mentioned in 
+ * the head of this file.
+ */

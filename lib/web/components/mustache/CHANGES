@@ -1,0 +1,34 @@
+= 0.7.2 / 27 Dec 2012
+
+  * Fixed a rendering bug (#274) when using nested higher-order sections.
+  * Converted tests to use mocha instead of vows.
+
+= 0.7.1 / 6 Dec 2012
+
+  * Handle empty templates gracefully. Fixes #265, #267, and #270.
+  * Cache partials by template, not by name. Fixes #257.
+  * Added Mustache.compileTokens to compile the output of Mustache.parse. Fixes
+    #258.
+
+= 0.7.0 / 10 Sep 2012
+
+  * Rename Renderer => Writer.
+  * Allow partials to be loaded dynamically using a callback (thanks
+    @TiddoLangerak for the suggestion).
+  * Fixed a bug with higher-order sections that prevented them from being
+    passed the raw text of the section from the original template.
+  * More concise token format. Tokens also include start/end indices in the
+    original template.
+  * High-level API is consistent with the Writer API.
+  * Allow partials to be passed to the pre-compiled function (thanks
+    @fallenice).
+  * Don't use eval (thanks @cweider).
+
+= 0.6.0 / 31 Aug 2012
+
+  * Use JavaScript's definition of falsy when determining whether to render an
+    inverted section or not. Issue #186.
+  * Use Mustache.escape to escape values inside {{}}. This function may be
+    reassigned to alter the default escaping behavior. Issue #244.
+  * Fixed a bug that clashed with QUnit (thanks @kannix).
+  * Added volo support (thanks @guybedford).

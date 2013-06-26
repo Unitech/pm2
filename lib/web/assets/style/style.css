@@ -1,0 +1,158 @@
+@import url(http://fonts.googleapis.com/css?family=Abel);
+
+@import url(font-awesome.min.css);
+
+@import url("reset.css");
+body {
+  background: url(../image/satinweave.png);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #3a3a3b;
+}
+.column {
+  display: inline-block;
+  vertical-align: top;
+}
+.column.third {
+  width: 33%;
+}
+.column.twothirds {
+  width: 66%;
+}
+.message {
+  text-align: center;
+  padding-top: 100px;
+}
+.neutral {
+  color: #d3d3db;
+}
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+.title {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 12px 0;
+  font-family: 'Abel', sans-serif;
+  text-transform: uppercase;
+}
+.dashboard {
+  background: #fff;
+  padding: 18px;
+  border-radius: 6px;
+  box-shadow: 0 1px 0 #e6e6e6, 0 2px 0 #eeeeee, 0 3px 0 #dddddd;
+}
+.dashboard h3 {
+  font-size: 14px;
+  font-family: 'Abel', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 12px;
+  padding: 6px 8px;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-left-radius: 6px;
+  color: #9b9bad;
+}
+.process-list {
+  margin-bottom: 18px;
+}
+.process-list .list {
+  max-height: 200px;
+  overflow: scroll;
+}
+.process-list .process {
+  height: 40px;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.process-list .process div {
+  display: inline-block;
+  vertical-align: top;
+}
+.process-list .process .pid {
+  height: 40px;
+  width: 8%;
+  border-right: 1px solid #ddd;
+  text-align: center;
+}
+.process-list .process .pid span {
+  display: inline-block;
+  padding-top: 12px;
+  font-weight: bold;
+}
+.process-list .process .name {
+  width: 62%;
+}
+.process-list .process .name h4 {
+  font-size: 18px;
+  margin: 2px 12px 4px;
+  font-weight: bold;
+}
+.process-list .process .name h5 {
+  font-size: 14px;
+  margin: 0 12px;
+  font-family: Monaco, monospace;
+  color: #c8bfb8;
+}
+.process-list .process .actions {
+  width: 20%;
+  padding-top: 8px;
+}
+.process-list .process .actions i {
+  font-size: 24px;
+  margin: 6px;
+}
+.process-list .process .actions .icon-remove {
+  color: #ea8958;
+}
+.process-list .process .actions .icon-refresh {
+  color: #33b763;
+}
+.process-list .process .status {
+  text-align: center;
+  width: 8%;
+  padding-top: 12px;
+}
+.process-list .process .status .online {
+  color: #58eae0;
+}
+.process-list .process:hover {
+  background: #ebf9fa;
+}
+.process-list .process.head {
+  height: 20px;
+  cursor: auto;
+}
+.process-list .process.head span {
+  color: #ccc;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 12px;
+}
+.process-list .process.head .pid {
+  height: 20px;
+}
+.process-list .process.head .pid span {
+  padding-top: 0;
+  margin-left: 0;
+}
+.process-list .process.head .actions {
+  padding-top: 0;
+}
+.process-list .process.head .actions span {
+  margin-left: 0;
+}
+.process-list .process.head .status {
+  padding-top: 0;
+}
+.process-list .process.head .status span {
+  margin-left: 0;
+}
+.process-list .process.head {
+  background: inherit;
+}
+.process-log {
+  min-height: 200px;
+}

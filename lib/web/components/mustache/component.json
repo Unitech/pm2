@@ -1,0 +1,8 @@
+{
+  "name": "mustache",
+  "version": "0.7.2",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/janl/mustache.js"
+  }
+}

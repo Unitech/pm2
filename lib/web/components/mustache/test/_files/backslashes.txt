@@ -1,0 +1,7 @@
+* \abc
+* \abc
+* \abc
+<script>
+foo = { bar: 'abc\"xyz\"' };
+foo = { bar: 'x\'y' };
+</script>

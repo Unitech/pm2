@@ -1,0 +1,9 @@
+/**
+ * Above is the original mustache code.
+ */
+
+// EXPOSE qooxdoo variant
+qx.bom.Template.version = Mustache.version;
+qx.bom.Template.render = Mustache.render;
+
+})();

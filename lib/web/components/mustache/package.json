@@ -1,0 +1,17 @@
+{
+  "name": "mustache",
+  "version": "0.7.2",
+  "description": "Logic-less {{mustache}} templates with JavaScript",
+  "author": "mustache.js Authors <http://github.com/janl/mustache.js>",
+  "keywords": ["mustache", "template", "templates", "ejs"],
+  "main": "./mustache.js",
+  "devDependencies": {
+    "mocha": "1.5.0"
+  },
+  "volo": {
+    "url": "https://raw.github.com/janl/mustache.js/0.7.2/mustache.js"
+  },
+  "scripts": {
+    "test": "mocha test"
+  }
+}
