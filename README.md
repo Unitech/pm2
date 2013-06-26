@@ -8,6 +8,8 @@ The next generation daemon process manager for Node.js with native clusterizatio
 
 PM2 is mainly a production module for Linux servers.
 
+Tested with Node v0.8, v0.10, v0.11
+
 # Installation
 
 ```
@@ -45,6 +47,15 @@ $ pm2 start app.json       // Start processes with options declared in app.json
                            
 $ pm2 start app.js -i max -- -a 23 // Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log -w // Will start and generate a configuration file
+```
+
+## Updating pm2 and keeping processes alive
+
+```
+$ pm2 dump
+$ npm install -g pm2@latest
+$ pm2 kill
+$ pm2 resurect
 ```
 
 ## pm2 list

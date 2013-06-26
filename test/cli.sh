@@ -46,6 +46,12 @@ cd $file_path
 $pm2 kill
 spec "kill daemon"
 
+$pm2 start eyayimfake
+ispec "should fail if script doesnt exist"
+
+$pm2 start $file_path/child.js -o /sadadsax
+ispec "should fail if output log unreachable"
+
 $pm2
 ispec "No argument"
 
@@ -114,6 +120,7 @@ spec "Should restart all processes"
 sleep 0.3
 wget -q http://localhost:9615/ -O $JSON_FILE
 OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
+
 [ $OUT -eq 7 ] || fail "$1"
 success "$1"
 

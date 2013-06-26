@@ -18,7 +18,7 @@
   "description": "The next generation process manager for Node.js with native clusterization ",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/cli.sh ; NODE_ENV=test ./node_modules/mocha/bin/mocha test",
+    "test": "bash ./test/cli.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test",
     "froze": "npm shrinkwrap"
   },
   "keywords": [

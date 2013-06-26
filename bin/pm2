@@ -13,6 +13,7 @@ var util      = require('util');
 var watch     = require('watch');
 
 const PREFIX_MSG        = '\x1B[32m⌬ PM2 \x1B[39m';
+const PREFIX_MSG_ERR    = '\x1B[31m⌬ PM2 [ERROR] \x1B[39m';
 const SUCCESS_EXIT      = 0;
 const ERROR_EXIT        = 1;
 const SAMPLE_FILE_PATH  = '../lib/sample.json';
@@ -33,7 +34,7 @@ commander.version(pkg.version)
 //
 // Start command
 //
-commander.command('start <part>')
+commander.command('start <script>')
          .description('start specific part')
          .action(function(cmd) {
   if (cmd.indexOf('.json') > 0)
@@ -59,7 +60,7 @@ commander.command('stopAll')
 commander.command('stop <pm2_id>')
   .description('stop specific process pm2 id')
   .action(function(pm2_id) {    
-    console.log(PREFIX_MSG + 'Stopping process' + pm2_id);
+    console.log(PREFIX_MSG + 'Stopping process ' + pm2_id);
     UX.processing.start();
     CLI.stopId(pm2_id);
   });
@@ -284,7 +285,7 @@ CLI.startFile = function(script) {
 
   Satan.executeRemote('findByScript', {script : appConf.script}, function(err, exec) {
       if (exec && !commander.force) {
-        console.log(PREFIX_MSG + 'Script already launched, add -f option to force re execution');
+        console.log(PREFIX_MSG_ERR + 'Script already launched, add -f option to force re execution');
         process.exit(ERROR_EXIT);
       }
 
@@ -445,10 +446,13 @@ CLI.web = function() {
 CLI.restart = function(pm2_id) {
   Satan.executeRemote('list', {}, function(err, list) {
     list.forEach(function(l) {
-      if (l.pm_id == pm2_id) {
+      if (l.pm_id == pm2_id && l.status != 'stopped') {
         try {
           process.kill(l.pid);
         } catch(e) { }
+      }
+      else if (l.pm_id == pm2_id && l.status == 'stopped') {
+        Satan.executeRemote('startId', {id : l.pm_id}, function(err, list) {});
       }
     });
     setTimeout(function() {
@@ -486,7 +490,11 @@ CLI.stopId = function(pm2_id) {
   Satan.executeRemote('stopId', {
     id : pm2_id
   }, function(err, list) {
-    if (err) process.exit(ERROR_EXIT);
+    if (err) {
+      console.log('\n' + PREFIX_MSG_ERR + pm2_id + ' : pm2 id not found');
+      process.exit(ERROR_EXIT);
+    }
+
     console.log('\n');
     console.log(PREFIX_MSG + 'Process stopped');
     UX.processing.stop();
@@ -606,7 +614,10 @@ function speedList() {
 function resolvePaths(app) {
   app["pm_exec_path"]    = path.resolve(process.cwd(), app.script);
 
-  fs.existsSync(app.pm_exec_path);
+  if (fs.existsSync(app.pm_exec_path) == false) {
+    console.log(PREFIX_MSG_ERR + 'script not found : ' + app.pm_exec_path);
+    process.exit(ERROR_EXIT);
+  }
 
   // Set current env
   util._extend(app, process.env);
@@ -615,7 +626,7 @@ function resolvePaths(app) {
     app["pm_out_log_path"] = path.resolve(process.cwd(), app.fileOutput);
   else {
     if (!app.name) {
-      console.log(PREFIX_MSG + 'You havent specified log path, please specify at least a "name" field in the JSON');
+      console.log(PREFIX_MSG_ERR + 'You havent specified log path, please specify at least a "name" field in the JSON');
       process.exit(ERROR_EXIT);
     }
     app["pm_out_log_path"] = path.resolve(cst.DEFAULT_LOG_PATH, [app.name, '-out.log'].join(''));
@@ -636,8 +647,9 @@ function resolvePaths(app) {
     app.pidFile            = app["pm_pid_path"];
   }
 
-  fs.existsSync(app.pm_out_log_path);
-  fs.existsSync(app.pm_err_log_path);
-
+  if (!fs.existsSync(app.pm_out_log_path) || !fs.existsSync(app.pm_err_log_path)) {
+    console.log(PREFIX_MSG_ERR + 'logs file not accessible : ' + app.pm_out_log_path + ' | ' + app.pm_err_log_path);
+    process.exit(ERROR_EXIT);
+  }
   return app;
 }
