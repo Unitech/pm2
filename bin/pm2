@@ -470,6 +470,7 @@ CLI.web.getProcess = function(callback) {
 
 CLI.web.start = function(callback) {
   console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
+  console.log(p.resolve(p.dirname(module.filename), '../lib/HttpInterface.js'))
   //Create the process
   Satan.executeRemote('prepare', resolvePaths({
     script : p.resolve(p.dirname(module.filename), '../lib/HttpInterface.js'),
