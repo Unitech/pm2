@@ -137,7 +137,7 @@ spec "Should stop all processes"
 
 $pm2 kill
 
-$pm2 resurect
+$pm2 resurrect
 spec "Should resurect all apps"
 
 $pm2 stopAll

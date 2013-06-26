@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "engines" : {
     "node" : ">=0.8"
   },
@@ -13,6 +13,9 @@
   "contributors": [{
     "name"  : "Alex Kocharin",
     "email" : "alex@kocharin.ru" 
+  }, {
+    "name" : "Devo.ps",
+    "email" : "contact@devo.ps"
   }],
   "homepage" : "http://unitech.io/",
   "description": "The next generation process manager for Node.js with native clusterization ",
@@ -41,7 +44,7 @@
   "dependencies": {
     "commander": "1.1.0",
     "cli-table" : "0.2.0",
-    "multimeter": "git://github.com/Alexandre-Strzelewicz/node-multimeter.git",
+    "multimeter": "git://github.com/Unitech/node-multimeter.git",
     "usage" : "0.3.5",
     "axon-rpc" : "0.0.2",
     "watch" : "0.7.0",

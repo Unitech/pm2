@@ -99,12 +99,12 @@ commander.command('dump')
 //
 // Save processes to file
 //
-commander.command('resurect')
+commander.command('resurrect')
          .description('resurect previously dumped processes')
          .action(function() {
-  console.log(PREFIX_MSG + 'Resurecting');
+  console.log(PREFIX_MSG + 'Resurrecting');
   UX.processing.start();
-  CLI.resurect();
+  CLI.resurrect();
 });
 
 //
@@ -363,7 +363,7 @@ CLI.developmentMode = function(script) {
   });
 };
 
-CLI.resurect = function() {
+CLI.resurrect = function() {
   try {
     fs.existsSync(cst.DUMP_FILE_PATH);
   } catch(e) {
@@ -572,17 +572,31 @@ CLI.monit = function() {
 };
 
 CLI.streamLogs = function() {
+  var tdb = {};
+  
   Satan.executeRemote('list', {}, function(err, list) {
+    
+    list.forEach(function(l) {
+      tdb[l.opts.script] = l;
+    });
     Log.stream(cst.PM2_LOG_FILE_PATH, 'PM2 DAEMON');
     if (err) process.exit(ERROR_EXIT);
-    list.forEach(function(l) {
-      if (l.opts.pm_out_log_path)
-        Log.stream(l.opts.pm_out_log_path,
-                   p.basename(l.opts.script, '.js') + ' out');
-      if (l.opts.pm_err_log_path)
-        Log.stream(l.opts.pm_err_log_path,
-                   p.basename(l.opts.script, '.js') + ' err');
-    });
+    for (k in tdb) {      
+      if (tdb[k].opts.pm_out_log_path)
+        Log.stream(tdb[k].opts.pm_out_log_path,
+                   p.basename(tdb[k].opts.script, '.js') + ' out');
+      if (tdb[k].opts.pm_err_log_path)
+        Log.stream(tdb[k].opts.pm_err_log_path,
+                   p.basename(tdb[k].opts.script, '.js') + ' err');
+    }
+    // list.forEach(function(l) {
+    //   if (l.opts.pm_out_log_path)
+    //     Log.stream(l.opts.pm_out_log_path,
+    //                p.basename(l.opts.script, '.js') + ' out');
+    //   if (l.opts.pm_err_log_path)
+    //     Log.stream(l.opts.pm_err_log_path,
+    //                p.basename(l.opts.script, '.js') + ' err');
+    // });
   });
 };
 

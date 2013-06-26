@@ -29,7 +29,7 @@ $ pm2 logs               // Display all processes logs in streaming
 $ pm2 dump               // Dump the states of all processes
 $ pm2 stop pm2_id        // Stop specific process id
 $ pm2 stopAll            // Stop all processes
-$ pm2 resurect           // Put online previously dumped processes
+$ pm2 resurrect           // Put online previously dumped processes
 $ pm2 restart pm2_id     // Restart specific process
 $ pm2 restartAll         // Restart all proccesses
 $ pm2 stopAll
@@ -55,7 +55,7 @@ $ pm2 start app.js -i max -e err.log -o out.log -w // Will start and generate a 
 $ pm2 dump
 $ npm install -g pm2@latest
 $ pm2 kill
-$ pm2 resurect
+$ pm2 resurrect
 ```
 
 ## pm2 list
@@ -76,10 +76,10 @@ Display logs in streaming of all processes, without having to do a tail -f or so
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
-## pm2 dump/resurect
+## pm2 dump/resurrect
 
 You can dump all currently running processes, including their environment and execution path.
-After restarting or stopping PM2 you can `resurect` them. 
+After restarting or stopping PM2 you can `resurrect` them. 
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
 
@@ -90,7 +90,6 @@ PM2 can disserve an API endpoint to monitor processes and computer health (cpu u
 ```
 pm2 web
 ```
-
 
 # Features
 
