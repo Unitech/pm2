@@ -661,9 +661,5 @@ function resolvePaths(app) {
     app.pidFile            = app["pm_pid_path"];
   }
 
-  if (!fs.existsSync(app.pm_out_log_path) || !fs.existsSync(app.pm_err_log_path)) {
-    console.log(PREFIX_MSG_ERR + 'logs file not accessible : ' + app.pm_out_log_path + ' | ' + app.pm_err_log_path);
-    process.exit(ERROR_EXIT);
-  }
   return app;
 }

@@ -49,9 +49,6 @@ spec "kill daemon"
 $pm2 start eyayimfake
 ispec "should fail if script doesnt exist"
 
-$pm2 start $file_path/child.js -o /sadadsax
-ispec "should fail if output log unreachable"
-
 $pm2
 ispec "No argument"
 
