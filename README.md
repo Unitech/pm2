@@ -1,4 +1,4 @@
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-large.png)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
 
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
