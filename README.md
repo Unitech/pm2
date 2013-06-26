@@ -159,6 +159,10 @@ $ m2 info web-pm2    // list
 
 - Add homogen communication channel (pubsub/eventemitter2 - wildcard events) (axon pub/sub-message.js)
 
+# Sponsors
+
+Thanks to [Devo.ps](http://devo.ps/) and [Wiredcraft](http://wiredcraft.com/) for their knowledge and expertise.
+
 # License
 
 (The MIT License)
