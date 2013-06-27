@@ -12,46 +12,46 @@ Tested with Node v0.8, v0.10, v0.11
 
 # Installation
 
-```
+```bash
 npm install -g pm2
 ```
 
 # Usage/Features
 
-```
-$ npm install pm2 -g     // Install pm2 command line globally
-$ pm2 start app.js -i 4  // Daemonize pm2 and Start 4 clustered instances of app.js
-                         // You can also pass the 'max' params to start 
-                         // the right numbers of processes depending of CPUs
-$ pm2 list               // Display all processes status
-$ pm2 monit              // Monitor all processes
-$ pm2 logs               // Display all processes logs in streaming
-$ pm2 dump               // Dump the states of all processes
-$ pm2 stop pm2_id        // Stop specific process id
-$ pm2 stopAll            // Stop all processes
-$ pm2 resurrect           // Put online previously dumped processes
-$ pm2 restart pm2_id     // Restart specific process
-$ pm2 restartAll         // Restart all proccesses
-$ pm2 stopAll
-$ pm2 generate app       // Generate a JSON process configuration
-$ pm2 web                // Health computer API endpoint (http://localhost:9615)
+```bash
+$ npm install pm2 -g     # Install pm2 command line globally
+$ pm2 start app.js -i 4  # Daemonize pm2 and Start 4 clustered instances of app.js
+                         # You can also pass the 'max' params to start 
+                         # the right numbers of processes depending of CPUs
+$ pm2 list               # Display all processes status
+$ pm2 monit              # Monitor all processes
+$ pm2 logs               # Display all processes logs in streaming
+$ pm2 dump               # Dump the states of all processes
+$ pm2 stop pm2_id        # Stop specific process id
+$ pm2 stopAll            # Stop all processes
+$ pm2 resurrect          # Put online previously dumped processes
+$ pm2 restart pm2_id     # Restart specific process
+$ pm2 restartAll         # Restart all proccesses
+$ pm2 stopAll            # Stop all processes
+$ pm2 generate app       # Generate a JSON process configuration
+$ pm2 web                # Health computer API endpoint (http://localhost:9615)
 ```
 
-## Differents way of starting a process
+## Different ways of starting a process
 
-```
-$ pm2 start app.js -i max  // Will start maximum processes depending on CPU availables
-$ pm2 start app.js -i 3    // Will start 3 processes
-$ pm2 start app.json       // Start processes with options declared in app.json
-                           // Go to chapter Multi process JSON declaration for more
+```bash
+$ pm2 start app.js -i max  # Will start maximum processes depending on CPU availables
+$ pm2 start app.js -i 3    # Will start 3 processes
+$ pm2 start app.json       # Start processes with options declared in app.json
+                           # Go to chapter Multi process JSON declaration for more
                            
-$ pm2 start app.js -i max -- -a 23 // Pass arguments after -- to app.js
-$ pm2 start app.js -i max -e err.log -o out.log -w // Will start and generate a configuration file
+$ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
+$ pm2 start app.js -i max -e err.log -o out.log -w  # Will start and generate a configuration file
 ```
 
-## Updating pm2 procedure (and keeping processes alive)
+## Updating pm2 and keeping processes alive
 
-```
+```bash
 $ pm2 dump
 $ npm install -g pm2@latest
 $ pm2 kill
@@ -62,7 +62,7 @@ $ pm2 resurrect
 
 Just try the tests before using PM2 on your production server
 
-```
+```bash
 $ git clone https://github.com/Unitech/pm2.git
 $ cd pm2
 $ npm install --dev
@@ -122,7 +122,7 @@ pm2 web
 
 processes.json : 
 
-```
+```json
 [{
     "name"      : "echo",
     "script"    : "./examples/echo.js",
@@ -140,13 +140,13 @@ processes.json :
 ```
 
 Then with the cli :
-```
+```bash
 $ pm2 start processes.json
 ```
 
 # Test
 
-```
+```bash
 npm test
 ```
 
@@ -163,11 +163,11 @@ npm test
 # Install a process (draft, not implemented)
 
 You can install processes and communicate with them
-```
+```bash
 $ m2 install web-pm2
 $ m2 list
 $ m2 start web-pm2
-$ m2 info web-pm2    // list 
+$ m2 info web-pm2  # list 
 ```
 
 - Add homogen communication channel (pubsub/eventemitter2 - wildcard events) (axon pub/sub-message.js)
