@@ -49,7 +49,7 @@ $ pm2 start app.js -i max -- -a 23 // Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log -w // Will start and generate a configuration file
 ```
 
-## Updating pm2 and keeping processes alive
+## Updating pm2 procedure (and keeping processes alive)
 
 ```
 $ pm2 dump
