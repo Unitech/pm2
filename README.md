@@ -65,7 +65,7 @@ Just try the tests before using PM2 on your production server
 ```
 $ git clone https://github.com/Unitech/pm2.git
 $ cd pm2
-$ npm install 
+$ npm install --dev
 $ npm test
 ```
 

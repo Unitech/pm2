@@ -2,6 +2,7 @@
 var Monit = require('../lib/Monit');
 var should = require('should');
 var assert = require('better-assert');
+var os = require('os');
 
 describe('Monit', function() {
   it('should have right properties', function() {
@@ -17,7 +18,7 @@ describe('Monit', function() {
       script : 'asd'
     },
     monit: {
-      memory: 13357056,
+      memory: os.totalmem() / 50,
       cpu: 0
     }
   },{
@@ -26,7 +27,7 @@ describe('Monit', function() {
       script : 'asd'
     },
     monit: {
-      memory: 133570560,
+      memory: os.totalmem() / 10,
       cpu: 0
     }
   },{
@@ -35,7 +36,7 @@ describe('Monit', function() {
       script : 'asd'
     },
     monit: {
-      memory: 1335705600,
+      memory: os.totalmem() / 2,
       cpu: 0
     }
   }];
@@ -46,7 +47,7 @@ describe('Monit', function() {
       script : 'asd'
     },
     monit: {
-      memory: 23357096,
+      memory: os.totalmem() / 25,
       cpu: 0
     }
   },{
@@ -55,7 +56,7 @@ describe('Monit', function() {
       script : 'asd'
     },
     monit: {
-      memory: 233570560,
+      memory: os.totalmem() / 5,
       cpu: 0
     }
   },{
@@ -64,7 +65,7 @@ describe('Monit', function() {
       script : 'asd'
     },
     monit: {
-      memory: 2335705600,
+      memory: os.totalmem() / 8,
       cpu: 0
     }
   }];

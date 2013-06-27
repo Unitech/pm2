@@ -172,6 +172,34 @@ commander.command('monit')
 });
 
 //
+// Monitoring command
+//
+commander.command('update')
+  .description('update the daemon (after you updated pm2 by doing : npm install pm2@latest -g)')
+  .action(function() {
+    var exec = require('child_process').exec, child;
+
+    function bind_child(child, cb) {
+      child.stdout.on('data', function(data) {
+        console.log(data);
+      });
+      child.stderr.on('data', function(data) {
+        console.log(data);
+      });
+      child.on('exit', function() {
+        return cb();
+      });
+    }
+
+    bind_child(exec('pm2 dump'), function() {
+      bind_child(exec('pm2 kill; pm2 resurrect'), function() {
+        console.log('resurecting');
+        process.exit(SUCCESS_EXIT);
+      });
+    });
+  });
+
+//
 // Flushing command
 //
 commander.command('flush')
