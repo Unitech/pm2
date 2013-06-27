@@ -58,6 +58,19 @@ $ pm2 kill
 $ pm2 resurrect
 ```
 
+## Is my production server ready for PM2 ?
+
+Just try the tests before using PM2 on your production server
+
+```
+$ git clone https://github.com/Unitech/pm2.git
+$ cd pm2
+$ npm install 
+$ npm test
+```
+
+If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
+
 ## pm2 list
 
 List infos about all processes managed by pm2. It shows also how many times a process has been restarted because of an unhandled exception.
@@ -103,7 +116,7 @@ pm2 web
 - Log uncaught exceptions in error logs
 - Track restarted time
 - Auto stop processes who exit too fast
-- Dump current processes and resurect (upstart)
+- Dump current processes and resurrect (upstart)
 
 # Multi process JSON declaration
 
