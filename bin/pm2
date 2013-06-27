@@ -554,7 +554,7 @@ CLI.list = function() {
 CLI.jlist = function() {
   Satan.executeRemote('list', {}, function(err, list) {
     if (err) process.exit(ERROR_EXIT);
-    console.log(list);
+    console.log(JSON.stringify(list));
     process.exit(SUCCESS_EXIT);
   });
 };
