@@ -26,7 +26,7 @@ export HOME="%HOME_PATH%"
 start() {
     echo "Starting $NAME"
     $NODE $PM2 stop
-    $NODE $PM2 resurect
+    $NODE $PM2 resurrect
 }
  
 stop() {
