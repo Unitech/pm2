@@ -11,6 +11,7 @@
 
 
 node="`type -P node`"
+nodeVersion="`$node -v`"
 pm2="`type -P node` `pwd`/bin/pm2"
 
 script="echo"
@@ -40,6 +41,13 @@ echo -e "\033[1mRunning tests:\033[0m"
 
 
 
+echo "####################### DEBUG ############################"
+echo "PM2 Command = " $pm2
+echo "PM2 version = " $pm2 -V
+echo "Node version = " $nodeVersion
+
+$node -e "var os = require('os'); console.log('arch : %s\nplatform : %s\nrelease : %s\ntype : %s\nmem : %d', os.arch(), os.platform(), os.release(), os.type(), os.totalmem())"
+echo "###################### !DEBUG! ###########################"
 
 cd $file_path
 
