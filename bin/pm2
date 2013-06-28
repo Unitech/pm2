@@ -375,6 +375,11 @@ CLI.developmentMode = function(script) {
     }, function(f, curr, prev) {
          console.log(PREFIX_MSG + 'File changed. Reloading.');
          Satan.executeRemote('list', {}, function(err, list) {
+           if (err) {
+             console.error('Error retrieving process list: ' + err);
+             process.exit(ERROR_EXIT);
+           }
+
            list.forEach(function(l) {
              process.kill(l.pid);
            });
@@ -445,6 +450,11 @@ CLI.upstart = function() {
 CLI.dump = function() {
   var opts_arr = [];
   Satan.executeRemote('list', {}, function(err, list) {
+    if (err) {
+       console.error('Error retrieving process list: ' + err);
+       process.exit(ERROR_EXIT);
+     }
+
     function fin(err) {
       fs.writeFileSync(cst.DUMP_FILE_PATH, JSON.stringify(opts_arr));
       UX.processing.stop();
@@ -473,6 +483,11 @@ CLI.web = function() {
 
 CLI.restart = function(pm2_id) {
   Satan.executeRemote('list', {}, function(err, list) {
+    if (err) {
+       console.error('Error retrieving process list: ' + err);
+       process.exit(ERROR_EXIT);
+     }
+
     list.forEach(function(l) {
       if (l.pm_id == pm2_id && l.status != 'stopped') {
         try {
@@ -492,6 +507,11 @@ CLI.restart = function(pm2_id) {
 
 CLI.restartAll = function() {
   Satan.executeRemote('list', {}, function(err, list) {
+    if (err) {
+      console.error('Error retrieving process list: ' + err);
+      process.exit(ERROR_EXIT);
+    }
+
     list.forEach(function(l) {
       try {
         process.kill(l.pid);
@@ -543,7 +563,11 @@ CLI.generateSample = function(name) {
 
 CLI.list = function() {
   Satan.executeRemote('list', {}, function(err, list) {
-    if (err) process.exit(ERROR_EXIT);
+    if (err) {
+      console.error('Error retrieving process list: ' + err);
+      process.exit(ERROR_EXIT);
+    }
+
     console.log(PREFIX_MSG, 'Process listing');
     UX.dispAsTable(list);
     console.log(PREFIX_MSG, 'PM2 log file path : ', cst.PM2_LOG_FILE_PATH, ' (type pm2 logs to see log streaming)');
@@ -553,7 +577,10 @@ CLI.list = function() {
 
 CLI.jlist = function() {
   Satan.executeRemote('list', {}, function(err, list) {
-    if (err) process.exit(ERROR_EXIT);
+    if (err) {
+      console.error('Error retrieving process list: ' + err);
+      process.exit(ERROR_EXIT);
+    }
     console.log(list);
     process.exit(SUCCESS_EXIT);
   });
@@ -564,7 +591,10 @@ CLI.flush = function() {
   fs.openSync(cst.PM2_LOG_FILE_PATH, 'w');
 
   Satan.executeRemote('list', {}, function(err, list) {
-    if (err) process.exit(ERROR_EXIT);
+    if (err) {
+      console.error('Error retrieving process list: ' + err);
+      process.exit(ERROR_EXIT);
+    }
     list.forEach(function(l) {
       console.log(PREFIX_MSG + 'Flushing');
       console.log(PREFIX_MSG + l.opts.pm_out_log_path);
@@ -579,7 +609,10 @@ CLI.flush = function() {
 
 CLI.monit = function() {
   Satan.executeRemote('list', {}, function(err, list) {
-    if (err) process.exit(ERROR_EXIT);
+    if (err) {
+      console.error('Error retrieving process list: ' + err);
+      process.exit(ERROR_EXIT);
+    }
     if (Object.keys(list).length == 0) {
       console.log(PREFIX_MSG + 'No online process to monitor');
       process.exit(ERROR_EXIT);
@@ -589,6 +622,10 @@ CLI.monit = function() {
 
     function refresh(cb) {
       Satan.executeRemote('list', {}, function(err, list) {
+        if (err) {
+          console.error('Error retrieving process list: ' + err);
+          process.exit(ERROR_EXIT);
+        }
         setTimeout(function() {
           Monit.refresh(list);
           refresh();
@@ -603,7 +640,10 @@ CLI.streamLogs = function() {
   var tdb = {};
   
   Satan.executeRemote('list', {}, function(err, list) {
-    
+    if (err) {
+      console.error('Error retrieving process list: ' + err);
+      process.exit(ERROR_EXIT);
+    }
     list.forEach(function(l) {
       tdb[l.opts.script] = l;
     });
@@ -645,6 +685,10 @@ CLI.killDaemon = function() {
 //
 function speedList() {
   Satan.executeRemote('list', {}, function(err, list) {
+    if (err) {
+      console.error('Error retrieving process list: ' + err);
+      process.exit(ERROR_EXIT);
+    }
     UX.dispAsTable(list);
     process.exit(SUCCESS_EXIT);
   });
