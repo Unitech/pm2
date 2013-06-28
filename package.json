@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "engines" : {
     "node" : ">=0.8"
   },
