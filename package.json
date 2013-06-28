@@ -48,7 +48,7 @@
     "commander": "1.1.0",
     "cli-table" : "0.2.0",
     "multimeter": "git://github.com/Unitech/node-multimeter.git",
-    "usage" : "0.3.5",
+    "usage" : "0.3.4",
     "axon-rpc" : "0.0.2",
     "watch" : "0.7.0",
     "axon" : "0.6.1",
