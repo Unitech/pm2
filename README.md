@@ -4,9 +4,7 @@
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 
-The next generation daemon process manager for Node.js with native clusterization.
-
-PM2 is mainly a production module for Linux servers.
+The modern CLI process manager for Node apps with native clusterization.
 
 Tested with Node v0.8, v0.10, v0.11
 
@@ -70,6 +68,11 @@ $ npm test
 ```
 
 If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
+
+## pm2 context
+
+pm2 permits you to daemonize node.js scripts very easily.
+All processes popped with pm2 inherit the entire environment.
 
 ## pm2 list
 
