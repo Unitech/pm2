@@ -23,7 +23,8 @@ describe('Satan', function() {
   });
 
   it('should start daemon', function(done) {
-    Satan.launchDaemon(function(child) {
+    Satan.launchDaemon(function(err, child) {
+      assert(err == null);
       assert(typeof child.pid == 'number');
       Satan.pingDaemon(function(online) {
         console.log(online);
