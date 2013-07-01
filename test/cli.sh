@@ -129,6 +129,15 @@ OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 [ $OUT -eq 7 ] || fail "$1"
 success "$1"
 
+#
+# Cron
+#
+$pm2 start cron.js -c "* * * asdasd"
+ispec "Cron should throw error when pattern invalid"
+
+$pm2 start cron.js -c "* * * * * *"
+spec "Should cron restart echo.js"
+
 $pm2 list
 
 $pm2 dump
@@ -140,13 +149,29 @@ spec "Dump file should be present"
 $pm2 stopAll
 spec "Should stop all processes"
 
+sleep 0.5
+OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+[ $OUT -eq 0 ] || fail "Process not stopped"
+success "Process succesfully stopped"
+
+
 $pm2 kill
 
 $pm2 resurrect
 spec "Should resurect all apps"
 
+sleep 0.5
+OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+[ $OUT -eq 9 ] || fail "Not valid process number"
+success "Processes valid"
+
 $pm2 stopAll
 spec "Should stop all processes"
+
+sleep 0.5
+OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+[ $OUT -eq 0 ] || fail "Process not stopped"
+success "Process succesfully stopped"
 
 $pm2 kill
 spec "Should kill daemon"

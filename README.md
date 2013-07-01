@@ -43,6 +43,10 @@ $ pm2 start app.js -i 3    # Will start 3 processes
 $ pm2 start app.json       # Start processes with options declared in app.json
                            # Go to chapter Multi process JSON declaration for more
                            
+$ pm2 start app.js -c "* * * * * *" # Will restart the process depending on the
+                                    # cron pattern. Here it will restart the process
+                                    # every second
+
 $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log -w  # Will start and generate a configuration file
 ```
@@ -68,6 +72,12 @@ $ npm test
 ```
 
 If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
+
+## How to install the pm2 master branch
+
+```bash
+npm install git://github.com/Unitech/pm2.git -g
+```
 
 ## pm2 context
 
@@ -99,6 +109,10 @@ After restarting or stopping PM2 you can `resurrect` them.
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
 
+## pm2 cron restart
+
+The `-c "cron_pattern"` option permits to hard restart a process scheduled on the cron pattern.
+
 ## pm2 health web api endpoint
 
 PM2 can disserve an API endpoint to monitor processes and computer health (cpu usage, memory, network interfaces...)
@@ -127,11 +141,11 @@ processes.json :
 
 ```json
 [{
-    "name"      : "echo",
-    "script"    : "./examples/echo.js",
-    "max"       : "10",
-    "instances" : "max",
-    "args"      : "-d 1"
+  "name"      : "echo",
+  "script"    : "./examples/args.js",
+  "instances" : "1",
+  "args"      : "['--toto=heya coco', '-d', '1']",
+  "cron_restart" : "* * * * * *"
 },{
     "name"      : "api",
     "script"    : "./examples/child.js",

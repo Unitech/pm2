@@ -11,6 +11,7 @@ var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 var util      = require('util');
 var watch     = require('watch');
+var cronJob   = require('cron').CronJob;
 
 const PREFIX_MSG        = '\x1B[32m⌬ PM2 \x1B[39m';
 const PREFIX_MSG_ERR    = '\x1B[31m⌬ PM2 [ERROR] \x1B[39m';
@@ -22,14 +23,15 @@ const STARTUP_SCRIPT    = '../lib/scripts/pm2-init.sh';
 //console.log();
 
 commander.version(pkg.version)
-         .option('-v --verbose', 'Display all data')
-         .option('-f --force', 'Force actions')
-         .option('-i --instances <number>', 'Launch [number] instances (clustered with same socket)')
-         .option('-o --output <path>', 'Out log file output')
-         .option('-e --error <path>', 'Error log file output')
-         .option('-p --pid <pid>', 'Pid file')
-         .option('-w --write', 'Write configuration in local folder')
-         .usage('[cmd] app');
+  .option('-v --verbose', 'Display all data')
+  .option('-f --force', 'Force actions')
+  .option('-i --instances <number>', 'Launch [number] instances (clustered with same socket)')
+  .option('-o --output <path>', 'Out log file output')
+  .option('-e --error <path>', 'Error log file output')
+  .option('-p --pid <pid>', 'Pid file')
+  .option('-c --cron <cron_pattern>', 'Restart a script depending on a cron pattern')
+  .option('-w --write', 'Write configuration in local folder')
+  .usage('[cmd] app');
 
 //
 // Start command
@@ -156,6 +158,12 @@ commander.command('list')
   CLI.list();
 });
 
+commander.command('status')
+  .description('list all processes')
+  .action(function() {
+    CLI.list();
+  });
+
 commander.command('jlist')
          .description('json list all processes')
          .action(function() {
@@ -280,27 +288,23 @@ CLI.startFile = function(script) {
     name : p.basename(script, '.js')
   };
 
-  if (commander.instances &&
-      isNaN(parseInt(commander.instances)) &&
-      commander.instances != 'max') {
-    console.log(PREFIX_MSG + ' [ERROR] instance option must be an integer ot the "max" string');
-    process.exit(ERROR_EXIT);
-  }
-
   if (commander.instances)
-    appConf['instances'] = commander.instances;    
+    appConf['instances']   = commander.instances;    
   if (commander.error)
-    appConf['fileError'] = commander.error;
+    appConf['fileError']   = commander.error;
   if (commander.output)
-    appConf['fileOutput'] = commander.output;
+    appConf['fileOutput']  = commander.output;
   if (commander.pid)
-    appConf['pidFile'] = commander.pid;
-
+    appConf['pidFile']     = commander.pid;
+  if (commander.cron)
+    appConf['cron_restart'] = commander.cron;
+  
   // Script arguments
   var opts = commander.rawArgs.indexOf('--') + 1;
   if (opts > 1)
-    appConf['args'] = commander.rawArgs.slice(opts, commander.rawArgs.length).join('%pm2%');
-
+    appConf['args'] = JSON.stringify(commander.rawArgs.slice(opts,
+                                                             commander.rawArgs.length));
+  
   if (commander.write) {
     var dst_path = path.join(process.env.PWD, path.basename(script, '.js') + '-pm2.json');
     console.log(PREFIX_MSG + 'Writing configuration to ', dst_path);
@@ -617,14 +621,6 @@ CLI.streamLogs = function() {
         Log.stream(tdb[k].opts.pm_err_log_path,
                    p.basename(tdb[k].opts.script, '.js') + ' err');
     }
-    // list.forEach(function(l) {
-    //   if (l.opts.pm_out_log_path)
-    //     Log.stream(l.opts.pm_out_log_path,
-    //                p.basename(l.opts.script, '.js') + ' out');
-    //   if (l.opts.pm_err_log_path)
-    //     Log.stream(l.opts.pm_err_log_path,
-    //                p.basename(l.opts.script, '.js') + ' err');
-    // });
   });
 };
 
@@ -650,12 +646,40 @@ function speedList() {
   });
 }
 
+function validate(appConf) {
+  var instances = appConf['instances'];
+  var script    = appConf['script'];
+  var cron_pattern = appConf['cron_restart'];
+  
+  if (instances && isNaN(parseInt(instances)) && instances != 'max') {
+    console.log(PREFIX_MSG_ERR + 'Instance option must be an integer or the "max" string');
+    process.exit(ERROR_EXIT);
+  }
+
+  if (cron_pattern) {
+    try {
+      console.log(cron_pattern);
+      var cron_test = new cronJob(cron_pattern, function() {
+        console.log(PREFIX_MSG + 'cron pattern for auto restart detected and valid');
+        delete cron_test;
+      });
+    } catch(ex) {
+      console.log(PREFIX_MSG_ERR + 'Cron pattern is not valid !');
+      process.exit(ERROR_EXIT);
+    }
+  }
+}
+
 //
 // Resolving path, seing if default ...
 //
 function resolvePaths(app) {
+
+  validate(app);
+  
   app["pm_exec_path"]    = path.resolve(process.cwd(), app.script);
 
+  console.log(app);
   if (fs.existsSync(app.pm_exec_path) == false) {
     console.log(PREFIX_MSG_ERR + 'script not found : ' + app.pm_exec_path);
     process.exit(ERROR_EXIT);

@@ -17,7 +17,7 @@ describe('God', function() {
   });
 
   describe('One process', function() {
-    var proc;
+    var proc, pid;
 
     after(function(done) {
       God.stopAll(done);
@@ -31,6 +31,7 @@ describe('God', function() {
 	pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
       }, function(err, proce) {
 	proc = proce;
+        pid = proc.process.pid;
 	proc.status.should.be.equal('online');
 	God.getFormatedProcesses().length.should.equal(1);
 	done();
@@ -42,9 +43,8 @@ describe('God', function() {
       God.checkProcess(proc.process.pid).should.be.true;
       God.stopProcess(proc, function() {
 	God.getFormatedProcesses().length.should.equal(0);
-	God.checkProcess(proc.process.pid).should.be.false;
-	proc.status.should.be.equal('stopped');
-	done()
+	God.checkProcess(pid).should.be.false;
+	done();
       });
     });
 
@@ -94,18 +94,32 @@ describe('God', function() {
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        args            : '-d -a',
+        args            : "['-d', '-a']",
         instances       : '1'
       }, function(err, procs) {
         setTimeout(function() {
           God.getFormatedProcesses()[0].opts.restart_time.should.eql(0);
+          console.log(God.getFormatedProcesses()[0]);
           God.stopAll(done);
-        }, 400);
+        }, 500);
       });
     });
-
+    it('should cron restart', function(done) {
+      God.prepare({
+        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/args.js'),
+        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
+        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
+        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
+        args            : "['-d', '-a']",
+        cron_restart    : '* * * * * *',
+        instances       : '1'
+      }, function(err, procs) {
+        setTimeout(function() {
+          God.getFormatedProcesses()[0].opts.restart_time.should.be.above(1);
+          God.stopAll(done);
+        }, 2200);
+      });
+    });
   });
-
-  
 
 });

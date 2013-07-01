@@ -1,12 +1,7 @@
 [{
-    "name" : "echo",
-    "script" : "./examples/echo.js",
-    "max" : "10"
-},{
-    "name" : "api",
-    "script" : "./examples/child.js",
-    "instances" : "4"
-},{
-    "name" : "bus",
-    "script" : "./examples/echokill.js"
+  "name"      : "echo",
+  "script"    : "./examples/args.js",
+  "instances" : "1",
+  "args"      : "['--toto=heya coco', '-d', '1']",
+  "cron_restart" : "* * * * * *"
 }]
