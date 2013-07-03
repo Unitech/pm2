@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.4.14",
+  "version": "0.5.0",
   "engines" : {
     "node" : ">=0.8"
   },
@@ -20,8 +20,8 @@
     "name" : "John Hurliman",
     "email" : "jhurliman@jhurliman.org"
   }],
-  "homepage" : "http://unitech.io/",
-  "description": "The next generation process manager for Node.js with native clusterization ",
+  "homepage" : "https://github.com/Unitech/pm2",
+  "description": "The modern CLI process manager for Node apps with native clusterization",
   "main": "index.js",
   "scripts": {
     "test": "bash ./test/cli.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test",
@@ -39,7 +39,8 @@
     "process configuration",
     "clustering",
     "cluster cli",
-    "cluster"
+    "cluster",
+    "cron"
   ],
   "bin": {
     "pm2": "./bin/pm2"

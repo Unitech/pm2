@@ -7,6 +7,7 @@
 The modern CLI process manager for Node apps with native clusterization.
 
 Tested with Node v0.8, v0.10, v0.11
+Works on Linux & MacOS
 
 # Installation
 
