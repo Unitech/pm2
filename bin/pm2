@@ -113,7 +113,7 @@ commander.command('resurrect')
 // Stop All processes
 //
 commander.command('restart <pm2_id>')
-  .description('restart all processes')
+  .description('restart specific process pm2 id')
   .action(function(pm2_id) {
     console.log(PREFIX_MSG + 'Restarting process ' + pm2_id);
     UX.processing.start();
