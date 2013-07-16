@@ -97,8 +97,7 @@ describe('God', function() {
       });
     });
 
-    it('should start maximum processes depending on CPU numbers', function(done) {
-      
+    it('should start maximum processes depending on CPU numbers', function(done) {      
       God.prepare({
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
