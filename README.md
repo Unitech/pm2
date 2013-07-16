@@ -4,17 +4,43 @@
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 
-The modern CLI process manager for Node apps with native clusterization.
+The modern and stable CLI process manager for Node apps with native clusterization, monitoring, startup scripts and much more.
 
 Tested with Node v0.8, v0.10, v0.11
 Works on Linux & MacOS
 
+[![NPM](https://nodei.co/npm/pm2.png)](https://nodei.co/npm/pm2/)
+
+Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
+
+# Readme Contents
+
+- [Installation](#a1)
+- [Usage/Features](#a2)
+- [Different ways to launch a process](#a3)
+- [Is my production server ready for PM2](#a4)
+- [Updating pm2 and keeping processes alive](#a5)
+- [Listing processes : pm2 list](#a6)
+- [Monitoring processes (CPU/RAM) : pm2 monit](#a7)
+- [Startup script generation : pm2 startup](#a8)
+- [Log aggregation : pm2 logs](#a9)
+- [Dumping and resurrecting processes : pm2 dump/resurrect](#a10)
+- [Scheduling application restart : CRON option](#a11)
+- [API health end point : pm2 web](#a12)
+- [JSON processes declaration](#a13)
+- [Launching the tests](#a14)
+- [License](#a15)
+
+- [](#a)
+
+<a name="a1"/>
 # Installation
 
 ```bash
 npm install -g pm2
 ```
 
+<a name="a2"/>
 # Usage/Features
 
 ```bash
@@ -33,10 +59,12 @@ $ pm2 restart pm2_id     # Restart specific process
 $ pm2 restartAll         # Restart all proccesses
 $ pm2 stopAll            # Stop all processes
 $ pm2 generate app       # Generate a JSON process configuration
+$ pm2 startup            # Generate init script to keep processes alive
 $ pm2 web                # Health computer API endpoint (http://localhost:9615)
 ```
 
-## Different ways of starting a process
+<a name="a3"/>
+## Different ways to launch a process
 
 ```bash
 $ pm2 start app.js -i max  # Will start maximum processes depending on CPU availables
@@ -52,15 +80,7 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log -w  # Will start and generate a configuration file
 ```
 
-## Updating pm2 and keeping processes alive
-
-```bash
-$ pm2 dump
-$ npm install -g pm2@latest
-$ pm2 kill
-$ pm2 resurrect
-```
-
+<a name="a4"/>
 ## Is my production server ready for PM2 ?
 
 Just try the tests before using PM2 on your production server
@@ -74,35 +94,54 @@ $ npm test
 
 If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
 
+<a name="a5"/>
+## Updating pm2 and keeping processes alive
+
+```bash
+$ pm2 dump
+$ npm install -g pm2@latest
+$ pm2 kill ; pm2 resurrect
+```
+
 ## How to install the pm2 master branch
 
 ```bash
 npm install git://github.com/Unitech/pm2.git -g
 ```
 
-## pm2 context
-
-pm2 permits you to daemonize node.js scripts very easily.
-All processes popped with pm2 inherit the entire environment.
-
+<a name="a6"/>
 ## pm2 list
 
 List infos about all processes managed by pm2. It shows also how many times a process has been restarted because of an unhandled exception.
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
 
+<a name="a7"/>
 ## pm2 monit
 
 Monitor CPU and memory usage of every node process (and also clustered processes) managed by pm2.
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
 
+<a name="a8"/>
+## pm2 automatic startup script generation
+
+PM2 provides an automatic way to keep Node processes alive. It uses an init script (compatible with most Linux systems).
+
+```bash
+$ pm2 startup
+```
+
+Now you can reboot your server, and already launched processes should be kepts alive ;)
+
+<a name="a9"/>
 ## pm2 logs
 
 Display logs in streaming of all processes, without having to do a tail -f or something else.
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
+<a name="a10"/>
 ## pm2 dump/resurrect
 
 You can dump all currently running processes, including their environment and execution path.
@@ -110,10 +149,13 @@ After restarting or stopping PM2 you can `resurrect` them.
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-resurect.png)
 
+<a name="a11"/>
 ## pm2 cron restart
 
 The `-c "cron_pattern"` option permits to hard restart a process scheduled on the cron pattern.
+Look at test/cli.sh for examples.
 
+<a name="a12"/>
 ## pm2 health web api endpoint
 
 PM2 can disserve an API endpoint to monitor processes and computer health (cpu usage, memory, network interfaces...)
@@ -122,20 +164,7 @@ PM2 can disserve an API endpoint to monitor processes and computer health (cpu u
 pm2 web
 ```
 
-# Features
-
-- Clusterize your Node networked script without adding one line of code
-- Fully tested
-- Monitor process/cluster processes health (status, memory, cpu usage, restarted time) via CLI (htop like)
-- Monitor server health (processes, cpu core...) via JSON api (pm2 web)
-- Launch multiple applications via JSON
-- Forever keep alive processes
-- Log streaming in realtime (pm2 logs)
-- Log uncaught exceptions in error logs
-- Track restarted time
-- Auto stop processes who exit too fast
-- Dump current processes and resurrect (upstart)
-
+<a name="a13"/>
 # Multi process JSON declaration
 
 processes.json : 
@@ -162,13 +191,31 @@ Then with the cli :
 $ pm2 start processes.json
 ```
 
+<a name="a14"/>
 # Test
 
 ```bash
 npm test
 ```
 
-# Next Features
+# MISC
+
+## Features
+
+- Clusterize your Node networked script without adding one line of code
+- Fully tested
+- Monitor process/cluster processes health (status, memory, cpu usage, restarted time) via CLI (htop like)
+- Monitor server health (processes, cpu core...) via JSON api (pm2 web)
+- Launch multiple applications via JSON
+- Forever keep alive processes
+- Log streaming in realtime (pm2 logs)
+- Log uncaught exceptions in error logs
+- Track restarted time
+- Auto stop processes who exit too fast
+- Dump current processes and resurrect (upstart)
+
+
+## Next Features/Ideas
 
 - Remote administration/status checking
 - Builtin Inter process communication channel (message bus)
@@ -178,7 +225,7 @@ npm test
 - Keeping monitoring data
 - Integrated wrk utils endpoint benchmark
 
-# Install a process (draft, not implemented)
+## Install a process (draft, not implemented)
 
 You can install processes and communicate with them
 ```bash
@@ -190,31 +237,26 @@ $ m2 info web-pm2  # list
 
 - Add homogen communication channel (pubsub/eventemitter2 - wildcard events) (axon pub/sub-message.js)
 
-# Sponsors
+## Sponsors
 
 Thanks to [Devo.ps](http://devo.ps/) and [Wiredcraft](http://wiredcraft.com/) for their knowledge and expertise.
 
-# License
 
-(The MIT License)
+<a name="a15"/>
+# License - Apache License v2
 
-Copyright (c) 2011-2013 Strzelewicz Alexandre <as@unitech.io>
+Copyright [2013] [Strzelewicz Alexandre <as@unitech.io>]
+  
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+           
+    http://www.apache.org/licenses/LICENSE-2.0
+                  
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

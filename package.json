@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "engines" : {
     "node" : ">=0.8"
   },
@@ -65,5 +65,5 @@
     "type" : "git",
     "url" : "git://github.com/Unitech/pm2.git"
   },
-  "license": "MIT"
+  "license": "Apache v2"
 }
