@@ -6,7 +6,7 @@
 
 The modern and stable CLI process manager for Node apps with native clusterization, monitoring, startup scripts and much more.
 
-Tested with Node v0.8, v0.10, v0.11
+Tested with Node v0.11, v0.10
 Works on Linux & MacOS
 
 [![NPM](https://nodei.co/npm/pm2.png)](https://nodei.co/npm/pm2/)
@@ -30,8 +30,6 @@ Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/bl
 - [JSON processes declaration](#a13)
 - [Launching the tests](#a14)
 - [License](#a15)
-
-- [](#a)
 
 <a name="a1"/>
 # Installation
