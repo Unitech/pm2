@@ -25,13 +25,13 @@ export HOME="%HOME_PATH%"
  
 start() {
     echo "Starting $NAME"
-    $NODE $PM2 stop
+    $NODE $PM2 stopAll
     $NODE $PM2 resurrect
 }
  
 stop() {
     $NODE $PM2 dump
-    $NODE $PM2 stop
+    $NODE $PM2 stopAll
 }
  
 restart() {
