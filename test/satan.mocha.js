@@ -8,7 +8,7 @@ describe('Satan', function() {
 
   after(function(done) {
     Satan.killDaemon(function() {
-      done();
+      setTimeout(done, 400);
     });
   });
 
