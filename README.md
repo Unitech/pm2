@@ -1,15 +1,15 @@
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
 
+The modern and stable CLI process manager for Node apps with native clusterization, monitoring, startup scripts and much more.
+
+Tested with Node v0.12, v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
+Works on Linux & MacOS.
+
+[![NPM](https://nodei.co/npm/pm2.png)](https://nodei.co/npm/pm2/)
+
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
-
-The modern and stable CLI process manager for Node apps with native clusterization, monitoring, startup scripts and much more.
-
-Tested with Node v0.11, v0.10
-Works on Linux & MacOS
-
-[![NPM](https://nodei.co/npm/pm2.png)](https://nodei.co/npm/pm2/)
 
 Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
 
