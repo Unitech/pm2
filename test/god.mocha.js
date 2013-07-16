@@ -139,7 +139,7 @@ describe('God', function() {
         instances       : '1'
       }, function(err, procs) {
         setTimeout(function() {
-          God.getFormatedProcesses()[0].opts.restart_time.should.be.above(1);
+          God.getFormatedProcesses()[0].opts.restart_time.should.be.above(0);
           God.stopAll(done);
         }, 2200);
       });
