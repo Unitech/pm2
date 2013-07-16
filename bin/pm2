@@ -59,12 +59,17 @@ commander.command('stopAll')
 //
 // Stop specific id
 //
-commander.command('stop <pm2_id>')
-  .description('stop specific process pm2 id')
+commander.command('stop <pm2_id|script_name>')
+  .description('stop specific process pm2 id or script name (=script basepath)')
   .action(function(pm2_id) {    
-    console.log(PREFIX_MSG + 'Stopping process ' + pm2_id);
     UX.processing.start();
-    CLI.stopId(pm2_id);
+    if (isNaN(parseInt(pm2_id))) {
+      console.log(PREFIX_MSG + 'Stopping process by name ' + pm2_id);
+      CLI.stopProcessName(pm2_id);
+    } else {
+      console.log(PREFIX_MSG + 'Stopping process by id ' + pm2_id);
+      CLI.stopId(pm2_id);
+    }
   });
 
 //
@@ -538,6 +543,18 @@ CLI.stopAll = function() {
   });
 };
 
+CLI.stopProcessName = function(name) {
+  Satan.executeRemote('stopProcessName', {
+    name : name
+  }, function(err, list) {
+    if (err) process.exit(ERROR_EXIT);
+    console.log('\n');
+    UX.dispAsTable(list);
+    UX.processing.stop();
+    process.exit(SUCCESS_EXIT);
+  });
+};
+
 CLI.stopId = function(pm2_id) {
   Satan.executeRemote('stopId', {
     id : pm2_id
@@ -546,8 +563,8 @@ CLI.stopId = function(pm2_id) {
       console.log('\n' + PREFIX_MSG_ERR + pm2_id + ' : pm2 id not found');
       process.exit(ERROR_EXIT);
     }
-
     console.log('\n');
+    UX.dispAsTable(list);
     console.log(PREFIX_MSG + 'Process stopped');
     UX.processing.stop();
     process.exit(SUCCESS_EXIT);

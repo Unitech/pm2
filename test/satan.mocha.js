@@ -54,6 +54,7 @@ describe('Satan', function() {
         methods.should.have.property('list');
         methods.should.have.property('stopId');
         methods.should.have.property('stopAll');
+        methods.should.have.property('stopProcessName');
         methods.should.have.property('killMe');
         methods.should.have.property('daemonData');
         done();

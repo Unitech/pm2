@@ -54,6 +54,37 @@ cd $file_path
 $pm2 kill
 spec "kill daemon"
 
+
+#
+# Different way to stop process
+#
+$pm2 start echo.js
+$pm2 start echo.js -f
+$pm2 start echo.js -f
+
+OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+[ $OUT -eq 3 ] || fail "$1"
+success "$1"
+
+$pm2 stop 0
+
+OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+[ $OUT -eq 2 ] || fail "$1"
+success "$1"
+
+$pm2 stop echo.js
+
+OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+[ $OUT -eq 0 ] || fail "$1"
+success "$1"
+
+
+#
+# Main tests
+#
+$pm2 kill
+spec "kill daemon"
+
 $pm2 start eyayimfake
 ispec "should fail if script doesnt exist"
 
