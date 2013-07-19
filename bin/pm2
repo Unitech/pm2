@@ -564,7 +564,7 @@ CLI.stopId = function(pm2_id) {
       process.exit(ERROR_EXIT);
     }
     console.log('\n');
-    UX.dispAsTable(list);
+    //UX.dispAsTable(list);
     console.log(PREFIX_MSG + 'Process stopped');
     UX.processing.stop();
     process.exit(SUCCESS_EXIT);
