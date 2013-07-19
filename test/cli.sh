@@ -66,11 +66,14 @@ OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 3 ] || fail "$1"
 success "$1"
 
+$pm2 stop 12412
 $pm2 stop 0
 
 OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 2 ] || fail "$1"
 success "$1"
+
+$pm2 stop asdsdaecho.js
 
 $pm2 stop echo.js
 
