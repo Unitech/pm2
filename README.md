@@ -177,7 +177,9 @@ processes.json :
 },{
     "name"      : "api",
     "script"    : "./examples/child.js",
-    "instances" : "4"
+    "instances" : "4",
+    "fileError" : "./examples/child-err.log",
+    "fileOutput" : "./examples/child-out.log"
 },{
     "name"      : "bus",
     "script"    : "./examples/echokill.js"
