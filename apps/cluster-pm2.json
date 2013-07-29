@@ -3,5 +3,7 @@
   "fileError" : "errLog.log",
   "fileOutput" : "outLog.log",
   "pidFile" : "child",
-  "instances" : "4"
+  "instances" : "4",
+  "min_uptime" : "10",
+  "max_restarts" : "4"
 }

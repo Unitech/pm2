@@ -179,8 +179,10 @@ processes.json :
     "script"    : "./examples/child.js",
     "instances" : "4"
 },{
-    "name"      : "bus",
-    "script"    : "./examples/echokill.js"
+  "min_uptime" : "100",
+  "max_restarts" : "400",
+  "name" : "auto-kill",
+  "script" : "./examples/killfast.js"
 }]
 ```
 
@@ -188,6 +190,18 @@ Then with the cli :
 ```bash
 $ pm2 start processes.json
 ```
+
+### Special options with JSON process declaration
+
+- "min_uptime":
+if a process is restarted with an uptime smaller than this value,
+this restart counts as an unstable restart. If this option is not specified,
+all restarts are considered unstable.
+
+- "max_restarts":
+if the number of unstable restarts exceeds this number,
+the process will be stopped and a message with number with restarts will be logged.
+
 
 <a name="a14"/>
 # Test
