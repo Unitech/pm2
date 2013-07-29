@@ -54,8 +54,8 @@ $ pm2 stop pm2_id        # Stop specific process id
 $ pm2 stopAll            # Stop all processes
 $ pm2 resurrect          # Put online previously dumped processes
 $ pm2 restart pm2_id     # Restart specific process
-$ pm2 restartAll         # Restart all proccesses
-$ pm2 stopAll            # Stop all processes
+$ pm2 restart all        # Restart all proccesses
+$ pm2 stop all           # Stop all processes
 $ pm2 generate app       # Generate a JSON process configuration
 $ pm2 startup            # Generate init script to keep processes alive
 $ pm2 web                # Health computer API endpoint (http://localhost:9615)

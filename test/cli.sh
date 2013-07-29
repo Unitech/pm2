@@ -153,7 +153,7 @@ success "$1"
 #
 # Restart all processes
 #
-$pm2 restartAll
+$pm2 restart all
 spec "Should restart all processes"
 
 sleep 0.3
@@ -180,7 +180,7 @@ spec "Should dump current processes"
 ls ~/.pm2/dump.pm2
 spec "Dump file should be present"
 
-$pm2 stopAll
+$pm2 stop all
 spec "Should stop all processes"
 
 sleep 0.5
