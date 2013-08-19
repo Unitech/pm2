@@ -49,7 +49,7 @@
     "commander"  : "1.1.0",
     "cli-table"  : "0.2.0",
     "pm2-multimeter" : "0.1.2",
-    "usage"      : "0.3.7",
+    "usage"      : "0.3.8",
     "axon-rpc"   : "0.0.2",
     "watch"      : "0.7.0",
     "axon"       : "0.6.1",
