@@ -149,11 +149,12 @@ commander.command('restartAll')
 //
 // Set pm2 to startup
 //
-commander.command('startup')
-         .description('auto resurect process at startup')
-         .action(function() {
-  CLI.upstart();
+commander.command('startup [platform]')
+         .description('auto resurect process at startup. [platform] can be CentOS, default use update-rc.d')
+         .action(function(platform) {
+  CLI.upstart(platform);
 });
+
 
 //
 // Sample generate
@@ -441,11 +442,11 @@ CLI.resurrect = function() {
 CLI.dumped = function() {
 };
 
-CLI.upstart = function() {
+CLI.upstart = function(platform) {
   if (process.getuid() != 0) {
     console.log(PREFIX_MSG + 'You have to run this command as root');
     console.log(PREFIX_MSG + 'Execute the following command :');
-    console.log(PREFIX_MSG + 'sudo PATH=' + p.dirname(process.execPath) + ':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin pm2 startup');
+    console.log(PREFIX_MSG + 'sudo env PATH=$PATH:' + p.dirname(process.execPath) + ' pm2 startup');
     process.exit(ERROR_EXIT);
   }
 
@@ -459,7 +460,14 @@ CLI.upstart = function() {
   fs.writeFileSync(INIT_SCRIPT, script);
   var exec = require('child_process').exec;
 
-  exec('chmod +x ' + INIT_SCRIPT + '; update-rc.d ' + p.basename(INIT_SCRIPT) + ' defaults', function(err, stdo, stde) {
+  var cmd;
+
+  if (platform == 'centos')
+    cmd = 'chmod +x ' + INIT_SCRIPT + '; chkconfig --level 2345 ' + p.basename(INIT_SCRIPT) + ' on';
+  else
+    cmd = 'chmod +x ' + INIT_SCRIPT + '; update-rc.d ' + p.basename(INIT_SCRIPT) + ' defaults';
+
+  exec(cmd, function(err, stdo, stde) {
     if (err) {
       console.error(err);
       process.exit(ERROR_EXIT);

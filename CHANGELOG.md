@@ -6,6 +6,7 @@
     - with the "name" parameter for JSON files
 - Ability to restart a script by name + tests
 - Upgrade node-usage to 0.3.8 - fix monitoring feedback for MacOSx 
+- require.main now require the right file // to check and double check
 
 # 0.5.4
 

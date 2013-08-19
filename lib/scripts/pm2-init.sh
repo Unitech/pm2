@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+# chkconfig: 2345 98 02
 #
 # description: PM2 next gen process manager for Node.js
 # processname: pm2
