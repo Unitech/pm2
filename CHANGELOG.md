@@ -7,6 +7,8 @@
 - Ability to restart a script by name + tests
 - Upgrade node-usage to 0.3.8 - fix monitoring feedback for MacOSx 
 - require.main now require the right file // to check and double check
+- CentOS startup script with pm2 startup centos
+
 
 # 0.5.4
 

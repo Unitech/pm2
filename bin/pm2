@@ -446,7 +446,8 @@ CLI.upstart = function(platform) {
   if (process.getuid() != 0) {
     console.log(PREFIX_MSG + 'You have to run this command as root');
     console.log(PREFIX_MSG + 'Execute the following command :');
-    console.log(PREFIX_MSG + 'sudo env PATH=$PATH:' + p.dirname(process.execPath) + ' pm2 startup');
+    if (platform === undefined) platform = '';
+    console.log(PREFIX_MSG + 'sudo env PATH=$PATH:' + p.dirname(process.execPath) + ' pm2 startup ' + platform);
     process.exit(ERROR_EXIT);
   }
 
