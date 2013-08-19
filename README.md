@@ -13,6 +13,15 @@ Works on Linux & MacOS.
 
 Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
 
+# Note
+
+If you like this module or it solves something you always needed for your Node deployment, please support PM2 !
+
+[![Donate](http://unitech.io/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id="TRF8NYRUVZXZ6")
+
+I can also integrates very specific features or make a custom PM2 fitted for your need.
+Contact me at : as@unitech.io
+
 # Readme Contents
 
 - [Installation](#a1)
