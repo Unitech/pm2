@@ -25,6 +25,7 @@ const STARTUP_SCRIPT    = '../lib/scripts/pm2-init.sh';
 commander.version(pkg.version)
   .option('-v --verbose', 'Display all data')
   .option('-f --force', 'Force actions')
+  .option('-n --name <name>', 'Set a <name> for script')
   .option('-i --instances <number>', 'Launch [number] instances (clustered with same socket)')
   .option('-o --output <path>', 'Out log file output')
   .option('-e --error <path>', 'Error log file output')
@@ -59,8 +60,8 @@ commander.command('stopAll')
 //
 // Stop specific id
 //
-commander.command('stop <pm2_id|script_name|all>')
-  .description('stop specific process pm2 id or script name (=script basepath)')
+commander.command('stop <pm2_id|name|all>')
+  .description('stop specific process pm2 id or script name (set with --name or script name)')
   .action(function(pm2_id) {    
     UX.processing.start();
     
@@ -121,7 +122,7 @@ commander.command('resurrect')
 //
 // Stop All processes
 //
-commander.command('restart <pm2_id|all>')
+commander.command('restart <pm2_id|name|all>')
   .description('restart specific process pm2 id')
   .action(function(pm2_id) {
     console.log(PREFIX_MSG + 'Restarting process ' + pm2_id);
@@ -302,6 +303,8 @@ CLI.startFile = function(script) {
     name : p.basename(script, '.js')
   };
 
+  if (commander.name)
+    appConf['name']        = commander.name;
   if (commander.instances)
     appConf['instances']   = commander.instances;    
   if (commander.error)
@@ -354,6 +357,7 @@ CLI.startFromJson = function(cmd) {
         apps.shift();
         return ex(apps);
       });
+      return false;
     })(appConf);
   }
   else {
@@ -507,7 +511,8 @@ CLI.restart = function(pm2_id) {
      }
 
     list.forEach(function(l) {
-      if (l.pm_id == pm2_id && l.status != 'stopped') {
+      if ((l.pm_id == pm2_id && l.status != 'stopped') ||
+          (l.opts.name == pm2_id && l.status != 'stopped')) {
         try {
           process.kill(l.pid);
         } catch(e) { }
@@ -544,7 +549,10 @@ CLI.restartAll = function() {
 
 CLI.stopAll = function() {
   Satan.executeRemote('stopAll', {}, function(err, list) {
-    if (err) process.exit(ERROR_EXIT);
+    if (err) {
+      console.log('\n' + PREFIX_MSG_ERR + err);
+      process.exit(ERROR_EXIT);
+    }
     console.log('\n');
     UX.dispAsTable(list);
     UX.processing.stop();
@@ -556,7 +564,10 @@ CLI.stopProcessName = function(name) {
   Satan.executeRemote('stopProcessName', {
     name : name
   }, function(err, list) {
-    if (err) process.exit(ERROR_EXIT);
+    if (err) {
+      console.error(err);
+      process.exit(ERROR_EXIT);
+    }
     console.log('\n');
     UX.dispAsTable(list);
     UX.processing.stop();

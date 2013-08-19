@@ -67,6 +67,9 @@ $ pm2 web                # Health computer API endpoint (http://localhost:9615)
 ```bash
 $ pm2 start app.js -i max  # Will start maximum processes depending on CPU availables
 $ pm2 start app.js -i 3    # Will start 3 processes
+$ pm2 start app.js --name serverone # Start a process an name it as server one
+                                    # you can now stop the process by doing
+                                    # pm2 stop serverone
 $ pm2 start app.json       # Start processes with options declared in app.json
                            # Go to chapter Multi process JSON declaration for more
                            

@@ -189,6 +189,33 @@ OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
 success "Process succesfully stopped"
 
 
+#
+# Issue #71
+#
+
+PROC_NAME='ECHONEST'
+# Launch a script with name option
+$pm2 start echo.js --name $PROC_NAME
+OUT=`$pm2 jlist | grep -o "ECHONEST" | wc -l`
+[ $OUT -gt 0 ] || fail "Process not launched"
+success "Processes sucessfully launched with a specific name"
+
+# Restart a process by name
+$pm2 restart $PROC_NAME
+OUT=`$pm2 jlist | grep -o "restart_time: 1" | wc -l`
+[ $OUT -gt 0 ] || fail "Process name not restarted"
+success "Processes sucessfully restarted with a specific name"
+
+# Stop a process by name
+$pm2 stop $PROC_NAME
+OUT=`$pm2 jlist | grep -o "ECHONEST" | wc -l`
+[ $OUT -eq 0 ] || fail "Process name not stopped"
+success "Processes sucessfully stopped with a specific name"
+
+
+
+
+
 $pm2 kill
 
 $pm2 resurrect
