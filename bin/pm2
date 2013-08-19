@@ -136,6 +136,16 @@ commander.command('restart <pm2_id|name|all>')
   });
 
 //
+// Reload process(es)
+//
+commander.command('reload <pm2_id|all>')
+  .description('reload all processes or a specific process pm2 id')
+  .action(function(pm2_id) {
+    UX.processing.start();
+    CLI.reload(pm2_id);
+  });
+
+//
 // Stop All processes
 //
 commander.command('restartAll')
@@ -510,6 +520,20 @@ CLI.web = function() {
     console.log(PREFIX_MSG + 'Process launched');
     speedList();
   });
+};
+
+
+CLI.reload = function (cluster) {
+  Satan.executeRemote('reload', cluster, function(err) {
+    if (err) {
+      console.error('Cannot reload process: ' + err);
+      process.exit(ERROR_EXIT);
+      return;
+    }
+    console.log('\n' + PREFIX_MSG + 'All processes reloaded');
+    process.exit(SUCCESS_EXIT);
+  });
+
 };
 
 CLI.restart = function(pm2_id) {
