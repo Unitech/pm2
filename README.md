@@ -1,6 +1,6 @@
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
 
-The modern and stable CLI process manager for Node apps with native clusterization, monitoring, startup scripts and much more.
+The modern and stable CLI process manager for Node apps with native clusterization, monitoring, 0 downtime process restart, startup scripts and much more.
 
 Tested with Node v0.12, v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
 Works on Linux & MacOS.
@@ -27,6 +27,7 @@ Contact me at : as@unitech.io
 - [Installation](#a1)
 - [Usage/Features](#a2)
 - [Different ways to launch a process](#a3)
+- [0 downtime process reloading](#a16)
 - [Is my production server ready for PM2](#a4)
 - [Updating pm2 and keeping processes alive](#a5)
 - [Listing processes : pm2 list](#a6)
@@ -62,8 +63,9 @@ $ pm2 dump               # Dump the states of all processes
 $ pm2 stop pm2_id        # Stop specific process id
 $ pm2 stopAll            # Stop all processes
 $ pm2 resurrect          # Put online previously dumped processes
+$ pm2 reload all         # Reload all processes with 0 downtime
 $ pm2 restart pm2_id     # Restart specific process
-$ pm2 restart all        # Restart all proccesses
+$ pm2 restart all        # Hard Restart all proccesses
 $ pm2 stop all           # Stop all processes
 $ pm2 generate app       # Generate a JSON process configuration
 $ pm2 startup            # Generate init script to keep processes alive
@@ -104,13 +106,22 @@ $ npm test
 
 If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
 
+<a name="a16"/>
+## 0 downtime process reloading
+
+```
+$ pm2 reload all
+```
+
+Thanks to TruongSinh Tran-Nguyen https://github.com/truongsinh
+
 <a name="a5"/>
-## Updating pm2 and keeping processes alive
+## Updating pm2 and resurecting process
 
 ```bash
 $ pm2 dump
 $ npm install -g pm2@latest
-$ pm2 kill ; pm2 resurrect
+$ pm2 kill ; pm2 resurect
 ```
 
 ## How to install the pm2 master branch

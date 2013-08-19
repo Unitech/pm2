@@ -19,6 +19,9 @@
   }, {
     "name" : "John Hurliman",
     "email" : "jhurliman@jhurliman.org"
+  }, {
+    "name" : "TruongSinh Tran-Nguyen",
+    "email" : "i@truongsinh.pro"
   }],
   "homepage" : "https://github.com/Unitech/pm2",
   "description": "The modern CLI process manager for Node apps with native clusterization",

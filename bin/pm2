@@ -101,7 +101,7 @@ commander.command('web')
 // Save processes to file
 //
 commander.command('dump')
-         .description('dump all processes for auto restart')
+         .description('dump all processes for resurecting them later')
          .action(function() {
   console.log(PREFIX_MSG + 'Dumping processes');
   UX.processing.start();
