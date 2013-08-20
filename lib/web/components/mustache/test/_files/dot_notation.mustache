@@ -1,0 +1,9 @@
+<!-- exciting part -->
+<h1>{{name}}</h1>
+<p>Authors: <ul>{{#authors}}<li>{{.}}</li>{{/authors}}</ul></p>
+<p>Price: {{{price.currency.symbol}}}{{price.value}} {{#price.currency}}{{name}} <b>{{availability.text}}</b>{{/price.currency}}</p>
+<p>VAT: {{{price.currency.symbol}}}{{#price}}{{vat}}{{/price}}</p>
+<!-- boring part -->
+<h2>Test truthy false values:</h2>
+<p>Zero: {{truthy.zero}}</p>
+<p>False: {{truthy.notTrue}}</p>

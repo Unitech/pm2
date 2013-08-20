@@ -1,0 +1,335 @@
+@import url(http://fonts.googleapis.com/css?family=Abel);
+
+@import url(font-awesome.min.css);
+
+@import url("reset.css");
+body {
+  background: url(../image/satinweave.png);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #3a3a3b;
+}
+.column {
+  display: inline-block;
+  vertical-align: top;
+}
+.column.third {
+  width: 34%;
+}
+.column.twothirds {
+  width: 66%;
+}
+.message {
+  text-align: center;
+  padding-top: 100px;
+}
+.neutral {
+  color: #d3d3db;
+}
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+.title {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 12px 0;
+  font-family: 'Abel', sans-serif;
+  text-transform: uppercase;
+}
+.refresh-bar {
+  float: right;
+  margin: 6px 0 0;
+  text-align: right;
+}
+.refresh-bar h5 {
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 1;
+}
+.refresh-bar h5 input {
+  border: 0;
+  font-size: 14px;
+  width: 20px;
+  text-align: center;
+  background: 0;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.6);
+}
+.refresh-bar h5 i {
+  float: left;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.refresh-bar h5:hover {
+  opacity: 1;
+}
+.refresh-bar div {
+  border-radius: 6px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  width: 140px;
+  float: right;
+  background: #3a3a3b;
+}
+.refresh-bar div div {
+  float: none;
+  width: 40%;
+  background: #9b9bad;
+}
+.dashboard {
+  background: #fff;
+  padding: 18px;
+  border-radius: 6px;
+  box-shadow: 0 1px 0 #e6e6e6, 0 2px 0 #eeeeee, 0 3px 0 #dddddd;
+}
+.dashboard h3 {
+  font-size: 14px;
+  font-family: 'Abel', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 12px;
+  padding: 6px 8px;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-left-radius: 6px;
+  color: #9b9bad;
+}
+.process-list {
+  margin-bottom: 18px;
+  margin-right: 18px;
+}
+.process-list .list {
+  max-height: 420px;
+  overflow: scroll;
+}
+.process-list .process {
+  height: 40px;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.process-list .process div {
+  display: inline-block;
+  vertical-align: top;
+}
+.process-list .process .pid {
+  height: 40px;
+  width: 8%;
+  border-right: 1px solid #ddd;
+  text-align: center;
+}
+.process-list .process .pid span {
+  display: inline-block;
+  padding-top: 12px;
+  font-weight: bold;
+}
+.process-list .process .name {
+  width: 62%;
+}
+.process-list .process .name h4 {
+  font-size: 18px;
+  margin: 2px 12px 4px;
+  font-weight: bold;
+}
+.process-list .process .name h5 {
+  font-size: 14px;
+  margin: 0 12px;
+  font-family: Monaco, monospace;
+  color: #c8bfb8;
+}
+.process-list .process .actions {
+  width: 20%;
+  padding-top: 8px;
+}
+.process-list .process .actions i {
+  font-size: 24px;
+  margin: 6px;
+}
+.process-list .process .actions .icon-remove {
+  color: #ea8958;
+}
+.process-list .process .actions .icon-refresh {
+  color: #33b763;
+}
+.process-list .process .uptime,
+.process-list .process .restarts {
+  width: 8%;
+  text-align: center;
+}
+.process-list .process .uptime span,
+.process-list .process .restarts span {
+  display: block;
+  margin-top: 12px;
+}
+.process-list .process .status {
+  text-align: center;
+  width: 8%;
+  padding-top: 12px;
+}
+.process-list .process .status .online {
+  color: #58eae0;
+}
+.process-list .process:hover {
+  background: #ebf9fa;
+}
+.process-list .process.self {
+  opacity: 0.3;
+  cursor: auto;
+}
+.process-list .process.self:hover {
+  background: none;
+}
+.process-list .process.head {
+  height: 20px;
+  cursor: auto;
+}
+.process-list .process.head span {
+  color: #ccc;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 12px;
+}
+.process-list .process.head .pid {
+  height: 20px;
+}
+.process-list .process.head .pid span {
+  padding-top: 0;
+  margin-left: 0;
+}
+.process-list .process.head .actions {
+  padding-top: 0;
+}
+.process-list .process.head .actions span {
+  margin-left: 0;
+}
+.process-list .process.head .uptime,
+.process-list .process.head .restarts {
+  text-align: left;
+}
+.process-list .process.head .uptime span,
+.process-list .process.head .restarts span {
+  margin-top: 4px;
+}
+.process-list .process.head .status {
+  padding-top: 0;
+}
+.process-list .process.head .status span {
+  margin-left: 0;
+}
+.process-list .process.head {
+  background: inherit;
+}
+.system {
+  margin-bottom: 18px;
+}
+.system h4 {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 13px;
+  padding: 4px;
+}
+.system #memory div {
+  display: inline-block;
+  vertical-align: top;
+  height: 28px;
+  width: 50%;
+  text-align: center;
+  padding-top: 14px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+}
+.system #memory div:first-child {
+  background: #fbe9e0;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.system #memory div:last-child {
+  background: #ea8958;
+  -webkit-border-top-right-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-bottomright: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.system .stats {
+  margin-bottom: 14px;
+}
+.system .stats div {
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+  text-align: center;
+}
+.system .stats div span {
+  font-weight: bold;
+  font-size: 54px;
+}
+.system .stats .avg span {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+}
+.system .stats .uptime span {
+  display: block;
+  margin-top: 16px;
+  font-size: 15px;
+}
+.system #hostname {
+  float: right;
+  font-family: Monaco, monospace;
+  color: #3a3a3b;
+  margin-top: 2px;
+}
+.process-log #log-type {
+  float: right;
+  opacity: 0.3;
+  margin: 8px;
+}
+.process-log #log-type:hover {
+  opacity: 1;
+}
+.process-log #terminal {
+  background: #3a3a3b;
+  height: 200px;
+  border-radius: 8px;
+  padding: 12px;
+  color: #33b763;
+  font-family: monaco, monospace;
+  font-size: 14px;
+}
+.process-log #terminal p {
+  margin-bottom: 6px;
+}
+.process-log #terminal p:last-child:after {
+  content: '  \258B';
+  -webkit-animation: blink 1200ms infinite;
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  49% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

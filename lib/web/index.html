@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pm2 Web Monitor</title>
+	<script type="text/javascript" src="components/mustache/mustache.js"></script>
+	<script type="text/javascript" src="components/zepto/zepto.min.js"></script>
+	<script type="text/javascript" src="assets/script/moment.min.js"></script>
+	<link rel="stylesheet" href="assets/style/style.css">
+
+	<script type="text/template" id="process-list">
+		{{#processes}}
+		<div class="process {{_class}}" id="{{pm_id}}">
+			<div class="pid"><span>{{pm_id}}</span></div>
+			<div class="name">
+				<h4>{{opts.name}}{{#_class}} ({{_class}}){{/_class}}</h4>
+				<h5>{{opts.script}}</h5>
+			</div><!-- <div class="actions">
+				<i class="icon-remove"></i>
+				<i class="icon-refresh"></i>
+			</div> --><div class="uptime">
+			<span>{{uptime}}</span>
+			</div><div class="restarts">
+				<span>{{opts.restart_time}}</span>
+			</div><div class="status ">
+				<i class="icon-circle {{status}}"></i>
+			</div>
+		</div>
+		{{/processes}}
+		{{^processes}}
+		<p>No processes running.</p>
+		{{/processes}}
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="refresh-bar">
+			<h5><i class="icon-refresh" id="refresh"></i> <span>Interval <input type="text" id="refresh-interval" value="4" /> s</span></h5>
+			<div><div></div></div>
+		</div>
+		<h1 class="title">Dashboard</h1>
+		<div class="dashboard">
+			<section class="processes column twothirds">
+				<h3>Processes</h3>
+				<div class="process-list">
+					<div class="process head">
+						<div class="pid"><span>PID</span></div>
+						<div class="name">
+							<span>Script</span>
+						</div><!-- <div class="actions">
+							<span>Actions</span>
+						</div> --><div class="uptime">
+							<span>Uptime</span>
+						</div><div class="restarts">
+							<span>Restarts</span>
+						</div><div class="status">
+							<span>Status</span>
+						</div>
+					</div>
+					<div class="list">
+						<p>No processes running.</p>
+					</div>
+				</div>
+			</section><section class="system column third">
+				<h4 id="hostname">{{title}}</h4>
+				<h3>System</h3>
+				<div class="stats">
+					<div>
+						<h4>Processes</h4>
+						<span>{{process_count}}</span>
+					</div><div>
+						<h4>CPUS</h4>
+						<span>{{cpu_count}}</span>
+					</div><div class="avg">
+						<h4>Load Avg.</h4>
+						{{#load_avg}}
+							<span>{{.}}</span>
+						{{/load_avg}}
+					</div><div class="uptime">
+						<h4>Uptime</h4>
+						<span>{{uptime}}</span>
+					</div>
+				</div>
+				<h4>Memory</h4>
+				<figure id="memory">
+					<div style="width: {{memory_free_percent}}%">Free</div><div style="width: {{memory_used_percent}}%">Used</div>
+				</figure>
+				<h3>Information</h3>
+				<div class="process-log">
+					<select id="log-type">
+						<option>Error</option>
+						<option>Output</option>
+					</select>
+					<div id="terminal">
+						<p>No process log selected</p>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="assets/script/Monitor.js"></script>
+</html>

@@ -1,0 +1,409 @@
+@import url(http://fonts.googleapis.com/css?family=Abel);
+@import url(font-awesome.min.css);
+@import url("reset.css");
+
+@blue: #9B9BAD;
+@lighterblue: #58EAE0;
+@lightblue: #EBF9FA;
+@sand: #FBE9E0;
+@cardboard: #ded9d5;
+@barelywhite: #f8f8fa;
+@green: #33B763;
+@lightergreen: #A2FBDC;
+@darkgray: #3A3A3B;
+@yellow: #FBF586;
+
+body {
+	background: url(../image/satinweave.png);
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: @darkgray;
+}
+
+.column {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.column.third { width: 34%; }
+.column.twothirds { width: 66%; }
+
+//Infoclasses
+.message { text-align: center; padding-top: 100px; }
+.neutral { color: lighten(@blue, 20%); }
+
+.wrapper {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.title {
+	font-size: 48px;
+	font-weight: bold;
+	margin: 12px 0;
+	font-family: 'Abel', sans-serif;
+	text-transform: uppercase;
+}
+
+.refresh-bar {
+	float: right;
+	margin: 6px 0 0;
+	text-align: right;
+
+	h5 {
+		margin-bottom: 4px;
+		font-weight: bold;
+		font-size: 14px;
+		opacity: 1;
+
+		input {
+			border: 0;
+			font-size: 14px;
+			width: 20px;
+			text-align: center;
+			background: 0;
+			border-bottom: 1px dotted rgba(0,0,0,0.6);
+		}
+
+		i {
+			float: left;
+			margin-top: 6px;
+			cursor: pointer;
+		}
+	}
+
+	h5:hover {
+		opacity: 1;
+	}
+
+	div {
+		border-radius: 6px;
+		height: 8px;
+		background: rgba(0,0,0,0.4);
+		width: 140px;
+		float: right;
+		background: @darkgray;
+
+		div {
+			float: none;
+			width: 40%;
+			background: @blue;
+		}
+	}
+}
+
+.dashboard {
+	background: #fff;
+	padding: 18px;
+	border-radius: 6px;
+	box-shadow: 0 1px 0 darken(#fff, 10%), 0 2px 0 #eee, 0 3px 0 #ddd;
+
+	h3 {
+		font-size: 14px;
+		font-family: 'Abel', sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin: 0 0 12px;
+		padding: 6px 8px;
+		-webkit-border-bottom-left-radius: 6px;
+		-moz-border-radius-bottomleft: 6px;
+		border-bottom-left-radius: 6px;
+		color: @blue;
+	}
+}
+
+.process-list {
+	margin-bottom: 18px;
+	margin-right: 18px;
+
+	.list {
+		max-height: 420px;
+		overflow: scroll;
+	}
+
+	.process {
+		height: 40px;
+		padding: 4px;
+		border-radius: 6px;
+		cursor: pointer;
+
+		div {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		.pid {
+			height: 40px;
+			width: 8%;
+			border-right: 1px solid #ddd;
+			text-align: center;
+
+			span {
+				display: inline-block;
+				padding-top: 12px;
+				font-weight: bold;
+			}
+		}
+
+		.name {
+			width: 62%;
+
+			h4 {
+				font-size: 18px;
+				margin: 2px 12px 4px;
+				font-weight: bold;
+			}
+
+			h5 {
+				font-size: 14px;
+				margin: 0 12px;
+				font-family: Monaco, monospace;
+				color: darken(@cardboard, 10%);
+			}
+		}
+
+		.actions {
+			width: 20%;
+			padding-top: 8px;
+
+			i {
+				font-size: 24px;
+				margin: 6px;
+			}
+
+			.icon-remove {
+				color: darken(@sand, 30%);
+			}
+
+			.icon-refresh {
+				color: @green;
+			}
+		}
+
+		.uptime, .restarts {
+			width: 8%;
+			text-align: center;
+
+			span {
+				display: block;
+				margin-top: 12px;
+			}
+		}
+
+		.status {
+			text-align: center;
+			width: 8%;
+			padding-top: 12px;
+
+			.online {
+				color: @lighterblue;
+			}
+		}
+	}
+
+	.process:hover {
+		background: @lightblue; //lighten(@sand, 4%);
+	}
+
+	.process.self {
+		opacity: 0.3;
+		cursor: auto;
+	}
+
+	.process.self:hover {
+		background: none;
+	}
+
+	//This is a bit messy
+	.process.head {
+		height: 20px;
+		cursor: auto;
+
+		span {
+			color: #ccc;
+			font-weight: bold;
+			font-size: 12px;
+			margin-left: 12px;
+		}
+
+		.pid {
+			height: 20px;
+
+			span {
+				padding-top: 0;
+				margin-left: 0;
+			}
+		}
+
+		.actions {
+			padding-top: 0;
+
+			span {
+				margin-left: 0;
+			}
+		}
+
+		.uptime, .restarts {
+			text-align: left;
+
+			span {
+				margin-top: 4px;
+			}
+		}
+
+		.status {
+			padding-top: 0;
+
+			span {
+				margin-left: 0;
+			}
+		}
+	}
+
+	.process.head {
+		background: inherit;
+	}
+}
+
+.system {
+	margin-bottom: 18px;
+
+	h4 {
+		font-weight: bold;
+		color: rgba(0,0,0,0.3);
+		font-size: 13px;
+		padding: 4px;
+	}
+
+	#memory {
+		div {
+			display: inline-block;
+			vertical-align: top;
+			height: 28px;
+			width: 50%;
+			text-align: center;
+			padding-top: 14px;
+			font-size: 14px;
+			text-transform: uppercase;
+			color: rgba(0,0,0,0.4);
+		}
+
+		div:first-child {
+			background: @sand;
+			-webkit-border-top-left-radius: 6px;
+			-webkit-border-bottom-left-radius: 6px;
+			-moz-border-radius-topleft: 6px;
+			-moz-border-radius-bottomleft: 6px;
+			border-top-left-radius: 6px;
+			border-bottom-left-radius: 6px;
+		}
+
+		div:last-child {
+			background: darken(@sand, 30%);
+			-webkit-border-top-right-radius: 6px;
+			-webkit-border-bottom-right-radius: 6px;
+			-moz-border-radius-topright: 6px;
+			-moz-border-radius-bottomright: 6px;
+			border-top-right-radius: 6px;
+			border-bottom-right-radius: 6px;
+		}
+	}
+
+	.stats {
+		margin-bottom: 14px;
+
+		div {
+			display: inline-block;
+			vertical-align: top;
+			width: 25%;
+			text-align: center;
+
+			span {
+				font-weight: bold;
+				font-size: 54px;
+			}
+		}
+
+		.avg {
+			span {
+				display: block;
+				width: 100%;
+				text-align: center;
+				font-size: 16px;
+			}
+		}
+
+		.uptime {
+			span {
+				display: block;
+				margin-top: 16px;
+				font-size: 15px;
+			}
+		}
+	}
+
+	#hostname {
+		float: right;
+		font-family: Monaco, monospace;
+		color: @darkgray;
+		margin-top: 2px;
+	}
+}
+
+.process-log {
+	#log-type {
+		float: right;
+		opacity: 0.3;
+		margin: 8px;
+	}
+
+	#log-type:hover {
+		opacity: 1;
+	}
+
+	#terminal {
+		background: @darkgray;
+		height: 200px;
+		border-radius: 8px;
+		padding: 12px;
+		color: @green;
+		font-family: monaco, monospace;
+		font-size: 14px;
+
+		p {
+			margin-bottom: 6px;	
+		}
+
+		p:last-child:after{
+			content: '  \258B';
+			-webkit-animation: blink 1200ms infinite;
+		}
+	}
+}
+
+@-webkit-keyframes blink {
+	0% {
+		opacity: 0;
+	}
+
+	49% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes progress {
+	0% {
+		width: 0%;
+	}
+
+	100% {
+		width: 100%;
+	}
+}

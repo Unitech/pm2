@@ -1,0 +1,9 @@
+<!-- exciting part -->
+<h1>A Book</h1>
+<p>Authors: <ul><li>John Power</li><li>Jamie Walsh</li></ul></p>
+<p>Price: $200 USD <b>In Stock</b></p>
+<p>VAT: $40</p>
+<!-- boring part -->
+<h2>Test truthy false values:</h2>
+<p>Zero: 0</p>
+<p>False: false</p>

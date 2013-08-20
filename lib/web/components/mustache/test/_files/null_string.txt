@@ -1,0 +1,6 @@
+Hello Elise
+glytch true
+binary false
+value 
+undef 
+numeric NaN

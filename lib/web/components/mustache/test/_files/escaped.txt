@@ -1,0 +1,2 @@
+<h1>Bear &gt; Shark</h1>
+And even &amp;quot; &quot;&#39;&lt;&gt;&#x2F;, but not &quot; "'<>/.

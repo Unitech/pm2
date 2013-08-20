@@ -90,11 +90,23 @@ commander.command('dev <script>')
 //
 // Web interface
 //
-commander.command('web')
+commander.command('web start|stop|restart')
          .description('launch process/server monit api on ' + cst.WEB_INTERFACE)
          .action(function() {
-  console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
-  CLI.web();
+
+
+  switch(this.args[0]) {
+    case "stop":
+      CLI.web.stop();
+    break;
+
+    case "restart":
+      CLI.web.restart();
+    break;
+
+    default:
+      CLI.web();
+  }
 });
 
 //
@@ -512,13 +524,56 @@ CLI.dump = function() {
   });
 };
 
+//Needs to be a tad more complex than just launch..
 CLI.web = function() {
+  CLI.web.getProcess(function(proc) {
+    if(!proc) {
+      CLI.web.start();
+    } else {
+      console.log("Uh-oh. Web interface already running! Use `pm2 web stop` to stop it or `pm2 web restart` to restart it.");
+      process.exit();
+    }
+  });
+};
+
+CLI.web.getProcess = function(callback) {
+  Satan.executeRemote("list", {}, function(err, list) {
+    var processExists = false;
+    //Loop over the processes, determine if it's running
+    list.forEach(function(proc) {
+      if(proc.opts.name.match(/Pm2Http/)) processExists = proc;
+    });
+    callback(processExists);
+  });
+};
+
+CLI.web.start = function(callback) {
+  console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
+  console.log(p.resolve(p.dirname(module.filename), '../lib/HttpInterface.js'))
+  //Create the process
   Satan.executeRemote('prepare', resolvePaths({
     script : p.resolve(p.dirname(module.filename), '../lib/HttpInterface.js'),
     name : 'Pm2Http' + cst.WEB_INTERFACE
   }), function() {
     console.log(PREFIX_MSG + 'Process launched');
     speedList();
+    if(callback) callback();
+  });
+};
+
+CLI.web.stop = function(callback) {
+  console.log("Stopping web interface..");
+  CLI.web.getProcess(function(process) {
+    if(process) CLI.stopId(process.pm_id);
+    else callback();
+  });
+};
+
+CLI.web.restart = function(callback) {
+  console.log("Restart web interface..")
+  CLI.web.getProcess(function(process) {
+    if(process) CLI.restart(process.pm_id);
+    else CLI.web.start();
   });
 };
 
