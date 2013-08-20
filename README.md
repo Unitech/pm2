@@ -1,6 +1,6 @@
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
 
-The modern and stable CLI process manager for Node apps with native clusterization, monitoring, 0 downtime process restart, startup scripts and much more.
+The modern and stable CLI process manager for Node apps with native clusterization, monitoring, hot code reload, startup scripts and much more.
 
 Tested with Node v0.12, v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
 Works on Linux & MacOS.
@@ -13,21 +13,18 @@ Works on Linux & MacOS.
 
 Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
 
-# Note
+# Support
 
-If you like this module or it solves something you always needed for your Node deployment, please support PM2 !
+If you like this module please support !
 
 [![Donate](http://unitech.io/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TRF8NYRUVZXZ6)
-
-I can also integrates very specific features or make a custom PM2 fitted for your need.
-Contact me at : as@unitech.io
 
 # Readme Contents
 
 - [Installation](#a1)
 - [Usage/Features](#a2)
 - [Different ways to launch a process](#a3)
-- [0 downtime process reloading](#a16)
+- [Hot code reload (0s downtime)](#a16)
 - [Is my production server ready for PM2](#a4)
 - [Updating pm2 and keeping processes alive](#a5)
 - [Listing processes : pm2 list](#a6)
@@ -63,7 +60,7 @@ $ pm2 dump               # Dump the states of all processes
 $ pm2 stop pm2_id        # Stop specific process id
 $ pm2 stopAll            # Stop all processes
 $ pm2 resurrect          # Put online previously dumped processes
-$ pm2 reload all         # Reload all processes with 0 downtime
+$ pm2 reload all         # Hot Reload all processes with 0s downtime
 $ pm2 restart pm2_id     # Restart specific process
 $ pm2 restart all        # Hard Restart all proccesses
 $ pm2 stop all           # Stop all processes
@@ -107,7 +104,9 @@ $ npm test
 If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
 
 <a name="a16"/>
-## 0 downtime process reloading
+## Hot code reload (0s downtime)
+
+This feature permits to reload code without loosing current processed queries.
 
 ```
 $ pm2 reload all
@@ -295,5 +294,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-

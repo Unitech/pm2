@@ -15,5 +15,6 @@ module.exports = {
   DUMP_FILE_PATH    : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
   DAEMON_BIND_ADDR  : 'localhost:6666',
   DEBUG             : false,
-  WEB_INTERFACE     : 9615
+  WEB_INTERFACE     : 9615,
+  MODIFY_REQUIRE    : false
 };
