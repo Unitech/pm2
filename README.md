@@ -60,7 +60,7 @@ $ pm2 dump               # Dump the states of all processes
 $ pm2 stop pm2_id        # Stop specific process id
 $ pm2 stopAll            # Stop all processes
 $ pm2 resurrect          # Put online previously dumped processes
-$ pm2 reload all         # Hot Reload all processes with 0s downtime
+$ pm2 reload all         # Hot Reload all processes with 0s downtime (only for HTTP)
 $ pm2 restart pm2_id     # Restart specific process
 $ pm2 restart all        # Hard Restart all proccesses
 $ pm2 stop all           # Stop all processes
@@ -107,6 +107,7 @@ If a test is broken please report us issues [here](https://github.com/Unitech/pm
 ## Hot code reload (0s downtime)
 
 This feature permits to reload code without loosing current processed queries.
+**ONLY FOR NETWORKED APPLICATIONS**
 
 ```
 $ pm2 reload all
