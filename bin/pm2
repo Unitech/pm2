@@ -20,8 +20,6 @@ const ERROR_EXIT        = 1;
 const SAMPLE_FILE_PATH  = '../lib/sample.json';
 const STARTUP_SCRIPT    = '../lib/scripts/pm2-init.sh';
 
-//console.log();
-
 commander.version(pkg.version)
   .option('-v --verbose', 'Display all data')
   .option('-f --force', 'Force actions')
@@ -245,10 +243,10 @@ commander.command('flush')
 //
 // Log streaming
 //
-commander.command('logs')
-         .description('stream logs file')
-         .action(function() {
-  CLI.streamLogs();
+commander.command('logs [id|name]')
+         .description('stream logs file. Default stream all logs')
+         .action(function(id) {
+  CLI.streamLogs(id);
 });
 
 
@@ -710,9 +708,9 @@ CLI.monit = function() {
   });
 };
 
-CLI.streamLogs = function() {
+CLI.streamLogs = function(id) {
   var tdb = {};
-  
+    
   Satan.executeRemote('list', {}, function(err, list) {
     if (err) {
       console.error('Error retrieving process list: ' + err);
@@ -721,15 +719,18 @@ CLI.streamLogs = function() {
     list.forEach(function(l) {
       tdb[l.opts.script] = l;
     });
-    Log.stream(cst.PM2_LOG_FILE_PATH, 'PM2 DAEMON');
-    if (err) process.exit(ERROR_EXIT);
-    for (k in tdb) {      
-      if (tdb[k].opts.pm_out_log_path)
-        Log.stream(tdb[k].opts.pm_out_log_path,
-                   p.basename(tdb[k].opts.script, '.js') + ' out');
-      if (tdb[k].opts.pm_err_log_path)
-        Log.stream(tdb[k].opts.pm_err_log_path,
-                   p.basename(tdb[k].opts.script, '.js') + ' err');
+
+    console.log('########### Starting streaming logs for [%s] process', id || 'all');
+    for (var k in tdb) {
+      if ((!id || (id && !isNaN(parseInt(id)) && tdb[k].pm_id == id)) ||
+          (!id || (id && isNaN(parseInt(id)) && tdb[k].opts.name == id))) {
+        if (tdb[k].opts.pm_out_log_path)
+          Log.stream(tdb[k].opts.pm_out_log_path,
+                     p.basename(tdb[k].opts.script, '.js') + '-' + tdb[k].pm_id + ' (out)');
+        if (tdb[k].opts.pm_err_log_path)
+          Log.stream(tdb[k].opts.pm_err_log_path,
+                     p.basename(tdb[k].opts.script, '.js') + '-' + tdb[k].pm_id + ' (err)');
+      }
     }
   });
 };

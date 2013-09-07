@@ -3,6 +3,7 @@
 The modern and stable CLI process manager for Node apps with native clusterization, monitoring, hot code reload, startup scripts and much more.
 
 Tested with Node v0.12, v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
+Compatible CoffeeScript.
 Works on Linux & MacOS.
 
 [![NPM](https://nodei.co/npm/pm2.png)](https://nodei.co/npm/pm2/)
@@ -13,18 +14,13 @@ Works on Linux & MacOS.
 
 Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
 
-# Support
-
-If you like this module please support !
-
-[![Donate](http://unitech.io/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TRF8NYRUVZXZ6)
-
 # Readme Contents
 
 - [Installation](#a1)
 - [Usage/Features](#a2)
 - [Different ways to launch a process](#a3)
 - [Hot code reload (0s downtime)](#a16)
+- [CoffeeScript](#a19)
 - [Is my production server ready for PM2](#a4)
 - [Updating pm2 and keeping processes alive](#a5)
 - [Listing processes : pm2 list](#a6)
@@ -115,6 +111,15 @@ $ pm2 reload all
 
 Thanks to TruongSinh Tran-Nguyen https://github.com/truongsinh
 
+<a name="a19"/>
+## CoffeeScript
+
+```bash
+$ pm2 start my_app.coffee
+```
+
+That's all !
+
 <a name="a5"/>
 ## Updating pm2 and resurecting process
 
@@ -159,6 +164,7 @@ Now you can reboot your server, and already launched processes should be kepts a
 ## pm2 logs
 
 Display logs in streaming of all processes, without having to do a tail -f or something else.
+You can also pass [name|id] as parameter to stream only the log of a specified process.
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
