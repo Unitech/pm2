@@ -1,4 +1,10 @@
 
+# 0.5.6
+
+- Coffeescript support
+- Updating dependencies - axon - commander
+- Log feature enhanced - duplicates removed - name or id can be passed to pm2 logs xxx
+
 # 0.5.5
 
 - Ability to set a name to a launched script + tests
