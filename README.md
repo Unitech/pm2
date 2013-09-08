@@ -2,7 +2,7 @@
 
 The modern and stable CLI process manager for Node apps with native clusterization, monitoring, hot code reload, startup scripts and much more.
 
-Tested with Node v0.12, v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
+Tested with Node v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
 Compatible CoffeeScript.
 Works on Linux & MacOS.
 
