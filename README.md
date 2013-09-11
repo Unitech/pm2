@@ -6,13 +6,15 @@ Tested with Node v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
 Compatible CoffeeScript.
 Works on Linux & MacOS.
 
-[![NPM](https://nodei.co/npm/pm2.png)](https://nodei.co/npm/pm2/)
+[![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
 
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 
 Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
+
+<a href="http://flattr.com/thing/1490051/Unitechpm2-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
 
 # Readme Contents
 
