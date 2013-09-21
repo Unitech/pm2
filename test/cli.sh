@@ -62,14 +62,14 @@ $pm2 start echo.js
 $pm2 start echo.js -f
 $pm2 start echo.js -f
 
-OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 3 ] || fail "$1"
 success "$1"
 
 $pm2 stop 12412
 $pm2 stop 0
 
-OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 2 ] || fail "$1"
 success "$1"
 
@@ -77,7 +77,7 @@ $pm2 stop asdsdaecho.js
 
 $pm2 stop echo.js
 
-OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 0 ] || fail "$1"
 success "$1"
 
@@ -184,7 +184,7 @@ $pm2 stop all
 spec "Should stop all processes"
 
 sleep 0.5
-OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 0 ] || fail "Process not stopped"
 success "Process succesfully stopped"
 
@@ -196,19 +196,19 @@ success "Process succesfully stopped"
 PROC_NAME='ECHONEST'
 # Launch a script with name option
 $pm2 start echo.js --name $PROC_NAME
-OUT=`$pm2 jlist | grep -o "ECHONEST" | wc -l`
+OUT=`$pm2 prettylist | grep -o "ECHONEST" | wc -l`
 [ $OUT -gt 0 ] || fail "Process not launched"
 success "Processes sucessfully launched with a specific name"
 
 # Restart a process by name
 $pm2 restart $PROC_NAME
-OUT=`$pm2 jlist | grep -o "restart_time: 1" | wc -l`
+OUT=`$pm2 prettylist | grep -o "restart_time: 1" | wc -l`
 [ $OUT -gt 0 ] || fail "Process name not restarted"
 success "Processes sucessfully restarted with a specific name"
 
 # Stop a process by name
 $pm2 stop $PROC_NAME
-OUT=`$pm2 jlist | grep -o "ECHONEST" | wc -l`
+OUT=`$pm2 prettylist | grep -o "ECHONEST" | wc -l`
 [ $OUT -eq 0 ] || fail "Process name not stopped"
 success "Processes sucessfully stopped with a specific name"
 
@@ -222,7 +222,7 @@ $pm2 resurrect
 spec "Should resurect all apps"
 
 sleep 0.5
-OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 9 ] || fail "Not valid process number"
 success "Processes valid"
 
@@ -230,7 +230,7 @@ $pm2 stopAll
 spec "Should stop all processes"
 
 sleep 0.5
-OUT=`$pm2 jlist | grep -o "restart_time" | wc -l`
+OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 0 ] || fail "Process not stopped"
 success "Process succesfully stopped"
 

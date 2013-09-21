@@ -34,6 +34,7 @@ Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/bl
 - [API health end point : pm2 web](#a12)
 - [JSON processes declaration](#a13)
 - [Launching the tests](#a14)
+- [They talk about it](#a20)
 - [License](#a15)
 
 <a name="a1"/>
@@ -242,6 +243,15 @@ the process will be stopped and a message with number with restarts will be logg
 ```bash
 npm test
 ```
+
+<a name="a20"/>
+# They talk about it
+
+- https://coderwall.com/p/igdqyw
+- http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
+- https://medium.com/tech-talk/e7c0b0e5ce3c
+- http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
+
 
 # MISC
 

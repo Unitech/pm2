@@ -189,10 +189,16 @@ commander.command('status')
   });
 
 commander.command('jlist')
-         .description('json list all processes')
+         .description('list all processes in JSON format')
          .action(function() {
   CLI.jlist();
 });
+
+commander.command('prettylist')
+  .description('print json in a pretty way')
+  .action(function() {
+    CLI.jlist(true);
+  });
 
 //
 // Monitoring command
@@ -647,13 +653,16 @@ CLI.list = function() {
   });
 };
 
-CLI.jlist = function() {
+CLI.jlist = function(debug) {
   Satan.executeRemote('list', {}, function(err, list) {
     if (err) {
       console.error('Error retrieving process list: ' + err);
       process.exit(ERROR_EXIT);
     }
-    console.log(JSON.stringify(list));
+    if (debug)
+      console.log(list);
+    else
+      console.log(JSON.stringify(list));
     process.exit(SUCCESS_EXIT);
   });
 };
