@@ -123,12 +123,12 @@ $ pm2 start my_app.coffee
 That's all !
 
 <a name="a5"/>
-## Updating pm2 and resurecting process
+## Updating pm2 and resurrecting process
 
 ```bash
 $ pm2 dump
 $ npm install -g pm2@latest
-$ pm2 kill ; pm2 resurect
+$ pm2 kill ; pm2 resurrect
 ```
 
 ## How to install the pm2 master branch
