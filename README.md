@@ -1,6 +1,8 @@
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
 
-The modern and stable CLI process manager for Node apps with native clusterization, monitoring, hot code reload, startup scripts and much more.
+Modern CLI process manager for Node apps with a builtin load-balancer.
+
+**Features** : monitoring, hot code reload, builtin load balancer, automatic startup script, resurrect/dump processes...
 
 Tested with Node v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
 Compatible CoffeeScript.
