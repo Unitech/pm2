@@ -137,7 +137,7 @@ sleep 0.3
 
 JSON_FILE='/tmp/web-json'
 
-curl -q http://localhost:9615/ -O $JSON_FILE
+$http_get -q http://localhost:9615/ -O $JSON_FILE
 cat $JSON_FILE | grep "HttpInterface.js" > /dev/null
 spec "Should get the right JSON with HttpInterface file launched"
 
@@ -148,7 +148,7 @@ cat ~/.pm2/logs/echo-out.log | wc -l
 spec "File Log should be cleaned"
 
 sleep 0.3
-wget -q http://localhost:9615/ -O $JSON_FILE
+$http_get -q http://localhost:9615/ -O $JSON_FILE
 cat $JSON_FILE | grep "restart_time\":0" > /dev/null
 spec "Should get the right JSON with HttpInterface file launched"
 
@@ -157,7 +157,7 @@ spec "Should get the right JSON with HttpInterface file launched"
 #
 $pm2 restart 1
 sleep 0.3
-wget -q http://localhost:9615/ -O $JSON_FILE
+$http_get -q http://localhost:9615/ -O $JSON_FILE
 OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 [ $OUT -eq 1 ] || fail "$1"
 success "$1"
@@ -169,7 +169,7 @@ $pm2 restart all
 spec "Should restart all processes"
 
 sleep 0.3
-wget -q http://localhost:9615/ -O $JSON_FILE
+$http_get -q http://localhost:9615/ -O $JSON_FILE
 OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 
 [ $OUT -eq 7 ] || fail "$1"
