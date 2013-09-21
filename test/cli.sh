@@ -18,6 +18,18 @@ script="echo"
 
 file_path="test/fixtures"
 
+# Determine wget / curl
+which wget
+if [ $? -eq 1 ]
+then
+    http_get="curl"
+else
+    http_get="wget"
+fi
+
+
+echo $http_get
+
 function fail {
   echo -e "######## \033[31m  ✘ $1\033[0m"
   exit 1
@@ -125,7 +137,7 @@ sleep 0.3
 
 JSON_FILE='/tmp/web-json'
 
-wget -q http://localhost:9615/ -O $JSON_FILE
+curl -q http://localhost:9615/ -O $JSON_FILE
 cat $JSON_FILE | grep "HttpInterface.js" > /dev/null
 spec "Should get the right JSON with HttpInterface file launched"
 
