@@ -6,12 +6,12 @@
 #
 ### BEGIN INIT INFO
 # Provides:          pm2
-# Required-Start:    pm2
+# Required-Start:    
 # Required-Stop:     
 # Should-Start:      
 # Should-Stop:
-# Default-Start:     
-# Default-Stop:
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
 # Short-Description: PM2 init script
 # Description: PM2 is the next gen process manager for Node.js
 ### END INIT INFO
