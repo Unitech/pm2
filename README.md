@@ -1,22 +1,20 @@
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
 
-Modern CLI process manager for Node apps with a builtin load-balancer.
-
-**Features** : monitoring, hot code reload, builtin load balancer, automatic startup script, resurrect/dump processes...
-
-Tested with Node v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
-Compatible CoffeeScript.
-Works on Linux & MacOS.
-
-[![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
+# Modern CLI process manager for Node apps with builtin load-balancer
 
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
+[![Gittip donate button](http://badgr.co/gittip/docpad.png)](https://www.gittip.com/Alexandre-Strzelewicz/ "Donate weekly to this project using Gittip")
+[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/1490051/Unitechpm2-on-GitHub "Donate monthly to this project using Flattr")
 
-Blog post for some context : [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
+[![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
 
-<a href="http://flattr.com/thing/1490051/Unitechpm2-on-GitHub" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
+**Main Features** : monitoring, hot code reload, builtin load balancer, automatic startup script, resurrect/dump processes...
+
+Tested with Node v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
+Compatible CoffeeScript.
+Works on Linux & MacOS.
 
 # Readme Contents
 
