@@ -1,6 +1,6 @@
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
 
-# Modern CLI process manager for Node apps with builtin load-balancer
+Modern CLI process manager for Node apps with builtin load-balancer
 
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
