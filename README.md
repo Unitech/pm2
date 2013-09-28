@@ -247,10 +247,10 @@ npm test
 <a name="a20"/>
 # They talk about it
 
+- http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
-- http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
 
 
 # MISC
