@@ -7,8 +7,8 @@
   },
   "author": {
     "name": "Strzelewicz Alexandre",
-    "email": "strzelewicz.alexandre@gmail.com",
-    "url": "http://apps.hemca.com"
+    "email": "as@unitech.io",
+    "url": "http://unitech.io"
   },
   "contributors": [{
     "name"  : "Alex Kocharin",
@@ -24,11 +24,10 @@
     "email" : "i@truongsinh.pro"
   }],
   "homepage" : "https://github.com/Unitech/pm2",
-  "description": "Modern CLI process manager for Node apps with a builtin load-balancer.",
+  "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/cli.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test",
-    "froze": "npm shrinkwrap"
+    "test": "bash ./test/cli.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
   },
   "keywords": [
     "cli",
@@ -43,7 +42,9 @@
     "clustering",
     "cluster cli",
     "cluster",
-    "cron"
+    "cron",
+    "devops",
+    "dev ops"
   ],
   "bin": {
     "pm2": "./bin/pm2"
@@ -56,9 +57,9 @@
     "axon-rpc"       : "0.0.2",
     "watch"          : "0.8.0",
     "axon"           : "1.0.0",
-    "debug"          : "*",
     "cron"           : "1.0.1",
-    "coffee-script"  : "*"
+    "coffee-script"  : "*",
+    "eventemitter2"  : "0.4.13"
   },
   "devDependencies": {
     "mocha"         : "1.x",

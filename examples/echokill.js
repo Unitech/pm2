@@ -6,5 +6,5 @@ setInterval(function() {
 
 setTimeout(function() {
   console.error('error message, killing my self');
-  process.exit(-1);
+  process.exit(10);
 }, 3000);

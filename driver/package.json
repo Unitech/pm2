@@ -1,0 +1,17 @@
+{
+  "name": "pm2-interface",
+  "version": "0.0.0",
+  "description": "Interact with pm2 via RPC and get real time update with pub/sub system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies" : {
+    "axon"           : "1.0.0",    
+    "axon-rpc"       : "0.0.2",
+    "debug"          : "*"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}

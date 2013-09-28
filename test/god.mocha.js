@@ -29,7 +29,7 @@ describe('God', function() {
 
         God.stopProcessName('echo.js', function() {
           God.getFormatedProcesses().length.should.equal(0);
-          God.stopAll(done);
+          God.stopAll({}, done);
         });
       });
     }); 
@@ -39,11 +39,11 @@ describe('God', function() {
     var proc, pid;
 
     before(function(done) {
-      God.stopAll(done);
+      God.stopAll({}, done);
     });
     
     after(function(done) {
-      God.stopAll(done);
+      God.stopAll({}, done);
     });
 
     it('should fork one process', function(done) {
@@ -64,22 +64,22 @@ describe('God', function() {
     it('should stop process and no more present', function(done) {
       proc.status.should.be.equal('online');
       God.checkProcess(proc.process.pid).should.be.true;
-      God.stopProcess(proc, function() {
+      God.stopProcessId(proc.pm_id, function() {
 	God.getFormatedProcesses().length.should.equal(0);
 	God.checkProcess(pid).should.be.false;
 	done();
       });
     });
 
-    // Process stopped are not anymore cached in db
-    it.skip('should start the process', function(done) {
-      God.startProcess(proc, function(err, proc) {
-        God.checkProcess(proc.process.pid).should.be.true;
-	proc.status.should.be.equal('online');
-	God.getFormatedProcesses().length.should.equal(1);
-	done();
-      });
-    });
+    // // Process stopped are not anymore cached in db
+    // it.skip('should start the process', function(done) {
+    //   God.startProcessId(proc.pm_id, function(err, proc) {
+    //     God.checkProcess(proc.process.pid).should.be.true;
+    //     proc.status.should.be.equal('online');
+    //     God.getFormatedProcesses().length.should.equal(1);
+    //     done();
+    //   });
+    // });
   });
 
   describe('Multi launching', function() {
@@ -93,7 +93,7 @@ describe('God', function() {
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(3);
         procs.length.should.equal(3);
-        God.stopAll(done);
+        God.stopAll({}, done);
       });
     });
 
@@ -107,7 +107,7 @@ describe('God', function() {
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(10);
         procs.length.should.equal(10);
-        God.stopAll(done);
+        God.stopAll({}, done);
       });
     });
 
@@ -123,7 +123,7 @@ describe('God', function() {
         setTimeout(function() {
           God.getFormatedProcesses()[0].opts.restart_time.should.eql(0);
           console.log(God.getFormatedProcesses()[0]);
-          God.stopAll(done);
+          God.stopAll({}, done);
         }, 500);
       });
     });
@@ -140,7 +140,7 @@ describe('God', function() {
       }, function(err, procs) {
         setTimeout(function() {
           God.getFormatedProcesses()[0].opts.restart_time.should.be.above(0);
-          God.stopAll(done);
+          God.stopAll({}, done);
         }, 2200);
       });
     });

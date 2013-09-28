@@ -248,3 +248,7 @@ success "Process succesfully stopped"
 
 $pm2 kill
 spec "Should kill daemon"
+
+
+# to test :
+# reload feature
