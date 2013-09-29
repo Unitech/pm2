@@ -4,6 +4,15 @@ var God = require('..');
 var numCPUs = require('os').cpus().length;
 var fs = require('fs');
 var path = require('path');
+var should = require('should');
+
+var process_conf = {
+  pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+  pm_err_log_path : path.resolve(process.cwd(), 'test/echoErr.log'),
+  pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
+  pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
+};
+
 
 describe('God', function() {
   it('should have right properties', function() {
@@ -27,62 +36,97 @@ describe('God', function() {
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(2);
 
-        God.stopProcessName('echo.js', function() {
-          God.getFormatedProcesses().length.should.equal(0);
-          God.stopAll({}, done);
+        God.stopProcessName('echo', function() {
+          God.getFormatedProcesses().length.should.equal(2);
+          God.deleteAll({}, done);
         });
       });
     }); 
   });
-
+  
   describe('One process', function() {
     var proc, pid;
-
-    before(function(done) {
-      God.stopAll({}, done);
-    });
     
-    after(function(done) {
-      God.stopAll({}, done);
+    afterEach(function(done) {
+      God.deleteAll({}, done);
     });
 
     it('should fork one process', function(done) {
-      God.prepare({
-	pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-	pm_err_log_path : path.resolve(process.cwd(), 'test/echoErr.log'),
-	pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
-	pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
-      }, function(err, proce) {
+      God.prepare(process_conf, function(err, proce) {
 	proc = proce;
         pid = proc.process.pid;
-	proc.status.should.be.equal('online');
+	proc.pm2_env.status.should.be.equal('online');
 	God.getFormatedProcesses().length.should.equal(1);
 	done();
       });
     });
+  });
 
-    it('should stop process and no more present', function(done) {
-      proc.status.should.be.equal('online');
-      God.checkProcess(proc.process.pid).should.be.true;
-      God.stopProcessId(proc.pm_id, function() {
-	God.getFormatedProcesses().length.should.equal(0);
-	God.checkProcess(pid).should.be.false;
+  describe('Process State Machine', function() {
+    var clu, pid;
+    
+    it('should start a process', function(done) {
+      God.prepare(process_conf, function(err, proce) {
+	clu = proce;
+        pid = clu.process.pid;
+	clu.pm2_env.status.should.be.equal('online');
 	done();
       });
     });
 
-    // // Process stopped are not anymore cached in db
-    // it.skip('should start the process', function(done) {
-    //   God.startProcessId(proc.pm_id, function(err, proc) {
-    //     God.checkProcess(proc.process.pid).should.be.true;
-    //     proc.status.should.be.equal('online');
-    //     God.getFormatedProcesses().length.should.equal(1);
-    //     done();
-    //   });
-    // });
+    it('should stop a process and keep in database on state stopped', function(done) {
+      God.stopProcessId(clu.pm2_env.pm_id, function(err, dt) {
+        var proc = God.findProcessById(clu.pm2_env.pm_id);
+        proc.pm2_env.status.should.be.equal('stopped');
+        God.checkProcess(proc.process.pid).should.be.equal(false);
+        done();
+      });
+    });
+
+    it('should restart the same process and set it as state online and be up', function(done) {
+      God.restartProcessId(clu.pm2_env.pm_id, function(err, dt) {
+        var proc = God.findProcessById(clu.pm2_env.pm_id);
+        proc.pm2_env.status.should.be.equal('online');
+        God.checkProcess(proc.process.pid).should.be.equal(true);
+        done();
+      });
+    });
+
+    it('should stop this process by name and keep in db on state stopped', function(done) {
+      God.stopProcessName(clu.name, function(err, dt) {
+        var proc = God.findProcessById(clu.pm2_env.pm_id);
+        proc.pm2_env.status.should.be.equal('stopped');
+        God.checkProcess(proc.process.pid).should.be.equal(false);
+        done();
+      });
+    });
+
+    it('should restart the same process by NAME and set it as state online and be up', function(done) {
+      God.restartProcessName(clu.name, function(err, dt) {
+        var proc = God.findProcessById(clu.pm2_env.pm_id);
+        proc.pm2_env.status.should.be.equal('online');
+        God.checkProcess(proc.process.pid).should.be.equal(true);
+        done();
+      });
+    });
+
+    it('should stop and delete the process name from database', function(done) {
+      God.deleteProcess(clu.name, function(err, dt) {
+        var proc = God.findProcessById(clu.pm2_env.pm_id);
+        should.not.exist(proc);
+        done();
+      });
+    });
+
   });
 
+
   describe('Multi launching', function() {
+
+    afterEach(function(done) {
+      God.deleteAll({}, done);
+    });
+
     it('should launch multiple processes depending on CPUs available', function(done) {
       God.prepare({
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
@@ -93,7 +137,7 @@ describe('God', function() {
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(3);
         procs.length.should.equal(3);
-        God.stopAll({}, done);
+        done();
       });
     });
 
@@ -107,7 +151,7 @@ describe('God', function() {
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(10);
         procs.length.should.equal(10);
-        God.stopAll({}, done);
+        done();
       });
     });
 
@@ -121,9 +165,9 @@ describe('God', function() {
         instances       : '1'
       }, function(err, procs) {
         setTimeout(function() {
-          God.getFormatedProcesses()[0].opts.restart_time.should.eql(0);
+          God.getFormatedProcesses()[0].pm2_env.restart_time.should.eql(0);
           console.log(God.getFormatedProcesses()[0]);
-          God.stopAll({}, done);
+          done();
         }, 500);
       });
     });
@@ -139,8 +183,8 @@ describe('God', function() {
         instances       : '1'
       }, function(err, procs) {
         setTimeout(function() {
-          God.getFormatedProcesses()[0].opts.restart_time.should.be.above(0);
-          God.stopAll({}, done);
+          God.getFormatedProcesses()[0].pm2_env.restart_time.should.be.above(0);
+          done();
         }, 2200);
       });
     });

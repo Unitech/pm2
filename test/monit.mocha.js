@@ -14,8 +14,8 @@ describe('Monit', function() {
 
   var fixt1 = [{
     pid : 324,
-    opts : {
-      script : 'asd'
+    pm2_env : {
+      pm_exec_path : 'asd'
     },
     monit: {
       memory: os.totalmem() / 50,
@@ -23,8 +23,8 @@ describe('Monit', function() {
     }
   },{
     pid : 3245,
-    opts : {
-      script : 'asd'
+    pm2_env : {
+      pm_exec_path : 'asd'
     },
     monit: {
       memory: os.totalmem() / 10,
@@ -32,8 +32,8 @@ describe('Monit', function() {
     }
   },{
     pid : 3247,
-    opts : {
-      script : 'asd'
+    pm2_env : {
+      pm_exec_path : 'asd'
     },
     monit: {
       memory: os.totalmem() / 2,
@@ -43,8 +43,8 @@ describe('Monit', function() {
 
   var fixt2 = [{
     pid : 324,
-    opts : {
-      script : 'asd'
+    pm2_env : {
+      pm_exec_path : 'asd'
     },
     monit: {
       memory: os.totalmem() / 25,
@@ -52,8 +52,8 @@ describe('Monit', function() {
     }
   },{
     pid : 3245,
-    opts : {
-      script : 'asd'
+    pm2_env : {
+      pm_exec_path : 'asd'
     },
     monit: {
       memory: os.totalmem() / 5,
@@ -61,8 +61,8 @@ describe('Monit', function() {
     }
   },{
     pid : 3247,
-    opts : {
-      script : 'asd'
+    pm2_env : {
+      pm_exec_path : 'asd'
     },
     monit: {
       memory: os.totalmem() / 8,

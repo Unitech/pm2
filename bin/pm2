@@ -120,11 +120,16 @@ commander.command('restart <pm2_id|name|all>')
   .action(function(pm2_id) {
     console.log(cst.PREFIX_MSG + 'Restarting process ' + pm2_id);
     UX.processing.start();
+
     if (pm2_id == 'all') {
       CLI.restartAll();
     }
-    else {
-      CLI.restart(pm2_id);
+    else if (isNaN(parseInt(pm2_id))) {
+      console.log(cst.PREFIX_MSG + 'Restarting process by name ' + pm2_id);
+      CLI.restartProcessByName(pm2_id);
+    } else {
+      console.log(cst.PREFIX_MSG + 'Restarting process by id ' + pm2_id);
+      CLI.restartProcessById(pm2_id);
     }
   });
 
@@ -233,13 +238,22 @@ commander.command('update')
   });
 
 //
+// Stop and delete a process by name from database
+//
+commander.command('delete <name|all>')
+  .description('Stop and delete a process by name from PM2 database')
+  .action(function(name) {
+    CLI.deleteProcess(name);
+  });
+
+//
 // Flushing command
 //
 commander.command('flush')
-         .description('flush logs')
-         .action(function() {
-  CLI.flush();
-});
+  .description('flush logs')
+  .action(function() {
+    CLI.flush();
+  });
 
 //
 // Log streaming

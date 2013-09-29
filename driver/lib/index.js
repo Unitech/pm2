@@ -5,10 +5,12 @@
 
 var axon = require('axon');
 var cst  = require('./constants.js');
+var sys  = require('sys');
 var rpc  = require('axon-rpc');
 var sub  = axon.socket('sub-emitter');
 var req  = axon.socket("req");
 var log  = require('debug')('pm2:interface');
+var EventEmitter = require('events').EventEmitter;
 
 /**
  * Export with conf
@@ -18,85 +20,84 @@ module.exports = function(opts){
   var rpc_port  = opts && opts.rpc_port  || cst.DAEMON_RPC_PORT;
   var bind_host = opts && opts.bind_host || cst.DAEMON_BIND_HOST;
 
-  return IPM2.init(sub_port, rpc_port, bind_host);
+  return new IPM2(sub_port, rpc_port, bind_host);
 };
 
 /**
  * IPM2, Pm2 Interface
  */
 
-var IPM2 = {
-  /**
-   * Init method
-   */
-  init : function(sub_port, rpc_port, bind_host) {
-    var self = this;
-    
-    this.sub_port  = sub_port;
-    this.rpc_port  = rpc_port;
-    this.bind_host = bind_host;
-    
-    this.sub_sock = sub_sock = sub.connect(sub_port, bind_host);
-    this.sub_client = sub;
-    
-    this.rpc_client = new rpc.Client(req);    
-    this.rpc_sock = rpc_sock = req.connect(rpc_port, bind_host);
-    
-    sub_sock.on('connect', function() {
-      log('PubSub Connected');
-    });
-    
-    rpc_sock.on('connect', function() {
-      log('RPC Connected');
-      self.generateMethods();
-    });
+var IPM2 = function(sub_port, rpc_port, bind_host) {
+  //if (!(this instanceof Bash)) return new Bash(opts);
+  var self = this;
 
-    sub_sock.on('close', function() {
-      console.log('Disconnected');
-    });
-
-    sub_sock.on('error', function() {
-      console.log('Disconnected');
-    });
-
-    sub_sock.on('reconnect attempt', function() {
-      console.log('Trying to reconnect');
-    });
-
-    sub.on('*', function(event){
-      console.log(event);
-    });
-
-  },
+  EventEmitter.call(this);
+  
+  this.sub_port  = sub_port;
+  this.rpc_port  = rpc_port;
+  this.bind_host = bind_host;
+  
+  this.sub_sock = sub_sock = sub.connect(sub_port, bind_host);
+  this.sub_client = sub;
+  
+  this.rpc_client = new rpc.Client(req);    
+  this.rpc_sock = rpc_sock = req.connect(rpc_port, bind_host);
+  this.rpc = {};
+  
   /**
    * Generate method by requesting exposed methods by PM2
    * You can now control/interact with PM2
    */
-  generateMethods : function() {
-    var self = this;
-
+  var generateMethods = function(cb) {
     log('Requesting and generating RPC methods');
-    IPM2.rpc_client.methods(function(err, methods) {
+    self.rpc_client.methods(function(err, methods) {
       Object.keys(methods).forEach(function(key) {
         var method_signature = md = methods[key];
 
         log('+-- Creating %s method', md.name);
-        self[md.name] = function(opts, cb) {            
-          IPM2.rpc_client.call(md.name, opts, cb);
-        };
-      });      
+        
+        (function(name) {
+          self.rpc[name] = function(opts, cb) {
+            console.log(name);
+            self.rpc_client.call(name, opts, cb);
+          };
+        })(md.name);
+        
+      });
+      return cb();
     });
-  },
+  };
   
-  /**
-   * Variables
-   */
-  rpc_client : {},
-  rpc_sock   : {},
-  sub_client : {},
-  sub_sock   : {},
-  /**
-   * RPC methods generate by generateMethods()
-   */
-  rpc        : {}
+  sub_sock.on('connect', function() {
+    log('PubSub Connected');
+    
+    rpc_sock.on('connect', function() {
+      log('RPC Connected');
+      generateMethods(function() {
+        self.emit('ready');
+      });
+    });
+  });
+  
+
+
+  sub_sock.on('close', function() {
+    console.log('Disconnected');
+  });
+
+  sub_sock.on('error', function() {
+    console.log('Disconnected');
+  });
+
+  sub_sock.on('reconnect attempt', function() {
+    console.log('Trying to reconnect');
+  });
+
+  sub.on('*', function(event){
+    console.log(event);
+  });
+
+
 };
+
+sys.inherits(IPM2, EventEmitter);
