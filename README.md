@@ -42,6 +42,10 @@ Works on Linux & MacOS.
 - [They talk about it](#a20)
 - [License](#a15)
 
+# Brief schema
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/Drawing1.png)
+
 <a name="a1"/>
 # Installation
 
