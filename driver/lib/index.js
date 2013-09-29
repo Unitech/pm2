@@ -38,10 +38,11 @@ var IPM2 = function(sub_port, rpc_port, bind_host) {
   this.bind_host = bind_host;
   
   this.sub_sock = sub_sock = sub.connect(sub_port, bind_host);
-  this.sub_client = sub;
-  
-  this.rpc_client = new rpc.Client(req);    
+  this.bus      = sub;
+
   this.rpc_sock = rpc_sock = req.connect(rpc_port, bind_host);
+  this.rpc_client = new rpc.Client(req);
+  
   this.rpc = {};
   
   /**
@@ -67,36 +68,33 @@ var IPM2 = function(sub_port, rpc_port, bind_host) {
       return cb();
     });
   };
-  
-  sub_sock.on('connect', function() {
-    log('PubSub Connected');
+
+  /**
+   * Waiting to connect to sub channel
+   * and RPC
+   */
+
+  rpc_sock.on('connect', function() {
+    log('RPC Connected');
     
-    rpc_sock.on('connect', function() {
-      log('RPC Connected');
-      generateMethods(function() {
-        self.emit('ready');
-      });
+    generateMethods(function() {
+      self.emit('ready');
     });
   });
-  
 
-
-  sub_sock.on('close', function() {
-    console.log('Disconnected');
+  sub_sock.on('connect', function() {
+    log('PubSub Connected');
   });
-
-  sub_sock.on('error', function() {
-    console.log('Disconnected');
+    
+  sub_sock.on('disconnect', function() {
+    log('Error4');
+    self.emit('close');
   });
 
   sub_sock.on('reconnect attempt', function() {
-    console.log('Trying to reconnect');
+    log('Error5');
+    self.emit('reconnect attempt');
   });
-
-  sub.on('*', function(event){
-    console.log(event);
-  });
-
 
 };
 

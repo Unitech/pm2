@@ -213,7 +213,7 @@ success "Process succesfully stopped"
 
 PROC_NAME='ECHONEST'
 # Launch a script with name option
-$pm2 start echo.js --name $PROC_NAME
+$pm2 start echo.js --name $PROC_NAME -f
 OUT=`$pm2 prettylist | grep -o "ECHONEST" | wc -l`
 [ $OUT -gt 0 ] || fail "Process not launched"
 success "Processes sucessfully launched with a specific name"

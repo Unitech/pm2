@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.5.7",
+  "version": "0.6.0",
   "engines" : {
     "node" : ">=0.8"
   },
@@ -35,6 +35,7 @@
     "sysadmin",
     "tools",
     "pm2",
+    "node-pm2",
     "monitoring",
     "process manager",
     "forever",
@@ -59,7 +60,8 @@
     "axon"           : "1.0.0",
     "cron"           : "1.0.1",
     "coffee-script"  : "*",
-    "eventemitter2"  : "0.4.13"
+    "eventemitter2"  : "0.4.13",
+    "debug"          : "*"
   },
   "devDependencies": {
     "mocha"         : "1.x",
