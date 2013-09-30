@@ -21,7 +21,7 @@ module.exports = {
 
   CODE_UNCAUGHTEXCEPTION : 100,
   
-  DEBUG              : false,
+  DEBUG              : true,
   WEB_INTERFACE      : 9615,
   MODIFY_REQUIRE     : false,
   PREFIX_MSG         : '\x1B[32m⌬ PM2 \x1B[39m',
