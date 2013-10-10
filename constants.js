@@ -13,7 +13,7 @@ module.exports = {
   DEFAULT_PID_PATH  : p.join(DEFAULT_FILE_PATH, 'pids'),
   DEFAULT_LOG_PATH  : p.join(DEFAULT_FILE_PATH, 'logs'),
   DUMP_FILE_PATH    : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
-  DAEMON_BIND_ADDR  : 'localhost:6666',
+  DAEMON_BIND_ADDR  : process.env.PM2_BIND_ADDR || 'localhost:6666',
   DEBUG             : false,
   WEB_INTERFACE     : 9615,
   MODIFY_REQUIRE    : false
