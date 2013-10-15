@@ -2,29 +2,39 @@
 
 Modern CLI process manager for Node apps with builtin load-balancer
 
-[![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
-[![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
-[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/1490051/Unitechpm2-on-GitHub "Donate monthly to this project using Flattr")
-
-[![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
-
-This doc is for the 0.6.x pm2 version. **not published on NPM for now, feel free to test it and report issues** `npm install git://github.com/Unitech/pm2.git -g`
-
-For the pm2 0.5.x version please refer to this documentation : [0.5.x](https://github.com/Unitech/pm2/blob/0f0f4261ab21560d54bf39503ff01d4278096240/README.md)
-To get sources of older pm2 versions please refer to releases : [0.5.x source](https://github.com/Unitech/pm2/releases)
-
-
-**Main Features** : monitoring, hot code reload, builtin load balancer, automatic startup script, resurrect/dump processes...
+**Main Features** : monitoring, hot code reload, builtin load balancer, fork mode, HTTP API, message bus, automatic startup script, resurrect/dump processes...
 
 Tested with Node v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
 Compatible CoffeeScript.
 Works on Linux & MacOS.
 
+[![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
+[![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
+[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
+
+[![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
+
+## This doc is for the 0.6.x pm2 version. **the 0.6x is not published on NPM for now, feel free to test it and tell me what you think** 
+
+`npm install git://github.com/Unitech/pm2.git -g`
+
+# 0.6.x schema
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/Drawing1.png)
+
 - Code hardening
 - Environment enhanced
 - Process state gestion
 - Internal bus messaging system
+- interface via [https://github.com/Unitech/pm2-interface](https://github.com/Unitech/pm2-interface)
+- fork mode via -x command
+
+# 0.5.7 documentation
+
+If you install pm2 like that : `npm install pm2` it will install the 0.5.7.
+
+For the pm2 0.5.x version please refer to this documentation : [0.5.x](https://github.com/Unitech/pm2/blob/0f0f4261ab21560d54bf39503ff01d4278096240/README.md)
+To get sources of older pm2 versions please refer to releases : [0.5.x source](https://github.com/Unitech/pm2/releases)
 
 # Readme Contents
 
@@ -47,9 +57,6 @@ Works on Linux & MacOS.
 - [They talk about it](#a20)
 - [License](#a15)
 
-# Brief schema
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/Drawing1.png)
 
 <a name="a1"/>
 # Installation
