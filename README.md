@@ -34,8 +34,8 @@ To get sources of older pm2 versions please refer to releases : [0.5.x source](h
 - Environment enhanced
 - Process state gestion (a process can be stopped and stay on the process list)
 - Internal bus messaging system
-- Fork mode via -x command
-- Enhancement on process monitoring, process listing (uptime, status)
+- Fork mode via -x command (you can run non-node process)
+- Enhancement on process monitoring, process listing (colors, uptime, status)
 - 60 tests added
 
 
