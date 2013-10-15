@@ -1,20 +1,30 @@
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/top-logo.png)
 
 Modern CLI process manager for Node apps with builtin load-balancer
 
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
-[![Gittip donate button](http://badgr.co/gittip/docpad.png)](https://www.gittip.com/Alexandre-Strzelewicz/ "Donate weekly to this project using Gittip")
 [![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/1490051/Unitechpm2-on-GitHub "Donate monthly to this project using Flattr")
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
+
+This doc is for the 0.6.x pm2 version. **not published on NPM for now, feel free to test it and report issues** `npm install git://github.com/Unitech/pm2.git -g`
+
+For the pm2 0.5.x version please refer to this documentation : [0.5.x](https://github.com/Unitech/pm2/blob/0f0f4261ab21560d54bf39503ff01d4278096240/README.md)
+To get sources of older pm2 versions please refer to releases : [0.5.x source](https://github.com/Unitech/pm2/releases)
+
 
 **Main Features** : monitoring, hot code reload, builtin load balancer, automatic startup script, resurrect/dump processes...
 
 Tested with Node v0.11, v0.10, v0.9, v0.8 (https://travis-ci.org/Unitech/pm2).
 Compatible CoffeeScript.
 Works on Linux & MacOS.
+
+- Code hardening
+- Environment enhanced
+- Process state gestion
+- Internal bus messaging system
 
 # Readme Contents
 
@@ -36,6 +46,10 @@ Works on Linux & MacOS.
 - [Launching the tests](#a14)
 - [They talk about it](#a20)
 - [License](#a15)
+
+# Brief schema
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/Drawing1.png)
 
 <a name="a1"/>
 # Installation
@@ -247,10 +261,10 @@ npm test
 <a name="a20"/>
 # They talk about it
 
+- http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
-- http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
 
 
 # MISC

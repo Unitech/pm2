@@ -51,18 +51,17 @@ describe('Satan', function() {
       Satan.getExposedMethods(function(err, methods) {
         assert(err == null);
         methods.should.have.property('prepare');
-        methods.should.have.property('list');
-        methods.should.have.property('stopId');
+        methods.should.have.property('getMonitorData');
+        methods.should.have.property('stopProcessId');
         methods.should.have.property('stopAll');
         methods.should.have.property('stopProcessName');
         methods.should.have.property('killMe');
-        methods.should.have.property('daemonData');
         done();
       });
     });
 
     it('should get an empty process list', function(done) {
-      Satan.executeRemote('list', {}, function(err, res) {
+      Satan.executeRemote('getMonitorData', {}, function(err, res) {
         assert(res.length === 0);
         done();
       });
@@ -76,14 +75,14 @@ describe('Satan', function() {
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
         instances       : 4
       }, function(err, procs) {
-	   assert(err == null);
-           assert(JSON.parse(procs).length == 4);
-	   done();
-         });
+	assert(err == null);
+        assert(procs.length == 4);
+	done();
+      });
     });
 
     it('should list 4 processes', function(done) {
-      Satan.executeRemote('list', {}, function(err, res) {
+      Satan.executeRemote('getMonitorData', {}, function(err, res) {
         assert(res.length === 4);
         done();
       });

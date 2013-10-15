@@ -1,14 +1,14 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.5.9",
+  "version": "0.6.1",
   "engines" : {
     "node" : ">=0.8"
   },
   "author": {
     "name": "Strzelewicz Alexandre",
-    "email": "strzelewicz.alexandre@gmail.com",
-    "url": "http://apps.hemca.com"
+    "email": "as@unitech.io",
+    "url": "http://unitech.io"
   },
   "contributors": [{
     "name"  : "Alex Kocharin",
@@ -24,11 +24,10 @@
     "email" : "i@truongsinh.pro"
   }],
   "homepage" : "https://github.com/Unitech/pm2",
-  "description": "Modern CLI process manager for Node apps with a builtin load-balancer.",
+  "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/cli.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test",
-    "froze": "npm shrinkwrap"
+    "test": "bash ./test/cli.sh && bash ./test/cli2.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
   },
   "keywords": [
     "cli",
@@ -36,14 +35,18 @@
     "sysadmin",
     "tools",
     "pm2",
+    "node-pm2",
     "monitoring",
     "process manager",
     "forever",
+    "keep process alive",
     "process configuration",
     "clustering",
     "cluster cli",
     "cluster",
-    "cron"
+    "cron",
+    "devops",
+    "dev ops"
   ],
   "bin": {
     "pm2": "./bin/pm2"
@@ -52,13 +55,15 @@
     "commander"      : "2.0.0",
     "cli-table"      : "0.2.0",
     "pm2-multimeter" : "0.1.2",
-    "usage"          : "0.3.8",
+    "usage"          : "0.3.9",
     "axon-rpc"       : "0.0.2",
     "watch"          : "0.8.0",
     "axon"           : "1.0.0",
-    "debug"          : "*",
     "cron"           : "1.0.1",
-    "coffee-script"  : "*"
+    "colors"         : "0.6.2",
+    "coffee-script"  : "*",
+    "eventemitter2"  : "0.4.13",
+    "debug"          : "*"
   },
   "devDependencies": {
     "mocha"         : "1.x",
