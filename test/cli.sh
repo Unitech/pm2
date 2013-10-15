@@ -22,7 +22,7 @@ file_path="test/fixtures"
 which wget
 if [ $? -eq 1 ]
 then
-    http_get="curl"
+    http_get="wget"
 else
     http_get="wget"
 fi
