@@ -6,12 +6,14 @@ var fs = require('fs');
 var path = require('path');
 var should = require('should');
 
-var process_conf = {
-  pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-  pm_err_log_path : path.resolve(process.cwd(), 'test/echoErr.log'),
-  pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
-  pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
-};
+function getConf() {
+  return process_conf = {
+    pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+    pm_err_log_path : path.resolve(process.cwd(), 'test/echoErr.log'),
+    pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
+    pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
+  };
+}
 
 
 describe('God', function() {
@@ -52,7 +54,7 @@ describe('God', function() {
     });
 
     it('should fork one process', function(done) {
-      God.prepare(process_conf, function(err, proce) {
+      God.prepare(getConf(), function(err, proce) {
 	proc = proce;
         pid = proc.process.pid;
 	proc.pm2_env.status.should.be.equal('online');
@@ -66,7 +68,7 @@ describe('God', function() {
     var clu, pid;
     
     it('should start a process', function(done) {
-      God.prepare(process_conf, function(err, proce) {
+      God.prepare(getConf(), function(err, proce) {
 	clu = proce;
         pid = clu.process.pid;
 	clu.pm2_env.status.should.be.equal('online');
@@ -109,12 +111,42 @@ describe('God', function() {
         done();
       });
     });
-
-    it('should stop and delete the process name from database', function(done) {
-      God.deleteProcess(clu.name, function(err, dt) {
+    
+    it('should stop and delete a process id', function(done) {
+      var old_pid = clu.process.pid;
+      God.deleteProcessId(clu.pm2_env.pm_id, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
-        should.not.exist(proc);
+        God.checkProcess(old_pid).should.be.equal(false);
+        dt.length.should.be.equal(0);
         done();
+      });
+    });
+
+    it('should start stop and delete the process name from database', function(done) {
+      God.prepare(getConf(), function(err, _clu) {
+        pid = _clu.process.pid;
+	_clu.pm2_env.status.should.be.equal('online');
+        var old_pid = _clu.process.pid;
+        God.deleteProcessName(_clu.name, function(err, dt) {
+          var proc = God.findProcessById(clu.pm2_env.pm_id);
+          should(proc == null);
+          God.checkProcess(old_pid).should.be.equal(false);
+          done();
+        });
+      });
+    });
+
+    it('should start stop and delete the process name from database', function(done) {
+      God.prepare(getConf(), function(err, _clu) {
+        pid = _clu.process.pid;
+	_clu.pm2_env.status.should.be.equal('online');
+        var old_pid = _clu.process.pid;
+        God.deleteProcessName(_clu.name, function(err, dt) {
+          var proc = God.findProcessById(clu.pm2_env.pm_id);
+          should(proc == null);
+          God.checkProcess(old_pid).should.be.equal(false);
+          done();
+        });
       });
     });
 

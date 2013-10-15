@@ -15,7 +15,11 @@ describe('Monit', function() {
   var fixt1 = [{
     pid : 324,
     pm2_env : {
-      pm_exec_path : 'asd'
+      pm_exec_path : 'asd',
+      name : 'test',
+      status : 'online'
+      ,pm_id : 666
+      ,exec_mode : 'fork_mode'
     },
     monit: {
       memory: os.totalmem() / 50,
@@ -24,7 +28,11 @@ describe('Monit', function() {
   },{
     pid : 3245,
     pm2_env : {
-      pm_exec_path : 'asd'
+      pm_exec_path : 'asd',
+      name : 'test',
+      status : 'online'
+      ,pm_id : 666
+      ,exec_mode : 'fork_mode'
     },
     monit: {
       memory: os.totalmem() / 10,
@@ -33,7 +41,11 @@ describe('Monit', function() {
   },{
     pid : 3247,
     pm2_env : {
-      pm_exec_path : 'asd'
+      pm_exec_path : 'asd',
+      name : 'test',
+      status : 'stopped'
+      ,pm_id : 666
+      ,exec_mode : 'fork_mode'
     },
     monit: {
       memory: os.totalmem() / 2,
@@ -44,7 +56,11 @@ describe('Monit', function() {
   var fixt2 = [{
     pid : 324,
     pm2_env : {
-      pm_exec_path : 'asd'
+      pm_exec_path : 'asd',
+      name : 'test',
+      status : 'online'
+      ,pm_id : 666
+      ,exec_mode : 'fork_mode'
     },
     monit: {
       memory: os.totalmem() / 25,
@@ -53,7 +69,11 @@ describe('Monit', function() {
   },{
     pid : 3245,
     pm2_env : {
-      pm_exec_path : 'asd'
+      pm_exec_path : 'asd',
+      name : 'test',
+      status : 'stopped'
+      ,pm_id : 666
+      ,exec_mode : 'fork_mode'
     },
     monit: {
       memory: os.totalmem() / 5,
@@ -62,7 +82,11 @@ describe('Monit', function() {
   },{
     pid : 3247,
     pm2_env : {
-      pm_exec_path : 'asd'
+      pm_exec_path : 'asd',
+      name : 'test',
+      status : 'stopped'
+      ,pm_id : 666
+      ,exec_mode : 'fork_mode'
     },
     monit: {
       memory: os.totalmem() / 8,
@@ -70,12 +94,16 @@ describe('Monit', function() {
     }
   }];
 
-  it('should init', function() {
-    Monit.init(fixt1);    
+  it('should init', function(done) {
+    Monit.init(fixt1);
+    done()
   });
 
-  it('should refresh and handle processes with different sizes', function() {
-    Monit.refresh(fixt2);    
+  it('should refresh and handle processes with different sizes', function(done) {
+    setTimeout(function() {
+      Monit.refresh(fixt2);
+      done();
+    }, 400);
   });
 
   it('should stop monitoring', function() {

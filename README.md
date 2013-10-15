@@ -1,14 +1,19 @@
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm22.png)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/top-logo.png)
 
 Modern CLI process manager for Node apps with builtin load-balancer
 
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
-[![Gittip donate button](http://badgr.co/gittip/docpad.png)](https://www.gittip.com/Alexandre-Strzelewicz/ "Donate weekly to this project using Gittip")
 [![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/1490051/Unitechpm2-on-GitHub "Donate monthly to this project using Flattr")
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
+
+This doc is for the 0.6.x pm2 version. **not published on NPM for now, feel free to test it and report issues** `npm install git://github.com/Unitech/pm2.git -g`
+
+For the pm2 0.5.x version please refer to this documentation : [0.5.x](https://github.com/Unitech/pm2/blob/0f0f4261ab21560d54bf39503ff01d4278096240/README.md)
+To get sources of older pm2 versions please refer to releases : [0.5.x source](https://github.com/Unitech/pm2/releases)
+
 
 **Main Features** : monitoring, hot code reload, builtin load balancer, automatic startup script, resurrect/dump processes...
 

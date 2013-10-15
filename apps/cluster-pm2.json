@@ -1,8 +1,8 @@
 {
   "script" : "./examples/child.js",
-  "fileError" : "errLog.log",
-  "fileOutput" : "outLog.log",
-  "pidFile" : "child",
+  "error_file" : "errLog.log",
+  "out_file" : "outLog.log",
+  "pid_file" : "child",
   "instances" : "4",
   "min_uptime" : "10",
   "max_restarts" : "4"

@@ -89,9 +89,11 @@ $pm2 stop asdsdaecho.js
 
 $pm2 stop echo
 
+$pm2 list
 OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 3 ] || fail "$1"
 success "$1"
+
 
 
 #
@@ -206,6 +208,8 @@ OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 9 ] || fail "Process not stopped"
 success "Process succesfully stopped"
 
+
+$pm2 kill
 
 #
 # Issue #71
