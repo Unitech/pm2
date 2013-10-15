@@ -18,23 +18,26 @@ Works on Linux & MacOS.
 
 `npm install git://github.com/Unitech/pm2.git -g`
 
-# 0.6.x schema
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/Drawing1.png)
-
-- Code hardening
-- Environment enhanced
-- Process state gestion
-- Internal bus messaging system
-- interface via [https://github.com/Unitech/pm2-interface](https://github.com/Unitech/pm2-interface)
-- fork mode via -x command
-
-# 0.5.7 documentation
+# Get the 0.5.7 for production server
 
 If you install pm2 like that : `npm install pm2` it will install the 0.5.7.
 
 For the pm2 0.5.x version please refer to this documentation : [0.5.x](https://github.com/Unitech/pm2/blob/0f0f4261ab21560d54bf39503ff01d4278096240/README.md)
 To get sources of older pm2 versions please refer to releases : [0.5.x source](https://github.com/Unitech/pm2/releases)
+
+# 0.6.x enhancements
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/Drawing1.png)
+
+- Code hardening
+- Interface via [https://github.com/Unitech/pm2-interface](https://github.com/Unitech/pm2-interface)
+- Environment enhanced
+- Process state gestion (a process can be stopped and stay on the process list)
+- Internal bus messaging system
+- Fork mode via -x command
+- Enhancement on process monitoring, process listing (uptime, status)
+- 60 tests added
+
 
 # Readme Contents
 
