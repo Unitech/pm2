@@ -7,9 +7,7 @@
 ### BEGIN INIT INFO
 # Provides:          pm2
 # Required-Start:    
-# Required-Stop:     
-# Should-Start:      
-# Should-Stop:
+# Required-Stop:
 # Default-Start:        2 3 4 5
 # Default-Stop:         0 1 6
 # Short-Description: PM2 init script
@@ -19,29 +17,34 @@
 NAME=pm2
 PM2=%PM2_PATH%
 NODE=%NODE_PATH%
+USER=%USER%
 
 export HOME="%HOME_PATH%"
+
+super() {
+    su -l $USER -c "$1 $2 $3"
+}
  
 start() {
     echo "Starting $NAME"
-    $NODE $PM2 stopAll
-    $NODE $PM2 resurrect
+    super $NODE $PM2 stopAll
+    super $NODE $PM2 resurrect
 }
  
 stop() {
-    $NODE $PM2 dump
-    $NODE $PM2 stopAll
+    super $NODE $PM2 dump
+    super $NODE $PM2 stopAll
 }
  
 restart() {
     echo "Restarting $NAME"
-    stop
-    start
+    super stop
+    super start
 }
  
 status() {
     echo "Status for $NAME:"
-    $NODE $PM2 list
+    super $NODE $PM2 list
     RETVAL=$?
 }
  
