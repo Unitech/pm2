@@ -65,7 +65,6 @@ commander.command('stop <pm2_id|name|all>')
     if (pm2_id == 'all')
       CLI.stopAll();
     else if (isNaN(parseInt(pm2_id))) {
-      console.log(cst.PREFIX_MSG + 'Stopping process by name ' + pm2_id);
       CLI.stopProcessName(pm2_id);
     } else {
       console.log(cst.PREFIX_MSG + 'Stopping process by id ' + pm2_id);
