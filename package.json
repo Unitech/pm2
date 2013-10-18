@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "engines" : {
     "node" : ">=0.8"
   },
@@ -27,7 +27,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test && bash ./test/cli.sh && bash ./test/cli2.sh"
+    "test": "bash ./test/cli.sh && bash ./test/cli2.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
   },
   "keywords": [
     "cli",
