@@ -274,6 +274,8 @@ npm test
 
 Thanks to [Devo.ps](http://devo.ps/) and [Wiredcraft](http://wiredcraft.com/) for their knowledge and expertise.
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Unitech/pm2/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 <a name="a15"/>
 # License - Apache License v2
 
