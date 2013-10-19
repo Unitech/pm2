@@ -1,4 +1,3 @@
-
 //
 // Modifying these values break tests and can break
 // pm2-interface module (because of ports)
@@ -24,8 +23,8 @@ module.exports = {
   DEBUG              : false,
   WEB_INTERFACE      : 9615,
   MODIFY_REQUIRE     : false,
-  PREFIX_MSG         : '\x1B[32m⌬ PM2 \x1B[39m',
-  PREFIX_MSG_ERR     : '\x1B[31m⌬ PM2 [ERROR] \x1B[39m',
+  PREFIX_MSG         : '\x1B[32mPM2 \x1B[39m',
+  PREFIX_MSG_ERR     : '\x1B[31mPM2 [ERROR] \x1B[39m',
   SAMPLE_FILE_PATH   : '../lib/sample.json',
   STARTUP_SCRIPT     : '../lib/scripts/pm2-init.sh',
   SUCCESS_EXIT       : 0,

@@ -39,8 +39,10 @@ Works on Linux & MacOS.
 - [Monitoring processes (CPU/RAM) : pm2 monit](#a7)
 - [Startup script generation : pm2 startup](#a8)
 - [Log aggregation : pm2 logs](#a9)
+- [Fork mode](#a23)
 - [API health end point : pm2 web](#a12)
 - [JSON processes declaration](#a13)
+- [Known bugs](#21)
 - [Launching the tests](#a4)
 - [They talk about it](#a20)
 - [License](#a15)
@@ -103,11 +105,22 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
 ```
 
+You can also execute app in other languages ([the fork mode](#23)):
+```
+$ pm2 start my-bash-script.sh -x --interpreter bash
+
+$ pm2 start my-python-script.py -x --interpreter python
+```
+
 <a name="a16"/>
 ## 0s downtime reload
 
 This feature permits to reload code without loosing queries connection.
-**ONLY FOR NETWORKED APPLICATIONS**
+
+Warning :
+- Only for networked app
+- Running on Node 0.11.x
+- In cluster mode (default mode)
 
 ```
 $ pm2 reload all
@@ -123,6 +136,30 @@ $ pm2 start my_app.coffee
 ```
 
 That's all !
+
+<a name="a23"/>
+## Fork mode - execute script in different languages
+
+The default mode of PM2 consists of wrapping the code of your node app into the Node Cluster module. It's called the **cluster mode**.
+There is also a more classical way to execute your app, like node-forever do, called the **fork mode**.
+
+In fork mode all options are the same than the cluster mode (restart, delete...). 
+But, by the way, you can't cluster natively in fork mode as cluster do (can't use the -i option).
+
+Here is how to start your app in fork : 
+
+```bash
+$ pm2 start app.js -x   # Will start your app.js in fork mode
+$ pm2 list              # You will see that on the row "mode" it's written "fork"
+```
+
+You can also exec scripts in other languages :
+
+```bash
+$ pm2 start my-bash-script.sh -x --interpreter bash
+
+$ pm2 start my-python-script.py -x --interpreter python
+```
 
 <a name="a4"/>
 ## Is my production server ready for PM2 ?
@@ -223,6 +260,22 @@ all restarts are considered unstable.
 if the number of unstable restarts exceeds this number,
 the process will be stopped and a message with number with restarts will be logged.
 
+
+<a name="a21"/>
+# Known bugs
+
+- Node 0.10.x doesn't free script port when stopped. It's due to the NodeJS cluster module.
+So in order to manage your process with PM2 without problem, you have to use the [fork mode](#a23) instead.
+
+```
+$ pm2 start index.js -x  # start my app in fork mode
+```
+
+For more informations about this issue : [#74](https://github.com/Unitech/pm2/issues/74)
+
+- `Cannot read property 'getsockname' of undefined`
+
+When using the cluster mode (by default) you can't use ports from 0 to 1024. If you really need to exec in this range use the [fork mode](#a23) with the `-x` parameter.
 
 <a name="a14"/>
 # Test
