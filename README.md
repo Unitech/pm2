@@ -106,7 +106,7 @@ $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a con
 ```
 
 You can also execute app in other languages ([the fork mode](#a23)):
-```
+```bash
 $ pm2 start my-bash-script.sh -x --interpreter bash
 
 $ pm2 start my-python-script.py -x --interpreter python
@@ -122,7 +122,7 @@ Warning :
 - Running on Node 0.11.x
 - In cluster mode (default mode)
 
-```
+```bash
 $ pm2 reload all
 ```
 
@@ -262,7 +262,13 @@ the process will be stopped and a message with number with restarts will be logg
 
 
 <a name="a21"/>
-# Known bugs
+# Known bugs and workarounds
+
+First, install the lastest pm2 version :
+
+```bash
+$ npm install -g pm2@latest
+```
 
 - Node 0.10.x doesn't free script port when stopped. It's due to the NodeJS cluster module.
 So in order to manage your process with PM2 without problem, you have to use the [fork mode](#a23) instead.
