@@ -42,7 +42,7 @@ Works on Linux & MacOS.
 - [Fork mode](#a23)
 - [API health end point : pm2 web](#a12)
 - [JSON processes declaration](#a13)
-- [Known bugs](#21)
+- [Known bugs](#a21)
 - [Launching the tests](#a4)
 - [They talk about it](#a20)
 - [License](#a15)
@@ -105,7 +105,7 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
 ```
 
-You can also execute app in other languages ([the fork mode](#23)):
+You can also execute app in other languages ([the fork mode](#a23)):
 ```
 $ pm2 start my-bash-script.sh -x --interpreter bash
 
