@@ -60,18 +60,18 @@ commander.command('stopAll')
 //
 commander.command('stop <pm2_id|name|all>')
   .description('stop specific process pm2 id or script name (set with --name or script name)')
-  .action(function(pm2_id) {    
+  .action(function(pm2_id) {
     UX.processing.start();
-    
+
     if (pm2_id == 'all') {
       CLI.stopAll();
     }
     else if (isNaN(parseInt(pm2_id))) {
       console.log(PREFIX_MSG + 'Stopping process by name ' + pm2_id);
-      CLI.stopProcessName(pm2_id);
+      CLI.sendSignalToProcessName(pm2_id);
     } else {
       console.log(PREFIX_MSG + 'Stopping process by id ' + pm2_id);
-      CLI.stopId(pm2_id);
+      CLI.sendSignalToProcessId(pm2_id);
     }
   });
 
@@ -141,6 +141,18 @@ commander.command('reload <pm2_id|all>')
   .action(function(pm2_id) {
     UX.processing.start();
     CLI.reload(pm2_id);
+  });
+
+commander.command('sendSignal <signal> <pm2_id|name>')
+  .description('send a signal to a specific process')
+  .action(function(signal, pm2_id) {
+    UX.processing.start();
+    if (isNaN(parseInt(pm2_id))) {
+      CLI.sendSignalToProcessName(pm2_id, signal);
+    }
+    else {
+      CLI.sendSignalToProcessId(pm2_id, signal);
+    }
   });
 
 //
@@ -321,7 +333,7 @@ CLI.startFile = function(script) {
   if (commander.name)
     appConf['name']        = commander.name;
   if (commander.instances)
-    appConf['instances']   = commander.instances;    
+    appConf['instances']   = commander.instances;
   if (commander.error)
     appConf['fileError']   = commander.error;
   if (commander.output)
@@ -330,13 +342,13 @@ CLI.startFile = function(script) {
     appConf['pidFile']     = commander.pid;
   if (commander.cron)
     appConf['cron_restart'] = commander.cron;
-  
+
   // Script arguments
   var opts = commander.rawArgs.indexOf('--') + 1;
   if (opts > 1)
     appConf['args'] = JSON.stringify(commander.rawArgs.slice(opts,
                                                              commander.rawArgs.length));
-  
+
   if (commander.write) {
     var dst_path = path.join(process.env.PWD, path.basename(script, '.js') + '-pm2.json');
     console.log(PREFIX_MSG + 'Writing configuration to ', dst_path);
@@ -597,9 +609,29 @@ CLI.stopAll = function() {
   });
 };
 
-CLI.stopProcessName = function(name) {
-  Satan.executeRemote('stopProcessName', {
-    name : name
+CLI.sendSignalToProcessId = function(pm2_id, signal) {
+  Satan.executeRemote('sendSignalToProcessId', {
+    id : pm2_id,
+    signal : signal
+  }, function(err, list) {
+    if (err) {
+      console.log('\n' + PREFIX_MSG_ERR + pm2_id + ' : pm2 id not found');
+      process.exit(ERROR_EXIT);
+    }
+    console.log('\n');
+    UX.dispAsTable(list);
+    if (signal === undefined) {
+      console.log(PREFIX_MSG + 'Process stopped');
+    }
+    UX.processing.stop();
+    process.exit(SUCCESS_EXIT);
+  });
+};
+
+CLI.sendSignalToProcessName = function(name, signal) {
+  Satan.executeRemote('sendSignalToProcessName', {
+    name : name,
+    signal : signal
   }, function(err, list) {
     if (err) {
       console.error(err);
@@ -610,23 +642,7 @@ CLI.stopProcessName = function(name) {
     UX.processing.stop();
     process.exit(SUCCESS_EXIT);
   });
-};
-
-CLI.stopId = function(pm2_id) {
-  Satan.executeRemote('stopId', {
-    id : pm2_id
-  }, function(err, list) {
-    if (err) {
-      console.log('\n' + PREFIX_MSG_ERR + pm2_id + ' : pm2 id not found');
-      process.exit(ERROR_EXIT);
-    }
-    console.log('\n');
-    //UX.dispAsTable(list);
-    console.log(PREFIX_MSG + 'Process stopped');
-    UX.processing.stop();
-    process.exit(SUCCESS_EXIT);
-  });
-};
+}
 
 CLI.generateSample = function(name) {
   var sample = fs.readFileSync(path.join(__dirname, SAMPLE_FILE_PATH));
@@ -698,7 +714,7 @@ CLI.monit = function() {
       console.log(PREFIX_MSG + 'No online process to monitor');
       process.exit(ERROR_EXIT);
     }
-    
+
     Monit.init(list);
 
     function refresh(cb) {
@@ -719,7 +735,7 @@ CLI.monit = function() {
 
 CLI.streamLogs = function(id) {
   var tdb = {};
-    
+
   Satan.executeRemote('list', {}, function(err, list) {
     if (err) {
       console.error('Error retrieving process list: ' + err);
@@ -774,7 +790,7 @@ function validate(appConf) {
   var instances = appConf['instances'];
   var script    = appConf['script'];
   var cron_pattern = appConf['cron_restart'];
-  
+
   if (instances && isNaN(parseInt(instances)) && instances != 'max') {
     console.log(PREFIX_MSG_ERR + 'Instance option must be an integer or the "max" string');
     process.exit(ERROR_EXIT);
@@ -800,7 +816,7 @@ function validate(appConf) {
 function resolvePaths(app) {
 
   validate(app);
-  
+
   app["pm_exec_path"]    = path.resolve(process.cwd(), app.script);
 
   console.log(app);

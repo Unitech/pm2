@@ -13,11 +13,11 @@ describe('God', function() {
     God.should.have.property('getFormatedProcesses');
     God.should.have.property('checkProcess');
     God.should.have.property('stopAll');
-    God.should.have.property('stopProcessId');
+    God.should.have.property('sendSignalToProcessId');
   });
 
   describe('Special functions for God', function() {
-    it('should kill a process by name', function(done) {
+    it('should send a kill signal to a process selected by name', function(done) {
       God.prepare({
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
@@ -25,14 +25,14 @@ describe('God', function() {
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
         instances       : 2
       }, function(err, procs) {
-	God.getFormatedProcesses().length.should.equal(2);
+        God.getFormatedProcesses().length.should.equal(2);
 
-        God.stopProcessName('echo.js', function() {
+        God.sendSignalToProcessName('echo.js', function() {
           God.getFormatedProcesses().length.should.equal(0);
           God.stopAll(done);
         });
       });
-    }); 
+    });
   });
 
   describe('One process', function() {
@@ -41,7 +41,7 @@ describe('God', function() {
     before(function(done) {
       God.stopAll(done);
     });
-    
+
     after(function(done) {
       God.stopAll(done);
     });
@@ -97,7 +97,7 @@ describe('God', function() {
       });
     });
 
-    it('should start maximum processes depending on CPU numbers', function(done) {      
+    it('should start maximum processes depending on CPU numbers', function(done) {
       God.prepare({
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
@@ -127,7 +127,7 @@ describe('God', function() {
         }, 500);
       });
     });
-    
+
     it('should cron restart', function(done) {
       God.prepare({
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/args.js'),
