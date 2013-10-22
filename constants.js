@@ -16,5 +16,6 @@ module.exports = {
   DAEMON_BIND_ADDR  : 'localhost:6666',
   DEBUG             : false,
   WEB_INTERFACE     : 9615,
-  MODIFY_REQUIRE    : false
+  MODIFY_REQUIRE    : false,
+  REOPEN_LOG_SIGNAL : 'SIGUSR2'
 };
