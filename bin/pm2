@@ -25,6 +25,7 @@ commander.version(pkg.version)
   .option('-f --force', 'Force actions')
   .option('-n --name <name>', 'Set a <name> for script')
   .option('-i --instances <number>', 'Launch [number] instances (clustered with same socket)')
+  .option('-s --separate_log_file', 'Each worker has it own log file')
   .option('-o --output <path>', 'Out log file output')
   .option('-e --error <path>', 'Error log file output')
   .option('-p --pid <pid>', 'Pid file')
@@ -718,29 +719,26 @@ CLI.monit = function() {
 };
 
 CLI.streamLogs = function(id) {
-  var tdb = {};
-    
+
   Satan.executeRemote('list', {}, function(err, list) {
     if (err) {
       console.error('Error retrieving process list: ' + err);
       process.exit(ERROR_EXIT);
     }
-    list.forEach(function(l) {
-      tdb[l.opts.script] = l;
-    });
 
     console.log('########### Starting streaming logs for [%s] process', id || 'all');
-    for (var k in tdb) {
-      if ((!id || (id && !isNaN(parseInt(id)) && tdb[k].pm_id == id)) ||
-          (!id || (id && isNaN(parseInt(id)) && tdb[k].opts.name == id))) {
-        if (tdb[k].opts.pm_out_log_path)
-          Log.stream(tdb[k].opts.pm_out_log_path,
-                     p.basename(tdb[k].opts.script, '.js') + '-' + tdb[k].pm_id + ' (out)');
-        if (tdb[k].opts.pm_err_log_path)
-          Log.stream(tdb[k].opts.pm_err_log_path,
-                     p.basename(tdb[k].opts.script, '.js') + '-' + tdb[k].pm_id + ' (err)');
+    list.forEach(function(proc) {
+      if ((!id || (id && !isNaN(parseInt(id)) && proc.pm_id == id)) ||
+          (!id || (id && isNaN(parseInt(id)) && proc.opts.name == id))) {
+
+        if (proc.opts.pm_out_log_path)
+          Log.stream(proc.opts.pm_out_log_path,
+                     p.basename(proc.opts.script, '.js') + '-' + proc.pm_id + ' (out)');
+        if (proc.opts.pm_err_log_path)
+          Log.stream(proc.opts.pm_err_log_path,
+                     p.basename(proc.opts.script, '.js') + '-' + proc.pm_id + ' (err)');
       }
-    }
+    });
   });
 };
 
@@ -836,6 +834,8 @@ function resolvePaths(app) {
     app["pm_pid_path"]     = path.resolve(cst.DEFAULT_PID_PATH, [app.name, '.pid'].join(''));
     app.pidFile            = app["pm_pid_path"];
   }
+
+  app["separate_log_file"] = !!commander.separate_log_file
 
   return app;
 }

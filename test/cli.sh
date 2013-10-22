@@ -227,6 +227,23 @@ success "Processes sucessfully stopped with a specific name"
 
 
 
+$pm2 stop all
+$pm2 kill
+
+$pm2 start echo.js -s -i 2
+# get the log file and the id.
+OUT_LOG=`$pm2 prettylist | grep -E "pm_out_log_path:"`
+OUT0=`echo $OUT_LOG | grep "echo-out-0.log" | wc -l`
+[ $OUT0 -eq 1 ] || fail "the stdout log are not separated correctly"
+OUT1=`echo $OUT_LOG | grep "echo-out-1.log" | wc -l`
+[ $OUT1 -eq 1 ] || fail "the stdout log are not separated correctly"
+
+ERR_LOG=`$pm2 prettylist | grep -E "pm_err_log_path:"`
+ERR0=`echo $ERR_LOG | grep "echo-err-0.log" | wc -l`
+[ $ERR0 -eq 1 ] || fail "the stdout log are not separated correctly"
+ERR1=`echo $ERR_LOG | grep "echo-err-1.log" | wc -l`
+[ $OUT1 -eq 1 ] || fail "the stdout log are not separated correctly"
+success "The log files are separated into different files"
 
 $pm2 kill
 
