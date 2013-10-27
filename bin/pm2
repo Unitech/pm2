@@ -29,7 +29,6 @@ commander.version(pkg.version)
   .option('-u --user <username>', 'When generating startup script defined the username')
   .option('-c --cron <cron_pattern>', 'Restart a running process based on a cron pattern')
   .option('-w --write', 'Write configuration in local folder')
-//.option('--start-one-time', 'Only start the app one time and doesn\'t restart it but keep in process list')
   .usage('[cmd] app');
 
 //
@@ -157,18 +156,31 @@ commander.command('generate <name>')
 //
 commander.command('list')
   .description('list all processes')
-  .action(function() {
-    CLI.list();
-  });
+  .action(CLI.list);
 
+commander.command('ls')
+  .description('(alias) list all processes')
+  .action(CLI.list);
+
+commander.command('l')
+  .description('(alias) list all processes')
+  .action(CLI.list);
+
+commander.command('status')
+  .description('(alias) list all processes')
+  .action(CLI.list);
+
+
+// List in raw json
 commander.command('jlist')
   .description('list all processes in JSON format')
   .action(function() {
     CLI.jlist();
   });
 
+// List in prettified Json
 commander.command('prettylist')
-  .description('print json in a pretty way')
+  .description('print json in a prettified JSON')
   .action(function() {
     CLI.jlist(true);
   });
@@ -177,10 +189,12 @@ commander.command('prettylist')
 // Monitoring command
 //
 commander.command('monit')
-  .description('list all processes')
-  .action(function() {
-    CLI.monit();
-  });
+  .description('launch termcaps monitoring')
+  .action(CLI.monit);
+
+commander.command('m')
+  .description('(alias) launch termcaps monitoring')
+  .action(CLI.monit);
 
 //
 // Flushing command
@@ -233,6 +247,9 @@ if (process.argv.length == 2) {
 //
 // Wait Satan is connected to God to launch parsing
 //
+// This message is triggered once the RPC Client is connected to the Daemon
+// in file Satan.js, method Satan.launchRPC
+//
 process.on('satan:client:ready', function() {
   commander.parse(process.argv);
 });
@@ -249,5 +266,3 @@ process.on('satan:client:ready', function() {
     }
   });
 })();
-
-
