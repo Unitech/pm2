@@ -20,31 +20,27 @@ NODE=%NODE_PATH%
 USER=%USER%
 
 export HOME="%HOME_PATH%"
-
-super() {
-    su -l $USER -c "$1 $2 $3"
-}
  
 start() {
     echo "Starting $NAME"
-    super $NODE $PM2 stopAll
-    super $NODE $PM2 resurrect
+    $NODE $PM2 resurrect
 }
  
 stop() {
-    super $NODE $PM2 dump
-    super $NODE $PM2 stopAll
+    $NODE $PM2 dump
+    $NODE $PM2 delete all
+    $NODE $PM2 kill
 }
  
 restart() {
     echo "Restarting $NAME"
-    super stop
-    super start
+    stop
+    start
 }
  
 status() {
     echo "Status for $NAME:"
-    super $NODE $PM2 list
+    $NODE $PM2 list
     RETVAL=$?
 }
  
