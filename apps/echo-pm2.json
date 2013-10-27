@@ -1,7 +1,9 @@
 {
   "script" : "examples/echo.js",
-  "fileError" : "logs/errEcho.log",
-  "fileOutput" : "logs/outEcho.log",
-  "pidFile" : "pids/echo",
-  "max" : "1"
+  "error_file" : "errEcho.log",
+  "out_file" : "outEcho.log",
+  "name" : "ok",
+  "pidFile" : "echo.pid",
+  "max" : "1",
+  "exec_mode" : "cluster_mode"
 }

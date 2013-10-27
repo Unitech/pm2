@@ -2,7 +2,7 @@
   "script":"examples/child.js",
   "name":"SERVERONE",
   "instances":10,
-  "fileError":"errfile.log",
-  "fileOutput":"outfile.log",
+  "error_file":"errfile.log",
+  "out_file":"outfile.log",
   "pidFile":"pidfile.pid"
 }
