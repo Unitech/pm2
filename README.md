@@ -8,6 +8,7 @@ pm2 is a process manager for Node apps with a builtin load-balancer.
 - 0s downtime reload
 - Builtin load-balancer
 - Startup scripts for Ubuntu and CentOS
+- Stop unstable process (avoid infinite loop)
 - Monitoring in console
 - HTTP API
 - [Remote control and real time interface API](https://github.com/Unitech/pm2-interface)

@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 #
@@ -60,32 +61,28 @@ function should()
 
 cd $file_path
 
-########### Fork mode
-$pm2 kill
 
-$pm2 start echo.js -x
-should 'should has forked app' 'fork' 1
-
-$pm2 restart echo.js
-should 'should has forked app' 'restart_time: 1' 1
-
-########### Fork mode
-$pm2 kill
-
-$pm2 start bashscript.sh -x --interpreter bash
-should 'should has forked app' 'fork' 1
-
-### Dump resurect should be ok
-$pm2 dump
+echo "Starting infinite loop tests"
 
 $pm2 kill
 
-#should 'should has forked app' 'fork' 0
 
-$pm2 resurrect
-should 'should has forked app' 'fork' 1
+export PM2_RPC_PORT=4242
+export PM2_PUB_PORT=4243
 
-## Delete
 
-$pm2 delete 0
-should 'should has delete process' 'fork' 0
+$pm2 start killtoofast.js --name unstable-process
+
+echo -n "Waiting for process to restart too many times and pm2 to stop it"
+
+for (( i = 0; i <= 50; i++ )); do
+    sleep 0.1
+    echo -n "."
+done
+
+
+$pm2 list
+
+
+should 'should has stopped unstable process' 'errored' 1
+

@@ -27,7 +27,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/cli.sh && bash ./test/cli2.sh && bash ./test/fork.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
+    "test": "bash ./test/cli.sh && bash ./test/cli2.sh && bash ./test/fork.sh && bash ./test/infinite_loop.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
   },
   "keywords": [
     "cli",
