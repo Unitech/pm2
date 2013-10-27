@@ -14,14 +14,14 @@ module.exports = {
   DEFAULT_LOG_PATH   : p.join(DEFAULT_FILE_PATH, 'logs'),
   DUMP_FILE_PATH     : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
 
-  DAEMON_BIND_HOST   : 'localhost',
-  DAEMON_RPC_PORT    : 6666, // RPC commands
-  DAEMON_PUB_PORT    : 6667, // Realtime events
+  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
+  DAEMON_RPC_PORT    : process.env.PM2_RPC_PORT  || 6666, // RPC commands
+  DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
 
   CODE_UNCAUGHTEXCEPTION : 100,
   
-  DEBUG              : false,
-  WEB_INTERFACE      : 9615,
+  DEBUG              : process.env.PM2_DEBUG || false,
+  WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
   MODIFY_REQUIRE     : false,
   PREFIX_MSG         : '\x1B[32mPM2 \x1B[39m',
   PREFIX_MSG_ERR     : '\x1B[31mPM2 [ERROR] \x1B[39m',

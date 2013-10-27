@@ -40,6 +40,7 @@ Works on Linux & MacOS.
 - [Startup script generation : pm2 startup](#a8)
 - [Log aggregation : pm2 logs](#a9)
 - [Fork mode](#a23)
+- [Customization](#a24)
 - [API health end point : pm2 web](#a12)
 - [JSON processes declaration](#a13)
 - [Known bugs](#a21)
@@ -218,6 +219,19 @@ PM2 can disserve an API endpoint to monitor processes and computer health (cpu u
 pm2 web
 ```
 
+<a name="a24"/>
+## Customization
+
+Multiple variables can be customized via the environment :
+
+```
+  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
+  DAEMON_RPC_PORT    : process.env.PM2_RPC_PORT  || 6666, // RPC commands
+  DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
+  DEBUG              : process.env.PM2_DEBUG || false,
+  WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
+```
+
 <a name="a13"/>
 # Multi process JSON declaration
 
@@ -227,15 +241,16 @@ processes.json :
 [{
   "name"      : "echo",
   "script"    : "./examples/args.js",
-  "instances" : "1",
   "args"      : "['--toto=heya coco', '-d', '1']",
-  "cron_restart" : "* * * * * *"
+  "exec_mode" : "fork_mode"
 },{
-    "name"      : "api",
-    "script"    : "./examples/child.js",
-    "instances" : "4",
+    "name"       : "api",
+    "script"     : "./examples/child.js",
+    "instances"  : "4",
     "error_file" : "./examples/child-err.log",
-    "out_file" : "./examples/child-out.log"
+    "out_file"   : "./examples/child-out.log",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 9005
 },{
   "min_uptime" : "100",
   "max_restarts" : "400",
