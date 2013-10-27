@@ -95,6 +95,9 @@ $ pm2 start app.js -i max  # Will start maximum processes depending on CPU avail
 
 $ pm2 start app.js -i 3    # Will start 3 processes
 
+$ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
+$ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
+
 $ pm2 start app.js --name serverone # Start a process an name it as server one
                                     # you can now stop the process by doing
                                     # pm2 stop serverone
