@@ -43,6 +43,7 @@ Works on Linux & MacOS.
 - [Customization](#a24)
 - [API health end point : pm2 web](#a12)
 - [JSON processes declaration](#a13)
+- [Contributing/Development mode](#a27)
 - [Known bugs](#a21)
 - [Launching the tests](#a4)
 - [They talk about it](#a20)
@@ -275,6 +276,22 @@ all restarts are considered unstable.
 if the number of unstable restarts exceeds this number,
 the process will be stopped and a message with number with restarts will be logged.
 
+
+<a name="a27"/>
+# Contributing/Development mode
+
+Fork PM2 and to hack it it's pretty simple :
+
+```
+$ pm2 kill   # kill the current pm2
+$ git clone my_pm2_fork.git
+$ cd pm2/
+$ DEBUG=* PM2_DEBUG=true./bin/pm2 start xxx.js
+```
+
+Everytime you do a modification on the code you have to restart pm2, so just do a `./bin/pm2 kill` before
+starting an app or something else.
+You have to restart it because the code is daemonized on the memory.
 
 <a name="a21"/>
 # Known bugs and workarounds
