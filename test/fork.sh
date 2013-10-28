@@ -49,13 +49,10 @@ function ispec {
   success "$1"
 }
 
-
-function should() 
-{
+function should {
     OUT=`$pm2 prettylist | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
     success "$1"
-
 }
 
 cd $file_path
@@ -73,6 +70,13 @@ should 'should has forked app' 'restart_time: 1' 1
 $pm2 kill
 
 $pm2 start bashscript.sh -x --interpreter bash
+should 'should has forked app' 'fork' 1
+
+########### Auto Detective Interpreter In Fork mode
+
+$pm2 kill
+
+$pm2 start echo.coffee -x
 should 'should has forked app' 'fork' 1
 
 ### Dump resurect should be ok

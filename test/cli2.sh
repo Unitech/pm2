@@ -49,18 +49,15 @@ function ispec {
   success "$1"
 }
 
-
-function should() 
-{
+function should {
     OUT=`$pm2 prettylist | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
     success "$1"
-
 }
 
 cd $file_path
 
-########## TEST
+############# TEST
 
 echo -e "\033[1mRunning tests:\033[0m"
 
@@ -109,7 +106,7 @@ should 'should app be stopped' 'stopped' 1
 $pm2 start test/fixtures/echo.js
 should 'should app be online' 'online' 1
 
-cd - 
+cd -
 
 ###############
 $pm2 kill
@@ -124,7 +121,7 @@ should 'should restart a second time (BY SCRIPT NAME)' 'restart_time: 2' 4
 $pm2 restart child
 should 'should restart a third time (BY NAME)' 'restart_time: 3' 4
 $pm2 reload all
-should 'should RELOAD a fourd time' 'restart_time: 4' 4
+should 'should RELOAD a fourth time' 'restart_time: 4' 4
 
 
 ########### DELETED STUFF BY ID
@@ -132,14 +129,14 @@ $pm2 kill
 
 $pm2 start echo.js
 $pm2 delete 0
-should 'should has been deleted process by id' '' 0
+should 'should has been deleted process by id' "name: 'echo'" 0
 
 ########### DELETED STUFF BY NAME
 $pm2 kill
 
 $pm2 start echo.js --name test
 $pm2 delete test
-should 'should has been deleted process by name' '' 0
+should 'should has been deleted process by name' "name: 'test'" 0
 
 ########### DELETED STUFF BY SCRIPT
 $pm2 kill
@@ -147,7 +144,7 @@ $pm2 kill
 $pm2 start echo.js
 $pm2 delete echo.js
 $pm2 list
-should 'should has been deleted process by script' '' 0
+should 'should has been deleted process by script' "name: 'echo'" 0
 
 
 ########### OPTIONS OUTPUT FILES
