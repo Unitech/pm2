@@ -49,7 +49,6 @@ function ispec {
   success "$1"
 }
 
-
 function should {
     OUT=`$pm2 prettylist | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
