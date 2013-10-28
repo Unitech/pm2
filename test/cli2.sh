@@ -50,7 +50,7 @@ function ispec {
 }
 
 
-function should() 
+function should()
 {
     OUT=`$pm2 prettylist | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
@@ -109,7 +109,7 @@ should 'should app be stopped' 'stopped' 1
 $pm2 start test/fixtures/echo.js
 should 'should app be online' 'online' 1
 
-cd - 
+cd -
 
 ###############
 $pm2 kill
@@ -124,7 +124,7 @@ should 'should restart a second time (BY SCRIPT NAME)' 'restart_time: 2' 4
 $pm2 restart child
 should 'should restart a third time (BY NAME)' 'restart_time: 3' 4
 $pm2 reload all
-should 'should RELOAD a fourd time' 'restart_time: 4' 4
+should 'should RELOAD a fourth time' 'restart_time: 4' 4
 
 
 ########### DELETED STUFF BY ID
