@@ -50,17 +50,15 @@ function ispec {
 }
 
 
-function should()
-{
+function should {
     OUT=`$pm2 prettylist | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
     success "$1"
-
 }
 
 cd $file_path
 
-########## TEST
+############# TEST
 
 echo -e "\033[1mRunning tests:\033[0m"
 
@@ -132,14 +130,14 @@ $pm2 kill
 
 $pm2 start echo.js
 $pm2 delete 0
-should 'should has been deleted process by id' '' 0
+should 'should has been deleted process by id' "name: 'echo'" 0
 
 ########### DELETED STUFF BY NAME
 $pm2 kill
 
 $pm2 start echo.js --name test
 $pm2 delete test
-should 'should has been deleted process by name' '' 0
+should 'should has been deleted process by name' "name: 'test'" 0
 
 ########### DELETED STUFF BY SCRIPT
 $pm2 kill
@@ -147,7 +145,7 @@ $pm2 kill
 $pm2 start echo.js
 $pm2 delete echo.js
 $pm2 list
-should 'should has been deleted process by script' '' 0
+should 'should has been deleted process by script' "name: 'echo'" 0
 
 
 ########### OPTIONS OUTPUT FILES
