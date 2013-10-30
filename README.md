@@ -28,11 +28,6 @@ Works on Linux & MacOS.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
 
-# Doc
-
-- 0.5.x documentation : [0.5.x](https://github.com/Unitech/pm2/blob/0f0f4261ab21560d54bf39503ff01d4278096240/README.md)
-
-
 # Readme Contents
 
 - [Installation](#a1)
