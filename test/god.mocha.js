@@ -204,22 +204,6 @@ describe('God', function() {
       });
     });
     
-    it('should cron restart', function(done) {
-      God.prepare({
-        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/args.js'),
-        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
-        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        args            : "['-d', '-a']",
-        cron_restart    : '* * * * * *',
-        instances       : '1'
-      }, function(err, procs) {
-        setTimeout(function() {
-          God.getFormatedProcesses()[0].pm2_env.restart_time.should.be.above(0);
-          done();
-        }, 2200);
-      });
-    });
   });
 
 
