@@ -1,5 +1,5 @@
 {
-  "script" : "examples/echo.js",
+  "script" : "examples/env.js",
   "error_file" : "errEcho.log",
   "out_file" : "outEcho.log",
   "name" : "ok",
@@ -7,5 +7,6 @@
   "max" : "1",
   "exec_mode" : "cluster_mode",
   "port" : "9001",
-  "env_variable" : "TOTO"
+  "env_variable" : "TOTO",
+  "TEST_VARIABLE" : "YESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSIR"
 }
