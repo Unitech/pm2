@@ -28,7 +28,6 @@ start() {
  
 stop() {
     $NODE $PM2 dump
-    $NODE $PM2 delete all
     $NODE $PM2 kill
 }
  
