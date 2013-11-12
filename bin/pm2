@@ -136,7 +136,7 @@ commander.command('reload <pm2_id|all>')
 // Set pm2 to startup
 //
 commander.command('startup [platform]')
-  .description('auto resurect process at startup. [platform] can be CentOS, default use update-rc.d')
+  .description('auto resurect process at startup. [platform] can be centos, default use update-rc.d')
   .action(function(platform) {
     CLI.startup(platform);
   });
