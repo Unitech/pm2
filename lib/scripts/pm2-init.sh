@@ -22,7 +22,7 @@ USER=%USER%
 export HOME="%HOME_PATH%"
 
 super() {
-    su -l $USER -c "$1 $2 $3"
+    su -l $USER -c "$*"
 }
 
 start() {
