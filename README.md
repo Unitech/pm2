@@ -201,14 +201,17 @@ Monitor CPU and memory usage of every node process (and also clustered processes
 <a name="a8"/>
 ## pm2 automatic startup script generation
 
-PM2 provides an automatic way to keep Node processes alive. 
-It uses a System V init script compatible Ubuntu and CentOS.
+PM2 provides an automatic way to keep Node processes alive on server restart.
+On exit it will dump the process list and their environment and will resurrect them on startup. 
+It uses **System V init script** compatible with **Ubuntu and CentOS** (maybe it works on other sys but not 100% sure).
 
 ```bash
 $ pm2 startup  # then follow the command instruction
 ```
 
-Now you can reboot your server, and already launched processes should be kepts alive.
+The `-u username` option permits to specify which user have to start the process at startup.
+Internally it uses `sudo -u $USER`.
+
 
 <a name="a9"/>
 ## pm2 logs

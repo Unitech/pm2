@@ -20,16 +20,20 @@ NODE=%NODE_PATH%
 USER=%USER%
 
 export HOME="%HOME_PATH%"
+
+super() {
+    sudo -u $USER $*
+}
  
 start() {
     echo "Starting $NAME"
-    $NODE $PM2 resurrect
+    super $NODE $PM2 resurrect
 }
  
 stop() {
-    $NODE $PM2 dump
-    $NODE $PM2 delete all
-    $NODE $PM2 kill
+    super $NODE $PM2 dump
+    super $NODE $PM2 delete all
+    super $NODE $PM2 kill
 }
  
 restart() {
