@@ -209,7 +209,11 @@ It uses **System V init script** compatible with **Ubuntu and CentOS** (maybe it
 $ pm2 startup  # then follow the command instruction
 ```
 
-The `-u username` option permits to specify which user have to start the process at startup.
+### Running script as a different user
+
+The `-u username` option permits to specify which user has to start the process at startup. 
+**NOTE** that this user must have access to npm, apps and node ! So the best way is to log with this user `su -l www`, then do `pm2 startup -u www`.
+
 Internally it uses `sudo -u $USER`.
 
 
