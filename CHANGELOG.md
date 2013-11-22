@@ -1,4 +1,9 @@
 
+# 0.6.8
+
+- Homogeneize JSON #186
+- Auto intepreter selection (you can do pm2 start app.php)
+
 # 0.5.6
 
 - Coffeescript support
@@ -11,10 +16,10 @@
     - with the --name option when launching file
     - with the "name" parameter for JSON files
 - Ability to restart a script by name + tests
-- Upgrade node-usage to 0.3.8 - fix monitoring feedback for MacOSx 
+- Upgrade node-usage to 0.3.8 - fix monitoring feedback for MacOSx
 - require.main now require the right file (activate it by modifying MODIFY_REQUIRE in constants.js)
 - CentOS startup script with pm2 startup centos
-- 0 downtime reload 
+- 0 downtime reload
 
 # 0.5.4
 

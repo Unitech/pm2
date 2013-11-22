@@ -1,0 +1,8 @@
+{
+  ".coffee": "coffee",
+  ".sh": "bash",
+  ".py": "python",
+  ".rb": "ruby",
+  ".php": "php",
+  ".go": "go"
+}
