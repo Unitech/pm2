@@ -1,11 +1,10 @@
 # ![Monit](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
 
-pm2 is a process manager for Node apps with a builtin load-balancer. 
+pm2 is a process manager for Node apps with a builtin load-balancer.
 
 ## Tech notes
 
 pm2 is perfect when you need to spread your stateless code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload it.
-Good fit for IaaS structures. Don't use it on PaaS solutions (a solution for PaaS will be developed later).
 
 # Main features
 
@@ -63,7 +62,7 @@ npm install -g pm2
 ```bash
 $ npm install pm2 -g     # Install pm2 command line globally
 $ pm2 start app.js -i 4  # Daemonize pm2 and Start 4 clustered instances of app.js
-                         # You can also pass the 'max' params to start 
+                         # You can also pass the 'max' params to start
                          # the right numbers of processes depending of CPUs
 
 $ pm2 start app.js --name my-api # Name process
@@ -88,6 +87,16 @@ $ pm2 delete 0           # Will remove process from pm2 list
 $ pm2 delete all         # Will remove all processes from pm2 list
 ```
 
+For other nature scripts :
+
+```bash
+$ pm2 start echo.php
+$ pm2 start echo.py
+$ pm2 start echo.sh
+$ pm2 start echo.rb
+$ pm2 start echo.pl
+```
+
 <a name="a3"/>
 ## Different ways to launch a process
 
@@ -102,10 +111,10 @@ $ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments 
 $ pm2 start app.js --name serverone # Start a process an name it as server one
                                     # you can now stop the process by doing
                                     # pm2 stop serverone
-                                    
+
 $ pm2 start app.json                # Start processes with options declared in app.json
                                     # Go to chapter Multi process JSON declaration for more
-                           
+
 $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 
 $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
@@ -149,13 +158,13 @@ That's all !
 The default mode of PM2 consists of wrapping the code of your node app into the Node Cluster module. It's called the **cluster mode**.
 There is also a more classical way to execute your app, like node-forever do, called the **fork mode**.
 
-In fork mode all options are the same than the cluster mode (restart, delete...). 
+In fork mode all options are the same than the cluster mode (restart, delete...).
 
 **By using the fork mode you will loose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
 
 So use it if you only need a forever like behaviour.
 
-Here is how to start your app in fork : 
+Here is how to start your app in fork :
 
 ```bash
 $ pm2 start app.js -x   # Will start your app.js in fork mode
@@ -202,7 +211,7 @@ Monitor CPU and memory usage of every node process (and also clustered processes
 ## pm2 automatic startup script generation
 
 PM2 provides an automatic way to keep Node processes alive on server restart.
-On exit it will dump the process list and their environment and will resurrect them on startup. 
+On exit it will dump the process list and their environment and will resurrect them on startup.
 It uses **System V init script** compatible with **Ubuntu and CentOS** (maybe it works on other sys but not 100% sure).
 
 ```bash
@@ -211,7 +220,7 @@ $ pm2 startup  # then follow the command instruction
 
 ### Running script as a different user
 
-The `-u username` option permits to specify which user has to start the process at startup. 
+The `-u username` option permits to specify which user has to start the process at startup.
 **NOTE** that this user must have access to npm, apps and node ! So the best way is to log with this user `su -l www`, then do `pm2 startup -u www`.
 
 Internally it uses `sudo -u $USER`.
@@ -250,7 +259,7 @@ Multiple variables can be customized via the environment :
 <a name="a13"/>
 # Multi process JSON declaration
 
-processes.json : 
+processes.json :
 
 ```json
 [{
@@ -279,7 +288,7 @@ Then with the cli :
 $ pm2 start processes.json
 ```
 
-**Notes** 
+**Notes**
 - every line you add like `"port" : 9005` is present in the process environment
 
 ### Special options with JSON process declaration
@@ -390,13 +399,13 @@ Thanks to [Devo.ps](http://devo.ps/) and [Wiredcraft](http://wiredcraft.com/) fo
 # License - Apache License v2
 
 Copyright [2013] [Strzelewicz Alexandre <as@unitech.io>]
-  
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-           
+
     http://www.apache.org/licenses/LICENSE-2.0
-                  
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
