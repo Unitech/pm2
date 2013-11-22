@@ -21,6 +21,7 @@ describe('God', function() {
     God.should.have.property('prepare');
     God.should.have.property('getProcesses');
     God.should.have.property('getMonitorData');
+    God.should.have.property('getSystemData');
     God.should.have.property('getFormatedProcesses');
     God.should.have.property('checkProcess');
     God.should.have.property('stopAll');
