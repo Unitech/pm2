@@ -160,7 +160,7 @@ There is also a more classical way to execute your app, like node-forever do, ca
 
 In fork mode all options are the same than the cluster mode (restart, delete...).
 
-**By using the fork mode you will loose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
+**By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
 
 So use it if you only need a forever like behaviour.
 
