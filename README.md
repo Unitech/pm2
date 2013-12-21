@@ -6,9 +6,10 @@ pm2 is a process manager for Node apps with a builtin load-balancer.
 
 pm2 will always stay open source and we gonna create a product around pm2, a dashboard to monitor everything !
 
-Here is the pitch/survey, people who fill the survey will get free license for this product ! : [pitch/survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform)
+Help us to know, your needs and if we are going on the right way :
 
-Here is the landing page on which you can subscribe to the newsletter : [newsletter](http://signup.pm2.io/)
+- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will get free license
+- [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
 
 Thanks in advance and we hope that you like pm2 !
 
