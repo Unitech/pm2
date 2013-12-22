@@ -41,17 +41,21 @@ function success {
 }
 
 function spec {
-  [ $? -eq 0 ] || fail "$1"
+PREV=$?
+sleep 1
+  [ $PREV -eq 0 ] || fail "$1"
   success "$1"
 }
 
 function ispec {
-  [ $? -eq 1 ] || fail "$1"
+PREV=$?
+sleep 1
+  [ $PREV -eq 1 ] || fail "$1"
   success "$1"
 }
 
 
-function should() 
+function should()
 {
     OUT=`$pm2 prettylist | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
@@ -85,4 +89,3 @@ $pm2 list
 
 
 should 'should has stopped unstable process' 'errored' 1
-
