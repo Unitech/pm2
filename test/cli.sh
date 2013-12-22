@@ -40,12 +40,16 @@ function success {
 }
 
 function spec {
-  [ $? -eq 0 ] || fail "$1"
+PREV=$?
+sleep 0.2
+  [ $PREV -eq 0 ] || fail "$1"
   success "$1"
 }
 
 function ispec {
-  [ $? -eq 1 ] || fail "$1"
+PREV=$?
+sleep 0.2
+  [ $PREV -eq 1 ] || fail "$1"
   success "$1"
 }
 
@@ -55,9 +59,7 @@ echo -e "\033[1mRunning tests:\033[0m"
 
 echo "####################### DEBUG ############################"
 echo "PM2 Command = " $pm2
-echo "PM2 version = " $pm2 -V
 echo "Node version = " $nodeVersion
-
 $node -e "var os = require('os'); console.log('arch : %s\nplatform : %s\nrelease : %s\ntype : %s\nmem : %d', os.arch(), os.platform(), os.release(), os.type(), os.totalmem())"
 echo "###################### !DEBUG! ###########################"
 

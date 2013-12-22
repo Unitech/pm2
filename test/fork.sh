@@ -40,12 +40,16 @@ function success {
 }
 
 function spec {
-  [ $? -eq 0 ] || fail "$1"
+PREV=$?
+sleep 0.2
+  [ $PREV -eq 0 ] || fail "$1"
   success "$1"
 }
 
 function ispec {
-  [ $? -eq 1 ] || fail "$1"
+PREV=$?
+sleep 0.2
+  [ $PREV -eq 1 ] || fail "$1"
   success "$1"
 }
 
