@@ -33,8 +33,8 @@ Works on Linux & MacOS.
 
 We gonna release a very nice product, a dashboard to monitor every part of you NodeJS applications. Here are some links :
 
-[Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will get free license
-[Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
+- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will get free license
+- [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
 
 Thanks in advance and we hope that you like pm2 !
 
