@@ -2,17 +2,6 @@
 
 pm2 is a process manager for Node apps with a builtin load-balancer.
 
-## pm2 related product incoming !
-
-pm2 will always stay open source and we gonna create a product around pm2, a dashboard to monitor everything !
-
-Help us to know your needs and if we are going on the right way :
-
-- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will get free license
-- [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
-
-Thanks in advance and we hope that you like pm2 !
-
 ## Tech notes
 
 pm2 is perfect when you need to spread your stateless code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload it.
@@ -37,6 +26,17 @@ Works on Linux & MacOS.
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
+
+# Monitoring dashboard
+
+![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
+
+We gonna release a very nice product, a dashboard to monitor every part of you NodeJS applications. Here are some links :
+
+[Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will get free license
+[Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
+
+Thanks in advance and we hope that you like pm2 !
 
 # Readme Contents
 
