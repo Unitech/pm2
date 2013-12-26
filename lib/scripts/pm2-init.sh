@@ -42,6 +42,11 @@ restart() {
     start
 }
  
+reload() {
+    echo "Reloading $NAME"
+    super $NODE $PM2 reload all
+}
+ 
 status() {
     echo "Status for $NAME:"
     $NODE $PM2 list
@@ -61,8 +66,11 @@ case "$1" in
     restart)
         restart
         ;;
+    reload)
+        reload
+        ;;
     *)
-        echo "Usage: {start|stop|status|restart}"
+        echo "Usage: {start|stop|status|restart|reload}"
         exit 1
         ;;
 esac
