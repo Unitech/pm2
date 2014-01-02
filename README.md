@@ -134,8 +134,8 @@ This feature permits to reload code without loosing queries connection.
 
 Warning :
 - Only for networked app
-- Running on Node 0.11.x
-- In cluster mode (default mode)
+- Work for node version > 0.11.x
+- Only for app in cluster mode (default mode)
 
 ```bash
 $ pm2 reload all
@@ -192,6 +192,16 @@ $ npm test
 ```
 
 If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
+Also make sure you have all dependencies needed. For Ubuntu :
+
+```bash
+$ sudo apt-get install build-essential
+$ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
+$ nvm install v0.11.9
+$ nvm use v0.11.9
+$ nvm alias default v0.11.9
+```
+
 
 <a name="a6"/>
 ## pm2 list
@@ -266,7 +276,10 @@ processes.json :
   "name"      : "echo",
   "script"    : "./examples/args.js",
   "args"      : "['--toto=heya coco', '-d', '1']",
-  "exec_mode" : "fork_mode"
+  "env": {
+      "NODE_ENV": "production",
+      "AWESOME_SERVICE_API_TOKEN": "xxx"
+  }
 },{
     "name"       : "api",
     "script"     : "./examples/child.js",
@@ -279,6 +292,7 @@ processes.json :
   "min_uptime" : "100",
   "max_restarts" : "400",
   "name" : "auto-kill",
+  "exec_mode" : "fork_mode",
   "script" : "./examples/killfast.js"
 }]
 ```
