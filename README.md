@@ -273,6 +273,7 @@ processes.json :
     "instances"  : "4",
     "error_file" : "./examples/child-err.log",
     "out_file"   : "./examples/child-out.log",
+    "pid_file"   : "./examples/child.pid",
     "exec_mode"  : "cluster_mode",
     "port"       : 9005
 },{
