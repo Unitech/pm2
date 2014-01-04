@@ -3,7 +3,7 @@
   "error_file" : "errEcho.log",
   "out_file" : "outEcho.log",
   "name" : "ok",
-  "pidFile" : "echo.pid",
+  "pid_file" : "echo.pid",
   "max" : "1",
   "exec_mode" : "cluster_mode",
   "port" : "9001",

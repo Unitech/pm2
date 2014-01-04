@@ -4,5 +4,5 @@
   "instances":10,
   "error_file":"errfile.log",
   "out_file":"outfile.log",
-  "pidFile":"pidfile.pid"
+  "pid_file":"pidfile.pid"
 }
