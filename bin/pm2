@@ -48,9 +48,9 @@ commander.command('start <script>')
 //
 commander.command('stop <pm2_id|name|all>')
   .description('stop specific process pm2 id or script name (set with --name or script name)')
-  .action(function(pm2_id) {    
+  .action(function(pm2_id) {
     UX.processing.start();
-    
+
     if (pm2_id == 'all')
       CLI.stopAll();
     else if (isNaN(parseInt(pm2_id))) {
@@ -60,6 +60,24 @@ commander.command('stop <pm2_id|name|all>')
       CLI.stopId(pm2_id);
     }
   });
+
+//
+// Send system signal to process
+//
+commander.command('sendSignal <signal> <pm2_id|name>')
+  .description('stop specific process pm2 id or script name (set with --name or script name)')
+  .action(function(signal, pm2_id) {
+    UX.processing.start();
+
+    if (isNaN(parseInt(pm2_id))) {
+      console.log(cst.PREFIX_MSG + 'Sending signal to process name ' + pm2_id);
+      CLI.sendSignalToProcessName(signal, pm2_id);
+    } else {
+      console.log(cst.PREFIX_MSG + 'Sending signal to process id ' + pm2_id);
+      CLI.sendSignalToProcessId(signal, pm2_id);
+    }
+  });
+
 
 //
 // Stop and delete a process by name from database

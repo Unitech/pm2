@@ -19,9 +19,9 @@ module.exports = {
   DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
   DAEMON_RPC_PORT    : parseInt(process.env.PM2_RPC_PORT)  || 6666, // RPC commands
   DAEMON_PUB_PORT    : parseInt(process.env.PM2_PUB_PORT)  || 6667, // Realtime events
-  
+
   CODE_UNCAUGHTEXCEPTION : 100,
-  
+
   DEBUG              : process.env.PM2_DEBUG || false,
   WEB_INTERFACE      : parseInt(process.env.PM2_API_PORT)  || 9615,
   MODIFY_REQUIRE     : false,

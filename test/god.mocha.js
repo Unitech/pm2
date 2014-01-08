@@ -26,6 +26,8 @@ describe('God', function() {
     God.should.have.property('checkProcess');
     God.should.have.property('stopAll');
     God.should.have.property('stopProcessId');
+    God.should.have.property('sendSignalToProcessId');
+    God.should.have.property('sendSignalToProcessName');
   });
 
   describe('Special functions for God', function() {
@@ -44,12 +46,12 @@ describe('God', function() {
           God.deleteAll({}, done);
         });
       });
-    }); 
+    });
   });
-  
+
   describe('One process', function() {
     var proc, pid;
-    
+
     afterEach(function(done) {
       God.deleteAll({}, done);
     });
@@ -67,7 +69,7 @@ describe('God', function() {
 
   describe('Process State Machine', function() {
     var clu, pid;
-    
+
     it('should start a process', function(done) {
       God.prepare(getConf(), function(err, proce) {
 	clu = proce;
@@ -112,7 +114,7 @@ describe('God', function() {
         done();
       });
     });
-    
+
     it('should stop and delete a process id', function(done) {
       var old_pid = clu.process.pid;
       God.deleteProcessId(clu.pm2_env.pm_id, function(err, dt) {
@@ -174,7 +176,7 @@ describe('God', function() {
       });
     });
 
-    it('should start maximum processes depending on CPU numbers', function(done) {      
+    it('should start maximum processes depending on CPU numbers', function(done) {
       God.prepare({
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
@@ -204,7 +206,7 @@ describe('God', function() {
         }, 500);
       });
     });
-    
+
   });
 
 
