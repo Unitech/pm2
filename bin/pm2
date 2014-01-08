@@ -143,11 +143,14 @@ commander.command('restart <pm2_id|name|all>')
 //
 // Reload process(es)
 //
-commander.command('reload <pm2_id|all>')
+commander.command('reload <name|all>')
   .description('reload all processes or a specific process pm2 id')
   .action(function(pm2_id) {
     UX.processing.start();
-    CLI.reload(pm2_id);
+    if (pm2_id == 'all')
+      CLI.reload(pm2_id);
+    else
+      CLI.reloadProcessName(pm2_id);
   });
 
 //

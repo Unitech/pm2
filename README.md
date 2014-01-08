@@ -10,7 +10,7 @@ pm2 is perfect when you need to spread your stateless code accross all CPUs avai
 
 - Builtin load-balancer (using the node cluster module)
 - Script daemonization
-- 0s downtime reload for Node > 0.11.x
+- 0s downtime reload for Node
 - Startup scripts for Ubuntu and CentOS
 - Stop unstable process (avoid infinite loop)
 - Monitoring in console
@@ -147,11 +147,11 @@ This feature permits to reload code without loosing queries connection.
 
 Warning :
 - Only for networked app
-- Work for node version > 0.11.x
 - Only for app in cluster mode (default mode)
 
 ```bash
 $ pm2 reload all
+$ pm2 reload my-api
 ```
 
 Thanks to TruongSinh Tran-Nguyen https://github.com/truongsinh
@@ -293,7 +293,8 @@ processes.json :
       "NODE_ENV": "production",
       "AWESOME_SERVICE_API_TOKEN": "xxx"
   }
-},{
+}
+,{
     "name"       : "api",
     "script"     : "./examples/child.js",
     "instances"  : "4",
