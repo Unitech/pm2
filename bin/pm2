@@ -16,19 +16,19 @@ var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 
 commander.version(pkg.version)
-  .option('-v --verbose', 'Verbose level')
-  .option('-s --silent', 'Throw less messages', false)
-  .option('-f --force', 'Force actions')
-  .option('-n --name <name>', 'Set a <name> for script')
-  .option('-i --instances <number>', 'Launch [number] instances (for networked app)(load balanced)')
-  .option('-o --output <path>', 'Out log file output')
-  .option('-x --execute-command', 'Execute a program using fork system')
-  .option('--interpreter <interpreter>', 'The interpreter pm2 should use for executing app (bash, python...)')
-  .option('-e --error <path>', 'Error log file output')
-  .option('-p --pid <pid>', 'PID file')
-  .option('-u --user <username>', 'When generating startup script defined the username')
-  .option('-c --cron <cron_pattern>', 'Restart a running process based on a cron pattern')
-  .option('-w --write', 'Write configuration in local folder')
+  .option('-v --verbose', 'verbose level')
+  .option('-s --silent', 'throw less messages', false)
+  .option('-f --force', 'force actions')
+  .option('-n --name <name>', 'set a <name> for script')
+  .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
+  .option('-o --output <path>', 'specify out log file')
+  .option('-e --error <path>', 'specify error log file')
+  .option('-p --pid <pid>', 'specify pid file')
+  .option('-x --execute-command', 'execute a program using fork system')
+  .option('-u --user <username>', 'define user when generating startup script')
+  .option('-c --cron <cron_pattern>', 'restart a running process based on a cron pattern')
+  .option('-w --write', 'write configuration in local folder')
+  .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
   .usage('[cmd] app');
 
 //
@@ -78,12 +78,20 @@ commander.command('sendSignal <signal> <pm2_id|name>')
     }
   });
 
+//
+// Stop and delete a process by name from database
+//
+commander.command('ping')
+  .description('ping pm2 daemon - if not up it will launch it')
+  .action(function() {
+    CLI.ping();
+  });
 
 //
 // Stop and delete a process by name from database
 //
 commander.command('delete <name|id|script|all>')
-  .description('Stop and delete a process by name from PM2 database')
+  .description('stop and delete a process by name from PM2 database')
   .action(function(name) {
     CLI.deleteProcess(name);
   });

@@ -19,6 +19,7 @@ function getConf() {
 describe('God', function() {
   it('should have right properties', function() {
     God.should.have.property('prepare');
+    God.should.have.property('ping');
     God.should.have.property('getProcesses');
     God.should.have.property('getMonitorData');
     God.should.have.property('getSystemData');
@@ -26,6 +27,8 @@ describe('God', function() {
     God.should.have.property('checkProcess');
     God.should.have.property('stopAll');
     God.should.have.property('stopProcessId');
+    God.should.have.property('reload');
+    God.should.have.property('reloadProcessName');
     God.should.have.property('sendSignalToProcessId');
     God.should.have.property('sendSignalToProcessName');
   });
@@ -206,8 +209,5 @@ describe('God', function() {
         }, 500);
       });
     });
-
   });
-
-
 });
