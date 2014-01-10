@@ -1,5 +1,4 @@
 
-
 var God = require('..');
 var numCPUs = require('os').cpus().length;
 var fs = require('fs');
@@ -14,7 +13,6 @@ function getConf() {
     pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
   };
 }
-
 
 describe('God', function() {
   it('should have right properties', function() {
@@ -159,7 +157,53 @@ describe('God', function() {
   });
 
 
+  describe('Reload - cluster', function() {
+
+    before(function(done) {
+      God.deleteAll({}, done);
+    });
+
+    it('should launch app', function(done) {
+      God.prepare({
+        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/child.js'),
+        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
+        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
+        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
+        instances       : 4,
+        exec_mode       : 'cluster_mode',
+        name : 'child'
+      }, function(err, procs) {
+	var processes = God.getFormatedProcesses();
+        processes.length.should.equal(4);
+        processes.forEach(function(proc) {
+          proc.pm2_env.restart_time.should.eql(0);
+        });
+        done();
+      });
+    });
+
+    it('should restart the same process and set it as state online and be up', function(done) {
+      var processes = God.getFormatedProcesses();
+
+      God.reload({}, function(err, dt) {
+        console.log(dt);
+	var processes = God.getFormatedProcesses();
+
+        processes.length.should.equal(4);
+        processes.forEach(function(proc) {
+          proc.pm2_env.restart_time.should.eql(1);
+        });
+        done();
+      });
+    });
+
+  });
+
   describe('Multi launching', function() {
+
+    before(function(done) {
+      God.deleteAll({}, done);
+    });
 
     afterEach(function(done) {
       God.deleteAll({}, done);

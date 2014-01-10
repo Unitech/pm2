@@ -70,7 +70,8 @@
     "colors"         : "0.6.2",
     "coffee-script"  : "*",
     "eventemitter2"  : "0.4.13",
-    "debug"          : "*"
+    "debug"          : "*",
+    "async"          : "0.2.9"
   },
   "devDependencies": {
     "mocha"         : "1.x",

@@ -10,6 +10,9 @@
 
 # Yes, we have tests in bash. How mad science is that?
 
+export PM2_RPC_PORT=4242
+export PM2_PUB_PORT=4243
+
 
 node="`type -P node`"
 pm2="`type -P node` `pwd`/bin/pm2"
@@ -56,4 +59,3 @@ wrk -c 500 -t 500 -d 8 http://localhost:8020 &> /dev/null &
 $pm2 monit
 $pm2 list
 $pm2 stop
-

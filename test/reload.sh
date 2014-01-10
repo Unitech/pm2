@@ -9,6 +9,8 @@
 
 # Yes, we have tests in bash. How mad science is that?
 
+export PM2_RPC_PORT=4242
+export PM2_PUB_PORT=4243
 
 node="`type -P node`"
 nodeVersion="`$node -v`"
@@ -95,5 +97,11 @@ should 'should reload only child.js' 'restart_time: 2' 4
 
 $pm2 reload network.js
 should 'should reload network.js' 'restart_time: 2' 8
+
+##### WITH OTHER SOFT TYPE
+$pm2 web
+spec 'should start web interface (in default mode forked)'
+$pm2 reload all
+spec 'should not hang when reloading all'
 
 $pm2 kill

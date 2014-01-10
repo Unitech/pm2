@@ -11,6 +11,9 @@
 # Yes, we have tests in bash. How mad science is that?
 
 
+export PM2_RPC_PORT=4242
+export PM2_PUB_PORT=4243
+
 node="`type -P node`"
 nodeVersion="`$node -v`"
 pm2="`type -P node` `pwd`/bin/pm2"
@@ -71,9 +74,6 @@ echo "Starting infinite loop tests"
 $pm2 kill
 
 
-export PM2_RPC_PORT=4242
-export PM2_PUB_PORT=4243
-
 
 $pm2 start killtoofast.js --name unstable-process
 
@@ -86,6 +86,6 @@ done
 
 
 $pm2 list
-
-
 should 'should has stopped unstable process' 'errored' 1
+
+$pm2 kill
