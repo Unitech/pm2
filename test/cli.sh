@@ -255,11 +255,5 @@ spec "Should cron restart echo.js"
 
 
 
-
 $pm2 kill
 spec "Should kill daemon"
-
-
-
-# to test :
-# reload feature

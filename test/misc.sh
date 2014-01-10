@@ -65,32 +65,6 @@ cd $file_path
 echo -e "\033[1mRunning tests:\033[0m"
 
 
-############### CLUSTER STUFF
-$pm2 kill
-
-echo "Reloading"
-$pm2 start child.js -i 4
-should 'should start processes' 'online' 4
-
-$pm2 start network.js -i 4
-should 'should has 8 online apps' 'online' 8
-
-should 'should has 4 api online' 'network.js' 4
-should 'should has 4 child.js online' 'child.js' 4
-
-$pm2 reload all
-should 'should reload all' 'restart_time' 8
-
-$pm2 reload child.js
-should 'should reload only child.js' 'restart_time: 2' 4
-
-$pm2 reload network.js
-should 'should reload network.js' 'restart_time: 2' 8
-
-$pm2 reload unknownname
-ispec "Should throw an error as unknow name"
-
-
 $pm2 kill
 
 $pm2 start env.js

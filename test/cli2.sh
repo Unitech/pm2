@@ -108,21 +108,6 @@ should 'should app be online' 'online' 1
 
 cd -
 
-###############
-$pm2 kill
-
-echo "Reloading"
-$pm2 start child.js -i 4
-should 'should start processes' 'online' 4
-$pm2 restart all
-should 'should restarted be one for all' 'restart_time' 4
-$pm2 restart child.js
-should 'should restart a second time (BY SCRIPT NAME)' 'restart_time: 2' 4
-$pm2 restart child
-should 'should restart a third time (BY NAME)' 'restart_time: 3' 4
-$pm2 reload all
-should 'should RELOAD a fourth time' 'restart_time: 4' 4
-
 
 ########### DELETED STUFF BY ID
 $pm2 kill
@@ -151,7 +136,6 @@ should 'should has been deleted process by script' "name: 'echo'" 0
 $pm2 kill
 
 $pm2 start echo.js -o outech.log -e errech.log --name gmail -i 10
-ls -l
 cat outech-0.log > /dev/null
 spec "file outech.log exist"
 cat errech-0.log > /dev/null
