@@ -151,11 +151,9 @@ should 'should has been deleted process by script' "name: 'echo'" 0
 $pm2 kill
 
 $pm2 start echo.js -o outech.log -e errech.log --name gmail -i 10
-cat outech.log > /dev/null
+ls -l
+cat outech-0.log > /dev/null
 spec "file outech.log exist"
-cat errech.log > /dev/null
+cat errech-0.log > /dev/null
 spec "file errech.log exist"
 should 'should has not restarted' 'restart_time: 0' 10
-
-
-
