@@ -3,6 +3,5 @@
   ".py": "python",
   ".rb": "ruby",
   ".php": "php",
-  ".pl" : "perl",
-  ".coffee" : "coffee"
+  ".pl" : "perl"
 }
