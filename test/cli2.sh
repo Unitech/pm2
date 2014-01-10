@@ -72,7 +72,7 @@ $pm2 start echo.js
 spec "Should start an app by script.js"
 $pm2 stop echo.js
 spec "Should stop an app by script.js"
-$pm2 start echo.js
+$pm2 restart echo.js
 spec "Should restart an app by script.js (TRANSITIONAL STATE)"
 
 ###############
@@ -85,7 +85,7 @@ should 'should app be online' 'online' 1
 $pm2 stop gege
 should 'should app be stopped' 'stopped' 1
 $pm2 restart gege
-should 'should app be online' 'online' 1
+should 'should app be online once restart called' 'online' 1
 
 ###############
 $pm2 kill
