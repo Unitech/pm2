@@ -44,6 +44,7 @@ Thanks in advance and we hope that you like pm2 !
 
 - [Installation](#a1)
 - [Usage/Features](#a2)
+- [Pid file, error and out Log files](#a34)
 - [Different ways to launch a process](#a3)
 - [0s downtime reload](#a16)
 - [CoffeeScript](#a19)
@@ -138,6 +139,19 @@ You can also execute app in other languages ([the fork mode](#a23)):
 $ pm2 start my-bash-script.sh -x --interpreter bash
 
 $ pm2 start my-python-script.py -x --interpreter python
+```
+
+<a name="a34"/>
+## Pid file, error and out Log files
+
+By default every logs (error and out), pids files, dump, pm2 logs are located in `~/.pm2/`
+
+```
+.pm2/
+├── dump.pm2
+├── logs
+├── pids
+└── pm2.log
 ```
 
 <a name="a16"/>
@@ -316,21 +330,6 @@ Then with the cli :
 ```bash
 $ pm2 start processes.json
 ```
-
-**Notes**
-- every line you add like `"port" : 9005` is present in the process environment
-
-### Special options with JSON process declaration
-
-- "min_uptime":
-if a process is restarted with an uptime smaller than this value,
-this restart counts as an unstable restart. If this option is not specified,
-all restarts are considered unstable.
-
-- "max_restarts":
-if the number of unstable restarts exceeds this number,
-the process will be stopped and a message with number with restarts will be logged.
-
 
 <a name="a27"/>
 # Contributing/Development mode
