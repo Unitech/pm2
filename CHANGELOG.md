@@ -1,4 +1,14 @@
 
+# 0.7.0
+
+- Reload works at 100%
+- Logs are now separated by process id
+- Minimal listing with -m option
+- pid files are deleted once process exit
+- ping method to launch or knwo if pm2 is alive
+- more tests
+- coffeescript is supported in cluster mode
+
 # 0.6.8
 
 - Homogeneize JSON #186
