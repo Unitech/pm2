@@ -105,6 +105,8 @@ $ pm2 web                # Launch Health computer API endpoint (http://localhost
 
 $ pm2 dump               # Backup current processes managed by pm2
 $ pm2 resurrect          # Restore backup
+
+$ pm2 sendSignal SIGUSR2 signal.js # Send system signal to script
 ```
 
 For other nature scripts :
