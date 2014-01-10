@@ -82,6 +82,7 @@ $ pm2 start app.js -i 4  # Daemonize pm2 and Start 4 clustered instances of app.
 $ pm2 start app.js --name my-api # Name process
 
 $ pm2 list               # Display all processes status
+$ pm2 list -m            # Serious display
 $ pm2 monit              # Monitor all processes
 $ pm2 logs               # Display all processes logs in streaming
 $ pm2 flush              # Empty all log file
