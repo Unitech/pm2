@@ -18,7 +18,7 @@ pm2 is perfect when you need to spread your stateless code accross all CPUs avai
 - [Remote control and real time interface API](https://github.com/Unitech/pm2-interface)
 
 Tested with Node v0.11, v0.10, v0.8 (https://travis-ci.org/Unitech/pm2).
-Compatible CoffeeScript.
+Compatible with CoffeeScript.
 Works on Linux & MacOS.
 
 [![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
@@ -115,7 +115,7 @@ $ pm2 start echo.pl
 ## Different ways to launch a process
 
 ```bash
-$ pm2 start app.js -i max  # Will start maximum processes depending on CPU availables
+$ pm2 start app.js -i max  # Will start maximum processes depending on available CPUs
 
 $ pm2 start app.js -i 3    # Will start 3 processes
 
@@ -157,7 +157,7 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 <a name="a16"/>
 ## 0s downtime reload
 
-This feature permits to reload code without loosing queries connection.
+This feature permits to reload code without losing queries connection.
 
 Warning :
 - Only for networked app
@@ -183,13 +183,13 @@ That's all !
 ## Fork mode - execute script in different languages
 
 The default mode of PM2 consists of wrapping the code of your node app into the Node Cluster module. It's called the **cluster mode**.
-There is also a more classical way to execute your app, like node-forever do, called the **fork mode**.
+There is also a more classical way to execute your app, like node-forever does, called the **fork mode**.
 
-In fork mode all options are the same than the cluster mode (restart, delete...).
+In fork mode all options are the same as the cluster mode (restart, delete...).
 
-**By using the fork mode you will loose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
+**By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
 
-So use it if you only need a forever like behaviour.
+So use it if you only need a forever-like behaviour.
 
 Here is how to start your app in fork :
 
@@ -358,7 +358,7 @@ $ npm install -g pm2@latest
 
 - Node 0.10.x doesn't free script port when stopped. It's due to the NodeJS cluster module.
 So if you feel that this problem is important for your use case, use the fork mode the [fork mode](#a23) instead.
-By using the fork mode you will loose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
+By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
 ```
 $ pm2 start index.js -x  # start my app in fork mode
@@ -369,7 +369,7 @@ For more informations about this issue : [#74](https://github.com/Unitech/pm2/is
 - `Cannot read property 'getsockname' of undefined`
 
 When using the cluster mode (by default) you can't use ports from 0 to 1024. If you really need to exec in this range use the [fork mode](#a23) with the `-x` parameter.
-By using the fork mode you will loose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
+By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
 <a name="a14"/>
 # Test
