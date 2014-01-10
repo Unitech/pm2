@@ -68,10 +68,10 @@ OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)
 cat /dev/null > $OUT_LOG
 
 $pm2 sendSignal SIGUSR2 signal.js
-
 sleep 1
+
 OUT=`grep "SIGUSR2" "$OUT_LOG" | wc -l`
-[ $OUT -eq 2 ] || fail "Signal not received by the process name"
+[ $OUT -eq 1 ] || fail "Signal not received by the process name"
 success "Processes sucessfully receives the signal"
 
 $pm2 stop signal.js
