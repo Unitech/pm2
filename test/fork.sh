@@ -83,7 +83,7 @@ should 'should has forked app' 'fork' 1
 
 $pm2 kill
 
-$pm2 start echo.coffee -x
+$pm2 start echo.coffee -x --interpreter coffee
 should 'should has forked app' 'fork' 1
 
 ### Dump resurect should be ok
@@ -97,6 +97,8 @@ $pm2 resurrect
 should 'should has forked app' 'fork' 1
 
 ## Delete
+
+$pm2 list
 
 $pm2 delete 0
 should 'should has delete process' 'fork' 0
