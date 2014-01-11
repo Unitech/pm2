@@ -98,7 +98,16 @@ should 'should reload only child.js' 'restart_time: 2' 4
 $pm2 reload network.js
 should 'should reload network.js' 'restart_time: 2' 8
 
-#
+############### BLOCKING STUFF
+
+# this is not a networked application
+$pm2 start echo.js
+should 'should has 8 online apps' 'online' 9
+
+$pm2 reload echo
+should 'should not hang and fallback to restart behaviour' 'restart_time' 9
+
+
 
 #$pm2 web
 #$pm2 reload all
