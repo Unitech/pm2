@@ -84,9 +84,18 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 //
 commander.command('ping')
   .description('ping pm2 daemon - if not up it will launch it')
-  .action(function() {
-    CLI.ping();
-  });
+  .action(CLI.ping);
+
+//
+// Interact
+//
+commander.command('interact <secret_key> <machine_name>')
+  .description('launch interaction daemon')
+  .action(CLI.interact);
+
+commander.command('killInteract')
+  .description('launch interaction daemon')
+  .action(CLI.interactKill);
 
 //
 // Stop and delete a process by name from database
