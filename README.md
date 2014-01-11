@@ -21,9 +21,18 @@ Tested with Node v0.11, v0.10, v0.8 (https://travis-ci.org/Unitech/pm2).
 Compatible with CoffeeScript.
 Works on Linux & MacOS.
 
-[![Build Status](https://travis-ci.org/Unitech/pm2.png)](https://travis-ci.org/Unitech/pm2)
 [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
+
+### Build Status with Travis
+
+Master :
+
+[![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=master)](https://api.travis-ci.org/Unitech/pm2.png?branch=master)
+
+Development :
+
+[![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=development)](https://api.travis-ci.org/Unitech/pm2.png?branch=development)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
 

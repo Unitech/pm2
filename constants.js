@@ -37,5 +37,8 @@ module.exports = {
   ONLINE_STATUS      : 'online',
   STOPPED_STATUS     : 'stopped',
   ERRORED_STATUS     : 'errored',
-  ONE_LAUNCH_STATUS  : 'one-launch-status'
+  ONE_LAUNCH_STATUS  : 'one-launch-status',
+
+  REMOTE_PORT        : 3900,
+  REMOTE_HOST        : 'socket-1.pm2.io'
 };
