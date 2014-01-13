@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "engines" : {
     "node" : ">=0.8"
   },
@@ -13,6 +13,9 @@
   "contributors": [{
     "name"  : "Alex Kocharin",
     "email" : "alex@kocharin.ru"
+  },{
+    "name"  : "Xu Jingxin",
+    "email" : "sailxjx@gmail.com"
   },{
     "name" : "Ben Postlethwaite",
     "email" : "post.ben.here@gmail.com"

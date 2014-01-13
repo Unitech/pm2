@@ -9,10 +9,6 @@
 
 # Yes, we have tests in bash. How mad science is that?
 
-export PM2_RPC_PORT=4242
-export PM2_PUB_PORT=4243
-
-
 node="`type -P node`"
 nodeVersion="`$node -v`"
 pm2="`type -P node` `pwd`/bin/pm2"
@@ -115,6 +111,8 @@ ispec "should fail if script doesnt exist"
 $pm2
 ispec "No argument"
 
+$pm2 list
+
 $pm2 start cluster-pm2.json
 spec "Should start well formated json with name for file prefix"
 
@@ -142,6 +140,16 @@ sleep 1
 
 kill $!
 spec "Should kill logs"
+
+$pm2 logs echo &
+spec "Should display logs"
+TMPPID=$!
+
+sleep 1
+
+kill $!
+spec "Should kill logs"
+
 
 $pm2 web
 spec "Should start web interface"

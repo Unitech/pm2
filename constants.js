@@ -22,7 +22,7 @@ module.exports = {
 
   CODE_UNCAUGHTEXCEPTION : 100,
 
-  CONCURRENT_ACTIONS : 4,
+  CONCURRENT_ACTIONS : 2,
 
   DEBUG              : process.env.PM2_DEBUG || false,
   WEB_INTERFACE      : parseInt(process.env.PM2_API_PORT)  || 9615,

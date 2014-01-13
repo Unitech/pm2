@@ -11,8 +11,8 @@
 # Yes, we have tests in bash. How mad science is that?
 
 
-export PM2_RPC_PORT=4242
-export PM2_PUB_PORT=4243
+# export PM2_RPC_PORT=4242
+# export PM2_PUB_PORT=4243
 
 node="`type -P node`"
 nodeVersion="`$node -v`"
@@ -87,5 +87,41 @@ done
 
 $pm2 list
 should 'should has stopped unstable process' 'errored' 1
+
+$pm2 kill
+
+echo "Start infinite loop tests for restart|reload"
+
+cp killnotsofast.js killthen.js
+
+$pm2 start killthen.js --name killthen
+
+$pm2 list
+
+should 'should killthen alive for a long time' 'online' 1
+
+# Replace killthen file with the fast quit file
+
+sleep 15
+cp killtoofast.js killthen.js
+
+echo "Restart with unstable process"
+
+$pm2 list
+
+$pm2 restart all  # pm2 reload should also work here
+
+for (( i = 0; i <= 50; i++ )); do
+    sleep 0.1
+    echo -n "."
+done
+
+$pm2 list
+
+should 'should has stoped unstable process' 'errored' 1
+
+rm killthen.js
+
+$pm2 list
 
 $pm2 kill
