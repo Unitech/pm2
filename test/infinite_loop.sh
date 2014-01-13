@@ -68,12 +68,9 @@ function should()
 
 cd $file_path
 
-
 echo "Starting infinite loop tests"
 
 $pm2 kill
-
-
 
 $pm2 start killtoofast.js --name unstable-process
 
@@ -87,5 +84,35 @@ done
 
 $pm2 list
 should 'should has stopped unstable process' 'errored' 1
+
+$pm2 kill
+
+echo "Start infinite loop tests for restart|reload"
+
+$pm2 kill
+
+cp killnotsofast.js killthen.js
+
+$pm2 start killthen.js --name killthen
+
+$pme list
+
+should 'should killthen alive for a long time' 'online' 1
+
+# Replace killthen file with the fast quit file
+cp killtoofast.js killthen.js
+
+$pm2 restart killthen  # pm2 reload should also work here
+
+$pm2 list
+
+for (( i = 0; i <= 50; i++ )); do
+    sleep 0.1
+    echo -n "."
+done
+
+should 'should has stoped unstable process' 'errored' 1
+
+rm killthen.js
 
 $pm2 kill
