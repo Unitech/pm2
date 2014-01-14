@@ -45,6 +45,10 @@ We are also looking for AngularJS developers and designers contact us at contact
 
 Thanks in advance and we hope that you like pm2 !
 
+# News
+
+- 0.7.1 integrates hardened reload, graceful reload and strengthened process management
+
 # Readme Contents
 
 - [Installation](#a1)
