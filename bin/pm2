@@ -162,13 +162,26 @@ commander.command('restart <pm2_id|name|all>')
 // Reload process(es)
 //
 commander.command('reload <name|all>')
-  .description('reload all processes or a specific process pm2 id')
+  .description('reload all processes or by name')
   .action(function(pm2_id) {
     UX.processing.start();
     if (pm2_id == 'all')
-      CLI.reload(pm2_id);
+      CLI.reload('reloadProcessId');
     else
-      CLI.reloadProcessName(pm2_id);
+      CLI.reloadProcessName(pm2_id, 'reloadProcessId');
+  });
+
+//
+// Reload process(es)
+//
+commander.command('gracefulReload <name|all>')
+  .description('reload all processes or by name. Will send a "shutdown" message for graceful exit.')
+  .action(function(pm2_id) {
+    UX.processing.start();
+    if (pm2_id == 'all')
+      CLI.reload('softReloadProcessId');
+    else
+      CLI.reloadProcessName(pm2_id, 'softReloadProcessId');
   });
 
 //

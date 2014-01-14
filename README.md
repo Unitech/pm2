@@ -4,11 +4,11 @@ pm2 is a process manager for Node apps with a builtin load-balancer.
 
 ## Tech notes
 
-pm2 is perfect when you need to spread your stateless code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload it.
+pm2 is perfect when you need to spread your stateless NodeJS code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
 
 # Main features
 
-- Builtin load-balancer (using the node cluster module)
+- Builtin load-balancer (using the native cluster module)
 - Script daemonization
 - 0s downtime reload for Node
 - Startup scripts for Ubuntu and CentOS
@@ -171,11 +171,8 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 <a name="a16"/>
 ## 0s downtime reload
 
-This feature permits to reload code without losing queries connection.
-
-Warning :
-- Only for networked app
-- Only for app in cluster mode (default mode)
+This feature permits to reload code without losing in process connections.
+Works for apps in cluster_mode (the default mode) that uses sockets (express or other).
 
 ```bash
 $ pm2 reload all
@@ -183,6 +180,40 @@ $ pm2 reload my-api
 ```
 
 Thanks to TruongSinh Tran-Nguyen https://github.com/truongsinh
+
+### Graceful reload
+
+```bash
+$ pm2 gracefulReload all
+```
+
+Instead of just processing remaining connections, `gracefulReload` will also send a `shutdown` message to your process, so you can close all database/socket.io/* connections and be sure that your process will properly exit.
+
+```javascript
+process.on('message', function(msg) {
+  if (msg == 'shutdown') {
+    // Your process is going to be reloaded
+    // Close all database/socket.io/* connections
+    console.log('Closing all connections...');
+    setTimeout(function() {
+      console.log('Finished closing connections');
+      // You can exit to faster the process or it will be
+      // automatically killed after 4000ms.
+      // You can override the timeout by modifying PM2_GRACEFUL_TIMEOUT
+      process.exit(0);
+    }, 1500);
+  }
+});
+
+var http = require('http');
+
+http.createServer(function(req, res) {
+  res.writeHead(200);
+  res.end('hey');
+}).listen(8000, function() {
+  console.log('listening');
+});
+```
 
 <a name="a19"/>
 ## CoffeeScript
@@ -199,7 +230,7 @@ That's all !
 The default mode of PM2 consists of wrapping the code of your node app into the Node Cluster module. It's called the **cluster mode**.
 There is also a more classical way to execute your app, like node-forever does, called the **fork mode**.
 
-In fork mode all options are the same as the cluster mode (restart, delete...).
+In fork mode almost all options are the same as the cluster mode. But no reload, gracefulReload.
 
 **By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
 
@@ -267,6 +298,7 @@ It uses **System V init script** compatible with **Ubuntu and CentOS** (maybe it
 
 ```bash
 $ pm2 startup  # then follow the command instruction
+$ pm2 startup centos # will try to use chkconfig instead of updaterc.d
 ```
 
 ### Running script as a different user
@@ -305,6 +337,8 @@ Multiple variables can be customized via the environment :
   DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
   DEBUG              : process.env.PM2_DEBUG || false,
   WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
+  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
+
 ```
 
 <a name="a13"/>
@@ -333,7 +367,6 @@ processes.json :
     "port"       : 9005
 },{
   "min_uptime" : "100",
-  "max_restarts" : "400",
   "name" : "auto-kill",
   "exec_mode" : "fork_mode",
   "script" : "./examples/killfast.js"
@@ -429,7 +462,6 @@ npm test
 - Web interface
 - Keeping monitoring data
 - Integrated wrk utils endpoint benchmark
-- Add homogen communication channel (pubsub/eventemitter2 - wildcard events) (axon pub/sub-message.js)
 
 ## Sponsors
 
