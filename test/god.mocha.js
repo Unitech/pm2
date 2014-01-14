@@ -15,6 +15,11 @@ function getConf() {
 }
 
 describe('God', function() {
+
+  before(function(done) {
+    God.deleteAll({}, done);
+  });
+
   it('should have right properties', function() {
     God.should.have.property('prepare');
     God.should.have.property('ping');
@@ -32,6 +37,10 @@ describe('God', function() {
   });
 
   describe('Special functions for God', function() {
+    before(function(done) {
+      God.deleteAll({}, done);
+    });
+
     it('should kill a process by name', function(done) {
       God.prepare({
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
@@ -53,7 +62,7 @@ describe('God', function() {
   describe('One process', function() {
     var proc, pid;
 
-    afterEach(function(done) {
+    before(function(done) {
       God.deleteAll({}, done);
     });
 
@@ -70,6 +79,10 @@ describe('God', function() {
 
   describe('Process State Machine', function() {
     var clu, pid;
+
+    before(function(done) {
+      God.deleteAll({}, done);
+    });
 
     it('should start a process', function(done) {
       God.prepare(getConf(), function(err, proce) {
@@ -132,10 +145,12 @@ describe('God', function() {
 	_clu.pm2_env.status.should.be.equal('online');
         var old_pid = _clu.process.pid;
         God.deleteProcessName(_clu.name, function(err, dt) {
-          var proc = God.findProcessById(clu.pm2_env.pm_id);
-          should(proc == null);
-          God.checkProcess(old_pid).should.be.equal(false);
-          done();
+          process.nextTick(function() {
+            var proc = God.findProcessById(clu.pm2_env.pm_id);
+            should(proc == null);
+            God.checkProcess(old_pid).should.be.equal(false);
+            done();
+          });
         });
       });
     });
@@ -146,10 +161,12 @@ describe('God', function() {
 	_clu.pm2_env.status.should.be.equal('online');
         var old_pid = _clu.process.pid;
         God.deleteProcessName(_clu.name, function(err, dt) {
-          var proc = God.findProcessById(clu.pm2_env.pm_id);
-          should(proc == null);
-          God.checkProcess(old_pid).should.be.equal(false);
-          done();
+          process.nextTick(function() {
+            var proc = God.findProcessById(clu.pm2_env.pm_id);
+            should(proc == null);
+            God.checkProcess(old_pid).should.be.equal(false);
+            done();
+          });
         });
       });
     });
@@ -174,6 +191,7 @@ describe('God', function() {
         name : 'child'
       }, function(err, procs) {
 	var processes = God.getFormatedProcesses();
+
         processes.length.should.equal(4);
         processes.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(0);
