@@ -10,7 +10,8 @@ function getConf() {
     pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
     pm_err_log_path : path.resolve(process.cwd(), 'test/echoErr.log'),
     pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
-    pm_pid_file : path.resolve(process.cwd(), 'test/echopid')
+    pm_pid_file : path.resolve(process.cwd(), 'test/echopid'),
+    exec_mode       : 'cluster_mode'
   };
 }
 
@@ -204,7 +205,6 @@ describe('God', function() {
       var processes = God.getFormatedProcesses();
 
       God.reload({}, function(err, dt) {
-        console.log(dt);
 	var processes = God.getFormatedProcesses();
 
         processes.length.should.equal(4);
@@ -266,7 +266,6 @@ describe('God', function() {
       }, function(err, procs) {
         setTimeout(function() {
           God.getFormatedProcesses()[0].pm2_env.restart_time.should.eql(0);
-          console.log(God.getFormatedProcesses()[0]);
           done();
         }, 500);
       });
