@@ -75,10 +75,7 @@ should 'should fail when trying to launch pm2 without harmony option' 'errored' 
 $pm2 list
 $pm2 kill
 
-sleep 2
-
 PM2_NODE_OPTIONS='--harmony' `pwd`/../../bin/pm2 start harmony.js
-
 sleep 2
 should 'should not fail when passing harmony option to V8' 'errored' 0
 $pm2 list
