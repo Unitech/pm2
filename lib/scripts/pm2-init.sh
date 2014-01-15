@@ -19,10 +19,11 @@ PM2=%PM2_PATH%
 NODE=%NODE_PATH%
 USER=%USER%
 
+export PATH=$PATH:%NODE_PATH%
 export HOME="%HOME_PATH%"
 
 super() {
-    sudo -i -u $USER $*
+    sudo -Ei -u $USER PATH=$PATH $*
 }
 
 start() {

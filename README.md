@@ -47,7 +47,10 @@ Thanks in advance and we hope that you like pm2 !
 
 # News
 
-- 0.7.2 harmony, can pass options to pm2 script via PM2_NODE_OPTIONS
+- 0.7.2
+    - harmony
+    - can pass any options to node via PM2_NODE_OPTIONS, configurable via ~/.pm2/custom_options.sh
+    - pid file is written in ~/.pm2/pm2.pid
 - 0.7.1 integrates hardened reload, graceful reload and strengthened process management
 
 # Readme Contents
@@ -168,9 +171,11 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 ```
 .pm2/
 ├── dump.pm2
+├── custom_options.sh
+├── pm2.log
+├── pm2.pid
 ├── logs
-├── pids
-└── pm2.log
+└── pids
 ```
 
 <a name="a16"/>
@@ -332,9 +337,11 @@ pm2 web
 ```
 
 <a name="a24"/>
-## Customization
+## Configuration / Customization
 
-Multiple variables can be customized via the environment :
+You can edit these options by editing the file `~/.pm2/custom_options.sh`
+
+These variables can be customized :
 
 ```
   DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
@@ -343,8 +350,11 @@ Multiple variables can be customized via the environment :
   DEBUG              : process.env.PM2_DEBUG || false,
   WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
   GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
-
+  PM2_NODE_OPTIONS   : ''
 ```
+
+
+
 
 <a name="a13"/>
 # Multi process JSON declaration
@@ -388,7 +398,7 @@ $ pm2 start processes.json
 
 Fork PM2 and to hack it it's pretty simple :
 
-```
+```bash
 $ pm2 kill   # kill the current pm2
 $ git clone my_pm2_fork.git
 $ cd pm2/
@@ -398,6 +408,17 @@ $ DEBUG=* PM2_DEBUG=true./bin/pm2 start xxx.js
 Everytime you do a modification on the code you have to restart pm2, so just do a `./bin/pm2 kill` before
 starting an app or something else.
 You have to restart it because the code is daemonized on the memory.
+
+## Install pm2 development
+
+```bash
+$ npm install git://github.com/Unitech/pm2#development -g
+```
+
+# MISC Notes
+
+- Remove init script : `sudo update-rc.d -f pm2-init.sh remove`
+
 
 <a name="a21"/>
 # Known bugs and workarounds
