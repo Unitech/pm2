@@ -47,6 +47,7 @@ Thanks in advance and we hope that you like pm2 !
 
 # News
 
+- 0.7.2 harmony, can pass options to pm2 script via PM2_NODE_OPTIONS
 - 0.7.1 integrates hardened reload, graceful reload and strengthened process management
 
 # Readme Contents

@@ -3,18 +3,19 @@
 // pm2-interface module (because of ports)
 //
 
-var p = require('path');
+var p    = require('path');
+var fs   = require('fs');
+var util = require('util');
 
 DEFAULT_FILE_PATH = p.resolve(process.env.HOME, '.pm2');
 
-
-
-module.exports = {
+var default_conf = {
   DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
   PM2_LOG_FILE_PATH  : p.join(p.resolve(process.env.HOME, '.pm2'), 'pm2.log'),
   DEFAULT_PID_PATH   : p.join(DEFAULT_FILE_PATH, 'pids'),
   DEFAULT_LOG_PATH   : p.join(DEFAULT_FILE_PATH, 'logs'),
   DUMP_FILE_PATH     : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
+  PM2_CONF_FILE      : p.join(DEFAULT_FILE_PATH, 'conf.json'),
 
   DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
   DAEMON_RPC_PORT    : parseInt(process.env.PM2_RPC_PORT)  || 6666, // RPC commands
@@ -46,3 +47,8 @@ module.exports = {
   INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
 };
+
+// var custom_conf = fs.readFileSync(default_conf.PM2_CONF_FILE, 'utf8') || "{}";
+// util._extend(default_conf, eval(custom_conf));
+
+module.exports = default_conf;

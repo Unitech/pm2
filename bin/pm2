@@ -1,4 +1,18 @@
-#!/usr/bin/env node
+#!/bin/sh
+
+':' //; exec "`command -v nodejs || command -v node`" $PM2_NODE_OPTIONS "$0" "$@"
+
+//
+// Harmony test
+//
+try {
+  var assert = require('assert')
+  , s = new Set();
+  s.add('a');
+  assert.ok(s.has('a'));
+  console.log('ES6 Harmony succesfully enabled');
+} catch(e) {
+}
 
 var commander = require('commander');
 var fs        = require('fs');
