@@ -6,7 +6,7 @@
 #
 ### BEGIN INIT INFO
 # Provides:          pm2
-# Required-Start:    
+# Required-Start:
 # Required-Stop:
 # Default-Start:        2 3 4 5
 # Default-Stop:         0 1 6
@@ -22,37 +22,37 @@ USER=%USER%
 export HOME="%HOME_PATH%"
 
 super() {
-    sudo -u $USER $*
+    sudo -i -u $USER $*
 }
- 
+
 start() {
     echo "Starting $NAME"
-    super $NODE $PM2 resurrect
+    super $PM2 resurrect
 }
- 
+
 stop() {
-    super $NODE $PM2 dump
-    super $NODE $PM2 delete all
-    super $NODE $PM2 kill
+    super $PM2 dump
+    super $PM2 delete all
+    super $PM2 kill
 }
- 
+
 restart() {
     echo "Restarting $NAME"
     stop
     start
 }
- 
+
 reload() {
     echo "Reloading $NAME"
-    super $NODE $PM2 reload all
+    super $PM2 reload all
 }
- 
+
 status() {
     echo "Status for $NAME:"
-    $NODE $PM2 list
+    $PM2 list
     RETVAL=$?
 }
- 
+
 case "$1" in
     start)
         start
