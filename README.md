@@ -474,18 +474,7 @@ Thanks to [Devo.ps](http://devo.ps/) and [Wiredcraft](http://wiredcraft.com/) fo
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Unitech/pm2/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 <a name="a15"/>
-# License - Apache License v2
+# License
 
-Copyright [2013] [Strzelewicz Alexandre <as@unitech.io>]
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Files in lib/ are made available under the terms of the GNU Affero General Public License (AGPL).
+pm2-interface is made under the terms of the Apache V2 license.
