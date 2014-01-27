@@ -6,10 +6,10 @@
 #
 # export PM2_NODE_OPTIONS='--harmony'
 
-
-# export DAEMON_RPC_PORT=6666
-# export DAEMON_PUB_PORT=6667
-# export DAEMON_BIND_HOST='localhost'
+#
+# Will modify basepath
+#
+# export PM2_MODIFY_REQUIRE=false
 
 #
 # This it's the timeout used for the process to graceful exit everything
@@ -21,3 +21,8 @@
 # If you want to run pm2 in debug mode
 #
 # export DEBUG=false
+
+
+# export DAEMON_RPC_PORT=6666
+# export DAEMON_PUB_PORT=6667
+# export DAEMON_BIND_HOST='localhost'
