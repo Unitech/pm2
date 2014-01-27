@@ -26,8 +26,6 @@ USER=%USER%
 export PATH=$PATH:%NODE_PATH%
 export HOME="%HOME_PATH%"
 
-. /etc/init.d/functions
-
 lockfile="/var/lock/subsys/pm2-init.sh"
 
 super() {
