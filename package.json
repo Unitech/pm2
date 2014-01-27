@@ -86,5 +86,5 @@
     "type" : "git",
     "url" : "git://github.com/Unitech/pm2.git"
   },
-  "license": "Apache v2"
+  "license": "AGPLv3"
 }

@@ -191,7 +191,7 @@ commander.command('gracefulReload <name|all>')
 //
 // Set pm2 to startup
 //
-commander.command('startup [platform]')
+commander.command('startup <platform>')
   .description('auto resurect process at startup. [platform] can be centos redhat or ubuntu')
   .action(function(platform) {
     CLI.startup(platform);

@@ -11,7 +11,7 @@ pm2 is perfect when you need to spread your stateless NodeJS code accross all CP
 - Builtin load-balancer (using the native cluster module)
 - Script daemonization
 - 0s downtime reload for Node
-- Startup scripts for Ubuntu and CentOS
+- Startup scripts for Ubuntu/CentOS/RedHat (use updaterc.d for Ubuntu and chkconfig for others)
 - Stop unstable process (avoid infinite loop)
 - Monitoring in console
 - HTTP API
@@ -95,6 +95,8 @@ $ pm2 start app.js -i 4  # Daemonize pm2 and Start 4 clustered instances of app.
 
 $ pm2 start app.js --name my-api # Name process
 
+$ pm2 start app.js --no-daemon # Doesn't exit process
+
 $ pm2 list               # Display all processes status
 $ pm2 list -m            # Serious display
 $ pm2 monit              # Monitor all processes
@@ -114,7 +116,8 @@ $ pm2 delete all         # Will remove all processes from pm2 list
 
 $ pm2 ping               # Ensure pm2 dameon has been launched
 
-$ pm2 startup            # Generate init script to keep processes alive
+$ pm2 startup ubuntu     # Generate init script for ubuntu to keep processes alive on restart
+                         # ubuntu/redhat/centos
 
 $ pm2 web                # Launch Health computer API endpoint (http://localhost:9615)
 
@@ -326,16 +329,20 @@ Monitor CPU and memory usage of every node process (and also clustered processes
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
 
 <a name="a8"/>
-## pm2 automatic startup script generation
+## Startup script generation : pm2 startup
 
 PM2 provides an automatic way to keep Node processes alive on server restart.
 On exit it will dump the process list and their environment and will resurrect them on startup.
-It uses **System V init script** compatible with **Ubuntu and CentOS** (maybe it works on other sys but not 100% sure).
+
+It uses **System V init script** compatible with **Ubuntu/CentOS/Redhat** (maybe it works on other sys but not 100% sure).
 
 ```bash
-$ pm2 startup  # then follow the command instruction
-$ pm2 startup centos # will try to use chkconfig instead of updaterc.d
+$ pm2 startup ubuntu # then follow the command instruction
+$ pm2 startup centos # will use chkconfig instead of updaterc.d
+$ pm2 startup redhat # will use chkconfig instead of updaterc.d
 ```
+
+Init script generated are located in /etc/init.d/pm2-init.sh.
 
 ### Running script as a different user
 
