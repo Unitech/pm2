@@ -33,6 +33,7 @@ commander.version(pkg.version)
   .option('-c --cron <cron_pattern>', 'restart a running process based on a cron pattern')
   .option('-w --write', 'write configuration in local folder')
   .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
+  .option('--no-daemon', 'let pm2 continues to run and output logs')
   .usage('[cmd] app');
 
 //
