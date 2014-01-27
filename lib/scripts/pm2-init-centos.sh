@@ -1,5 +1,8 @@
 #!/bin/bash
-# chkconfig: 2345 98 02
+#
+# pm2 Process manager for NodeJS
+#
+# chkconfig: 345 80 20
 #
 # description: PM2 next gen process manager for Node.js
 # processname: pm2
@@ -23,19 +26,27 @@ USER=%USER%
 export PATH=$PATH:%NODE_PATH%
 export HOME="%HOME_PATH%"
 
+. /etc/init.d/functions
+
+lockfile="/var/lock/subsys/pm2-init.sh"
+
 super() {
-    sudo -Ei -u $USER PATH=$PATH $*
+    su - $USER -c "PATH=$PATH; $*"
 }
 
 start() {
     echo "Starting $NAME"
     super $PM2 resurrect
+    retval=$?
+    [ $retval -eq 0 ] && touch $lockfile
 }
 
 stop() {
+    echo "Stopping $NAME"
     super $PM2 dump
     super $PM2 delete all
     super $PM2 kill
+    rm -f $lockfile
 }
 
 restart() {
