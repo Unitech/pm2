@@ -11,7 +11,7 @@ pm2 is perfect when you need to spread your stateless NodeJS code accross all CP
 - Builtin load-balancer (using the native cluster module)
 - Script daemonization
 - 0s downtime reload for Node
-- Startup scripts for Ubuntu/CentOS/RedHat (use updaterc.d for Ubuntu and chkconfig for others)
+- Startup scripts for Ubuntu/CentOS (use updaterc.d for Ubuntu and chkconfig for others)
 - Stop unstable process (avoid infinite loop)
 - Monitoring in console
 - HTTP API
@@ -48,9 +48,11 @@ Thanks in advance and we hope that you like pm2 !
 # News
 
 - 0.7.2
-    - harmony
+    - harmony can be enabled [Enabling harmony](#a66)
     - can pass any options to node via PM2_NODE_OPTIONS, configurable via ~/.pm2/custom_options.sh
-    - pid file is written in ~/.pm2/pm2.pid
+    - pid file written in ~/.pm2/pm2.pid
+    - startup script support for CentOS
+    - no daemon option
 - 0.7.1 integrates hardened reload, graceful reload and strengthened process management
 
 # Readme Contents
@@ -117,7 +119,7 @@ $ pm2 delete all         # Will remove all processes from pm2 list
 $ pm2 ping               # Ensure pm2 dameon has been launched
 
 $ pm2 startup ubuntu     # Generate init script for ubuntu to keep processes alive on restart
-                         # ubuntu/redhat/centos
+                         # ubuntu/centos
 
 $ pm2 web                # Launch Health computer API endpoint (http://localhost:9615)
 
