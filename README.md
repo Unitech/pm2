@@ -61,6 +61,7 @@ Thanks in advance and we hope that you like pm2 !
 - [Different ways to launch a process](#a3)
 - [0s downtime reload](#a16)
 - [CoffeeScript](#a19)
+- [Enabling Harmony](#a66)
 - [Is my production server ready for PM2](#a4)
 - [Listing processes : pm2 list](#a6)
 - [Monitoring processes (CPU/RAM) : pm2 monit](#a7)
@@ -233,6 +234,31 @@ $ pm2 start my_app.coffee
 ```
 
 That's all !
+
+<a name="a66"/>
+## Enabling Harmony ES6
+
+You can enable Harmony ES6 by setting the `--harmony` option when you start pm2 (pm2 should not be already daemonized).
+
+To pass this option by default, you can edit `~/.pm2/custom_options.sh` and adding :
+
+```bash
+export PM2_NODE_OPTIONS='--harmony'
+```
+
+Then :
+
+```bash
+$ pm2 dump
+$ pm2 exit
+$ pm2 resurrect
+```
+
+If ES6 has been enabled you should see this message :
+
+```
+● ES6 mode
+```
 
 <a name="a23"/>
 ## Fork mode - execute script in different languages
