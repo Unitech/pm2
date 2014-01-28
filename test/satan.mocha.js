@@ -14,6 +14,7 @@ describe('Satan', function() {
 
   it('should auto instancy itself, fire event and kill daemon', function(done) {
     Satan = require('../lib/Satan');
+    Satan.start();
     process.once('satan:client:ready', function() {
       console.log('Client ready');
       Satan.killDaemon(function() {
@@ -36,7 +37,7 @@ describe('Satan', function() {
 
   it('should have right properties', function() {
     Satan.should.have.property('remoteWrapper');
-    Satan.should.have.property('onReady');
+    Satan.should.have.property('start');
     Satan.should.have.property('launchRPC');
     Satan.should.have.property('executeRemote');
     Satan.should.have.property('launchDaemon');
@@ -83,9 +84,9 @@ describe('Satan', function() {
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
         instances       : 4
       }, function(err, procs) {
-	assert(err == null);
+        assert(err == null);
         assert(procs.length == 4);
-	done();
+        done();
       });
     });
 
