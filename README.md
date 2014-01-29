@@ -250,9 +250,9 @@ That's all !
 <a name="a66"/>
 ## Enabling Harmony ES6
 
-You can enable Harmony ES6 by setting the `--harmony` option when you start pm2 (pm2 should not be already daemonized).
+You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
 
-To pass this option by default, you can edit `~/.pm2/custom_options.sh` and adding :
+To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add :
 
 ```bash
 export PM2_NODE_OPTIONS='--harmony'
@@ -266,7 +266,7 @@ $ pm2 exit
 $ pm2 resurrect
 ```
 
-If ES6 has been enabled you should see this message :
+If ES6 has been enabled you should see this message at the beggining of each pm2 commands :
 
 ```
 ● ES6 mode
