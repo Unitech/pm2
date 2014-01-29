@@ -50,25 +50,39 @@ commander.version(pkg.version)
 //
 // Start command
 //
-commander.command('start <script|json_file>')
-  .description('start specific part')
+commander.command('start <script|json_file|stdin(-)>')
+  .description('start specific processes')
   .action(function(cmd) {
-    if (cmd.indexOf('.json') > 0)
-      CLI.startFromJson(cmd);
+    if (cmd == "-") {
+      process.stdin.resume();
+      process.stdin.setEncoding('utf8');
+      process.stdin.on('data', function (cmd) {
+        process.stdin.pause();
+        CLI.startFromJson(cmd, 'pipe');
+      });
+    } else if (cmd.indexOf('.json') > 0)
+      CLI.startFromJson(cmd, 'file');
     else
-      CLI.startFile(cmd);
+      CLI.startFile(cmd,'file');
   });
 
 //
 // Stop specific id
 //
-commander.command('stop <pm2_id|name|all|json_file>')
+commander.command('stop <pm2_id|name|all|json_file|stdin(-)>')
   .description('stop specific process pm2 id or script name (set with --name or script name)')
   .action(function(param) {
     UX.processing.start();
 
-    if (param.indexOf('.json') > 0)
-      CLI.actionFromJson('stopProcessName', param);
+    if (param == "-") {
+      process.stdin.resume();
+      process.stdin.setEncoding('utf8');
+      process.stdin.on('data', function (param) {
+        process.stdin.pause();
+        CLI.actionFromJson('stopProcessName', param, 'pipe');
+      });
+    } else if (param.indexOf('.json') > 0)
+      CLI.actionFromJson('stopProcessName', param, 'file');
     else if (param == 'all')
       CLI.stopAll();
     else if (isNaN(parseInt(param))) {
@@ -82,13 +96,20 @@ commander.command('stop <pm2_id|name|all|json_file>')
 //
 // Stop All processes
 //
-commander.command('restart <pm2_id|name|all|json_file>')
+commander.command('restart <pm2_id|name|all|json_file|stdin(-)>')
   .description('restart processes by id/name/all or by apps defined in json file')
   .action(function(param) {
     UX.processing.start();
 
-    if (param.indexOf('.json') > 0)
-      CLI.actionFromJson('restartProcessName', param);
+    if (param == "-") {
+      process.stdin.resume();
+      process.stdin.setEncoding('utf8');
+      process.stdin.on('data', function (param) {
+        process.stdin.pause();
+        CLI.actionFromJson('restartProcessName', param, 'pipe');
+      });
+    } else if (param.indexOf('.json') > 0)
+      CLI.actionFromJson('restartProcessName', param, 'file');
     if (param == 'all')
       CLI.restartAll();
     else if (isNaN(parseInt(param))) {
