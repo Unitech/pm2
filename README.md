@@ -52,8 +52,15 @@ Thanks in advance and we hope that you like pm2 !
     - can pass any options to node via PM2_NODE_OPTIONS, configurable via ~/.pm2/custom_options.sh
     - pid file written in ~/.pm2/pm2.pid
     - startup script support for CentOS
-    - no daemon option
+    - --no-daemon option
 - 0.7.1 integrates hardened reload, graceful reload and strengthened process management
+
+# Updates
+
+## Update from 0.x -> 0.7.2
+
+- CentOS crontab option should not be used anymore and use the new init script with `pm2 startup centos`
+- If you use the configuration file or the harmonoy option, you should regenerate the init script
 
 # Readme Contents
 
