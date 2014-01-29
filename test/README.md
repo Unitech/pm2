@@ -28,6 +28,12 @@ $ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
 $
 ```
 
+## Remove init script
+
+```
+$ chkconfig --del pm2-init.sh
+$ chkconfig --add pm2-init.sh
+```
 
 gyp WARN EACCES user "root" does not have permission to create dev dir :
 https://github.com/TooTallNate/node-gyp/issues/126
