@@ -50,7 +50,7 @@ commander.version(pkg.version)
 //
 // Start command
 //
-commander.command('start <script>')
+commander.command('start <script|json_file>')
   .description('start specific part')
   .action(function(cmd) {
     if (cmd.indexOf('.json') > 0)
@@ -62,19 +62,77 @@ commander.command('start <script>')
 //
 // Stop specific id
 //
-commander.command('stop <pm2_id|name|all>')
+commander.command('stop <pm2_id|name|all|json_file>')
   .description('stop specific process pm2 id or script name (set with --name or script name)')
-  .action(function(pm2_id) {
+  .action(function(param) {
     UX.processing.start();
 
-    if (pm2_id == 'all')
+    if (param.indexOf('.json') > 0)
+      CLI.actionFromJson('stopProcessName', param);
+    else if (param == 'all')
       CLI.stopAll();
-    else if (isNaN(parseInt(pm2_id))) {
-      CLI.stopProcessName(pm2_id);
+    else if (isNaN(parseInt(param))) {
+      CLI.stopProcessName(param);
     } else {
-      console.log(cst.PREFIX_MSG + 'Stopping process by id ' + pm2_id);
-      CLI.stopId(pm2_id);
+      console.log(cst.PREFIX_MSG + 'Stopping process by id ' + param);
+      CLI.stopId(param);
     }
+  });
+
+//
+// Stop All processes
+//
+commander.command('restart <pm2_id|name|all|json_file>')
+  .description('restart processes by id/name/all or by apps defined in json file')
+  .action(function(param) {
+    UX.processing.start();
+
+    if (param.indexOf('.json') > 0)
+      CLI.actionFromJson('restartProcessName', param);
+    if (param == 'all')
+      CLI.restartAll();
+    else if (isNaN(parseInt(param))) {
+      console.log(cst.PREFIX_MSG + 'Restarting process by name ' + param);
+      CLI.restartProcessByName(param);
+    } else {
+      console.log(cst.PREFIX_MSG + 'Restarting process by id ' + param);
+      CLI.restartProcessById(param);
+    }
+  });
+
+//
+// Reload process(es)
+//
+commander.command('reload <name|all>')
+  .description('reload all processes or by name')
+  .action(function(pm2_id) {
+    UX.processing.start();
+    if (pm2_id == 'all')
+      CLI.reload('reloadProcessId');
+    else
+      CLI.reloadProcessName(pm2_id, 'reloadProcessId');
+  });
+
+//
+// Reload process(es)
+//
+commander.command('gracefulReload <name|all>')
+  .description('reload all processes or by name. Will send a "shutdown" message for graceful exit.')
+  .action(function(pm2_id) {
+    UX.processing.start();
+    if (pm2_id == 'all')
+      CLI.reload('softReloadProcessId');
+    else
+      CLI.reloadProcessName(pm2_id, 'softReloadProcessId');
+  });
+
+//
+// Stop and delete a process by name from database
+//
+commander.command('delete <name|id|script|all|json_file>')
+  .description('stop and delete a process by name from PM2 database')
+  .action(function(name) {
+    CLI.deleteProcess(name);
   });
 
 //
@@ -113,15 +171,6 @@ commander.command('killInteract')
   .action(CLI.interactKill);
 
 //
-// Stop and delete a process by name from database
-//
-commander.command('delete <name|id|script|all>')
-  .description('stop and delete a process by name from PM2 database')
-  .action(function(name) {
-    CLI.deleteProcess(name);
-  });
-
-//
 // Web interface
 //
 commander.command('web')
@@ -151,52 +200,6 @@ commander.command('resurrect')
     console.log(cst.PREFIX_MSG + 'Resurrecting');
     UX.processing.start();
     CLI.resurrect();
-  });
-
-//
-// Stop All processes
-//
-commander.command('restart <pm2_id|name|all>')
-  .description('restart specific process pm2 id')
-  .action(function(pm2_id) {
-    UX.processing.start();
-
-    if (pm2_id == 'all') {
-      CLI.restartAll();
-    }
-    else if (isNaN(parseInt(pm2_id))) {
-      console.log(cst.PREFIX_MSG + 'Restarting process by name ' + pm2_id);
-      CLI.restartProcessByName(pm2_id);
-    } else {
-      console.log(cst.PREFIX_MSG + 'Restarting process by id ' + pm2_id);
-      CLI.restartProcessById(pm2_id);
-    }
-  });
-
-//
-// Reload process(es)
-//
-commander.command('reload <name|all>')
-  .description('reload all processes or by name')
-  .action(function(pm2_id) {
-    UX.processing.start();
-    if (pm2_id == 'all')
-      CLI.reload('reloadProcessId');
-    else
-      CLI.reloadProcessName(pm2_id, 'reloadProcessId');
-  });
-
-//
-// Reload process(es)
-//
-commander.command('gracefulReload <name|all>')
-  .description('reload all processes or by name. Will send a "shutdown" message for graceful exit.')
-  .action(function(pm2_id) {
-    UX.processing.start();
-    if (pm2_id == 'all')
-      CLI.reload('softReloadProcessId');
-    else
-      CLI.reloadProcessName(pm2_id, 'softReloadProcessId');
   });
 
 //

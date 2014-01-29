@@ -53,6 +53,7 @@ Thanks in advance and we hope that you like pm2 !
     - pid file written in ~/.pm2/pm2.pid
     - startup script support for CentOS
     - --no-daemon option
+    - json file now can be : started/stoped/restarted/deleted
 - 0.7.1 integrates hardened reload, graceful reload and strengthened process management
 
 # Updates
@@ -348,7 +349,7 @@ It uses **System V init script** compatible with **Ubuntu/CentOS/Redhat** (maybe
 ```bash
 $ pm2 startup ubuntu # then follow the command instruction
 $ pm2 startup centos # will use chkconfig instead of updaterc.d
-$ pm2 startup redhat # will use chkconfig instead of updaterc.d
+$ pm2 startup redhat # not very stable for redhat
 ```
 
 Init script generated are located in /etc/init.d/pm2-init.sh.
@@ -433,6 +434,9 @@ processes.json :
 Then with the cli :
 ```bash
 $ pm2 start processes.json
+$ pm2 stop processes.json
+$ pm2 delete processes.json
+$ pm2 restart processes.json
 ```
 
 <a name="a27"/>

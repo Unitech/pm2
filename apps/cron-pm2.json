@@ -1,0 +1,7 @@
+{
+  "name"      : "echo",
+  "script"    : "./examples/args.js",
+  "instances" : "1",
+  "args"      : "['--toto=heya coco', '-d', '1']",
+  "cron_restart" : "* * * * * *"
+}

@@ -1,56 +1,7 @@
 #!/usr/bin/env bash
 
-#
-# cli-test: Tests for god
-#
-# (C) 2013 Unitech.io Inc.
-# MIT LICENSE
-#
-
-# Yes, we have tests in bash. How mad science is that?
-
-node="`type -P node`"
-nodeVersion="`$node -v`"
-pm2="`type -P node` `pwd`/bin/pm2"
-
-script="echo"
-
-file_path="test/fixtures"
-
-# Determine wget / curl
-which wget
-if [ $? -eq 1 ]
-then
-    http_get="wget"
-else
-    http_get="wget"
-fi
-
-
-echo $http_get
-
-function fail {
-  echo -e "######## \033[31m  ✘ $1\033[0m"
-  exit 1
-}
-
-function success {
-  echo -e "\033[32m------------> ✔ $1\033[0m"
-}
-
-function spec {
-PREV=$?
-sleep 0.2
-  [ $PREV -eq 0 ] || fail "$1"
-  success "$1"
-}
-
-function ispec {
-PREV=$?
-sleep 0.2
-  [ $PREV -eq 1 ] || fail "$1"
-  success "$1"
-}
+SRC=$(cd $(dirname "$0"); pwd)
+source "${SRC}/include.sh"
 
 echo -e "\033[1mRunning tests:\033[0m"
 
