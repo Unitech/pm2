@@ -4,6 +4,7 @@ branches:
     - master
     - development
 node_js:
+   - "0.11.11"
    - "0.11.10"
    - "0.10.25"
    - "0.10.24"
