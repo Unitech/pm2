@@ -343,6 +343,11 @@ if (process.argv.length == 2) {
 //
 process.on('satan:client:ready', function() {
   commander.parse(process.argv);
+  // if (commander.silent) {
+  //   global.console = {};
+  //   global.console.log = function(){};
+  //   global.console.error = function(){};
+  // }
 });
 
 //
