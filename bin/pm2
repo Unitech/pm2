@@ -150,10 +150,18 @@ commander.command('gracefulReload <name|all>')
 //
 // Stop and delete a process by name from database
 //
-commander.command('delete <name|id|script|all|json_file>')
+commander.command('delete <name|id|script|all|json_file|stdin(-)>')
   .description('stop and delete a process by name from PM2 database')
   .action(function(name) {
-    CLI.deleteProcess(name);
+    if (name == "-") {
+      process.stdin.resume();
+      process.stdin.setEncoding('utf8');
+      process.stdin.on('data', function (param) {
+        process.stdin.pause();
+        CLI.deleteProcess(param, 'pipe');
+      });
+    } else 
+      CLI.deleteProcess(name,'');
   });
 
 //
