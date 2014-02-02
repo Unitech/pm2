@@ -110,7 +110,7 @@ commander.command('restart <pm2_id|name|all|json_file|stdin(-)>')
       });
     } else if (param.indexOf('.json') > 0)
       CLI.actionFromJson('restartProcessName', param, 'file');
-    if (param == 'all')
+    else if (param == 'all')
       CLI.restartAll();
     else if (isNaN(parseInt(param))) {
       console.log(cst.PREFIX_MSG + 'Restarting process by name ' + param);
@@ -160,7 +160,7 @@ commander.command('delete <name|id|script|all|json_file|stdin(-)>')
         process.stdin.pause();
         CLI.deleteProcess(param, 'pipe');
       });
-    } else 
+    } else
       CLI.deleteProcess(name,'');
   });
 
