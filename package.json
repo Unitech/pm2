@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "engines" : {
     "node" : ">=0.8"
   },
@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "commander"      : "2.1.0",
-    "cli-table"      : "0.2.0",
+    "pm2-cli-table"  : "0.2.0",
     "pm2-multimeter" : "0.1.2",
     "pm2-interface"  : "0.1.0",
     "usage"          : "0.3.9",
