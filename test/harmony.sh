@@ -9,7 +9,7 @@ $pm2 kill
 echo "################ HARMONY ES6"
 
 $pm2 start harmony.js
-sleep 4
+sleep 8
 $pm2 list
 should 'should fail when trying to launch pm2 without harmony option' 'errored' 1
 $pm2 list
