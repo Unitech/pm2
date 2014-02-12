@@ -23,11 +23,18 @@ file_path="test/fixtures"
 
 # Determine wget / curl
 which wget
-if [ $? -eq 1 ]
+if [ $? -eq 0 ]
 then
     http_get="wget"
 else
-    http_get="wget"
+    which curl
+    if [ $? -eq 0 ]
+    then
+        http_get="curl"
+    else
+        echo -e "\033[31m You need wget or curl to run this test \033[0m";
+        exit 1;
+    fi
 fi
 
 
