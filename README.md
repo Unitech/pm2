@@ -55,6 +55,7 @@ Thanks in advance and we hope that you like pm2 !
 - [0s downtime reload](#a16)
 - [CoffeeScript](#a19)
 - [Enabling Harmony](#a66)
+- [Accept JSON app configuration via pipe from standard input](#a96)
 - [Is my production server ready for PM2](#a4)
 - [Listing processes : pm2 list](#a6)
 - [Monitoring processes (CPU/RAM) : pm2 monit](#a7)
@@ -88,7 +89,7 @@ $ pm2 start app.js -i 4  # Daemonize pm2 and Start 4 clustered instances of app.
 
 $ pm2 start app.js --name my-api # Name process
 
-$ pm2 start app.js --no-daemon # Doesn't exit process
+$ pm2 start app.js --no-daemon   # Don't daemonize pm2
 
 $ pm2 list               # Display all processes status
 $ pm2 list -m            # Serious display
@@ -287,6 +288,32 @@ You can also exec scripts in other languages :
 $ pm2 start my-bash-script.sh -x --interpreter bash
 
 $ pm2 start my-python-script.py -x --interpreter python
+```
+
+<a name="a96"/>
+## Accept JSON app configuration via pipe from standard input
+
+PR :
+- [#273](https://github.com/Unitech/pm2/pull/273)
+- [#279](https://github.com/Unitech/pm2/pull/279)
+
+```bash
+#!/bin/bash
+
+read -d '' my_json <<_EOF_
+[{
+    "name"       : "app1",
+    "script"     : "/home/projects/pm2_nodetest/app.js",
+    "instances"  : "4",
+    "error_file" : "./logz/child-err.log",
+    "out_file"   : "./logz/child-out.log",
+    "pid_file"   : "./logz/child.pid",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 4200
+}]
+_EOF_
+
+echo $my_json | pm2 start -
 ```
 
 <a name="a4"/>

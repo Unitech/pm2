@@ -1,4 +1,7 @@
 
+# 0.7.8
+
+- List processes with user right `service pm2-init.sh status`
 
 # 0.7.7
 
