@@ -216,6 +216,8 @@ $pm2 start cron.js -c "* * * * * *"
 spec "Should cron restart echo.js"
 
 
+$pm2 kill test
+ispec "Should not kill with extra args"
 
 $pm2 kill
 spec "Should kill daemon"
