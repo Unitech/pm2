@@ -23,11 +23,12 @@ $pm2 kill
 
 # Determine wget / curl
 which wget
-if [ $? -eq 1 ]
+if [ $? -eq 0 ]
 then
     http_get="wget"
 else
-    http_get="wget"
+    echo -e "\033[31mYou need wget to run this test \033[0m";
+    exit 1;
 fi
 
 echo $http_get
