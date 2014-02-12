@@ -60,7 +60,7 @@ reload() {
 
 status() {
     echo "Status for $NAME:"
-    $PM2 list
+    super $PM2 list
     RETVAL=$?
 }
 
