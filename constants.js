@@ -46,6 +46,7 @@ var default_conf = {
 
   ONLINE_STATUS      : 'online',
   STOPPED_STATUS     : 'stopped',
+  STOPPING_STATUS    : 'stopping',
   LAUNCHING_STATUS   : 'launching',
   ERRORED_STATUS     : 'errored',
   ONE_LAUNCH_STATUS  : 'one-launch-status',
