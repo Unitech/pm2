@@ -48,6 +48,20 @@ commander.version(pkg.version)
 })();
 
 //
+// Helper function to fail when unknown command arguments are passed
+//
+function failOnUnknown(fn) {
+  return function(arg) {
+    if (arguments.length > 1) {
+      console.log(cst.PREFIX_MSG + '\nUnknown command argument: ' + arg);
+      commander.outputHelp();
+      process.exit(cst.ERROR_EXIT);
+    }
+    return fn.apply(this, arguments);
+  }
+}
+
+//
 // Start command
 //
 commander.command('start <script|json_file|stdin(-)>')
@@ -186,7 +200,7 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 //
 commander.command('ping')
   .description('ping pm2 daemon - if not up it will launch it')
-  .action(CLI.ping);
+  .action(failOnUnknown(CLI.ping));
 
 //
 // Interact
@@ -197,39 +211,39 @@ commander.command('interact <secret_key> <machine_name>')
 
 commander.command('killInteract')
   .description('launch interaction daemon')
-  .action(CLI.interactKill);
+  .action(failOnUnknown(CLI.interactKill));
 
 //
 // Web interface
 //
 commander.command('web')
   .description('launch process/server monit api on ' + cst.WEB_INTERFACE)
-  .action(function() {
+  .action(failOnUnknown(function() {
     console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
     CLI.web();
-  });
+  }));
 
 //
 // Save processes to file
 //
 commander.command('dump')
   .description('dump all processes for resurecting them later')
-  .action(function() {
+  .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Dumping processes');
     UX.processing.start();
     CLI.dump();
-  });
+  }));
 
 //
 // Save processes to file
 //
 commander.command('resurrect')
   .description('resurect previously dumped processes')
-  .action(function() {
+  .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Resurrecting');
     UX.processing.start();
     CLI.resurrect();
-  });
+  }));
 
 //
 // Set pm2 to startup
@@ -255,54 +269,54 @@ commander.command('generate <name>')
 //
 commander.command('list')
   .description('list all processes')
-  .action(CLI.list);
+  .action(failOnUnknown(CLI.list));
 
 commander.command('ls')
   .description('(alias) list all processes')
-  .action(CLI.list);
+  .action(failOnUnknown(CLI.list));
 
 commander.command('l')
   .description('(alias) list all processes')
-  .action(CLI.list);
+  .action(failOnUnknown(CLI.list));
 
 commander.command('status')
   .description('(alias) list all processes')
-  .action(CLI.list);
+  .action(failOnUnknown(CLI.list));
 
 
 // List in raw json
 commander.command('jlist')
   .description('list all processes in JSON format')
-  .action(function() {
+  .action(failOnUnknown(function() {
     CLI.jlist();
-  });
+  }));
 
 // List in prettified Json
 commander.command('prettylist')
   .description('print json in a prettified JSON')
-  .action(function() {
+  .action(failOnUnknown(function() {
     CLI.jlist(true);
-  });
+  }));
 
 //
 // Monitoring command
 //
 commander.command('monit')
   .description('launch termcaps monitoring')
-  .action(CLI.monit);
+  .action(failOnUnknown(CLI.monit));
 
 commander.command('m')
   .description('(alias) launch termcaps monitoring')
-  .action(CLI.monit);
+  .action(failOnUnknown(CLI.monit));
 
 //
 // Flushing command
 //
 commander.command('flush')
   .description('flush logs')
-  .action(function() {
+  .action(failOnUnknown(function() {
     CLI.flush();
-  });
+  }));
 
 //
 // Log streaming
@@ -319,9 +333,9 @@ commander.command('logs [id|name]')
 //
 commander.command('kill')
   .description('kill daemon')
-  .action(function() {
+  .action(failOnUnknown(function(arg) {
     CLI.killDaemon();
-  });
+  }));
 
 //
 // Catch all
