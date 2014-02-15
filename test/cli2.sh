@@ -49,13 +49,12 @@ cd ../..
 echo "Change path try to exec"
 $pm2 start test/fixtures/echo.js
 should 'should app be online' 'online' 1
-$pm2 stop test/fixtures/echo.js
+$pm2 stop echo
 should 'should app be stopped' 'stopped' 1
 $pm2 start test/fixtures/echo.js
 should 'should app be online' 'online' 1
 
 cd -
-
 
 ########### DELETED STUFF BY ID
 $pm2 kill
@@ -70,15 +69,6 @@ $pm2 kill
 $pm2 start echo.js --name test
 $pm2 delete test
 should 'should has been deleted process by name' "name: 'test'" 0
-
-########### DELETED STUFF BY SCRIPT
-$pm2 kill
-
-$pm2 start echo.js
-$pm2 delete echo.js
-$pm2 list
-should 'should has been deleted process by script' "name: 'echo'" 0
-
 
 ########### OPTIONS OUTPUT FILES
 $pm2 kill

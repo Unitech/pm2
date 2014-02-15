@@ -11,7 +11,7 @@ $pm2 kill
 $pm2 start echo.js -x
 should 'should has forked app' 'fork_mode' 1
 
-$pm2 restart echo.js
+$pm2 restart echo
 should 'should has forked app' 'restart_time: 1' 1
 
 ########### Fork mode
