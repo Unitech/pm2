@@ -92,7 +92,6 @@ $ pm2 start app.js --name my-api # Name process
 $ pm2 start app.js --no-daemon   # Don't daemonize pm2
 
 $ pm2 list               # Display all processes status
-$ pm2 list -m            # Serious display
 $ pm2 monit              # Monitor all processes
 $ pm2 logs               # Display all processes logs in streaming
 $ pm2 flush              # Empty all log file
@@ -138,6 +137,8 @@ $ pm2 start echo.pl
 $ pm2 start app.js -i max  # Will start maximum processes depending on available CPUs
 
 $ pm2 start app.js -i 3    # Will start 3 processes
+
+$ pm2 start app.js --node-args="--debug=7001 --trace-deprecation" # --node-args command line option to pass options to node
 
 $ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
 $ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
@@ -241,6 +242,8 @@ That's all !
 <a name="a66"/>
 ## Enabling Harmony ES6
 
+### Enable by default for all processes
+
 You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
 
 To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add :
@@ -261,6 +264,12 @@ If ES6 has been enabled you should see this message at the beggining of each pm2
 
 ```
 ● ES6 mode
+```
+
+### Enable for specific processes
+
+```bash
+$ pm2 start my_app.js --node-args="--harmony"
 ```
 
 <a name="a23"/>
