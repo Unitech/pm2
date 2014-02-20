@@ -18,6 +18,10 @@ var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 
+function list(val) {
+  return val.split(' ');
+}
+
 commander.version(pkg.version)
   .option('-v --verbose', 'verbose level')
   .option('-s --silent', 'throw less messages', false)
@@ -34,6 +38,7 @@ commander.version(pkg.version)
   .option('-w --write', 'write configuration in local folder')
   .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
   .option('--no-daemon', "run pm2 daemon in the foreground if it doesn't exist already")
+  .option('--node-args <node_args>', "space delimited arguments to pass to node in cluster mode - e.g. --node-args=\"--debug=7001 --trace-deprecation\"", list)
   .usage('[cmd] app');
 
 //
