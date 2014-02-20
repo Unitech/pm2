@@ -20,3 +20,11 @@ sleep 2
 should 'should not fail when passing harmony option to V8' 'errored' 0
 $pm2 list
 $pm2 kill
+
+
+$pm2 start harmony.js --node-args="--harmony"
+sleep 8
+$pm2 list
+should 'should not fail when passing node-args=harmony opts' 'errored' 0
+$pm2 list
+$pm2 kill
