@@ -458,18 +458,16 @@ $ pm2 restart processes.json
 <a name="a27"/>
 # Contributing/Development mode
 
-Fork PM2 and to hack it it's pretty simple :
+To hack PM2, it's pretty simple :
 
 ```bash
 $ pm2 kill   # kill the current pm2
 $ git clone my_pm2_fork.git
 $ cd pm2/
-$ DEBUG=* PM2_DEBUG=true./bin/pm2 start xxx.js
+$ DEBUG=* PM2_DEBUG=true ./bin/pm2 --no-daemon
 ```
 
-Everytime you do a modification on the code you have to restart pm2, so just do a `./bin/pm2 kill` before
-starting an app or something else.
-You have to restart it because the code is daemonized on the memory.
+Each time you edit the code be sure to restart pm2 to make changes taking effect.
 
 ## Install pm2 development
 
