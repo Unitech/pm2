@@ -153,6 +153,10 @@ $ pm2 start app.json                # Start processes with options declared in a
 $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 
 $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
+
+$ pm2 --run-as-user foo start app.js  # Start app.js as user foo instead of root (pm2 must be running as root)
+
+$ pm2 --run-as-user foo --run-as-group bar start app.js  # Start app.js as foo:bar instead of root:root (pm2 must be running as root)
 ```
 
 You can also execute app in other languages ([the fork mode](#a23)):
