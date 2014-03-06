@@ -186,7 +186,7 @@ commander.command('delete <name|id|script|all|json_file|stdin(-)>')
 // Send system signal to process
 //
 commander.command('sendSignal <signal> <pm2_id|name>')
-  .description('stop specific process pm2 id or script name (set with --name or script name)')
+  .description('send a system signal to the process')
   .action(function(signal, pm2_id) {
     UX.processing.start();
 
