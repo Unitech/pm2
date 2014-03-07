@@ -9,7 +9,7 @@ var util = require('util');
 
 // Dont change this or the pm2 could not load custom_options.sh because of
 // header in bin/pm2
-DEFAULT_FILE_PATH = p.resolve(process.env.HOME, '.pm2');
+var DEFAULT_FILE_PATH = p.resolve(process.env.HOME, '.pm2');
 
 var default_conf = {
   DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
