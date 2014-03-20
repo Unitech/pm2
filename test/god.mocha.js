@@ -271,4 +271,11 @@ describe('God', function() {
       });
     });
   });
+
+  it('should report pm2 version', function(done) {
+    God.getVersion({}, function(err, version) {
+      version.should.not.be.null;
+      done();
+    });
+  });
 });
