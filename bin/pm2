@@ -209,7 +209,7 @@ commander.command('ping')
 //
 // Interact
 //
-commander.command('interact <secret_key> <machine_name>')
+commander.command('interact <secret_key> <public_key> <machine_name>')
   .description('launch interaction daemon')
   .action(CLI.interact);
 

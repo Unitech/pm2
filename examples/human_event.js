@@ -1,4 +1,8 @@
 
 setInterval(function() {
-  process.send({type:"event:zlatan", msg:'hello im an human'});
-}, 1000);
+  process.send({type:"event:zlatan", msg: {
+    user : 'Alex registered',
+    email : 'alsdasd@asdad.fr'
+  }});
+  //process.send('heysaaa');
+}, 3000);
