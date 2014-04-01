@@ -50,6 +50,25 @@ fi
 
 $pm2 kill
 
-$pm2 start symlink-server.js
+#set init state
+ln -sfn symlink/20140101/server.js ./symlink-server.js
+
+$pm2 start symlink-server.js -o ./symlink-out.log
 
 should 'app should be online' 'online' 1
+
+mkdir symlink/20140202
+cp server-echo.js symlink/20140202/server.js
+
+ln -sfn symlink/20140202/server.js ./symlink-server.js
+
+$pm2 restart all
+
+OUT=`cat ./symlink-out-0.log | grep -o "Server is listenning on port 8020" | wc -l`
+
+[ $OUT -eq 1 ] || fail "Should start updated symlink"
+success "Should start updated symlink"
+
+#removing tests fixtures
+rm -R symlink/20140202
+rm ./symlink-out-0.log
