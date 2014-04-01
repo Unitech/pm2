@@ -43,3 +43,13 @@ then
 else
     success "environment variable successfully defined"
 fi
+
+###################
+# Testing symlink #
+###################
+
+$pm2 kill
+
+$pm2 start symlink-server.js
+
+should 'app should be online' 'online' 1
