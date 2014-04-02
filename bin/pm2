@@ -70,6 +70,7 @@ function failOnUnknown(fn) {
 //
 commander.command('start <script|json_file|stdin(-)>')
   .description('start specific processes')
+  .option('--watch', 'Watch folder for changes')  
   .action(function(cmd) {
     if (cmd == "-") {
       process.stdin.resume();
