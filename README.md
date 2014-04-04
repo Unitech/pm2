@@ -21,16 +21,16 @@ Tested with Node v0.11, v0.10, v0.8 (https://travis-ci.org/Unitech/pm2).
 Compatible with CoffeeScript.
 Works on Linux & MacOS.
 
-[![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
+<!-- [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2) -->
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 
-<!-- [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true) -->
+[![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
 
 ### Build Status
 
-Master : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=master)](https://api.travis-ci.org/Unitech/pm2.png?branch=master)
+Master : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=master)](https://travis-ci.org/Unitech/pm2)
 
-Development : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=development)](https://api.travis-ci.org/Unitech/pm2.png?branch=development)
+Development : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=development)](https://travis-ci.org/Unitech/pm2)
 
 # Monitoring dashboard
 
