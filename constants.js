@@ -38,8 +38,9 @@ var default_conf = {
   PREFIX_MSG_ERR     : '\x1B[31mPM2 [ERROR] \x1B[39m',
   SAMPLE_FILE_PATH   : '../lib/sample.json',
 
-  CENTOS_STARTUP_SCRIPT     : '../lib/scripts/pm2-init-centos.sh',
+  CENTOS_STARTUP_SCRIPT : '../lib/scripts/pm2-init-centos.sh',
   UBUNTU_STARTUP_SCRIPT : '../lib/scripts/pm2-init.sh',
+  SYSTEMD_STARTUP_SCRIPT: '../lib/scripts/pm2.service',
 
   SUCCESS_EXIT       : 0,
   ERROR_EXIT         : 1,
