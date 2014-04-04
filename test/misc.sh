@@ -60,11 +60,9 @@ for (( i = 0; i <= 50; i++ )); do
     echo -n "."
 done
 
-echo ""
+$pm2 list
 
 should 'process should have been restarted' 'restart_time: 1' 1
-
-$pm2 stop server-watch
 
 rm server-watch.js
 
