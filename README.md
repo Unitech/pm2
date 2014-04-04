@@ -369,7 +369,7 @@ Monitor CPU and memory usage of every node process (and also clustered processes
 PM2 provides an automatic way to keep Node processes alive on server restart.
 On exit it will dump the process list and their environment and will resurrect them on startup.
 
-It uses **System V init script** compatible with **Ubuntu/CentOS/Redhat** (maybe it works on other sys but not 100% sure).
+It uses **System V init script** for **Ubuntu/CentOS/Redhat** (maybe it works on other sys but not 100% sure).
 
 ```bash
 $ pm2 startup ubuntu # then follow the command instruction
@@ -378,6 +378,18 @@ $ pm2 startup redhat # not very stable for redhat
 ```
 
 Init script generated are located in /etc/init.d/pm2-init.sh.
+
+### systemd
+
+Use this for systemd distributions, like Fedora and Archlinux.
+Note that all running services must be stopped and your old dump will be overwritten.
+
+```bash
+$ pm2 kill
+$ pm2 startup systemd
+```
+
+This will create, enable and start the service.
 
 ### Running script as a different user
 
