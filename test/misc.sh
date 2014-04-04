@@ -49,11 +49,11 @@ fi
 #####################
 $pm2 kill
 
-cp server-watch.js server-watch.bak.js
+cp server-watch.bak.js server-watch.js
 
 $pm2 start --watch server-watch.js
 
-echo "setTimeout(function() { console.log('still ok') })" >> "server-watch.js"
+echo "setTimeout(function() { console.log('still ok') })" > server-watch.js
 
 for (( i = 0; i <= 50; i++ )); do
     sleep 0.1
@@ -66,37 +66,38 @@ should 'process should have been restarted' 'restart_time: 1' 1
 
 $pm2 stop server-watch
 
-mv server-watch.bak.js server-watch.js
+rm server-watch.js
+
 
 ###############
 $pm2 kill
 
 # Script should fail but be started again on next change
-cp server-watch.js server-watch.bak.js
+cp server-watch.bak.js server-watch.js
 
 $pm2 start --watch server-watch.js
-												
-echo "setTimeout(function() { process.exit() }, 0)" >> "server-watch.js"
+
+echo "setTimeout(function() { process.exit() }, 30)" > server-watch.js
 
 for (( i = 0; i <= 50; i++ )); do
     sleep 0.2
     echo -n "."
 done
 
-#should 'should has been deleted process by id' "status: 'errored'" 1
 $pm2 list
 should 'should have stopped unstable process' 'errored' 1
 
-mv server-watch.bak.js server-watch.js
+cp server-watch.bak.js server-watch.js
 
 for (( i = 0; i <= 50; i++ )); do
     sleep 0.1
     echo -n "."
 done
 
-echo ""
-
-should 'should start the errored process again while putting file back' 'online' 1
 $pm2 list
+should 'should start the errored process again while putting file back' 'online' 1
+
+rm server-watch.js
+
 
 $pm2 kill
