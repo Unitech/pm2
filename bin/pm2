@@ -40,16 +40,49 @@ commander.version(pkg.version)
           })
   .usage('[cmd] app');
 
-//
-// Start daemon if it does not exist
-//
-// Function checks if --no-daemon option is present,
-// and starts daemon in the same process if it does
-//
-;(function launchDaemon() {
-  commander.parse(process.argv);
-  Satan.start(!commander.daemon);
-})();
+commander.on('--help', function() {
+        console.log('  Basic Examples:');
+        console.log('');
+        console.log('    Start an app using all CPUs available + set a name :');
+        console.log('    $ pm2 start app.js -i max --name "api"');
+        console.log('');
+        console.log('    Restart the previous app launched, by name :');
+        console.log('    $ pm2 restart api');
+        console.log('');
+        console.log('    Stop the app :');
+        console.log('    $ pm2 stop api');
+        console.log('');
+        console.log('    Restart the app that is stopped :');
+        console.log('    $ pm2 restart api');
+        console.log('');
+        console.log('    Remove the app from the process list :');
+        console.log('    $ pm2 delete api');
+        console.log('');
+        console.log('    Kill daemon pm2 :');
+        console.log('    $ pm2 kill');
+        console.log('');
+        console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
+        console.log('');
+        });
+
+if (process.argv.indexOf('--no-daemon') > -1) {
+  //
+  // Start daemon if it does not exist
+  //
+  // Function checks if --no-daemon option is present,
+  // and starts daemon in the same process if it does not exists
+  //
+  console.log('pm2 launched in no daemon mode (you can add DEBUG="*" env variable to get more msgs');
+  Satan.pingDaemon(function(ab) {
+    if (ab == true) {
+      console.error('>> pm2 is already daemonized ! You should kill it before launching it in no daemon mode'.red);
+    }
+    Satan.start(true);
+  });
+}
+else
+  Satan.start(false);
+
 
 //
 // Helper function to fail when unknown command arguments are passed
@@ -62,15 +95,14 @@ function failOnUnknown(fn) {
       process.exit(cst.ERROR_EXIT);
     }
     return fn.apply(this, arguments);
-  }
+  };
 }
 
 //
 // Start command
 //
-commander.command('start <script|json_file|stdin(-)>')
-  .description('start specific processes')
-
+commander.command('start <file|json|stdin>')
+  .description('                start and daemonize an app')
   .action(function(cmd) {
     if (cmd == "-") {
       process.stdin.resume();
@@ -88,8 +120,8 @@ commander.command('start <script|json_file|stdin(-)>')
 //
 // Stop specific id
 //
-commander.command('stop <pm2_id|name|all|json_file|stdin(-)>')
-  .description('stop specific process pm2 id or script name (set with --name or script name)')
+commander.command('stop <id|name|all|json|stdin>')
+  .description('          stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
     UX.processing.start();
 
@@ -115,8 +147,8 @@ commander.command('stop <pm2_id|name|all|json_file|stdin(-)>')
 //
 // Stop All processes
 //
-commander.command('restart <pm2_id|name|all|json_file|stdin(-)>')
-  .description('restart processes by id/name/all or by apps defined in json file')
+commander.command('restart <id|name|all|json|stdin>')
+  .description('       restart a process')
   .action(function(param) {
     UX.processing.start();
 
@@ -144,7 +176,7 @@ commander.command('restart <pm2_id|name|all|json_file|stdin(-)>')
 // Reload process(es)
 //
 commander.command('reload <name|all>')
-  .description('reload all processes or by name')
+  .description('                 reload processes (note that its for app using HTTP/HTTPS)')
   .action(function(pm2_id) {
     UX.processing.start();
     if (pm2_id == 'all')
@@ -157,7 +189,7 @@ commander.command('reload <name|all>')
 // Reload process(es)
 //
 commander.command('gracefulReload <name|all>')
-  .description('reload all processes or by name. Will send a "shutdown" message for graceful exit.')
+  .description('              gracefully reload a process. Send a "shutdown" message to close all connections.')
   .action(function(pm2_id) {
     UX.processing.start();
     if (pm2_id == 'all')
@@ -169,8 +201,8 @@ commander.command('gracefulReload <name|all>')
 //
 // Stop and delete a process by name from database
 //
-commander.command('delete <name|id|script|all|json_file|stdin(-)>')
-  .description('stop and delete a process by name from PM2 database')
+commander.command('delete <name|id|script|all|json|stdin>')
+  .description(' stop and delete a process from pm2 process list')
   .action(function(name) {
     if (name == "-") {
       process.stdin.resume();
@@ -187,7 +219,7 @@ commander.command('delete <name|id|script|all|json_file|stdin(-)>')
 // Send system signal to process
 //
 commander.command('sendSignal <signal> <pm2_id|name>')
-  .description('send a system signal to the process')
+.description('      send a system signal to the target process')
   .action(function(signal, pm2_id) {
     UX.processing.start();
 
@@ -204,25 +236,25 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 // Stop and delete a process by name from database
 //
 commander.command('ping')
-  .description('ping pm2 daemon - if not up it will launch it')
+  .description('                 ping pm2 daemon - if not up it will launch it')
   .action(failOnUnknown(CLI.ping));
 
 //
 // Interact
 //
 commander.command('interact <secret_key> <public_key> <machine_name>')
-  .description('launch interaction daemon')
+  .description('launch interaction with VitalSigns servers')
   .action(CLI.interact);
 
 commander.command('killInteract')
-  .description('launch interaction daemon')
+  .description('stop the interaction with VitalSigns servers')
   .action(failOnUnknown(CLI.interactKill));
 
 //
 // Web interface
 //
 commander.command('web')
-  .description('launch process/server monit api on ' + cst.WEB_INTERFACE)
+  .description('launch an health API on port ' + cst.WEB_INTERFACE)
   .action(failOnUnknown(function() {
     console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
     CLI.web();
@@ -232,7 +264,7 @@ commander.command('web')
 // Save processes to file
 //
 commander.command('dump')
-  .description('dump all processes for resurecting them later')
+  .description('dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Dumping processes');
     UX.processing.start();
@@ -243,7 +275,7 @@ commander.command('dump')
 // Save processes to file
 //
 commander.command('resurrect')
-  .description('resurect previously dumped processes')
+  .description('resurrect previously dumped processes')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Resurrecting');
     UX.processing.start();
@@ -254,7 +286,7 @@ commander.command('resurrect')
 // Set pm2 to startup
 //
 commander.command('startup <platform>')
-  .description('auto resurect process at startup. [platform] can be centos redhat or ubuntu')
+  .description('auto resurect process at startup. [platform] = ubuntu, centos or systemd')
   .action(function(platform) {
     CLI.startup(platform);
   });
@@ -341,6 +373,7 @@ commander.command('kill')
   .action(failOnUnknown(function(arg) {
     CLI.killDaemon();
   }));
+
 
 //
 // Catch all
