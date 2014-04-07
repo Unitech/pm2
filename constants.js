@@ -7,14 +7,16 @@ var p    = require('path');
 var fs   = require('fs');
 var util = require('util');
 
+var HOME = process.env.PM2_HOME || process.env.HOME;
+
 // Dont change this or the pm2 could not load custom_options.sh because of
 // header in bin/pm2
-var DEFAULT_FILE_PATH = p.resolve(process.env.HOME, '.pm2');
+var DEFAULT_FILE_PATH = p.resolve(HOME, '.pm2');
 
 var default_conf = {
   DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
-  PM2_LOG_FILE_PATH  : p.join(p.resolve(process.env.HOME, '.pm2'), 'pm2.log'),
-  PM2_PID_FILE_PATH  : p.join(p.resolve(process.env.HOME, '.pm2'), 'pm2.pid'),
+  PM2_LOG_FILE_PATH  : p.join(p.resolve(HOME, '.pm2'), 'pm2.log'),
+  PM2_PID_FILE_PATH  : p.join(p.resolve(HOME, '.pm2'), 'pm2.pid'),
   DEFAULT_PID_PATH   : p.join(DEFAULT_FILE_PATH, 'pids'),
   DEFAULT_LOG_PATH   : p.join(DEFAULT_FILE_PATH, 'logs'),
   DUMP_FILE_PATH     : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
@@ -54,8 +56,8 @@ var default_conf = {
 
   REMOTE_PORT        : 3900,
   REMOTE_HOST        : 'socket-1.pm2.io',
-  INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.log'),
-  INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),
+  INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(HOME, '.pm2'), 'interactor.log'),
+  INTERACTOR_PID_PATH : p.join(p.resolve(HOME, '.pm2'), 'interactor.pid'),
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
 };
 
