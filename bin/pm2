@@ -40,16 +40,49 @@ commander.version(pkg.version)
           })
   .usage('[cmd] app');
 
-//
-// Start daemon if it does not exist
-//
-// Function checks if --no-daemon option is present,
-// and starts daemon in the same process if it does
-//
-;(function launchDaemon() {
-  commander.parse(process.argv);
-  Satan.start(!commander.daemon);
-})();
+commander.on('--help', function() {
+        console.log('  Basic Examples:');
+        console.log('');
+        console.log('    Start an app using all CPUs available + set a name :');
+        console.log('    $ pm2 start app.js -i max --name "api"');
+        console.log('');
+        console.log('    Restart the previous app launched, by name :');
+        console.log('    $ pm2 restart api');
+        console.log('');
+        console.log('    Stop the app :');
+        console.log('    $ pm2 stop api');
+        console.log('');
+        console.log('    Restart the app that is stopped :');
+        console.log('    $ pm2 restart api');
+        console.log('');
+        console.log('    Remove the app from the process list :');
+        console.log('    $ pm2 delete api');
+        console.log('');
+        console.log('    Kill daemon pm2 :');
+        console.log('    $ pm2 kill');
+        console.log('');
+        console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
+        console.log('');
+        });
+
+if (process.argv.indexOf('--no-daemon') > -1) {
+  //
+  // Start daemon if it does not exist
+  //
+  // Function checks if --no-daemon option is present,
+  // and starts daemon in the same process if it does not exists
+  //
+  console.log('pm2 launched in no daemon mode (you can add DEBUG="*" env variable to get more msgs');
+  Satan.pingDaemon(function(ab) {
+    if (ab == true) {
+      console.error('>> pm2 is already daemonized ! You should kill it before launching it in no daemon mode'.red);
+    }
+    Satan.start(true);
+  });
+}
+else
+  Satan.start(false);
+
 
 //
 // Helper function to fail when unknown command arguments are passed
@@ -62,7 +95,7 @@ function failOnUnknown(fn) {
       process.exit(cst.ERROR_EXIT);
     }
     return fn.apply(this, arguments);
-  }
+  };
 }
 
 //
@@ -340,6 +373,7 @@ commander.command('kill')
   .action(failOnUnknown(function(arg) {
     CLI.killDaemon();
   }));
+
 
 //
 // Catch all
