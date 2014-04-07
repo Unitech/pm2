@@ -101,8 +101,8 @@ function failOnUnknown(fn) {
 //
 // Start command
 //
-commander.command('start <script|json_file|stdin(-)>')
-  .description('start specific processes')
+commander.command('start <file|json|stdin>')
+  .description('                start and daemonize an app')
   .action(function(cmd) {
     if (cmd == "-") {
       process.stdin.resume();
@@ -120,8 +120,8 @@ commander.command('start <script|json_file|stdin(-)>')
 //
 // Stop specific id
 //
-commander.command('stop <pm2_id|name|all|json_file|stdin(-)>')
-  .description('stop specific process pm2 id or script name (set with --name or script name)')
+commander.command('stop <id|name|all|json|stdin>')
+  .description('          stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
     UX.processing.start();
 
@@ -147,8 +147,8 @@ commander.command('stop <pm2_id|name|all|json_file|stdin(-)>')
 //
 // Stop All processes
 //
-commander.command('restart <pm2_id|name|all|json_file|stdin(-)>')
-  .description('restart processes by id/name/all or by apps defined in json file')
+commander.command('restart <id|name|all|json|stdin>')
+  .description('       restart a process')
   .action(function(param) {
     UX.processing.start();
 
@@ -176,7 +176,7 @@ commander.command('restart <pm2_id|name|all|json_file|stdin(-)>')
 // Reload process(es)
 //
 commander.command('reload <name|all>')
-  .description('reload all processes or by name')
+  .description('                 reload processes (note that its for app using HTTP/HTTPS)')
   .action(function(pm2_id) {
     UX.processing.start();
     if (pm2_id == 'all')
@@ -189,7 +189,7 @@ commander.command('reload <name|all>')
 // Reload process(es)
 //
 commander.command('gracefulReload <name|all>')
-  .description('reload all processes or by name. Will send a "shutdown" message for graceful exit.')
+  .description('              gracefully reload a process. Send a "shutdown" message to close all connections.')
   .action(function(pm2_id) {
     UX.processing.start();
     if (pm2_id == 'all')
@@ -201,8 +201,8 @@ commander.command('gracefulReload <name|all>')
 //
 // Stop and delete a process by name from database
 //
-commander.command('delete <name|id|script|all|json_file|stdin(-)>')
-  .description('stop and delete a process by name from PM2 database')
+commander.command('delete <name|id|script|all|json|stdin>')
+  .description(' stop and delete a process from pm2 process list')
   .action(function(name) {
     if (name == "-") {
       process.stdin.resume();
@@ -219,7 +219,7 @@ commander.command('delete <name|id|script|all|json_file|stdin(-)>')
 // Send system signal to process
 //
 commander.command('sendSignal <signal> <pm2_id|name>')
-  .description('send a system signal to the process')
+.description('      send a system signal to the target process')
   .action(function(signal, pm2_id) {
     UX.processing.start();
 
@@ -236,25 +236,25 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 // Stop and delete a process by name from database
 //
 commander.command('ping')
-  .description('ping pm2 daemon - if not up it will launch it')
+  .description('                 ping pm2 daemon - if not up it will launch it')
   .action(failOnUnknown(CLI.ping));
 
 //
 // Interact
 //
 commander.command('interact <secret_key> <public_key> <machine_name>')
-  .description('launch interaction daemon')
+  .description('launch interaction with VitalSigns servers')
   .action(CLI.interact);
 
 commander.command('killInteract')
-  .description('launch interaction daemon')
+  .description('stop the interaction with VitalSigns servers')
   .action(failOnUnknown(CLI.interactKill));
 
 //
 // Web interface
 //
 commander.command('web')
-  .description('launch process/server monit api on ' + cst.WEB_INTERFACE)
+  .description('launch an health API on port ' + cst.WEB_INTERFACE)
   .action(failOnUnknown(function() {
     console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
     CLI.web();
@@ -264,7 +264,7 @@ commander.command('web')
 // Save processes to file
 //
 commander.command('dump')
-  .description('dump all processes for resurecting them later')
+  .description('dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Dumping processes');
     UX.processing.start();
@@ -275,7 +275,7 @@ commander.command('dump')
 // Save processes to file
 //
 commander.command('resurrect')
-  .description('resurect previously dumped processes')
+  .description('resurrect previously dumped processes')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Resurrecting');
     UX.processing.start();
