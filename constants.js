@@ -53,7 +53,7 @@ var default_conf = {
   ONE_LAUNCH_STATUS  : 'one-launch-status',
 
   REMOTE_PORT        : 3900,
-  REMOTE_HOST        : 'socket-1.pm2.io',
+  REMOTE_HOST        : 'socket-1.vitalsigns.io',
   INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.log'),
   INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668

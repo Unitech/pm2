@@ -248,7 +248,7 @@ commander.command('interact <secret_key> <public_key> <machine_name>')
 
 commander.command('killInteract')
   .description('stop the interaction with VitalSigns servers')
-  .action(failOnUnknown(CLI.interactKill));
+  .action(failOnUnknown(CLI.killInteract));
 
 //
 // Web interface
