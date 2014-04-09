@@ -520,7 +520,7 @@ $ pm2 start my-python-script.py -x --interpreter python
 
 
 <a name="a34"/>
-# Log and PID files
+## Log and PID files
 
 By default every logs (error and out), pids files, dump, pm2 logs are located in `~/.pm2/`
 
@@ -619,7 +619,7 @@ $ nvm alias default v0.11.9
 ```
 
 <a name="a27"/>
-# Contributing/Development mode
+## Contributing/Development mode
 
 To hack PM2, it's pretty simple :
 
@@ -639,7 +639,7 @@ $ npm install git://github.com/Unitech/pm2#development -g
 ```
 
 <a name="a21"/>
-# Known bugs and workarounds
+## Known bugs and workarounds
 
 First, install the lastest pm2 version :
 
@@ -663,35 +663,21 @@ When using the cluster mode (by default) you can't use ports from 0 to 1024. If 
 By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
 <a name="a14"/>
-# Test
+## Test
 
 ```bash
 npm test
 ```
 
 <a name="a20"/>
-# They talk about it
+## They talk about it
 
 - http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
 
-# Other features
-
-- Clusterize your Node networked script without adding one line of code
-- Fully tested
-- Monitor process/cluster processes health (status, memory, cpu usage, restarted time) via CLI (htop like)
-- Monitor server health (processes, cpu core...) via JSON api (pm2 web)
-- Launch multiple applications via JSON
-- Forever keep alive processes
-- Log streaming in realtime (pm2 logs)
-- Log uncaught exceptions in error logs
-- Track restarted time
-- Auto stop processes who exit too fast
-- Dump current processes and resurrect (upstart)
-
-# Idea bucket
+## Idea bucket
 
 - Remote administration/status checking
 - Builtin Inter process communication channel (message bus)

@@ -30,6 +30,7 @@ $
 
 ## Remove init script
 
+sudo update-rc.d -f pm2-init.sh remove
 ```
 $ chkconfig --del pm2-init.sh
 $ chkconfig --add pm2-init.sh
