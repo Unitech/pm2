@@ -68,6 +68,7 @@ Thanks in advance and we hope that you like pm2 !
 - [Monitoring CPU/Memory usage](#a7)
 - [Displaying logs in realtime](#a9)
 - [Clustering](#a5)
+- [Watch & Restart](#a890)
 - [Reloading without downtime](#a690)
 - [Make PM2 restart on server reboot](#a8)
 - [JSON app declaration](#a10)
@@ -311,6 +312,15 @@ It populates the file `~/.pm2/dump.pm2` by default.
 To bring back the latest dump :
 ```bash
 $ pm2 resurrect
+```
+
+<a name="a890"/>
+## Watch & Restart
+
+Built by [Soyuka](JSON app declaration), this feature permits to restart automatically your app when a file change in the current folder (recursively) :
+
+```bash
+$ pm2 start app.js --watch
 ```
 
 <a name="a10"/>
