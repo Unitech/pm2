@@ -130,6 +130,9 @@ $ pm2 start app.js
 <a name="a3"/>
 ## Examples
 
+- [Raw examples/Hacker guide](#a666)
+- [Differents ways to launch a process](#a667)
+
 <a name="a6"/>
 ## Listing all processes
 
