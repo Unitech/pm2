@@ -49,48 +49,44 @@ We are also looking for AngularJS developers and designers contact us at contact
 
 Thanks in advance and we hope that you like pm2 !
 
-# Readme Contents
+### Table of contents
 
-## Quick start
+### Quick start
 
 - [Installation](#a1)
 - [Usage](#a2)
 - [Examples](#a3)
+- [Raw examples/Hacker guide](#a666)
+- [Differents ways to launch a process](#a667)
 
-- [Transitional state of apps](#a4)
-- [Clustering](#a5)
-- [Reloading without downtime](#a6)
+### Special features
 
-- [make PM2 restart on server reboot](#a8)
-
-- [Configuration file](#a9)
-- [JSON app declaration](#a10)
-
-## Special features
-
-- [JSON app declaration](#a10)
 - [Process listing](#a6)
 - [Monitoring CPU/Memory usage](#a7)
-- [Configuration file](#a24)
 - [Displaying logs in realtime](#a9)
-- [API health end point](#a12)
+- [Clustering](#a5)
+- [Reloading without downtime](#a690)
+- [Make PM2 restart on server reboot](#a8)
+- [JSON app declaration](#a10)
 
-## Specific
+### Specific
 
-- [Specific features](#a7)
+- [Specific features](#a77)
+- [Configuration file](#a24)
+- [API health endpoint](#a12)
 - [Enabling Harmony](#a66)
 - [CoffeeScript](#a19)
 - [Testing PM2 on your prod environment](#a149)
 - [JSON app via pipe](#a96)
 
-## Knowledge
+### Knowledge
 
 - [Setup PM2 on server : tutorial](#a89)
 - [Logs and PID files](#a34)
 - [Transitional state of apps](#a4)
 - [Execute any script : What is fork mode ?](#a23)
 
-## More
+### More
 
 - [Contributing/Development mode](#a27)
 - [Known bugs and workaround](#a21)
@@ -101,7 +97,7 @@ Thanks in advance and we hope that you like pm2 !
 ------
 
 <a name="a1"/>
-# Installation
+## Installation
 
 The prefered Node version to run PM2, is the **0.11.10**
 
@@ -123,7 +119,7 @@ Common problems on installation :
 - if Make/GCC or other are missing `sudo apt-get install build-essential` on Ubuntu
 
 <a name="a2"/>
-# Usage
+## Usage
 
 Hello world :
 
@@ -132,12 +128,47 @@ $ pm2 start app.js
 ```
 
 <a name="a3"/>
-# Quick Examples
+## Examples
 
-Hacker guide :
+<a name="a6"/>
+## Listing all processes
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
+
+Listing all processes running :
+
+```bash
+$ pm2 list
+# Or
+$ pm2 [list|ls|l|status]
+```
+
+<a name="a7"/>
+## Monitoring CPU/Memory usage
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
+
+Monitor all processes launched :
+
+```bash
+$ pm2 monit
+```
+
+<a name="a9"/>
+## Display logs in realtime
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
+
+Displaying logs of specified process or all process in realtime :
+
+```bash
+$ pm2 logs
+$ pm2 logs big-api
+$ pm2 flush # Clear all the logs
+```
 
 <a name="a4"/>
-# Transitional state of apps (important)
+## Transitional state of apps (important)
 
 PM2 is a process manager, as said, pm2 can start, stop, restart and *delete* processes.
 
@@ -170,7 +201,7 @@ $ pm2 delete web-interface
 ```
 
 <a name="a5"/>
-# Clustering
+## Clustering
 
 Launch `max` instances (`max` depending on the number of CPUs available) and set the load balancer to balance queries between each process :
 
@@ -185,8 +216,8 @@ Important concepts to make a NodeJS app stateless :
 - Session must not be in memory but shared via a database (Redis, Mongo, whatever)
 - [WebSocket/Socket.io should communicate via a database](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO)
 
-<a name="a6"/>
-# Reloading without downtime
+<a name="a690"/>
+## Reloading without downtime
 
 This special feature has been added to PM2 a while ago.
 
@@ -200,7 +231,7 @@ $ pm2 reload api
 
 If the reload system hasn't managed to reload gracefully, a timeout will simply kill the process and will restart it.
 
-## Graceful reload
+### Graceful reload
 
 Sometimes you can experience a **very long reload, or a reload that doesn't work** (fallback to restart).
 
@@ -230,43 +261,6 @@ process.on('message', function(msg) {
     }, 1500);
   }
 });
-```
-
-<a name="a7"/>
-# Specific features
-
-Launching PM2 without daemonizing itself :
-
-```bash
-$ pm2 start app.js --no-daemon
-```
-
-Listing all processes running :
-
-```bash
-$ pm2 list
-# Or
-$ pm2 [list|ls|l|status]
-```
-
-Monitor all processes launched :
-
-```bash
-$ pm2 monit
-```
-
-Displaying logs of specified process or all process in realtime :
-
-```bash
-$ pm2 logs
-$ pm2 logs big-api
-$ pm2 flush # Clear all the logs
-```
-
-Sending a system signal to a process :
-
-```bash
-$ pm2 sendSignal SIGUSR2 my-app
 ```
 
 <a name="a8"/>
@@ -314,31 +308,8 @@ To bring back the latest dump :
 $ pm2 resurrect
 ```
 
-## Make PM2 expose an API
-
-```bash
-$ pm2 web
-```
-
-<a name="a9"/>
-# Configuration file
-
-You can edit these options by editing the file `~/.pm2/custom_options.sh`
-
-These variables can be customized :
-
-```
-  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
-  DAEMON_RPC_PORT    : process.env.PM2_RPC_PORT  || 6666, // RPC commands
-  DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
-  DEBUG              : process.env.PM2_DEBUG || false,
-  WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
-  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
-  PM2_NODE_OPTIONS   : ''
-```
-
 <a name="a10"/>
-# JSON app declaration
+## JSON app declaration
 
 processes.json :
 
@@ -377,10 +348,95 @@ $ pm2 delete processes.json
 $ pm2 restart processes.json
 ```
 
+# Specific features
+
+<a name="a77"/>
+
+Launching PM2 without daemonizing itself :
+
+```bash
+$ pm2 start app.js --no-daemon
+```
+
+Sending a system signal to a process :
+
+```bash
+$ pm2 sendSignal SIGUSR2 my-app
+```
+
+<a name="a9"/>
+## Configuration file
+
+You can edit these options by editing the file `~/.pm2/custom_options.sh`
+
+These variables can be customized :
+
+```
+  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
+  DAEMON_RPC_PORT    : process.env.PM2_RPC_PORT  || 6666, // RPC commands
+  DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
+  DEBUG              : process.env.PM2_DEBUG || false,
+  WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
+  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
+  PM2_NODE_OPTIONS   : ''
+```
+
+
+## API health endpoint
+
+```bash
+$ pm2 web
+```
+
+<a name="a66"/>
+## Enabling Harmony ES6
+
+### Enable by default for all processes
+
+You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
+
+To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add :
+
+```bash
+export PM2_NODE_OPTIONS='--harmony'
+```
+
+Then :
+
+```bash
+$ pm2 dump
+$ pm2 exit
+$ pm2 resurrect
+```
+
+If ES6 has been enabled you should see this message at the beggining of each pm2 commands :
+
+```
+● ES6 mode
+```
+
+### Enable for specific processes
+
+```bash
+$ pm2 start my_app.js --node-args="--harmony"
+```
+
+<a name="a19"/>
+## CoffeeScript
+
+```bash
+$ pm2 start my_app.coffee
+```
+
+That's all !
+
+
+
 <a name="a666"/>
-# Hacker guide
+## Hacker guide
 
 Quick start for command and examples :
+
 ```bash
 $ pm2 start app.js --name my-api # Name process
 
@@ -425,6 +481,7 @@ $ pm2 start echo.rb
 $ pm2 start echo.pl
 ```
 
+<a name="a667"/>
 ## Different ways to launch a process
 
 ```bash
@@ -478,47 +535,6 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 [How To Use PM2 to Setup a Node.js Production Environment On An Ubuntu VPS](https://www.digitalocean.com/community/articles/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps)
 
 
-<a name="a19"/>
-## CoffeeScript
-
-```bash
-$ pm2 start my_app.coffee
-```
-
-That's all !
-
-<a name="a66"/>
-## Enabling Harmony ES6
-
-### Enable by default for all processes
-
-You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
-
-To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add :
-
-```bash
-export PM2_NODE_OPTIONS='--harmony'
-```
-
-Then :
-
-```bash
-$ pm2 dump
-$ pm2 exit
-$ pm2 resurrect
-```
-
-If ES6 has been enabled you should see this message at the beggining of each pm2 commands :
-
-```
-● ES6 mode
-```
-
-### Enable for specific processes
-
-```bash
-$ pm2 start my_app.js --node-args="--harmony"
-```
 
 <a name="a23"/>
 ## Execute any script : What is fork mode ?
