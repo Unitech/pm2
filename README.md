@@ -32,9 +32,9 @@ Works on Linux & MacOS.
 
 ### Build Status
 
-Master : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=master)](https://travis-ci.org/Unitech/pm2)
+Master: [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=master)](https://travis-ci.org/Unitech/pm2)
 
-Development : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=development)](https://travis-ci.org/Unitech/pm2)
+Development: [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=development)](https://travis-ci.org/Unitech/pm2)
 
 ## Monitoring dashboard
 
@@ -85,9 +85,9 @@ Thanks in advance and we hope that you like pm2 !
 ### Knowledge
 
 - [Transitional state of apps](#a4)
-- [Setup PM2 on server : tutorial](#a89)
+- [Setup PM2 on server: tutorial](#a89)
 - [Logs and PID files](#a34)
-- [Execute any script : What is fork mode ?](#a23)
+- [Execute any script: What is fork mode ?](#a23)
 
 ### More
 
@@ -118,7 +118,7 @@ $ npm install git://github.com/Unitech/pm2#master -g
 
 Common problems on installation :
 
-- node-gyp permission problem : [Setup a new user on your server](https://github.com/Unitech/pm2/issues/188#issuecomment-30204146) or add the `--unsafe-perm` to the npm command
+- node-gyp permission problem: [Setup a new user on your server](https://github.com/Unitech/pm2/issues/188#issuecomment-30204146) or add the `--unsafe-perm` to the npm command
 - if Make/GCC or other are missing `sudo apt-get install build-essential` on Ubuntu
 
 <a name="a2"/>
@@ -283,13 +283,16 @@ $ pm2 startup [ubuntu|centos|systemd]
 
 ### More informations
 
-Two types of startup script are availables :
+Two types of startup script are availables:
+
 - SystemV init script (with the option `ubuntu` or `centos`)
 - SystemD init script (with the `systemd` option)
 
-`ubuntu` will use updaterc.d and the script lib/scripts/pm2-init.sh
-`centos` will use chkconfig and the script lib/scripts/pm2-init-centos.sh
-`systemd` will use systemctl and the script lib/scripts/pm2.service
+Those options are using :
+
+- **ubuntu** will use `updaterc.d` and the script `lib/scripts/pm2-init.sh`
+- **centos** will use `chkconfig` and the script `lib/scripts/pm2-init-centos.sh`
+- **systemd** will use `systemctl` and the script `lib/scripts/pm2.service`
 
 ### User permission
 
@@ -317,7 +320,7 @@ $ pm2 resurrect
 <a name="a890"/>
 ## Watch & Restart
 
-Built by [Soyuka](https://github.com/soyuka), this feature permits to restart automatically your app when a file change in the current folder (recursively) :
+This feature permits to restart automatically your app when a file change in the current folder (recursively) :
 
 ```bash
 $ pm2 start app.js --watch
@@ -349,9 +352,9 @@ processes.json :
     "port"       : 9005
 },{
   "min_uptime" : "100",
-  "name" : "auto-kill",
-  "exec_mode" : "fork_mode",
-  "script" : "./examples/killfast.js"
+  "name"       : "auto-kill",
+  "exec_mode"  : "fork_mode",
+  "script"     : "./examples/killfast.js"
 }]
 ```
 
@@ -552,26 +555,26 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 
 
 <a name="a23"/>
-## Execute any script : What is fork mode ?
+## Execute any script: What is fork mode ?
 
 The default mode of PM2 consists of wrapping the code of your node application into the Node Cluster module. It's called the **cluster mode**.
 
 There is also a more classical way to execute your app, like node-forever does, called the **fork mode**.
 
-In fork mode almost all options are the same as the cluster mode. But no reload or gracefulReload.
+In fork mode almost all options are the same as the cluster mode. But there is no reload or gracefulReload command.
 
 **By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
 
 So use it if you only need a forever-like behaviour.
 
-Here is how to start your app in fork :
+Here is how to start your app within a fork:
 
 ```bash
 $ pm2 start app.js -x   # Will start your app.js in fork mode
 $ pm2 list              # You will see that on the row "mode" it's written "fork"
 ```
 
-You can also exec scripts in other languages :
+You can also exec scripts in other languages:
 
 ```bash
 $ pm2 start my-bash-script.sh -x --interpreter bash
@@ -582,7 +585,7 @@ $ pm2 start my-python-script.py -x --interpreter python
 <a name="a96"/>
 ## JSON app configuration via pipe from stdout
 
-PR :
+Pull-requests:
 - [#273](https://github.com/Unitech/pm2/pull/273)
 - [#279](https://github.com/Unitech/pm2/pull/279)
 
@@ -622,10 +625,11 @@ Also make sure you have all dependencies needed. For Ubuntu :
 
 ```bash
 $ sudo apt-get install build-essential
+# nvm is a nodejs version manager - https://github.com/creationix/nvm
 $ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
-$ nvm install v0.11.9
-$ nvm use v0.11.9
-$ nvm alias default v0.11.9
+$ nvm install v0.11.10
+$ nvm use v0.11.10
+$ nvm alias default v0.11.10
 ```
 
 <a name="a27"/>
@@ -640,7 +644,7 @@ $ cd pm2/
 $ DEBUG=* PM2_DEBUG=true ./bin/pm2 --no-daemon
 ```
 
-Each time you edit the code be sure to restart pm2 to make changes taking effect.
+Each time you edit the code be sure to kill and restart pm2 to make changes taking effect.
 
 ## Install pm2 development
 
@@ -665,7 +669,7 @@ By using the fork mode you will lose core features of PM2 like the automatic clu
 $ pm2 start index.js -x  # start my app in fork mode
 ```
 
-For more informations about this issue : [#74](https://github.com/Unitech/pm2/issues/74)
+For more informations about this issue: [#74](https://github.com/Unitech/pm2/issues/74)
 
 - `Cannot read property 'getsockname' of undefined`
 
