@@ -13,15 +13,19 @@ pm2 is perfect when you need to spread your stateless NodeJS code accross all CP
 - 0s downtime reload for Node
 - Startup scripts for Ubuntu/CentOS (use updaterc.d for Ubuntu and chkconfig for others)
 - Stop unstable process (avoid infinite loop)
+- Restart on file change with --watch
 - Monitoring in console
 - HTTP API
 - [Remote control and real time interface API](https://github.com/Unitech/pm2-interface)
 
-Tested with Node v0.11, v0.10, v0.8 (https://travis-ci.org/Unitech/pm2).
+Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
+
+**Recommanded NodeJS version is v0.11.10**
+
 Compatible with CoffeeScript.
 Works on Linux & MacOS.
 
-<!-- [![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2) -->
+[![Build Status](https://david-dm.org/Unitech/pm2.png)](https://david-dm.org/Unitech/pm2)
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
@@ -47,46 +51,337 @@ Thanks in advance and we hope that you like pm2 !
 
 # Readme Contents
 
+## Quick start
+
 - [Installation](#a1)
-- [Usage/Features](#a2)
-- [Tutorial : How To Use PM2 to Setup a Node.js Production Environment](#a89)
-- [Pid file, error and out Log files](#a34)
-- [Different ways to launch a process](#a3)
-- [0s downtime reload](#a16)
-- [CoffeeScript](#a19)
+- [Usage](#a2)
+- [Examples](#a3)
+
+- [Transitional state of apps](#a4)
+- [Clustering](#a5)
+- [Reloading without downtime](#a6)
+
+- [make PM2 restart on server reboot](#a8)
+
+- [Configuration file](#a9)
+- [JSON app declaration](#a10)
+
+## Special features
+
+- [JSON app declaration](#a10)
+- [Process listing](#a6)
+- [Monitoring CPU/Memory usage](#a7)
+- [Configuration file](#a24)
+- [Displaying logs in realtime](#a9)
+- [API health end point](#a12)
+
+## Specific
+
+- [Specific features](#a7)
 - [Enabling Harmony](#a66)
-- [Accept JSON app configuration via pipe from standard input](#a96)
-- [Is my production server ready for PM2](#a4)
-- [Listing processes : pm2 list](#a6)
-- [Monitoring processes (CPU/RAM) : pm2 monit](#a7)
-- [Startup script generation : pm2 startup](#a8)
-- [Log aggregation : pm2 logs](#a9)
-- [Fork mode](#a23)
-- [Customization](#a24)
-- [API health end point : pm2 web](#a12)
-- [JSON processes declaration](#a13)
+- [CoffeeScript](#a19)
+- [Testing PM2 on your prod environment](#a149)
+- [JSON app via pipe](#a96)
+
+## Knowledge
+
+- [Setup PM2 on server : tutorial](#a89)
+- [Logs and PID files](#a34)
+- [Transitional state of apps](#a4)
+- [Execute any script : What is fork mode ?](#a23)
+
+## More
+
 - [Contributing/Development mode](#a27)
-- [Known bugs](#a21)
+- [Known bugs and workaround](#a21)
 - [Launching the tests](#a4)
 - [They talk about it](#a20)
 - [License](#a15)
 
+------
+
 <a name="a1"/>
 # Installation
 
+The prefered Node version to run PM2, is the **0.11.10**
+
+The latest stable version can always be installed via NPM :
+
 ```bash
-npm install pm2@latest -g
+$ npm install pm2@latest -g
 ```
 
-<a name="a2"/>
-# Usage/Features
+If the above fails :
 
 ```bash
-$ npm install pm2@latest -g     # Install pm2 command line globally
-$ pm2 start app.js -i 4  # Daemonize pm2 and Start 4 clustered instances of app.js
-                         # You can also pass the 'max' params to start
-                         # the right numbers of processes depending of CPUs
+$ npm install git://github.com/Unitech/pm2#master -g
+```
 
+Common problems on installation :
+
+- node-gyp permission problem : [Setup a new user on your server](https://github.com/Unitech/pm2/issues/188#issuecomment-30204146) or add the `--unsafe-perm` to the npm command
+- if Make/GCC or other are missing `sudo apt-get install build-essential` on Ubuntu
+
+<a name="a2"/>
+# Usage
+
+Hello world :
+
+```bash
+$ pm2 start app.js
+```
+
+<a name="a3"/>
+# Quick Examples
+
+Hacker guide :
+
+<a name="a4"/>
+# Transitional state of apps (important)
+
+PM2 is a process manager, as said, pm2 can start, stop, restart and *delete* processes.
+
+Start a process :
+
+```bash
+$ pm2 start app.js --name "my-api"
+$ pm2 start web.js --name "web-interface"
+```
+
+Now let's say I need to stop the web-interface :
+
+```bash
+$ pm2 stop web-interface
+```
+
+As you can see **the process hasn't disapeared**. It is still there but now in `stopped` status.
+
+To restart it just do :
+
+```bash
+$ pm2 restart web-interface
+```
+
+Now I want to **delete** the app from the pm2 process list.
+To do that :
+
+```bash
+$ pm2 delete web-interface
+```
+
+<a name="a5"/>
+# Clustering
+
+Launch `max` instances (`max` depending on the number of CPUs available) and set the load balancer to balance queries between each process :
+
+```bash
+$ pm2 start app.js --name "API" -i max
+```
+
+If your app is well designed (**state less**) you gonna be able to **process much more queries** !!
+
+Important concepts to make a NodeJS app stateless :
+
+- Session must not be in memory but shared via a database (Redis, Mongo, whatever)
+- [WebSocket/Socket.io should communicate via a database](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO)
+
+<a name="a6"/>
+# Reloading without downtime
+
+This special feature has been added to PM2 a while ago.
+
+**Warning** It only works for apps in *cluster mode* (the default mode), that uses HTTP/HTTPS/Socket connections.
+
+Reloading an app :
+
+```bash
+$ pm2 reload api
+```
+
+If the reload system hasn't managed to reload gracefully, a timeout will simply kill the process and will restart it.
+
+## Graceful reload
+
+Sometimes you can experience a **very long reload, or a reload that doesn't work** (fallback to restart).
+
+It means that your app **still have open connection on exit**.
+
+To pass this problem you have to use the graceful reload.
+Graceful reload is a mecanism that will send a *shutdown* message to your process before reloading it.
+
+Example :
+
+```javascript
+process.on('message', function(msg) {
+  if (msg == 'shutdown') {
+    // Your process is going to be reloaded
+    // You have to close all database/socket.io/* connections
+
+    console.log('Closing all connections...');
+
+    // You will have 4000ms to close all connections before
+    // the reload mecanism will try to do his job
+
+    setTimeout(function() {
+      console.log('Finished closing connections');
+      // Ok this timeout mean that all connections have been closed
+      // Now I can exit to let the reload mecanism do his job
+      process.exit(0);
+    }, 1500);
+  }
+});
+```
+
+<a name="a7"/>
+# Specific features
+
+Launching PM2 without daemonizing itself :
+
+```bash
+$ pm2 start app.js --no-daemon
+```
+
+Listing all processes running :
+
+```bash
+$ pm2 list
+# Or
+$ pm2 [list|ls|l|status]
+```
+
+Monitor all processes launched :
+
+```bash
+$ pm2 monit
+```
+
+Displaying logs of specified process or all process in realtime :
+
+```bash
+$ pm2 logs
+$ pm2 logs big-api
+$ pm2 flush # Clear all the logs
+```
+
+Sending a system signal to a process :
+
+```bash
+$ pm2 sendSignal SIGUSR2 my-app
+```
+
+<a name="a8"/>
+## Startup script
+
+PM2 has the amazing ability to **generate startup scripts and configure it**.
+PM2 is also smart enough to **save all your process list** and to **bring back all your processes on restart**.
+
+```bash
+$ pm2 startup [ubuntu|centos|systemd]
+```
+
+**Warning** This feature is tricky to make it work generically, so once PM2 has setup your startup script, reboot your server to be sure that PM2 put back your apps !
+
+### More informations
+
+Two types of startup script are availables :
+- SystemV init script (with the option `ubuntu` or `centos`)
+- SystemD init script (with the `systemd` option)
+
+`ubuntu` will use updaterc.d and the script lib/scripts/pm2-init.sh
+`centos` will use chkconfig and the script lib/scripts/pm2-init-centos.sh
+`systemd` will use systemctl and the script lib/scripts/pm2.service
+
+### User permission
+
+Ah, there is something else, let's say you want the startup script to be executed under another user.
+
+Just use the `-u <username` option !
+
+```bash
+$ pm2 startup ubuntu -u www
+```
+
+### Derivated commands
+
+Dump all processes status and environment managed by pm2 :
+```bash
+$ pm2 dump
+```
+It populates the file `~/.pm2/dump.pm2` by default.
+
+To bring back the latest dump :
+```bash
+$ pm2 resurrect
+```
+
+## Make PM2 expose an API
+
+```bash
+$ pm2 web
+```
+
+<a name="a9"/>
+# Configuration file
+
+You can edit these options by editing the file `~/.pm2/custom_options.sh`
+
+These variables can be customized :
+
+```
+  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
+  DAEMON_RPC_PORT    : process.env.PM2_RPC_PORT  || 6666, // RPC commands
+  DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
+  DEBUG              : process.env.PM2_DEBUG || false,
+  WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
+  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
+  PM2_NODE_OPTIONS   : ''
+```
+
+<a name="a10"/>
+# JSON app declaration
+
+processes.json :
+
+```json
+[{
+  "name"      : "echo",
+  "script"    : "./examples/args.js",
+  "args"      : "['--toto=heya coco', '-d', '1']",
+  "env": {
+      "NODE_ENV": "production",
+      "AWESOME_SERVICE_API_TOKEN": "xxx"
+  }
+}
+,{
+    "name"       : "api",
+    "script"     : "./examples/child.js",
+    "instances"  : "4",
+    "error_file" : "./examples/child-err.log",
+    "out_file"   : "./examples/child-out.log",
+    "pid_file"   : "./examples/child.pid",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 9005
+},{
+  "min_uptime" : "100",
+  "name" : "auto-kill",
+  "exec_mode" : "fork_mode",
+  "script" : "./examples/killfast.js"
+}]
+```
+
+Then with the cli :
+```bash
+$ pm2 start processes.json
+$ pm2 stop processes.json
+$ pm2 delete processes.json
+$ pm2 restart processes.json
+```
+
+<a name="a666"/>
+# Hacker guide
+
+Quick start for command and examples :
+```bash
 $ pm2 start app.js --name my-api # Name process
 
 $ pm2 start app.js --no-daemon   # Don't daemonize pm2
@@ -130,7 +425,6 @@ $ pm2 start echo.rb
 $ pm2 start echo.pl
 ```
 
-<a name="a3"/>
 ## Different ways to launch a process
 
 ```bash
@@ -162,14 +456,9 @@ $ pm2 start my-bash-script.sh -x --interpreter bash
 $ pm2 start my-python-script.py -x --interpreter python
 ```
 
-<a name="a89"/>
-## Tutorial
-
-[How To Use PM2 to Setup a Node.js Production Environment On An Ubuntu VPS](https://www.digitalocean.com/community/articles/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps)
-
 
 <a name="a34"/>
-## Pid file, error and out Log files
+# Log and PID files
 
 By default every logs (error and out), pids files, dump, pm2 logs are located in `~/.pm2/`
 
@@ -183,52 +472,11 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 └── pids
 ```
 
-<a name="a16"/>
-## 0s downtime reload
+<a name="a89"/>
+## Tutorial
 
-This feature permits to reload code without losing in process connections.
-Works for apps in cluster_mode (the default mode) that uses sockets (express or other).
+[How To Use PM2 to Setup a Node.js Production Environment On An Ubuntu VPS](https://www.digitalocean.com/community/articles/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps)
 
-```bash
-$ pm2 reload all
-$ pm2 reload my-api
-```
-
-Thanks to TruongSinh Tran-Nguyen https://github.com/truongsinh
-
-### Graceful reload
-
-```bash
-$ pm2 gracefulReload all
-```
-
-Instead of just processing remaining connections, `gracefulReload` will also send a `shutdown` message to your process, so you can close all database/socket.io/* connections and be sure that your process will properly exit.
-
-```javascript
-process.on('message', function(msg) {
-  if (msg == 'shutdown') {
-    // Your process is going to be reloaded
-    // Close all database/socket.io/* connections
-    console.log('Closing all connections...');
-    setTimeout(function() {
-      console.log('Finished closing connections');
-      // You can exit to faster the process or it will be
-      // automatically killed after 4000ms.
-      // You can override the timeout by modifying PM2_GRACEFUL_TIMEOUT
-      process.exit(0);
-    }, 1500);
-  }
-});
-
-var http = require('http');
-
-http.createServer(function(req, res) {
-  res.writeHead(200);
-  res.end('hey');
-}).listen(8000, function() {
-  console.log('listening');
-});
-```
 
 <a name="a19"/>
 ## CoffeeScript
@@ -273,12 +521,13 @@ $ pm2 start my_app.js --node-args="--harmony"
 ```
 
 <a name="a23"/>
-## Fork mode - execute script in different languages
+## Execute any script : What is fork mode ?
 
-The default mode of PM2 consists of wrapping the code of your node app into the Node Cluster module. It's called the **cluster mode**.
+The default mode of PM2 consists of wrapping the code of your node application into the Node Cluster module. It's called the **cluster mode**.
+
 There is also a more classical way to execute your app, like node-forever does, called the **fork mode**.
 
-In fork mode almost all options are the same as the cluster mode. But no reload, gracefulReload.
+In fork mode almost all options are the same as the cluster mode. But no reload or gracefulReload.
 
 **By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
 
@@ -325,7 +574,7 @@ _EOF_
 echo $my_json | pm2 start -
 ```
 
-<a name="a4"/>
+<a name="a149"/>
 ## Is my production server ready for PM2 ?
 
 Just try the tests before using PM2 on your production server
@@ -348,134 +597,6 @@ $ nvm use v0.11.9
 $ nvm alias default v0.11.9
 ```
 
-
-<a name="a6"/>
-## pm2 list
-
-List infos about all processes managed by pm2. It shows also how many times a process has been restarted because of an unhandled exception.
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
-
-<a name="a7"/>
-## pm2 monit
-
-Monitor CPU and memory usage of every node process (and also clustered processes) managed by pm2.
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
-
-<a name="a8"/>
-## Startup script generation : pm2 startup
-
-PM2 provides an automatic way to keep Node processes alive on server restart.
-On exit it will dump the process list and their environment and will resurrect them on startup.
-
-It uses **System V init script** for **Ubuntu/CentOS/Redhat** (maybe it works on other sys but not 100% sure).
-
-```bash
-$ pm2 startup ubuntu # then follow the command instruction
-$ pm2 startup centos # will use chkconfig instead of updaterc.d
-$ pm2 startup redhat # not very stable for redhat
-```
-
-Init script generated are located in /etc/init.d/pm2-init.sh.
-
-### systemd
-
-Use this for systemd distributions, like Fedora and Archlinux.
-Note that all running services must be stopped and your old dump will be overwritten.
-
-```bash
-$ pm2 kill
-$ pm2 startup systemd
-```
-
-This will create, enable and start the service.
-
-### Running script as a different user
-
-The `-u username` option permits to specify which user has to start the process at startup.
-**NOTE** that this user must have access to npm, apps and node ! So the best way is to log with this user `su -l www`, then do `pm2 startup -u www`.
-
-Internally it uses `sudo -u $USER`.
-
-
-<a name="a9"/>
-## pm2 logs
-
-Display logs in streaming of all processes, without having to do a tail -f or something else.
-You can also pass [name|id] as parameter to stream only the log of a specified process.
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
-
-<a name="a12"/>
-## pm2 health web api endpoint
-
-PM2 can disserve an API endpoint to monitor processes and computer health (cpu usage, memory, network interfaces...)
-
-```
-pm2 web
-```
-
-<a name="a24"/>
-## Configuration / Customization
-
-You can edit these options by editing the file `~/.pm2/custom_options.sh`
-
-These variables can be customized :
-
-```
-  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
-  DAEMON_RPC_PORT    : process.env.PM2_RPC_PORT  || 6666, // RPC commands
-  DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
-  DEBUG              : process.env.PM2_DEBUG || false,
-  WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
-  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
-  PM2_NODE_OPTIONS   : ''
-```
-
-
-
-
-<a name="a13"/>
-# Multi process JSON declaration
-
-processes.json :
-
-```json
-[{
-  "name"      : "echo",
-  "script"    : "./examples/args.js",
-  "args"      : "['--toto=heya coco', '-d', '1']",
-  "env": {
-      "NODE_ENV": "production",
-      "AWESOME_SERVICE_API_TOKEN": "xxx"
-  }
-}
-,{
-    "name"       : "api",
-    "script"     : "./examples/child.js",
-    "instances"  : "4",
-    "error_file" : "./examples/child-err.log",
-    "out_file"   : "./examples/child-out.log",
-    "pid_file"   : "./examples/child.pid",
-    "exec_mode"  : "cluster_mode",
-    "port"       : 9005
-},{
-  "min_uptime" : "100",
-  "name" : "auto-kill",
-  "exec_mode" : "fork_mode",
-  "script" : "./examples/killfast.js"
-}]
-```
-
-Then with the cli :
-```bash
-$ pm2 start processes.json
-$ pm2 stop processes.json
-$ pm2 delete processes.json
-$ pm2 restart processes.json
-```
-
 <a name="a27"/>
 # Contributing/Development mode
 
@@ -495,11 +616,6 @@ Each time you edit the code be sure to restart pm2 to make changes taking effect
 ```bash
 $ npm install git://github.com/Unitech/pm2#development -g
 ```
-
-# MISC Notes
-
-- Remove init script : `sudo update-rc.d -f pm2-init.sh remove`
-
 
 <a name="a21"/>
 # Known bugs and workarounds
@@ -540,13 +656,9 @@ npm test
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
 
-# MISC
 
-## Code structure
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/Drawing1.png)
-
-## Features
+# Other features
 
 - Clusterize your Node networked script without adding one line of code
 - Fully tested
@@ -560,7 +672,7 @@ npm test
 - Auto stop processes who exit too fast
 - Dump current processes and resurrect (upstart)
 
-## Idea bucket
+# Idea bucket
 
 - Remote administration/status checking
 - Builtin Inter process communication channel (message bus)
