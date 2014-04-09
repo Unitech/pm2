@@ -19,7 +19,7 @@ var pkg       = require('../package.json');
 
 commander.version(pkg.version)
   .option('-v --verbose', 'verbose level')
-  .option('-s --silent', 'throw less messages', false)
+  .option('-s --silent', 'hide all messages', false)
   .option('-m --mini-list', 'display a compacted list without formatting')
   .option('--watch', 'Watch folder for changes')
   .option('-f --force', 'force actions')
@@ -64,6 +64,12 @@ commander.on('--help', function() {
         console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
         console.log('');
         });
+
+if (process.argv.indexOf('-s') > -1) {
+  global.console = {};
+  global.console.log = function(){};
+  global.console.error = function(){};
+}
 
 if (process.argv.indexOf('--no-daemon') > -1) {
   //
@@ -403,11 +409,6 @@ if (process.argv.length == 2) {
 //
 process.on('satan:client:ready', function() {
   commander.parse(process.argv);
-  // if (commander.silent) {
-  //   global.console = {};
-  //   global.console.log = function(){};
-  //   global.console.error = function(){};
-  // }
 });
 
 //
