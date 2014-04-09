@@ -1,4 +1,4 @@
-# ![Monit](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
+# ![PM2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
 
 pm2 is a process manager for Node apps with a builtin load-balancer.
 
@@ -6,7 +6,7 @@ pm2 is a process manager for Node apps with a builtin load-balancer.
 
 pm2 is perfect when you need to spread your stateless NodeJS code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
 
-# Main features
+### Main features
 
 - Builtin load-balancer (using the native cluster module)
 - Script daemonization
@@ -36,7 +36,7 @@ Master : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=maste
 
 Development : [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=development)](https://travis-ci.org/Unitech/pm2)
 
-# Monitoring dashboard
+## Monitoring dashboard
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
@@ -49,7 +49,9 @@ We are also looking for AngularJS developers and designers contact us at contact
 
 Thanks in advance and we hope that you like pm2 !
 
-### Table of contents
+------
+
+## Table of contents
 
 ### Quick start
 
@@ -61,6 +63,7 @@ Thanks in advance and we hope that you like pm2 !
 
 ### Special features
 
+- [Transitional state of apps](#a4)
 - [Process listing](#a6)
 - [Monitoring CPU/Memory usage](#a7)
 - [Displaying logs in realtime](#a9)
@@ -72,8 +75,7 @@ Thanks in advance and we hope that you like pm2 !
 ### Specific
 
 - [Specific features](#a77)
-- [Configuration file](#a24)
-- [API health endpoint](#a12)
+- [Configuration file](#a989)
 - [Enabling Harmony](#a66)
 - [CoffeeScript](#a19)
 - [Testing PM2 on your prod environment](#a149)
@@ -81,16 +83,16 @@ Thanks in advance and we hope that you like pm2 !
 
 ### Knowledge
 
+- [Transitional state of apps](#a4)
 - [Setup PM2 on server : tutorial](#a89)
 - [Logs and PID files](#a34)
-- [Transitional state of apps](#a4)
 - [Execute any script : What is fork mode ?](#a23)
 
 ### More
 
 - [Contributing/Development mode](#a27)
 - [Known bugs and workaround](#a21)
-- [Launching the tests](#a4)
+- [Launching the tests](#a14)
 - [They talk about it](#a20)
 - [License](#a15)
 
@@ -133,6 +135,39 @@ $ pm2 start app.js
 - [Raw examples/Hacker guide](#a666)
 - [Differents ways to launch a process](#a667)
 
+<a name="a4"/>
+## Transitional state of apps (important)
+
+PM2 is a process manager, as said, pm2 can start, stop, restart and *delete* processes.
+
+Start a process :
+
+```bash
+$ pm2 start app.js --name "my-api"
+$ pm2 start web.js --name "web-interface"
+```
+
+Now let's say I need to stop the web-interface :
+
+```bash
+$ pm2 stop web-interface
+```
+
+As you can see **the process hasn't disapeared**. It is still there but now in `stopped` status.
+
+To restart it just do :
+
+```bash
+$ pm2 restart web-interface
+```
+
+Now I want to **delete** the app from the pm2 process list.
+To do that :
+
+```bash
+$ pm2 delete web-interface
+```
+
 <a name="a6"/>
 ## Listing all processes
 
@@ -170,39 +205,6 @@ $ pm2 logs big-api
 $ pm2 flush # Clear all the logs
 ```
 
-<a name="a4"/>
-## Transitional state of apps (important)
-
-PM2 is a process manager, as said, pm2 can start, stop, restart and *delete* processes.
-
-Start a process :
-
-```bash
-$ pm2 start app.js --name "my-api"
-$ pm2 start web.js --name "web-interface"
-```
-
-Now let's say I need to stop the web-interface :
-
-```bash
-$ pm2 stop web-interface
-```
-
-As you can see **the process hasn't disapeared**. It is still there but now in `stopped` status.
-
-To restart it just do :
-
-```bash
-$ pm2 restart web-interface
-```
-
-Now I want to **delete** the app from the pm2 process list.
-To do that :
-
-```bash
-$ pm2 delete web-interface
-```
-
 <a name="a5"/>
 ## Clustering
 
@@ -212,7 +214,7 @@ Launch `max` instances (`max` depending on the number of CPUs available) and set
 $ pm2 start app.js --name "API" -i max
 ```
 
-If your app is well designed (**state less**) you gonna be able to **process much more queries** !!
+If your app is well designed (**state less**) you gonna be able to **process much more queries**.
 
 Important concepts to make a NodeJS app stateless :
 
@@ -367,7 +369,7 @@ Sending a system signal to a process :
 $ pm2 sendSignal SIGUSR2 my-app
 ```
 
-<a name="a9"/>
+<a name="a989"/>
 ## Configuration file
 
 You can edit these options by editing the file `~/.pm2/custom_options.sh`
@@ -568,7 +570,7 @@ $ pm2 start my-python-script.py -x --interpreter python
 ```
 
 <a name="a96"/>
-## Accept JSON app configuration via pipe from standard input
+## JSON app configuration via pipe from stdout
 
 PR :
 - [#273](https://github.com/Unitech/pm2/pull/273)
@@ -674,8 +676,6 @@ npm test
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
-
-
 
 # Other features
 
