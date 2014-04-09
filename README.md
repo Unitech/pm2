@@ -686,6 +686,8 @@ npm test
 - Web interface
 - Keeping monitoring data
 - Integrated wrk utils endpoint benchmark
+- Scale up/down processes
+- Use https://github.com/felixge/node-measured in process container
 
 ## Sponsors
 
