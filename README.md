@@ -317,7 +317,7 @@ $ pm2 resurrect
 <a name="a890"/>
 ## Watch & Restart
 
-Built by [Soyuka](JSON app declaration), this feature permits to restart automatically your app when a file change in the current folder (recursively) :
+Built by [Soyuka](https://github.com/soyuka), this feature permits to restart automatically your app when a file change in the current folder (recursively) :
 
 ```bash
 $ pm2 start app.js --watch
