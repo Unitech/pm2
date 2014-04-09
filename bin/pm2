@@ -90,9 +90,9 @@ commander.command('start <script|json_file|stdin(-)>')
 //
 commander.command('stop <pm2_id|name|all|json_file|stdin(-)>')
   .description('stop specific process pm2 id or script name (set with --name or script name)')
+  .option('--watch', 'Stop watching folder for changes')  
   .action(function(param) {
     UX.processing.start();
-
     if (param == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
@@ -117,9 +117,10 @@ commander.command('stop <pm2_id|name|all|json_file|stdin(-)>')
 //
 commander.command('restart <pm2_id|name|all|json_file|stdin(-)>')
   .description('restart processes by id/name/all or by apps defined in json file')
+  .option('--watch', 'Watch folder for changes')
   .action(function(param) {
     UX.processing.start();
-
+    
     if (param == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
