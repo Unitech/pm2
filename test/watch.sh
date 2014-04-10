@@ -145,5 +145,3 @@ $pm2 restart --watch all
 should 'processes should be watched' 'watch: true' 8
 
 $pm2 kill
-
-
