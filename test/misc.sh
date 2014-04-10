@@ -43,3 +43,4 @@ then
 else
     success "environment variable successfully defined"
 fi
+

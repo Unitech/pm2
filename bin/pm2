@@ -7,7 +7,6 @@ var commander = require('commander');
 var fs        = require('fs');
 var path      = p = require('path');
 var util      = require('util');
-var watch     = require('watch');
 var cronJob   = require('cron').CronJob;
 
 var Monit     = require('../lib/Monit');
@@ -20,8 +19,9 @@ var pkg       = require('../package.json');
 
 commander.version(pkg.version)
   .option('-v --verbose', 'verbose level')
-  .option('-s --silent', 'throw less messages', false)
+  .option('-s --silent', 'hide all messages', false)
   .option('-m --mini-list', 'display a compacted list without formatting')
+  .option('--watch', 'Watch folder for changes')
   .option('-f --force', 'force actions')
   .option('-n --name <name>', 'set a <name> for script')
   .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
@@ -64,6 +64,12 @@ commander.on('--help', function() {
         console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
         console.log('');
         });
+
+if (process.argv.indexOf('-s') > -1) {
+  global.console = {};
+  global.console.log = function(){};
+  global.console.error = function(){};
+}
 
 if (process.argv.indexOf('--no-daemon') > -1) {
   //
@@ -121,10 +127,10 @@ commander.command('start <file|json|stdin>')
 // Stop specific id
 //
 commander.command('stop <id|name|all|json|stdin>')
-  .description('          stop a process (to start it again, do pm2 restart <app>)')
+  .description('stop specific process pm2 id or script name (set with --name or script name)')
+  .option('--watch', 'Stop watching folder for changes')  
   .action(function(param) {
     UX.processing.start();
-
     if (param == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
@@ -148,10 +154,11 @@ commander.command('stop <id|name|all|json|stdin>')
 // Stop All processes
 //
 commander.command('restart <id|name|all|json|stdin>')
-  .description('       restart a process')
+  .description('restart processes by id/name/all or by apps defined in json file')
+  .option('--watch', 'Watch folder for changes')
   .action(function(param) {
     UX.processing.start();
-
+    
     if (param == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
@@ -248,7 +255,7 @@ commander.command('interact <secret_key> <public_key> <machine_name>')
 
 commander.command('killInteract')
   .description('stop the interaction with VitalSigns servers')
-  .action(failOnUnknown(CLI.interactKill));
+  .action(failOnUnknown(CLI.killInteract));
 
 //
 // Web interface
@@ -286,7 +293,7 @@ commander.command('resurrect')
 // Set pm2 to startup
 //
 commander.command('startup <platform>')
-  .description('auto resurect process at startup. [platform] can be centos redhat or ubuntu')
+  .description('auto resurect process at startup. [platform] = ubuntu, centos or systemd')
   .action(function(platform) {
     CLI.startup(platform);
   });
@@ -403,11 +410,6 @@ if (process.argv.length == 2) {
 //
 process.on('satan:client:ready', function() {
   commander.parse(process.argv);
-  // if (commander.silent) {
-  //   global.console = {};
-  //   global.console.log = function(){};
-  //   global.console.error = function(){};
-  // }
 });
 
 //
