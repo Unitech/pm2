@@ -133,8 +133,65 @@ $ pm2 start app.js
 <a name="a3"/>
 ## Examples
 
-- [Raw examples/Hacker guide](#a666)
-- [Differents ways to launch a process](#a667)
+Raw examples :
+
+```bash
+$ pm2 start app.js --name my-api # Name process
+
+$ pm2 start app.js -i max        # Will start maximum processes with LB depending on available CPUs
+
+$ pm2 list               # Display all processes status
+$ pm2 monit              # Monitor all processes
+$ pm2 logs               # Display all processes logs in streaming
+$ pm2 flush              # Empty all log file
+
+$ pm2 stop all           # Stop all processes
+$ pm2 restart all        # Restart all processes
+
+$ pm2 reload all         # Will 0s downtime reload (for NETWORKED processes)
+
+$ pm2 stop 0             # Stop specific process id
+$ pm2 restart 0          # Restart specific process id
+
+$ pm2 delete 0           # Will remove process from pm2 list
+$ pm2 delete all         # Will remove all processes from pm2 list
+
+$ pm2 ping               # Ensure pm2 dameon has been launched
+```
+
+## Different ways to launch a process
+
+```bash
+$ pm2 start app.js -i max  # Will start maximum processes depending on available CPUs
+
+$ pm2 start app.js -i 3    # Will start 3 processes
+
+$ pm2 start app.js --node-args="--debug=7001 --trace-deprecation" # --node-args command line option to pass options to node
+
+$ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
+$ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
+
+$ pm2 start app.js --name serverone # Start a process an name it as server one
+                                    # you can now stop the process by doing
+                                    # pm2 stop serverone
+
+$ pm2 start app.json                # Start processes with options declared in app.json
+                                    # Go to chapter Multi process JSON declaration for more
+
+$ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
+
+$ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
+```
+
+For other nature scripts :
+
+```bash
+$ pm2 start echo.php
+$ pm2 start echo.py
+$ pm2 start echo.sh
+$ pm2 start echo.rb
+$ pm2 start echo.pl
+```
 
 <a name="a4"/>
 ## Transitional state of apps (important)
@@ -455,49 +512,6 @@ That's all !
 
 Quick start for command and examples :
 
-```bash
-$ pm2 start app.js --name my-api # Name process
-
-$ pm2 start app.js --no-daemon   # Don't daemonize pm2
-
-$ pm2 list               # Display all processes status
-$ pm2 monit              # Monitor all processes
-$ pm2 logs               # Display all processes logs in streaming
-$ pm2 flush              # Empty all log file
-
-$ pm2 stop all           # Stop all processes
-$ pm2 restart all        # Restart all processes
-
-$ pm2 reload all         # Will 0s downtime reload (for NETWORKED processes)
-
-$ pm2 stop 0             # Stop specific process id
-$ pm2 restart 0          # Restart specific process id
-
-$ pm2 delete 0           # Will remove process from pm2 list
-$ pm2 delete all         # Will remove all processes from pm2 list
-
-$ pm2 ping               # Ensure pm2 dameon has been launched
-
-$ pm2 startup ubuntu     # Generate init script for ubuntu to keep processes alive on restart
-                         # ubuntu/centos
-
-$ pm2 web                # Launch Health computer API endpoint (http://localhost:9615)
-
-$ pm2 dump               # Backup current processes managed by pm2
-$ pm2 resurrect          # Restore backup
-
-$ pm2 sendSignal SIGUSR2 signal.js # Send system signal to script
-```
-
-For other nature scripts :
-
-```bash
-$ pm2 start echo.php
-$ pm2 start echo.py
-$ pm2 start echo.sh
-$ pm2 start echo.rb
-$ pm2 start echo.pl
-```
 
 <a name="a667"/>
 ## Different ways to launch a process
