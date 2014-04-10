@@ -1,4 +1,11 @@
 
+# 0.7.9
+
+- Linter errors
+- Systemd support for Fedora / ArchLinux
+- Fixed rendering
+- Avoid exception when dump file is not present
+
 # 0.7.8
 
 - List processes with user right `service pm2-init.sh status`

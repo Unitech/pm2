@@ -38,8 +38,9 @@ var default_conf = {
   PREFIX_MSG_ERR     : '\x1B[31mPM2 [ERROR] \x1B[39m',
   SAMPLE_FILE_PATH   : '../lib/sample.json',
 
-  CENTOS_STARTUP_SCRIPT     : '../lib/scripts/pm2-init-centos.sh',
+  CENTOS_STARTUP_SCRIPT : '../lib/scripts/pm2-init-centos.sh',
   UBUNTU_STARTUP_SCRIPT : '../lib/scripts/pm2-init.sh',
+  SYSTEMD_STARTUP_SCRIPT: '../lib/scripts/pm2.service',
 
   SUCCESS_EXIT       : 0,
   ERROR_EXIT         : 1,
@@ -52,7 +53,7 @@ var default_conf = {
   ONE_LAUNCH_STATUS  : 'one-launch-status',
 
   REMOTE_PORT        : 3900,
-  REMOTE_HOST        : 'socket-1.pm2.io',
+  REMOTE_HOST        : 'socket-1.vitalsigns.io',
   INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.log'),
   INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
