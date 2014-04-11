@@ -41,6 +41,7 @@ var default_conf = {
   CENTOS_STARTUP_SCRIPT : '../lib/scripts/pm2-init-centos.sh',
   UBUNTU_STARTUP_SCRIPT : '../lib/scripts/pm2-init.sh',
   SYSTEMD_STARTUP_SCRIPT: '../lib/scripts/pm2.service',
+  AMAZON_STARTUP_SCRIPT: '../lib/scripts/pm2-init-amazon.sh',
 
   SUCCESS_EXIT       : 0,
   ERROR_EXIT         : 1,
