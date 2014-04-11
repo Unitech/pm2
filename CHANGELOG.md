@@ -1,9 +1,17 @@
 
 # 0.7.9
 
+- More verbosity to pm2.log
+- New README.md
+- Upgrade of outdated packages
+- Silent (-s) flag remove all possible pm2 output to CLI
+- New display for list, more compact
+- Fix 0.10.x issue when stop/kill
+- Helper shown when -h
 - Linter errors
 - Systemd support for Fedora / ArchLinux
 - Fixed rendering
+- Interaction possible with VitalSigns.io
 - Avoid exception when dump file is not present
 
 # 0.7.8

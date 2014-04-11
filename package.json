@@ -10,6 +10,12 @@
     "email": "as@unitech.io",
     "url": "http://pm2.io"
   },
+  "maintainers": [
+    "tknew <strzelewicz.alexandre@gmail.com",
+    "soyuka <soyuka@gmail.com>",
+    "Alex Kocharin <alex@kocharin.ru>",
+    "achingbrain <alex@achingbrain.net>"
+  ],
   "contributors": [{
     "name"  : "Alex Kocharin",
     "email" : "alex@kocharin.ru"
