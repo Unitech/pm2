@@ -12,6 +12,7 @@
 - Helper shown when -h
 - Linter errors
 - Systemd support for Fedora / ArchLinux
+- #381 Add support for Amazon Linux startup script
 - Fixed rendering
 - Interaction possible with VitalSigns.io
 - Avoid exception when dump file is not present
