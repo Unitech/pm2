@@ -44,6 +44,40 @@ else
     success "environment variable successfully defined"
 fi
 
+
+#####################
+# Merge logs option #
+#####################
+$pm2 kill
+
+rm outmerge*
+
+$pm2 start echo.js -i max -o outmerge.log
+
+cat outmerge.log > /dev/null
+ispec 'file outmerge.log should not exist'
+
+cat outmerge-0.log > /dev/null
+spec 'file outmerge-0.log should exist'
+
+rm outmerge*
+
+############ Now with --merge option
+
+$pm2 kill
+
+rm outmerge*
+
+$pm2 start echo.js -i max -o outmerge.log --merge-logs
+
+cat outmerge.log > /dev/null
+spec 'file outmerge.log should exist'
+
+cat outmerge-0.log > /dev/null
+ispec 'file outmerge-0.log should not exist'
+
+rm outmerge*
+
 #####################
 # Watch for changes #
 #####################

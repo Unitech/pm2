@@ -3,6 +3,8 @@
 
 - More verbosity to pm2.log
 - New README.md
+- --merge-logs option to merge logs for a group of process
+- return failure code when no process has been reloaded
 - Upgrade of outdated packages
 - Silent (-s) flag remove all possible pm2 output to CLI
 - New display for list, more compact
