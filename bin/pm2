@@ -21,9 +21,7 @@ commander.version(pkg.version)
   .option('-v --verbose', 'verbose level')
   .option('-s --silent', 'hide all messages', false)
   .option('-m --mini-list', 'display a compacted list without formatting')
-  .option('--watch', 'Watch folder for changes')
   .option('-f --force', 'force actions')
-  .option('--merge-logs', 'merge logs')
   .option('-n --name <name>', 'set a <name> for script')
   .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
   .option('-o --output <path>', 'specify out log file')
@@ -35,6 +33,8 @@ commander.version(pkg.version)
   .option('-w --write', 'write configuration in local folder')
   .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
   .option('--no-daemon', "run pm2 daemon in the foreground if it doesn't exist already")
+  .option('--merge-logs', 'merge logs')
+  .option('--watch', 'watch application folder for changes')
   .option('--node-args <node_args>', "space delimited arguments to pass to node in cluster mode - e.g. --node-args=\"--debug=7001 --trace-deprecation\"",
       function(val) {
           return val.split(' ');
@@ -109,8 +109,10 @@ function failOnUnknown(fn) {
 // Start command
 //
 commander.command('start <file|json|stdin>')
+  .option('--watch', 'Watch folder for changes')
   .description('                start and daemonize an app')
   .action(function(cmd) {
+
     if (cmd == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
@@ -128,6 +130,7 @@ commander.command('start <file|json|stdin>')
 // Stop specific id
 //
 commander.command('stop <id|name|all|json|stdin>')
+  .option('--watch', 'Stop watching folder for changes')
   .description('          stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
     UX.processing.start();
@@ -155,6 +158,7 @@ commander.command('stop <id|name|all|json|stdin>')
 // Stop All processes
 //
 commander.command('restart <id|name|all|json|stdin>')
+  .option('--watch', 'Toggle watching folder for changes')
   .description('       restart a process')
   .action(function(param) {
     UX.processing.start();
