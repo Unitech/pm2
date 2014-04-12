@@ -39,34 +39,32 @@ rm server-watch.js
 # Sadly travis has an issue with that test, it's working and tested with node v0.11.10
 # Feel free to uncomment and report to http://github.com/Unitech/pm2/issues
 
-$pm2 kill
+# cp server-watch.bak.js server-watch.js
 
-cp server-watch.bak.js server-watch.js
+# $pm2 start --watch server-watch.js
 
-$pm2 start --watch server-watch.js
+# echo "setTimeout(function() { process.exit(0) }, 1)" > server-watch.js
 
-echo "setTimeout(function() { process.exit(0) }, 1)" > server-watch.js
+# for (( i = 0; i <= 30; i++ )); do
+#     sleep 0.2
+#     echo -n "."
+# done
 
-for (( i = 0; i <= 30; i++ )); do
-    sleep 0.2
-    echo -n "."
-done
+# $pm2 list
+# should 'should have stopped unstable process' 'errored' 1
 
-$pm2 list
-should 'should have stopped unstable process' 'errored' 1
+# cp server-watch.bak.js server-watch.js
 
-cp server-watch.bak.js server-watch.js
+# for (( i = 0; i <= 10; i++ )); do
+#     sleep 0.2
+#     echo -n "."
+# done
 
-for (( i = 0; i <= 10; i++ )); do
-    sleep 0.2
-    echo -n "."
-done
+# $pm2 list
+# should 'should start the errored process again while putting file back' 'online' 1
 
-$pm2 list
-should 'should start the errored process again while putting file back' 'online' 1
-
-$pm2 kill
-rm server-watch.js
+# $pm2 kill
+# rm server-watch.js
 
 ###############
 
