@@ -367,6 +367,15 @@ commander.command('flush')
   }));
 
 //
+// Reload all logs
+//
+commander.command('reloadLogs')
+  .description('reload all logs')
+  .action(function() {
+    CLI.reloadLogs();
+  });
+
+//
 // Log streaming
 //
 commander.command('logs [id|name]')

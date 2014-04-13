@@ -58,7 +58,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/cli.sh && bash ./test/json_file.sh && bash ./test/harmony.sh && bash ./test/reload.sh && bash ./test/right-exit-code.sh && bash ./test/gracefulReload.sh && bash ./test/cli2.sh && bash ./test/misc.sh && bash ./test/watch.sh && bash ./test/fork.sh && bash ./test/infinite_loop.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
+    "test": "bash ./test/cli.sh && bash ./test/json_file.sh && bash ./test/harmony.sh && bash ./test/reload.sh && bash ./test/right-exit-code.sh && bash ./test/log-reload.sh && bash ./test/gracefulReload.sh && bash ./test/cli2.sh && bash ./test/misc.sh && bash ./test/watch.sh && bash ./test/fork.sh && bash ./test/infinite_loop.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
   },
   "keywords": [
     "cli",
@@ -68,6 +68,11 @@
     "pm2",
     "harmony",
     "node-pm2",
+    "production",
+    "vitalsigns",
+    "pm2.io",
+    "ghost",
+    "ghost production",
     "monitoring",
     "process manager",
     "forever",
