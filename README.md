@@ -58,15 +58,15 @@ Thanks in advance and we hope that you like pm2 !
 - [Installation](#a1)
 - [Usage](#a2)
 - [Examples](#a3)
-- [Raw examples/Hacker guide](#a666)
 - [Differents ways to launch a process](#a667)
+- [Options](#a987)
 
-### Special features
+### Features
 
 - [Transitional state of apps](#a4)
 - [Process listing](#a6)
 - [Monitoring CPU/Memory usage](#a7)
-- [Displaying logs in realtime](#a9)
+- [Logs management](#a9)
 - [Clustering](#a5)
 - [Watch & Restart](#a890)
 - [Reloading without downtime](#a690)
@@ -77,7 +77,7 @@ Thanks in advance and we hope that you like pm2 !
 
 - [Specific features](#a77)
 - [Configuration file](#a989)
-- [Enabling Harmony](#a66)
+- [Enabling Harmony ES6](#a66)
 - [CoffeeScript](#a19)
 - [Testing PM2 on your prod environment](#a149)
 - [JSON app via pipe](#a96)
@@ -121,6 +121,8 @@ Common problems on installation :
 - node-gyp permission problem: [Setup a new user on your server](https://github.com/Unitech/pm2/issues/188#issuecomment-30204146) or add the `--unsafe-perm` to the npm command
 - if Make/GCC or other are missing `sudo apt-get install build-essential` on Ubuntu
 
+# Quick start
+
 <a name="a2"/>
 ## Usage
 
@@ -141,9 +143,14 @@ $ pm2 start app.js --name my-api # Name process
 $ pm2 start app.js -i max        # Will start maximum processes with LB depending on available CPUs
 
 $ pm2 list               # Display all processes status
+
+$ pm2 describe 0         # Display all informations about a specific process
+
 $ pm2 monit              # Monitor all processes
+
 $ pm2 logs               # Display all processes logs in streaming
 $ pm2 flush              # Empty all log file
+$ pm2 reloadLogs         # Reload all logs
 
 $ pm2 stop all           # Stop all processes
 $ pm2 restart all        # Restart all processes
@@ -193,6 +200,36 @@ $ pm2 start echo.rb
 $ pm2 start echo.pl
 ```
 
+<a name="a987"/>
+## Options
+
+```
+Options:
+
+    -h, --help                   output usage information
+    -V, --version                output the version number
+    -v --verbose                 verbose level
+    -s --silent                  hide all messages
+    -m --mini-list               display a compacted list without formatting
+    -f --force                   force actions
+    -n --name <name>             set a <name> for script
+    -i --instances <number>      launch [number] instances (for networked app)(load balanced)
+    -o --output <path>           specify out log file
+    -e --error <path>            specify error log file
+    -p --pid <pid>               specify pid file
+    -x --execute-command         execute a program using fork system
+    -u --user <username>         define user when generating startup script
+    -c --cron <cron_pattern>     restart a running process based on a cron pattern
+    -w --write                   write configuration in local folder
+    --interpreter <interpreter>  the interpreter pm2 should use for executing app (bash, python...)
+    --no-daemon                  run pm2 daemon in the foreground if it doesn't exist already
+    --merge-logs                 merge logs
+    --watch                      watch application folder for changes
+    --node-args <node_args>      space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
+```
+
+# Features
+
 <a name="a4"/>
 ## Transitional state of apps (important)
 
@@ -227,16 +264,22 @@ $ pm2 delete web-interface
 ```
 
 <a name="a6"/>
-## Listing all processes
+## Process listing
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
 
-Listing all processes running :
+To list all process running :
 
 ```bash
 $ pm2 list
 # Or
 $ pm2 [list|ls|l|status]
+```
+
+To get more informations about a specific process :
+
+```bash
+$ pm2 describe 0
 ```
 
 <a name="a7"/>
@@ -251,7 +294,9 @@ $ pm2 monit
 ```
 
 <a name="a9"/>
-## Display logs in realtime
+## Logs management
+
+### Displaying logs in realtime
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
@@ -261,6 +306,16 @@ Displaying logs of specified process or all process in realtime :
 $ pm2 logs
 $ pm2 logs big-api
 $ pm2 flush # Clear all the logs
+```
+
+### Reloading all logs (SIGUSR2/Logrotate)
+
+To reaload all logs, you can send `SIGUSR2` to pm2 process.
+
+You can also reload all logs via command line with :
+
+```bash
+$ pm2 reloadLogs
 ```
 
 <a name="a5"/>
@@ -423,7 +478,9 @@ $ pm2 delete processes.json
 $ pm2 restart processes.json
 ```
 
-# Specific features
+# Specific
+
+## Specific features
 
 <a name="a77"/>
 
@@ -504,47 +561,6 @@ $ pm2 start my_app.coffee
 ```
 
 That's all !
-
-
-
-<a name="a666"/>
-## Hacker guide
-
-Quick start for command and examples :
-
-
-<a name="a667"/>
-## Different ways to launch a process
-
-```bash
-$ pm2 start app.js -i max  # Will start maximum processes depending on available CPUs
-
-$ pm2 start app.js -i 3    # Will start 3 processes
-
-$ pm2 start app.js --node-args="--debug=7001 --trace-deprecation" # --node-args command line option to pass options to node
-
-$ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
-$ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
-
-$ pm2 start app.js --name serverone # Start a process an name it as server one
-                                    # you can now stop the process by doing
-                                    # pm2 stop serverone
-
-$ pm2 start app.json                # Start processes with options declared in app.json
-                                    # Go to chapter Multi process JSON declaration for more
-
-$ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
-
-$ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
-```
-
-You can also execute app in other languages ([the fork mode](#a23)):
-```bash
-$ pm2 start my-bash-script.sh -x --interpreter bash
-
-$ pm2 start my-python-script.py -x --interpreter python
-```
-
 
 <a name="a34"/>
 ## Log and PID files
