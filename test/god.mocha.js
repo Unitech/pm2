@@ -31,6 +31,7 @@ describe('God', function() {
     God.should.have.property('getFormatedProcesses');
     God.should.have.property('checkProcess');
     God.should.have.property('stopAll');
+    God.should.have.property('reloadLogs');
     God.should.have.property('stopProcessId');
     God.should.have.property('reload');
     God.should.have.property('reloadProcessName');

@@ -312,6 +312,14 @@ commander.command('generate <name>')
     CLI.generateSample(name);
   });
 
+commander.command('describe <id>')
+  .description('describe all parameters of a process id')
+  .action(CLI.describeProcess);
+
+commander.command('desc <id>')
+  .description('describe all parameters of a process id')
+  .action(CLI.describeProcess);
+
 //
 // List command
 //

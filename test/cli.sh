@@ -46,6 +46,19 @@ OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 3 ] || fail "$1"
 success "$1"
 
+#
+# Describe process
+#
+$pm2 describe 0
+spec "should describe stopped process"
+
+$pm2 restart 1
+
+$pm2 describe 1
+spec "should describe online process"
+
+$pm2 describe asdsa
+ispec "should exit with right exit code when no process found"
 
 
 #
