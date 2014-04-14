@@ -2,6 +2,7 @@
   "name": "pm2",
   "preferGlobal": "true",
   "version": "0.7.9",
+  "os" : [ "!win32" ],
   "engines": {
     "node": ">=0.8"
   },
