@@ -18,7 +18,7 @@ pm2 is perfect when you need to spread your stateless NodeJS code accross all CP
 
 Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
 
-**Recommanded NodeJS version is v0.11.10**
+**The recommended Node.js version is v0.11.10**
 
 Compatible with CoffeeScript.
 Works on Linux & MacOS.
@@ -186,9 +186,10 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
 ```
 
-For other nature scripts:
+For scripts in other languages:
 
 ```bash
+$ pm2 start echo.coffee
 $ pm2 start echo.php
 $ pm2 start echo.py
 $ pm2 start echo.sh
@@ -209,7 +210,7 @@ Options:
     -m --mini-list               display a compacted list without formatting
     -f --force                   force actions
     -n --name <name>             set a <name> for script
-    -i --instances <number>      launch [number] instances (for networked app)(load balanced)
+    -i --instances <number>      launch [number] (load balanced) instances (for networked app)
     -o --output <path>           specify out log file
     -e --error <path>            specify error log file
     -p --pid <pid>               specify pid file
@@ -221,7 +222,7 @@ Options:
     --no-daemon                  run pm2 daemon in the foreground if it doesn't exist already
     --merge-logs                 merge logs
     --watch                      watch application folder for changes
-    --node-args <node_args>      space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
+    --node-args <node_args>      space-delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
 ```
 
 # Features
@@ -306,7 +307,7 @@ $ pm2 flush # Clear all the logs
 
 ### Reloading all logs (SIGUSR2/Logrotate)
 
-To reaload all logs, you can send `SIGUSR2` to pm2 process.
+To reload all logs, you can send `SIGUSR2` to the pm2 process.
 
 You can also reload all logs via the command line with:
 
@@ -325,9 +326,9 @@ $ pm2 start app.js --name "API" -i max
 
 If your app is well designed (**state less**) you gonna be able to **process much more queries**.
 
-Important concepts to make a NodeJS app stateless:
+Important concepts to make a Node.js app stateless:
 
-- Session must not be in memory but shared via a database (Redis, Mongo, whatever)
+- Sessions must not be stored in memory but shared via a database (Redis, Mongo, whatever)
 - [WebSocket/Socket.io should communicate via a database](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO)
 
 <a name="a690"/>
@@ -349,10 +350,10 @@ If the reload system hasn't managed to reload gracefully, a timeout will simply 
 
 Sometimes you can experience a **very long reload, or a reload that doesn't work** (fallback to restart).
 
-It means that your app **still have open connection on exit**.
+It means that your app **still has open connections on exit**.
 
-To pass this problem you have to use the graceful reload.
-Graceful reload is a mecanism that will send a *shutdown* message to your process before reloading it.
+To work around this problem you have to use the graceful reload.
+Graceful reload is a mechanism that will send a *shutdown* message to your process before reloading it.
 
 Example:
 
@@ -365,12 +366,12 @@ process.on('message', function(msg) {
     console.log('Closing all connections...');
 
     // You will have 4000ms to close all connections before
-    // the reload mecanism will try to do his job
+    // the reload mechanism will try to do its job
 
     setTimeout(function() {
       console.log('Finished closing connections');
-      // Ok this timeout mean that all connections have been closed
-      // Now I can exit to let the reload mecanism do his job
+      // This timeout means that all connections have been closed
+      // Now we can exit to let the reload mechanism do its job
       process.exit(0);
     }, 1500);
   }
@@ -477,13 +478,13 @@ $ pm2 restart processes.json
 
 <a name="a77"/>
 
-Launching PM2 without daemonizing itself :
+Launching PM2 without daemonizing itself:
 
 ```bash
 $ pm2 start app.js --no-daemon
 ```
 
-Sending a system signal to a process :
+Sending a system signal to a process:
 
 ```bash
 $ pm2 sendSignal SIGUSR2 my-app
@@ -595,7 +596,7 @@ $ pm2 start app.js -x   # Will start your app.js in fork mode
 $ pm2 list              # You will see that on the row "mode" it's written "fork"
 ```
 
-You can also exec scripts in other languages:
+You can also exec scripts written in other languages:
 
 ```bash
 $ pm2 start my-bash-script.sh -x --interpreter bash
