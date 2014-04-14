@@ -39,12 +39,12 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=d
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
-We gonna release a very nice product, a dashboard to monitor every part of your NodeJS applications. Here are some links :
+We're going to release a very nice product, a dashboard to monitor every part of your NodeJS applications. Here are some links:
 
 - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
 - [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
 
-Thanks in advance and we hope that you like pm2 !
+Thanks in advance and we hope that you like pm2!
 
 ------
 
@@ -90,7 +90,6 @@ Thanks in advance and we hope that you like pm2 !
 
 - [Contributing/Development mode](#a27)
 - [Known bugs and workaround](#a21)
-- [Launching the tests](#a14)
 - [They talk about it](#a20)
 - [License](#a15)
 
@@ -103,19 +102,19 @@ Thanks in advance and we hope that you like pm2 !
 
 The prefered Node version to run PM2, is the **0.11.10**
 
-The latest stable version can always be installed via NPM :
+The latest stable version can always be installed via NPM:
 
 ```bash
 $ npm install pm2@latest -g
 ```
 
-If the above fails :
+If the above fails:
 
 ```bash
 $ npm install git://github.com/Unitech/pm2#master -g
 ```
 
-Common problems on installation :
+Common problems on installation:
 
 - node-gyp permission problem: [Setup a new user on your server](https://github.com/Unitech/pm2/issues/188#issuecomment-30204146) or add the `--unsafe-perm` to the npm command
 - if Make/GCC or other are missing `sudo apt-get install build-essential` on Ubuntu
@@ -123,7 +122,7 @@ Common problems on installation :
 <a name="a2"/>
 ## Usage
 
-Hello world :
+Hello world:
 
 ```bash
 $ pm2 start app.js
@@ -132,7 +131,7 @@ $ pm2 start app.js
 <a name="a3"/>
 ## Examples
 
-Raw examples :
+Raw examples:
 
 ```bash
 $ pm2 start app.js --name my-api # Name process
@@ -187,7 +186,7 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
 ```
 
-For other nature scripts :
+For other nature scripts:
 
 ```bash
 $ pm2 start echo.php
@@ -232,14 +231,14 @@ Options:
 
 PM2 is a process manager, as said, pm2 can start, stop, restart and *delete* processes.
 
-Start a process :
+Start a process:
 
 ```bash
 $ pm2 start app.js --name "my-api"
 $ pm2 start web.js --name "web-interface"
 ```
 
-Now let's say I need to stop the web-interface :
+Now let's say I need to stop the web-interface:
 
 ```bash
 $ pm2 stop web-interface
@@ -247,14 +246,14 @@ $ pm2 stop web-interface
 
 As you can see **the process hasn't disapeared**. It is still there but now in `stopped` status.
 
-To restart it just do :
+To restart it just do:
 
 ```bash
 $ pm2 restart web-interface
 ```
 
 Now I want to **delete** the app from the pm2 process list.
-To do that :
+To do that:
 
 ```bash
 $ pm2 delete web-interface
@@ -265,7 +264,7 @@ $ pm2 delete web-interface
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
 
-To list all process running :
+To list all running processes:
 
 ```bash
 $ pm2 list
@@ -273,7 +272,7 @@ $ pm2 list
 $ pm2 [list|ls|l|status]
 ```
 
-To get more informations about a specific process :
+To get more details about a specific process:
 
 ```bash
 $ pm2 describe 0
@@ -284,7 +283,7 @@ $ pm2 describe 0
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
 
-Monitor all processes launched :
+Monitor all processes launched:
 
 ```bash
 $ pm2 monit
@@ -297,7 +296,7 @@ $ pm2 monit
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
-Displaying logs of specified process or all process in realtime :
+Displaying logs of specified process or all processes in realtime:
 
 ```bash
 $ pm2 logs
@@ -309,7 +308,7 @@ $ pm2 flush # Clear all the logs
 
 To reaload all logs, you can send `SIGUSR2` to pm2 process.
 
-You can also reload all logs via command line with :
+You can also reload all logs via the command line with:
 
 ```bash
 $ pm2 reloadLogs
@@ -318,7 +317,7 @@ $ pm2 reloadLogs
 <a name="a5"/>
 ## Clustering
 
-Launch `max` instances (`max` depending on the number of CPUs available) and set the load balancer to balance queries between each process :
+Launch `max` instances (`max` depending on the number of CPUs available) and set the load balancer to balance queries among process:
 
 ```bash
 $ pm2 start app.js --name "API" -i max
@@ -326,7 +325,7 @@ $ pm2 start app.js --name "API" -i max
 
 If your app is well designed (**state less**) you gonna be able to **process much more queries**.
 
-Important concepts to make a NodeJS app stateless :
+Important concepts to make a NodeJS app stateless:
 
 - Session must not be in memory but shared via a database (Redis, Mongo, whatever)
 - [WebSocket/Socket.io should communicate via a database](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO)
@@ -338,7 +337,7 @@ This special feature has been added to PM2 a while ago.
 
 **Warning** It only works for apps in *cluster mode* (the default mode), that uses HTTP/HTTPS/Socket connections.
 
-Reloading an app :
+Reloading an app:
 
 ```bash
 $ pm2 reload api
@@ -355,7 +354,7 @@ It means that your app **still have open connection on exit**.
 To pass this problem you have to use the graceful reload.
 Graceful reload is a mecanism that will send a *shutdown* message to your process before reloading it.
 
-Example :
+Example:
 
 ```javascript
 process.on('message', function(msg) {
@@ -388,26 +387,26 @@ PM2 is also smart enough to **save all your process list** and to **bring back a
 $ pm2 startup [ubuntu|centos|systemd]
 ```
 
-**Warning** This feature is tricky to make it work generically, so once PM2 has setup your startup script, reboot your server to be sure that PM2 put back your apps !
+**Warning** It's tricky to make this feature work generically, so once PM2 has setup your startup script, reboot your server to make sure that PM2 has launched your apps!
 
-### More informations
+### More information
 
-Two types of startup script are availables:
+Two types of startup scripts are available:
 
 - SystemV init script (with the option `ubuntu` or `centos`)
 - SystemD init script (with the `systemd` option)
 
-Those options are using :
+The startup options are using:
 
 - **ubuntu** will use `updaterc.d` and the script `lib/scripts/pm2-init.sh`
 - **centos** will use `chkconfig` and the script `lib/scripts/pm2-init-centos.sh`
 - **systemd** will use `systemctl` and the script `lib/scripts/pm2.service`
 
-### User permission
+### User permissions
 
-Ah, there is something else, let's say you want the startup script to be executed under another user.
+Let's say you want the startup script to be executed under another user.
 
-Just use the `-u <username` option !
+Just use the `-u <username>` option !
 
 ```bash
 $ pm2 startup ubuntu -u www
@@ -415,13 +414,13 @@ $ pm2 startup ubuntu -u www
 
 ### Derivated commands
 
-Dump all processes status and environment managed by pm2 :
+Dump all processes status and environment managed by pm2:
 ```bash
 $ pm2 dump
 ```
 It populates the file `~/.pm2/dump.pm2` by default.
 
-To bring back the latest dump :
+To bring back the latest dump:
 ```bash
 $ pm2 resurrect
 ```
@@ -429,7 +428,7 @@ $ pm2 resurrect
 <a name="a890"/>
 ## Watch & Restart
 
-This feature permits to restart automatically your app when a file change in the current folder (recursively) :
+pm2 can automatically restart your app when a file changes in the current directory or its subdirectories:
 
 ```bash
 $ pm2 start app.js --watch
@@ -438,7 +437,7 @@ $ pm2 start app.js --watch
 <a name="a10"/>
 ## JSON app declaration
 
-processes.json :
+You can define parameters for your apps in `processes.json`:
 
 ```json
 [{
@@ -449,25 +448,24 @@ processes.json :
       "NODE_ENV": "production",
       "AWESOME_SERVICE_API_TOKEN": "xxx"
   }
-}
-,{
-    "name"       : "api",
-    "script"     : "./examples/child.js",
-    "instances"  : "4",
-    "error_file" : "./examples/child-err.log",
-    "out_file"   : "./examples/child-out.log",
-    "pid_file"   : "./examples/child.pid",
-    "exec_mode"  : "cluster_mode",
-    "port"       : 9005
-},{
-  "min_uptime" : "100",
+}, {
+  "name"       : "api",
+  "script"     : "./examples/child.js",
+  "instances"  : "4",
+  "error_file" : "./examples/child-err.log",
+  "out_file"   : "./examples/child-out.log",
+  "pid_file"   : "./examples/child.pid",
+  "exec_mode"  : "cluster_mode",
+  "port"       : 9005
+}, {
   "name"       : "auto-kill",
-  "exec_mode"  : "fork_mode",
   "script"     : "./examples/killfast.js"
+  "min_uptime" : "100",
+  "exec_mode"  : "fork_mode",
 }]
 ```
 
-Then with the cli :
+Then run:
 ```bash
 $ pm2 start processes.json
 $ pm2 stop processes.json
@@ -475,9 +473,7 @@ $ pm2 delete processes.json
 $ pm2 restart processes.json
 ```
 
-# Specific
-
-## Specific features
+# Miscellaneous
 
 <a name="a77"/>
 
@@ -496,9 +492,7 @@ $ pm2 sendSignal SIGUSR2 my-app
 <a name="a989"/>
 ## Configuration file
 
-You can edit these options by editing the file `~/.pm2/custom_options.sh`
-
-These variables can be customized :
+You can specifiy the following options by editing the file `~/.pm2/custom_options.sh`:
 
 ```
 PM2_RPC_PORT
@@ -524,13 +518,13 @@ $ pm2 web
 
 You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
 
-To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add :
+To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add:
 
 ```bash
 export PM2_NODE_OPTIONS='--harmony'
 ```
 
-Then :
+Then:
 
 ```bash
 $ pm2 dump
@@ -538,7 +532,7 @@ $ pm2 exit
 $ pm2 resurrect
 ```
 
-If ES6 has been enabled you should see this message at the beggining of each pm2 commands :
+If ES6 has been enabled you should see this message at the beggining of each pm2 command:
 
 ```
 ● ES6 mode
@@ -557,12 +551,12 @@ $ pm2 start my_app.js --node-args="--harmony"
 $ pm2 start my_app.coffee
 ```
 
-That's all !
+That's all!
 
 <a name="a34"/>
 ## Log and PID files
 
-By default every logs (error and out), pids files, dump, pm2 logs are located in `~/.pm2/`
+By default, logs (error and output), pid files, dumps, and pm2 logs are located in `~/.pm2/`:
 
 ```
 .pm2/
@@ -582,13 +576,13 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 
 
 <a name="a23"/>
-## Execute any script: What is fork mode ?
+## Execute any script: What is fork mode?
 
 The default mode of PM2 consists of wrapping the code of your node application into the Node Cluster module. It's called the **cluster mode**.
 
 There is also a more classical way to execute your app, like node-forever does, called the **fork mode**.
 
-In fork mode almost all options are the same as the cluster mode. But there is no reload or gracefulReload command.
+In fork mode almost all options are the same as the cluster mode. But there is no [`reload`](#reloading-without-downtime) or `gracefulReload` command.
 
 **By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
 
@@ -636,7 +630,7 @@ echo $my_json | pm2 start -
 ```
 
 <a name="a149"/>
-## Is my production server ready for PM2 ?
+## Is my production server ready for PM2?
 
 Just try the tests before using PM2 on your production server
 
@@ -648,7 +642,7 @@ $ npm test
 ```
 
 If a test is broken please report us issues [here](https://github.com/Unitech/pm2/issues?state=open)
-Also make sure you have all dependencies needed. For Ubuntu :
+Also make sure you have all dependencies needed. For Ubuntu:
 
 ```bash
 $ sudo apt-get install build-essential
@@ -662,7 +656,7 @@ $ nvm alias default v0.11.10
 <a name="a27"/>
 ## Contributing/Development mode
 
-To hack PM2, it's pretty simple :
+To hack PM2, it's pretty simple:
 
 ```bash
 $ pm2 kill   # kill the current pm2
@@ -671,7 +665,7 @@ $ cd pm2/
 $ DEBUG=* PM2_DEBUG=true ./bin/pm2 --no-daemon
 ```
 
-Each time you edit the code be sure to kill and restart pm2 to make changes taking effect.
+Each time you edit the code, be sure to kill and restart pm2 to make changes taking effect.
 
 ## Install pm2 development
 
@@ -688,32 +682,25 @@ First, install the lastest pm2 version :
 $ npm install -g pm2@latest
 ```
 
-- Node 0.10.x doesn't free script port when stopped. It's due to the NodeJS cluster module.
-So if you feel that this problem is important for your use case, use the fork mode the [fork mode](#a23) instead.
+### Node 0.10.x doesn't free the script port when stopped. It's due to the NodeJS cluster module.
+So if you feel that this problem is important for your use case, use the [fork mode](#execute-any-script-what-is-fork-mode-) instead.
 By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
 ```
 $ pm2 start index.js -x  # start my app in fork mode
 ```
 
-For more informations about this issue: [#74](https://github.com/Unitech/pm2/issues/74)
+For more information about this, see [issue #74](https://github.com/Unitech/pm2/issues/74).
 
-- `Cannot read property 'getsockname' of undefined`
+### `Cannot read property 'getsockname' of undefined`
 
 When using the cluster mode (by default) you can't use ports from 0 to 1024. If you really need to exec in this range use the [fork mode](#a23) with the `-x` parameter.
 By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
-<a name="a14"/>
-## Test
-
-```bash
-npm test
-```
-
 <a name="a20"/>
-## They talk about it
+## External resources and articles
 
-- http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
+- [Goodbye node-forever, hello PM2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
 - http://www.allaboutghost.com/keep-ghost-running-with-pm2/
 - http://blog.ponyfoo.com/2013/09/19/deploying-node-apps-to-aws-using-grunt
 - http://www.allaboutghost.com/keep-ghost-running-with-pm2/
@@ -778,5 +765,5 @@ Thanks to [Devo.ps](http://devo.ps/) and [Wiredcraft](http://wiredcraft.com/) fo
 <a name="a15"/>
 # License
 
-Files in lib/ are made available under the terms of the GNU Affero General Public License (AGPL).
-pm2-interface is made under the terms of the Apache V2 license.
+Files in `lib/` are made available under the terms of the GNU Affero General Public License (AGPL).
+`pm2-interface` is made under the terms of the Apache V2 license.

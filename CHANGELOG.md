@@ -10,7 +10,7 @@
 - Upgrade of outdated packages
 - Silent (-s) flag remove all possible pm2 output to CLI
 - New display for list, more compact
-- `pm2 describe <id>` to get more informations about a process
+- `pm2 describe <id>` to get more details about a process
 - Fixed 0.10.x issue when stop/kill
 - Helper shown when -h
 - Linter errors
