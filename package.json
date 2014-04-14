@@ -1,10 +1,10 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "os" : [ "!win32" ],
   "engines": {
-    "node": ">=0.8"
+    "node": ">=0.10"
   },
   "author": {
     "name": "Strzelewicz Alexandre",

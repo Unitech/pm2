@@ -1,14 +1,17 @@
 
-# 0.7.9
+# 0.8.0
 
 - More verbosity to pm2.log
+- Fast Watch & Reload
 - New README.md
 - --merge-logs option to merge logs for a group of process
+- logs reload with SIGUSR2 or `pm2 reloadLogs`
 - return failure code when no process has been reloaded
 - Upgrade of outdated packages
 - Silent (-s) flag remove all possible pm2 output to CLI
 - New display for list, more compact
-- Fix 0.10.x issue when stop/kill
+- `pm2 describe <id>` to get more informations about a process
+- Fixed 0.10.x issue when stop/kill
 - Helper shown when -h
 - Linter errors
 - Systemd support for Fedora / ArchLinux
