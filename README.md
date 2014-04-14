@@ -10,13 +10,11 @@ pm2 is perfect when you need to spread your stateless NodeJS code accross all CP
 
 - Builtin load-balancer (using the native cluster module)
 - Script daemonization
-- 0s downtime reload for Node
-- Startup scripts for Ubuntu/CentOS (use updaterc.d for Ubuntu and chkconfig for others)
-- Stop unstable process (avoid infinite loop)
+- 0s downtime reload for Node apps
+- Startup scripts for with SystemV/SystemD scripts (Ubuntu, Centos...)
+- Pause unstable process (avoid infinite loop)
 - Restart on file change with --watch
 - Monitoring in console
-- HTTP API
-- [Remote control and real time interface API](https://github.com/Unitech/pm2-interface)
 
 Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
 
@@ -716,6 +714,15 @@ npm test
 ## They talk about it
 
 - http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html
+- http://www.allaboutghost.com/keep-ghost-running-with-pm2/
+- http://blog.ponyfoo.com/2013/09/19/deploying-node-apps-to-aws-using-grunt
+- http://www.allaboutghost.com/keep-ghost-running-with-pm2/
+- http://bioselemental.com/keeping-ghost-alive-with-pm2/
+- http://blog.chyld.net/installing-ghost-on-ubuntu-13-10-aws-ec2-instance-with-pm2/
+- http://blog.marvinroger.fr/gerer-ses-applications-node-en-production-pm2/
+- https://www.codersgrid.com/2013/06/29/pm2-process-manager-for-node-js/
+- http://yosoftware.com/blog/7-tips-for-a-node-js/
+- http://blog.rapsli.ch/posts/2013/2013-10-17-node-monitor-pm2.html
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
@@ -761,18 +768,6 @@ npm test
      1  perfectworks
      1  subeeshcbabu
 ```
-
-## Idea bucket
-
-- Remote administration/status checking
-- Builtin Inter process communication channel (message bus)
-- Auto start of the script at start (upstart)
-- V8 GC memory leak detection
-- Web interface
-- Keeping monitoring data
-- Integrated wrk utils endpoint benchmark
-- Scale up/down processes
-- Use https://github.com/felixge/node-measured in process container
 
 ## Sponsors
 
