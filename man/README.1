@@ -1,0 +1,1177 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "README" "" "April 2014" "" ""
+pm2 is a process manager for Node apps with a builtin load\-balancer\.
+.
+.SS "Tech notes"
+pm2 is perfect when you need to spread your stateless NodeJS code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them\.
+.
+.SS "Main features"
+.
+.IP "\(bu" 4
+Builtin load\-balancer (using the native cluster module)
+.
+.IP "\(bu" 4
+Script daemonization
+.
+.IP "\(bu" 4
+0s downtime reload for Node apps
+.
+.IP "\(bu" 4
+Startup scripts for with SystemV/SystemD scripts (Ubuntu, Centos\.\.\.)
+.
+.IP "\(bu" 4
+Pause unstable process (avoid infinite loop)
+.
+.IP "\(bu" 4
+Restart on file change with \-\-watch
+.
+.IP "\(bu" 4
+Monitoring in console
+.
+.IP "" 0
+.
+.P
+Tested with Node v0\.11, v0\.10 (https://travis\-ci\.org/Unitech/pm2)\.
+.
+.P
+\fBRecommanded NodeJS version is v0\.11\.10\fR
+.
+.P
+Compatible with CoffeeScript\. Works on Linux & MacOS\.
+.
+.P
+ \fIhttps://david\-dm\.org/Unitech/pm2\fR  \fIhttp://badge\.fury\.io/js/pm2\fR  \fIhttp://goo\.gl/sdaIwX\fR
+.
+.P
+ \fIhttps://nodei\.co/npm/pm2\.png?downloads=true\fR
+.
+.SS "Build Status"
+Master:  \fIhttps://travis\-ci\.org/Unitech/pm2\fR
+.
+.P
+Development:  \fIhttps://travis\-ci\.org/Unitech/pm2\fR
+.
+.SH "Monitoring dashboard"
+.
+.P
+We gonna release a very nice product, a dashboard to monitor every part of your NodeJS applications\. Here are some links :
+.
+.IP "\(bu" 4
+Pitch + Survey \fIhttps://docs\.google\.com/forms/d/1FuCjIhrGg\-ItxInq2nLreoe9GS\-gZWJNkNWE0JJajw8/viewform\fR People who fill the survey will be eligible for free license
+.
+.IP "\(bu" 4
+Newsletter \fIhttp://signup\.pm2\.io/\fR Subscribe to be kept informed
+.
+.IP "" 0
+.
+.P
+Thanks in advance and we hope that you like pm2 !
+.
+.SH "Table of contents"
+.
+.SS "Quick start"
+.
+.IP "\(bu" 4
+\fIInstallation\fR
+.
+.IP "\(bu" 4
+\fIUsage\fR
+.
+.IP "\(bu" 4
+\fIExamples\fR
+.
+.IP "\(bu" 4
+\fIDifferents ways to launch a process\fR
+.
+.IP "\(bu" 4
+\fIOptions\fR
+.
+.IP "" 0
+.
+.SS "Features"
+.
+.IP "\(bu" 4
+\fITransitional state of apps\fR
+.
+.IP "\(bu" 4
+\fIProcess listing\fR
+.
+.IP "\(bu" 4
+\fIMonitoring CPU/Memory usage\fR
+.
+.IP "\(bu" 4
+\fILogs management\fR
+.
+.IP "\(bu" 4
+\fIClustering\fR
+.
+.IP "\(bu" 4
+\fIWatch & Restart\fR
+.
+.IP "\(bu" 4
+\fIReloading without downtime\fR
+.
+.IP "\(bu" 4
+\fIMake PM2 restart on server reboot\fR
+.
+.IP "\(bu" 4
+\fIJSON app declaration\fR
+.
+.IP "" 0
+.
+.SS "Specific"
+.
+.IP "\(bu" 4
+\fISpecific features\fR
+.
+.IP "\(bu" 4
+\fIConfiguration file\fR
+.
+.IP "\(bu" 4
+\fIEnabling Harmony ES6\fR
+.
+.IP "\(bu" 4
+\fICoffeeScript\fR
+.
+.IP "\(bu" 4
+\fITesting PM2 on your prod environment\fR
+.
+.IP "\(bu" 4
+\fIJSON app via pipe\fR
+.
+.IP "" 0
+.
+.SS "Knowledge"
+.
+.IP "\(bu" 4
+\fITransitional state of apps\fR
+.
+.IP "\(bu" 4
+\fISetup PM2 on server: tutorial\fR
+.
+.IP "\(bu" 4
+\fILogs and PID files\fR
+.
+.IP "\(bu" 4
+\fIExecute any script: What is fork mode ?\fR
+.
+.IP "" 0
+.
+.SS "More"
+.
+.IP "\(bu" 4
+\fIContributing/Development mode\fR
+.
+.IP "\(bu" 4
+\fIKnown bugs and workaround\fR
+.
+.IP "\(bu" 4
+\fILaunching the tests\fR
+.
+.IP "\(bu" 4
+\fIThey talk about it\fR
+.
+.IP "\(bu" 4
+\fILicense\fR
+.
+.IP "" 0
+ \fI\fR
+.
+.SH "Installation"
+The prefered Node version to run PM2, is the \fB0\.11\.10\fR
+.
+.P
+The latest stable version can always be installed via NPM :
+.
+.IP "" 4
+.
+.nf
+
+$ npm install pm2@latest \-g
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If the above fails :
+.
+.IP "" 4
+.
+.nf
+
+$ npm install git://github\.com/Unitech/pm2#master \-g
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Common problems on installation :
+.
+.IP "\(bu" 4
+node\-gyp permission problem: Setup a new user on your server \fIhttps://github\.com/Unitech/pm2/issues/188#issuecomment\-30204146\fR or add the \fB\-\-unsafe\-perm\fR to the npm command
+.
+.IP "\(bu" 4
+if Make/GCC or other are missing \fBsudo apt\-get install build\-essential\fR on Ubuntu
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Usage"
+Hello world :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start app\.js
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Examples"
+Raw examples :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start app\.js \-\-name my\-api # Name process
+
+$ pm2 start app\.js \-i max        # Will start maximum processes with LB depending on available CPUs
+
+$ pm2 list               # Display all processes status
+
+$ pm2 describe 0         # Display all informations about a specific process
+
+$ pm2 monit              # Monitor all processes
+
+$ pm2 logs               # Display all processes logs in streaming
+$ pm2 flush              # Empty all log file
+$ pm2 reloadLogs         # Reload all logs
+
+$ pm2 stop all           # Stop all processes
+$ pm2 restart all        # Restart all processes
+
+$ pm2 reload all         # Will 0s downtime reload (for NETWORKED processes)
+
+$ pm2 stop 0             # Stop specific process id
+$ pm2 restart 0          # Restart specific process id
+
+$ pm2 delete 0           # Will remove process from pm2 list
+$ pm2 delete all         # Will remove all processes from pm2 list
+
+$ pm2 ping               # Ensure pm2 dameon has been launched
+.
+.fi
+.
+.IP "" 0
+.
+.SH "Different ways to launch a process"
+.
+.nf
+
+$ pm2 start app\.js \-i max  # Will start maximum processes depending on available CPUs
+
+$ pm2 start app\.js \-i 3    # Will start 3 processes
+
+$ pm2 start app\.js \-\-node\-args="\-\-debug=7001 \-\-trace\-deprecation" # \-\-node\-args command line option to pass options to node
+
+$ pm2 start app\.js \-x            # Start app\.js in fork mode instead of cluster
+$ pm2 start app\.js \-x \-\- \-a 23   # Start app\.js in fork mode and pass arguments (\-a 23)
+
+$ pm2 start app\.js \-\-name serverone # Start a process an name it as server one
+                                    # you can now stop the process by doing
+                                    # pm2 stop serverone
+
+$ pm2 start app\.json                # Start processes with options declared in app\.json
+                                    # Go to chapter Multi process JSON declaration for more
+
+$ pm2 start app\.js \-i max \-\- \-a 23  # Pass arguments after \-\- to app\.js
+
+$ pm2 start app\.js \-i max \-e err\.log \-o out\.log  # Will start and generate a configuration file
+.
+.fi
+.
+.P
+For other nature scripts :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start echo\.php
+$ pm2 start echo\.py
+$ pm2 start echo\.sh
+$ pm2 start echo\.rb
+$ pm2 start echo\.pl
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Options"
+.
+.nf
+
+Options:
+
+    \-h, \-\-help                   output usage information
+    \-V, \-\-version                output the version number
+    \-v \-\-verbose                 verbose level
+    \-s \-\-silent                  hide all messages
+    \-m \-\-mini\-list               display a compacted list without formatting
+    \-f \-\-force                   force actions
+    \-n \-\-name <name>             set a <name> for script
+    \-i \-\-instances <number>      launch [number] instances (for networked app)(load balanced)
+    \-o \-\-output <path>           specify out log file
+    \-e \-\-error <path>            specify error log file
+    \-p \-\-pid <pid>               specify pid file
+    \-x \-\-execute\-command         execute a program using fork system
+    \-u \-\-user <username>         define user when generating startup script
+    \-c \-\-cron <cron_pattern>     restart a running process based on a cron pattern
+    \-w \-\-write                   write configuration in local folder
+    \-\-interpreter <interpreter>  the interpreter pm2 should use for executing app (bash, python\.\.\.)
+    \-\-no\-daemon                  run pm2 daemon in the foreground if it doesn\'t exist already
+    \-\-merge\-logs                 merge logs
+    \-\-watch                      watch application folder for changes
+    \-\-node\-args <node_args>      space delimited arguments to pass to node in cluster mode \- e\.g\. \-\-node\-args="\-\-debug=7001 \-\-trace\-deprecation"
+.
+.fi
+ \fI\fR
+.
+.SH "Transitional state of apps (important)"
+PM2 is a process manager, as said, pm2 can start, stop, restart and \fIdelete\fR processes\.
+.
+.P
+Start a process :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start app\.js \-\-name "my\-api"
+$ pm2 start web\.js \-\-name "web\-interface"
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Now let\'s say I need to stop the web\-interface :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 stop web\-interface
+.
+.fi
+.
+.IP "" 0
+.
+.P
+As you can see \fBthe process hasn\'t disapeared\fR\. It is still there but now in \fBstopped\fR status\.
+.
+.P
+To restart it just do :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 restart web\-interface
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Now I want to \fBdelete\fR the app from the pm2 process list\. To do that :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 delete web\-interface
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Process listing"
+.
+.P
+To list all process running :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 list
+# Or
+$ pm2 [list|ls|l|status]
+.
+.fi
+.
+.IP "" 0
+.
+.P
+To get more informations about a specific process :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 describe 0
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Monitoring CPU/Memory usage"
+.
+.P
+Monitor all processes launched :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 monit
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Logs management"
+.
+.SS "Displaying logs in realtime"
+.
+.P
+Displaying logs of specified process or all process in realtime :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 logs
+$ pm2 logs big\-api
+$ pm2 flush # Clear all the logs
+.
+.fi
+.
+.IP "" 0
+.
+.SS "Reloading all logs (SIGUSR2/Logrotate)"
+To reaload all logs, you can send \fBSIGUSR2\fR to pm2 process\.
+.
+.P
+You can also reload all logs via command line with :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 reloadLogs
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Clustering"
+Launch \fBmax\fR instances (\fBmax\fR depending on the number of CPUs available) and set the load balancer to balance queries between each process :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start app\.js \-\-name "API" \-i max
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If your app is well designed (\fBstate less\fR) you gonna be able to \fBprocess much more queries\fR\.
+.
+.P
+Important concepts to make a NodeJS app stateless :
+.
+.IP "\(bu" 4
+Session must not be in memory but shared via a database (Redis, Mongo, whatever)
+.
+.IP "\(bu" 4
+WebSocket/Socket\.io should communicate via a database \fIhttps://github\.com/LearnBoost/Socket\.IO/wiki/Configuring\-Socket\.IO\fR
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Reloading without downtime"
+This special feature has been added to PM2 a while ago\.
+.
+.P
+\fBWarning\fR It only works for apps in \fIcluster mode\fR (the default mode), that uses HTTP/HTTPS/Socket connections\.
+.
+.P
+Reloading an app :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 reload api
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If the reload system hasn\'t managed to reload gracefully, a timeout will simply kill the process and will restart it\.
+.
+.SS "Graceful reload"
+Sometimes you can experience a \fBvery long reload, or a reload that doesn\'t work\fR (fallback to restart)\.
+.
+.P
+It means that your app \fBstill have open connection on exit\fR\.
+.
+.P
+To pass this problem you have to use the graceful reload\. Graceful reload is a mecanism that will send a \fIshutdown\fR message to your process before reloading it\.
+.
+.P
+Example :
+.
+.IP "" 4
+.
+.nf
+
+process\.on(\'message\', function(msg) {
+  if (msg == \'shutdown\') {
+    // Your process is going to be reloaded
+    // You have to close all database/socket\.io/* connections
+
+    console\.log(\'Closing all connections\.\.\.\');
+
+    // You will have 4000ms to close all connections before
+    // the reload mecanism will try to do his job
+
+    setTimeout(function() {
+      console\.log(\'Finished closing connections\');
+      // Ok this timeout mean that all connections have been closed
+      // Now I can exit to let the reload mecanism do his job
+      process\.exit(0);
+    }, 1500);
+  }
+});
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Startup script"
+PM2 has the amazing ability to \fBgenerate startup scripts and configure it\fR\. PM2 is also smart enough to \fBsave all your process list\fR and to \fBbring back all your processes on restart\fR\.
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 startup [ubuntu|centos|systemd]
+.
+.fi
+.
+.IP "" 0
+.
+.P
+\fBWarning\fR This feature is tricky to make it work generically, so once PM2 has setup your startup script, reboot your server to be sure that PM2 put back your apps !
+.
+.SS "More informations"
+Two types of startup script are availables:
+.
+.IP "\(bu" 4
+SystemV init script (with the option \fBubuntu\fR or \fBcentos\fR)
+.
+.IP "\(bu" 4
+SystemD init script (with the \fBsystemd\fR option)
+.
+.IP "" 0
+.
+.P
+Those options are using :
+.
+.IP "\(bu" 4
+\fBubuntu\fR will use \fBupdaterc\.d\fR and the script \fBlib/scripts/pm2\-init\.sh\fR
+.
+.IP "\(bu" 4
+\fBcentos\fR will use \fBchkconfig\fR and the script \fBlib/scripts/pm2\-init\-centos\.sh\fR
+.
+.IP "\(bu" 4
+\fBsystemd\fR will use \fBsystemctl\fR and the script \fBlib/scripts/pm2\.service\fR
+.
+.IP "" 0
+.
+.SS "User permission"
+Ah, there is something else, let\'s say you want the startup script to be executed under another user\.
+.
+.P
+Just use the \fB\-u <username\fR option !
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 startup ubuntu \-u www
+.
+.fi
+.
+.IP "" 0
+.
+.SS "Derivated commands"
+Dump all processes status and environment managed by pm2 : \fBbash $ pm2 dump\fR It populates the file \fB~/\.pm2/dump\.pm2\fR by default\.
+.
+.P
+To bring back the latest dump : \fBbash $ pm2 resurrect\fR
+.
+.P
+ \fI\fR
+.
+.SH "Watch & Restart"
+This feature permits to restart automatically your app when a file change in the current folder (recursively) :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start app\.js \-\-watch
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "JSON app declaration"
+processes\.json :
+.
+.IP "" 4
+.
+.nf
+
+[{
+  "name"      : "echo",
+  "script"    : "\./examples/args\.js",
+  "args"      : "[\'\-\-toto=heya coco\', \'\-d\', \'1\']",
+  "env": {
+      "NODE_ENV": "production",
+      "AWESOME_SERVICE_API_TOKEN": "xxx"
+  }
+}
+,{
+    "name"       : "api",
+    "script"     : "\./examples/child\.js",
+    "instances"  : "4",
+    "error_file" : "\./examples/child\-err\.log",
+    "out_file"   : "\./examples/child\-out\.log",
+    "pid_file"   : "\./examples/child\.pid",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 9005
+},{
+  "min_uptime" : "100",
+  "name"       : "auto\-kill",
+  "exec_mode"  : "fork_mode",
+  "script"     : "\./examples/killfast\.js"
+}]
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Then with the cli : \fBbash $ pm2 start processes\.json $ pm2 stop processes\.json $ pm2 delete processes\.json $ pm2 restart processes\.json\fR
+.
+.SH "Specific features"
+ \fI\fR
+.
+.P
+Launching PM2 without daemonizing itself :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start app\.js \-\-no\-daemon
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Sending a system signal to a process :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 sendSignal SIGUSR2 my\-app
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Configuration file"
+You can edit these options by editing the file \fB~/\.pm2/custom_options\.sh\fR
+.
+.P
+These variables can be customized :
+.
+.IP "" 4
+.
+.nf
+
+PM2_RPC_PORT
+PM2_PUB_PORT
+PM2_BIND_ADDR
+PM2_API_PORT
+PM2_GRACEFUL_TIMEOUT
+PM2_MODIFY_REQUIRE
+PM2_NODE_OPTIONS
+.
+.fi
+.
+.IP "" 0
+.
+.SH "API health endpoint"
+.
+.nf
+
+$ pm2 web
+.
+.fi
+.
+.P
+ \fI\fR
+.
+.SH "Enabling Harmony ES6"
+.
+.SS "Enable by default for all processes"
+You can enable Harmony ES6 by setting \fBPM2_NODE_OPTIONS=\'\-\-harmony\'\fR environment variable option when you start pm2 (pm2 should not be already daemonized)\.
+.
+.P
+To pass this option by default, you can edit \fB~/\.pm2/custom_options\.sh\fR and add :
+.
+.IP "" 4
+.
+.nf
+
+export PM2_NODE_OPTIONS=\'\-\-harmony\'
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Then :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 dump
+$ pm2 exit
+$ pm2 resurrect
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If ES6 has been enabled you should see this message at the beggining of each pm2 commands :
+.
+.IP "" 4
+.
+.nf
+
+● ES6 mode
+.
+.fi
+.
+.IP "" 0
+.
+.SS "Enable for specific processes"
+.
+.nf
+
+$ pm2 start my_app\.js \-\-node\-args="\-\-harmony"
+.
+.fi
+.
+.P
+ \fI\fR
+.
+.SH "CoffeeScript"
+.
+.nf
+
+$ pm2 start my_app\.coffee
+.
+.fi
+.
+.P
+That\'s all !
+.
+.P
+ \fI\fR
+.
+.SH "Log and PID files"
+By default every logs (error and out), pids files, dump, pm2 logs are located in \fB~/\.pm2/\fR
+.
+.IP "" 4
+.
+.nf
+
+\&\.pm2/
+├── dump\.pm2
+├── custom_options\.sh
+├── pm2\.log
+├── pm2\.pid
+├── logs
+└── pids
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Tutorial"
+How To Use PM2 to Setup a Node\.js Production Environment On An Ubuntu VPS \fIhttps://www\.digitalocean\.com/community/articles/how\-to\-use\-pm2\-to\-setup\-a\-node\-js\-production\-environment\-on\-an\-ubuntu\-vps\fR
+.
+.P
+ \fI\fR
+.
+.SH "Execute any script: What is fork mode ?"
+The default mode of PM2 consists of wrapping the code of your node application into the Node Cluster module\. It\'s called the \fBcluster mode\fR\.
+.
+.P
+There is also a more classical way to execute your app, like node\-forever does, called the \fBfork mode\fR\.
+.
+.P
+In fork mode almost all options are the same as the cluster mode\. But there is no reload or gracefulReload command\.
+.
+.P
+\fBBy using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload\.\fR
+.
+.P
+So use it if you only need a forever\-like behaviour\.
+.
+.P
+Here is how to start your app within a fork:
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start app\.js \-x   # Will start your app\.js in fork mode
+$ pm2 list              # You will see that on the row "mode" it\'s written "fork"
+.
+.fi
+.
+.IP "" 0
+.
+.P
+You can also exec scripts in other languages:
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start my\-bash\-script\.sh \-x \-\-interpreter bash
+
+$ pm2 start my\-python\-script\.py \-x \-\-interpreter python
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "JSON app configuration via pipe from stdout"
+Pull\-requests: \- #273 \fIhttps://github\.com/Unitech/pm2/pull/273\fR \- #279 \fIhttps://github\.com/Unitech/pm2/pull/279\fR
+.
+.IP "" 4
+.
+.nf
+
+#!/bin/bash
+
+read \-d \'\' my_json <<_EOF_
+[{
+    "name"       : "app1",
+    "script"     : "/home/projects/pm2_nodetest/app\.js",
+    "instances"  : "4",
+    "error_file" : "\./logz/child\-err\.log",
+    "out_file"   : "\./logz/child\-out\.log",
+    "pid_file"   : "\./logz/child\.pid",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 4200
+}]
+_EOF_
+
+echo $my_json | pm2 start \-
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Is my production server ready for PM2 ?"
+Just try the tests before using PM2 on your production server
+.
+.IP "" 4
+.
+.nf
+
+$ git clone https://github\.com/Unitech/pm2\.git
+$ cd pm2
+$ npm install  # Or do NODE_ENV=development npm install if some packages are missing
+$ npm test
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If a test is broken please report us issues here \fIhttps://github\.com/Unitech/pm2/issues?state=open\fR Also make sure you have all dependencies needed\. For Ubuntu :
+.
+.IP "" 4
+.
+.nf
+
+$ sudo apt\-get install build\-essential
+# nvm is a nodejs version manager \- https://github\.com/creationix/nvm
+$ wget \-qO\- https://raw\.github\.com/creationix/nvm/master/install\.sh | sh
+$ nvm install v0\.11\.10
+$ nvm use v0\.11\.10
+$ nvm alias default v0\.11\.10
+.
+.fi
+.
+.IP "" 0
+.
+.P
+ \fI\fR
+.
+.SH "Contributing/Development mode"
+To hack PM2, it\'s pretty simple :
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 kill   # kill the current pm2
+$ git clone my_pm2_fork\.git
+$ cd pm2/
+$ DEBUG=* PM2_DEBUG=true \./bin/pm2 \-\-no\-daemon
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Each time you edit the code be sure to kill and restart pm2 to make changes taking effect\.
+.
+.SH "Install pm2 development"
+.
+.nf
+
+$ npm install git://github\.com/Unitech/pm2#development \-g
+.
+.fi
+.
+.P
+ \fI\fR
+.
+.SH "Known bugs and workarounds"
+First, install the lastest pm2 version :
+.
+.IP "" 4
+.
+.nf
+
+$ npm install \-g pm2@latest
+.
+.fi
+.
+.IP "" 0
+.
+.IP "\(bu" 4
+Node 0\.10\.x doesn\'t free script port when stopped\. It\'s due to the NodeJS cluster module\. So if you feel that this problem is important for your use case, use the fork mode the \fIfork mode\fR instead\. By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload\.
+.
+.IP "" 0
+.
+.IP "" 4
+.
+.nf
+
+$ pm2 start index\.js \-x  # start my app in fork mode
+.
+.fi
+.
+.IP "" 0
+.
+.P
+For more informations about this issue: #74 \fIhttps://github\.com/Unitech/pm2/issues/74\fR
+.
+.IP "\(bu" 4
+\fBCannot read property \'getsockname\' of undefined\fR
+.
+.IP "" 0
+.
+.P
+When using the cluster mode (by default) you can\'t use ports from 0 to 1024\. If you really need to exec in this range use the \fIfork mode\fR with the \fB\-x\fR parameter\. By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload\.
+.
+.P
+ \fI\fR
+.
+.SH "Test"
+.
+.nf
+
+npm test
+.
+.fi
+.
+.P
+ \fI\fR
+.
+.SH "They talk about it"
+.
+.IP "\(bu" 4
+http://devo\.ps/blog/2013/06/26/goodbye\-node\-forever\-hello\-pm2\.html
+.
+.IP "\(bu" 4
+http://www\.allaboutghost\.com/keep\-ghost\-running\-with\-pm2/
+.
+.IP "\(bu" 4
+http://blog\.ponyfoo\.com/2013/09/19/deploying\-node\-apps\-to\-aws\-using\-grunt
+.
+.IP "\(bu" 4
+http://www\.allaboutghost\.com/keep\-ghost\-running\-with\-pm2/
+.
+.IP "\(bu" 4
+http://bioselemental\.com/keeping\-ghost\-alive\-with\-pm2/
+.
+.IP "\(bu" 4
+http://blog\.chyld\.net/installing\-ghost\-on\-ubuntu\-13\-10\-aws\-ec2\-instance\-with\-pm2/
+.
+.IP "\(bu" 4
+http://blog\.marvinroger\.fr/gerer\-ses\-applications\-node\-en\-production\-pm2/
+.
+.IP "\(bu" 4
+https://www\.codersgrid\.com/2013/06/29/pm2\-process\-manager\-for\-node\-js/
+.
+.IP "\(bu" 4
+http://yosoftware\.com/blog/7\-tips\-for\-a\-node\-js/
+.
+.IP "\(bu" 4
+http://blog\.rapsli\.ch/posts/2013/2013\-10\-17\-node\-monitor\-pm2\.html
+.
+.IP "\(bu" 4
+https://coderwall\.com/p/igdqyw
+.
+.IP "\(bu" 4
+http://revdancatt\.com/2013/09/17/node\-day\-1\-getting\-the\-server\-installing\-node\-and\-pm2/
+.
+.IP "\(bu" 4
+https://medium\.com/tech\-talk/e7c0b0e5ce3c
+.
+.IP "" 0
+.
+.SH "Contributors"
+.
+.nf
+
+   195  tknew2
+   184  Alexandre Strzelewicz
+    20  Alex Kocharin
+     8  soyuka
+     6  sailxjx
+     5  Bret Copeland
+     4  AS
+     4  Ville Walveranta
+     4  achingbrain
+     3  Ben Postlethwaite
+     3  Evan You
+     2  Frederico Silva
+     2  Ivan Seidel
+     2  MATSUU Takuto
+     2  Oleg
+     2  Willian
+     2  Yani Iliev
+     1  Almog Melamed
+     1  Brent Burgoyne
+     1  Daniel Pihlstrom
+     1  Ed Hubbell
+     1  Eugene Lucash
+     1  Gil Pedersen
+     1  Hao\-kang Den
+     1  John Hurliman
+     1  Jose V\. Trigueros
+     1  Josh Skidmore
+     1  Juozas Valenčius
+     1  Kevin Gao
+     1  Loïc Mahieu
+     1  Mark Evans
+     1  Nathan Peck
+     1  TruongSinh Tran\-Nguyen
+     1  Wes Mason
+     1  Zihua Li
+     1  perfectworks
+     1  subeeshcbabu
+.
+.fi
+.
+.SH "Sponsors"
+Thanks to Devo\.ps \fIhttp://devo\.ps/\fR and Wiredcraft \fIhttp://wiredcraft\.com/\fR for their knowledge and expertise\.
+.
+.P
+ \fIhttps://bitdeli\.com/free\fR
+.
+.P
+ \fI\fRFiles in lib/ are made available under the terms of the GNU Affero General Public License (AGPL)\. pm2\-interface is made under the terms of the Apache V2 license\.

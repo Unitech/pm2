@@ -3,8 +3,15 @@
   "preferGlobal": "true",
   "version": "0.8.1",
   "os" : [ "!win32" ],
+  "man" : "./man/README.1",
   "engines": {
     "node": ">=0.10"
+  },
+  "directories": {
+    "bin" : "./bin",
+    "lib" : "./lib",
+    "man" : "./man",
+    "example" : "./examples"
   },
   "author": {
     "name": "Strzelewicz Alexandre",
@@ -109,6 +116,9 @@
     "mocha": "1.x",
     "should": "1.x",
     "better-assert": "*"
+  },
+  "bugs" : {
+    "url" : "https://github.com/Unitech/pm2/issues"
   },
   "repository": {
     "type": "git",
