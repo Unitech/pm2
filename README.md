@@ -501,13 +501,13 @@ You can edit these options by editing the file `~/.pm2/custom_options.sh`
 These variables can be customized :
 
 ```
-  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
-  DAEMON_RPC_PORT    : process.env.PM2_RPC_PORT  || 6666, // RPC commands
-  DAEMON_PUB_PORT    : process.env.PM2_PUB_PORT  || 6667, // Realtime events
-  DEBUG              : process.env.PM2_DEBUG || false,
-  WEB_INTERFACE      : process.env.PM2_API_PORT  || 9615,
-  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
-  PM2_NODE_OPTIONS   : ''
+PM2_RPC_PORT
+PM2_PUB_PORT
+PM2_BIND_ADDR
+PM2_API_PORT
+PM2_GRACEFUL_TIMEOUT
+PM2_MODIFY_REQUIRE
+PM2_NODE_OPTIONS
 ```
 
 
