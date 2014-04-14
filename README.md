@@ -1,19 +1,19 @@
 # ![PM2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
 
-pm2 is a process manager for Node apps with a builtin load-balancer.
+pm2 is a process manager for Node apps with a built-in load balancer.
 
 ### Tech notes
 
-pm2 is perfect when you need to spread your stateless NodeJS code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
+pm2 is perfect when you need to spread your stateless Node.js code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
 
 ### Main features
 
-- Builtin load-balancer (using the native cluster module)
+- Built-in load balancer (using the native cluster module)
 - Script daemonization
 - 0s downtime reload for Node apps
-- Startup scripts for with SystemV/SystemD scripts (Ubuntu, Centos...)
+- Generate SystemV/SystemD startup scripts (Ubuntu, Centos...)
 - Pause unstable process (avoid infinite loop)
-- Restart on file change with --watch
+- Restart on file change with `--watch`
 - Monitoring in console
 
 Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
@@ -39,7 +39,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/pm2.png?branch=d
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
-We're going to release a very nice product, a dashboard to monitor every part of your NodeJS applications. Here are some links:
+We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
 
 - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
 - [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
@@ -324,7 +324,7 @@ Launch `max` instances (`max` depending on the number of CPUs available) and set
 $ pm2 start app.js --name "API" -i max
 ```
 
-If your app is well designed (**state less**) you gonna be able to **process much more queries**.
+If your app is well-designed (**stateless**) you'll be able to **process many more queries**.
 
 Important concepts to make a Node.js app stateless:
 
@@ -647,7 +647,7 @@ Also make sure you have all dependencies needed. For Ubuntu:
 
 ```bash
 $ sudo apt-get install build-essential
-# nvm is a nodejs version manager - https://github.com/creationix/nvm
+# nvm is a Node.js version manager - https://github.com/creationix/nvm
 $ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
 $ nvm install v0.11.10
 $ nvm use v0.11.10
@@ -677,13 +677,13 @@ $ npm install git://github.com/Unitech/pm2#development -g
 <a name="a21"/>
 ## Known bugs and workarounds
 
-First, install the lastest pm2 version :
+First, install the lastest pm2 version:
 
 ```bash
 $ npm install -g pm2@latest
 ```
 
-### Node 0.10.x doesn't free the script port when stopped. It's due to the NodeJS cluster module.
+### Node 0.10.x doesn't free the script port when stopped. It's due to the Node.js cluster module.
 So if you feel that this problem is important for your use case, use the [fork mode](#execute-any-script-what-is-fork-mode-) instead.
 By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
