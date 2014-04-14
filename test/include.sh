@@ -53,6 +53,7 @@ function ispec {
 }
 
 function should {
+    sleep 0.1
     OUT=`$pm2 prettylist | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
     success "$1"
