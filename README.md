@@ -2,7 +2,7 @@
 
 pm2 is a process manager for Node apps with a builtin load-balancer.
 
-## Tech notes
+### Tech notes
 
 pm2 is perfect when you need to spread your stateless NodeJS code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
 
@@ -45,8 +45,6 @@ We gonna release a very nice product, a dashboard to monitor every part of your 
 
 - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
 - [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
-
-We are also looking for AngularJS developers and designers contact us at contact AT unitech DOT io
 
 Thanks in advance and we hope that you like pm2 !
 
@@ -100,6 +98,8 @@ Thanks in advance and we hope that you like pm2 !
 
 ------
 
+# Quick start
+
 <a name="a1"/>
 ## Installation
 
@@ -121,8 +121,6 @@ Common problems on installation :
 
 - node-gyp permission problem: [Setup a new user on your server](https://github.com/Unitech/pm2/issues/188#issuecomment-30204146) or add the `--unsafe-perm` to the npm command
 - if Make/GCC or other are missing `sudo apt-get install build-essential` on Ubuntu
-
-# Quick start
 
 <a name="a2"/>
 ## Usage
