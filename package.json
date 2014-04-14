@@ -3,7 +3,7 @@
   "preferGlobal": "true",
   "version": "0.8.1",
   "os" : [ "!win32" ],
-  "man" : "./man/README.1",
+  "man" : "./man/pm2.1",
   "engines": {
     "node": ">=0.10"
   },
