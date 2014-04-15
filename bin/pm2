@@ -33,7 +33,7 @@ commander.version(pkg.version)
   .option('-w --write', 'write configuration in local folder')
   .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
   .option('--no-daemon', "run pm2 daemon in the foreground if it doesn't exist already")
-  .option('--merge-logs', 'merge logs')
+  .option('--merge-logs', 'merge logs from different instances but keep error and out separated')
   .option('--watch', 'watch application folder for changes')
   .option('--node-args <node_args>', "space delimited arguments to pass to node in cluster mode - e.g. --node-args=\"--debug=7001 --trace-deprecation\"",
       function(val) {

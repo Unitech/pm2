@@ -316,6 +316,11 @@ You can also reload all logs via the command line with:
 $ pm2 reloadLogs
 ```
 
+### Options
+
+```bash
+--merge-logs : merge logs from different instances but keep error and out separated
+```
 <a name="a5"/>
 ## Clustering
 
