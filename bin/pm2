@@ -204,9 +204,9 @@ commander.command('gracefulReload <name|all>')
   .action(function(pm2_id) {
     UX.processing.start();
     if (pm2_id == 'all')
-      CLI.reload('softReloadProcessId');
+        CLI.reload('softReloadProcessId');
     else
-      CLI.reloadProcessName(pm2_id, 'softReloadProcessId');
+        CLI.reloadProcessName(pm2_id, 'softReloadProcessId');
   });
 
 //
