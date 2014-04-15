@@ -1,4 +1,10 @@
 
+# 0.8.1
+
+- Readme changes #400 #398
+- Fix describe command #403
+- reload/gracefulReload throw error if no process has been reloaded #340
+
 # 0.8.0
 
 - More verbosity to pm2.log
