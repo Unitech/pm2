@@ -379,6 +379,12 @@ process.on('message', function(msg) {
 });
 ```
 
+Then use the command:
+
+```bash
+$ pm2 gracefulReload [all|name]
+```
+
 <a name="a8"/>
 ## Startup script
 
