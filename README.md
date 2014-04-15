@@ -81,6 +81,7 @@ Thanks in advance and we hope that you like pm2 !
 
 ### Knowledge
 
+- [Stateless apps ?](#stateless-apps)
 - [Transitional state of apps](#a4)
 - [Setup PM2 on server: tutorial](#a89)
 - [Logs and PID files](#a34)
@@ -559,6 +560,27 @@ $ pm2 start my_app.coffee
 
 That's all !
 
+# Knowledge
+
+
+<a name="stateless-apps"/>
+## Statless apps
+
+We recommend (and you must) write stateless NodeJS apps. Apps that don't retain any form of local variables or local instances or whatever local.
+Every data, states, websocket session, session data, must be shared via any kind of database.
+
+We recommend using Redis for sharing session data, websocket.
+
+- SocketIO with Redis : [https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO](Configuring SocketIO)
+- Redis session store for Connect : [https://github.com/visionmedia/connect-redis](Connect-redis)
+
+We recommend following the 12 factor convention : [http://12factor.net/](http://12factor.net/)
+
+<a name="a89"/>
+## Setup PM2 on a server
+
+[How To Use PM2 to Setup a Node.js Production Environment On An Ubuntu VPS](https://www.digitalocean.com/community/articles/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps)
+
 <a name="a34"/>
 ## Log and PID files
 
@@ -573,13 +595,6 @@ By default every logs (error and out), pids files, dump, pm2 logs are located in
 ├── logs
 └── pids
 ```
-
-<a name="a89"/>
-## Tutorial
-
-[How To Use PM2 to Setup a Node.js Production Environment On An Ubuntu VPS](https://www.digitalocean.com/community/articles/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps)
-
-
 
 <a name="a23"/>
 ## Execute any script: What is fork mode ?
@@ -721,7 +736,9 @@ npm test
 - http://blog.chyld.net/installing-ghost-on-ubuntu-13-10-aws-ec2-instance-with-pm2/
 - http://blog.marvinroger.fr/gerer-ses-applications-node-en-production-pm2/
 - https://www.codersgrid.com/2013/06/29/pm2-process-manager-for-node-js/
+- http://www.z-car.com/blog/programming/how-to-rotate-logs-using-pm2-process-manager-for-node-js
 - http://yosoftware.com/blog/7-tips-for-a-node-js/
+- https://www.exponential.io/blog/nodeday-2014-moving-a-large-developer-workforce-to-nodejs
 - http://blog.rapsli.ch/posts/2013/2013-10-17-node-monitor-pm2.html
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
