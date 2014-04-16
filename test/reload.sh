@@ -15,12 +15,10 @@ $pm2 start child.js -i 4
 should 'should start processes' 'online' 4
 $pm2 restart all
 should 'should restarted be one for all' 'restart_time' 4
-$pm2 restart child.js
-should 'should restart a second time (BY SCRIPT NAME)' 'restart_time: 2' 4
 $pm2 restart child
-should 'should restart a third time (BY NAME)' 'restart_time: 3' 4
+should 'should restart a second time (BY NAME)' 'restart_time: 2' 4
 $pm2 reload all
-should 'should RELOAD a fourth time' 'restart_time: 4' 4
+should 'should RELOAD a third time' 'restart_time: 3' 4
 
 ############### CLUSTER STUFF
 $pm2 kill
