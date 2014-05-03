@@ -351,11 +351,11 @@ Important concepts to make a Node.js app stateless:
 <a name="a690"/>
 ## Reloading without downtime
 
-This special feature has been added to PM2 a while ago.
+As opposed to `restart`, which kills and restarts the process, `reload` achieves a 0-second-downtime reload.
 
-**Warning** It only works for apps in *cluster mode* (the default mode), that uses HTTP/HTTPS/Socket connections.
+**Warning** This feature only works for apps in *cluster mode* (the default mode), that uses HTTP/HTTPS/Socket connections.
 
-Reloading an app:
+To reload an app:
 
 ```bash
 $ pm2 reload api
