@@ -371,6 +371,7 @@ It means that your app **still has open connections on exit**.
 
 To work around this problem you have to use the graceful reload.
 Graceful reload is a mechanism that will send a *shutdown* message to your process before reloading it.
+You can control the time that the app has to shutdown via the `PM2_GRACEFUL_TIMEOUT` environment variable.
 
 Example:
 
