@@ -17,9 +17,12 @@ $pm2 restart all
 should 'should restarted be one for all' 'restart_time' 4
 $pm2 restart child.js
 should 'should restart a second time (BY SCRIPT NAME)' 'restart_time: 2' 4
+
 $pm2 restart child
 should 'should restart a third time (BY NAME)' 'restart_time: 3' 4
+sleep 0.5
 $pm2 reload all
+sleep 0.5
 should 'should RELOAD a fourth time' 'restart_time: 4' 4
 
 ############### CLUSTER STUFF
