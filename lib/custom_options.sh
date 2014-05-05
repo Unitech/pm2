@@ -32,3 +32,5 @@
 # export PM2_RPC_PORT=6666
 # export PM2_PUB_PORT=6667
 # export PM2_BIND_ADDR='localhost'
+# PM2_PID_DIR
+# PM2_LOG_DIR

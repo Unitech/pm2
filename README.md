@@ -239,6 +239,8 @@ Options:
     --merge-logs                 merge logs
     --watch                      watch application folder for changes
     --node-args <node_args>      space-delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
+    --run-as-user <run_as_user>    The user or uid to run a managed process as
+    --run-as-group <run_as_group>  The group or gid to run a managed process as
 ```
 
 # Features

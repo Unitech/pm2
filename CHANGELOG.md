@@ -1,4 +1,11 @@
 
+# 0.8.2
+
+- Adds option to switch to a different user/group before starting a managed process #329
+- watch doesnt watch node_module folder
+- default log files and pid files location can be overidded by PM2_LOG_DIR / PM2_PID_DIR
+
+
 # 0.8.1
 
 - Readme changes #400 #398
