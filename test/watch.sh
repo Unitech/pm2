@@ -72,9 +72,9 @@ cp server-watch.bak.js server-watch.js
 
 $pm2 start --watch server-watch.js
 
-$pm2 restart 0
-
 sleep 1
+
+$pm2 restart 0
 
 should 'process should be watched' 'watch: true' 1
 
@@ -82,10 +82,14 @@ $pm2 stop --watch 0
 
 should 'process should have stopped beeing watched' 'watch: false' 1
 
-echo "setTimeout(function() { console.log('still ok') })" >> server-watch.js
+$pm2 list
+
+echo "setInterval(function() { console.log('still ok'); }, 100);" > server-watch.js
+
+cat server-watch.js
 
 for (( i = 0; i <= 10; i++ )); do
-    sleep 0.2
+    sleep 0.1
     echo -n "."
 done
 
@@ -125,7 +129,7 @@ rm server-watch.js
 # we've already seen before that "watch: true" is really watching when changing a file
 
 $pm2 start --watch all.json
-sleep 1 
+sleep 1
 should 'processes should be watched' 'watch: true' 8
 
 $pm2 stop --watch all
