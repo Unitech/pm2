@@ -263,6 +263,10 @@ commander.command('killInteract')
   .description('stop the interaction with VitalSigns servers')
   .action(failOnUnknown(CLI.killInteract));
 
+commander.command('infoInteract')
+  .description('get information about the monitoring connection to VitalSigns')
+  .action(failOnUnknown(CLI.infoInteract));
+
 //
 // Web interface
 //
