@@ -3,14 +3,12 @@
   "preferGlobal": "true",
   "version": "0.8.2",
   "os" : [ "!win32" ],
-  "man" : "./man/pm2.1",
   "engines": {
     "node": ">=0.10"
   },
   "directories": {
     "bin" : "./bin",
     "lib" : "./lib",
-    "man" : "./man",
     "example" : "./examples"
   },
   "author": {
