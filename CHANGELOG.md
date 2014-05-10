@@ -1,4 +1,9 @@
 
+# 0.8.4
+
+- Remove C++ binding for monitoring
+- Update axon and axon-rpc
+
 # 0.8.2
 
 - Adds option to switch to a different user/group before starting a managed process #329

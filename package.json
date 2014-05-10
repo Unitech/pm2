@@ -100,7 +100,7 @@
     "pm2-multimeter": "0.1.2",
     "pm2-interface": "0.1.1",
     "axon-rpc": "0.0.3",
-    "axon": "1.0.0",
+    "axon": "2.0.0",
     "cron": "1.0.1",
     "colors": "0.6.2",
     "coffee-script": "1.7.0",
