@@ -103,7 +103,7 @@ Thanks in advance and we hope that you like pm2!
 
 The prefered Node version to run PM2, is the **0.11.10**
 
-The latest stable version can always be installed via NPM:
+The latest stable version is installable via NPM:
 
 ```bash
 $ npm install pm2@latest -g
@@ -114,11 +114,6 @@ If the above fails:
 ```bash
 $ npm install git://github.com/Unitech/pm2#master -g
 ```
-
-Common problems on installation:
-
-- node-gyp permission problem: [Setup a new user on your server](https://github.com/Unitech/pm2/issues/188#issuecomment-30204146) or add the `--unsafe-perm` to the npm command
-- if Make/GCC or other are missing `sudo apt-get install build-essential` on Ubuntu
 
 <a name="a2"/>
 ## Usage
