@@ -411,7 +411,7 @@ $ pm2 gracefulReload [all|name]
 <a name="a8"/>
 ## Startup script
 
-PM2 has the amazing ability to **generate startup scripts and configure it**.
+PM2 has the amazing ability to **generate startup scripts and configure them**.
 PM2 is also smart enough to **save all your process list** and to **bring back all your processes on restart**.
 
 ```bash
@@ -443,7 +443,7 @@ Just use the `-u <username>` option !
 $ pm2 startup ubuntu -u www
 ```
 
-### Derivated commands
+### Related commands
 
 Dump all processes status and environment managed by pm2:
 ```bash
