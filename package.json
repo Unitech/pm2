@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "os" : [ "!win32" ],
   "engines": {
     "node": ">=0.10"
@@ -99,7 +99,7 @@
     "cli-table": "0.3.0",
     "pm2-multimeter": "0.1.2",
     "pm2-interface": "0.1.1",
-    "axon-rpc": "0.0.3",
+    "axon-rpc": "0.0.2",
     "axon": "2.0.0",
     "cron": "1.0.1",
     "colors": "0.6.2",
