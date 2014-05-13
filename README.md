@@ -15,6 +15,7 @@ pm2 is perfect when you need to spread your stateless Node.js code accross all C
 - Pause unstable process (avoid infinite loop)
 - Restart on file change with `--watch`
 - Monitoring in console
+- [Free server/pm2 monitoring by ping strategy](#builtin-remote-monitoring)
 
 Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
 
@@ -57,6 +58,7 @@ Thanks in advance and we hope that you like pm2!
 - [Examples](#a3)
 - [Differents ways to launch a process](#a667)
 - [Options](#a987)
+- [Builtin remote monitoring](#builtin-remote-monitoring)
 
 ### Features
 
@@ -143,6 +145,11 @@ $ pm2 prettylist         # Print process list in beautified JSON
 $ pm2 describe 0         # Display all informations about a specific process
 
 $ pm2 monit              # Monitor all processes
+
+# Builtin monitoring via PING strategy
+
+$ pm2 subscribe my@email.com  # Send an email if your server or pm2 is down
+$ pm2 unsubscribe             # Unable the remote monitoring
 
 # Logs
 
@@ -236,6 +243,31 @@ Options:
     --node-args <node_args>      space-delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
     --run-as-user <run_as_user>    The user or uid to run a managed process as
     --run-as-group <run_as_group>  The group or gid to run a managed process as
+```
+
+
+<a name="builtin-remote-monitoring"/>
+## Builtin remote monitoring
+
+On installation, you're asked if you want to enable the remote monitoring for your server or pm2.
+If accepted and if you set the right email, you will receive an email if something hangs (offline).
+
+This monitoring strategy **only do a ping** at a regular interval to pm2.io servers.
+
+If you want to enable it after installation just do :
+
+```bash
+$ pm2 subscribe my@email.com
+# Once the monitoring enabled, you have to restart pm2 :
+$ pm2 dump
+$ pm2 kill
+$ pm2 resurrect
+```
+
+If you want to stop the monitoring do :
+
+```bash
+$ pm2 unsubscribe
 ```
 
 # Features
