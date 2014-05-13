@@ -5,7 +5,7 @@ var WatchDog = require('../lib/WatchDog.js');
 var t = setTimeout(function() {
   console.log('Question canceled, you can still enable pm2 monitoring via `pm2 subscribe`');
   WatchDog.refuse();
-  process.exit(1);
+  process.exit(0);
 }, 10000);
 
 q.askOne({ info: 'Would you like to receive an email when pm2 or your server goes offline ? (y/n)', required : false }, function(result){
@@ -18,6 +18,8 @@ q.askOne({ info: 'Would you like to receive an email when pm2 or your server goe
       });
     });
   }
-  else
+  else {
     WatchDog.refuse();
+    process.exit(0);
+  }
 });
