@@ -55,6 +55,11 @@ var default_conf = {
 
   REMOTE_PORT        : 3900,
   REMOTE_HOST        : 'socket-1.vitalsigns.io',
+
+  WATCHDOG_URL      : 'ping.pm2.io',
+  WATCHDOG_FILE     : p.join(DEFAULT_FILE_PATH, 'watch_dog.json'),
+  WATCHDOG_PORT     : 13777,
+
   INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.log'),
   INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668

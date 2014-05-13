@@ -267,6 +267,15 @@ commander.command('infoInteract')
   .description('get information about the monitoring connection to VitalSigns')
   .action(failOnUnknown(CLI.infoInteract));
 
+commander.command('subscribe <email>')
+  .description('enable simple pm2 monitoring with email notification')
+  .action(CLI.subscribe);
+
+commander.command('unsubscribe')
+  .description('disable simple pm2 monitoring')
+  .action(CLI.unsubscribe);
+
+
 //
 // Web interface
 //
