@@ -1,6 +1,18 @@
 
-var q = require('./question.js');
+var q        = require('./question.js');
 var WatchDog = require('../lib/WatchDog.js');
+var fs       = require('fs');
+var cst      = require('../constants.js');
+
+(function pre_init() {
+  fs.exists(cst.DEFAULT_FILE_PATH, function(exist) {
+    if (!exist) {
+      fs.mkdirSync(cst.DEFAULT_FILE_PATH);
+      fs.mkdirSync(cst.DEFAULT_LOG_PATH);
+      fs.mkdirSync(cst.DEFAULT_PID_PATH);
+    }
+  });
+})();
 
 var t = setTimeout(function() {
   console.log('Question canceled, you can still enable pm2 monitoring via `pm2 subscribe`');
