@@ -18,7 +18,7 @@ $pm2 start --watch server-watch.js
 
 sleep 1
 
-echo "setTimeout(function() { console.log('still ok') })" >> server-watch.js
+echo "setTimeout(function() { console.log('still ok') }, 200)" >> server-watch.js
 
 for (( i = 0; i <= 10; i++ )); do
     sleep 0.2
