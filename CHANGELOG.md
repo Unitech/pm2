@@ -1,4 +1,14 @@
 
+# 0.8.7
+
+- Builtin monitoring feature
+- Reload for Fork
+- Avoid circular dependencies
+
+# 0.8.5-6
+
+- Update monitoring module
+
 # 0.8.4
 
 - Remove C++ binding for monitoring

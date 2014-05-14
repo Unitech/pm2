@@ -1,8 +1,8 @@
 
 setInterval(function() {
-    console.log('ok');
-}, 500);
+  console.log('ok');
+}, 100);
 
-// setTimeout(function() {
-//   throw new Error('eh merde');
-// }, 3000);
+setInterval(function() {
+  console.error('thisnok');
+}, 100);
