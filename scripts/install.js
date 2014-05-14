@@ -4,6 +4,10 @@ var WatchDog = require('../lib/WatchDog.js');
 var fs       = require('fs');
 var cst      = require('../constants.js');
 
+if (fs.existsSync(cst.WATCHDOG_FILE)) {
+  process.exit(0);
+}
+
 (function pre_init() {
   fs.exists(cst.DEFAULT_FILE_PATH, function(exist) {
     if (!exist) {
