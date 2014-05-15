@@ -41,7 +41,7 @@ describe('Interactor', function() {
     });
   });
 
-  describe('STRING INTERACTION', function() {
+  describe.skip('STRING INTERACTION', function() {
     it('should launch a process', function(done) {
       Satan.executeRemote('prepare', {
         pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
