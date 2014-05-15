@@ -174,6 +174,8 @@ $ pm2 delete all         # Will remove all processes from pm2 list
 # Misc
 
 $ pm2 ping               # Ensure pm2 dameon has been launched
+$ pm2 sendSignal SIGUSR2 my-app # Send system signal to script
+$ pm2 start app.js --no-daemon
 ```
 
 ## Different ways to launch a process
@@ -183,7 +185,7 @@ $ pm2 start app.js -i max  # Will start maximum processes depending on available
 
 $ pm2 start app.js -i 3    # Will start 3 processes
 
-$ pm2 start app.js --node-args="--debug=7001 --trace-deprecation" # --node-args command line option to pass options to node
+$ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 
 $ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
 $ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
@@ -195,9 +197,9 @@ $ pm2 start app.js --name serverone # Start a process an name it as server one
 $ pm2 start app.json                # Start processes with options declared in app.json
                                     # Go to chapter Multi process JSON declaration for more
 
-$ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
-
 $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
+
+$ pm2 start app.js --node-args="--debug=7001 --trace-deprecation" # --node-args command line option to pass options to node
 
 $ pm2 --run-as-user foo start app.js  # Start app.js as user foo instead of root (pm2 must be running as root)
 
