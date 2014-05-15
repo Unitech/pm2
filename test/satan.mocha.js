@@ -28,7 +28,6 @@ describe('Satan', function() {
       assert(err == null);
       assert(typeof child.pid == 'number');
       Satan.pingDaemon(function(online) {
-        console.log(online);
         assert(online == true);
         done();
       });
