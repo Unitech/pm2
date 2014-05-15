@@ -58,6 +58,7 @@ Thanks in advance and we hope that you like pm2!
 - [Examples](#a3)
 - [Differents ways to launch a process](#a667)
 - [Options](#a987)
+- [How to update pm2 ?](#update-pm2)
 - [Builtin remote monitoring](#builtin-remote-monitoring)
 
 ### Features
@@ -247,6 +248,17 @@ Options:
     --run-as-group <run_as_group>  The group or gid to run a managed process as
 ```
 
+<a name="update-pm2"/>
+## How to update PM2
+
+As PM2 is backgrounded, when you do an update you have to replace the old PM2 daemon by the new one:
+
+```
+$ npm install pm2@latest -g
+$ pm2 dump       # Save the current process list
+$ pm2 kill       # Kill current pm2
+$ pm2 resurrect  # Resurrect previously saved processes
+```
 
 <a name="builtin-remote-monitoring"/>
 ## Builtin remote monitoring
