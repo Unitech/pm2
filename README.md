@@ -514,10 +514,11 @@ You can define parameters for your apps in `processes.json`:
 ```json
 [{
   "name"        : "echo",
-  "script"      : "./examples/args.js",
+  "script"      : "examples/args.js",
   "args"        : "['--toto=heya coco', '-d', '1']",
   "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
   "watch"       : "true",
+  "cwd"         : "/this/is/a/path/to/start/script/",
   "env": {
       "NODE_ENV": "production",
       "AWESOME_SERVICE_API_TOKEN": "xxx"

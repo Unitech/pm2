@@ -1,0 +1,11 @@
+[{
+  "name"      : "iminpath1",
+  "script"    : "iminpath1.js",
+  "cwd"       : "path1",
+  "out_file" : "./iminpath1.log"
+},{
+  "name" : "iminpath2",
+  "script"    : "iminpath2.js",
+  "cwd"       : "path1/path2",
+  "out_file" : "./iminpath2.log"
+}]

@@ -21,3 +21,19 @@ should 'should start processes' 'online' 8
 $pm2 restart all.json
 should 'should stop processes' 'online' 8
 should 'should all script been restarted one time' 'restart_time: 1' 8
+
+#
+# CWD OPTION
+#
+
+$pm2 kill
+
+$pm2 start change_cwd.json
+sleep 1
+should 'should start 2 processes' 'online' 2
+
+$pm2 delete all
+
+$pm2 start no_cwd_change.json
+sleep 1
+should 'should not start 2 processes because of paths' 'online' 0
