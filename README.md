@@ -174,9 +174,11 @@ $ pm2 delete all         # Will remove all processes from pm2 list
 
 # Misc
 
+$ pm2 updatePM2          # Update in memory pm2
 $ pm2 ping               # Ensure pm2 dameon has been launched
 $ pm2 sendSignal SIGUSR2 my-app # Send system signal to script
 $ pm2 start app.js --no-daemon
+
 ```
 
 ## Different ways to launch a process
@@ -251,13 +253,16 @@ Options:
 <a name="update-pm2"/>
 ## How to update PM2
 
-As PM2 is backgrounded, when you do an update you have to replace the old PM2 daemon by the new one:
+Install the latest pm2 version :
 
-```
+```bash
 $ npm install pm2@latest -g
-$ pm2 dump       # Save the current process list
-$ pm2 kill       # Kill current pm2
-$ pm2 resurrect  # Resurrect previously saved processes
+```
+
+Then update the in-memory pm2 :
+
+```bash
+$ pm2 updatePM2
 ```
 
 <a name="builtin-remote-monitoring"/>

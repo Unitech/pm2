@@ -60,6 +60,11 @@ spec "should describe online process"
 $pm2 describe asdsa
 ispec "should exit with right exit code when no process found"
 
+#
+# Update pm2
+#
+$pm2 updatePM2
+spec "should update pm2"
 
 #
 # Main tests

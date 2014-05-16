@@ -64,6 +64,9 @@ commander.on('--help', function() {
         console.log('    Kill daemon pm2 :');
         console.log('    $ pm2 kill');
         console.log('');
+        console.log('    Update pm2 :');
+        console.log('    $ npm install pm2@latest -g ; pm2 updatePM2');
+        console.log('');
         console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
         console.log('');
         });
@@ -251,6 +254,12 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 commander.command('ping')
   .description('                 ping pm2 daemon - if not up it will launch it')
   .action(failOnUnknown(CLI.ping));
+
+commander.command('updatePM2')
+  .description('                 updatePM2 after a npm update')
+  .action(function() {
+          CLI.updatePM2()
+          });
 
 //
 // Interact
@@ -444,7 +453,7 @@ if (process.argv.length == 2) {
 // This message is triggered once the RPC Client is connected to the Daemon
 // in file Satan.js, method Satan.launchRPC
 //
-process.on('satan:client:ready', function() {
+process.once('satan:client:ready', function() {
   commander.parse(process.argv);
 });
 
