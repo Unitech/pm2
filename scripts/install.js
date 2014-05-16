@@ -10,11 +10,15 @@ if (fs.existsSync(cst.WATCHDOG_FILE)) {
 
 (function pre_init() {
   fs.exists(cst.DEFAULT_FILE_PATH, function(exist) {
-    if (!exist) {
-      fs.mkdirSync(cst.DEFAULT_FILE_PATH);
-      fs.mkdirSync(cst.DEFAULT_LOG_PATH);
-      fs.mkdirSync(cst.DEFAULT_PID_PATH);
-    }
+    try {
+      if (!exist) {
+        fs.mkdirSync(cst.DEFAULT_FILE_PATH);
+        fs.mkdirSync(cst.DEFAULT_LOG_PATH);
+        fs.mkdirSync(cst.DEFAULT_PID_PATH);
+      }
+    } catch(e) {
+      process.exit(0);
+    };
   });
 })();
 
