@@ -1,5 +1,5 @@
 
-# 0.8.7
+# 0.8.9
 
 - Builtin monitoring feature with email (with pm2 subscribe)
 - Reload Logs for Fork
