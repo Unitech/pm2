@@ -18,8 +18,13 @@ if (fs.existsSync(cst.WATCHDOG_FILE)) {
   });
 })();
 
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
 var t = setTimeout(function() {
-  console.log('Question canceled, you can still enable pm2 monitoring via `pm2 subscribe`');
+  console.log('Question canceled, you can still enable pm2 monitoring via `$ pm2 subscribe`');
   WatchDog.refuse();
   process.exit(0);
 }, 10000);
@@ -28,13 +33,21 @@ q.askOne({ info: 'Would you like to receive an email when pm2 or your server goe
   clearTimeout(t);
 
   if (result == 'y' || result == 'Y') {
-    q.askOne({ info: 'Email' }, function(email){
-      WatchDog.createConfFile(email, function() {
-        console.log('Thanks for your subscription, if pm2 goes offline for more that 1min, you will be notified.');
-        //console.log('\nTo update current pm2 please do :\n$ pm2 updatePM2');
-        process.exit(0);
+
+    function get_email() {
+      q.askOne({ info: 'Email' }, function(email){
+        if (!validateEmail(email)) {
+          console.log('Wrong email format, please retry');
+          return get_email();
+        }
+        WatchDog.createConfFile(email, function() {
+          console.log('Thanks for your subscription, if pm2 goes offline for more that 1min, you will be notified.');
+          process.exit(0);
+        });
       });
-    });
+    }
+
+    get_email();
   }
   else {
     WatchDog.refuse();
