@@ -18,7 +18,7 @@ var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 
 commander.version(pkg.version)
-  .option('-v --verbose', 'verbose level')
+  .option('-v --version', 'get version')
   .option('-s --silent', 'hide all messages', false)
   .option('-m --mini-list', 'display a compacted list without formatting')
   .option('-f --force', 'force actions')
@@ -454,7 +454,11 @@ if (process.argv.length == 2) {
 // in file Satan.js, method Satan.launchRPC
 //
 process.once('satan:client:ready', function() {
-  commander.parse(process.argv);
+    CLI.getVersion(function(err, remote_version) {
+        if (!err && (pkg.version != remote_version))
+            console.log('>>>> In-memory PM2 is out-of-date, do :\n>>>> $ pm2 updatePM2');
+        commander.parse(process.argv);
+    });
 });
 
 //

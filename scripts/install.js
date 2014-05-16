@@ -31,7 +31,8 @@ q.askOne({ info: 'Would you like to receive an email when pm2 or your server goe
     q.askOne({ info: 'Email' }, function(email){
       WatchDog.createConfFile(email, function() {
         console.log('Thanks for your subscription, if pm2 goes offline for more that 1min, you will be notified.');
-        console.log('\nTo update current pm2 please do :\npm2 updatePM2\n');
+        //console.log('\nTo update current pm2 please do :\n$ pm2 updatePM2');
+        process.exit(0);
       });
     });
   }
