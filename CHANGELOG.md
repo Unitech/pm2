@@ -1,9 +1,17 @@
 
 # 0.8.7
 
-- Builtin monitoring feature
-- Reload for Fork
-- Avoid circular dependencies
+- Builtin monitoring feature with email (with pm2 subscribe)
+- Reload Logs for Fork
+- Deletion of possible circular dependencies error
+- pm2 updatePM2 command to update in-memory pm2
+- notification message if the in-memory pm2 is outdated
+- cwd option in json #405 #417 #295
+- README updates
+- ipc channel for fork mode
+- re enable process event loggin for interactor
+- avoid possible stream error
+- watch ignore option in JSON
 
 # 0.8.5-6
 
