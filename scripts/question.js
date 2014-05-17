@@ -31,10 +31,10 @@ module.exports = function (){
 
   obj.askOne = function (question, callback) {
     var stdin = process.stdin,
-        stdout = process.stdout
+        stdout = process.stdout;
 
-    stdin.resume()
-    stdout.write( (question.required == false ? '(Optional) ': '') + question.info + ": ");
+    stdin.resume();
+    stdout.write(question.info + ": ");
 
     stdin.once('data', function(data) {
       result = data.toString().trim();

@@ -28,12 +28,13 @@ function validateEmail(email) {
 }
 
 var t = setTimeout(function() {
-  console.log('Question canceled, you can still enable pm2 monitoring via `$ pm2 subscribe`');
-  WatchDog.refuse();
-  process.exit(0);
+  console.log('\nQuestion canceled, you can still enable pm2 monitoring via `$ pm2 subscribe`');
+  WatchDog.refuse(function() {
+    process.exit(0);
+  });
 }, 10000);
 
-q.askOne({ info: 'Would you like to receive an email when pm2 or your server goes offline ? (y/n)', required : false }, function(result){
+q.askOne({ info: 'Would you like to be notified by email when a problem is detected on your server (server offline) ? (y/n)', required : false }, function(result){
   clearTimeout(t);
 
   if (result == 'y' || result == 'Y') {
@@ -45,7 +46,7 @@ q.askOne({ info: 'Would you like to receive an email when pm2 or your server goe
           return get_email();
         }
         WatchDog.createConfFile(email, function() {
-          console.log('Thanks for your subscription, if pm2 goes offline for more that 1min, you will be notified.');
+          console.log('Thanks for your subscription, you will receive a mail shortly once pm2 is online and/or updated.');
           process.exit(0);
         });
       });
@@ -54,7 +55,9 @@ q.askOne({ info: 'Would you like to receive an email when pm2 or your server goe
     get_email();
   }
   else {
-    WatchDog.refuse();
-    process.exit(0);
+    WatchDog.refuse(function() {
+      console.log('\nSubscription canceled, you can still enable pm2 simple monitoring via \n$ pm2 subscribe my@email.com\n');
+      process.exit(0);
+    });
   }
 });
