@@ -116,8 +116,9 @@
   },
   "devDependencies": {
     "mocha": "1.x",
-    "should": "1.x",
-    "better-assert": "*"
+    "should": "3.x",
+    "better-assert": "*",
+    "axm" : "*"
   },
   "bugs" : {
     "url" : "https://github.com/Unitech/pm2/issues"
