@@ -1,10 +1,10 @@
 # ![PM2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
 
-pm2 is a process manager for Node apps with a built-in load balancer.
+PM2 is a process manager for Node apps with a built-in load balancer.
 
 ### Tech notes
 
-pm2 is perfect when you need to spread your stateless Node.js code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
+PM2 is perfect when you need to spread your stateless Node.js code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
 
 ### Main features
 
@@ -45,7 +45,7 @@ We're going to release a very nice product, a dashboard to monitor every part of
 - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
 - [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
 
-Thanks in advance and we hope that you like pm2!
+Thanks in advance and we hope that you like PM2!
 
 ------
 
@@ -58,7 +58,7 @@ Thanks in advance and we hope that you like pm2!
 - [Examples](#a3)
 - [Differents ways to launch a process](#a667)
 - [Options](#a987)
-- [How to update pm2 ?](#update-pm2)
+- [How to update PM2 ?](#update-pm2)
 - [Builtin remote monitoring](#builtin-remote-monitoring)
 
 ### Features
@@ -253,13 +253,13 @@ Options:
 <a name="update-pm2"/>
 ## How to update PM2
 
-Install the latest pm2 version :
+Install the latest PM2 version :
 
 ```bash
 $ npm install pm2@latest -g
 ```
 
-Then update the in-memory pm2 :
+Then update the in-memory PM2 :
 
 ```bash
 $ pm2 updatePM2
@@ -268,7 +268,7 @@ $ pm2 updatePM2
 <a name="builtin-remote-monitoring"/>
 ## Builtin remote monitoring
 
-On installation, you're asked if you want to enable the remote monitoring for your server or pm2.
+On installation, you're asked if you want to enable the remote monitoring for your server or PM2.
 If accepted and if you set the right email, you will receive an email if something hangs (offline).
 
 This monitoring strategy **only do a ping** at a regular interval to pm2.io servers.
@@ -294,7 +294,7 @@ $ pm2 unsubscribe
 <a name="a4"/>
 ## Transitional state of apps (important)
 
-PM2 is a process manager, as said, pm2 can start, stop, restart and *delete* processes.
+PM2 is a process manager, as said, PM2 can start, stop, restart and *delete* processes.
 
 Start a process:
 
@@ -317,7 +317,7 @@ To restart it just do:
 $ pm2 restart web-interface
 ```
 
-Now I want to **delete** the app from the pm2 process list.
+Now I want to **delete** the app from the PM2 process list.
 To do that:
 
 ```bash
@@ -371,7 +371,7 @@ $ pm2 flush # Clear all the logs
 
 ### Reloading all logs (SIGUSR2/Logrotate)
 
-To reload all logs, you can send `SIGUSR2` to the pm2 process.
+To reload all logs, you can send `SIGUSR2` to the PM2 process.
 
 You can also reload all logs via the command line with:
 
@@ -596,7 +596,7 @@ $ pm2 web
 
 ### Enable by default for all processes
 
-You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
+You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start PM2 (PM2 should not be already daemonized).
 
 To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add:
 
@@ -612,7 +612,7 @@ $ pm2 exit
 $ pm2 resurrect
 ```
 
-If ES6 has been enabled you should see this message at the beggining of each pm2 command:
+If ES6 has been enabled you should see this message at the beggining of each PM2 command:
 
 ```
 ● ES6 mode
@@ -657,7 +657,7 @@ We recommend following the 12 factor convention : [http://12factor.net/](http://
 <a name="a34"/>
 ## Log and PID files
 
-By default, logs (error and output), pid files, dumps, and pm2 logs are located in `~/.pm2/`:
+By default, logs (error and output), pid files, dumps, and PM2 logs are located in `~/.pm2/`:
 
 ```
 .pm2/

@@ -37,7 +37,7 @@ module.exports = function (){
     stdout.write(question.info + ": ");
 
     stdin.once('data', function(data) {
-      result = data.toString().trim();
+      var result = data.toString().trim();
 
       if (question.required != false && result == '') {
         // Ask again
