@@ -570,7 +570,7 @@ $ pm2 --run-as-user app start node-app-1.json
 $ ps aux | grep node-app
 root 14735 5.8 1.1 752476 83932 ? Sl 00:08 0:00 pm2: node-app-1  <-- owned by the default user (root), not app
 ```
-- JSON app declarations are addititve.  Continuing from above:
+- JSON app declarations are additive.  Continuing from above:
 ```bash
 $ pm2 start node-app-2.json
 $ ps aux | grep node-app 
