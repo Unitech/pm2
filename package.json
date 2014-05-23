@@ -112,7 +112,8 @@
     "async": "0.7.0",
     "chokidar": "~0.8.2",
     "json-stringify-safe" : "*",
-    "pidusage" : "0.0.4"
+    "pidusage" : "0.0.4",
+    "nssocket" : "*"
   },
   "devDependencies": {
     "mocha": "1.x",

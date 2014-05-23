@@ -12,11 +12,21 @@ describe('PM2 BUS / RPC', function() {
   var pm2;
   var ipm2;
 
+  after(function(done) {
+    ipm2 = Ipm2();
+
+    ipm2.once('ready', function() {
+      ipm2.rpc.killMe({}, function() {
+        ipm2.disconnect();
+        done();
+      });
+    });
+  });
+
   it('should fork PM2', function(done) {
     try {
       pm2 = APPS.forkPM2();
     } catch(e) {
-      done();
     }
     done();
   });
@@ -51,10 +61,11 @@ describe('PM2 BUS / RPC', function() {
     });
 
     it('should start a process via IPM2', function(done) {
-      APPS.launchApp(ipm2, 'echo.js', 'echo', function(err, proc) {
-        proc.length.should.eql(1);
-        proc[0].pm2_env.status.should.eql('online');
-        proc[0].pm2_env.should.have.properties([
+      APPS.launchApp(ipm2, 'echo.js', 'echo', function(err, procs) {
+        should(err).be.null;
+        procs.length.should.eql(1);
+        procs[0].pm2_env.status.should.eql('online');
+        procs[0].pm2_env.should.have.properties([
           'pm_id',
           'restart_time',
           'created_at',
@@ -109,9 +120,11 @@ describe('PM2 BUS / RPC', function() {
     });
 
     it('should start exception process', function(done) {
-      APPS.launchApp(ipm2, 'throw.js', 'throw', function(err, proc) {
-        proc.length.should.eql(1);
-        proc[0].pm2_env.should.have.properties([
+      APPS.launchApp(ipm2, 'throw.js', 'throw', function(err, procs) {
+        should(err).be.null;
+        procs.length.should.eql(1);
+        procs[0].pm2_env.status.should.eql('online');
+        procs[0].pm2_env.should.have.properties([
           'pm_id',
           'restart_time',
           'created_at',
@@ -217,6 +230,9 @@ describe('PM2 BUS / RPC', function() {
         if (event == 'axm:action') {
           msg.data.type.should.be.eql('axm:action');
           msg.data.data.action_name.should.eql('refresh:db');
+          msg.process.should.have.properties([
+            'process', 'pm2_env'
+          ]);
           plan.ok(true);
           triggerMessage();
         }
@@ -224,6 +240,9 @@ describe('PM2 BUS / RPC', function() {
         if (event == 'axm:reply') {
           msg.data.type.should.eql('axm:reply');
           msg.data.data.success.should.eql(true);
+          msg.process.should.have.properties([
+            'process', 'pm2_env'
+          ]);
           plan.ok(true);
         }
       }
@@ -232,6 +251,7 @@ describe('PM2 BUS / RPC', function() {
 
       APPS.launchApp(ipm2, 'events/custom_action.js', 'custom_event', function(err, proc) {
         should(err).be.null;
+
         ipm2.rpc.getMonitorData({}, function(err, procs) {
           should(err).be.null;
           procs.length.should.eql(1);
@@ -239,4 +259,173 @@ describe('PM2 BUS / RPC', function() {
       });
     });
   });
+
+  describe('Specific event in FORK_MODE', function() {
+    beforeEach(function(done) {
+      ipm2 = Ipm2();
+
+      ipm2.once('ready', function() {
+        done();
+      });
+    });
+
+    afterEach(function(done) {
+      ipm2.disconnect();
+      done();
+    });
+
+    it('should start process own_event and catch custom event', function(done) {
+      function rcpt(event, data) {
+        if (event == 'user:register')
+          done();
+      }
+
+      APPS.launchAppFork(ipm2, 'events/own_event.js', 'own_event', function(err, proc) {
+        should(err).be.null;
+        ipm2.rpc.getMonitorData({}, function(err, procs) {
+          should(err).be.null;
+          ipm2.bus.on('*', rcpt);
+        });
+      });
+    });
+
+    it('should delete all apps', function(done) {
+      ipm2.rpc.deleteAll({}, function(err, procs) {
+        done();
+      });
+    });
+
+    it('should start process own_event and catch custom event', function(done) {
+      var plan = new Plan(3, done);
+
+      function triggerMessage() {
+        ipm2.rpc.getMonitorData({}, function(err, procs) {
+          should(err).be.null;
+          console.log('Triggering message');
+          ipm2.rpc.msgProcess({
+            id : procs[0].pm_id,
+            msg : 'refresh:db'
+          }, function(err, dt) {
+            should(err).be.null;
+            console.log('Message triggered');
+            plan.ok(true);
+          });
+        });
+      }
+
+      function rcpt(event, msg) {
+        // This is the message that a new action will be registered
+        if (event == 'axm:action') {
+          msg.data.type.should.be.eql('axm:action');
+          msg.data.data.action_name.should.eql('refresh:db');
+          msg.process.should.have.properties([
+            'process', 'pm2_env'
+          ]);
+          plan.ok(true);
+          triggerMessage();
+        }
+
+        if (event == 'axm:reply') {
+          msg.data.type.should.eql('axm:reply');
+          msg.data.data.success.should.eql(true);
+          msg.process.should.have.properties([
+            'process', 'pm2_env'
+          ]);
+          plan.ok(true);
+        }
+      }
+
+      ipm2.bus.on('*', rcpt);
+
+      APPS.launchAppFork(ipm2, 'events/custom_action.js', 'custom_event', function(err, proc) {
+        should(err).be.null;
+        ipm2.rpc.getMonitorData({}, function(err, procs) {
+          should(err).be.null;
+          procs.length.should.eql(1);
+        });
+      });
+    });
+
+    it('should reference the new action into the pm2_env.axm_actions', function(done) {
+      ipm2.rpc.getMonitorData({}, function(err, procs) {
+        should(err).be.null;
+        procs[0].pm2_env.axm_actions[0].action_name.should.eql('refresh:db');
+        should(procs[0].pm2_env.axm_actions[0].opts).be.null;
+        done();
+      });
+    });
+
+    it('should on process stop not referenciate axm_actions anymore', function(done) {
+      ipm2.rpc.stopAll({}, function(err, procs) {
+        should(err).be.null;
+        ipm2.rpc.getMonitorData({}, function(err, procs) {
+          should(err).be.null;
+          procs[0].pm2_env.axm_actions.length.should.eql(0);;
+          done();
+        });
+      });
+    });
+
+    it('should start an APP and reference axm_action once axm:action message received', function(done) {
+
+      function rcpt(event, msg) {
+        // This is the message that a new action will be registered
+        if (event == 'axm:action') {
+          ipm2.rpc.getMonitorData({}, function(err, procs) {
+            should(err).be.null;
+            procs[1].pm2_env.axm_actions[0].action_name.should.eql('refresh:db');
+            should(procs[1].pm2_env.axm_actions[0].opts).be.null;
+            done();
+          });
+        }
+      }
+
+      APPS.launchAppFork(ipm2, 'events/custom_action.js', 'custom_event', function(err, procs) {
+        should(err).be.null;
+        ipm2.bus.on('*', rcpt);
+      });
+    });
+
+    it('should delete all apps', function(done) {
+      ipm2.rpc.deleteAll({}, function(err, procs) {
+        done();
+      });
+    });
+
+  });
+
+  describe('Multiple axm_actions test', function() {
+    beforeEach(function(done) {
+      ipm2 = Ipm2();
+
+      ipm2.once('ready', function() {
+        done();
+      });
+    });
+
+    afterEach(function(done) {
+      ipm2.disconnect();
+      done();
+    });
+
+    it('should start process in cluster_mode and get 3 axm:action + get comments', function(done) {
+      var plan = new Plan(6, done);
+
+      function rcpt(event, msg) {
+        if (event == 'axm:action') {
+          plan.ok(true);
+          if (msg.data.data.opts && msg.data.data.opts.comment) {
+            plan.ok(true);
+          }
+        }
+      }
+      ipm2.bus.on('*', rcpt);
+
+      APPS.launchAppFork(ipm2, 'events/custom_action_with_params.js', 'custom_action_params', function(err, procs) {
+        should(err).be.null;
+      });
+    });
+  });
+
+
 });

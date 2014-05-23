@@ -4,6 +4,11 @@ var ipm2 = require('pm2-interface');
 var util = require('util');
 var axon = require('axon');
 var sock          = axon.socket('sub');
+var cst = require('../constants.js');
+var Plan = require('./helpers/plan.js');
+
+
+var nssocket = require('nssocket');
 
 var Ipm2 = require('pm2-interface');
 
@@ -33,7 +38,7 @@ function bufferContain(buffer, event) {
   var contain = false;
   buffer.data.buffer.forEach(function(dt) {
     if (dt.event == event)
-      contain = true;
+      contain = dt;
   });
   return contain;
 }
@@ -42,13 +47,27 @@ describe('Interactor', function() {
   var pm2;
   var interactor;
   var ipm2;
+  var socket;
+  var server;
 
+  after(function() {
+    server.close();
+  });
   it('should fork PM2', function(done) {
     try {
       pm2 = APPS.forkPM2();
     } catch(e) {
       done();
     }
+    done();
+  });
+
+  it('should start mock NSSOCKER interface', function(done) {
+    server = nssocket.createServer(function (_socket) {
+      console.log('new connection');
+      socket = _socket;
+    });
+    server.listen(cst.REMOTE_REVERSE_PORT);
     done();
   });
 
@@ -69,7 +88,6 @@ describe('Interactor', function() {
 
     it('should fork Interactor', function(done) {
       sock.bind(3900);
-
       interactor = forkInteractor();
 
       done();
@@ -84,6 +102,8 @@ describe('Interactor', function() {
         done();
       });
     });
+
+    var cur_id = 0;
 
     it('should on application start, buffer contain a process:online event', function(done) {
       sock.once('message', function(raw_data) {
@@ -101,6 +121,81 @@ describe('Interactor', function() {
       });
 
     });
+
+    it('should on launch custom action', function(done) {
+      APPS.launchApp(ipm2, 'events/custom_action.js', 'custom_action', function(err, proc) {
+        cur_id = proc[1].pm2_env.pm_id;
+        should(err).be.null;
+        setTimeout(done, 500);
+      });
+    });
+
+
+    it('should get information about instance', function(done) {
+
+
+      socket.send('ask');
+
+      socket.data('ask:rep', function (data) {
+        data.success.should.eql.true;
+        data.machine_name.should.eql('test');
+        data.public_key.should.eql('tg');
+        done();
+      });
+
+
+    });
+
+    it('should trigger action like remote AXM', function(done) {
+      var plan = new Plan(2, done);
+
+      function rcv(raw_data) {
+        var data = JSON.parse(raw_data);
+        var ret;
+        //console.log(data.data.buffer);
+        if ((ret = bufferContain(data, 'axm:reply'))) {
+          ret.should.have.properties([
+            'event', 'process_id', 'process_name', 'data', 'at'
+          ]);
+          ret.data.data.success.should.be.true;
+          sock.removeListener('message', rcv);
+          plan.ok(true);
+        }
+      }
+      // 2 - He should then receive an axm:reply on completion
+      sock.on('message', rcv);
+
+      socket.send('trigger:action', {
+        process_id : cur_id,
+        action_name : 'refresh:db',
+        type : 'remote_action'
+      });
+
+      socket.data('trigger:action:success', function() {
+        console.log('Action has been sent');
+        plan.ok(true);
+      });
+
+      socket.data('trigger:action:failure', function(e) {
+        console.log(e);
+        throw new Error(e);
+      });
+    });
+
+
+    // it('should remove all socket data and stuff if server disconnect', function(done) {
+
+    //   server.close();
+    //   server = nssocket.createServer(function (_socket) {
+    //     console.log('new connection');
+    //     socket = _socket;
+    //     done();
+    //   });
+
+    //   server.listen(cst.REMOTE_REVERSE_PORT);
+
+    // });
+
 
     it('should kill alive processes', function(done) {
       process.kill(pm2.pid);

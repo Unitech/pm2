@@ -74,10 +74,10 @@ describe('God', function() {
     });
 
     it('should fork one process', function(done) {
-      God.prepare(getConf(), function(err, proce) {
-	proc = proce;
-        pid = proc.process.pid;
-	proc.pm2_env.status.should.be.equal('online');
+      God.prepare(getConf(), function(err, procs) {
+        should(err).be.null;
+        pid = procs[0].pid;
+	procs[0].pm2_env.status.should.be.equal('online');
 	God.getFormatedProcesses().length.should.equal(1);
 	done();
       });
@@ -93,10 +93,11 @@ describe('God', function() {
       });
     });
     it('should start a process', function(done) {
-      God.prepare(getConf(), function(err, proce) {
-	clu = proce;
-        pid = clu.process.pid;
-	clu.pm2_env.status.should.be.equal('online');
+      God.prepare(getConf(), function(err, procs) {
+        clu = procs[0];
+
+        pid = clu.pid;
+	procs[0].pm2_env.status.should.be.equal('online');
 	done();
       });
     });
@@ -138,7 +139,7 @@ describe('God', function() {
     });
 
     it('should stop and delete a process id', function(done) {
-      var old_pid = clu.process.pid;
+      var old_pid = clu.pid;
       God.deleteProcessId(clu.pm2_env.pm_id, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         God.checkProcess(old_pid).should.be.equal(false);
@@ -149,25 +150,9 @@ describe('God', function() {
 
     it('should start stop and delete the process name from database', function(done) {
       God.prepare(getConf(), function(err, _clu) {
-        pid = _clu.process.pid;
-	_clu.pm2_env.status.should.be.equal('online');
-        var old_pid = _clu.process.pid;
-        God.deleteProcessName(_clu.name, function(err, dt) {
-          process.nextTick(function() {
-            var proc = God.findProcessById(clu.pm2_env.pm_id);
-            should(proc == null);
-            God.checkProcess(old_pid).should.be.equal(false);
-            done();
-          });
-        });
-      });
-    });
-
-    it('should start stop and delete the process name from database', function(done) {
-      God.prepare(getConf(), function(err, _clu) {
-        pid = _clu.process.pid;
-	_clu.pm2_env.status.should.be.equal('online');
-        var old_pid = _clu.process.pid;
+        pid = _clu[0].pid;
+	_clu[0].pm2_env.status.should.be.equal('online');
+        var old_pid = _clu[0].pid;
         God.deleteProcessName(_clu.name, function(err, dt) {
           process.nextTick(function() {
             var proc = God.findProcessById(clu.pm2_env.pm_id);
@@ -247,6 +232,7 @@ describe('God', function() {
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
+        exec_mode : 'cluster_mode',
         instances       : 3
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(3);
@@ -261,7 +247,8 @@ describe('God', function() {
         pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        instances       : 10
+        instances       : 10,
+        exec_mode : 'cluster_mode',
       }, function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(10);
         procs.length.should.equal(10);
@@ -276,7 +263,8 @@ describe('God', function() {
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
         args            : "['-d', '-a']",
-        instances       : '1'
+        instances       : '1',
+        exec_mode : 'cluster_mode'
       }, function(err, procs) {
         setTimeout(function() {
           God.getFormatedProcesses()[0].pm2_env.restart_time.should.eql(0);

@@ -18,8 +18,7 @@ APPS.launchApp = function(ipm2, script, name, cb) {
     pm_out_log_path : path.resolve(process.cwd(), 'test/' + name + '.log'),
     pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
     exec_mode : 'cluster',
-    name : name,
-    instances       : 1
+    name : name
   }, cb);
 }
 
@@ -30,8 +29,7 @@ APPS.launchAppFork = function(ipm2, script, name, cb) {
     pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
     pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
     exec_mode : 'fork',
-    name : name,
-    instances       : 1
+    name : name
   }, cb);
 }
 

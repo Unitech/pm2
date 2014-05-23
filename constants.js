@@ -54,6 +54,7 @@ var default_conf = {
   ONE_LAUNCH_STATUS  : 'one-launch-status',
 
   REMOTE_PORT        : 3900,
+  REMOTE_REVERSE_PORT : 43554,
   REMOTE_HOST        : 'socket-1.vitalsigns.io',
 
   WATCHDOG_URL      : 'ping.pm2.io',
