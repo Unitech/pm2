@@ -523,7 +523,7 @@ You can define parameters for your apps in `processes.json`:
   "args"        : "['--toto=heya coco', '-d', '1']",
   "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
   "watch"       : "true",
-  "cwd"         : "/this/is/a/path/to/start/script/",
+  "cwd"         : "/this/is/a/path/to/start/script",
   "env": {
       "NODE_ENV": "production",
       "AWESOME_SERVICE_API_TOKEN": "xxx"
@@ -551,6 +551,56 @@ $ pm2 start processes.json
 $ pm2 stop processes.json
 $ pm2 delete processes.json
 $ pm2 restart processes.json
+```
+
+**A few notes about JSON app declarations:** 
+
+- All command line options passed when using the JSON app declaration will be dropped i.e. 
+```bash
+$ cat node-app-1.json
+
+{
+"name" : "node-app-1",
+"script" : "app.js",
+"cwd" : "/srv/node-app-1/current"
+}
+
+$ pm2 --run-as-user app start node-app-1.json 
+
+$ ps aux | grep node-app
+root 14735 5.8 1.1 752476 83932 ? Sl 00:08 0:00 pm2: node-app-1  <-- owned by the default user (root), not app
+```
+- JSON app declarations are addititve.  Continuing from above:
+```bash
+$ pm2 start node-app-2.json
+$ ps aux | grep node-app 
+root  14735  5.8  1.1  752476  83932 ? Sl 00:08 0:00 pm2: node-app-1
+root  24271  0.0  0.3  696428  24208 ? Sl 17:36 0:00 pm2: node-app-2
+```
+Note that if you execute `pm2 start node-app-2` again, it will spawn an additional instance node-app-2.
+
+- **cwd:** your JSON declaration does not need to reside with your script.  If you wished to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
+
+- The following are valid options for JSON app declarations: 
+```
+[{
+  "name"             : "node-app",
+  "cwd"              : "/srv/node-app/current",
+  "script"           : "bin/app.js",
+  "error_file"       : "/var/log/node-app/node-app.stderr.log",                    
+  "out_file"         : "log/node-app.stdout.log",
+  "pid_file"         : "pids/node-geo-api.pid", 
+  "run_as_user"      : "app",
+  "run_as_group"     : "www-data",
+  "instances"        : "6",
+  "min_uptime"       : "200",
+  "cron_restart"     : "1 0 * * *",
+  "watch"            : "false",
+  "merge_logs"       : "true",
+  "exec_interpreter" : "node",
+  "one_launch_only"  : "true",
+  "exec_mode"        : "cluster_mode"
+}]
 ```
 
 # Miscellaneous
