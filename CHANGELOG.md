@@ -1,5 +1,9 @@
 
-# 0.8.10
+# 0.8.12
+
+- Fix CWD option #295
+
+# 0.8.10-0.8.11
 
 - Builtin monitoring feature with email (with pm2 subscribe)
 - Reload Logs for Fork

@@ -104,7 +104,7 @@ Thanks in advance and we hope that you like PM2!
 <a name="a1"/>
 ## Installation
 
-The prefered Node version to run PM2, is the **0.11.10**
+The preferred Node version to run PM2, is the **0.11.10**
 
 The latest stable version is installable via NPM:
 
