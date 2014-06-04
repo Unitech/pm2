@@ -58,6 +58,10 @@
     {
       "name": "TruongSinh Tran-Nguyen",
       "email": "i@truongsinh.pro"
+    },
+    {
+      "name": "Michael Hueuberger",
+      "email": "michael.heuberger@binarykitchen.com"
     }
   ],
   "homepage": "https://github.com/Unitech/pm2",
@@ -101,21 +105,21 @@
     "pm2-multimeter": "0.1.2",
     "pm2-interface": "0.1.3",
     "pm2-axon-rpc": "0.0.2",
-    "axon": "1.0.0",
-    "cron": "1.0.1",
+    "axon": "^1.0.0",
+    "cron": "^1.0.4",
     "colors": "0.6.2",
-    "coffee-script": "1.7.0",
+    "coffee-script": "^1.7.1",
     "eventemitter2": "0.4.13",
     "debug": "*",
-    "async": "0.7.0",
+    "async": "^0.9.0",
     "chokidar": "~0.8.2",
     "json-stringify-safe" : "*",
-    "pidusage" : "0.0.4",
+    "pidusage" : "^0.0.5",
     "nssocket" : "*"
   },
   "devDependencies": {
     "mocha": "1.x",
-    "should": "3.x",
+    "should": "^4.0.0",
     "better-assert": "*",
     "axm" : "*"
   },
