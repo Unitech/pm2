@@ -59,7 +59,6 @@ Thanks in advance and we hope that you like PM2!
 - [Differents ways to launch a process](#a667)
 - [Options](#a987)
 - [How to update PM2 ?](#update-pm2)
-- [Builtin remote monitoring](#builtin-remote-monitoring)
 
 ### Features
 
@@ -106,7 +105,7 @@ Thanks in advance and we hope that you like PM2!
 
 The preferred Node version to run PM2, is the **0.11.10**
 
-The latest stable version is installable via NPM:
+The latest PM2 stable version is installable via NPM:
 
 ```bash
 $ npm install pm2@latest -g
@@ -147,11 +146,6 @@ $ pm2 describe 0         # Display all informations about a specific process
 
 $ pm2 monit              # Monitor all processes
 
-# Builtin monitoring via PING strategy
-
-$ pm2 subscribe my@email.com  # Send an email if your server or pm2 is down
-$ pm2 unsubscribe             # Unable the remote monitoring
-
 # Logs
 
 $ pm2 logs               # Display all processes logs in streaming
@@ -178,7 +172,6 @@ $ pm2 updatePM2          # Update in memory pm2
 $ pm2 ping               # Ensure pm2 dameon has been launched
 $ pm2 sendSignal SIGUSR2 my-app # Send system signal to script
 $ pm2 start app.js --no-daemon
-
 ```
 
 ## Different ways to launch a process
@@ -263,30 +256,6 @@ Then update the in-memory PM2 :
 
 ```bash
 $ pm2 updatePM2
-```
-
-<a name="builtin-remote-monitoring"/>
-## Builtin remote monitoring
-
-On installation, you're asked if you want to enable the remote monitoring for your server or PM2.
-If accepted and if you set the right email, you will receive an email if something hangs (offline).
-
-This monitoring strategy **only do a ping** at a regular interval to pm2.io servers.
-
-If you want to enable it after installation just do :
-
-```bash
-$ pm2 subscribe my@email.com
-# Once the monitoring enabled, you have to restart pm2 :
-$ pm2 dump
-$ pm2 kill
-$ pm2 resurrect
-```
-
-If you want to stop the monitoring do :
-
-```bash
-$ pm2 unsubscribe
 ```
 
 # Features
