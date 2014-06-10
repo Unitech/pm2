@@ -244,7 +244,7 @@ Options:
     --interpreter <interpreter>  the interpreter pm2 should use for executing app (bash, python...)
     --no-daemon                  run pm2 daemon in the foreground if it doesn't exist already
     --merge-logs                 merge logs
-    --watch                      watch application folder for changes
+    --watch                      watch folder(s) for changes. When `true`, watching all folders from root. Can also be a string or an array of strings for paths to watch for changes.
     --node-args <node_args>      space-delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
     --run-as-user <run_as_user>    The user or uid to run a managed process as
     --run-as-group <run_as_group>  The group or gid to run a managed process as
@@ -553,9 +553,9 @@ $ pm2 delete processes.json
 $ pm2 restart processes.json
 ```
 
-**A few notes about JSON app declarations:** 
+**A few notes about JSON app declarations:**
 
-- All command line options passed when using the JSON app declaration will be dropped i.e. 
+- All command line options passed when using the JSON app declaration will be dropped i.e.
 ```bash
 $ cat node-app-1.json
 
@@ -565,7 +565,7 @@ $ cat node-app-1.json
 "cwd" : "/srv/node-app-1/current"
 }
 
-$ pm2 --run-as-user app start node-app-1.json 
+$ pm2 --run-as-user app start node-app-1.json
 
 $ ps aux | grep node-app
 root 14735 5.8 1.1 752476 83932 ? Sl 00:08 0:00 pm2: node-app-1  <-- owned by the default user (root), not app
@@ -573,7 +573,7 @@ root 14735 5.8 1.1 752476 83932 ? Sl 00:08 0:00 pm2: node-app-1  <-- owned by th
 - JSON app declarations are additive.  Continuing from above:
 ```bash
 $ pm2 start node-app-2.json
-$ ps aux | grep node-app 
+$ ps aux | grep node-app
 root  14735  5.8  1.1  752476  83932 ? Sl 00:08 0:00 pm2: node-app-1
 root  24271  0.0  0.3  696428  24208 ? Sl 17:36 0:00 pm2: node-app-2
 ```
@@ -581,15 +581,15 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 
 - **cwd:** your JSON declaration does not need to reside with your script.  If you wished to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
 
-- The following are valid options for JSON app declarations: 
+- The following are valid options for JSON app declarations:
 ```
 [{
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
   "script"           : "bin/app.js",
-  "error_file"       : "/var/log/node-app/node-app.stderr.log",                    
+  "error_file"       : "/var/log/node-app/node-app.stderr.log",
   "out_file"         : "log/node-app.stdout.log",
-  "pid_file"         : "pids/node-geo-api.pid", 
+  "pid_file"         : "pids/node-geo-api.pid",
   "run_as_user"      : "app",
   "run_as_group"     : "www-data",
   "instances"        : "6",
@@ -900,6 +900,7 @@ By using the fork mode you will lose core features of PM2 like the automatic clu
      1  Zihua Li
      1  perfectworks
      1  subeeshcbabu
+     1  Michael Heuberger
 ```
 
 ## Sponsors
