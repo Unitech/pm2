@@ -29,7 +29,7 @@ var default_conf = {
   CODE_UNCAUGHTEXCEPTION : 100,
 
   CONCURRENT_ACTIONS : 1,
-  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 4000,
+  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
 
   DEBUG              : process.env.PM2_DEBUG || false,
   WEB_INTERFACE      : parseInt(process.env.PM2_API_PORT)  || 9615,
