@@ -593,7 +593,8 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "run_as_user"      : "app",
   "run_as_group"     : "www-data",
   "instances"        : "6",
-  "min_uptime"       : "200",
+  "min_uptime"       : "200", // milliseconds, defaults to 1000
+  "max_restarts"     : "10", // defaults to 15
   "cron_restart"     : "1 0 * * *",
   "watch"            : "false",
   "merge_logs"       : "true",
