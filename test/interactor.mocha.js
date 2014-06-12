@@ -126,13 +126,21 @@ describe('Interactor', function() {
       APPS.launchApp(ipm2, 'events/custom_action.js', 'custom_action', function(err, proc) {
         cur_id = proc[1].pm2_env.pm_id;
         should(err).be.null;
-        setTimeout(done, 500);
+
+        setTimeout(function() {
+        ipm2.rpc.getMonitorData({}, function(err, procs) {
+          should(err).be.null;
+          console.log(procs);
+          procs.length.should.eql(2);
+          procs[1].pm2_env.restart_time.should.eql(0);
+          done();
+        });
+        }, 1000);
       });
     });
 
 
     it('should get information about instance', function(done) {
-
 
       socket.send('ask');
 

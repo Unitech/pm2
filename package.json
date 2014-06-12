@@ -115,13 +115,13 @@
     "chokidar": "^0.8.2",
     "json-stringify-safe" : "^5.0.0",
     "pidusage" : "^0.0.5",
-    "nssocket" : "^0.5.1"
+    "nssocket" : "^0.5.1",
+    "axm" : "^0.1.2"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
     "should": "^4.0.0",
-    "better-assert": "^1.0.0",
-    "axm" : "^0.1.2"
+    "better-assert": "^1.0.0"
   },
   "bugs" : {
     "url" : "https://github.com/Unitech/pm2/issues"

@@ -1,8 +1,8 @@
+var axm = require('axm');
 
 setInterval(function() {
-  process.send({type:"user:register", msg: {
-    user : 'ayayayywqeqweqwea !',
-    email : 'ouiiii@asdad.fr'
-  }});
-  //process.send('heysaaa');
-}, 3000);
+  axm.emit('content:page:created', {
+    msg : 'A CMS page has been created',
+    user : 'Francois Debiole'
+  });
+}, 1000);

@@ -260,7 +260,7 @@ describe('PM2 BUS / RPC', function() {
     });
   });
 
-  describe('Specific event in FORK_MODE', function() {
+  describe.skip('Specific event in FORK_MODE', function() {
     beforeEach(function(done) {
       ipm2 = Ipm2();
 
@@ -394,7 +394,7 @@ describe('PM2 BUS / RPC', function() {
 
   });
 
-  describe('Multiple axm_actions test', function() {
+  describe.skip('Multiple axm_actions test', function() {
     beforeEach(function(done) {
       ipm2 = Ipm2();
 
