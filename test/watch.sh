@@ -118,7 +118,7 @@ done
 
 $pm2 list
 
-should 'process should have restart because of a file change' 'restart_time: 3' 1
+should 'process should have restart because of a file change' 'restart_time: 4' 1
 
 $pm2 kill
 rm server-watch.js
