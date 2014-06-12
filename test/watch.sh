@@ -123,8 +123,6 @@ should 'process should have restart because of a file change' 'restart_time: 4' 
 $pm2 kill
 rm server-watch.js
 
-exit 0
-
 #############
 # JSON test #
 #############
