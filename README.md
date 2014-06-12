@@ -511,6 +511,22 @@ pm2 can automatically restart your app when a file changes in the current direct
 $ pm2 start app.js --watch
 ```
 
+If `--watch` is enabled, stopping it won't stop watching:
+- `pm2 stop 0` 'll not stop watching
+- `pm2 stop --watch 0` 'll stop watching
+
+Restart toggle the `watch` parameter when triggered.
+
+To watch specifics paths, please use a JSON app declaration, `watch` can take a string or an array of paths. Default is `true`:
+
+```json
+{
+  "watch": ["server", "client"],
+  "ignoreWatch" : ["node_modules", "client/img"]
+}
+
+```
+
 <a name="a10"/>
 ## JSON app declaration
 
