@@ -110,11 +110,11 @@
     "colors": "^0.6.2",
     "coffee-script": "^1.7.1",
     "eventemitter2": "^0.4.13",
-    "debug": "^0.8.1",
+    "debug": "^1.0.2",
     "async": "^0.9.0",
     "chokidar": "^0.8.2",
     "json-stringify-safe" : "^5.0.0",
-    "pidusage" : "^0.0.5",
+    "pidusage" : "^0.0.6",
     "nssocket" : "^0.5.1",
     "axm" : "^0.1.2"
   },
