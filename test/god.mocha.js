@@ -154,12 +154,12 @@ describe('God', function() {
 	_clu[0].pm2_env.status.should.be.equal('online');
         var old_pid = _clu[0].pid;
         God.deleteProcessName(_clu.name, function(err, dt) {
-          process.nextTick(function() {
+          setTimeout(function() {
             var proc = God.findProcessById(clu.pm2_env.pm_id);
             should(proc == null);
             God.checkProcess(old_pid).should.be.equal(false);
             done();
-          });
+          }, 100);
         });
       });
     });
@@ -187,11 +187,13 @@ describe('God', function() {
       }, function(err, procs) {
 	var processes = God.getFormatedProcesses();
 
-        processes.length.should.equal(4);
-        processes.forEach(function(proc) {
-          proc.pm2_env.restart_time.should.eql(0);
-        });
-        done();
+        setTimeout(function() {
+          processes.length.should.equal(4);
+          processes.forEach(function(proc) {
+            proc.pm2_env.restart_time.should.eql(0);
+          });
+          done();
+        }, 100);
       });
     });
 
@@ -215,14 +217,14 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 50);
       });
     });
 
 
     afterEach(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 50);
       });
     });
 
