@@ -14,6 +14,11 @@ var Ipm2 = require('pm2-interface');
 
 var APPS = require('./helpers/apps.js');
 
+/**
+ * Description
+ * @method forkPM2
+ * @return pm2
+ */
 function forkPM2() {
   var pm2 = require('child_process').fork('lib/Satan.js', [], {
     detached   : true
@@ -22,6 +27,11 @@ function forkPM2() {
   return pm2;
 }
 
+/**
+ * Description
+ * @method forkInteractor
+ * @return CallExpression
+ */
 function forkInteractor() {
   return require('child_process').fork('lib/Interactor.js', [], {
     env        : util._extend({
@@ -34,6 +44,13 @@ function forkInteractor() {
   });
 }
 
+/**
+ * Description
+ * @method bufferContain
+ * @param {} buffer
+ * @param {} event
+ * @return contain
+ */
 function bufferContain(buffer, event) {
   var contain = false;
   buffer.data.buffer.forEach(function(dt) {
@@ -157,6 +174,12 @@ describe('Interactor', function() {
     it('should trigger action like remote AXM', function(done) {
       var plan = new Plan(2, done);
 
+      /**
+       * Description
+       * @method rcv
+       * @param {} raw_data
+       * @return 
+       */
       function rcv(raw_data) {
         var data = JSON.parse(raw_data);
         var ret;

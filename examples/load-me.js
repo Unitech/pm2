@@ -1,6 +1,13 @@
 
 var stop = false;
 
+/**
+ * Description
+ * @method add
+ * @param {} a
+ * @param {} b
+ * @return sum
+ */
 function add(a, b) {
   while (a.length < b.length) a.unshift(0);
   while (a.length > b.length) b.unshift(0);
@@ -20,6 +27,12 @@ function add(a, b) {
   return sum;
 }
 
+/**
+ * Description
+ * @method fib
+ * @param {} n
+ * @return CallExpression
+ */
 function fib(n) {
   var f1 = [0];
   var f2 = [1];

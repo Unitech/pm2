@@ -5,6 +5,11 @@ var fs = require('fs');
 var path = require('path');
 var should = require('should');
 
+/**
+ * Description
+ * @method getConf
+ * @return AssignmentExpression
+ */
 function getConf() {
   return process_conf = {
     pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),

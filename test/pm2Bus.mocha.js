@@ -82,6 +82,13 @@ describe('PM2 BUS / RPC', function() {
     it('should receive log:out and log:err messages', function(done) {
       var plan = new Plan(2, done);
 
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} data
+       * @return 
+       */
       function rcpt(event, data) {
         if (event == 'log:out')
           plan.ok(true);
@@ -95,6 +102,13 @@ describe('PM2 BUS / RPC', function() {
     it('should receive process:exit and process:online signal on restart', function(done) {
       var plan = new Plan(3, done);
 
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} data
+       * @return 
+       */
       function rcpt(event, data) {
         if (event == 'process:exit')
           plan.ok(true);
@@ -139,6 +153,13 @@ describe('PM2 BUS / RPC', function() {
     });
 
     it('should receive process:exception message', function(done) {
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} data
+       * @return 
+       */
       function rcpt(event, data) {
         if (event == 'process:exception')
           done();
@@ -191,6 +212,13 @@ describe('PM2 BUS / RPC', function() {
     });
 
     it('should start process own_event and catch custom event', function(done) {
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} data
+       * @return 
+       */
       function rcpt(event, data) {
         if (event == 'user:register')
           done();
@@ -209,6 +237,11 @@ describe('PM2 BUS / RPC', function() {
     it('should start process own_event and catch custom event', function(done) {
       var plan = new Plan(3, done);
 
+      /**
+       * Description
+       * @method triggerMessage
+       * @return 
+       */
       function triggerMessage() {
         ipm2.rpc.getMonitorData({}, function(err, procs) {
           should(err).be.null;
@@ -225,6 +258,13 @@ describe('PM2 BUS / RPC', function() {
         });
       }
 
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} msg
+       * @return 
+       */
       function rcpt(event, msg) {
         // This is the message that a new action will be registered
         if (event == 'axm:action') {
@@ -275,6 +315,13 @@ describe('PM2 BUS / RPC', function() {
     });
 
     it('should start process own_event and catch custom event', function(done) {
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} data
+       * @return 
+       */
       function rcpt(event, data) {
         if (event == 'user:register')
           done();
@@ -298,6 +345,11 @@ describe('PM2 BUS / RPC', function() {
     it('should start process own_event and catch custom event', function(done) {
       var plan = new Plan(3, done);
 
+      /**
+       * Description
+       * @method triggerMessage
+       * @return 
+       */
       function triggerMessage() {
         ipm2.rpc.getMonitorData({}, function(err, procs) {
           should(err).be.null;
@@ -313,6 +365,13 @@ describe('PM2 BUS / RPC', function() {
         });
       }
 
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} msg
+       * @return 
+       */
       function rcpt(event, msg) {
         // This is the message that a new action will be registered
         if (event == 'axm:action') {
@@ -368,6 +427,13 @@ describe('PM2 BUS / RPC', function() {
 
     it('should start an APP and reference axm_action once axm:action message received', function(done) {
 
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} msg
+       * @return 
+       */
       function rcpt(event, msg) {
         // This is the message that a new action will be registered
         if (event == 'axm:action') {
@@ -411,6 +477,13 @@ describe('PM2 BUS / RPC', function() {
     it('should start process in cluster_mode and get 3 axm:action + get comments', function(done) {
       var plan = new Plan(6, done);
 
+      /**
+       * Description
+       * @method rcpt
+       * @param {} event
+       * @param {} msg
+       * @return 
+       */
       function rcpt(event, msg) {
         if (event == 'axm:action') {
           plan.ok(true);
