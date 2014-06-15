@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ':' // Hack to pass parameters to Node before running this file
-':' //; [ -f ~/.pm2/custom_options.sh ] && . ~/.pm2/custom_options.sh || : ; exec "`command -v nodejs || command -v node`" $PM2_NODE_OPTIONS "$0" "$@"
+':' //; [ -f ~/.pm2/custom_options.sh ] && . ~/.pm2/custom_options.sh || : ; exec "`command -v node || command -v nodejs`" $PM2_NODE_OPTIONS "$0" "$@"
 
 var commander = require('commander');
 var fs        = require('fs');
