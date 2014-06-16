@@ -1,4 +1,4 @@
-B1;3201;0c# ![PM2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
+![PM2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
 
 PM2 is a process manager for Node apps with a built-in load balancer.
 
@@ -845,6 +845,7 @@ By using the fork mode you will lose core features of PM2 like the automatic clu
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
+- [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
 
 ## Contributors
 
