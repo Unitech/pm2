@@ -674,7 +674,7 @@ That's all!
 
 
 <a name="stateless-apps"/>
-## Statless apps
+## Stateless apps
 
 We recommend (and you must) write stateless NodeJS apps. Apps that don't retain any form of local variables or local instances or whatever local.
 Every data, states, websocket session, session data, must be shared via any kind of database.
@@ -879,7 +879,7 @@ By using the fork mode you will lose core features of PM2 like the automatic clu
      1  Josh Skidmore
      1  Juozas Valenčius
      1  Kevin Gao
-     1  Loïc Mahieu
+     1  Loïc Mahieu
      1  Mark Evans
      1  Nathan Peck
      1  TruongSinh Tran-Nguyen
