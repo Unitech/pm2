@@ -298,8 +298,16 @@ commander.command('dump')
     CLI.dump();
   }));
 
+commander.command('save')
+  .description('(alias) dump all processes for resurrecting them later')
+  .action(failOnUnknown(function() {
+    console.log(cst.PREFIX_MSG + 'Dumping processes');
+    UX.processing.start();
+    CLI.dump();
+  }));
+
 //
-// Save processes to file
+// Resurect
 //
 commander.command('resurrect')
   .description('resurrect previously dumped processes')
