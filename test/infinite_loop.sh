@@ -48,7 +48,7 @@ $pm2 list
 
 $pm2 restart all  # pm2 reload should also work here
 
-for (( i = 0; i <= 50; i++ )); do
+for (( i = 0; i <= 80; i++ )); do
     sleep 0.1
     echo -n "."
 done

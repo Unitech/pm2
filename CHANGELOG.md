@@ -1,4 +1,17 @@
 
+# 0.8.16
+
+- Remove builtin monitoring feature
+- Fix watch on delete #514
+- Gracefull reload now rightly handled #502
+- Allow path in watch option #501
+- Allow management of non-interpreted binaries #499
+- Documentation fixes
+
+# 0.8.12-0.8.15
+
+- Version bumping
+
 # 0.8.12
 
 - Fix CWD option #295
