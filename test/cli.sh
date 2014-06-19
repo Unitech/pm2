@@ -171,6 +171,10 @@ $pm2 list
 $pm2 dump
 spec "Should dump current processes"
 
+$pm2 save
+spec "Should save (dump alias) current processes"
+
+
 ls ~/.pm2/dump.pm2
 spec "Dump file should be present"
 
