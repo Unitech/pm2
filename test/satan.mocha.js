@@ -1,14 +1,20 @@
 
-var Satan;
 var should = require('should');
 var assert = require('better-assert');
 var path = require('path');
 
+var Satan = require('../lib/Satan');
+
 describe('Satan', function() {
 
   after(function(done) {
-    Satan.killDaemon(function() {
-      setTimeout(done, 400);
+    Satan.disconnectRPC(done);
+  });
+
+  it('should start Satan interaction', function(done) {
+    Satan.start(function(err) {
+      should(err).be.null;
+      done();
     });
   });
 
@@ -17,20 +23,7 @@ describe('Satan', function() {
     Satan.start();
     process.once('satan:client:ready', function() {
       console.log('Client ready');
-      Satan.killDaemon(function() {
-        done();
-      });
-    });
-  });
-
-  it('should start daemon', function(done) {
-    Satan.launchDaemon(function(err, child) {
-      assert(err == null);
-      assert(typeof child.pid == 'number');
-      Satan.pingDaemon(function(online) {
-        assert(online == true);
-        done();
-      });
+      done();
     });
   });
 

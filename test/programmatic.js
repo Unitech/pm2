@@ -11,7 +11,7 @@ var path   = require('path');
 describe('Satan', function() {
 
   after(function(done) {
-    Satan.killDaemon(done);
+    Satan.disconnectRPC(done);
   });
 
   it('should start Satan interaction', function(done) {
@@ -20,6 +20,5 @@ describe('Satan', function() {
       done();
     });
   });
-
 
 });

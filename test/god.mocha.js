@@ -1,5 +1,5 @@
 
-var God = require('..');
+var God = require('../lib/God');
 var numCPUs = require('os').cpus().length;
 var fs = require('fs');
 var path = require('path');

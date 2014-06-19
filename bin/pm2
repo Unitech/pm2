@@ -128,7 +128,7 @@ commander.command('start <file|json|stdin>')
     } else if (cmd.indexOf('.json') > 0)
       CLI.startFromJson(cmd, 'file');
     else
-      CLI.startFile(cmd,'file');
+      CLI.startFile(cmd);
   });
 
 //
@@ -253,7 +253,9 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 //
 commander.command('ping')
   .description('                 ping pm2 daemon - if not up it will launch it')
-  .action(failOnUnknown(CLI.ping));
+  .action(function() {
+          CLI.ping();
+          });
 
 commander.command('updatePM2')
   .description('                 updatePM2 after a npm update')
@@ -266,15 +268,21 @@ commander.command('updatePM2')
 //
 commander.command('interact <secret_key> <public_key> <machine_name>')
   .description('launch interaction with VitalSigns servers')
-  .action(CLI.interact);
+  .action(function(secret, public, machine) {
+          CLI.interact(secret, public, machine);
+          });
 
 commander.command('killInteract')
   .description('stop the interaction with VitalSigns servers')
-  .action(failOnUnknown(CLI.killInteract));
+  .action(function() {
+          CLI.killInteract()
+          });
 
 commander.command('infoInteract')
   .description('get information about the monitoring connection to VitalSigns')
-  .action(failOnUnknown(CLI.infoInteract));
+  .action(function() {
+          CLI.infoInteract();
+          });
 
 
 //
@@ -282,10 +290,10 @@ commander.command('infoInteract')
 //
 commander.command('web')
   .description('launch an health API on port ' + cst.WEB_INTERFACE)
-  .action(failOnUnknown(function() {
+  .action(function() {
     console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
     CLI.web();
-  }));
+  });
 
 //
 // Save processes to file
@@ -338,38 +346,50 @@ commander.command('generate <name>')
 
 commander.command('describe <id>')
   .description('describe all parameters of a process id')
-  .action(CLI.describeProcess);
+  .action(function(proc_id) {
+          CLI.describeProcess(proc_id);
+          });
 
 commander.command('desc <id>')
   .description('describe all parameters of a process id')
-  .action(CLI.describeProcess);
+  .action(function(proc_id) {
+          CLI.describeProcess(proc_id);
+          });
 
 //
 // List command
 //
 commander.command('list')
   .description('list all processes')
-  .action(failOnUnknown(CLI.list));
+  .action(function() {
+          CLI.list()
+          });
 
 commander.command('ls')
   .description('(alias) list all processes')
-  .action(failOnUnknown(CLI.list));
+  .action(function() {
+          CLI.list()
+          });
 
 commander.command('l')
   .description('(alias) list all processes')
-  .action(failOnUnknown(CLI.list));
+  .action(function() {
+          CLI.list()
+          });
 
 commander.command('status')
   .description('(alias) list all processes')
-  .action(failOnUnknown(CLI.list));
+  .action(function() {
+          CLI.list()
+          });
 
 
 // List in raw json
 commander.command('jlist')
   .description('list all processes in JSON format')
-  .action(failOnUnknown(function() {
-    CLI.jlist();
-  }));
+  .action(function() {
+          CLI.jlist()
+          });
 
 // List in prettified Json
 commander.command('prettylist')
@@ -383,11 +403,16 @@ commander.command('prettylist')
 //
 commander.command('monit')
   .description('launch termcaps monitoring')
-  .action(failOnUnknown(CLI.monit));
+  .action(function() {
+          CLI.monit()
+          });
 
 commander.command('m')
   .description('(alias) launch termcaps monitoring')
-  .action(failOnUnknown(CLI.monit));
+  .action(function() {
+          CLI.monit()
+          });
+
 
 //
 // Flushing command

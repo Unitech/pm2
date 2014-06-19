@@ -1,1 +1,1 @@
-module.exports = require('./lib/God');
+module.exports = require('./lib/CLI.js');
