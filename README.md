@@ -1,4 +1,4 @@
-B1;3201;0c# ![PM2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
+![PM2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
 
 PM2 is a process manager for Node apps with a built-in load balancer.
 
@@ -15,7 +15,6 @@ PM2 is perfect when you need to spread your stateless Node.js code accross all C
 - Pause unstable process (avoid infinite loop)
 - Restart on file change with `--watch`
 - Monitoring in console
-- [Free server/pm2 monitoring by ping strategy](#builtin-remote-monitoring)
 
 Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
 
