@@ -564,7 +564,7 @@ root  24271  0.0  0.3  696428  24208 ? Sl 17:36 0:00 pm2: node-app-2
 ```
 Note that if you execute `pm2 start node-app-2` again, it will spawn an additional instance node-app-2.
 
-- **cwd:** your JSON declaration does not need to reside with your script.  If you wished to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
+- **cwd:** your JSON declaration does not need to reside with your script.  If you wish to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
 
 - The following are valid options for JSON app declarations:
 ```
@@ -844,6 +844,7 @@ By using the fork mode you will lose core features of PM2 like the automatic clu
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
+- [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
 
 ## Contributors
 
