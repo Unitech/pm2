@@ -1,25 +1,19 @@
 {
   "apps" : [{
-    "name"      : "API",
-    "script"    : "app.js",
-    "env": {
-      "NODE_ENV": "production",
-      "AWESOME_SERVICE_API_TOKEN": "xxx"
-    }
-  }, {
-    "name"      : "WEB",
-    "script"    : "web.js"
+    "name" : "test.json",
+    "script" : "test.json.js",
+    "options": [""]
   }],
   "deploy" : {
     "production" : {
       "user" : "node",
-      "host" : "212.83.163.1",
+      "host" :  "212.83.163.1",
       "repo" : "git@github.com:repo.git",
       "path" : "/var/www/production"
     },
     "dev" : {
       "user" : "node",
-      "host" : "212.83.163.1",
+      "host" :  "212.83.163.1",
       "repo" : "git@github.com:repo.git",
       "path" : "/var/www/development"
     }

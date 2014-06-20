@@ -1,4 +1,10 @@
 
+# 0.9.0
+
+- CLI flattening
+- require('pm2') possible to interact with
+- graceful stop
+
 # 0.8.16
 
 - Remove builtin monitoring feature

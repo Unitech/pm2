@@ -1,15 +1,15 @@
 [{
   "name"      : "echo",
-  "script"    : "./echo.js",
+  "script"    : "./test/fixtures/echo.js",
   "instances" : "1"
 },{
   "name"      : "child",
-  "script"    : "./child.js",
-  "instances" : "4",
+  "script"    : "./test/fixtures/child.js",
+  "instances" : "1",
   "error_file" : "./child-err.log",
   "out_file" : "./child-out.log"
 },{
   "name"      : "api-2",
-  "script"    : "./server.js",
-  "instances" : "3"
+  "script"    : "./test/fixtures/server.js",
+  "instances" : "2"
 }]

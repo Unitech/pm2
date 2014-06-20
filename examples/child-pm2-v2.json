@@ -1,0 +1,19 @@
+{
+  "apps" : [{
+    "script":"examples/child.js",
+    "name":"API-web",
+    "instances":3
+  },{
+    "script":"examples/echo.js",
+    "name":"API-io",
+    "instances":2
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "node",
+      "host" :  "212.83.163.168",
+      "repo" : "git@github.com:Unitech/eip-vitrine.git",
+      "path" : "/var/www/test-deploy"
+    }
+  }
+}

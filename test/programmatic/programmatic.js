@@ -32,8 +32,9 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should start a script', function(done) {
-    pm2.start(process.cwd() + '/test/programmatic/child.js', {
-    }, function(err, data) {
+    pm2.start(process.cwd() + '/test/programmatic/child.js',
+              {},
+              function(err, data) {
       proc1 = data[0];
 
       should(err).be.null;
@@ -253,5 +254,37 @@ describe('PM2 programmatic calls', function() {
   });
 
 
+
+  describe('start OR restart', function() {
+    before(function(done) {
+      pm2.delete('all', function(err, ret) {
+        done();
+      });
+    });
+
+    it('should start', function(done) {
+      pm2._jsonStartOrAction('restart', process.cwd() + '/test/fixtures/all2.json', function(err, data) {
+        should(err).be.null;
+        pm2.list(function(err, ret) {
+          should(err).be.null;
+          ret.length.should.eql(4);
+          done();
+        });
+      });
+    });
+
+    it('should NOW restart action', function(done) {
+      pm2._jsonStartOrAction('restart', process.cwd() + '/test/fixtures/all2.json', function(err, data) {
+        should(err).be.null;
+        pm2.list(function(err, ret) {
+          should(err).be.null;
+          ret.forEach(function(app) {
+            app.pm2_env.restart_time.should.eql(1);
+          });
+          setTimeout(function() { done(); }, 500);
+        });
+      });
+    });
+  });
 
 });
