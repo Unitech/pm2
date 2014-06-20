@@ -70,7 +70,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/pm2Bus.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/god.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/satan.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/programmatic.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/interactor.mocha.js && bash test/main.sh"
+    "test": "bash test/main.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/pm2Bus.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/god.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/satan.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/programmatic.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/interactor.mocha.js"
   },
   "keywords": [
     "cli",
