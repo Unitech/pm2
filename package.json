@@ -70,7 +70,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash ./test/cli.sh && bash ./test/json_file.sh && bash ./test/harmony.sh && bash ./test/reload.sh && bash ./test/right-exit-code.sh && bash ./test/log-reload.sh && bash ./test/gracefulReload.sh && bash ./test/gracefulReload2.sh && bash ./test/gracefulReload3.sh && bash ./test/cli2.sh && bash ./test/misc.sh && bash ./test/fork.sh && bash ./test/infinite_loop.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test"
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/pm2Bus.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/god.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/satan.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/programmatic.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/interactor.mocha.js && bash test/main.sh"
   },
   "keywords": [
     "cli",
@@ -107,6 +107,7 @@
     "pm2-multimeter": "~0.1.2",
     "pm2-interface": "~0.1.3",
     "pm2-axon-rpc": "~0.0.2",
+    "pm2-deploy" : "*",
     "axon": "~1.0.0",
     "cron": "~1.0.4",
     "colors": "~0.6.2",

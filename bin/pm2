@@ -9,9 +9,6 @@ var path      = p = require('path');
 var util      = require('util');
 var cronJob   = require('cron').CronJob;
 
-var Monit     = require('../lib/Monit');
-var UX        = require('../lib/CliUx');
-var Log       = require('../lib/Log');
 var Satan     = require('../lib/Satan');
 var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
@@ -123,12 +120,12 @@ commander.command('start <file|json|stdin>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (cmd) {
         process.stdin.pause();
-        CLI.startFromJson(cmd, 'pipe');
+        CLI.startJson(cmd, commander, 'pipe');
       });
     } else if (cmd.indexOf('.json') > 0)
-      CLI.startFromJson(cmd, 'file');
+      CLI.startJson(cmd, commander, 'file');
     else
-      CLI.startFile(cmd);
+      CLI.start(cmd, commander);
   });
 
 //
@@ -138,25 +135,7 @@ commander.command('stop <id|name|all|json|stdin>')
   .option('--watch', 'Stop watching folder for changes')
   .description('          stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
-    UX.processing.start();
-
-    if (param == "-") {
-      process.stdin.resume();
-      process.stdin.setEncoding('utf8');
-      process.stdin.on('data', function (param) {
-        process.stdin.pause();
-        CLI.actionFromJson('stopProcessName', param, 'pipe');
-      });
-    } else if (param.indexOf('.json') > 0)
-      CLI.actionFromJson('stopProcessName', param, 'file');
-    else if (param == 'all')
-      CLI.stopAll();
-    else if (isNaN(parseInt(param))) {
-      CLI.stopProcessName(param);
-    } else {
-      console.log(cst.PREFIX_MSG + 'Stopping process by id ' + param);
-      CLI.stopId(param);
-    }
+    CLI.stop(param);
   });
 
 //
@@ -166,26 +145,7 @@ commander.command('restart <id|name|all|json|stdin>')
   .option('--watch', 'Toggle watching folder for changes')
   .description('       restart a process')
   .action(function(param) {
-    UX.processing.start();
-
-    if (param == "-") {
-      process.stdin.resume();
-      process.stdin.setEncoding('utf8');
-      process.stdin.on('data', function (param) {
-        process.stdin.pause();
-        CLI.actionFromJson('restartProcessName', param, 'pipe');
-      });
-    } else if (param.indexOf('.json') > 0)
-      CLI.actionFromJson('restartProcessName', param, 'file');
-    else if (param == 'all')
-      CLI.restartAll();
-    else if (isNaN(parseInt(param))) {
-      console.log(cst.PREFIX_MSG + 'Restarting process by name ' + param);
-      CLI.restartProcessByName(param);
-    } else {
-      console.log(cst.PREFIX_MSG + 'Restarting process by id ' + param);
-      CLI.restartProcessById(param);
-    }
+    CLI.restart(param);
   });
 
 //
@@ -194,24 +154,16 @@ commander.command('restart <id|name|all|json|stdin>')
 commander.command('reload <name|all>')
   .description('                 reload processes (note that its for app using HTTP/HTTPS)')
   .action(function(pm2_id) {
-    UX.processing.start();
-    if (pm2_id == 'all')
-      CLI.reload('reloadProcessId');
-    else
-      CLI.reloadProcessName(pm2_id, 'reloadProcessId');
+    CLI.reload(pm2_id);
   });
 
 //
 // Reload process(es)
 //
 commander.command('gracefulReload <name|all>')
-  .description('              gracefully reload a process. Send a "shutdown" message to close all connections.')
+.description('              gracefully reload a process. Send a "shutdown" message to close all connections.')
   .action(function(pm2_id) {
-    UX.processing.start();
-    if (pm2_id == 'all')
-        CLI.reload('softReloadProcessId');
-    else
-        CLI.reloadProcessName(pm2_id, 'softReloadProcessId');
+    CLI.gracefulReload(pm2_id);
   });
 
 //
@@ -225,20 +177,18 @@ commander.command('delete <name|id|script|all|json|stdin>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (param) {
         process.stdin.pause();
-        CLI.deleteProcess(param, 'pipe');
+        CLI.delete(param, 'pipe');
       });
     } else
-      CLI.deleteProcess(name,'');
+      CLI.delete(name,'');
   });
 
 //
 // Send system signal to process
 //
 commander.command('sendSignal <signal> <pm2_id|name>')
-.description('      send a system signal to the target process')
+  .description('      send a system signal to the target process')
   .action(function(signal, pm2_id) {
-    UX.processing.start();
-
     if (isNaN(parseInt(pm2_id))) {
       console.log(cst.PREFIX_MSG + 'Sending signal to process name ' + pm2_id);
       CLI.sendSignalToProcessName(signal, pm2_id);
@@ -302,7 +252,6 @@ commander.command('dump')
   .description('dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Dumping processes');
-    UX.processing.start();
     CLI.dump();
   }));
 
@@ -310,7 +259,6 @@ commander.command('save')
   .description('(alias) dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Dumping processes');
-    UX.processing.start();
     CLI.dump();
   }));
 
@@ -321,7 +269,6 @@ commander.command('resurrect')
   .description('resurrect previously dumped processes')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Resurrecting');
-    UX.processing.start();
     CLI.resurrect();
   }));
 
@@ -331,7 +278,7 @@ commander.command('resurrect')
 commander.command('startup <platform>')
   .description('auto resurect process at startup. [platform] = ubuntu, centos or systemd')
   .action(function(platform) {
-    CLI.startup(platform);
+    CLI.startup(platform, commander);
   });
 
 
@@ -347,13 +294,13 @@ commander.command('generate <name>')
 commander.command('describe <id>')
   .description('describe all parameters of a process id')
   .action(function(proc_id) {
-          CLI.describeProcess(proc_id);
+          CLI.describe(proc_id);
           });
 
 commander.command('desc <id>')
   .description('describe all parameters of a process id')
   .action(function(proc_id) {
-          CLI.describeProcess(proc_id);
+          CLI.describe(proc_id);
           });
 
 //
