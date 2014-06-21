@@ -1,113 +1,104 @@
+var p = require('path')
+  , root = p.resolve(__dirname, '../../')
+  , fixtures = p.join(root, 'test/fixtures/')
+  // , spawn = require('child_process').spawn
+  , Spawner = require('promise-spawner')
+  , async = require('async')
+ 
+  , bin = p.join(root, '/bin/pm2')
+  , pm2 = require(p.join(root, 'index.js'))
+  , ids = []
 
-var Monit = require('../../lib/Monit');
-var should = require('should');
-var assert = require('better-assert');
-var os = require('os');
+var timeout = function(cb, time) {
+  return function() {
+    setTimeout(cb, time || 2000)
+  }
+}
 
-describe('Monit', function() {
-  it('should have right properties', function() {
-    Monit.should.have.property('init');
-    Monit.should.have.property('refresh');
-    Monit.should.have.property('drawRatio');
-    Monit.should.have.property('stop');
-  });
+describe('Monitor', function() {
+  this.timeout(0);
 
-  var fixt1 = [{
-    pid : 324,
-    pm2_env : {
-      pm_exec_path : 'asd',
-      name : 'test',
-      status : 'online'
-      ,pm_id : 666
-      ,exec_mode : 'fork_mode'
-    },
-    monit: {
-      memory: os.totalmem() / 50,
-      cpu: 0
+  beforeEach(function(cb) {
+    pm2.connect(function() {
+      cb()
+    })
+  })
+
+  before(function(cb) {
+    pm2.connect(function() {
+      pm2.delete('all', function(err, ret) {
+        cb()
+      })
+    })
+  })
+
+  it('should start', function() {
+
+    var modifiers = {
+        out: function(d) { return d },
+        err: 'error: '
     }
-  },{
-    pid : 3245,
-    pm2_env : {
-      pm_exec_path : 'asd',
-      name : 'test',
-      status : 'online'
-      ,pm_id : 666
-      ,exec_mode : 'fork_mode'
-    },
-    monit: {
-      memory: os.totalmem() / 10,
-      cpu: 0
-    }
-  },{
-    pid : 3247,
-    pm2_env : {
-      pm_exec_path : 'asd',
-      name : 'test',
-      status : 'stopped'
-      ,pm_id : 666
-      ,exec_mode : 'fork_mode'
-    },
-    monit: {
-      memory: os.totalmem() / 2,
-      cpu: 0
-    }
-  }];
 
-  var fixt2 = [{
-    pid : 324,
-    pm2_env : {
-      pm_exec_path : 'asd',
-      name : 'test',
-      status : 'online'
-      ,pm_id : 666
-      ,exec_mode : 'fork_mode'
-    },
-    monit: {
-      memory: os.totalmem() / 25,
-      cpu: 0
-    }
-  },{
-    pid : 3245,
-    pm2_env : {
-      pm_exec_path : 'asd',
-      name : 'test',
-      status : 'stopped'
-      ,pm_id : 666
-      ,exec_mode : 'fork_mode'
-    },
-    monit: {
-      memory: os.totalmem() / 5,
-      cpu: 0
-    }
-  },{
-    pid : 3247,
-    pm2_env : {
-      pm_exec_path : 'asd',
-      name : 'test',
-      status : 'stopped'
-      ,pm_id : 666
-      ,exec_mode : 'fork_mode'
-    },
-    monit: {
-      memory: os.totalmem() / 8,
-      cpu: 0
-    }
-  }];
+    var spawner = new Spawner(modifiers)
 
-  it('should init', function(done) {
-    Monit.init(fixt1);
-    done()
-  });
+    //spawner gives you global streams from spawned stdout and stderr
+    spawner.out.pipe(process.stdout)
+    spawner.err.pipe(process.stdout)
 
-  it('should refresh and handle processes with different sizes', function(done) {
-    setTimeout(function() {
-      Monit.refresh(fixt2);
-      done();
-    }, 400);
-  });
+    spawner
+      .spawn(bin + ' monit')
+      .catch(function(code) {
+        console.log('Script failed with code ', code)
+        process.exit(code)
+      })
+      .then(function(code) {
+        if(this.data.err) {
+          console.log(this.data.err)
+        }
 
-  it('should stop monitoring', function() {
-    Monit.stop();
-  });
+        process.exit(code)      
+      })
 
-});
+  })
+
+  it('should start monitoring', function(cb) {
+
+    var paths = [p.join(fixtures, 'quit.js'), p.join(fixtures, 'killtoofast.js'), p.join(fixtures, 'server.js'), p.join(fixtures, 'echo.js')]
+
+    async.eachSeries(paths, function(item, next) {
+
+      pm2.start(item, {}, function(err, data) {
+        if(err)
+          throw err
+
+        ids.push(data[0].pm2_env.pm_id);
+
+        setTimeout(function() {
+          next();
+        }, 2000)
+      })
+
+    }, cb)
+
+  })
+
+  it('should delete', function(cb) {
+    pm2.delete(ids[3], timeout(cb))
+  })
+
+  it('should stop', function(cb) {
+    pm2.stop(ids[2], timeout(cb))
+  })
+
+  it('should restart', function(cb) {
+    pm2.restart(ids[1], timeout(cb))
+  })
+
+  after(function() {
+    pm2.connect(function() {
+      pm2.delete('all', function(err, ret) {
+        process.exit(0)
+      })
+    })
+  })
+})
