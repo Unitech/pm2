@@ -969,7 +969,10 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
+
+## Some tips
 - [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
+- [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
 
 ## Contributors
 
