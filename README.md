@@ -70,6 +70,13 @@ Thanks in advance and we hope that you like pm2!
 - [Make pm2 restart on server reboot](#a8)
 - [JSON app declaration](#a10)
 
+### Deployment - ecosystem.json
+
+- [Getting started with deployment](#deployment)
+- [Deployment options](#deployment-help)
+- [Considerations](#considerations)
+- [Contributing](#deployment-contribution)
+
 ### Specific
 
 - [Specific features](#a77)
@@ -502,32 +509,34 @@ To watch specifics paths, please use a JSON app declaration, `watch` can take a 
 You can define parameters for your apps in `processes.json`:
 
 ```json
-[{
-  "name"        : "echo",
-  "script"      : "examples/args.js",
-  "args"        : "['--toto=heya coco', '-d', '1']",
-  "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
-  "watch"       : "true",
-  "cwd"         : "/this/is/a/path/to/start/script",
-  "env": {
-      "NODE_ENV": "production",
-      "AWESOME_SERVICE_API_TOKEN": "xxx"
-  }
-}, {
-  "name"       : "api",
-  "script"     : "./examples/child.js",
-  "instances"  : "4",
-  "error_file" : "./examples/child-err.log",
-  "out_file"   : "./examples/child-out.log",
-  "pid_file"   : "./examples/child.pid",
-  "exec_mode"  : "cluster_mode",
-  "port"       : 9005
-}, {
-  "name"       : "auto-kill",
-  "script"     : "./examples/killfast.js",
-  "min_uptime" : "100",
-  "exec_mode"  : "fork_mode",
-}]
+{
+  "apps" : [{
+    "name"        : "echo",
+    "script"      : "examples/args.js",
+    "args"        : "['--toto=heya coco', '-d', '1']",
+    "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
+    "watch"       : "true",
+    "cwd"         : "/this/is/a/path/to/start/script",
+    "env": {
+        "NODE_ENV": "production",
+        "AWESOME_SERVICE_API_TOKEN": "xxx"
+    }
+  },{
+    "name"       : "api",
+    "script"     : "./examples/child.js",
+    "instances"  : "4",
+    "error_file" : "./examples/child-err.log",
+    "out_file"   : "./examples/child-out.log",
+    "pid_file"   : "./examples/child.pid",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 9005
+  },{
+    "name"       : "auto-kill",
+    "script"     : "./examples/killfast.js",
+    "min_uptime" : "100",
+    "exec_mode"  : "fork_mode",
+  }]
+}
 ```
 
 Then run:
@@ -541,13 +550,14 @@ $ pm2 restart processes.json
 **A few notes about JSON app declarations:**
 
 - All command line options passed when using the JSON app declaration will be dropped i.e.
+
 ```bash
 $ cat node-app-1.json
 
 {
-"name" : "node-app-1",
-"script" : "app.js",
-"cwd" : "/srv/node-app-1/current"
+  "name" : "node-app-1",
+  "script" : "app.js",
+  "cwd" : "/srv/node-app-1/current"
 }
 
 $ pm2 --run-as-user app start node-app-1.json
@@ -571,6 +581,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 [{
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
+  "args"             : "['--toto=heya coco', '-d', '1']",
   "script"           : "bin/app.js",
   "error_file"       : "/var/log/node-app/node-app.stderr.log",
   "out_file"         : "log/node-app.stdout.log",
@@ -581,16 +592,129 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "min_uptime"       : "200",
   "cron_restart"     : "1 0 * * *",
   "watch"            : "false",
+  "ignoreWatch"      : ["[\\/\\\\]\\./", "node_modules"],
   "merge_logs"       : "true",
   "exec_interpreter" : "node",
   "one_launch_only"  : "true",
-  "exec_mode"        : "cluster_mode"
+  "exec_mode"        : "cluster_mode",
+  "env": {
+    "NODE_ENV": "production",
+    "AWESOME_SERVICE_API_TOKEN": "xxx"
+  }
 }]
 ```
 
-# Miscellaneous
+<a name="deployment"/>
+# Deployment (PM2 >= 0.9.0)
+
+PM2 embed a simple and powerful deployment system with revision tracing.
+It's based on <a href="https://github.com/visionmedia/deploy">https://github.com/visionmedia/deploy</a>
+
+## Getting started with deployment
+
+1- Generate a sample ecosystem.json file that list processes and deployment environment
+
+```bash
+$ pm2 ecosystem
+```
+
+In the current folder a `ecosystem.json` file will be created.
+It contains this:
+
+```json
+{
+  "apps" : [{
+    "name"      : "API",
+    "script"    : "app.js",
+    "env": {
+      "NODE_ENV": "production",
+      "AWESOME_SERVICE_API_TOKEN": "xxx"
+    }
+  },{
+    "name"      : "WEB",
+    "script"    : "web.js"
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "node",
+      "host" : "212.83.163.1",
+      "repo" : "git@github.com:repo.git",
+      "path" : "/var/www/production"
+    },
+    "dev" : {
+      "user" : "node",
+      "host" : "212.83.163.1",
+      "repo" : "git@github.com:repo.git",
+      "path" : "/var/www/development"
+    }
+  }
+}
+```
+
+Edit the file according to your needs.
+
+2- Be sure that you have the public ssh key on your local machine
+
+```bash
+$ ssh-keygen -t rsa
+$ ssh-copy-id root@myserver.com
+```
+
+3- Now initialize the remote folder with:
+
+```bash
+$ pm2 deploy <configuration_file> <environment> setup
+```
+
+E.g:
+
+```bash
+$ pm2 deploy ecosystem.json production setup
+```
+
+Folders will be created on your remote server
+
+4- Deploy your code
+
+```bash
+$ pm2 deploy ecosystem.json production
+```
+
+Now your code will be populated, installed and started with PM2
+
+<a name="deployment-help"/>
+## Deployment options
+
+```
+$ pm2 deploy <configuration_file> <environment> <command>
+
+  Commands:
+    setup                run remote setup commands
+    update               update deploy to the latest release
+    revert [n]           revert to [n]th last deployment or 1
+    curr[ent]            output current release commit
+    prev[ious]           output previous release commit
+    exec|run <cmd>       execute the given <cmd>
+    list                 list previous deploy commits
+    [ref]                deploy to [ref], the "ref" setting, or latest tag
+```
+
+<a name="considerations"/>
+## Considerations
+
+- PM2 will look by default to `ecosystem.json`. So you can skip the <configuration_file> options if it's the case
+- It deploys your code via ssh, you don't need any dependencies
+- Process are initialized / started automatically depending on application name in `ecosystem.json`
+- PM2-deploy is not on the main PM2 repository
+
+<a name="deployment-contribution"/>
+## Contributing
+
+The module is <a href="https://github.com/Unitech/pm2-deploy">https://github.com/Unitech/pm2-deploy</a>
+Feel free to PR for any changes or fix.
 
 <a name="a77"/>
+# Special features
 
 Launching pm2 without daemonizing itself:
 

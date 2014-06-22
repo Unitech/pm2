@@ -41,32 +41,37 @@ commander.version(pkg.version)
   .usage('[cmd] app');
 
 commander.on('--help', function() {
-        console.log('  Basic Examples:');
-        console.log('');
-        console.log('    Start an app using all CPUs available + set a name :');
-        console.log('    $ pm2 start app.js -i max --name "api"');
-        console.log('');
-        console.log('    Restart the previous app launched, by name :');
-        console.log('    $ pm2 restart api');
-        console.log('');
-        console.log('    Stop the app :');
-        console.log('    $ pm2 stop api');
-        console.log('');
-        console.log('    Restart the app that is stopped :');
-        console.log('    $ pm2 restart api');
-        console.log('');
-        console.log('    Remove the app from the process list :');
-        console.log('    $ pm2 delete api');
-        console.log('');
-        console.log('    Kill daemon pm2 :');
-        console.log('    $ pm2 kill');
-        console.log('');
-        console.log('    Update pm2 :');
-        console.log('    $ npm install pm2@latest -g ; pm2 updatePM2');
-        console.log('');
-        console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
-        console.log('');
-        });
+  console.log('  Basic Examples:');
+  console.log('');
+  console.log('    Start an app using all CPUs available + set a name :');
+  console.log('    $ pm2 start app.js -i max --name "api"');
+  console.log('');
+  console.log('    Restart the previous app launched, by name :');
+  console.log('    $ pm2 restart api');
+  console.log('');
+  console.log('    Stop the app :');
+  console.log('    $ pm2 stop api');
+  console.log('');
+  console.log('    Restart the app that is stopped :');
+  console.log('    $ pm2 restart api');
+  console.log('');
+  console.log('    Remove the app from the process list :');
+  console.log('    $ pm2 delete api');
+  console.log('');
+  console.log('    Kill daemon pm2 :');
+  console.log('    $ pm2 kill');
+  console.log('');
+  console.log('    Update pm2 :');
+  console.log('    $ npm install pm2@latest -g ; pm2 updatePM2');
+  console.log('');
+  console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
+  console.log('');
+  console.log('  Deployment help:');
+  console.log('');
+  console.log('    $ pm2 deploy help');
+  console.log('');
+  console.log('');
+});
 
 if (process.argv.indexOf('-s') > -1) {
   global.console = {};
@@ -128,6 +133,18 @@ commander.command('start <file|json|stdin>')
       CLI.start(cmd, commander);
   });
 
+commander.command('deploy <file|environment>')
+  .description('                deploy your json')
+  .action(function(cmd) {
+    CLI.deploy(cmd, commander);
+  });
+
+commander.command('startOrRestart <json file>')
+  .description('                start or restart JSON file')
+  .action(function(file) {
+    CLI._jsonStartOrAction('restart', file);
+  });
+
 //
 // Stop specific id
 //
@@ -165,6 +182,12 @@ commander.command('gracefulReload <name|all>')
   .action(function(pm2_id) {
     CLI.gracefulReload(pm2_id);
   });
+
+// commander.command('gracefulStop <name|all>')
+// .description('              gracefully reload a process. Send a "shutdown" message to close all connections.')
+//   .action(function(pm2_id) {
+//     CLI.gracefulStop(pm2_id);
+//   });
 
 //
 // Stop and delete a process by name from database
@@ -285,8 +308,14 @@ commander.command('startup <platform>')
 //
 // Sample generate
 //
-commander.command('generate <name>')
-  .description('generate sample JSON')
+commander.command('generate')
+  .description('generate an ecosystem.json configuration file')
+  .action(function(name) {
+    CLI.generateSample(name);
+  });
+
+commander.command('ecosystem')
+  .description('generate an ecosystem.json configuration file')
   .action(function(name) {
     CLI.generateSample(name);
   });
