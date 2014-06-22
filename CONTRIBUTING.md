@@ -23,7 +23,7 @@ Note that we might understand english, german and french
 
 #### 6) Use debugging functions:
 
-```DEBUG=* pm2_DEBUG=true ./bin/pm2 --no-daemon start my-buggy-thing.js```
+```DEBUG=pm2:* PM2_DEBUG=true ./bin/pm2 --no-daemon start my-buggy-thing.js```
 
 If your issue is flagged as `need data` be sure that there won't be any upgrade unless we can have enough data to reproduce. 
 ## Pull-Requests
