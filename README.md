@@ -397,7 +397,7 @@ It means that your app **still has open connections on exit**.
 
 To work around this problem you have to use the graceful reload.
 Graceful reload is a mechanism that will send a *shutdown* message to your process before reloading it.
-You can control the time that the app has to shutdown via the `pm2_GRACEFUL_TIMEOUT` environment variable.
+You can control the time that the app has to shutdown via the `PM2_GRACEFUL_TIMEOUT` environment variable.
 
 Example:
 
@@ -735,13 +735,13 @@ $ pm2 sendSignal SIGUSR2 my-app
 You can specifiy the following options by editing the file `~/.pm2/custom_options.sh`:
 
 ```
-pm2_RPC_PORT
-pm2_PUB_PORT
-pm2_BIND_ADDR
-pm2_API_PORT
-pm2_GRACEFUL_TIMEOUT
-pm2_MODIFY_REQUIRE
-pm2_NODE_OPTIONS
+PM2_RPC_PORT
+PM2_PUB_PORT
+PM2_BIND_ADDR
+PM2_API_PORT
+PM2_GRACEFUL_TIMEOUT
+PM2_MODIFY_REQUIRE
+PM2_NODE_OPTIONS
 ```
 
 
@@ -756,12 +756,12 @@ $ pm2 web
 
 ### Enable by default for all processes
 
-You can enable Harmony ES6 by setting `pm2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
+You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
 
 To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add:
 
 ```bash
-export pm2_NODE_OPTIONS='--harmony'
+export PM2_NODE_OPTIONS='--harmony'
 ```
 
 Then:
@@ -916,7 +916,7 @@ To hack pm2, it's pretty simple:
 $ pm2 kill   # kill the current pm2
 $ git clone my_pm2_fork.git
 $ cd pm2/
-$ DEBUG=* pm2_DEBUG=true ./bin/pm2 --no-daemon
+$ DEBUG=* PM2_DEBUG=true ./bin/pm2 --no-daemon
 ```
 
 Each time you edit the code, be sure to kill and restart pm2 to make changes taking effect.
