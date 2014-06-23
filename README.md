@@ -613,6 +613,8 @@ It's based on <a href="https://github.com/visionmedia/deploy">https://github.com
 
 ## Getting started with deployment
 
+Please read the [Considerations to use PM2 deploy](#considerations)
+
 1- Generate a sample ecosystem.json file that list processes and deployment environment
 
 ```bash
@@ -677,7 +679,7 @@ E.g:
 $ pm2 deploy ecosystem.json production setup
 ```
 
-Folders will be created on your remote server
+This command will create all the folders on your remote server.
 
 4- Deploy your code
 
@@ -707,6 +709,8 @@ $ pm2 deploy <configuration_file> <environment> <command>
 <a name="considerations"/>
 ## Considerations
 
+- Commit your node_modules folder. It's a best practice when you deploy code
+- You can declare specific environment variable depending on the environment you want to deploy the code to. For instance to declare variables for the production environment, just add "env_production": {} and declare that variables.
 - PM2 will look by default to `ecosystem.json`. So you can skip the <configuration_file> options if it's the case
 - It deploys your code via ssh, you don't need any dependencies
 - Process are initialized / started automatically depending on application name in `ecosystem.json`
