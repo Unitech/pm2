@@ -628,8 +628,10 @@ It contains this:
     "name"      : "API",
     "script"    : "app.js",
     "env": {
-      "NODE_ENV": "production",
-      "AWESOME_SERVICE_API_TOKEN": "xxx"
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
     }
   },{
     "name"      : "WEB",
@@ -639,12 +641,14 @@ It contains this:
     "production" : {
       "user" : "node",
       "host" : "212.83.163.1",
+      "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
       "path" : "/var/www/production"
     },
     "dev" : {
       "user" : "node",
       "host" : "212.83.163.1",
+      "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
       "path" : "/var/www/development"
     }
