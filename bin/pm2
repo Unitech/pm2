@@ -24,6 +24,7 @@ commander.version(pkg.version)
   .option('-o --output <path>', 'specify out log file')
   .option('-e --error <path>', 'specify error log file')
   .option('-p --pid <pid>', 'specify pid file')
+  .option('--env', 'specify environment to get specific env variables (for JSON declaration)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('-u --user <username>', 'define user when generating startup script')
   .option('-c --cron <cron_pattern>', 'restart a running process based on a cron pattern')
@@ -117,7 +118,6 @@ function failOnUnknown(fn) {
 //
 commander.command('start <file|json|stdin>')
   .option('--watch', 'Watch folder for changes')
-  .option('--env', 'specify environment to get specific env variables (for JSON declaration)')
   .description('                start and daemonize an app')
   .action(function(cmd) {
     if (cmd == "-") {
@@ -139,9 +139,8 @@ commander.command('deploy <file|environment>')
     CLI.deploy(cmd, commander);
   });
 
-commander.command('startOrRestart <json file>')
+commander.command('startOrRestart <json>')
   .description('                start or restart JSON file')
-  .option('--env', 'specify environment to get specific env variables')
   .action(function(file) {
     CLI._jsonStartOrAction('restart', file, commander);
   });
