@@ -2,5 +2,8 @@
   "name" : "serv-clust",
   "script" : "server.js",
   "max" : "10",
-  "instances" : "4"
+  "instances" : "4",
+  "env_test" : {
+    "NODE_ENV" : "TEST"
+  }
 }

@@ -117,9 +117,9 @@ function failOnUnknown(fn) {
 //
 commander.command('start <file|json|stdin>')
   .option('--watch', 'Watch folder for changes')
+  .option('--env', 'specify environment to get specific env variables (for JSON declaration)')
   .description('                start and daemonize an app')
   .action(function(cmd) {
-
     if (cmd == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
@@ -141,8 +141,9 @@ commander.command('deploy <file|environment>')
 
 commander.command('startOrRestart <json file>')
   .description('                start or restart JSON file')
+  .option('--env', 'specify environment to get specific env variables')
   .action(function(file) {
-    CLI._jsonStartOrAction('restart', file);
+    CLI._jsonStartOrAction('restart', file, commander);
   });
 
 //
