@@ -70,7 +70,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash test/main.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/pm2Bus.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/god.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/satan.mocha.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/programmatic.js && NODE_ENV=test ./node_modules/mocha/bin/mocha test/programmatic/interactor.mocha.js"
+    "test": "bash test/main.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test/index.js"
   },
   "keywords": [
     "cli",
@@ -107,7 +107,7 @@
     "pm2-multimeter": "~0.1.2",
     "pm2-interface": "~0.1.3",
     "pm2-axon-rpc": "~0.0.2",
-    "pm2-deploy" : "0.0.3",
+    "pm2-deploy" : "~0.0.3",
     "axon": "~1.0.0",
     "cron": "~1.0.4",
     "colors": "~0.6.2",
@@ -124,7 +124,8 @@
   "devDependencies": {
     "mocha": "^1.20.1",
     "should": "^4.0.0",
-    "better-assert": "^1.0.0"
+    "better-assert": "^1.0.0",
+    "promise-spawner": "0.0.3"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"

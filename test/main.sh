@@ -23,3 +23,5 @@ bash ./test/bash/cli2.sh
 bash ./test/bash/misc.sh
 bash ./test/bash/fork.sh
 bash ./test/bash/infinite_loop.sh
+
+$pm2 kill
