@@ -397,7 +397,7 @@ It means that your app **still has open connections on exit**.
 
 To work around this problem you have to use the graceful reload.
 Graceful reload is a mechanism that will send a *shutdown* message to your process before reloading it.
-You can control the time that the app has to shutdown via the `pm2_GRACEFUL_TIMEOUT` environment variable.
+You can control the time that the app has to shutdown via the `PM2_GRACEFUL_TIMEOUT` environment variable.
 
 Example:
 
@@ -589,7 +589,8 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "run_as_user"      : "app",
   "run_as_group"     : "www-data",
   "instances"        : "6",
-  "min_uptime"       : "200",
+  "min_uptime"       : "200", // milliseconds, defaults to 1000
+  "max_restarts"     : "10", // defaults to 15
   "cron_restart"     : "1 0 * * *",
   "watch"            : "false",
   "ignoreWatch"      : ["[\\/\\\\]\\./", "node_modules"],
@@ -734,13 +735,13 @@ $ pm2 sendSignal SIGUSR2 my-app
 You can specifiy the following options by editing the file `~/.pm2/custom_options.sh`:
 
 ```
-pm2_RPC_PORT
-pm2_PUB_PORT
-pm2_BIND_ADDR
-pm2_API_PORT
-pm2_GRACEFUL_TIMEOUT
-pm2_MODIFY_REQUIRE
-pm2_NODE_OPTIONS
+PM2_RPC_PORT
+PM2_PUB_PORT
+PM2_BIND_ADDR
+PM2_API_PORT
+PM2_GRACEFUL_TIMEOUT
+PM2_MODIFY_REQUIRE
+PM2_NODE_OPTIONS
 ```
 
 
@@ -755,12 +756,12 @@ $ pm2 web
 
 ### Enable by default for all processes
 
-You can enable Harmony ES6 by setting `pm2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
+You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
 
 To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add:
 
 ```bash
-export pm2_NODE_OPTIONS='--harmony'
+export PM2_NODE_OPTIONS='--harmony'
 ```
 
 Then:
@@ -915,7 +916,7 @@ To hack pm2, it's pretty simple:
 $ pm2 kill   # kill the current pm2
 $ git clone my_pm2_fork.git
 $ cd pm2/
-$ DEBUG=* pm2_DEBUG=true ./bin/pm2 --no-daemon
+$ DEBUG=* PM2_DEBUG=true ./bin/pm2 --no-daemon
 ```
 
 Each time you edit the code, be sure to kill and restart pm2 to make changes taking effect.
@@ -968,7 +969,10 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
+
+## Some tips
 - [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
+- [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
 
 ## Contributors
 
