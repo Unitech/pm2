@@ -440,6 +440,12 @@ pm2 is also smart enough to **save all your process list** and to **bring back a
 $ pm2 startup [ubuntu|centos|systemd]
 ```
 
+Once you have started the apps and want to keep them on server reboot do:
+
+```bash
+$ pm2 save
+```
+
 **Warning** It's tricky to make this feature work generically, so once pm2 has setup your startup script, reboot your server to make sure that pm2 has launched your apps!
 
 ### More information
@@ -646,13 +652,15 @@ It contains this:
       "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
       "path" : "/var/www/production"
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env production"
     },
     "dev" : {
       "user" : "node",
       "host" : "212.83.163.1",
       "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
-      "path" : "/var/www/development"
+      "path" : "/var/www/development",
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env dev"
     }
   }
 }
