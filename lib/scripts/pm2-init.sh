@@ -71,8 +71,11 @@ case "$1" in
     reload)
         reload
         ;;
+    force-reload)
+        reload
+        ;;
     *)
-        echo "Usage: {start|stop|status|restart|reload}"
+        echo "Usage: {start|stop|status|restart|reload|force-reload}"
         exit 1
         ;;
 esac
