@@ -3,7 +3,7 @@ var should = require('should');
 var fs = require('fs');
 var os = require('os');
 var cst = require('../../constants');
-var interactorDaemonizer = require('../../lib/InteractorDaemonizer');
+var interactorDaemonizer = require('../../lib/Interactor/InteractorDaemonizer');
 
 describe('Daemonizer interactor', function() {
   before(function(done) {
