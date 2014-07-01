@@ -53,13 +53,10 @@ var default_conf = {
   ERRORED_STATUS     : 'errored',
   ONE_LAUNCH_STATUS  : 'one-launch-status',
 
-  REMOTE_PORT        : 3900,
+  REMOTE_PORT         : 3900,
   REMOTE_REVERSE_PORT : 43554,
-  REMOTE_HOST        : 'socket-1.vitalsigns.io',
-
-  WATCHDOG_URL      : 'ping.pm2.io',
-  WATCHDOG_FILE     : p.join(DEFAULT_FILE_PATH, 'watch_dog.json'),
-  WATCHDOG_PORT     : 13777,
+  REMOTE_HOST         : 'socket-1.vitalsigns.io',
+  INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'interaction.json'),
 
   INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.log'),
   INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),

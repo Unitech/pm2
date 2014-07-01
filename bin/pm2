@@ -240,8 +240,8 @@ commander.command('updatePM2')
 //
 // Interact
 //
-commander.command('interact <secret_key> <public_key> <machine_name>')
-  .description('launch interaction with VitalSigns servers')
+commander.command('interact [secret_key] [public_key] [machine_name]')
+  .description('launch agent to interact with Keymetrics')
   .action(function(secret, public, machine) {
           CLI.interact(secret, public, machine);
           });
