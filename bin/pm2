@@ -247,13 +247,13 @@ commander.command('interact [secret_key] [public_key] [machine_name]')
           });
 
 commander.command('killInteract')
-  .description('stop the interaction with VitalSigns servers')
+  .description('stop agent')
   .action(function() {
           CLI.killInteract()
           });
 
 commander.command('infoInteract')
-  .description('get information about the monitoring connection to VitalSigns')
+  .description('get information about agent')
   .action(function() {
           CLI.infoInteract();
           });
