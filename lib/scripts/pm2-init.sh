@@ -24,7 +24,7 @@ export PATH=$PATH:%NODE_PATH%
 export PM2_HOME="%HOME_PATH%"
 
 super() {
-    sudo -Ei -u $USER PATH=$PATH $*
+    sudo -u $USER PATH=$PATH $*
 }
 
 start() {
