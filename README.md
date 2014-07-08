@@ -77,6 +77,11 @@ Thanks in advance and we hope that you like pm2!
 - [Considerations](#considerations)
 - [Contributing](#deployment-contribution)
 
+### Using PM2 programmatically (via API)
+
+- [Simple example](#programmatic-example)
+- [Programmatic API](#programmatic-api)
+
 ### Specific
 
 - [Specific features](#a77)
@@ -729,6 +734,136 @@ $ pm2 deploy <configuration_file> <environment> <command>
 
 The module is <a href="https://github.com/Unitech/pm2-deploy">https://github.com/Unitech/pm2-deploy</a>
 Feel free to PR for any changes or fix.
+
+<a name="programmatic-example"/>
+# Using PM2 programmatically
+
+PM2 can be used programmatically, meaning that you can embed a process manager directly in your code, spawn processes, keep them alive even if the main script is exited.
+
+Check out [this article](http://keymetrics.io/2014/07/02/manage-processes-programmatically-with-pm2/) for more informations.
+
+## Simple example
+
+This will require pm2, launch `test.js`, list processes then exit the script.
+You will notice that after exiting this script you will be able to see `test.js` process with `pm2 list`
+
+```bash
+$ npm install pm2 --save
+```
+
+```javascript
+var pm2 = require('pm2');
+
+// Connect or launch PM2
+pm2.connect(function(err) {
+
+  // Start a script on the current folder
+  pm2.start('test.js', { name: 'test' }, function(err, proc) {
+    if (err) throw new Error('err');
+
+    // Get all processes running
+    pm2.list(function(err, process_list) {
+      console.log(process_list);
+
+      // Disconnect to PM2
+      pm2.disconnect(function() { process.exit(0) });
+    });
+  });
+})
+```
+
+<a name="programmatic-api"/>
+## Programmatic API
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Method name</th>
+        <th>API</th>
+    </tr>
+     <tr>
+      <td><b>Connect/Launch</b></td>
+      <td>pm2.connect(fn(err){})</td>
+    </tr>
+     <tr>
+      <td><b>Disconnect</b></td>
+      <td>pm2.disconnect(fn(err, proc){})</td>
+    </tr>
+</table>
+
+**Consideration with .connect**: the .connect method connect to the local PM2, but if PM2 is not up, it will launch it and will put in in background as you launched it via CLI.
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Method name</th>
+        <th>API</th>
+    </tr>
+    <tr>
+      <td><b>Start</b></td>
+      <td>pm2.start(script_path|json_path, options, fn(err, proc){})</td>
+    </tr>
+    <tr>
+      <td><b>Retart</b></td>
+      <td>pm2.restart(proc_name|proc_id|all, fn(err, proc){})</td>
+       </tr>
+     <tr>
+      <td><b>Stop</b></td>
+      <td>pm2.stop(proc_name|proc_id|all, fn(err, proc){})</td>
+    </tr>
+    <tr>
+      <td><b>Delete</b></td>
+      <td>pm2.delete(proc_name|proc_id|all, fn(err, proc){})</td>
+    </tr>
+
+
+
+    <tr>
+      <td><b>Reload</b></td>
+      <td>pm2.reload(proc_name|all, fn(err, proc){})</td>
+    </tr>
+      <tr>
+      <td><b>Graceful Reload</b></td>
+      <td>pm2.gracefulReload(proc_name|all, fn(err, proc){})</td>
+    </tr>
+</table>
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Method name</th>
+        <th>API</th>
+    </tr>
+    <tr>
+      <td><b>List</b></td>
+      <td>pm2.list(fn(err, list){})</td>
+    </tr>
+    <tr>
+      <td><b>Describe process</b></td>
+      <td>pm2.describe(proc_name|proc_id, fn(err, list){})</td>
+    </tr>
+    <tr>
+      <td><b>Dump (save)</b></td>
+      <td>pm2.dump(fn(err, ret){})</td>
+    </tr>
+    <tr>
+      <td><b>Flush logs</b></td>
+      <td>pm2.flush(fn(err, ret){})</td>
+    </tr>
+     <tr>
+      <td><b>Reload logs</b></td>
+      <td>pm2.reloadLogs(fn(err, ret){})</td>
+    </tr>
+         <tr>
+      <td><b>Send signal</b></td>
+      <td>pm2.sendSignalToProcessName(signal,proc,fn(err, ret){})</td>
+    </tr>
+     <tr>
+      <td><b>Generate start script</b></td>
+      <td>pm2.startup(platform, fn(err, ret){})</td>
+    </tr>
+     <tr>
+      <td><b>Kill PM2</b></td>
+      <td>pm2.killDaemon(fn(err, ret){})</td>
+    </tr>
+</table>
 
 <a name="a77"/>
 # Special features
