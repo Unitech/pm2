@@ -1,4 +1,3 @@
-
 var should = require('should');
 var fs = require('fs');
 var os = require('os');
