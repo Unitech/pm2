@@ -195,7 +195,7 @@ describe('PM2 BUS / RPC', function() {
 
   });
 
-  describe('Specific events in CLUSTER_MODE', function() {
+  describe.skip('Specific events in CLUSTER_MODE', function() {
     beforeEach(function(done) {
       ipm2 = Ipm2();
 
