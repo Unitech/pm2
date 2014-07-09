@@ -70,7 +70,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash test/main.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test/index.js"
+    "test": "PM2_DEBUG=true bash test/main.sh && NODE_ENV=test ./node_modules/mocha/bin/mocha test/index.js"
   },
   "keywords": [
     "cli",
@@ -119,7 +119,7 @@
     "json-stringify-safe": "~5.0.0",
     "pidusage": "~0.0.6",
     "nssocket": "~0.5.1",
-    "axm": "~0.1.2",
+    "axm": "~0.1.4",
     "chalk": "^0.4.0"
   },
   "devDependencies": {
