@@ -8,7 +8,7 @@ var Plan = require('../helpers/plan.js');
 var APPS = require('../helpers/apps.js');
 var Ipm2 = require('pm2-interface');
 
-describe('PM2 BUS / RPC', function() {
+describe.skip('PM2 BUS / RPC', function() {
   var pm2;
   var ipm2;
 
@@ -195,7 +195,7 @@ describe('PM2 BUS / RPC', function() {
 
   });
 
-  describe.skip('Specific events in CLUSTER_MODE', function() {
+  describe('Specific events in CLUSTER_MODE', function() {
     beforeEach(function(done) {
       ipm2 = Ipm2();
 

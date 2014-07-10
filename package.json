@@ -70,7 +70,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
   "main": "index.js",
   "scripts": {
-    "test": "bash test/main.sh"
+    "test": "NODE_ENV=test mocha && PM2_DEBUG=true bash test/main.sh"
   },
   "keywords": [
     "cli",
