@@ -1,5 +1,17 @@
 
-# 0.9.0
+# 0.9.2
+
+- max_restart enabled
+- sudo fix for init scripts
+- some startup refactoring
+- Possibility to specify the configuration folder for PM2 via process.env.PM2_HOME
+- Fix date format
+- N/A for undefined date
+- Evented interactions with PM2, available via pm2-interface
+- Deep Interactor refactoring
+- Force reload for upstart script
+
+# 0.9.0-0.9.1
 
 - CLI flattening
 - require('pm2') possible to interact with
