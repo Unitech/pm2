@@ -263,7 +263,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should start', function(done) {
-      pm2._jsonStartOrAction('restart', process.cwd() + '/test/fixtures/all2.json', function(err, data) {
+      pm2._jsonStartOrAction('restart', process.cwd() + '/test/fixtures/all2.json', {}, function(err, data) {
         should(err).be.null;
         pm2.list(function(err, ret) {
           should(err).be.null;
@@ -274,10 +274,11 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should NOW restart action', function(done) {
-      pm2._jsonStartOrAction('restart', process.cwd() + '/test/fixtures/all2.json', function(err, data) {
+      pm2._jsonStartOrAction('restart', process.cwd() + '/test/fixtures/all2.json', {}, function(err, data) {
         should(err).be.null;
         pm2.list(function(err, ret) {
           should(err).be.null;
+          should(ret[0].pm2_env['NODE_ENV']).not.exist;
           ret.forEach(function(app) {
             app.pm2_env.restart_time.should.eql(1);
           });
@@ -285,6 +286,27 @@ describe('PM2 programmatic calls', function() {
         });
       });
     });
+
+    it('should reset status', function(done) {
+      pm2.delete('all', function(err, ret) {
+        done();
+      });
+    });
+
+    it('should start with specific environment variables depending on the env type', function(done) {
+      pm2._jsonStartOrAction('restart', process.cwd() + '/test/fixtures/all2.json', {
+        env : 'production'
+      }, function(err, data) {
+        should(err).be.null;
+        pm2.list(function(err, ret) {
+          should(err).be.null;
+          ret[0].pm2_env['NODE_ENV'].should.eql('production');
+          ret[0].pm2_env['TOTO'].should.eql('heymoto');
+          done();
+        });
+      });
+    });
+
   });
 
 });

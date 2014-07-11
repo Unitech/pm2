@@ -7,9 +7,11 @@ var p    = require('path');
 var fs   = require('fs');
 var util = require('util');
 
+var HOME = process.env.PM2_HOME || process.env.HOME;
+
 // Dont change this or the pm2 could not load custom_options.sh because of
 // header in bin/pm2
-var DEFAULT_FILE_PATH = p.resolve(process.env.HOME, '.pm2');
+var DEFAULT_FILE_PATH = p.resolve(HOME, '.pm2');
 
 var default_conf = {
   DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
@@ -53,16 +55,15 @@ var default_conf = {
   ERRORED_STATUS     : 'errored',
   ONE_LAUNCH_STATUS  : 'one-launch-status',
 
-  REMOTE_PORT        : 3900,
+  REMOTE_PORT         : 3900,
   REMOTE_REVERSE_PORT : 43554,
-  REMOTE_HOST        : 'socket-1.vitalsigns.io',
-
-  WATCHDOG_URL      : 'ping.pm2.io',
-  WATCHDOG_FILE     : p.join(DEFAULT_FILE_PATH, 'watch_dog.json'),
-  WATCHDOG_PORT     : 13777,
+  REMOTE_HOST         : 'socket-1.vitalsigns.io',
+  INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'interaction.json'),
+  SEND_INTERVAL       : 1000,
 
   INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.log'),
   INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),
+
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
 };
 

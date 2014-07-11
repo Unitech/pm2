@@ -77,6 +77,11 @@ Thanks in advance and we hope that you like pm2!
 - [Considerations](#considerations)
 - [Contributing](#deployment-contribution)
 
+### Using PM2 programmatically (via API)
+
+- [Simple example](#programmatic-example)
+- [Programmatic API](#programmatic-api)
+
 ### Specific
 
 - [Specific features](#a77)
@@ -173,7 +178,7 @@ $ pm2 delete all         # Will remove all processes from pm2 list
 
 # Misc
 
-$ pm2 updatepm2          # Update in memory pm2
+$ pm2 updatePM2          # Update in memory pm2
 $ pm2 ping               # Ensure pm2 dameon has been launched
 $ pm2 sendSignal SIGUSR2 my-app # Send system signal to script
 $ pm2 start app.js --no-daemon
@@ -260,7 +265,7 @@ $ npm install pm2@latest -g
 Then update the in-memory pm2 :
 
 ```bash
-$ pm2 updatepm2
+$ pm2 updatePM2
 ```
 
 # Features
@@ -320,7 +325,7 @@ $ pm2 describe 0
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
+![Monit](http://www.zupmage.eu/i/xOX4xeaMpp.gif)
 
 Monitor all processes launched:
 
@@ -438,6 +443,12 @@ pm2 is also smart enough to **save all your process list** and to **bring back a
 
 ```bash
 $ pm2 startup [ubuntu|centos|systemd]
+```
+
+Once you have started the apps and want to keep them on server reboot do:
+
+```bash
+$ pm2 save
 ```
 
 **Warning** It's tricky to make this feature work generically, so once pm2 has setup your startup script, reboot your server to make sure that pm2 has launched your apps!
@@ -613,6 +624,8 @@ It's based on <a href="https://github.com/visionmedia/deploy">https://github.com
 
 ## Getting started with deployment
 
+Please read the [Considerations to use PM2 deploy](#considerations)
+
 1- Generate a sample ecosystem.json file that list processes and deployment environment
 
 ```bash
@@ -628,8 +641,10 @@ It contains this:
     "name"      : "API",
     "script"    : "app.js",
     "env": {
-      "NODE_ENV": "production",
-      "AWESOME_SERVICE_API_TOKEN": "xxx"
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
     }
   },{
     "name"      : "WEB",
@@ -639,14 +654,18 @@ It contains this:
     "production" : {
       "user" : "node",
       "host" : "212.83.163.1",
+      "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
-      "path" : "/var/www/production"
+      "path" : "/var/www/production",
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env production"
     },
     "dev" : {
       "user" : "node",
       "host" : "212.83.163.1",
+      "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
-      "path" : "/var/www/development"
+      "path" : "/var/www/development",
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env dev"
     }
   }
 }
@@ -673,7 +692,7 @@ E.g:
 $ pm2 deploy ecosystem.json production setup
 ```
 
-Folders will be created on your remote server
+This command will create all the folders on your remote server.
 
 4- Deploy your code
 
@@ -703,6 +722,8 @@ $ pm2 deploy <configuration_file> <environment> <command>
 <a name="considerations"/>
 ## Considerations
 
+- Commit your node_modules folder. It's a best practice when you deploy code
+- You can declare specific environment variable depending on the environment you want to deploy the code to. For instance to declare variables for the production environment, just add "env_production": {} and declare that variables.
 - PM2 will look by default to `ecosystem.json`. So you can skip the <configuration_file> options if it's the case
 - It deploys your code via ssh, you don't need any dependencies
 - Process are initialized / started automatically depending on application name in `ecosystem.json`
@@ -713,6 +734,136 @@ $ pm2 deploy <configuration_file> <environment> <command>
 
 The module is <a href="https://github.com/Unitech/pm2-deploy">https://github.com/Unitech/pm2-deploy</a>
 Feel free to PR for any changes or fix.
+
+<a name="programmatic-example"/>
+# Using PM2 programmatically
+
+PM2 can be used programmatically, meaning that you can embed a process manager directly in your code, spawn processes, keep them alive even if the main script is exited.
+
+Check out [this article](http://keymetrics.io/2014/07/02/manage-processes-programmatically-with-pm2/) for more informations.
+
+## Simple example
+
+This will require pm2, launch `test.js`, list processes then exit the script.
+You will notice that after exiting this script you will be able to see `test.js` process with `pm2 list`
+
+```bash
+$ npm install pm2 --save
+```
+
+```javascript
+var pm2 = require('pm2');
+
+// Connect or launch PM2
+pm2.connect(function(err) {
+
+  // Start a script on the current folder
+  pm2.start('test.js', { name: 'test' }, function(err, proc) {
+    if (err) throw new Error('err');
+
+    // Get all processes running
+    pm2.list(function(err, process_list) {
+      console.log(process_list);
+
+      // Disconnect to PM2
+      pm2.disconnect(function() { process.exit(0) });
+    });
+  });
+})
+```
+
+<a name="programmatic-api"/>
+## Programmatic API
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Method name</th>
+        <th>API</th>
+    </tr>
+     <tr>
+      <td><b>Connect/Launch</b></td>
+      <td>pm2.connect(fn(err){})</td>
+    </tr>
+     <tr>
+      <td><b>Disconnect</b></td>
+      <td>pm2.disconnect(fn(err, proc){})</td>
+    </tr>
+</table>
+
+**Consideration with .connect**: the .connect method connect to the local PM2, but if PM2 is not up, it will launch it and will put in in background as you launched it via CLI.
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Method name</th>
+        <th>API</th>
+    </tr>
+    <tr>
+      <td><b>Start</b></td>
+      <td>pm2.start(script_path|json_path, options, fn(err, proc){})</td>
+    </tr>
+    <tr>
+      <td><b>Retart</b></td>
+      <td>pm2.restart(proc_name|proc_id|all, fn(err, proc){})</td>
+       </tr>
+     <tr>
+      <td><b>Stop</b></td>
+      <td>pm2.stop(proc_name|proc_id|all, fn(err, proc){})</td>
+    </tr>
+    <tr>
+      <td><b>Delete</b></td>
+      <td>pm2.delete(proc_name|proc_id|all, fn(err, proc){})</td>
+    </tr>
+
+
+
+    <tr>
+      <td><b>Reload</b></td>
+      <td>pm2.reload(proc_name|all, fn(err, proc){})</td>
+    </tr>
+      <tr>
+      <td><b>Graceful Reload</b></td>
+      <td>pm2.gracefulReload(proc_name|all, fn(err, proc){})</td>
+    </tr>
+</table>
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Method name</th>
+        <th>API</th>
+    </tr>
+    <tr>
+      <td><b>List</b></td>
+      <td>pm2.list(fn(err, list){})</td>
+    </tr>
+    <tr>
+      <td><b>Describe process</b></td>
+      <td>pm2.describe(proc_name|proc_id, fn(err, list){})</td>
+    </tr>
+    <tr>
+      <td><b>Dump (save)</b></td>
+      <td>pm2.dump(fn(err, ret){})</td>
+    </tr>
+    <tr>
+      <td><b>Flush logs</b></td>
+      <td>pm2.flush(fn(err, ret){})</td>
+    </tr>
+     <tr>
+      <td><b>Reload logs</b></td>
+      <td>pm2.reloadLogs(fn(err, ret){})</td>
+    </tr>
+         <tr>
+      <td><b>Send signal</b></td>
+      <td>pm2.sendSignalToProcessName(signal,proc,fn(err, ret){})</td>
+    </tr>
+     <tr>
+      <td><b>Generate start script</b></td>
+      <td>pm2.startup(platform, fn(err, ret){})</td>
+    </tr>
+     <tr>
+      <td><b>Kill PM2</b></td>
+      <td>pm2.killDaemon(fn(err, ret){})</td>
+    </tr>
+</table>
 
 <a name="a77"/>
 # Special features

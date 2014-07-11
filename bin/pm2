@@ -24,6 +24,7 @@ commander.version(pkg.version)
   .option('-o --output <path>', 'specify out log file')
   .option('-e --error <path>', 'specify error log file')
   .option('-p --pid <pid>', 'specify pid file')
+  .option('--env <environment_name>', 'specify environment to get specific env variables (for JSON declaration)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('-u --user <username>', 'define user when generating startup script')
   .option('-c --cron <cron_pattern>', 'restart a running process based on a cron pattern')
@@ -38,7 +39,7 @@ commander.version(pkg.version)
           })
   .option('--run-as-user <run_as_user>', 'The user or uid to run a managed process as')
   .option('--run-as-group <run_as_group>', 'The group or gid to run a managed process as')
-  .option('--no-color', 'Output without colors')
+  .option('--no-color', 'skip colors')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
@@ -120,7 +121,6 @@ commander.command('start <file|json|stdin>')
   .option('--watch', 'Watch folder for changes')
   .description('                start and daemonize an app')
   .action(function(cmd) {
-
     if (cmd == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
@@ -140,10 +140,10 @@ commander.command('deploy <file|environment>')
     CLI.deploy(cmd, commander);
   });
 
-commander.command('startOrRestart <json file>')
+commander.command('startOrRestart <json>')
   .description('                start or restart JSON file')
   .action(function(file) {
-    CLI._jsonStartOrAction('restart', file);
+    CLI._jsonStartOrAction('restart', file, commander);
   });
 
 //
@@ -240,20 +240,20 @@ commander.command('updatePM2')
 //
 // Interact
 //
-commander.command('interact <secret_key> <public_key> <machine_name>')
-  .description('launch interaction with VitalSigns servers')
+commander.command('interact [secret_key] [public_key] [machine_name]')
+  .description('launch agent to interact with Keymetrics')
   .action(function(secret, public, machine) {
           CLI.interact(secret, public, machine);
           });
 
 commander.command('killInteract')
-  .description('stop the interaction with VitalSigns servers')
+  .description('stop agent')
   .action(function() {
           CLI.killInteract()
           });
 
 commander.command('infoInteract')
-  .description('get information about the monitoring connection to VitalSigns')
+  .description('get information about agent')
   .action(function() {
           CLI.infoInteract();
           });

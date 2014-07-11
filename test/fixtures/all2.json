@@ -1,7 +1,15 @@
 [{
   "name"      : "echo",
   "script"    : "./test/fixtures/echo.js",
-  "instances" : "1"
+  "instances" : "1",
+  "env_production" : {
+    "NODE_ENV" : "production",
+    "TOTO" : "heymoto"
+  },
+  "env_test" : {
+    "NODE_ENV" : "test",
+    "TOTO" : "heyamota"
+  }
 },{
   "name"      : "child",
   "script"    : "./test/fixtures/child.js",

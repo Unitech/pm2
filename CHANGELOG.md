@@ -3,10 +3,7 @@
 
 - CLI flattening
 - require('pm2') possible to interact with
-- graceful stop
-
-# 0.8.16
-
+- deployment system
 - Remove builtin monitoring feature
 - Fix watch on delete #514
 - Gracefull reload now rightly handled #502
