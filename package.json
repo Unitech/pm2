@@ -110,7 +110,6 @@
     "pm2-deploy" : "~0.0.4",
     "axon": "~1.0.0",
     "cron": "~1.0.4",
-    "colors": "~0.6.2",
     "coffee-script": "~1.7.1",
     "eventemitter2": "~0.4.13",
     "debug": "~1.0.2",
@@ -120,7 +119,8 @@
     "pidusage": "~0.0.6",
     "nssocket": "~0.5.1",
     "axm": "~0.1.4",
-    "chalk": "^0.4.0"
+    "chalk": "^0.4.0",
+    "colors": "~0.6.2"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
