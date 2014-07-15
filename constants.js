@@ -57,7 +57,7 @@ var default_conf = {
 
   REMOTE_PORT         : 3900,
   REMOTE_REVERSE_PORT : 43554,
-  REMOTE_HOST         : 'socket-1.vitalsigns.io',
+  REMOTE_HOST         : 's1.keymetrics.io',
   INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'interaction.json'),
   SEND_INTERVAL       : 1000,
 
