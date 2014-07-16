@@ -607,7 +607,6 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "ignoreWatch"      : ["[\\/\\\\]\\./", "node_modules"],
   "merge_logs"       : "true",
   "exec_interpreter" : "node",
-  "one_launch_only"  : "true",
   "exec_mode"        : "cluster_mode",
   "env": {
     "NODE_ENV": "production",
