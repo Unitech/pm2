@@ -236,7 +236,7 @@ Options:
     -m --mini-list               display a compacted list without formatting
     -f --force                   force actions
     -n --name <name>             set a <name> for script
-    -i --instances <number>      launch [number] (load balanced) instances (for networked app)
+    -i --instances <number>      launch [number|'max'] (load balanced) instances (for networked app)
     -o --output <path>           specify out log file
     -e --error <path>            specify error log file
     -p --pid <pid>               specify pid file
@@ -599,7 +599,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "pid_file"         : "pids/node-geo-api.pid",
   "run_as_user"      : "app",
   "run_as_group"     : "www-data",
-  "instances"        : "6",
+  "instances"        : "6", //or 'max'
   "min_uptime"       : "200", // milliseconds, defaults to 1000
   "max_restarts"     : "10", // defaults to 15
   "cron_restart"     : "1 0 * * *",
