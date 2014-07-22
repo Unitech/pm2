@@ -120,7 +120,8 @@
     "nssocket": "~0.5.1",
     "axm": "~0.1.4",
     "chalk": "^0.4.0",
-    "colors": "~0.6.2"
+    "colors": "~0.6.2",
+    "punt" : "*"
   },
   "devDependencies": {
     "mocha": "^1.20.1",

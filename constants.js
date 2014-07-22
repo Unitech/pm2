@@ -55,7 +55,7 @@ var default_conf = {
   ERRORED_STATUS     : 'errored',
   ONE_LAUNCH_STATUS  : 'one-launch-status',
 
-  REMOTE_PORT         : 3900,
+  REMOTE_PORT         : 41624,
   REMOTE_REVERSE_PORT : 43554,
   REMOTE_HOST         : 's1.keymetrics.io',
   INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'interaction.json'),
