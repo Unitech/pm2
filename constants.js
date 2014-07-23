@@ -58,16 +58,13 @@ var default_conf = {
   REMOTE_PORT         : 41624,
   REMOTE_REVERSE_PORT : 43554,
   REMOTE_HOST         : 's1.keymetrics.io',
-  INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'interaction.json'),
+  INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'agent.json'),
   SEND_INTERVAL       : 1000,
 
-  INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.log'),
-  INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'interactor.pid'),
+  INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'agent.log'),
+  INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'agent.pid'),
 
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
 };
-
-// var custom_conf = fs.readFileSync(default_conf.PM2_CONF_FILE, 'utf8') || "{}";
-// util._extend(default_conf, eval(custom_conf));
 
 module.exports = default_conf;
