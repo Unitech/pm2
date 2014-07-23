@@ -442,7 +442,7 @@ pm2 has the amazing ability to **generate startup scripts and configure them**.
 pm2 is also smart enough to **save all your process list** and to **bring back all your processes on restart**.
 
 ```bash
-$ pm2 startup [ubuntu|centos|systemd]
+$ pm2 startup [ubuntu|centos|gentoo|systemd]
 ```
 
 Once you have started the apps and want to keep them on server reboot do:
@@ -455,15 +455,17 @@ $ pm2 save
 
 ### More information
 
-Two types of startup scripts are available:
+Three types of startup scripts are available:
 
 - SystemV init script (with the option `ubuntu` or `centos`)
+- OpenRC init script (with the option `gentoo`)
 - SystemD init script (with the `systemd` option)
 
 The startup options are using:
 
 - **ubuntu** will use `updaterc.d` and the script `lib/scripts/pm2-init.sh`
 - **centos** will use `chkconfig` and the script `lib/scripts/pm2-init-centos.sh`
+- **gentoo** will use `rc-update` and the script `lib/scripts/pm2`
 - **systemd** will use `systemctl` and the script `lib/scripts/pm2.service`
 
 ### User permissions

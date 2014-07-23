@@ -300,7 +300,7 @@ commander.command('resurrect')
 // Set pm2 to startup
 //
 commander.command('startup <platform>')
-  .description('auto resurect process at startup. [platform] = ubuntu, centos or systemd')
+  .description('auto resurect process at startup. [platform] = ubuntu, centos, gentoo or systemd')
   .action(function(platform) {
     CLI.startup(platform, commander);
   });
