@@ -807,7 +807,7 @@ pm2.connect(function(err) {
       <td>Options available: nodeArgs(arr), scriptArgs(arr), name(str), instances(int), error(str), output(str), pid(int), cron(str), mergeLogs(bool), watch(bool), runAsUser(int), runAsGroup(int), executeCommand(bool), interpreter(str), write(bool)</td>
     </tr>
     <tr>
-      <td><b>Retart</b></td>
+      <td><b>Restart</b></td>
       <td>pm2.restart(proc_name|proc_id|all, fn(err, proc){})</td>
        </tr>
      <tr>
