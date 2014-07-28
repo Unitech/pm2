@@ -803,6 +803,10 @@ pm2.connect(function(err) {
       <td>pm2.start(script_path|json_path, options, fn(err, proc){})</td>
     </tr>
     <tr>
+      <td></td>
+      <td>Options available: </td>
+    </tr>
+    <tr>
       <td><b>Retart</b></td>
       <td>pm2.restart(proc_name|proc_id|all, fn(err, proc){})</td>
        </tr>
@@ -816,7 +820,6 @@ pm2.connect(function(err) {
     </tr>
 
 
-
     <tr>
       <td><b>Reload</b></td>
       <td>pm2.reload(proc_name|all, fn(err, proc){})</td>
@@ -826,6 +829,8 @@ pm2.connect(function(err) {
       <td>pm2.gracefulReload(proc_name|all, fn(err, proc){})</td>
     </tr>
 </table>
+
+*Options available: 
 
 <table class="table table-striped table-bordered">
     <tr>
