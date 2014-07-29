@@ -1,0 +1,52 @@
+#!/sbin/runscript
+
+extra_started_commands="reload"
+
+PM2=%PM2_PATH%
+USER=%USER%
+
+export PATH=$PATH:%NODE_PATH%
+export PM2_HOME="%HOME_PATH%"
+
+super() {
+    su - $USER -c "PATH=$PATH; $*"
+}
+
+depend() {
+	use net localmount
+	after bootmisc
+}
+
+start() {
+	ebegin "Starting PM2"
+
+	super $PM2 resurrect
+
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping PM2"
+
+	super $PM2 dump
+	super $PM2 delete all
+	super $PM2 kill
+
+	eend
+}
+
+reload() {
+	ebegin "Reloading PM2"
+
+	super $PM2 reload all
+
+	eend $?
+}
+
+status() {
+	ebegin "Status for PM2"
+
+	super $PM2 list
+
+	eend $?
+}
