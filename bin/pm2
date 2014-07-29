@@ -8,6 +8,7 @@ var fs        = require('fs');
 var path      = p = require('path');
 var util      = require('util');
 var cronJob   = require('cron').CronJob;
+var chalk     = require('chalk');
 
 var Satan     = require('../lib/Satan');
 var CLI       = require('../lib/CLI');
@@ -458,8 +459,13 @@ if (process.argv.length == 2) {
 //
 process.once('satan:client:ready', function() {
     CLI.getVersion(function(err, remote_version) {
-        if (!err && (pkg.version != remote_version))
-            console.log('>>>> In-memory PM2 is out-of-date, do :\n>>>> $ pm2 updatePM2');
+        if (!err && (pkg.version != remote_version)) {
+            console.log('');
+            console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 updatePM2'));
+            console.log('In memory PM2 version:', chalk.blue.bold(remote_version));
+            console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
+            console.log('');
+          }
         commander.parse(process.argv);
     });
 });
