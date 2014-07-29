@@ -1,4 +1,9 @@
 
+# 0.9.4
+
+- Bump fix
+- Bash test auto exit when failure
+
 # 0.9.3
 
 - Critical bug on fork mode fixed (stream close)
