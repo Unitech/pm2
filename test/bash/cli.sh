@@ -10,7 +10,6 @@ cd $file_path
 $pm2 kill
 spec "kill daemon"
 
-
 #
 # Different way to stop process
 #
