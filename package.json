@@ -130,6 +130,8 @@
     "better-assert": "^1.0.0",
     "promise-spawner": "0.0.3"
   },
+  "optionalDependencies": {
+  },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
   },
