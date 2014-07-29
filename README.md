@@ -196,6 +196,8 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
 $ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
 
+$ pm2 start app.js --log-date-format ""YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
+
 $ pm2 start app.js --name serverone # Start a process an name it as server one
                                     # you can now stop the process by doing
                                     # pm2 stop serverone
@@ -362,7 +364,9 @@ $ pm2 reloadLogs
 
 ```bash
 --merge-logs : merge logs from different instances but keep error and out separated
+--log-date-format <format>: prefix logs with formated timestamp (http://momentjs.com/docs/#/parsing/string-format/)
 ```
+
 <a name="a5"/>
 ## Clustering
 
@@ -527,6 +531,7 @@ You can define parameters for your apps in `processes.json`:
     "name"        : "echo",
     "script"      : "examples/args.js",
     "args"        : "['--toto=heya coco', '-d', '1']",
+    "log-date-format"  : "YYYY-MM-DD HH:mm Z",
     "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
     "watch"       : "true",
     "cwd"         : "/this/is/a/path/to/start/script",
@@ -538,6 +543,7 @@ You can define parameters for your apps in `processes.json`:
     "name"       : "api",
     "script"     : "./examples/child.js",
     "instances"  : "4",
+    "log-date-format"  : "YYYY-MM-DD",
     "error_file" : "./examples/child-err.log",
     "out_file"   : "./examples/child-out.log",
     "pid_file"   : "./examples/child.pid",
@@ -596,6 +602,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "cwd"              : "/srv/node-app/current",
   "args"             : "['--toto=heya coco', '-d', '1']",
   "script"           : "bin/app.js",
+  "log-date-format"  : "YYYY-MM-DD HH:mm Z",
   "error_file"       : "/var/log/node-app/node-app.stderr.log",
   "out_file"         : "log/node-app.stdout.log",
   "pid_file"         : "pids/node-geo-api.pid",

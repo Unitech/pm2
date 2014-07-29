@@ -1,4 +1,14 @@
 
+# 0.9.3
+
+- Critical bug on fork mode fixed (stream close)
+- Advanced log display interface pm2-logs #589
+- Simple log timestamp via --log-date-format (with momentJS formating) #183
+- Possible to pass arguments via scriptArg with programmatic PM2 #591
+- Gentoo startup script generation #592
+- Fix run-as-user and run-as-group in fork mode #582
+- Documentation update
+
 # 0.9.2
 
 - max_restart enabled
