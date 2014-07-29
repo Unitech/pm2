@@ -93,23 +93,23 @@ spec "Should start echo service"
 $pm2 list
 
 
-$pm2 logs &
-spec "Should display logs"
-TMPPID=$!
+# $pm2 logs &
+# spec "Should display logs"
+# TMPPID=$!
 
-sleep 1
+# sleep 1
 
-kill $!
-spec "Should kill logs"
+# kill $!
+# spec "Should kill logs"
 
-$pm2 logs echo &
-spec "Should display logs"
-TMPPID=$!
+# $pm2 logs echo &
+# spec "Should display logs"
+# TMPPID=$!
 
-sleep 1
+# sleep 1
 
-kill $!
-spec "Should kill logs"
+# kill $!
+# spec "Should kill logs"
 
 
 $pm2 web
