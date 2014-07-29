@@ -13,6 +13,7 @@ echo "###################### !DEBUG! ###########################"
 bash ./test/bash/cli.sh
 bash ./test/bash/json_file.sh
 bash ./test/bash/harmony.sh
+bash ./test/bash/log-custom.sh
 bash ./test/bash/reload.sh
 bash ./test/bash/right-exit-code.sh
 bash ./test/bash/log-reload.sh
