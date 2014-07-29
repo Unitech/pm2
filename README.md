@@ -803,7 +803,11 @@ pm2.connect(function(err) {
       <td>pm2.start(script_path|json_path, options, fn(err, proc){})</td>
     </tr>
     <tr>
-      <td><b>Retart</b></td>
+      <td></td>
+      <td>Options available: nodeArgs(arr), scriptArgs(arr), name(str), instances(int), error(str), output(str), pid(int), cron(str), mergeLogs(bool), watch(bool), runAsUser(int), runAsGroup(int), executeCommand(bool), interpreter(str), write(bool)</td>
+    </tr>
+    <tr>
+      <td><b>Restart</b></td>
       <td>pm2.restart(proc_name|proc_id|all, fn(err, proc){})</td>
        </tr>
      <tr>
@@ -814,7 +818,6 @@ pm2.connect(function(err) {
       <td><b>Delete</b></td>
       <td>pm2.delete(proc_name|proc_id|all, fn(err, proc){})</td>
     </tr>
-
 
 
     <tr>
