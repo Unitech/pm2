@@ -132,6 +132,7 @@
     "promise-spawner": "0.0.3"
   },
   "optionalDependencies": {
+    "pm2-logs" : "latest"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
