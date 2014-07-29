@@ -1,4 +1,8 @@
 
+# 0.9.5
+
+- Bump fix to display old logs streaming by default
+
 # 0.9.4
 
 - Bump fix

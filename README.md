@@ -159,6 +159,7 @@ $ pm2 monit              # Monitor all processes
 # Logs
 
 $ pm2 logs               # Display all processes logs in streaming
+$ pm2 ilogs              # Advanced termcaps interface to display logs
 $ pm2 flush              # Empty all log file
 $ pm2 reloadLogs         # Reload all logs
 
@@ -348,6 +349,14 @@ Displaying logs of specified process or all processes in realtime:
 $ pm2 logs
 $ pm2 logs big-api
 $ pm2 flush # Clear all the logs
+```
+
+### Advanced log interface
+
+Navigate between processes logs in realtime with an ergonomic interface:
+
+```bash
+$ pm2 ilogs
 ```
 
 ### Reloading all logs (SIGUSR2/Logrotate)
