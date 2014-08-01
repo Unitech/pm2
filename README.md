@@ -328,7 +328,7 @@ $ pm2 describe 0
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
 
-![Monit](http://www.zupmage.eu/i/xOX4xeaMpp.gif)
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
 
 Monitor all processes launched:
 
