@@ -18,7 +18,7 @@ pm2 is perfect when you need to spread your stateless Node.js code accross all C
 
 Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/pm2).
 
-**The recommended Node.js version is v0.11.10**
+**The recommended Node.js version is v0.11.13**
 
 Compatible with CoffeeScript.
 Works on Linux & MacOS.
