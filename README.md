@@ -390,7 +390,7 @@ If your app is well-designed (**stateless**) you'll be able to **process many mo
 Important concepts to make a Node.js app stateless:
 
 - Sessions must not be stored in memory but shared via a database (Redis, Mongo, whatever)
-- [WebSocket/Socket.io should communicate via a database](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO)
+- [WebSocket/Socket.io should communicate via a database](http://socket.io/docs/using-multiple-nodes/#passing-events-between-nodes)
 
 <a name="a690"/>
 ## Reloading without downtime
