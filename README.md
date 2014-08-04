@@ -1146,6 +1146,7 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 - [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
 - [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
 - [Using ansible with pm2](https://github.com/Unitech/pm2/issues/88#issuecomment-49106686)
+- [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
 
 ## Contributors
 
