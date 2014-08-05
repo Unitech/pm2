@@ -1,12 +1,10 @@
 
-# 0.9.5
+# 0.9.6 - 0.9.5 - 0.9.4
 
-- Bump fix to display old logs streaming by default
-
-# 0.9.4
-
-- Bump fix
 - Bash test auto exit when failure
+- Bump fix log streaming
+- Bump fix to display old logs streaming by default
+- Bump fix
 
 # 0.9.3
 
