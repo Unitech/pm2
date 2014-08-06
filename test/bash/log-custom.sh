@@ -17,7 +17,7 @@ $pm2 start echo.js --log-date-format "YYYY" -o out-rel.log --merge-logs
 sleep 2
 
 grep "2014" out-rel.log
-spec "Should have written year in log file according to format YYYY"
+spec "Should have written year in log file according to format YYYY (cluster mode)"
 
 rm out-rel.log
 
@@ -43,7 +43,7 @@ $pm2 start echo.js --log-date-format "YYYY" -o out-rel.log --merge-logs -x
 sleep 2
 
 grep "2014" out-rel.log
-spec "Should have written year in log file according to format YYYY"
+spec "Should have written year in log file according to format YYYY (fork mode)"
 
 rm out-rel.log
 
