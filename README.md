@@ -197,7 +197,7 @@ $ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
 $ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
 $ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
 
-$ pm2 start app.js --log-date-format ""YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
+$ pm2 start app.js --log-date-format "YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
 
 $ pm2 start app.js --name serverone # Start a process an name it as server one
                                     # you can now stop the process by doing
