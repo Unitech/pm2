@@ -5,3 +5,8 @@ axm.action('refresh:db', {comment : 'Refresh main database'}, function(reply) {
   console.log('Refreshing');
   reply({success : true});
 });
+
+axm.action('refresh:db', {comment : 'Refresh main database'}, function(reply) {
+  console.log('Refreshing');
+  reply({success : true});
+});
