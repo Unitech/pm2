@@ -739,7 +739,7 @@ $ pm2 deploy <configuration_file> <environment> <command>
 <a name="considerations"/>
 ## Considerations
 
-- Commit your node_modules folder. It's a best practice when you deploy code
+- You might want to commit your node_modules folder ([#622](https://github.com/Unitech/pm2/issues/622))
 - You can declare specific environment variable depending on the environment you want to deploy the code to. For instance to declare variables for the production environment, just add "env_production": {} and declare that variables.
 - PM2 will look by default to `ecosystem.json`. So you can skip the <configuration_file> options if it's the case
 - It deploys your code via ssh, you don't need any dependencies
