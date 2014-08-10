@@ -4,7 +4,7 @@ pm2 is a process manager for Node apps with a built-in load balancer.
 
 ### Tech notes
 
-pm2 is perfect when you need to spread your stateless Node.js code accross all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
+pm2 is perfect when you need to spread your stateless Node.js code across all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
 
 ### Main features
 
@@ -54,7 +54,7 @@ Thanks in advance and we hope that you like pm2!
 - [Installation](#a1)
 - [Usage](#a2)
 - [Examples](#a3)
-- [Differents ways to launch a process](#a667)
+- [Different ways to launch a process](#a667)
 - [Options](#a987)
 - [How to update pm2 ?](#update-pm2)
 
@@ -180,7 +180,7 @@ $ pm2 delete all         # Will remove all processes from pm2 list
 # Misc
 
 $ pm2 updatePM2          # Update in memory pm2
-$ pm2 ping               # Ensure pm2 dameon has been launched
+$ pm2 ping               # Ensure pm2 daemon has been launched
 $ pm2 sendSignal SIGUSR2 my-app # Send system signal to script
 $ pm2 start app.js --no-daemon
 ```
@@ -291,7 +291,7 @@ Now let's say I need to stop the web-interface:
 $ pm2 stop web-interface
 ```
 
-As you can see **the process hasn't disapeared**. It is still there but now in `stopped` status.
+As you can see **the process hasn't disappeared**. It is still there but now in `stopped` status.
 
 To restart it just do:
 
@@ -904,7 +904,7 @@ $ pm2 sendSignal SIGUSR2 my-app
 <a name="a989"/>
 ## Configuration file
 
-You can specifiy the following options by editing the file `~/.pm2/custom_options.sh`:
+You can specify the following options by editing the file `~/.pm2/custom_options.sh`:
 
 ```
 PM2_RPC_PORT
@@ -944,7 +944,7 @@ $ pm2 exit
 $ pm2 resurrect
 ```
 
-If ES6 has been enabled you should see this message at the beggining of each pm2 command:
+If ES6 has been enabled you should see this message at the beginning of each pm2 command:
 
 ```
 ● ES6 mode
