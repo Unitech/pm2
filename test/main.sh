@@ -38,5 +38,7 @@ bash ./test/bash/fork.sh
 spec "Fork verified"
 bash ./test/bash/infinite_loop.sh
 spec "Infinite loop stop"
+bash ./test/bash/reset.sh
+spec "Reset meta"
 
 $pm2 kill

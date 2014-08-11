@@ -323,6 +323,12 @@ commander.command('ecosystem')
     CLI.generateSample(name);
   });
 
+commander.command('reset <name|id|all>')
+  .description('reset counters for process')
+  .action(function(proc_id) {
+      CLI.resetMetaProcess(proc_id);
+      });
+
 commander.command('describe <id>')
   .description('describe all parameters of a process id')
   .action(function(proc_id) {

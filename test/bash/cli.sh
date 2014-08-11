@@ -211,6 +211,8 @@ OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 8 ] || fail "Not valid process number"
 success "Processes valid"
 
+
+
 $pm2 delete all
 spec "Should delete all processes"
 
