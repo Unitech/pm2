@@ -153,8 +153,8 @@ sleep 0.3
 $http_get -q http://localhost:9615/ -O $JSON_FILE
 OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 
-[ $OUT -eq 7 ] || fail "$1"
-success "$1"
+[ $OUT -eq 7 ] || fail "Error while wgeting data via web interface"
+success "Got data from interface"
 
 
 $pm2 list
