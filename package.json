@@ -117,7 +117,7 @@
     "json-stringify-safe": "~5.0.0",
     "nssocket": "~0.5.1",
     "punt" : "~2.2.0",
-    "pidusage": "~0.0.6",
+    "pidusage": "~0.0.7",
     "pm2-axon-rpc": "~0.0.2",
     "pm2-deploy": "~0.0.4",
     "pm2-interface": "~0.1.3",
