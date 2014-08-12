@@ -1,0 +1,42 @@
+{
+  "name": "pm2-interface",
+  "version": "0.1.4",
+  "description": "Interact with pm2 via RPC and receive real time notifications",
+  "author": {
+    "name": "Strzelewicz Alexandre",
+    "email": "as@unitech.io",
+    "url": "http://unitech.io"
+  },
+  "engines" : {
+    "node" : ">=0.8"
+  },
+  "main": "index.js",
+  "dependencies" : {
+    "axon"           : "2.0.0",
+    "axon-rpc"       : "0.0.3",
+    "debug"          : "*"
+  },
+  "keywords": [
+    "cli",
+    "fault tolerant",
+    "sysadmin",
+    "tools",
+    "pm2",
+    "node-pm2",
+    "monitoring",
+    "process manager",
+    "forever",
+    "process configuration",
+    "clustering",
+    "cluster cli",
+    "cluster",
+    "cron",
+    "devops",
+    "dev ops"
+  ],
+  "repository": {
+    "type" : "git",
+    "url" : "git://github.com/Unitech/pm2-interface.git"
+  },
+  "license": "Apache v2"
+}
