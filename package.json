@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.9.6",
+  "version": "0.10.0",
   "os": [
     "!win32"
   ],
@@ -110,10 +110,10 @@
     "cli-table": "~0.3.0",
     "coffee-script": "~1.7.1",
     "colors": "~0.6.2",
-    "commander": "~2.2.0",
+    "commander": "~2.3.0",
     "cron": "~1.0.4",
     "debug": "~1.0.2",
-    "eventemitter2": "~0.4.13",
+    "eventemitter2": "~0.4.14",
     "json-stringify-safe": "~5.0.0",
     "nssocket": "~0.5.1",
     "punt" : "~2.2.0",
