@@ -16,15 +16,13 @@ $pm2 list
 $pm2 kill
 
 PM2_NODE_OPTIONS='--harmony' `pwd`/../../bin/pm2 start harmony.js
-sleep 2
-should 'should not fail when passing harmony option to V8' 'errored' 0
+sleep 4
 $pm2 list
+should 'should not fail when passing harmony option to V8' 'restart_time: 0' 1
 $pm2 kill
-
 
 $pm2 start harmony.js --node-args="--harmony"
 sleep 8
 $pm2 list
 should 'should not fail when passing node-args=harmony opts' 'errored' 0
-$pm2 list
 $pm2 kill
