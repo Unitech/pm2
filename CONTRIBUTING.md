@@ -16,7 +16,8 @@ Please try following these rules it will make the task easier for you and for us
   - How may I reproduce this? (this isn't easy in some cases)
   - Are you using a cluster module? Are you trying to catch SIGTERM signals? With `code` if possible.
 
-#### 4. Think global if your issue is too specific we might not be able to help and stackoverflow might be a better place to seak for an answer
+#### 4. Think global 
+If your issue is too specific we might not be able to help and stackoverflow might be a better place to seak for an answer
 
 #### 5. Be clear and format issues with [markdown](http://daringfireball.net/projects/markdown/)
 Note that we might understand english, german and french
