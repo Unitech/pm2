@@ -219,12 +219,14 @@ For scripts in other languages:
 
 ```bash
 $ pm2 start echo.coffee
-$ pm2 start echo.php
-$ pm2 start echo.py
-$ pm2 start echo.sh
-$ pm2 start echo.rb
-$ pm2 start echo.pl
+$ pm2 start -x echo.php
+$ pm2 start -x echo.py
+$ pm2 start -x echo.sh
+$ pm2 start -x echo.rb
+$ pm2 start -x echo.pl
 ```
+
+The not javascript languages will have to be run in [fork mode](#a23).
 
 <a name="a987"/>
 ## Options
@@ -1028,6 +1030,8 @@ $ pm2 start my-bash-script.sh -x --interpreter bash
 
 $ pm2 start my-python-script.py -x --interpreter python
 ```
+
+The interpreter is deduced from the file extension from the [following list](https://github.com/Unitech/pm2/blob/master/lib/interpreter.json).
 
 <a name="a96"/>
 ## JSON app configuration via pipe from stdout
