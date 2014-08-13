@@ -26,6 +26,11 @@ Note that we might understand english, german and french
 ```DEBUG=pm2:* PM2_DEBUG=true ./bin/pm2 --no-daemon start my-buggy-thing.js```
 
 If your issue is flagged as `need data` be sure that there won't be any upgrade unless we can have enough data to reproduce. 
+
 ## Pull-Requests
 
-@Todo
+1) Fork pm2
+2) Create a different branch to do your fixes/improvements if it's core-related.
+3) Please add unit tests! There are lots of tests take examples from there!
+4) Try to be as clear as possible in your commits
+5) Pull request on pm2 from your branch
