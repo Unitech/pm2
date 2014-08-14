@@ -508,15 +508,15 @@ process.once('satan:client:ready', function() {
   });
 })();
 
-(function testHarmony() {
-  //
-  // Harmony test
-  //
-  try {
-    var assert = require('assert')
-    , s = new Set();
-    s.add('a');
-    assert.ok(s.has('a'));
-    console.log('● ES6 mode'.green);
-  } catch(e) {}
-})();
+// (function testHarmony() {
+//   //
+//   // Harmony test
+//   //
+//   try {
+//     var assert = require('assert')
+//     , s = new Set();
+//     s.add('a');
+//     assert.ok(s.has('a'));
+//     console.log('● ES6 mode'.green);
+//   } catch(e) {}
+// })();
