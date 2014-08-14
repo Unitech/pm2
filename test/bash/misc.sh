@@ -77,3 +77,12 @@ cat outmerge-0.log > /dev/null
 ispec 'file outmerge-0.log should not exist'
 
 rm outmerge*
+
+########### coffee cluster test
+$pm2 kill
+
+$pm2 start echo.coffee
+
+should 'process should not have been restarted' 'restart_time: 0' 1
+should 'process should be online' "status: 'online'" 1
+
