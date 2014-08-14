@@ -8,6 +8,8 @@
 - PM2 Programmatic interface enhanced
 - Daemon fork system enhanced
 - PM2 hearth refactor
+- PM2 describe show node-args
+- node_args for V8 options is now available via JSON declaration
 - Watch system avoid ghost processes
 - Memory leak fixes
 - Better performance on interface

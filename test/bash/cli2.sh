@@ -64,13 +64,13 @@ should 'should has been deleted process by script' "name: 'echo'" 0
 
 
 ########### OPTIONS OUTPUT FILES
-$pm2 delete all
+$pm2 kill
 
 $pm2 start echo.js -o outech.log -e errech.log --name gmail -i 10
 sleep 0.5
 cat outech-0.log > /dev/null
-spec "file outech.log exist"
+spec "file outech-0.log exist"
 cat errech-0.log > /dev/null
-spec "file errech.log exist"
+spec "file errech-0.log exist"
 
 should 'should has not restarted' 'restart_time: 0' 10

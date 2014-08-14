@@ -63,7 +63,7 @@ Thanks in advance and we hope that you like pm2!
 
 - [Transitional state of apps](#a4)
 - [Process listing](#a6)
-- [Automatic restart process based on memory](#a6)
+- [Automatic restart process based on memory](#max-memory-restart)
 - [Monitoring CPU/Memory usage](#a7)
 - [Logs management](#a9)
 - [Clustering](#a5)
