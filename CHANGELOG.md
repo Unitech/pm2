@@ -1,4 +1,21 @@
 
+# 0.10.0 - PM2 Hellfire release
+
+- PM2 Battle testing (https://docs.google.com/spreadsheets/d/1z7hJwI_TBQslkIS07YjgCGlpu8eHy2Wc0Bd5qDNnICE/edit#gid=925366936)
+- Coffeescript not enabled by default anymore (enhance memory usage)
+- PM2 Programmatic interface enhanced
+- Daemon fork system enhanced
+- PM2 hearth refactor
+- Watch system avoid ghost processes
+- Memory leak fixes
+- Better performance on interface
+- Fix tests
+- Enable PM2_NODE_OPTIONS and node-args for fork mode
+- Dependencies updated
+- Faster monitoring system
+- AXM actions unification
+- Socket errors handled
+
 # 0.9.6 - 0.9.5 - 0.9.4
 
 - Bash test auto exit when failure
