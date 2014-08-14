@@ -219,12 +219,14 @@ For scripts in other languages:
 
 ```bash
 $ pm2 start echo.coffee
-$ pm2 start echo.php
-$ pm2 start echo.py
-$ pm2 start echo.sh
-$ pm2 start echo.rb
-$ pm2 start echo.pl
+$ pm2 start -x echo.php
+$ pm2 start -x echo.py
+$ pm2 start -x echo.sh
+$ pm2 start -x echo.rb
+$ pm2 start -x echo.pl
 ```
+
+The not javascript languages will have to be run in [fork mode](#a23).
 
 <a name="a987"/>
 ## Options
@@ -1029,6 +1031,8 @@ $ pm2 start my-bash-script.sh -x --interpreter bash
 $ pm2 start my-python-script.py -x --interpreter python
 ```
 
+The interpreter is deduced from the file extension from the [following list](https://github.com/Unitech/pm2/blob/master/lib/interpreter.json).
+
 <a name="a96"/>
 ## JSON app configuration via pipe from stdout
 
@@ -1123,6 +1127,13 @@ For more information about this, see [issue #74](https://github.com/Unitech/pm2/
 When using the cluster mode (by default) you can't use ports from 0 to 1024. If you really need to exec in this range use the [fork mode](#a23) with the `-x` parameter.
 By using the fork mode you will lose core features of pm2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
+### User tips from issues
+- [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
+- [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
+- [Using ansible with pm2](https://github.com/Unitech/pm2/issues/88#issuecomment-49106686)
+- [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
+- [Restart when process reaches a specific memory amount](https://github.com/Unitech/pm2/issues/141)
+
 <a name="a20"/>
 ## External resources and articles
 
@@ -1141,12 +1152,6 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
-
-## Some tips
-- [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
-- [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
-- [Using ansible with pm2](https://github.com/Unitech/pm2/issues/88#issuecomment-49106686)
-- [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
 
 ## Contributors
 
