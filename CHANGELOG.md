@@ -2,11 +2,11 @@
 # 0.10.0 - PM2 Hellfire release
 
 - PM2 is now Battle tested (https://docs.google.com/spreadsheets/d/1z7hJwI_TBQslkIS07YjgCGlpu8eHy2Wc0Bd5qDNnICE/edit#gid=925366936)
-- Auto restart memory limit feature via --max-memory-restart (and max_memory_restart via JSON) (https://github.com/Unitech/pm2#max-memory-restart)
-- Remove timestamps bu default with pm2 logs
+- PM2 respects strong unix standard process management
+- Restart app when reaching a limit of memory by using --max-memory-restart (and max_memory_restart via JSON)(https://github.com/Unitech/pm2#max-memory-restart)
+- Remove timestamps by default with pm2 logs
 - Coffeescript not enabled by default anymore (enhance memory usage)
 - PM2 Programmatic interface enhanced
-- Daemon fork system enhanced
 - PM2 hearth refactor
 - PM2 describe show node-args
 - node_args for V8 options is now available via JSON declaration
