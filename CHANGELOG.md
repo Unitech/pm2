@@ -1,9 +1,9 @@
 
 # 0.10.0 - PM2 Hellfire release
 
-- PM2 is now Battle tested (https://docs.google.com/spreadsheets/d/1z7hJwI_TBQslkIS07YjgCGlpu8eHy2Wc0Bd5qDNnICE/edit#gid=925366936)
-- PM2 respects strong unix standard process management
+- PM2 hearth code has been refactored and now it handles extreme scenario without any leak or bug 
 - Restart app when reaching a limit of memory by using --max-memory-restart (and max_memory_restart via JSON)(https://github.com/Unitech/pm2#max-memory-restart)
+- PM2 respects strong unix standard process management
 - Remove timestamps by default with pm2 logs
 - Coffeescript not enabled by default anymore (enhance memory usage)
 - PM2 Programmatic interface enhanced
@@ -19,6 +19,7 @@
 - Faster monitoring system
 - AXM actions unification
 - Socket errors handled
+- Watchdog via Agent - restart automatically PM2 with previous processes in case of crash
 - PM2_NODE_OPTIONS deprecation (use --node-args instead)
 
 # 0.9.6 - 0.9.5 - 0.9.4
