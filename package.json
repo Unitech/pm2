@@ -143,7 +143,8 @@
     "mocha": "^1.20.1",
     "should": "^4.0.0",
     "better-assert": "^1.0.0",
-    "promise-spawner": "0.0.3"
+    "promise-spawner": "0.0.3",
+    "ikst" : "latest"
   },
   "optionalDependencies": {
     "pm2-logs" : "latest"
