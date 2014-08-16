@@ -143,11 +143,11 @@
     "mocha": "^1.20.1",
     "should": "^4.0.0",
     "better-assert": "^1.0.0",
-    "promise-spawner": "0.0.3",
-    "ikst" : "latest"
+    "promise-spawner": "^0.0.3"
   },
   "optionalDependencies": {
-    "pm2-logs" : "latest"
+    "pm2-logs" : "latest",
+    "ikst" : "~0.1.2"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
