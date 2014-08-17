@@ -1,4 +1,4 @@
-![pm2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
+![pm2](https://github.com/unitech/pm2/raw/master/doc/pres/top-logo-wo.png)
 
 pm2 is a process manager for Node apps with a built-in load balancer.
 
@@ -311,7 +311,7 @@ $ pm2 delete web-interface
 <a name="a6"/>
 ## Process listing
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
+![Monit](https://github.com/unitech/pm2/raw/master/doc/pres/pm2-list.png)
 
 To list all running processes:
 
@@ -330,7 +330,7 @@ $ pm2 describe 0
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
+![Monit](https://github.com/unitech/pm2/raw/master/doc/pres/pm2-monit.png)
 
 Monitor all processes launched:
 
@@ -343,7 +343,7 @@ $ pm2 monit
 
 ### Displaying logs in realtime
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
+![Monit](https://github.com/unitech/pm2/raw/master/doc/pres/pm2-logs.png)
 
 Displaying logs of specified process or all processes in realtime:
 
