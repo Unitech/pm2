@@ -21,6 +21,7 @@ success "$1"
 $pm2 stop 12412
 $pm2 stop 0
 
+
 OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 1 ] || fail "$1"
 success "$1"
@@ -33,6 +34,7 @@ $pm2 list
 OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 3 ] || fail "$1"
 success "$1"
+
 
 #
 # Describe process
