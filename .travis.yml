@@ -3,6 +3,7 @@ branches:
   only:
     - master
     - development
+    - communication-protocol
 node_js:
    - "0.11"
    - "0.10"
