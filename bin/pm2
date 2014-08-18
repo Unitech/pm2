@@ -16,6 +16,34 @@ var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 
+
+ //
+// Init
+//
+(function init() {
+  fs.exists(cst.DEFAULT_FILE_PATH, function(exist) {
+    if (!exist) {
+      console.log('Initializing folder for pm2 on %s', cst.DEFAULT_FILE_PATH);
+      fs.mkdirSync(cst.DEFAULT_FILE_PATH);
+      fs.mkdirSync(cst.DEFAULT_LOG_PATH);
+      fs.mkdirSync(cst.DEFAULT_PID_PATH);
+    }
+  });
+
+  /**
+   * Create configuration file if not present
+   */
+  fs.exists(cst.PM2_CONF_FILE, function(exist) {
+    if (!exist) {
+      console.log('Creating PM2 configuration file in %s', cst.PM2_CONF_FILE);
+      fs
+        .createReadStream(path.join(__dirname, cst.SAMPLE_CONF_FILE))
+        .pipe(fs.createWriteStream(cst.PM2_CONF_FILE));
+    }
+  });
+})();
+
+
 commander.version(pkg.version)
   .option('-v --version', 'get version')
   .option('-s --silent', 'hide all messages', false)
@@ -484,29 +512,3 @@ process.once('satan:client:ready', function() {
         commander.parse(process.argv);
     });
 });
-
-//
-// Init
-//
-(function init() {
-  fs.exists(cst.DEFAULT_FILE_PATH, function(exist) {
-    if (!exist) {
-      console.log('Initializing folder for pm2 on %s', cst.DEFAULT_FILE_PATH);
-      fs.mkdirSync(cst.DEFAULT_FILE_PATH);
-      fs.mkdirSync(cst.DEFAULT_LOG_PATH);
-      fs.mkdirSync(cst.DEFAULT_PID_PATH);
-    }
-  });
-
-  /**
-   * Create configuration file if not present
-   */
-  fs.exists(cst.PM2_CONF_FILE, function(exist) {
-    if (!exist) {
-      console.log('Creating PM2 configuration file in %s', cst.PM2_CONF_FILE);
-      fs
-        .createReadStream(path.join(__dirname, cst.SAMPLE_CONF_FILE))
-        .pipe(fs.createWriteStream(cst.PM2_CONF_FILE));
-    }
-  });
-})();
