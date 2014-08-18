@@ -16,31 +16,31 @@ var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 
-
- //
+//
 // Init
 //
 (function init() {
-  fs.exists(cst.DEFAULT_FILE_PATH, function(exist) {
-    if (!exist) {
-      console.log('Initializing folder for pm2 on %s', cst.DEFAULT_FILE_PATH);
-      fs.mkdirSync(cst.DEFAULT_FILE_PATH);
-      fs.mkdirSync(cst.DEFAULT_LOG_PATH);
-      fs.mkdirSync(cst.DEFAULT_PID_PATH);
-    }
-  });
+  var exist = fs.existsSync(cst.DEFAULT_FILE_PATH);
 
-  /**
-   * Create configuration file if not present
-   */
-  fs.exists(cst.PM2_CONF_FILE, function(exist) {
-    if (!exist) {
-      console.log('Creating PM2 configuration file in %s', cst.PM2_CONF_FILE);
-      fs
-        .createReadStream(path.join(__dirname, cst.SAMPLE_CONF_FILE))
-        .pipe(fs.createWriteStream(cst.PM2_CONF_FILE));
-    }
-  });
+  if (!exist) {
+    console.log('Initializing folder for pm2 on %s', cst.DEFAULT_FILE_PATH);
+    fs.mkdirSync(cst.DEFAULT_FILE_PATH);
+    fs.mkdirSync(cst.DEFAULT_LOG_PATH);
+    fs.mkdirSync(cst.DEFAULT_PID_PATH);
+
+    /**
+     * Create configuration file if not present
+     */
+    fs.exists(cst.PM2_CONF_FILE, function(exist) {
+      if (!exist) {
+        console.log('Creating PM2 configuration file in %s', cst.PM2_CONF_FILE);
+        fs
+          .createReadStream(path.join(__dirname, cst.SAMPLE_CONF_FILE))
+          .pipe(fs.createWriteStream(cst.PM2_CONF_FILE));
+      }
+
+    });
+  }
 })();
 
 
@@ -66,8 +66,8 @@ commander.version(pkg.version)
   .option('--merge-logs', 'merge logs from different instances but keep error and out separated')
   .option('--watch', 'watch application folder for changes')
   .option('--node-args <node_args>', "space delimited arguments to pass to node in cluster mode - e.g. --node-args=\"--debug=7001 --trace-deprecation\"",
-      function(val) {
-          return val.split(' ');
+          function(val) {
+            return val.split(' ');
           })
   .option('--run-as-user <run_as_user>', 'The user or uid to run a managed process as')
   .option('--run-as-group <run_as_group>', 'The group or gid to run a managed process as')
@@ -211,7 +211,7 @@ commander.command('reload <name|all>')
 // Reload process(es)
 //
 commander.command('gracefulReload <name|all>')
-.description('gracefully reload a process. Send a "shutdown" message to close all connections.')
+  .description('gracefully reload a process. Send a "shutdown" message to close all connections.')
   .action(function(pm2_id) {
     CLI.gracefulReload(pm2_id);
   });
@@ -260,14 +260,14 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 commander.command('ping')
   .description('ping pm2 daemon - if not up it will launch it')
   .action(function() {
-          CLI.ping();
-          });
+    CLI.ping();
+  });
 
 commander.command('updatePM2')
   .description('updatePM2 after a npm update')
   .action(function() {
-          CLI.updatePM2()
-          });
+    CLI.updatePM2()
+  });
 
 //
 // Interact
@@ -275,20 +275,20 @@ commander.command('updatePM2')
 commander.command('interact [secret_key] [public_key] [machine_name]')
   .description('launch agent to interact with Keymetrics')
   .action(function(secret, public, machine) {
-          CLI.interact(secret, public, machine);
-          });
+    CLI.interact(secret, public, machine);
+  });
 
 commander.command('killInteract')
   .description('stop agent')
   .action(function() {
-          CLI.killInteract()
-          });
+    CLI.killInteract()
+  });
 
 commander.command('infoInteract')
   .description('get information about agent')
   .action(function() {
-          CLI.infoInteract();
-          });
+    CLI.infoInteract();
+  });
 
 
 //
@@ -356,20 +356,20 @@ commander.command('ecosystem')
 commander.command('reset <name|id|all>')
   .description('reset counters for process')
   .action(function(proc_id) {
-      CLI.resetMetaProcess(proc_id);
-      });
+    CLI.resetMetaProcess(proc_id);
+  });
 
 commander.command('describe <id>')
   .description('describe all parameters of a process id')
   .action(function(proc_id) {
-          CLI.describe(proc_id);
-          });
+    CLI.describe(proc_id);
+  });
 
 commander.command('desc <id>')
   .description('describe all parameters of a process id')
   .action(function(proc_id) {
-          CLI.describe(proc_id);
-          });
+    CLI.describe(proc_id);
+  });
 
 //
 // List command
@@ -377,34 +377,34 @@ commander.command('desc <id>')
 commander.command('list')
   .description('list all processes')
   .action(function() {
-          CLI.list()
-          });
+    CLI.list()
+  });
 
 commander.command('ls')
   .description('(alias) list all processes')
   .action(function() {
-          CLI.list()
-          });
+    CLI.list()
+  });
 
 commander.command('l')
   .description('(alias) list all processes')
   .action(function() {
-          CLI.list()
-          });
+    CLI.list()
+  });
 
 commander.command('status')
   .description('(alias) list all processes')
   .action(function() {
-          CLI.list()
-          });
+    CLI.list()
+  });
 
 
 // List in raw json
 commander.command('jlist')
   .description('list all processes in JSON format')
   .action(function() {
-          CLI.jlist()
-          });
+    CLI.jlist()
+  });
 
 // List in prettified Json
 commander.command('prettylist')
@@ -419,14 +419,14 @@ commander.command('prettylist')
 commander.command('monit')
   .description('launch termcaps monitoring')
   .action(function() {
-          CLI.monit()
-          });
+    CLI.monit()
+  });
 
 commander.command('m')
   .description('(alias) launch termcaps monitoring')
   .action(function() {
-          CLI.monit()
-          });
+    CLI.monit()
+  });
 
 
 //
@@ -501,14 +501,14 @@ if (process.argv.length == 2) {
 //
 process.once('satan:client:ready', function() {
   debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
-    CLI.getVersion(function(err, remote_version) {
-        if (!err && (pkg.version != remote_version)) {
-            console.log('');
-            console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 updatePM2'));
-            console.log('In memory PM2 version:', chalk.blue.bold(remote_version));
-            console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
-            console.log('');
-          }
-        commander.parse(process.argv);
-    });
+  CLI.getVersion(function(err, remote_version) {
+    if (!err && (pkg.version != remote_version)) {
+      console.log('');
+      console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 updatePM2'));
+      console.log('In memory PM2 version:', chalk.blue.bold(remote_version));
+      console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
+      console.log('');
+    }
+    commander.parse(process.argv);
+  });
 });

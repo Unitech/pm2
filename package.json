@@ -70,7 +70,9 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer. Perfectly designed for microservices architecture.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test bash test/index.sh && bash test/main.sh"
+    "test": "NODE_ENV=test bash test/index.sh && bash test/main.sh",
+    "preinstall" : "bash scripts/preinstall.sh",
+    "postinstall" : "bash scripts/postinstall.sh"
   },
   "keywords": [
     "cli",
