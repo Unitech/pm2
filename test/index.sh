@@ -23,8 +23,6 @@ function spec {
 
 $pm2 kill
 
-#mocha ./test/programmatic/monit.mocha.js
-#spec "Monit test"
 mocha ./test/programmatic/god.mocha.js
 spec "God test"
 mocha ./test/programmatic/satan.mocha.js
