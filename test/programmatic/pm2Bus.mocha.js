@@ -8,7 +8,7 @@ var Plan = require('../helpers/plan.js');
 var APPS = require('../helpers/apps.js');
 var Ipm2 = require('pm2-interface');
 
-describe.skip('PM2 BUS / RPC', function() {
+describe('PM2 BUS / RPC', function() {
   var pm2;
   var ipm2;
 

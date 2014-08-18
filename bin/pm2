@@ -10,6 +10,7 @@ var util      = require('util');
 var cronJob   = require('cron').CronJob;
 var chalk     = require('chalk');
 
+var debug     = require('debug')('pm2:cli');
 var Satan     = require('../lib/Satan');
 var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
@@ -471,6 +472,7 @@ if (process.argv.length == 2) {
 // in file Satan.js, method Satan.launchRPC
 //
 process.once('satan:client:ready', function() {
+  debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
     CLI.getVersion(function(err, remote_version) {
         if (!err && (pkg.version != remote_version)) {
             console.log('');
