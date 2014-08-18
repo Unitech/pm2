@@ -12,6 +12,7 @@ pm2 is perfect when you need to spread your stateless Node.js code across all CP
 - Script daemonization
 - 0s downtime reload for Node apps
 - Generate SystemV/SystemD startup scripts (Ubuntu, Centos...)
+- Set memory limit for process to restart
 - Pause unstable process (avoid infinite loop)
 - Restart on file change with `--watch`
 - Monitoring in console
@@ -62,6 +63,7 @@ Thanks in advance and we hope that you like pm2!
 
 - [Transitional state of apps](#a4)
 - [Process listing](#a6)
+- [Automatic restart process based on memory](#max-memory-restart)
 - [Monitoring CPU/Memory usage](#a7)
 - [Logs management](#a9)
 - [Clustering](#a5)
@@ -179,6 +181,7 @@ $ pm2 delete all         # Will remove all processes from pm2 list
 
 # Misc
 
+$ pm2 reset <process>    # Reset meta data (restarted time...)
 $ pm2 updatePM2          # Update in memory pm2
 $ pm2 ping               # Ensure pm2 daemon has been launched
 $ pm2 sendSignal SIGUSR2 my-app # Send system signal to script
@@ -219,12 +222,14 @@ For scripts in other languages:
 
 ```bash
 $ pm2 start echo.coffee
-$ pm2 start echo.php
-$ pm2 start echo.py
-$ pm2 start echo.sh
-$ pm2 start echo.rb
-$ pm2 start echo.pl
+$ pm2 start -x echo.php
+$ pm2 start -x echo.py
+$ pm2 start -x echo.sh
+$ pm2 start -x echo.rb
+$ pm2 start -x echo.pl
 ```
+
+The not javascript languages will have to be run in [fork mode](#a23).
 
 <a name="a987"/>
 ## Options
@@ -323,6 +328,25 @@ To get more details about a specific process:
 
 ```bash
 $ pm2 describe 0
+```
+
+<a name="max-memory-restart"/>
+## Automatic restart process based on memory
+
+Value passed is in megaoctets. Internally it uses the V8 flag `--max-old-space-size=MEM` to make a process exit when memory exceed a certain amount of RAM used.
+
+CLI:
+```bash
+$ pm2 start big-array.js --max-memory-restart 20
+```
+
+JSON:
+```json
+{
+  "name" : "max_mem",
+  "script" : "big-array.js",
+  "max_memory_restart" : "20"
+}
 ```
 
 <a name="a7"/>
@@ -526,7 +550,6 @@ To watch specifics paths, please use a JSON app declaration, `watch` can take a 
   "watch": ["server", "client"],
   "ignoreWatch" : ["node_modules", "client/img"]
 }
-
 ```
 
 <a name="a10"/>
@@ -543,6 +566,7 @@ You can define parameters for your apps in `processes.json`:
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
     "watch"       : "true",
+    "node_args"   : "--harmony",
     "cwd"         : "/this/is/a/path/to/start/script",
     "env": {
         "NODE_ENV": "production",
@@ -611,6 +635,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "cwd"              : "/srv/node-app/current",
   "args"             : "['--toto=heya coco', '-d', '1']",
   "script"           : "bin/app.js",
+  "node_args"        : "--harmony",
   "log_date_format"  : "YYYY-MM-DD HH:mm Z",
   "error_file"       : "/var/log/node-app/node-app.stderr.log",
   "out_file"         : "log/node-app.stdout.log",
@@ -913,7 +938,6 @@ PM2_BIND_ADDR
 PM2_API_PORT
 PM2_GRACEFUL_TIMEOUT
 PM2_MODIFY_REQUIRE
-PM2_NODE_OPTIONS
 ```
 
 
@@ -926,34 +950,19 @@ $ pm2 web
 <a name="a66"/>
 ## Enabling Harmony ES6
 
-### Enable by default for all processes
-
-You can enable Harmony ES6 by setting `PM2_NODE_OPTIONS='--harmony'` environment variable option when you start pm2 (pm2 should not be already daemonized).
-
-To pass this option by default, you can edit `~/.pm2/custom_options.sh` and add:
-
-```bash
-export PM2_NODE_OPTIONS='--harmony'
-```
-
-Then:
-
-```bash
-$ pm2 dump
-$ pm2 exit
-$ pm2 resurrect
-```
-
-If ES6 has been enabled you should see this message at the beginning of each pm2 command:
-
-```
-● ES6 mode
-```
-
-### Enable for specific processes
-
+The `--node-args` option permit to launch script with V8 flags, so to enable harmony for a process just do this:
 ```bash
 $ pm2 start my_app.js --node-args="--harmony"
+```
+
+And with JSON declaration:
+
+```bash
+[{
+  "name" : "ES6",
+  "script" : "es6.js",
+  "node_args" : "--harmony"
+}]
 ```
 
 <a name="a19"/>
@@ -1028,6 +1037,8 @@ $ pm2 start my-bash-script.sh -x --interpreter bash
 
 $ pm2 start my-python-script.py -x --interpreter python
 ```
+
+The interpreter is deduced from the file extension from the [following list](https://github.com/Unitech/pm2/blob/master/lib/interpreter.json).
 
 <a name="a96"/>
 ## JSON app configuration via pipe from stdout
@@ -1123,6 +1134,13 @@ For more information about this, see [issue #74](https://github.com/Unitech/pm2/
 When using the cluster mode (by default) you can't use ports from 0 to 1024. If you really need to exec in this range use the [fork mode](#a23) with the `-x` parameter.
 By using the fork mode you will lose core features of pm2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
 
+### User tips from issues
+- [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
+- [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
+- [Using ansible with pm2](https://github.com/Unitech/pm2/issues/88#issuecomment-49106686)
+- [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
+- [Restart when process reaches a specific memory amount](https://github.com/Unitech/pm2/issues/141)
+
 <a name="a20"/>
 ## External resources and articles
 
@@ -1141,12 +1159,6 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 - https://coderwall.com/p/igdqyw
 - http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/
 - https://medium.com/tech-talk/e7c0b0e5ce3c
-
-## Some tips
-- [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
-- [Start the same app on different ports #322](https://github.com/Unitech/pm2/issues/322#issuecomment-46792733)
-- [Using ansible with pm2](https://github.com/Unitech/pm2/issues/88#issuecomment-49106686)
-- [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
 
 ## Contributors
 

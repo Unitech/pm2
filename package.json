@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "os": [
     "!win32"
   ],
@@ -70,7 +70,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer. Perfectly designed for microservices architecture.",
   "main": "index.js",
   "scripts": {
-    "test": "bash test/main.sh && NODE_ENV=test mocha"
+    "test": "NODE_ENV=test bash test/index.sh && bash test/main.sh"
   },
   "keywords": [
     "cli",
@@ -119,7 +119,7 @@
     "async": "~0.9.0",
     "axm": "~0.1.7",
     "axon": "~2.0.0",
-    "chalk": "^0.4.0",
+    "chalk": "~0.4.0",
     "chokidar": "~0.8.2",
     "cli-table": "~0.3.0",
     "coffee-script": "~1.7.1",
@@ -132,20 +132,22 @@
     "nssocket": "~0.5.1",
     "punt" : "~2.2.0",
     "pidusage": "~0.0.7",
-    "axon-rpc": "~0.0.3",
+    "pm2-axon-rpc": "~0.2.0",
     "pm2-deploy": "~0.0.4",
+    "pm2-interface" : "~1.1.0",
     "pm2-multimeter": "~0.1.2",
     "moment" : "~2.7.0",
-    "uid-number": "0.0.5"
+    "uid-number": "~0.0.5"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
     "should": "^4.0.0",
     "better-assert": "^1.0.0",
-    "promise-spawner": "0.0.3"
+    "promise-spawner": "^0.0.3"
   },
   "optionalDependencies": {
-    "pm2-logs" : "latest"
+    "pm2-logs" : "latest",
+    "ikst" : "~0.1.2"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"

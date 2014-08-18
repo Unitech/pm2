@@ -10,6 +10,7 @@ var util      = require('util');
 var cronJob   = require('cron').CronJob;
 var chalk     = require('chalk');
 
+var debug     = require('debug')('pm2:cli');
 var Satan     = require('../lib/Satan');
 var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
@@ -25,6 +26,7 @@ commander.version(pkg.version)
   .option('-o --output <path>', 'specify out log file')
   .option('-e --error <path>', 'specify error log file')
   .option('-p --pid <pid>', 'specify pid file')
+  .option('--max-memory-restart <memory>', 'specify max memory amount used to autorestart (in megaoctets)')
   .option('--env <environment_name>', 'specify environment to get specific env variables (for JSON declaration)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('-u --user <username>', 'define user when generating startup script')
@@ -470,6 +472,7 @@ if (process.argv.length == 2) {
 // in file Satan.js, method Satan.launchRPC
 //
 process.once('satan:client:ready', function() {
+  debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
     CLI.getVersion(function(err, remote_version) {
         if (!err && (pkg.version != remote_version)) {
             console.log('');
@@ -506,17 +509,4 @@ process.once('satan:client:ready', function() {
         .pipe(fs.createWriteStream(cst.PM2_CONF_FILE));
     }
   });
-})();
-
-(function testHarmony() {
-  //
-  // Harmony test
-  //
-  try {
-    var assert = require('assert')
-    , s = new Set();
-    s.add('a');
-    assert.ok(s.has('a'));
-    console.log('● ES6 mode'.green);
-  } catch(e) {}
 })();

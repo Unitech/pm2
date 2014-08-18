@@ -7,8 +7,27 @@ cd $file_path
 
 echo -e "\033[1mRunning tests:\033[0m"
 
+#
+# Max memory auto restart option
+#
+# -max-memory-restart option && maxMemoryRestart (via JSON file)
+#
+$pm2 start big-array.js --max-memory-restart 19
+sleep 7
+$pm2 list
+should 'process should been restarted' 'restart_time: 0' 0
 
-$pm2 kill
+$pm2 delete all
+
+#
+# Via JSON
+#
+$pm2 start max-mem.json
+sleep 7
+$pm2 list
+should 'process should been restarted' 'restart_time: 0' 0
+
+$pm2 delete all
 
 $pm2 start env.js
 
@@ -27,7 +46,7 @@ else
     fail "environment defined ? wtf ?"
 fi
 
-$pm2 kill
+$pm2 delete all
 
 $pm2 start env.json
 
@@ -37,7 +56,7 @@ sleep 1
 
 OUT=`cat $OUT_LOG | head -n 1`
 
-if [ $OUT = "undefined" ]
+if [ "$OUT" = "undefined" ]
 then
     fail "environment variable hasnt been defined"
 else
@@ -77,3 +96,11 @@ cat outmerge-0.log > /dev/null
 ispec 'file outmerge-0.log should not exist'
 
 rm outmerge*
+
+########### coffee cluster test
+$pm2 delete all
+
+$pm2 start echo.coffee
+
+should 'process should not have been restarted' 'restart_time: 0' 1
+should 'process should be online' "status: 'online'" 1
