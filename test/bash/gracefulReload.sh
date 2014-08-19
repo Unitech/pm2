@@ -8,7 +8,6 @@ cd $file_path
 echo "################## GRACEFUL RELOAD ###################"
 
 ###############
-$pm2 kill
 
 echo "Launching"
 $pm2 start graceful-exit.js -i 4 --name="graceful" -o "grace.log" -e "grace-err.log"

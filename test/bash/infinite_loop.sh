@@ -8,10 +8,6 @@ cd $file_path
 
 echo "Starting infinite loop tests"
 
-$pm2 kill
-
-
-
 $pm2 start killtoofast.js --name unstable-process
 
 echo -n "Waiting for process to restart too many times and pm2 to stop it"

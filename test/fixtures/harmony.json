@@ -1,0 +1,5 @@
+{
+  "name" : "ES6",
+  "script" : "harmony.js",
+  "node_args" : "--harmony"
+}

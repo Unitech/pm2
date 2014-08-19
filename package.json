@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.9.6",
+  "version": "0.10.0-beta1",
   "os": [
     "!win32"
   ],
@@ -67,28 +67,44 @@
     }
   ],
   "homepage": "https://github.com/Unitech/pm2",
-  "description": "Modern CLI process manager for Node apps with a builtin load-balancer",
+  "description": "Modern CLI process manager for Node apps with a builtin load-balancer. Perfectly designed for microservices architecture.",
   "main": "index.js",
   "scripts": {
-    "test": "bash test/main.sh && NODE_ENV=test mocha"
+    "test": "NODE_ENV=test bash test/index.sh && bash test/main.sh",
+    "preinstall" : "bash scripts/preinstall.sh",
+    "postinstall" : "bash scripts/postinstall.sh"
   },
   "keywords": [
     "cli",
     "fault tolerant",
     "sysadmin",
     "tools",
-    "h24",
     "pm2",
+    "logs",
+    "log",
+    "json",
+    "express",
+    "hapi",
+    "kraken",
+    "reload",
+    "microservice",
+    "programmatic",
     "harmony",
     "node-pm2",
     "production",
-    "vitalsigns",
+    "keymetrics",
+    "deploy",
+    "deployment",
+    "daemon",
+    "supervisor",
+    "nodemon",
     "pm2.io",
     "ghost",
     "ghost production",
     "monitoring",
     "process manager",
     "forever",
+    "forever-monitor",
     "keep process alive",
     "process configuration",
     "clustering",
@@ -104,35 +120,36 @@
   "dependencies": {
     "async": "~0.9.0",
     "axm": "~0.1.7",
-    "axon": "~1.0.0",
-    "chalk": "^0.4.0",
+    "axon": "~2.0.0",
+    "chalk": "~0.4.0",
     "chokidar": "~0.8.2",
     "cli-table": "~0.3.0",
     "coffee-script": "~1.7.1",
     "colors": "~0.6.2",
-    "commander": "~2.2.0",
+    "commander": "~2.3.0",
     "cron": "~1.0.4",
     "debug": "~1.0.2",
-    "eventemitter2": "~0.4.13",
+    "eventemitter2": "~0.4.14",
     "json-stringify-safe": "~5.0.0",
     "nssocket": "~0.5.1",
     "punt" : "~2.2.0",
-    "pidusage": "~0.0.6",
-    "pm2-axon-rpc": "~0.0.2",
+    "pidusage": "~0.0.7",
+    "pm2-axon-rpc": "~0.2.0",
     "pm2-deploy": "~0.0.4",
-    "pm2-interface": "~0.1.3",
+    "pm2-interface" : "~1.1.0",
     "pm2-multimeter": "~0.1.2",
     "moment" : "~2.7.0",
-    "uid-number": "0.0.5"
+    "uid-number": "~0.0.5"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
     "should": "^4.0.0",
     "better-assert": "^1.0.0",
-    "promise-spawner": "0.0.3"
+    "promise-spawner": "^0.0.3"
   },
   "optionalDependencies": {
-    "pm2-logs" : "latest"
+    "pm2-logs" : "latest",
+    "ikst" : "~0.1.2"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"

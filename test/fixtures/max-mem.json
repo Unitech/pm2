@@ -1,0 +1,5 @@
+{
+  "name" : "max_mem",
+  "script" : "big-array.js",
+  "max_memory_restart" : "19"
+}
