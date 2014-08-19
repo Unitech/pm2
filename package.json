@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.10.0-beta21",
+  "version": "0.10.0-beta22",
   "os": [
     "!win32"
   ],
