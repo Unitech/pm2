@@ -4,7 +4,7 @@
 # Check if user is logged as root and that pm2 command is available
 #
 
-if ( [ "$EUID" -eq 0 ] || [ "$USER" == "root" ] ) && ! command -v pm2 2>&1;
+if ( [ "$EUID" -eq 0 ] || [ "$USER" == "root" ] ) && ! ( env | grep "unsafe-perm" );
   then
     echo "##### PM2 INSTALLATION"
     echo "#"
@@ -21,18 +21,4 @@ if ( [ "$EUID" -eq 0 ] || [ "$USER" == "root" ] ) && ! command -v pm2 2>&1;
     echo "######"
     echo ""
   exit 1
-fi
-
-which pm2
-
-
-`command -v node || command -v nodejs` ./scripts/ping.js
-if [ $? -eq 0 ]
-then
-    echo "Saving process list..."
-    pm2 dump
-    echo "Done."
-    exit 0;
-else
-    exit 0;
 fi
