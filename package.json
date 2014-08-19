@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.10.0-beta20",
+  "version": "0.10.0-beta21",
   "os": [
     "!win32"
   ],
@@ -138,7 +138,7 @@
     "pm2-deploy": "~0.0.4",
     "pm2-interface" : "~1.1.0",
     "pm2-multimeter": "~0.1.2",
-    "pm2-rpc-fallback" : "~2.1.0",
+    "pm2-rpc-fallback" : "~2.7.0",
     "moment" : "~2.7.0",
     "uid-number": "~0.0.5"
   },

@@ -7,11 +7,10 @@ var cst       = require('../constants.js');
 var fs = require('fs');
 var pm2 = require('..');
 
-var pm2_pid = null;
-var interactor_pid = null;
-var version_file = null;
-
 function killEverything() {
+  var pm2_pid = null;
+  var interactor_pid = null;
+
   try {
     pm2_pid = fs.readFileSync(cst.PM2_PID_FILE_PATH);
   } catch(e) {
@@ -25,8 +24,8 @@ function killEverything() {
   }
 
   if (interactor_pid) {
-    console.log('Killing interactor');
     try {
+      console.log('Killing interactor');
       process.kill(interactor_pid);
     }
     catch (err) {
@@ -37,13 +36,14 @@ function killEverything() {
     try {
       console.log('Killing PM2');
       process.kill(pm2_pid);
-      process.exit(0);
     }
     catch (err) {
-      process.exit(1);
     }
   }
 
+  setTimeout(function() {
+    process.exit(0);
+  }, 100);
 }
 
 
@@ -54,11 +54,9 @@ fallback(cst, function(err, data) {
     // Right RPC communcation
     console.log('Stopping PM2');
     pm2.connect(function() {
-      pm2.dump(function() {
-        console.log('Succesfully dumped');
+      pm2.updatePM2(function() {
         pm2.disconnect(function() {
-          killEverything();
-          process.exit(0);
+          return process.exit(1);
         });
       });
     });
@@ -69,7 +67,7 @@ fallback(cst, function(err, data) {
     return process.exit(0);
   }
   else if (err) {
-    return console.log('Unhandled error, please report https://github.com/Unitech/pm2/issues');
+    return killEverything();
   }
   if (data) {
     console.log('Killing old PM2');
