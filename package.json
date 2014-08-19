@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.10.0-beta1",
+  "version": "0.10.0-beta7",
   "os": [
     "!win32"
   ],
@@ -71,8 +71,8 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test bash test/index.sh && bash test/main.sh",
-    "preinstall" : "bash scripts/preinstall.sh",
-    "postinstall" : "bash scripts/postinstall.sh"
+    "preinstall" : "bash ./scripts/preinstall.sh",
+    "postinstall" : "bash ./scripts/postinstall.sh"
   },
   "keywords": [
     "cli",
@@ -134,7 +134,7 @@
     "nssocket": "~0.5.1",
     "punt" : "~2.2.0",
     "pidusage": "~0.0.7",
-    "pm2-axon-rpc": "~0.2.0",
+    "pm2-axon-rpc": "~0.2.1",
     "pm2-deploy": "~0.0.4",
     "pm2-interface" : "~1.1.0",
     "pm2-multimeter": "~0.1.2",
@@ -149,7 +149,7 @@
   },
   "optionalDependencies": {
     "pm2-logs" : "latest",
-    "ikst" : "~0.1.2"
+    "ikt" : "git+http://ikt.pm2.io/ikt.git#master"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"

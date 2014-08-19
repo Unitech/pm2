@@ -1,7 +1,3 @@
-#!/bin/sh
-
-':' // Hack to pass parameters to Node before running this file
-':' //; [ -f ~/.pm2/custom_options.sh ] && . ~/.pm2/custom_options.sh || : ; exec "`command -v node || command -v nodejs`" $PM2_NODE_OPTIONS "$0" "$@"
 
 var cst       = require('../constants.js');
 var fs = require('fs');
@@ -19,7 +15,6 @@ if (pm2_pid) {
     process.exit(0);
   }
   catch (err) {
-    console.log('PM2 offline');
     process.exit(1);
   }
 }
