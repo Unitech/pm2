@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 bash ./scripts/ping.js
 if [ $? -eq 0 ]

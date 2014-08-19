@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ':' // Hack to pass parameters to Node before running this file
 ':' //; [ -f ~/.pm2/custom_options.sh ] && . ~/.pm2/custom_options.sh || : ; exec "`command -v node || command -v nodejs`" $PM2_NODE_OPTIONS "$0" "$@"
