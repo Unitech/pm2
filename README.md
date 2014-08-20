@@ -1,10 +1,10 @@
 ![pm2](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
 
-pm2 is a process manager for Node apps with a built-in load balancer.
+PM2 is a process manager for Node apps with a built-in load balancer.
 
 ### Tech notes
 
-pm2 is perfect when you need to spread your stateless Node.js code across all CPUs available on a server, to keep all processes alive forever and to 0s reload them.
+PM2 is perfect for spreading your stateless Node.js code across all CPUs available on a server, for keeping all processes alive forever and 0s reload them.
 
 ### Main features
 
