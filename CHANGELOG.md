@@ -1,7 +1,10 @@
 
 # 0.10.0 - PM2 Hellfire release
 
-- PM2 hearth code has been refactored and now it handles extreme scenario without any leak or bug 
+- PM2 hearth code has been refactored and now it handles extreme scenario without any leak or bug
+- PM2 reset <all|id|name> reset restart numbers
+- Auto update script at PM2 installtion
+- --watch enhanced to avoid zombie processes
 - Restart app when reaching a limit of memory by using --max-memory-restart (and max_memory_restart via JSON)(https://github.com/Unitech/pm2#max-memory-restart)
 - PM2 respects strong unix standard process management
 - Remove timestamps by default with pm2 logs
