@@ -124,8 +124,8 @@ spec "Should get the right JSON with HttpInterface file launched"
 $pm2 flush
 spec "Should clean logs"
 
-cat ~/.pm2/logs/echo-out.log | wc -l
-spec "File Log should be cleaned"
+# cat ~/.pm2/logs/echo-out.log | wc -l
+# spec "File Log should be cleaned"
 
 sleep 0.3
 $http_get -q http://localhost:9615/ -O $JSON_FILE

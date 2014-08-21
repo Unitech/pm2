@@ -2,6 +2,7 @@
 # 0.10.0 - PM2 Hellfire release
 
 - PM2 hearth code has been refactored and now it handles extreme scenario without any leak or bug
+- PM2 restart <json|id|name|all> refresh current environment variables #528
 - PM2 reset <all|id|name> reset restart numbers
 - Auto update script at PM2 installtion
 - --watch enhanced to avoid zombie processes
