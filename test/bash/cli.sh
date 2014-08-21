@@ -204,7 +204,7 @@ success "Processes sucessfully restarted with a specific name"
 $pm2 kill
 
 $pm2 resurrect
-spec "Should resurect all apps"
+spec "Should resurrect all apps"
 
 sleep 0.5
 OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
