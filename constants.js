@@ -15,13 +15,13 @@ var DEFAULT_FILE_PATH = p.resolve(HOME, '.pm2');
 
 var default_conf = {
   DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
-  PM2_LOG_FILE_PATH  : p.join(process.env.PM2_LOG_DIR || DEFAULT_FILE_PATH, 'pm2.log'),
-  PM2_PID_FILE_PATH  : p.join(process.env.PM2_PID_DIR || DEFAULT_FILE_PATH, 'pm2.pid'),
+  PM2_LOG_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.log'),
+  PM2_PID_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.pid'),
   DEFAULT_PID_PATH   : p.join(DEFAULT_FILE_PATH, 'pids'),
   DEFAULT_LOG_PATH   : p.join(DEFAULT_FILE_PATH, 'logs'),
   DUMP_FILE_PATH     : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
 
-  SAMPLE_CONF_FILE   : '../lib/custom_options.sh',
+  SAMPLE_CONF_FILE   : p.join('..', 'lib', 'custom_options.sh'),
   PM2_CONF_FILE      : p.join(DEFAULT_FILE_PATH, 'custom_options.sh'),
 
   DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
@@ -62,8 +62,8 @@ var default_conf = {
   INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'agent.json'),
   SEND_INTERVAL       : 1000,
 
-  INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'agent.log'),
-  INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'agent.pid'),
+  INTERACTOR_LOG_FILE_PATH : p.join(DEFAULT_FILE_PATH, 'agent.log'),
+  INTERACTOR_PID_PATH : p.join(DEFAULT_FILE_PATH, 'agent.pid'),
 
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
 };
