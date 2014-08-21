@@ -27,7 +27,7 @@ $pm2 kill
 $pm2 start echo.coffee -x --interpreter coffee
 should 'should has forked app' 'fork_mode' 1
 
-### Dump resurect should be ok
+### Dump resurrect should be ok
 $pm2 dump
 
 $pm2 kill
