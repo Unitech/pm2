@@ -3,8 +3,9 @@
 
 - PM2 hearth code has been refactored and now it handles extreme scenario without any leak or bug
 - PM2 restart <json|id|name|all> refresh current environment variables #528
+- PM2 delete all more verbose
 - PM2 reset <all|id|name> reset restart numbers
-- Auto update script at PM2 installtion
+- Auto update script at PM2 installation
 - --watch enhanced to avoid zombie processes
 - Restart app when reaching a limit of memory by using --max-memory-restart (and max_memory_restart via JSON)(https://github.com/Unitech/pm2#max-memory-restart)
 - PM2 respects strong unix standard process management
