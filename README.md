@@ -4,10 +4,6 @@
 
 PM2 is a process manager for Node apps with a built-in load balancer.
 
-### Tech notes
-
-PM2 is perfect for spreading your stateless Node.js code across all CPUs available on a server, for keeping all processes alive forever and 0s reload them.
-
 ### Main features
 
 - Built-in load balancer (using the native cluster module)
@@ -19,7 +15,7 @@ PM2 is perfect for spreading your stateless Node.js code across all CPUs availab
 - Restart on file change with `--watch`
 - Monitoring in console
 
-Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/PM2).
+Full test suit with more than 300 tests: (https://travis-ci.org/Unitech/PM2)
 
 **The recommended Node.js version is v0.11.13**
 
@@ -42,9 +38,10 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
-We are developing a top-notch product: a dashboard to monitor each part of your Node.js applications. Here are some links:
+We are developing a radically innovative product that will offer you to monitor and augment your Node.JS applications, as you never saw before.
+Here are some links:
 
-- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
+- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform)
 - [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
 
 Thanks in advance and we hope that you like PM2!
@@ -60,7 +57,7 @@ Thanks in advance and we hope that you like PM2!
 - [Examples](#a3)
 - [Different ways to launch a process](#a667)
 - [Options](#a987)
-- [How to update PM2 ?](#update-pm2)
+- [How to update PM2?](#update-pm2)
 
 ### Features
 
