@@ -7,9 +7,6 @@ echo -e "\033[1mRunning tests:\033[0m"
 
 cd $file_path
 
-$pm2 kill
-spec "kill daemon"
-
 #
 # Different way to stop process
 #
@@ -24,6 +21,7 @@ success "$1"
 $pm2 stop 12412
 $pm2 stop 0
 
+
 OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 1 ] || fail "$1"
 success "$1"
@@ -36,6 +34,7 @@ $pm2 list
 OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 3 ] || fail "$1"
 success "$1"
+
 
 #
 # Describe process
@@ -125,8 +124,8 @@ spec "Should get the right JSON with HttpInterface file launched"
 $pm2 flush
 spec "Should clean logs"
 
-cat ~/.pm2/logs/echo-out.log | wc -l
-spec "File Log should be cleaned"
+# cat ~/.pm2/logs/echo-out.log | wc -l
+# spec "File Log should be cleaned"
 
 sleep 0.3
 $http_get -q http://localhost:9615/ -O $JSON_FILE
@@ -137,11 +136,7 @@ spec "Should get the right JSON with HttpInterface file launched"
 # Restart only one process
 #
 $pm2 restart 1
-sleep 0.3
-$http_get -q http://localhost:9615/ -O $JSON_FILE
-OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
-[ $OUT -eq 1 ] || fail "$1"
-success "$1"
+should 'should has restarted process' 'restart_time: 1' 1
 
 #
 # Restart all processes
@@ -153,8 +148,8 @@ sleep 0.3
 $http_get -q http://localhost:9615/ -O $JSON_FILE
 OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 
-[ $OUT -eq 7 ] || fail "$1"
-success "$1"
+[ $OUT -eq 7 ] || fail "Error while wgeting data via web interface"
+success "Got data from interface"
 
 
 $pm2 list
@@ -210,6 +205,8 @@ sleep 0.5
 OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 [ $OUT -eq 8 ] || fail "Not valid process number"
 success "Processes valid"
+
+
 
 $pm2 delete all
 spec "Should delete all processes"

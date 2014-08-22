@@ -113,7 +113,6 @@ describe('PM2 programmatic calls', function() {
   it('should delete processes', function(done) {
     pm2.delete('all', function(err, ret) {
       should(err).be.null;
-      ret.length.should.eql(0);
       pm2.list(function(err, ret) {
         should(err).be.null;
         ret.length.should.eql(0);
@@ -258,7 +257,11 @@ describe('PM2 programmatic calls', function() {
   describe('start OR restart', function() {
     before(function(done) {
       pm2.delete('all', function(err, ret) {
-        done();
+        pm2.list(function(err, ret) {
+          should(err).be.null;
+          ret.length.should.eql(0);
+          done();
+        });
       });
     });
 

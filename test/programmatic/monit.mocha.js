@@ -4,7 +4,7 @@ var p = require('path')
   // , spawn = require('child_process').spawn
   , Spawner = require('promise-spawner')
   , async = require('async')
- 
+
   , bin = p.join(root, '/bin/pm2')
   , pm2 = require(p.join(root, 'index.js'))
   , ids = []
@@ -16,13 +16,6 @@ var timeout = function(cb, time) {
 }
 
 describe('Monitor', function() {
-  this.timeout(0);
-
-  beforeEach(function(cb) {
-    pm2.connect(function() {
-      cb()
-    })
-  })
 
   before(function(cb) {
     pm2.connect(function() {
@@ -31,6 +24,16 @@ describe('Monitor', function() {
       })
     })
   })
+
+
+  after(function(cb) {
+    pm2.killDaemon(function() {
+    pm2.disconnect(function() {
+      cb()
+    })
+    });
+  })
+
 
   it('should start', function() {
 
@@ -56,7 +59,7 @@ describe('Monitor', function() {
           console.log(this.data.err)
         }
 
-        process.exit(code)      
+        process.exit(code)
       })
 
   })

@@ -15,13 +15,13 @@ var DEFAULT_FILE_PATH = p.resolve(HOME, '.pm2');
 
 var default_conf = {
   DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
-  PM2_LOG_FILE_PATH  : p.join(process.env.PM2_LOG_DIR || p.resolve(process.env.HOME, '.pm2'), 'pm2.log'),
-  PM2_PID_FILE_PATH  : p.join(process.env.PM2_PID_DIR || p.resolve(process.env.HOME, '.pm2'), 'pm2.pid'),
+  PM2_LOG_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.log'),
+  PM2_PID_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.pid'),
   DEFAULT_PID_PATH   : p.join(DEFAULT_FILE_PATH, 'pids'),
   DEFAULT_LOG_PATH   : p.join(DEFAULT_FILE_PATH, 'logs'),
   DUMP_FILE_PATH     : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
 
-  SAMPLE_CONF_FILE   : '../lib/custom_options.sh',
+  SAMPLE_CONF_FILE   : p.join('..', 'lib', 'custom_options.sh'),
   PM2_CONF_FILE      : p.join(DEFAULT_FILE_PATH, 'custom_options.sh'),
 
   DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
@@ -36,8 +36,8 @@ var default_conf = {
   DEBUG              : process.env.PM2_DEBUG || false,
   WEB_INTERFACE      : parseInt(process.env.PM2_API_PORT)  || 9615,
   MODIFY_REQUIRE     : process.env.PM2_MODIFY_REQUIRE || false,
-  PREFIX_MSG         : '\x1B[32mPM2 \x1B[39m',
-  PREFIX_MSG_ERR     : '\x1B[31mPM2 [ERROR] \x1B[39m',
+  PREFIX_MSG         : '\x1B[32m[PM2] \x1B[39m',
+  PREFIX_MSG_ERR     : '\x1B[31m[PM2] [ERROR] \x1B[39m',
   SAMPLE_FILE_PATH   : '../lib/sample.json',
 
   CENTOS_STARTUP_SCRIPT : '../lib/scripts/pm2-init-centos.sh',
@@ -62,8 +62,8 @@ var default_conf = {
   INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'agent.json'),
   SEND_INTERVAL       : 1000,
 
-  INTERACTOR_LOG_FILE_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'agent.log'),
-  INTERACTOR_PID_PATH : p.join(p.resolve(process.env.HOME, '.pm2'), 'agent.pid'),
+  INTERACTOR_LOG_FILE_PATH : p.join(DEFAULT_FILE_PATH, 'agent.log'),
+  INTERACTOR_PID_PATH : p.join(DEFAULT_FILE_PATH, 'agent.pid'),
 
   INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
 };

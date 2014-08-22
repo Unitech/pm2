@@ -6,8 +6,6 @@ source "${SRC}/include.sh"
 cd $file_path
 
 ########### Fork mode
-$pm2 kill
-
 $pm2 start echo.js -x
 should 'should has forked app' 'fork_mode' 1
 

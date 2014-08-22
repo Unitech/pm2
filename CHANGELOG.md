@@ -1,4 +1,32 @@
 
+# 0.10.0 - PM2 Hellfire release
+
+- PM2 hearth code has been refactored and now it handles extreme scenario without any leak or bug
+- PM2 restart <json|id|name|all> refresh current environment variables #528
+- PM2 delete all more verbose
+- PM2 reset <all|id|name> reset restart numbers
+- Auto update script at PM2 installation
+- --watch enhanced to avoid zombie processes
+- Restart app when reaching a limit of memory by using --max-memory-restart (and max_memory_restart via JSON)(https://github.com/Unitech/pm2#max-memory-restart)
+- PM2 respects strong unix standard process management
+- Remove timestamps by default with pm2 logs
+- Coffeescript not enabled by default anymore (enhance memory usage)
+- PM2 Programmatic interface enhanced
+- PM2 hearth refactor
+- PM2 describe show node-args
+- node_args for V8 options is now available via JSON declaration
+- Watch system avoid ghost processes
+- Memory leak fixes
+- Better performance on interface
+- Fix tests
+- Enable PM2_NODE_OPTIONS and node-args for fork mode
+- Dependencies updated
+- Faster monitoring system
+- AXM actions unification
+- Socket errors handled
+- Watchdog via Agent - restart automatically PM2 with previous processes in case of crash
+- PM2_NODE_OPTIONS deprecation (use --node-args instead)
+
 # 0.9.6 - 0.9.5 - 0.9.4
 
 - Bash test auto exit when failure

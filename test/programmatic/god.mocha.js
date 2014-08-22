@@ -4,21 +4,48 @@ var numCPUs = require('os').cpus().length;
 var fs = require('fs');
 var path = require('path');
 var should = require('should');
-
+var Common = require('../../lib/Common');
 /**
  * Description
  * @method getConf
  * @return AssignmentExpression
  */
 function getConf() {
-  return process_conf = {
-    pm_exec_path : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-    pm_err_log_path : path.resolve(process.cwd(), 'test/echoErr.log'),
-    pm_out_log_path : path.resolve(process.cwd(), 'test/echoLog.log'),
-    pm_pid_file : path.resolve(process.cwd(), 'test/echopid'),
-    exec_mode       : 'cluster_mode'
-  };
+  var a = Common.resolveAppPaths({
+    script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+    name : 'echo',
+    instances : 2
+  });
+  return a;
 }
+
+function getConf2() {
+  return Common.resolveAppPaths({
+    script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
+    instances       : 4,
+    exec_mode       : 'cluster_mode',
+    name : 'child'
+  });
+}
+
+function getConf3() {
+  return Common.resolveAppPaths({
+    script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
+    instances       : 10,
+    exec_mode       : 'cluster_mode',
+    name : 'child'
+  });
+}
+
+function getConf4() {
+  return Common.resolveAppPaths({
+    script : path.resolve(process.cwd(), 'test/fixtures/args.js'),
+    args            : "['-d', '-a']",
+    instances       : '1',
+    name : 'child'
+  });
+}
+
 
 describe('God', function() {
   before(function(done) {
@@ -52,18 +79,14 @@ describe('God', function() {
     });
 
     it('should kill a process by name', function(done) {
-      God.prepare({
-        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
-        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        instances       : 2
-      }, function(err, procs) {
-	God.getFormatedProcesses().length.should.equal(2);
+      God.prepare(getConf(), function(err, procs) {
+	      God.getFormatedProcesses().length.should.equal(2);
 
         God.stopProcessName('echo', function() {
           God.getFormatedProcesses().length.should.equal(2);
-          God.deleteAll({}, done);
+          God.deleteAll({}, function() {
+            done();
+          });
         });
       });
     });
@@ -82,9 +105,9 @@ describe('God', function() {
       God.prepare(getConf(), function(err, procs) {
         should(err).be.null;
         pid = procs[0].pid;
-	procs[0].pm2_env.status.should.be.equal('online');
-	God.getFormatedProcesses().length.should.equal(1);
-	done();
+	      procs[0].pm2_env.status.should.be.equal('online');
+	      God.getFormatedProcesses().length.should.equal(2);
+	      done();
       });
     });
   });
@@ -102,8 +125,8 @@ describe('God', function() {
         clu = procs[0];
 
         pid = clu.pid;
-	procs[0].pm2_env.status.should.be.equal('online');
-	done();
+	      procs[0].pm2_env.status.should.be.equal('online');
+	      done();
       });
     });
 
@@ -117,7 +140,7 @@ describe('God', function() {
     });
 
     it('should restart the same process and set it as state online and be up', function(done) {
-      God.restartProcessId(clu.pm2_env.pm_id, function(err, dt) {
+      God.restartProcessId({id:clu.pm2_env.pm_id}, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         proc.pm2_env.status.should.be.equal('online');
         God.checkProcess(proc.process.pid).should.be.equal(true);
@@ -126,7 +149,7 @@ describe('God', function() {
     });
 
     it('should stop this process by name and keep in db on state stopped', function(done) {
-      God.stopProcessName(clu.name, function(err, dt) {
+      God.stopProcessName(clu.pm2_env.name, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         proc.pm2_env.status.should.be.equal('stopped');
         God.checkProcess(proc.process.pid).should.be.equal(false);
@@ -135,7 +158,7 @@ describe('God', function() {
     });
 
     it('should restart the same process by NAME and set it as state online and be up', function(done) {
-      God.restartProcessName(clu.name, function(err, dt) {
+      God.restartProcessName(clu.pm2_env.name, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         proc.pm2_env.status.should.be.equal('online');
         God.checkProcess(proc.process.pid).should.be.equal(true);
@@ -148,7 +171,7 @@ describe('God', function() {
       God.deleteProcessId(clu.pm2_env.pm_id, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         God.checkProcess(old_pid).should.be.equal(false);
-        dt.length.should.be.equal(0);
+        dt.length.should.be.equal(1);
         done();
       });
     });
@@ -158,7 +181,7 @@ describe('God', function() {
         pid = _clu[0].pid;
 	_clu[0].pm2_env.status.should.be.equal('online');
         var old_pid = _clu[0].pid;
-        God.deleteProcessName(_clu.name, function(err, dt) {
+        God.deleteProcessName(_clu[0].pm2_env.name, function(err, dt) {
           setTimeout(function() {
             var proc = God.findProcessById(clu.pm2_env.pm_id);
             should(proc == null);
@@ -181,15 +204,7 @@ describe('God', function() {
     });
 
     it('should launch app', function(done) {
-      God.prepare({
-        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/child.js'),
-        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
-        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        instances       : 4,
-        exec_mode       : 'cluster_mode',
-        name : 'child'
-      }, function(err, procs) {
+      God.prepare(getConf2(), function(err, procs) {
 	var processes = God.getFormatedProcesses();
 
         setTimeout(function() {
@@ -234,29 +249,19 @@ describe('God', function() {
     });
 
     it('should launch multiple processes depending on CPUs available', function(done) {
-      God.prepare({
-        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
-        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        exec_mode : 'cluster_mode',
-        instances       : 3
-      }, function(err, procs) {
-	God.getFormatedProcesses().length.should.equal(3);
+      God.prepare(Common.resolveAppPaths({
+        script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        name : 'child',
+        instances:3
+      }), function(err, procs) {
+	      God.getFormatedProcesses().length.should.equal(3);
         procs.length.should.equal(3);
         done();
       });
     });
 
     it('should start maximum processes depending on CPU numbers', function(done) {
-      God.prepare({
-        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
-        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
-        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        instances       : 10,
-        exec_mode : 'cluster_mode',
-      }, function(err, procs) {
+      God.prepare(getConf3(), function(err, procs) {
 	God.getFormatedProcesses().length.should.equal(10);
         procs.length.should.equal(10);
         done();
@@ -264,15 +269,7 @@ describe('God', function() {
     });
 
     it('should handle arguments', function(done) {
-      God.prepare({
-        pm_exec_path    : path.resolve(process.cwd(), 'test/fixtures/args.js'),
-        pm_err_log_path : path.resolve(process.cwd(), 'test/errLog.log'),
-        pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
-        pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
-        args            : "['-d', '-a']",
-        instances       : '1',
-        exec_mode : 'cluster_mode'
-      }, function(err, procs) {
+      God.prepare(getConf4(), function(err, procs) {
         setTimeout(function() {
           God.getFormatedProcesses()[0].pm2_env.restart_time.should.eql(0);
           done();
