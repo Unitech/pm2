@@ -320,7 +320,7 @@ commander.command('save')
   }));
 
 //
-// Resurect
+// Resurrect
 //
 commander.command('resurrect')
   .description('resurrect previously dumped processes')
@@ -333,7 +333,7 @@ commander.command('resurrect')
 // Set pm2 to startup
 //
 commander.command('startup <platform>')
-  .description('auto resurect process at startup. [platform] = ubuntu, centos, gentoo or systemd')
+  .description('auto resurrect process at startup. [platform] = ubuntu, centos, gentoo or systemd')
   .action(function(platform) {
     CLI.startup(platform, commander);
   });

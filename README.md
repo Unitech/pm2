@@ -4,6 +4,7 @@ PM2 is a process manager for Node apps with a built-in load balancer.
 
 ### Tech notes
 
+
 PM2 is perfect for spreading your stateless Node.js code across all CPUs available on a server, for keeping all processes alive forever and 0s reload them.
 
 ### Main features
@@ -30,6 +31,7 @@ Works on Linux & MacOS.
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true)](https://nodei.co/npm/pm2.png?downloads=true)
 
 <!-- ### Build Status -->
+
 
 Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
 
