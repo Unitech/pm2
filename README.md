@@ -1,6 +1,9 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2-v2.png)
 
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
+<center>
+[![NPM Version](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.org/package/pm2)
+[![Build Status](https://img.shields.io/travis/Unitech/PM2.svg?style=flat-square)](https://travis-ci.org/Unitech/PM2)
+</center>
 
 PM2 is a process manager for Node apps with a built-in load balancer.
 
@@ -26,7 +29,7 @@ Tested with Node v0.11, v0.10 (https://travis-ci.org/Unitech/PM2).
 Compatible with CoffeeScript.
 Works on Linux & MacOS.
 
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
+
 [![Donate](http://gravaco.in/b06327acf5ae1a2ce3f08254ed7f33d7.png)](http://goo.gl/sdaIwX)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
