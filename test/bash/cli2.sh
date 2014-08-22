@@ -72,5 +72,3 @@ cat outech-0.log > /dev/null
 spec "file outech-0.log exist"
 cat errech-0.log > /dev/null
 spec "file errech-0.log exist"
-
-should 'should has not restarted' 'restart_time: 0' 10

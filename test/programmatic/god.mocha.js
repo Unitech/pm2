@@ -140,7 +140,7 @@ describe('God', function() {
     });
 
     it('should restart the same process and set it as state online and be up', function(done) {
-      God.restartProcessId(clu.pm2_env.pm_id, function(err, dt) {
+      God.restartProcessId({id:clu.pm2_env.pm_id}, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         proc.pm2_env.status.should.be.equal('online');
         God.checkProcess(proc.process.pid).should.be.equal(true);

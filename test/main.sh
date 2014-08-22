@@ -38,6 +38,8 @@ bash ./test/bash/fork.sh
 spec "Fork verified"
 bash ./test/bash/infinite_loop.sh
 spec "Infinite loop stop"
+bash ./test/bash/env-refresh.sh
+spec "Environment refresh on restart"
 bash ./test/bash/reset.sh
 spec "Reset meta"
 
