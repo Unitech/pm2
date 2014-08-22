@@ -1,11 +1,6 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2-v2.png)
 
-<center>
-[![NPM Version](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.org/package/pm2)
-[![Build Status](https://img.shields.io/travis/Unitech/PM2.svg?style=flat-square)](https://travis-ci.org/Unitech/PM2)
-</center>
-
-PM2 is a process manager for Node apps with a built-in load balancer.
+PM2 is a process manager for Node.JS applications with a built-in load balancer.
 
 ### Tech notes
 
