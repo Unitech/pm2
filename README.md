@@ -1,19 +1,20 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2-v2.png)
 
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
-
-PM2 is a process manager for Node apps with a built-in load balancer.
+PM2 is a process manager for Node.JS application with a built-in load balancer.
 
 ### Main features
 
-- Built-in load balancer (using the native cluster module)
-- Script daemonization
-- 0s downtime reload for Node apps
+- Built-in load balancer (Node.JS)
+- 0s downtime reload (Node.JS)
+- JSON application declaration
+- PM2 programmatic management
+- Efficient Deployment System
+- In-terminal Monitoring
 - Generate SystemV/SystemD startup scripts (Ubuntu, Centos...)
 - Set memory limit for process to restart
 - Pause unstable process (avoid infinite loop)
+- Script daemonization
 - Restart on file change with `--watch`
-- Monitoring in console
 
 Full test suit with more than 300 tests: (https://travis-ci.org/Unitech/PM2)
 
@@ -666,6 +667,8 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 PM2 embed a simple and powerful deployment system with revision tracing.
 It's based on <a href="https://github.com/visionmedia/deploy">https://github.com/visionmedia/deploy</a>
 
+A step-by-step tutorial is available here : [Deploy and Iterate faster with PM2 deploy](https://keymetrics.io/2014/06/25/ecosystem-json-deploy-and-iterate-faster/)
+
 ## Getting started with deployment
 
 Please read the [Considerations to use PM2 deploy](#considerations)
@@ -769,9 +772,10 @@ $ pm2 deploy <configuration_file> <environment> <command>
 - You might want to commit your node_modules folder ([#622](https://github.com/Unitech/pm2/issues/622)) or add the `npm install` command to the `post-deploy` section: `"post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"`
 - You can declare specific environment variable depending on the environment you want to deploy the code to. For instance to declare variables for the production environment, just add "env_production": {} and declare that variables.
 - PM2 will look by default to `ecosystem.json`. So you can skip the <configuration_file> options if it's the case
+- You can embed the "apps" & "deploy" section in the package.json
 - It deploys your code via ssh, you don't need any dependencies
 - Process are initialized / started automatically depending on application name in `ecosystem.json`
-- PM2-deploy is not on the main PM2 repository
+- PM2-deploy repoitory is there: [pm2-deploy](https://github.com/Unitech/pm2-deploy)
 
 <a name="deployment-contribution"/>
 ## Contributing
