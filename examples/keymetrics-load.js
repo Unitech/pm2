@@ -7,7 +7,7 @@ pm2.connect(function() {
     pm2.start('examples/human_event.js', function() {
       pm2.start('examples/child.js', {instances:2},function() {
         pm2.start('examples/kill-not-so-fast.js',  {
-          instances:10,
+          instances:20,
           minUptime: 0,
           maxRestarts : 0
         },  function() {
