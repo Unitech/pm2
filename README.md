@@ -4,42 +4,45 @@ PM2 is a process manager for Node.JS application with a built-in load balancer.
 
 ### Main features
 
+- Advanced process management
 - Built-in load balancer (Node.JS)
 - 0s downtime reload (Node.JS)
 - JSON application declaration
-- PM2 programmatic management
-- Efficient Deployment System
-- In-terminal Monitoring
-- Generate SystemV/SystemD startup scripts (Ubuntu, Centos...)
-- Set memory limit for process to restart
-- Pause unstable process (avoid infinite loop)
-- Script daemonization
-- Restart on file change with `--watch`
+- Log management
+- Programmatic interface with embeddable capabilities
+- Provisioning and Deployment system
+- Application resource monitoring (RAM, CPU)
+- Application daemonization
+- Assisted startup script creation (SystemV/SystemD/Upstart)
+- Automatically restart process based on memory limit
+- Automatically stop unstable process (at launch)
+- Automatically restart process on file change
 
 Full test suit with more than 300 tests: (https://travis-ci.org/Unitech/PM2)
+Tested against extreme conditions and long time memory monitored.
 
-**The recommended Node.js version is v0.11.13**
+**We recommend the Node.js version v0.11.13**
 
 Compatible with CoffeeScript.
-Works on Linux & MacOS.
+Works on Linux & MacOS. Windows upcoming.
 
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 [![Donate](http://gravaco.in/b06327acf5ae1a2ce3f08254ed7f33d7.png)](http://goo.gl/sdaIwX)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
-<!-- ### Build Status -->
+### Build Status
 
 Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
 
 Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
 
 
-## Monitoring dashboard
+## Keymetrics Monitor & Augment Node.JS
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
-We are developing a radically innovative product that will offer you to monitor and augment your Node.JS applications, as you never saw before.
+We are developing a product that will offer you to monitor and augment your Node.JS applications, in an innovative way.
 Here are some links:
 
 - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform)
@@ -116,7 +119,7 @@ Thanks in advance and we hope that you like PM2!
 <a name="a1"/>
 ## Installation
 
-The preferred Node version to run PM2 is **0.11.10**
+One more time we recommend Node.JS 0.11.13 (manage Node.JS versions easily with https://github.com/creationix/nvm)
 
 The latest PM2 stable version is installable via NPM:
 
@@ -140,9 +143,7 @@ $ pm2 start app.js
 ```
 
 <a name="a3"/>
-## Examples
-
-Raw examples:
+## Raw Examples
 
 ```bash
 $ pm2 start app.js --name my-api # Name process
