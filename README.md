@@ -19,9 +19,9 @@ PM2 is a process manager for Node.JS application with a built-in load balancer.
 - Automatically restart process on file change
 
 Full test suit with more than 300 tests: (https://travis-ci.org/Unitech/PM2)
-Tested against extreme conditions and long time memory monitored.
+Tested against extreme conditions.
 
-**We recommend the Node.js version v0.11.13**
+**We recommend the Node.js version v0.11.13 for better cluster management**
 
 Compatible with CoffeeScript.
 Works on Linux & MacOS. Windows upcoming.
