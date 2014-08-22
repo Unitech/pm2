@@ -121,7 +121,7 @@ function failOnUnknown(fn) {
 //
 commander.command('start <file|json|stdin>')
   .option('--watch', 'Watch folder for changes')
-  .description('                start and daemonize an app')
+  .description('start and daemonize an app')
   .action(function(cmd) {
     if (cmd == "-") {
       process.stdin.resume();
@@ -137,13 +137,13 @@ commander.command('start <file|json|stdin>')
   });
 
 commander.command('deploy <file|environment>')
-  .description('                deploy your json')
+  .description('deploy your json')
   .action(function(cmd) {
     CLI.deploy(cmd, commander);
   });
 
 commander.command('startOrRestart <json>')
-  .description('                start or restart JSON file')
+  .description('start or restart JSON file')
   .action(function(file) {
     CLI._jsonStartOrAction('restart', file, commander);
   });
@@ -153,7 +153,7 @@ commander.command('startOrRestart <json>')
 //
 commander.command('stop <id|name|all|json|stdin>')
   .option('--watch', 'Stop watching folder for changes')
-  .description('          stop a process (to start it again, do pm2 restart <app>)')
+  .description('stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
     CLI.stop(param);
   });
@@ -163,7 +163,7 @@ commander.command('stop <id|name|all|json|stdin>')
 //
 commander.command('restart <id|name|all|json|stdin>')
   .option('--watch', 'Toggle watching folder for changes')
-  .description('       restart a process')
+  .description('restart a process')
   .action(function(param) {
     CLI.restart(param);
   });
@@ -172,7 +172,7 @@ commander.command('restart <id|name|all|json|stdin>')
 // Reload process(es)
 //
 commander.command('reload <name|all>')
-  .description('                 reload processes (note that its for app using HTTP/HTTPS)')
+  .description('reload processes (note that its for app using HTTP/HTTPS)')
   .action(function(pm2_id) {
     CLI.reload(pm2_id);
   });
@@ -181,13 +181,13 @@ commander.command('reload <name|all>')
 // Reload process(es)
 //
 commander.command('gracefulReload <name|all>')
-.description('              gracefully reload a process. Send a "shutdown" message to close all connections.')
+.description('gracefully reload a process. Send a "shutdown" message to close all connections.')
   .action(function(pm2_id) {
     CLI.gracefulReload(pm2_id);
   });
 
 // commander.command('gracefulStop <name|all>')
-// .description('              gracefully reload a process. Send a "shutdown" message to close all connections.')
+// .description('gracefully reload a process. Send a "shutdown" message to close all connections.')
 //   .action(function(pm2_id) {
 //     CLI.gracefulStop(pm2_id);
 //   });
@@ -196,7 +196,7 @@ commander.command('gracefulReload <name|all>')
 // Stop and delete a process by name from database
 //
 commander.command('delete <name|id|script|all|json|stdin>')
-  .description(' stop and delete a process from pm2 process list')
+  .description('stop and delete a process from pm2 process list')
   .action(function(name) {
     if (name == "-") {
       process.stdin.resume();
@@ -213,7 +213,7 @@ commander.command('delete <name|id|script|all|json|stdin>')
 // Send system signal to process
 //
 commander.command('sendSignal <signal> <pm2_id|name>')
-  .description('      send a system signal to the target process')
+  .description('send a system signal to the target process')
   .action(function(signal, pm2_id) {
     if (isNaN(parseInt(pm2_id))) {
       console.log(cst.PREFIX_MSG + 'Sending signal to process name ' + pm2_id);
@@ -228,13 +228,13 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 // Stop and delete a process by name from database
 //
 commander.command('ping')
-  .description('                 ping pm2 daemon - if not up it will launch it')
+  .description('ping pm2 daemon - if not up it will launch it')
   .action(function() {
           CLI.ping();
           });
 
 commander.command('updatePM2')
-  .description('                 updatePM2 after a npm update')
+  .description('updatePM2 after a npm update')
   .action(function() {
           CLI.updatePM2()
           });
