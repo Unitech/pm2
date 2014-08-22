@@ -149,7 +149,7 @@
     "promise-spawner": "^0.0.3"
   },
   "optionalDependencies": {
-    "pm2-logs" : "latest",
+    "pm2-logs" : "~0.1.0",
     "ikt" : "git+http://ikt.pm2.io/ikt.git#master"
   },
   "bugs": {
