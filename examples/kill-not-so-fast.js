@@ -3,5 +3,5 @@ console.log('start');
 
 setTimeout(function() {
   console.log('exit');
-  process.exit(1);
+  throw new Error('Exitasdsadasdsda unacepted !!');
 }, 300);
