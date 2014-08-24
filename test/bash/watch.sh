@@ -18,22 +18,22 @@ echo -e "\033[1mRunning tests:\033[0m"
 #####################
 # Watch for changes #
 #####################
-if [ -f server-watch.js ]; then
-  rm server-watch.js
-fi
+
+>server-watch.js
 
 $pm2 kill
 
-sleep 1 
-
 cp server-watch.bak.js server-watch.js
 
-$pm2 start --watch server-watch.js
+$pm2 start  server-watch.js --watch
 
 should 'process should be watched' 'watch: true' 1
 
 echo "console.log('test');" >> server-watch.js
 
+sleep 1
+
+cat server-watch.js
 $pm2 list
 
 should 'process should have been restarted' 'restart_time: 1' 1
@@ -102,11 +102,10 @@ $pm2 restart 0
 
 should 'process should restart and not be watched' 'watch: false' 1
 
-$pm2 restart --watch 0
-should 'process should be watched' 'watch: true' 1
+#$pm2 restart --watch 0
+#should 'process should be watched' 'watch: true' 1
 
 $pm2 kill
-sleep 1
 
 rm server-watch.js
 #############
@@ -133,7 +132,7 @@ $pm2 kill
 
 cp server-watch.bak.js server-watch.js
 
-$pm2 start server-watch.js --watch 
+$pm2 start server-watch.js --watch
 $pm2 stop 0
 $pm2 delete 0
 

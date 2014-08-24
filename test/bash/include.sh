@@ -13,6 +13,7 @@
 
 node="`type -P node`"
 nodeVersion="`$node -v`"
+
 pm2="`type -P node` `pwd`/bin/pm2"
 
 script="echo"

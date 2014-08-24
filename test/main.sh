@@ -12,6 +12,8 @@ echo "###################### !DEBUG! ###########################"
 
 bash ./test/bash/cli.sh
 spec "CLI basic test"
+bash ./test/bash/watch.sh
+spec "Watch feature"
 bash ./test/bash/json_file.sh
 spec "JSON file test"
 bash ./test/bash/harmony.sh

@@ -122,7 +122,7 @@
     "axm": "~0.1.7",
     "axon": "~2.0.0",
     "chalk": "~0.5.1",
-    "chokidar": "~0.8.2",
+    "chokidar": "0.8.2",
     "cli-table": "~0.3.0",
     "coffee-script": "~1.7.1",
     "colors": "~0.6.2",
