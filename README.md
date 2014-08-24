@@ -38,7 +38,7 @@ Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master
 Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
 
 
-## Keymetrics Monitor & Augment Node.JS
+## Keymetrics - Monitor & Augment Node.JS
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
