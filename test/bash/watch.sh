@@ -113,18 +113,18 @@ rm server-watch.js
 #############
 # we've already seen before that "watch: true" is really watching when changing a file
 
-$pm2 start --watch all.json
+# $pm2 start --watch all.json
 
-should 'processes should be watched' 'watch: true' 8
+# should 'processes should be watched' 'watch: true' 8
 
-$pm2 stop --watch all
+# $pm2 stop --watch all
 
-should 'processes should have stop being watched' 'watch: false' 8
+# should 'processes should have stop being watched' 'watch: false' 8
 
-$pm2 restart --watch all
-should 'processes should be watched' 'watch: true' 8
+# $pm2 restart --watch all
+# should 'processes should be watched' 'watch: true' 8
 
-$pm2 kill
+# $pm2 kill
 
 ##########
 # delete #
