@@ -1,4 +1,4 @@
-![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2-v2.png)
+![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
 PM2 is a process manager for Node.JS application with a built-in load balancer.
 
