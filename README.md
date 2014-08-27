@@ -19,7 +19,6 @@ PM2 is a process manager for Node.JS application with a built-in load balancer.
 - Automatically restart process on file change
 
 Full test suit with more than 300 tests: (https://travis-ci.org/Unitech/PM2)
-Tested against extreme conditions.
 
 **We recommend the Node.js version v0.11.13 for better cluster management**
 
@@ -38,15 +37,14 @@ Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master
 Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
 
 
-## Keymetrics - Monitor & Augment Node.JS
+## Monitoring dashboard
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
-We are developing a product that will offer you to monitor and augment your Node.JS applications, in an innovative way.
-Here are some links:
+We are developing a radically innovative product that will offer you to monitor and augment your Node.JS applications, as you never saw before. Here are some links:
 
 - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform)
-- [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
+- [Newsletter](http://signup.pm2.io/)
 
 Thanks in advance and we hope that you like PM2!
 
