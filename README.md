@@ -213,9 +213,9 @@ $ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a con
 
 $ pm2 start app.js --node-args="--debug=7001 --trace-deprecation" # --node-args command line option to pass options to node
 
-$ pm2 --run-as-user foo start app.js  # Start app.js as user foo instead of root (pm2 must be running as root)
+$ pm2 --run-as-user foo start app.js  # Start app.js as user foo instead of the user that started pm2
 
-$ pm2 --run-as-user foo --run-as-group bar start app.js  # Start app.js as foo:bar instead of root:root (pm2 must be running as root)
+$ pm2 --run-as-user foo --run-as-group bar start app.js  # Start app.js as foo:bar instead of the user:group that started pm2
 ```
 
 For scripts in other languages:
