@@ -1145,6 +1145,7 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 - [Using ansible with pm2](https://github.com/Unitech/pm2/issues/88#issuecomment-49106686)
 - [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
 - [Restart when process reaches a specific memory amount](https://github.com/Unitech/pm2/issues/141)
+- [Sticky sessions and socket.io discussion](https://github.com/Unitech/PM2/issues/637)
 
 <a name="a20"/>
 ## External resources and articles
