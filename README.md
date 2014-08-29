@@ -27,6 +27,7 @@ Works on Linux & MacOS. Windows upcoming.
 
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
 [![Donate](http://gravaco.in/b06327acf5ae1a2ce3f08254ed7f33d7.png)](http://goo.gl/sdaIwX)
+[![Bountysource](https://www.bountysource.com/badge/team?team_id=931&style=raised)](https://www.bountysource.com/teams/keymetricsio?utm_source=Keymetrics.io&utm_medium=shield&utm_campaign=raised)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
