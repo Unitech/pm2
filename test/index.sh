@@ -23,6 +23,8 @@ function spec {
 
 $pm2 kill
 
+export DEBUG="pm2:*"
+
 mocha ./test/programmatic/god.mocha.js
 spec "God test"
 mocha ./test/programmatic/satan.mocha.js
