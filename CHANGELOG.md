@@ -1,4 +1,13 @@
 
+# 0.10.1-2-3-4
+
+- env option via programmatic interface
+- fix watch system
+- correct pm2 describe command
+- close file used via pm2 flush
+- add startOrReload
+- better closing events
+
 # 0.10.0 - PM2 Hellfire release
 
 - PM2 hearth code has been refactored and now it handles extreme scenario without any leak or bug
