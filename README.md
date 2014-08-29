@@ -36,15 +36,14 @@ Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master
 
 Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
 
-
 ## Monitoring dashboard
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
-We are developing a radically innovative product that will offer you to monitor and augment your Node.JS applications, as you never saw before. Here are some links:
+We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
 
-- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform)
-- [Newsletter](http://signup.pm2.io/)
+- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
+- [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
 
 Thanks in advance and we hope that you like PM2!
 
@@ -769,12 +768,13 @@ $ pm2 deploy <configuration_file> <environment> <command>
 ## Considerations
 
 - You might want to commit your node_modules folder ([#622](https://github.com/Unitech/pm2/issues/622)) or add the `npm install` command to the `post-deploy` section: `"post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"`
+- Verify that your remote server has the permission to git clone the repository
 - You can declare specific environment variable depending on the environment you want to deploy the code to. For instance to declare variables for the production environment, just add "env_production": {} and declare that variables.
 - PM2 will look by default to `ecosystem.json`. So you can skip the <configuration_file> options if it's the case
 - You can embed the "apps" & "deploy" section in the package.json
 - It deploys your code via ssh, you don't need any dependencies
 - Process are initialized / started automatically depending on application name in `ecosystem.json`
-- PM2-deploy repoitory is there: [pm2-deploy](https://github.com/Unitech/pm2-deploy)
+- PM2-deploy repository is there: [pm2-deploy](https://github.com/Unitech/pm2-deploy)
 
 <a name="deployment-contribution"/>
 ## Contributing
@@ -944,7 +944,6 @@ PM2_API_PORT
 PM2_GRACEFUL_TIMEOUT
 PM2_MODIFY_REQUIRE
 ```
-
 
 ## API health endpoint
 

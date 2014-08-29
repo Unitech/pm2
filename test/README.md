@@ -39,3 +39,10 @@ $ chkconfig --add pm2-init.sh
 gyp WARN EACCES user "root" does not have permission to create dev dir :
 https://github.com/TooTallNate/node-gyp/issues/126
 -> add --unsafe-perm
+
+# .pm2
+
+```
+$ sudo sh -c 'echo "export PM2_HOME=/var/" >> /etc/profile'
+$ sudo mkdir /var/.pm2; chown -R tknew:tknew /var/.pm2
+```
