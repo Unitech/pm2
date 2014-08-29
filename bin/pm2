@@ -114,6 +114,26 @@ if (process.argv.indexOf('-s') > -1) {
   global.console.error = function(){};
 }
 
+function beginCommandProcessing() {
+  //
+  // Wait Satan is connected to God to launch parsing
+  //
+  // This message is triggered once the RPC Client is connected to the Daemon
+  // in file Satan.js, method Satan.launchRPC
+  //
+  debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
+  CLI.getVersion(function(err, remote_version) {
+    if (!err && (pkg.version != remote_version)) {
+      console.log('');
+      console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 updatePM2'));
+      console.log('In memory PM2 version:', chalk.blue.bold(remote_version));
+      console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
+      console.log('');
+    }
+    commander.parse(process.argv);
+  });
+}
+
 if (process.argv.indexOf('--no-daemon') > -1) {
   //
   // Start daemon if it does not exist
@@ -126,11 +146,15 @@ if (process.argv.indexOf('--no-daemon') > -1) {
     if (ab == true) {
       console.error('>> pm2 is already daemonized ! You should kill it before launching it in no-daemon mode'.red);
     }
-    Satan.start(true);
+    Satan.start(true, function() {
+      beginCommandProcessing();
+    });
   });
 }
 else
-  Satan.start(false);
+  Satan.start(false, function() {
+    beginCommandProcessing();
+  });
 
 
 //
@@ -492,24 +516,3 @@ if (process.argv.length == 2) {
   commander.outputHelp();
   process.exit(cst.ERROR_EXIT);
 }
-
-
-//
-// Wait Satan is connected to God to launch parsing
-//
-// This message is triggered once the RPC Client is connected to the Daemon
-// in file Satan.js, method Satan.launchRPC
-//
-process.once('satan:client:ready', function() {
-  debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
-  CLI.getVersion(function(err, remote_version) {
-    if (!err && (pkg.version != remote_version)) {
-      console.log('');
-      console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 updatePM2'));
-      console.log('In memory PM2 version:', chalk.blue.bold(remote_version));
-      console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
-      console.log('');
-    }
-    commander.parse(process.argv);
-  });
-});
