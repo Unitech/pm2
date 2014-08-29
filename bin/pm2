@@ -122,6 +122,9 @@ function beginCommandProcessing() {
   // in file Satan.js, method Satan.launchRPC
   //
   debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
+  return commander.parse(process.argv);
+  
+  // Deprecate message for update as there is an automatic update procedure now
   CLI.getVersion(function(err, remote_version) {
     if (!err && (pkg.version != remote_version)) {
       console.log('');
@@ -130,7 +133,7 @@ function beginCommandProcessing() {
       console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
       console.log('');
     }
-    commander.parse(process.argv);
+    
   });
 }
 
