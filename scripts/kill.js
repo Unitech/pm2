@@ -52,15 +52,7 @@ var fallback = require('pm2-rpc-fallback').fallback;
 fallback(cst, function(err, data) {
   if (err && err.online) {
     // Right RPC communcation
-    console.log('Stopping PM2');
-    pm2.connect(function() {
-      pm2.updatePM2(function() {
-        pm2.disconnect(function() {
-          return process.exit(1);
-        });
-      });
-    });
-    return false;
+    return process.exit(1);
   }
   else if (err && err.offline) {
     console.log('PM2 already offline');

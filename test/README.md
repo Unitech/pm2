@@ -42,6 +42,8 @@ https://github.com/TooTallNate/node-gyp/issues/126
 
 # .pm2
 
+Doesnt work
+
 ```
 $ sudo sh -c 'echo "export PM2_HOME=/var/" >> /etc/profile'
 $ sudo mkdir /var/.pm2; chown -R tknew:tknew /var/.pm2
