@@ -588,7 +588,7 @@ You can define parameters for your apps in `processes.json`:
     "name"       : "auto-kill",
     "script"     : "./examples/killfast.js",
     "min_uptime" : "100",
-    "exec_mode"  : "fork_mode",
+    "exec_mode"  : "fork_mode"
   }]
 }
 ```
