@@ -132,7 +132,7 @@ function beginCommandProcessing() {
       console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
       console.log('');
     }
-      commander.parse(process.argv)
+      commander.parse(process.argv);
 
   });
 }
@@ -150,7 +150,7 @@ if (process.argv.indexOf('--no-daemon') > -1) {
       console.error('>> pm2 is already daemonized ! You should kill it before launching it in no-daemon mode'.red);
     }
     Satan.start(true, function() {
-      beginCommandProcessing();
+        beginCommandProcessing();
     });
   });
 }
