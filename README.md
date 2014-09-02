@@ -751,6 +751,8 @@ Now your code will be populated, installed and started with PM2
 <a name="deployment-help"/>
 ## Deployment options
 
+Display deploy help via `pm2 deploy help`:
+
 ```
 $ pm2 deploy <configuration_file> <environment> <command>
 
@@ -763,6 +765,14 @@ $ pm2 deploy <configuration_file> <environment> <command>
     exec|run <cmd>       execute the given <cmd>
     list                 list previous deploy commits
     [ref]                deploy to [ref], the "ref" setting, or latest tag
+```
+
+## Commands
+
+```
+$ pm2 startOrRestart all.json            # Invoke restart on all apps in JSON
+$ pm2 startOrReload all.json             # Invoke reload
+$ pm2 startOrGracefulReload all.json     # Invoke gracefulReload
 ```
 
 <a name="considerations"/>
