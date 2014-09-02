@@ -53,6 +53,17 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
+  it('should start a script in a specified cwd', function(done) {
+    pm2.start(process.cwd() + '/test/programmatic/cwd.js',
+              {cwd:process.cwd() + '/test/programmatic/'},
+              function(err, data) {
+      proc1 = data[0];
+      proc1.pm2_env.cwd.should.eql(process.cwd() + '/test/programmatic/');      
+      should(err).be.null;
+      done();
+    });
+  });
+
   it('should notice error if wrong file passed', function(done) {
     pm2.start(process.cwd() + '/child.js', {
       force : true,
@@ -87,7 +98,7 @@ describe('PM2 programmatic calls', function() {
   it('should list processes', function(done) {
     pm2.list(function(err, ret) {
       should(err).be.null;
-      ret.length.should.eql(5);
+      ret.length.should.eql(6);
       done();
     });
   });
@@ -97,7 +108,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(4);
+        ret.length.should.eql(5);
         done();
       });
     });
@@ -126,7 +137,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(4);
+        ret.length.should.eql(5);
         done();
       });
     });
@@ -144,7 +155,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(5);
+        ret.length.should.eql(6);
         done();
       });
     });
@@ -221,7 +232,7 @@ describe('PM2 programmatic calls', function() {
     it('should stop process name', function(done) {
       pm2.stop(procs[0].pm2_env.name, function(err, ret) {
         should(err).be.null;
-        pm2.describe(procs[0].pm2_env.name, function(err, procs) {
+        pm2.describe(procs[0].pm2_env.name, function(err, procs) {          
           should(err).be.null;
           procs[0].pm2_env.status.should.eql('stopped');
           done();
