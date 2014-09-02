@@ -3,6 +3,8 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/bash/include.sh"
 
+set -e
+
 echo "####################### DEBUG ############################"
 echo "PM2 Command = " $pm2
 echo "Node version = " $nodeVersion

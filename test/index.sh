@@ -3,7 +3,7 @@
 alias mocha='../node_modules/mocha/bin/mocha'
 pm2="`type -P node` `pwd`/bin/pm2"
 
-
+set -e
 
 function fail {
   echo -e "######## \033[31m  ✘ $1\033[0m"
