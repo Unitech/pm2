@@ -206,10 +206,16 @@ commander.command('startOrRestart <json>')
     CLI._jsonStartOrAction('restart', file, commander);
   });
 
-commander.command('startOrGracefulReload <json>')
+commander.command('startOrReload <json>')
   .description('start or gracefully reload JSON file')
   .action(function(file) {
     CLI._jsonStartOrAction('reload', file, commander);
+  });
+
+commander.command('startOrGracefulReload <json>')
+  .description('start or gracefully reload JSON file')
+  .action(function(file) {
+    CLI._jsonStartOrAction('gracefulReload', file, commander);
   });
 
 //

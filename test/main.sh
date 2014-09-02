@@ -50,5 +50,7 @@ bash ./test/bash/env-refresh.sh
 spec "Environment refresh on restart"
 bash ./test/bash/reset.sh
 spec "Reset meta"
+bash ./test/bash/startOrX.sh
+spec "startOrX commands"
 
 $pm2 kill
