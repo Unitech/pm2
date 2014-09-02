@@ -11,7 +11,10 @@ echo "Node version = " $nodeVersion
 $node -e "var os = require('os'); console.log('arch : %s\nplatform : %s\nrelease : %s\ntype : %s\nmem : %d', os.arch(), os.platform(), os.release(), os.type(), os.totalmem())"
 echo "###################### !DEBUG! ###########################"
 
-export DEBUG="*"
+if [ $TRAVIS ]
+then
+  export DEBUG="*"
+fi
 
 bash ./test/bash/cli.sh
 spec "CLI basic test"
