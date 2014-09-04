@@ -9,15 +9,15 @@ cd $file_path
 
 $pm2 startOrRestart all.json
 
-should 'should start processes' 'online' 8
+should 'should start processes' 'online' 6
 
 $pm2 startOrRestart all.json
 
-should 'should has restarted app' 'restart_time: 1' 8
+should 'should has restarted app' 'restart_time: 1' 6
 
 $pm2 startOrReload all.json
 
-should 'should has reloaded app' 'restart_time: 2' 8
+should 'should has reloaded app' 'restart_time: 2' 6
 
 # slow
 # $pm2 startOrGracefulReload all.json
