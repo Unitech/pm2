@@ -33,7 +33,7 @@ describe('PM2 programmatic calls', function() {
 
   it('should start a script', function(done) {
     pm2.start(process.cwd() + '/test/programmatic/child.js',
-              {},
+              {instances : 1},
               function(err, data) {
       proc1 = data[0];
 
@@ -45,7 +45,8 @@ describe('PM2 programmatic calls', function() {
   it('should start a script and force to launch it', function(done) {
     pm2.start(process.cwd() + '/test/programmatic/child.js', {
       force : true,
-      name : 'toto'
+      name : 'toto',
+      instances : 1
     }, function(err, data) {
       should(err).be.null;
       data.length.should.eql(1);
@@ -55,10 +56,10 @@ describe('PM2 programmatic calls', function() {
 
   it('should start a script in a specified cwd', function(done) {
     pm2.start(process.cwd() + '/test/programmatic/cwd.js',
-              {cwd:process.cwd() + '/test/programmatic/'},
+              {cwd:process.cwd() + '/test/programmatic/', instances : 1},
               function(err, data) {
       proc1 = data[0];
-      proc1.pm2_env.cwd.should.eql(process.cwd() + '/test/programmatic/');      
+      proc1.pm2_env.cwd.should.eql(process.cwd() + '/test/programmatic/');
       should(err).be.null;
       done();
     });
@@ -232,7 +233,7 @@ describe('PM2 programmatic calls', function() {
     it('should stop process name', function(done) {
       pm2.stop(procs[0].pm2_env.name, function(err, ret) {
         should(err).be.null;
-        pm2.describe(procs[0].pm2_env.name, function(err, procs) {          
+        pm2.describe(procs[0].pm2_env.name, function(err, procs) {
           should(err).be.null;
           procs[0].pm2_env.status.should.eql('stopped');
           done();

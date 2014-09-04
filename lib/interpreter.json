@@ -2,6 +2,7 @@
   ".sh": "bash",
   ".py": "python",
   ".rb": "ruby",
+  ".coffee" : "coffee",
   ".php": "php",
   ".pl" : "perl",
   ".js" : "node"

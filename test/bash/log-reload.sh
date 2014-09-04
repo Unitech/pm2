@@ -11,7 +11,7 @@ $pm2 kill
 
 >out-rel.log
 
-$pm2 start echo.js -o out-rel.log --merge-logs
+$pm2 start echo.js -o out-rel.log --merge-logs -i 1
 
 $pm2 reloadLogs
 
