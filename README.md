@@ -5,8 +5,8 @@ PM2 is a process manager for Node.JS application with a built-in load balancer.
 ### Main features
 
 - Advanced process management
-- Built-in load balancer (Node.JS)
-- 0s downtime reload (Node.JS)
+- Built-in load balancer (Node.JS - cluster mode)
+- 0s downtime reload (Node.JS - cluster mode)
 - JSON application declaration
 - Log management
 - Programmatic interface with embeddable capabilities
@@ -144,8 +144,10 @@ $ pm2 start app.js
 ## Raw Examples
 
 ```bash
+# Fork mode
 $ pm2 start app.js --name my-api # Name process
 
+# Cluster mode
 $ pm2 start app.js -i max        # Will start maximum processes with LB depending on available CPUs
 
 # Listing
@@ -191,27 +193,24 @@ $ pm2 start app.js --no-daemon
 ## Different ways to launch a process
 
 ```bash
-$ pm2 start app.js -i max  # Will start maximum processes depending on available CPUs
+$ pm2 start app.js           # Start app.js
 
-$ pm2 start app.js -i 3    # Will start 3 processes
-
-$ pm2 start app.js -i max -- -a 23  # Pass arguments after -- to app.js
-
-$ pm2 start app.js -x            # Start app.js in fork mode instead of cluster
-$ pm2 start app.js -x -- -a 23   # Start app.js in fork mode and pass arguments (-a 23)
-
-$ pm2 start app.js --log-date-format "YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
+$ pm2 start app.js -- -a 23  # Pass arguments '-a 23' argument to app.js script
 
 $ pm2 start app.js --name serverone # Start a process an name it as server one
                                     # you can now stop the process by doing
                                     # pm2 stop serverone
 
+$ pm2 start app.js --node-args="--debug=7001" # --node-args to pass options to node V8
+
+$ pm2 start app.js -i max    # Start maximum processes depending on available CPUs (cluster mode)
+
+$ pm2 start app.js --log-date-format "YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
+
 $ pm2 start app.json                # Start processes with options declared in app.json
                                     # Go to chapter Multi process JSON declaration for more
 
-$ pm2 start app.js -i max -e err.log -o out.log  # Will start and generate a configuration file
-
-$ pm2 start app.js --node-args="--debug=7001 --trace-deprecation" # --node-args command line option to pass options to node
+$ pm2 start app.js -e err.log -o out.log  # Start and specify error and out log
 
 $ pm2 --run-as-user foo start app.js  # Start app.js as user foo instead of the user that started pm2
 
@@ -221,15 +220,28 @@ $ pm2 --run-as-user foo --run-as-group bar start app.js  # Start app.js as foo:b
 For scripts in other languages:
 
 ```bash
+$ pm2 start echo.pl --interpreter=perl
+
 $ pm2 start echo.coffee
-$ pm2 start -x echo.php
-$ pm2 start -x echo.py
-$ pm2 start -x echo.sh
-$ pm2 start -x echo.rb
-$ pm2 start -x echo.pl
+$ pm2 start echo.php
+$ pm2 start echo.py
+$ pm2 start echo.sh
+$ pm2 start echo.rb
 ```
 
-Languages other than javascript have to be run in [fork mode](#a23).
+The interpreter is set by default with this equivalence:
+
+```json
+{
+  ".sh": "bash",
+  ".py": "python",
+  ".rb": "ruby",
+  ".coffee" : "coffee",
+  ".php": "php",
+  ".pl" : "perl",
+  ".js" : "node"
+}
+```
 
 <a name="a987"/>
 ## Options
@@ -402,16 +414,23 @@ $ pm2 reloadLogs
 ```
 
 <a name="a5"/>
-## Clustering
+## Clustering (cluster_mode)
 
-Launch `max` instances (`max` depending on the number of CPUs available) and set the load balancer to balance queries among process:
+The *cluster_mode* will automatically wrap your Node.js app into the cluster module and will enable you to reload your app without downtime and to scale your processes across all CPUs available.
+
+To enable the *cluster_mode*, just pass the -i <instances> option:
+
+```bash
+$ pm2 start app.js -i 1
+```
+
+To launch `max` instances (`max` depending on the number of CPUs available) and set the load balancer to balance queries among process:
 
 ```bash
 $ pm2 start app.js --name "API" -i max
 ```
 
 If your app is well-designed (**stateless**) you'll be able to **process many more queries**.
-
 
 Important concepts to make a Node.js app stateless:
 
@@ -423,7 +442,7 @@ Important concepts to make a Node.js app stateless:
 
 As opposed to `restart`, which kills and restarts the process, `reload` achieves a 0-second-downtime reload.
 
-**Warning** This feature only works for apps in *cluster mode* (the default mode), that uses HTTP/HTTPS/Socket connections.
+**Warning** This feature only works for apps in *cluster_mode*, that uses HTTP/HTTPS/Socket connections.
 
 To reload an app:
 
@@ -431,7 +450,7 @@ To reload an app:
 $ pm2 reload api
 ```
 
-If the reload system hasn't managed to reload gracefully, a timeout will simply kill the process and will restart it.
+If the reload system hasn't managed to reload your app, a timeout will simply kill the process and will restart it.
 
 ### Graceful reload
 
@@ -440,7 +459,7 @@ Sometimes you can experience a **very long reload, or a reload that doesn't work
 It means that your app **still has open connections on exit**.
 
 To work around this problem you have to use the graceful reload.
-Graceful reload is a mechanism that will send a *shutdown* message to your process before reloading it.
+Graceful reload is a mechanism that will send a **shutdown** message to your process before reloading it.
 You can control the time that the app has to shutdown via the `PM2_GRACEFUL_TIMEOUT` environment variable.
 
 Example:
@@ -527,7 +546,7 @@ It populates the file `~/.pm2/dump.pm2` by default.
 
 To bring back the latest dump:
 ```bash
-$ pm2 resurrect
+$ pm2 [resurrect|save]
 ```
 
 <a name="a890"/>
@@ -652,7 +671,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "ignoreWatch"      : ["[\\/\\\\]\\./", "node_modules"],
   "merge_logs"       : "true",
   "exec_interpreter" : "node",
-  "exec_mode"        : "cluster_mode",
+  "exec_mode"        : "fork_mode",
   "env": {
     "NODE_ENV": "production",
     "AWESOME_SERVICE_API_TOKEN": "xxx"
@@ -1026,24 +1045,9 @@ By default, logs (error and output), pid files, dumps, and PM2 logs are located 
 ```
 
 <a name="a23"/>
-## Execute any script: What is fork mode?
-
-The default mode of PM2 consists of wrapping the code of your node application into the Node Cluster module. It's called the **cluster mode**.
-
-There is also a more classical way to execute your app, like node-forever does, called the **fork mode**.
+## Execute any kind of script
 
 In fork mode almost all options are the same as the cluster mode. But there is no [`reload`](#reloading-without-downtime) or `gracefulReload` command.
-
-**By using the fork mode you will lose core features of pm2 like the automatic clusterization of your code over all CPUs available and the 0s reload.**
-
-So use it if you only need a forever-like behaviour.
-
-Here is how to start your app within a fork:
-
-```bash
-$ pm2 start app.js -x   # Will start your app.js in fork mode
-$ pm2 list              # You will see that on the row "mode" it's written "fork"
-```
 
 You can also exec scripts written in other languages:
 
@@ -1134,20 +1138,9 @@ First, install the lastest PM2 version:
 $ npm install -g pm2@latest
 ```
 
-### Node 0.10.x doesn't free the script port when stopped. It's due to the Node.js cluster module.
-So if you feel that this problem is important for your use case, use the [fork mode](#execute-any-script-what-is-fork-mode-) instead.
-By using the fork mode you will lose core features of PM2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
+### Node 0.10.x doesn't free the script port when stopped in cluster_mode
 
-```
-$ pm2 start index.js -x  # start my app in fork mode
-```
-
-For more information about this, see [issue #74](https://github.com/Unitech/pm2/issues/74).
-
-### `Cannot read property 'getsockname' of undefined`
-
-When using the cluster mode (by default) you can't use ports from 0 to 1024. If you really need to exec in this range use the [fork mode](#a23) with the `-x` parameter.
-By using the fork mode you will lose core features of pm2 like the automatic clusterization of your code over all CPUs available and the 0s reload.
+Don't use the *cluster_mode* via -i option.
 
 ### User tips from issues
 - [Vagrant and pm2 #289](https://github.com/Unitech/pm2/issues/289#issuecomment-42900019)
@@ -1178,55 +1171,14 @@ By using the fork mode you will lose core features of pm2 like the automatic clu
 
 ## Contributors
 
-```
-   195  tknew2
-   184  Alexandre Strzelewicz
-    20  Alex Kocharin
-     8  soyuka
-     6  sailxjx
-     5  Bret Copeland
-     4  AS
-     4  Ville Walveranta
-     4  achingbrain
-     3  Ben Postlethwaite
-     3  Evan You
-     2  Frederico Silva
-     2  Ivan Seidel
-     2  MATSUU Takuto
-     2  Oleg
-     2  Willian
-     2  Yani Iliev
-     1  Almog Melamed
-     1  Brent Burgoyne
-     1  Daniel Pihlstrom
-     1  Ed Hubbell
-     1  Eugene Lucash
-     1  Gil Pedersen
-     1  Hao-kang Den
-     1  John Hurliman
-     1  Jose V. Trigueros
-     1  Josh Skidmore
-     1  Juozas Valenčius
-     1  Kevin Gao
-     1  Loïc Mahieu
-     1  Mark Evans
-     1  Nathan Peck
-     1  TruongSinh Tran-Nguyen
-     1  Wes Mason
-     1  Zihua Li
-     1  perfectworks
-     1  subeeshcbabu
-     1  Michael Heuberger
-```
+[Contributors](https://github.com/Unitech/PM2/graphs/contributors)
 
 ## Sponsors
 
 Thanks to [Devo.ps](http://devo.ps/) and [Wiredcraft](http://wiredcraft.com/) for their knowledge and expertise.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Unitech/pm2/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 <a name="a15"/>
 # License
 
-Files in `lib/` are made available under the terms of the GNU Affero General Public License (AGPL).
-`pm2-interface` is made under the terms of the Apache V2 license.
+Files in `lib/` are made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
+Except the file `lib/CLI.js` who is made under the terms of the Apache V2 license.

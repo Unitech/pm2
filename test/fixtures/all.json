@@ -1,7 +1,6 @@
 [{
   "name"      : "echo",
-  "script"    : "./echo.js",
-  "instances" : "1"
+  "script"    : "./echo.js"
 },{
   "name"      : "child",
   "script"    : "./child.js",
@@ -10,6 +9,5 @@
   "out_file" : "./child-out.log"
 },{
   "name"      : "api-2",
-  "script"    : "./server.js",
-  "instances" : "3"
+  "script"    : "./server.js"
 }]
