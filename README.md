@@ -20,8 +20,6 @@ PM2 is a process manager for Node.JS application with a built-in load balancer.
 
 Full test suit with more than 300 tests: (https://travis-ci.org/Unitech/PM2)
 
-**We recommend the Node.js version v0.11.13 for better cluster management**
-
 Compatible with CoffeeScript.
 Works on Linux & MacOS. Windows upcoming.
 
@@ -117,8 +115,6 @@ Thanks in advance and we hope that you like PM2!
 <a name="a1"/>
 ## Installation
 
-One more time we recommend Node.JS 0.11.13 (manage Node.JS versions easily with https://github.com/creationix/nvm)
-
 The latest PM2 stable version is installable via NPM:
 
 ```bash
@@ -130,6 +126,8 @@ If the above fails use:
 ```bash
 $ npm install git://github.com/Unitech/pm2#master -g
 ```
+
+We recommend Node.JS 0.11.13 for handling the cluster_mode (if you add the -i options to enable scaling and reload).
 
 <a name="a2"/>
 ## Usage
