@@ -38,6 +38,8 @@ var default_conf = {
   MODIFY_REQUIRE     : process.env.PM2_MODIFY_REQUIRE || false,
   PREFIX_MSG         : '\x1B[32m[PM2] \x1B[39m',
   PREFIX_MSG_ERR     : '\x1B[31m[PM2] [ERROR] \x1B[39m',
+  PREFIX_MSG_WARNING : '\x1B[33;1m[PM2] [WARNING] \x1B[39;0m',
+  PREFIX_MSG_SUCCESS : '\x1B[36;1m[PM2] \x1B[39;0m',
   SAMPLE_FILE_PATH   : '../lib/sample.json',
 
   CENTOS_STARTUP_SCRIPT : '../lib/scripts/pm2-init-centos.sh',
