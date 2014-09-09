@@ -25,7 +25,7 @@ $pm2 kill
 
 cp server-watch.bak.js server-watch.js
 
-$pm2 start  server-watch.js --watch
+$pm2 start server-watch.js --watch
 
 should 'process should be watched' 'watch: true' 1
 
@@ -142,5 +142,52 @@ waituntil 10
 
 should 'process should not have been restarted' 'watch: true' 0
 
-$pm2 kill
+$pm2 delete all
+rm server-watch.js
+
+###########
+# cluster #
+###########
+
+cp server-watch.bak.js server-watch.js
+
+$pm2 start server-watch.js --watch -i 4
+
+should 'processes should be watched' 'watch: true' 4
+
+##############
+# connection #
+##############
+
+wget -qO- http://localhost:8000 > /dev/null
+
+spec "Got connection"
+
+echo "console.log('test');" >> server-watch.js
+
+sleep 2
+
+should 'process should have been restarted' 'restart_time: 1' 4
+
+$pm2 list
+
+wget -qO- http://localhost:8000 > /dev/null
+spec "Got connection"
+
+#######################
+# make sure isolation #
+#######################
+
+$pm2 start server-watch.js -i 4 --name "server-2" -f
+
+$pm2 list
+
+echo "console.log('test');" >> server-watch.js
+
+sleep 2
+should 'right processes should have been restarted' 'restart_time: 2' 4
+
+$pm2 restart "server-2"
+
+should 'right processes should have been restarted' 'restart_time: 1' 4
 rm server-watch.js

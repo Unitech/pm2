@@ -1,6 +1,10 @@
 
-# 0.10.1-2-3-4
+# 0.10.x
 
+- multi host for pm2 deploy
+- fork mode by default
+- fix watch on clusters
+- refactor watch
 - env option via programmatic interface
 - fix watch system
 - correct pm2 describe command
