@@ -136,7 +136,7 @@
 
     "pm2-axon": "~2.0.1",
     "pm2-axon-rpc": "~0.3.1",
-    "pm2-deploy": "~0.0.4",
+    "pm2-deploy": "~0.1.0",
     "pm2-interface" : "~1.1.0",
     "pm2-multimeter": "~0.1.2",
     "pm2-rpc-fallback" : "~2.8.0",
