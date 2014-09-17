@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.10.7",
+  "version": "0.10.8",
   "os": [
     "!win32"
   ],
@@ -134,8 +134,8 @@
     "punt" : "~2.2.0",
     "pidusage": "~0.1.0",
 
-    "pm2-axon": "~2.0.1",
-    "pm2-axon-rpc": "~0.3.1",
+    "pm2-axon": "2.0.1",
+    "pm2-axon-rpc": "0.3.1",
     "pm2-deploy": "~0.1.0",
     "pm2-interface" : "~1.1.0",
     "pm2-multimeter": "~0.1.2",

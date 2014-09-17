@@ -79,9 +79,10 @@ describe('Satan', function() {
         pm_out_log_path : path.resolve(process.cwd(), 'test/outLog.log'),
         pm_pid_path     : path.resolve(process.cwd(), 'test/child'),
         name : 'toto',
-        exec_mode : 'cluster',
+        exec_mode : 'cluster_mode',
         instances       : 4
       }, function(err, procs) {
+        console.log('hey');
         assert(err == null);
         assert(procs.length == 4);
         done();
