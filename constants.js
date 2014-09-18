@@ -25,8 +25,12 @@ var default_conf = {
   PM2_CONF_FILE      : p.join(DEFAULT_FILE_PATH, 'custom_options.sh'),
 
   DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
+
   DAEMON_RPC_PORT    : parseInt(process.env.PM2_RPC_PORT)  || 6666, // RPC commands
   DAEMON_PUB_PORT    : parseInt(process.env.PM2_PUB_PORT)  || 6667, // Realtime events
+
+  DAEMON_RPC_PORT    : p.join(DEFAULT_FILE_PATH, 'rpc.sock'),
+  DAEMON_PUB_PORT    : p.join(DEFAULT_FILE_PATH, 'pub.sock'),
 
   CODE_UNCAUGHTEXCEPTION : 100,
 
