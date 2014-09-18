@@ -25,7 +25,7 @@ function killEverything() {
 
   if (interactor_pid) {
     try {
-      console.log('Killing interactor');
+      console.log('[PM2] Killing interactor');
       process.kill(interactor_pid);
     }
     catch (err) {
@@ -34,7 +34,7 @@ function killEverything() {
 
   if (pm2_pid) {
     try {
-      console.log('Killing PM2');
+      console.log('[PM2] Killing PM2');
       process.kill(pm2_pid);
     }
     catch (err) {
@@ -51,18 +51,18 @@ var fallback = require('pm2-rpc-fallback').fallback;
 
 fallback(cst, function(err, data) {
   if (err && err.online) {
-    // Right RPC communcation
+      // Right RPC communcation
     return process.exit(1);
   }
   else if (err && err.offline) {
-    console.log('PM2 already offline');
+        console.log('[PM2] Online');
     return process.exit(0);
   }
   else if (err) {
     return killEverything();
   }
   if (data) {
-    console.log('Killing old PM2');
+    console.log('[PM2] Killing old PM2');
     return killEverything();
   }
   return false;

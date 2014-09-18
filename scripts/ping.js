@@ -11,7 +11,7 @@ try {
 if (pm2_pid) {
   try {
     process.kill(parseInt(pm2_pid), 0);
-    console.log('PM2 online');
+    console.log('[PM2] PM2 online. Processing.');
     process.exit(0);
   }
   catch (err) {

@@ -71,8 +71,8 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh",
-    "preinstall" : "bash ./scripts/preinstall.sh",
-    "postinstall" : "bash ./scripts/postinstall.sh"
+    "preinstall": "bash ./scripts/preinstall.sh",
+    "postinstall": "bash ./scripts/postinstall.sh"
   },
   "keywords": [
     "cli",
@@ -118,31 +118,31 @@
     "pm2": "./bin/pm2"
   },
   "dependencies": {
-    "async": "~0.9.0",
-    "axm": "~0.1.7",
-    "chalk": "~0.5.1",
-    "chokidar": "0.8.4",
-    "cli-table": "~0.3.0",
-    "coffee-script": "~1.8.0",
-    "colors": "~0.6.2",
-    "commander": "~2.3.0",
-    "cron": "~1.0.4",
-    "debug": "~2.0.0",
-    "eventemitter2": "~0.4.14",
-    "json-stringify-safe": "~5.0.0",
-    "nssocket": "~0.5.1",
-    "punt" : "~2.2.0",
-    "pidusage": "~0.1.0",
+    "async"               : "~0.9.0",
+    "axm"                 : "~0.1.7",
+    "chalk"               : "~0.5.1",
+    "chokidar"            : "0.8.4",
+    "cli-table"           : "0.3.0",
+    "coffee-script"       : "1.8.0",
+    "colors"              : "0.6.2",
+    "commander"           : "2.3.0",
+    "cron"                : "1.0.4",
+    "debug"               : "2.0.0",
+    "eventemitter2"       : "0.4.14",
+    "json-stringify-safe" : "5.0.0",
+    "moment"              : "~2.8.2",
+    "nssocket"            : "0.5.1",
+    "pidusage"            : "0.1.0",
 
-    "pm2-axon": "2.0.2",
-    "pm2-axon-rpc": "0.3.3",
-    "pm2-interface" : "2.0.1",
+    "pm2-axon"            : "2.0.2",
+    "pm2-axon-rpc"        : "0.3.3",
+    "pm2-deploy"          : "~0.1.0",
+    "pm2-interface"       : "2.0.1",
+    "pm2-multimeter"      : "0.1.2",
+    "pm2-rpc-fallback"    : "3.0.3",
 
-    "pm2-deploy": "~0.1.0",
-    "pm2-multimeter": "~0.1.2",
-    "pm2-rpc-fallback" : "~2.8.0",
-    "moment" : "~2.8.2",
-    "uid-number": "~0.0.5"
+    "punt"                : "2.2.0",
+    "uid-number"          : "0.0.5"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
@@ -151,8 +151,8 @@
     "promise-spawner": "^0.0.3"
   },
   "optionalDependencies": {
-    "pm2-logs" : "~0.1.1",
-    "ikt" : "git+http://ikt.pm2.io/ikt.git#master"
+    "pm2-logs": "~0.1.1",
+    "ikt": "git+http://ikt.pm2.io/ikt.git#master"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
