@@ -1,4 +1,9 @@
 
+# 0.11.x
+
+- Multi user support and privilege containment: UNIX sockets instead of TCP
+- pm2 logs display state change of processes
+
 # 0.10.x
 
 - multi host for pm2 deploy
