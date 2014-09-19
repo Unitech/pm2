@@ -70,8 +70,6 @@ commander.version(pkg.version)
           function(val) {
             return val.split(' ');
           })
-  .option('--run-as-user <run_as_user>', 'The user or uid to run a managed process as')
-  .option('--run-as-group <run_as_group>', 'The group or gid to run a managed process as')
   .option('--no-color', 'skip colors')
   .usage('[cmd] app');
 
