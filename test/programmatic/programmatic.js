@@ -32,7 +32,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should start a script', function(done) {
-    pm2.start(process.cwd() + '/test/programmatic/child.js',
+    pm2.start(process.cwd() + '/test/fixtures/child.js',
               {instances : 1},
               function(err, data) {
       proc1 = data[0];
@@ -43,7 +43,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should start a script and force to launch it', function(done) {
-    pm2.start(process.cwd() + '/test/programmatic/child.js', {
+    pm2.start(process.cwd() + '/test/fixtures/child.js', {
       force : true,
       name : 'toto',
       instances : 1
@@ -55,18 +55,18 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should start a script in a specified cwd', function(done) {
-    pm2.start(process.cwd() + '/test/programmatic/cwd.js',
-              {cwd:process.cwd() + '/test/programmatic/', instances : 1},
+    pm2.start(process.cwd() + '/test/fixtures/cron.js',
+              {cwd:process.cwd() + '/test/fixtures/', instances : 1},
               function(err, data) {
       proc1 = data[0];
-      proc1.pm2_env.cwd.should.eql(process.cwd() + '/test/programmatic/');
+      proc1.pm2_env.cwd.should.eql(process.cwd() + '/test/fixtures/');
       should(err).be.null;
       done();
     });
   });
 
   it('should notice error if wrong file passed', function(done) {
-    pm2.start(process.cwd() + '/child.js', {
+    pm2.start(process.cwd() + '/test/fixtures/child.js', {
       force : true,
       name : 'tota',
       instances : 3
@@ -77,7 +77,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should start a script and force to launch it', function(done) {
-    pm2.start(process.cwd() + '/test/programmatic/child.js', {
+    pm2.start(process.cwd() + '/test/fixtures/child.js', {
       force : true,
       name : 'tota',
       instances : 3
@@ -99,7 +99,8 @@ describe('PM2 programmatic calls', function() {
   it('should list processes', function(done) {
     pm2.list(function(err, ret) {
       should(err).be.null;
-      ret.length.should.eql(6);
+      console.log(ret.length);
+      ret.length.should.eql(9);
       done();
     });
   });
@@ -109,13 +110,13 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(5);
+        ret.length.should.eql(8);
         done();
       });
     });
   });
 
-  it('should save all processes', function(done) {
+  it('should save/dump all processes', function(done) {
     pm2.dump(function(err, ret) {
       should(err).be.null;
       done();
@@ -138,7 +139,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(5);
+        ret.length.should.eql(8);
         done();
       });
     });
@@ -156,7 +157,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(6);
+        ret.length.should.eql(9);
         done();
       });
     });
@@ -175,7 +176,6 @@ describe('PM2 programmatic calls', function() {
       pm2.describe('tota', function(err, proc) {
         should(err).be.null;
         procs = proc;
-        proc.length.should.eql(3);
         proc[0].pm2_env.restart_time.should.eql(2);
         done();
       });
@@ -185,7 +185,7 @@ describe('PM2 programmatic calls', function() {
   it('should describe all process with name', function(done) {
     pm2.describe('tota', function(err, proc) {
       should(err).be.null;
-      proc.length.should.eql(3);
+      proc.length.should.eql(6);
       done();
     });
   });
@@ -197,7 +197,7 @@ describe('PM2 programmatic calls', function() {
         should(err).be.null;
         pm2.describe('tota', function(err, proc) {
           should(err).be.null;
-          proc.length.should.eql(3);
+          proc.length.should.eql(6);
           proc[0].pm2_env.restart_time.should.eql(3);
           done();
         });
@@ -209,7 +209,7 @@ describe('PM2 programmatic calls', function() {
         should(err).be.null;
         pm2.describe('tota', function(err, proc) {
           should(err).be.null;
-          proc.length.should.eql(3);
+          proc.length.should.eql(6);
           proc[0].pm2_env.restart_time.should.eql(4);
           done();
         });

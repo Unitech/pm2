@@ -12,7 +12,7 @@ pm2.connect(function() {
               pm2.start('examples/auto-save.js', {watch : true,force:true, name :'auto-save-modify'}, function() {
                 pm2.start('examples/http-trace.js', {name:'trace'}, function() {
                   //pm2.start('examples/auto-bench.js', {instances : 'max'}, function() {
-                  pm2.start('examples/throw.js', {name:'auto-throw'}, function() {
+                  pm2.start('examples/throw.js', {name:'auto-throw', execMode : 'cluster_mode'}, function() {
                     pm2.disconnect(function() { process.exit(1); });
                   });
                   //});

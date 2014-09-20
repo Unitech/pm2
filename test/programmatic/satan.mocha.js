@@ -43,7 +43,7 @@ describe('Satan', function() {
 
 
   describe('DAEMON', function() {
-    it('should have the right exposed methods via RPC', function(done) {
+    it.skip('should have the right exposed methods via RPC', function(done) {
       Satan.getExposedMethods(function(err, methods) {
         assert(err == null);
         methods.should.have.property('prepare');
@@ -82,7 +82,6 @@ describe('Satan', function() {
         exec_mode : 'cluster_mode',
         instances       : 4
       }, function(err, procs) {
-        console.log('hey');
         assert(err == null);
         assert(procs.length == 4);
         done();

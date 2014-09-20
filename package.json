@@ -134,7 +134,7 @@
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
-    "pm2-axon"            : "2.0.2",
+    "pm2-axon"            : "2.0.3",
     "pm2-axon-rpc"        : "0.3.3",
     "pm2-deploy"          : "~0.1.0",
     "pm2-interface"       : "2.0.1",
