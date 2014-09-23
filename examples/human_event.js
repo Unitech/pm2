@@ -5,4 +5,4 @@ setInterval(function() {
     msg : 'A CMS page has been created',
     user : 'Francois Debiole'
   });
-}, 1000);
+}, 900);
