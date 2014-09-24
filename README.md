@@ -5,7 +5,7 @@ PM2 is a process manager for Node.JS application with a built-in load balancer. 
 PM2 is constantly assailed by [more than 300 test](https://travis-ci.org/Unitech/PM2)
 
 Compatible with CoffeeScript.
-Works on Linux & MacOS.
+Works on Linux & MacOSx.
 
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
 
