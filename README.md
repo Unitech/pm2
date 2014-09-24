@@ -1,8 +1,8 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
-PM2 is a process manager for Node.JS application with a built-in load balancer. It will allows you to keep application alive forever, to reload them without downtime and will facilitate common admin system work.
+PM2 is a production process manager for Node.js applications with a built-in load balancer. It will allows you to keep application alive forever, to reload them without downtime and will facilitate common admin system tasks.
 
-PM2 is constantly assailed by [more than 300 test](https://travis-ci.org/Unitech/PM2)
+PM2 is constantly assailed by [more than 300 test](https://travis-ci.org/Unitech/PM2).
 
 Compatible with CoffeeScript.
 Works on Linux & MacOSx.
@@ -17,6 +17,9 @@ Works on Linux & MacOSx.
 $ npm install pm2 -g
 ```
 
+**npm is a builtin CLI when you install Node.js**
+[Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)
+
 ## Start an application
 
 ```bash
@@ -28,17 +31,17 @@ $ pm2 start app.js -i max  # Enable load-balancer and cluster features
 
 ### Process management
 
-Once app are started you can list them and manage them:
+Once app are started you can list and manage them easily:
 
 ![Process listing](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
 
-To list all running processes:
+Listing all running processes:
 
 ```bash
 $ pm2 list
 ```
 
-To manage your process it's straightforward:
+Managing your processes it's straightforward:
 
 ```bash
 $ pm2 stop     <app_name|id|all>
@@ -56,7 +59,7 @@ $ pm2 describe 0
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
 
-Monitor all processes launched:
+Monitoring all processes launched:
 
 ```bash
 $ pm2 monit
@@ -66,7 +69,7 @@ $ pm2 monit
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
-Displaying logs of specified process or all processes in realtime:
+Displaying logs of a specified process or all processes, in realtime:
 
 ```bash
 $ pm2 logs
@@ -76,7 +79,7 @@ $ pm2 flush          # Clear all the logs
 
 ### Load balancing / 0s reload downtime
 
-When an app is started with the -i <worker number> option, the cluster mode is enabled.
+When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
 With the cluster mode, PM2 enable load balancing between each worker.
 Each HTTP/TCP/UDP request will be forwarded to a specific process at a time.
