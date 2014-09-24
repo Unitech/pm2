@@ -74,14 +74,31 @@ $ pm2 logs big-api
 $ pm2 flush          # Clear all the logs
 ```
 
-### Cluster mode features
+### Load balancing / 0s reload downtime
 
 When an app is started with the -i <worker number> option, the cluster mode is enabled.
 
-Some features of this special mode:
+With the cluster mode, PM2 enable load balancing between each worker.
+Each HTTP/TCP/UDP request will be forwarded to a specific process at a time.
 
 ```bash
-$ pm2 reload all     # Reload all apps in 0s manner
+$ pm2 start app.js -i max  # Enable load-balancer and cluster features
+
+$ pm2 reload all           # Reload all apps in 0s manner
+```
+
+### Startup script generation
+
+PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
+
+```bash
+$ pm2 startup <ubuntu|centos|gentoo|systemd>
+```
+
+To save a process list just do:
+
+```bash
+$ pm2 save
 ```
 
 ## Monitoring dashboard
@@ -91,10 +108,22 @@ $ pm2 reload all     # Reload all apps in 0s manner
 We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
 
 - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
-- [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
 
 Thanks in advance and we hope that you like PM2!
 
+## Other PM2 features
+
+- [Watch & Restart](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a890)
+- [JSON application declaration](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a10)
+- [Using PM2 in your code](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#programmatic-example)
+- [Deployment workflow](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#deployment)
+- [Startup script generation (SystemV/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a8)
+- [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#9)
+- [GracefullReload](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a690)
+
+## Know more about PM2
+
+[Advanced README.md](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md)
 
 ## Contributors
 
