@@ -1,52 +1,8 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
-PM2 is a process manager for Node.JS application with a built-in load balancer.
-
-### Main features
-
-- Advanced process management
-- Built-in load balancer (Node.JS - cluster mode)
-- 0s downtime reload (Node.JS - cluster mode)
-- JSON application declaration
-- Log management
-- Programmatic interface with embeddable capabilities
-- Provisioning and Deployment system
-- Application resource monitoring (RAM, CPU)
-- Application daemonization
-- Assisted startup script creation (SystemV/SystemD/Upstart)
-- Automatically restart process based on memory limit
-- Automatically stop unstable process (at launch)
-- Automatically restart process on file change
-
-Full test suit with more than 300 tests: (https://travis-ci.org/Unitech/PM2)
-
-Compatible with CoffeeScript.
-Works on Linux & MacOS. Windows upcoming.
-
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)
-[![Donate](http://gravaco.in/b06327acf5ae1a2ce3f08254ed7f33d7.png)](http://goo.gl/sdaIwX)
-[![Bountysource](https://www.bountysource.com/badge/team?team_id=931&style=raised)](https://www.bountysource.com/teams/keymetricsio?utm_source=Keymetrics.io&utm_medium=shield&utm_campaign=raised)
-
-[![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
-
-### Build Status
 
 Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
-
 Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
-
-## Monitoring dashboard
-
-![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
-
-We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
-
-- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
-- [Newsletter](http://signup.pm2.io/) Subscribe to be kept informed
-
-Thanks in advance and we hope that you like PM2!
-
-------
 
 ## Table of contents
 
