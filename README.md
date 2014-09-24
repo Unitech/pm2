@@ -17,8 +17,8 @@ Works on Linux & MacOSx.
 $ npm install pm2 -g
 ```
 
-**npm is a builtin CLI when you install Node.js**
-[Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)
+*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
+
 
 ## Start an application
 
