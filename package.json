@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.11.0-beta1",
+  "version": "0.11.0-beta2",
   "os": [
     "!win32"
   ],
@@ -133,8 +133,8 @@
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
-    "axm"                 : "0.2.0",
-    "pm2-axon"            : "2.0.3",
+    "axm"                 : "0.2.4",
+    "pm2-axon"            : "2.0.4",
     "pm2-axon-rpc"        : "0.3.3",
     "pm2-deploy"          : "~0.1.0",
     "pm2-interface"       : "2.0.1",
