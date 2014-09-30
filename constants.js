@@ -28,9 +28,11 @@ var default_conf = {
 
   DAEMON_RPC_PORT    : parseInt(process.env.PM2_RPC_PORT)  || 6666, // RPC commands
   DAEMON_PUB_PORT    : parseInt(process.env.PM2_PUB_PORT)  || 6667, // Realtime events
+  INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668,
 
   DAEMON_RPC_PORT    : p.join(DEFAULT_FILE_PATH, 'rpc.sock'),
   DAEMON_PUB_PORT    : p.join(DEFAULT_FILE_PATH, 'pub.sock'),
+  INTERACTOR_RPC_PORT : p.join(DEFAULT_FILE_PATH, 'interactor.sock'),
 
   CODE_UNCAUGHTEXCEPTION : 100,
 
@@ -69,9 +71,9 @@ var default_conf = {
   SEND_INTERVAL       : 1000,
 
   INTERACTOR_LOG_FILE_PATH : p.join(DEFAULT_FILE_PATH, 'agent.log'),
-  INTERACTOR_PID_PATH : p.join(DEFAULT_FILE_PATH, 'agent.pid'),
+  INTERACTOR_PID_PATH : p.join(DEFAULT_FILE_PATH, 'agent.pid')
 
-  INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668
+
 };
 
 module.exports = default_conf;
