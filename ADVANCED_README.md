@@ -540,7 +540,7 @@ You can define parameters for your apps in `processes.json`:
     "args"        : "['--toto=heya coco', '-d', '1']",
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
-    "watch"       : "true",
+    "watch"       : true,
     "node_args"   : "--harmony",
     "cwd"         : "/this/is/a/path/to/start/script",
     "env": {
@@ -621,9 +621,9 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "min_uptime"       : "200", // milliseconds, defaults to 1000
   "max_restarts"     : "10", // defaults to 15
   "cron_restart"     : "1 0 * * *",
-  "watch"            : "false",
+  "watch"            : false,
   "ignoreWatch"      : ["[\\/\\\\]\\./", "node_modules"],
-  "merge_logs"       : "true",
+  "merge_logs"       : true,
   "exec_interpreter" : "node",
   "exec_mode"        : "fork_mode",
   "env": {
