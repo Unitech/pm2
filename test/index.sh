@@ -25,7 +25,7 @@ $pm2 kill
 
 if [ $TRAVIS ]
 then
-  export DEBUG="*"
+  export DEBUG="pm2:*"
 fi
 
 mocha ./test/programmatic/god.mocha.js
