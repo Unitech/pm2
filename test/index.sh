@@ -23,10 +23,10 @@ function spec {
 
 $pm2 kill
 
-# if [ $TRAVIS ]
-# then
-#   export DEBUG="pm2:*"
-# fi
+if [ $TRAVIS ]
+then
+  export DEBUG="pm2:*"
+fi
 
 mocha ./test/programmatic/god.mocha.js
 spec "God test"
