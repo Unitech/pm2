@@ -5,6 +5,9 @@ var fs = require('fs');
 var path = require('path');
 var should = require('should');
 var Common = require('../../lib/Common');
+
+var cst = require('../../constants.js');
+
 /**
  * Description
  * @method getConf
@@ -57,6 +60,7 @@ describe('God', function() {
   it('should have right properties', function() {
     God.should.have.property('prepare');
     God.should.have.property('ping');
+    God.should.have.property('dumpProcessList');
     God.should.have.property('getProcesses');
     God.should.have.property('getMonitorData');
     God.should.have.property('getSystemData');
@@ -179,7 +183,7 @@ describe('God', function() {
     it('should start stop and delete the process name from database', function(done) {
       God.prepare(getConf(), function(err, _clu) {
         pid = _clu[0].pid;
-	_clu[0].pm2_env.status.should.be.equal('online');
+	      _clu[0].pm2_env.status.should.be.equal('online');
         var old_pid = _clu[0].pid;
         God.deleteProcessName(_clu[0].pm2_env.name, function(err, dt) {
           setTimeout(function() {
@@ -205,7 +209,7 @@ describe('God', function() {
 
     it('should launch app', function(done) {
       God.prepare(getConf2(), function(err, procs) {
-	var processes = God.getFormatedProcesses();
+	      var processes = God.getFormatedProcesses();
 
         setTimeout(function() {
           processes.length.should.equal(4);
@@ -221,7 +225,7 @@ describe('God', function() {
       var processes = God.getFormatedProcesses();
 
       God.reload({}, function(err, dt) {
-	var processes = God.getFormatedProcesses();
+	      var processes = God.getFormatedProcesses();
 
         processes.length.should.equal(4);
         processes.forEach(function(proc) {
@@ -233,7 +237,7 @@ describe('God', function() {
 
   });
 
-  describe('Multi launching', function() {
+  describe.only('Multi launching', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
@@ -262,9 +266,28 @@ describe('God', function() {
 
     it('should start maximum processes depending on CPU numbers', function(done) {
       God.prepare(getConf3(), function(err, procs) {
-	God.getFormatedProcesses().length.should.equal(10);
+	      God.getFormatedProcesses().length.should.equal(10);
         procs.length.should.equal(10);
         done();
+      });
+    });
+
+    it('should dump process list', function(done) {
+      God.prepare(Common.resolveAppPaths({
+        script    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+        name      : 'child',
+        instances : 3
+      }), function(err, procs) {
+        God.getFormatedProcesses().length.should.equal(3);
+        procs.length.should.equal(3);
+
+        God.dumpProcessList(function(err) {
+          should(err).be.null;
+          var apps = fs.readFileSync(cst.DUMP_FILE_PATH);
+          apps = JSON.parse(apps);
+          apps.length.should.equal(3);
+          done();
+        });
       });
     });
 
@@ -284,4 +307,5 @@ describe('God', function() {
       done();
     });
   });
+
 });
