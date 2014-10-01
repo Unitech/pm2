@@ -141,6 +141,7 @@
     "pm2-multimeter"      : "0.1.2",
     "pm2-rpc-fallback"    : "3.0.7",
 
+    "vizionar"            : "^0.1.0",
     "punt"                : "2.2.0",
     "uid-number"          : "0.0.5"
   },
