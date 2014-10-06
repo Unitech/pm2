@@ -18,7 +18,7 @@ spec "should contain env variable"
 
 TEST_VARIABLE='89hello89' $pm2 restart env
 
-sleep 0.5
+sleep 1.0
 grep "89hello89" out-env.log &> /dev/null
 spec "should contain refreshed environment variable"
 
