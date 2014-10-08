@@ -13,9 +13,6 @@ var PROCESS_ARCH  = Object.keys({
   // server: 'server name' - attached in interactor
 });
 
-
-
-
 var PROCESS_EVENT = Object.keys({
   event   : 'process event name',
   manually: true,
@@ -24,36 +21,42 @@ var PROCESS_EVENT = Object.keys({
 });
 
 var LOG_EVENT = Object.keys({
-  str : 'string',
+  data : 'string',
   process : PROCESS_ARCH,
   at  : new Date()
 });
 
 var ERROR_EVENT = Object.keys({
   at : new Date(),
-  stack : '\n',
-  message : 'error',
+  data : {
+    stack : '\n',
+    message : 'error'
+  },
   process : PROCESS_ARCH
 });
 
 var HUMAN_EVENT = Object.keys({
   at      : new Date(),
   process : PROCESS_ARCH,
-  name    : 'event name',
-  data    : {}
+  data    : {
+    __name : 'event:name'
+  }
 });
 
 var TRANSACTION_HTTP_EVENT = Object.keys({
-  url     : '/user/root',
-  method  : 'POST',
-  time    : 234,
-  code    : 200,
+  data : {
+    url     : '/user/root',
+    method  : 'POST',
+    time    : 234,
+    code    : 200
+  },
   at      : new Date(),
   process : PROCESS_ARCH
 });
 
 process.on('uncaughtException', function(e) {
   console.log(e.stack);
+  process.exit(1);
 });
 
 describe('PM2 BUS / RPC', function() {

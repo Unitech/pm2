@@ -6,6 +6,4 @@ setInterval(function() {
     msg : 'A CMS page has been created',
     user : 'Francois Debiole'
   });
-  console.log('sadsad');
-
 }, 200);
