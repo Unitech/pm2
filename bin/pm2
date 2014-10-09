@@ -304,7 +304,13 @@ commander.command('ping')
   });
 
 commander.command('updatePM2')
-  .description('updatePM2 after a npm update')
+  .description('update in-memory PM2 with local PM2')
+  .action(function() {
+    CLI.updatePM2()
+  });
+
+commander.command('update')
+  .description('(alias) update in-memory PM2 with local PM2')
   .action(function() {
     CLI.updatePM2()
   });
@@ -313,15 +319,37 @@ commander.command('updatePM2')
 // Interact
 //
 commander.command('interact [secret_key] [public_key] [machine_name]')
-  .description('launch agent to interact with Keymetrics')
+  .description('agent actions for keymetrics.io')
   .action(function(secret, public, machine) {
-    CLI.interact(secret, public, machine);
+    if (secret == 'stop' || secret == 'kill') {
+      console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
+      CLI.killInteract(function() {
+        console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
+        return process.exit(cst.SUCCESS_EXIT);
+      });
+      return false;
+    }
+    if (secret == 'info') {
+      console.log(chalk.cyan('[Keymetrics.io]') + ' Getting agent information...');
+      return CLI.infoInteract();
+    }
+    if (secret == 'delete') {
+      CLI.killInteract(function() {
+        try {
+          fs.unkinkSync(cst.INTERACTION_CONF);
+        } catch(e) {}
+        console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
+        return process.exit(cst.SUCCESS_EXIT);
+      });
+      return false;
+    }
+    return CLI.interact(secret, public, machine);
   });
 
 commander.command('killInteract')
   .description('stop agent')
   .action(function() {
-    CLI.killInteract()
+    return CLI.killInteract();
   });
 
 commander.command('infoInteract')
