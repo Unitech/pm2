@@ -60,7 +60,7 @@ var default_conf = {
   ERRORED_STATUS     : 'errored',
   ONE_LAUNCH_STATUS  : 'one-launch-status',
 
-  KEYMETRICS_ROOT_URL : 'https://root.keymetrics.io',
+  KEYMETRICS_ROOT_URL : 'root.keymetrics.io',
 
   REMOTE_PORT         : 41624,
   REMOTE_REVERSE_PORT : 43554,

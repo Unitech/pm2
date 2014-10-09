@@ -83,7 +83,7 @@ If the above fails use:
 $ npm install git://github.com/Unitech/pm2#master -g
 ```
 
-We recommend Node.JS 0.11.13 for handling the cluster_mode (if you add the -i options to enable scaling and reload).
+We recommend Node.JS 0.11.14 for handling the cluster_mode (if you add the -i options to enable scaling and reload).
 
 <a name="a2"/>
 ## Usage
@@ -1058,9 +1058,9 @@ Also make sure you have all dependencies needed. For Ubuntu:
 $ sudo apt-get install build-essential
 # nvm is a Node.js version manager - https://github.com/creationix/nvm
 $ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
-$ nvm install v0.11.10
-$ nvm use v0.11.10
-$ nvm alias default v0.11.10
+$ nvm install v0.11.14
+$ nvm use v0.11.14
+$ nvm alias default v0.11.14
 ```
 
 <a name="a27"/>

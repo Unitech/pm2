@@ -18,7 +18,7 @@ $ npm install pm2 -g
 ```
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
-
+We recommend Node.js 0.11.14.
 
 ## Start an application
 
