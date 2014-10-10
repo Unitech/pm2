@@ -16,34 +16,7 @@ var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 
-//
-// Init
-//
-(function init() {
-  var exist = fs.existsSync(cst.DEFAULT_FILE_PATH);
-
-  if (!exist) {
-    console.log('Initializing folder for pm2 on %s', cst.DEFAULT_FILE_PATH);
-    fs.mkdirSync(cst.DEFAULT_FILE_PATH);
-    fs.mkdirSync(cst.DEFAULT_LOG_PATH);
-    fs.mkdirSync(cst.DEFAULT_PID_PATH);
-
-    /**
-     * Create configuration file if not present
-     */
-    fs.exists(cst.PM2_CONF_FILE, function(exist) {
-      if (!exist) {
-        console.log('Creating PM2 configuration file in %s', cst.PM2_CONF_FILE);
-        fs
-          .createReadStream(path.join(__dirname, cst.SAMPLE_CONF_FILE))
-          .pipe(fs.createWriteStream(cst.PM2_CONF_FILE));
-      }
-
-    });
-  }
-
-})();
-
+CLI.pm2Init();
 
 commander.version(pkg.version)
   .option('-v --version', 'get version')
@@ -132,8 +105,7 @@ function beginCommandProcessing() {
       console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
       console.log('');
     }
-      commander.parse(process.argv);
-
+    commander.parse(process.argv);
   });
 }
 
@@ -150,7 +122,7 @@ if (process.argv.indexOf('--no-daemon') > -1) {
       console.error('>> pm2 is already daemonized ! You should kill it before launching it in no-daemon mode'.red);
     }
     Satan.start(true, function() {
-        beginCommandProcessing();
+      beginCommandProcessing();
     });
   });
 }

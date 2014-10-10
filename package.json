@@ -134,7 +134,7 @@
     "pidusage"            : "0.1.0",
 
     "axm"                 : "0.2.13",
-    "pm2-axon"            : "2.0.5",
+    "pm2-axon"            : "2.0.6",
     "pm2-axon-rpc"        : "0.3.5",
     "pm2-deploy"          : "~0.1.0",
     "pm2-interface"       : "2.0.3",
