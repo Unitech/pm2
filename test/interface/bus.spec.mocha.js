@@ -67,7 +67,9 @@ describe('PM2 BUS / RPC', function() {
     pm2.delete('all', function(err, ret) {
       process.nextTick(function() {
         pm2.killDaemon(function() {
-          pm2.disconnect(done);
+          pm2.disconnect(function() {
+            done();
+          });
         });
       });
     });
