@@ -1,9 +1,9 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
 
-PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and will facilitate common system admin tasks.
+PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
-PM2 is constantly assailed by [more than 300 test](https://travis-ci.org/Unitech/PM2).
+PM2 is constantly under inspection by [more than 300 tests](https://travis-ci.org/Unitech/PM2).
 
 Compatible with CoffeeScript.
 Works on Linux & MacOSx.
@@ -43,7 +43,7 @@ Listing all running processes:
 $ pm2 list
 ```
 
-Managing your processes it's straightforward:
+Managing your processes is straightforward:
 
 ```bash
 $ pm2 stop     <app_name|id|all>
@@ -51,7 +51,7 @@ $ pm2 restart  <app_name|id|all>
 $ pm2 delete   <app_name|id|all>
 ```
 
-To get more details about a specific process:
+To have more details on a specific process:
 
 ```bash
 $ pm2 describe 0
@@ -83,8 +83,8 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
-With the cluster mode, PM2 enable load balancing between each worker.
-Each HTTP/TCP/UDP request will be forwarded to a specific process at a time.
+With the cluster mode, PM2 enables load balancing between each worker.
+Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
 
 ```bash
 $ pm2 start app.js -i max  # Enable load-balancer and cluster features
