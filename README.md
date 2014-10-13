@@ -1,5 +1,7 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
+<script type="text/javascript" src="https://asciinema.org/a/14.js" id="asciicast-14" async data-speed="2"></script>
+
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and will facilitate common system admin tasks.
 
 PM2 is constantly assailed by [more than 300 test](https://travis-ci.org/Unitech/PM2).
@@ -18,6 +20,7 @@ $ npm install pm2 -g
 ```
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
+
 We recommend Node.js 0.11.14.
 
 ## Start an application

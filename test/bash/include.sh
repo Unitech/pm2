@@ -20,6 +20,8 @@ script="echo"
 
 file_path="test/fixtures"
 
+set -o verbose
+
 $pm2 kill
 
 # Determine wget / curl

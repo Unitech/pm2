@@ -3,7 +3,10 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/bash/include.sh"
 
+# Abort script at first error
 set -e
+# Display all commands executed
+set -o verbose
 
 echo "####################### DEBUG ############################"
 echo "PM2 Command = " $pm2
