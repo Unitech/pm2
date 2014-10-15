@@ -5,39 +5,15 @@ var util = require('util');
 
 var HOME = process.env.PM2_HOME || process.env.HOME;
 
-// Dont change DEFAULT_FILE_PATH or PM2 could not load custom_options.sh because of
-// header in bin/pm2
 var DEFAULT_FILE_PATH = p.resolve(HOME, '.pm2');
 
-var default_conf = {
-  DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
-  PM2_LOG_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.log'),
-  PM2_PID_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.pid'),
-  DEFAULT_PID_PATH   : p.join(DEFAULT_FILE_PATH, 'pids'),
-  DEFAULT_LOG_PATH   : p.join(DEFAULT_FILE_PATH, 'logs'),
-  DUMP_FILE_PATH     : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
-
+/**
+ * Constants variables used by PM2
+ */
+var csts = {
   SAMPLE_CONF_FILE   : p.join('..', 'lib', 'custom_options.sh'),
-  PM2_CONF_FILE      : p.join(DEFAULT_FILE_PATH, 'custom_options.sh'),
-
-  DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
-
-  DAEMON_RPC_PORT    : parseInt(process.env.PM2_RPC_PORT)  || 6666, // RPC commands
-  DAEMON_PUB_PORT    : parseInt(process.env.PM2_PUB_PORT)  || 6667, // Realtime events
-  INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668,
-
-  DAEMON_RPC_PORT    : p.join(DEFAULT_FILE_PATH, 'rpc.sock'),
-  DAEMON_PUB_PORT    : p.join(DEFAULT_FILE_PATH, 'pub.sock'),
-  INTERACTOR_RPC_PORT : p.join(DEFAULT_FILE_PATH, 'interactor.sock'),
-
   CODE_UNCAUGHTEXCEPTION : 100,
-
   CONCURRENT_ACTIONS : 1,
-  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
-
-  DEBUG              : process.env.PM2_DEBUG || false,
-  WEB_INTERFACE      : parseInt(process.env.PM2_API_PORT)  || 9615,
-  MODIFY_REQUIRE     : process.env.PM2_MODIFY_REQUIRE || false,
   PREFIX_MSG         : '\x1B[32m[PM2] \x1B[39m',
   PREFIX_MSG_ERR     : '\x1B[31m[PM2] [ERROR] \x1B[39m',
   PREFIX_MSG_WARNING : '\x1B[33m[PM2] [WARN] \x1B[39m',
@@ -66,11 +42,61 @@ var default_conf = {
   REMOTE_REVERSE_PORT : 43554,
   REMOTE_HOST         : 's1.keymetrics.io',
   INTERACTION_CONF    : p.join(DEFAULT_FILE_PATH, 'agent.json'),
-  SEND_INTERVAL       : 1000,
+  SEND_INTERVAL       : 1000
+};
+
+/**
+ * Defaults variables
+ */
+var default_conf = {
+  DEFAULT_FILE_PATH  : DEFAULT_FILE_PATH,
+  PM2_LOG_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.log'),
+  PM2_PID_FILE_PATH  : p.join(DEFAULT_FILE_PATH, 'pm2.pid'),
+  DEFAULT_PID_PATH   : p.join(DEFAULT_FILE_PATH, 'pids'),
+  DEFAULT_LOG_PATH   : p.join(DEFAULT_FILE_PATH, 'logs'),
+  DUMP_FILE_PATH     : p.join(DEFAULT_FILE_PATH, 'dump.pm2'),
+
+  PM2_CONF_FILE      : p.join(DEFAULT_FILE_PATH, 'custom_options.sh'),
+
+  DAEMON_RPC_PORT    : p.join(DEFAULT_FILE_PATH, 'rpc.sock'),
+  DAEMON_PUB_PORT    : p.join(DEFAULT_FILE_PATH, 'pub.sock'),
+  INTERACTOR_RPC_PORT : p.join(DEFAULT_FILE_PATH, 'interactor.sock'),
+
+  GRACEFUL_TIMEOUT   : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
+
+  DEBUG              : process.env.PM2_DEBUG || false,
+  WEB_INTERFACE      : parseInt(process.env.PM2_API_PORT)  || 9615,
+  MODIFY_REQUIRE     : process.env.PM2_MODIFY_REQUIRE || false,
 
   INTERACTOR_LOG_FILE_PATH : p.join(DEFAULT_FILE_PATH, 'agent.log'),
   INTERACTOR_PID_PATH : p.join(DEFAULT_FILE_PATH, 'agent.pid')
-
 };
 
-module.exports = default_conf;
+/**
+ * Extend with optional configuration file
+ */
+var OPTIONAL_CONFIGURATION_FILE = p.join(DEFAULT_FILE_PATH, 'conf.js');
+
+if (fs.existsSync(OPTIONAL_CONFIGURATION_FILE)) {
+  try {
+    var extra = require(OPTIONAL_CONFIGURATION_FILE);
+    default_conf = util._extend(default_conf, extra);
+  } catch(e) {
+    console.error(e.stack || e);
+  }
+}
+
+var conf = util._extend(default_conf, csts);
+
+module.exports = conf;
+
+
+
+
+
+
+// DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
+
+// DAEMON_RPC_PORT    : parseInt(process.env.PM2_RPC_PORT)  || 6666, // RPC commands
+// DAEMON_PUB_PORT    : parseInt(process.env.PM2_PUB_PORT)  || 6667, // Realtime events
+// INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668,
