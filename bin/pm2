@@ -308,8 +308,8 @@ commander.command('interact [secret_key] [public_key] [machine_name]')
     if (secret == 'delete') {
       CLI.killInteract(function() {
         try {
-          fs.unkinkSync(cst.INTERACTION_CONF);
-        } catch(e) {}
+          fs.unlinkSync(cst.INTERACTION_CONF);
+        } catch(e) { console.log(e.stack) }
         console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
         return process.exit(cst.SUCCESS_EXIT);
       });
