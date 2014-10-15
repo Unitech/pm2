@@ -88,15 +88,18 @@ if (fs.existsSync(csts.PM2_CONF_FILE)) {
 
 var conf = util._extend(default_conf, csts);
 
+/**
+ * Windows specific
+ */
+
+if (process.platform === 'win32' ||
+    process.platform === 'win64') {
+  conf.DAEMON_RPC_PORT = '\\\\.\\pipe\\rpc.sock';
+  conf.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub.sock';
+  conf.INTERACTOR_RPC_PORT = '\\\\.\\pipe\\interactor.sock';
+}
+
+/**
+ * Final Export
+ */
 module.exports = conf;
-
-
-
-
-
-
-// DAEMON_BIND_HOST   : process.env.PM2_BIND_ADDR || 'localhost',
-
-// DAEMON_RPC_PORT    : parseInt(process.env.PM2_RPC_PORT)  || 6666, // RPC commands
-// DAEMON_PUB_PORT    : parseInt(process.env.PM2_PUB_PORT)  || 6667, // Realtime events
-// INTERACTOR_RPC_PORT : parseInt(process.env.PM2_INTERACTOR_PORT) || 6668,
