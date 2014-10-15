@@ -143,8 +143,7 @@
     "pm2-rpc-fallback"    : "3.0.9",
 
     "vizionar"            : "^0.1.0",
-    "punt"                : "2.2.0",
-    "uid-number"          : "0.0.5"
+    "punt"                : "2.2.0"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
