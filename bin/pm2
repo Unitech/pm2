@@ -310,6 +310,8 @@ commander.command('interact [secret_key] [public_key] [machine_name]')
       });
       return false;
     }
+    if (secret == 'start')
+      return CLI.interact(null, null, null);
     if (secret && !public) {
       console.error(chalk.cyan('[Keymetrics.io]') + ' Command [%s] unknown or missing public key', secret);
       return process.exit(cst.ERROR_EXIT);
