@@ -1,4 +1,23 @@
 
+# 0.11.2
+
+- Pre Windows Support
+- Upgrade Commander (better help display)
+- Upgrade chokidar to 0.10.x
+- Better interactor
+- Better revision parsing
+- Configuration file
+- Close fd in fork mode while reloading
+- Remove --run-as-user option
+- Better CLI interface for interactor
+- axm:monitor axm:dynamic
+- remove uidnumber module
+- Temporaly merge pm2-interface with pm2
+- Cache cpu infos
+- Make revision transit in God.bus broadcast
+- Ignore useless events in God.bus broadcast
+
+
 # 0.11.x
 
 - Multi user support and privilege containment: UNIX sockets instead of TCP

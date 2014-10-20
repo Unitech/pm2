@@ -118,16 +118,16 @@
   "dependencies": {
     "async"               : "~0.9.0",
     "chalk"               : "~0.5.1",
-    "chokidar"            : "0.9.0",
+    "chokidar"            : "~0.10.1",
     "cli-table"           : "0.3.0",
     "coffee-script"       : "1.8.0",
     "colors"              : "0.6.2",
-    "commander"           : "2.3.0",
-    "cron"                : "1.0.4",
-    "debug"               : "2.0.0",
+    "commander"           : "2.4.0",
+    "cron"                : "1.0.5",
+    "debug"               : "2.1.0",
     "eventemitter2"       : "0.4.14",
     "json-stringify-safe" : "5.0.0",
-    "moment"              : "~2.8.2",
+    "moment"              : "~2.8.3",
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
@@ -138,7 +138,7 @@
     "pm2-multimeter"      : "0.1.2",
     "pm2-rpc-fallback"    : "3.0.9",
 
-    "vizionar"            : "^0.1.0",
+    "vizionar"            : "~0.1.2",
     "punt"                : "2.2.0"
   },
   "devDependencies": {
