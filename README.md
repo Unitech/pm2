@@ -1,4 +1,5 @@
 # ![Monit](https://github.com/unitech/pm2/raw/master/pres/top-logo-wo.png)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 pm2 is a process manager for Node apps with a builtin load-balancer. 
 
