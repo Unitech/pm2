@@ -2,9 +2,6 @@
   "name": "pm2",
   "preferGlobal": "true",
   "version": "0.11.1",
-  "os": [
-    "!win32"
-  ],
   "engines": {
     "node": ">=0.10"
   },
@@ -134,17 +131,15 @@
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
-    "axm"                 : "0.2.13",
+    "axm"                 : "0.2.15",
     "pm2-axon"            : "2.0.7",
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "~0.1.0",
-    "pm2-interface"       : "2.0.4",
     "pm2-multimeter"      : "0.1.2",
     "pm2-rpc-fallback"    : "3.0.9",
 
     "vizionar"            : "^0.1.0",
-    "punt"                : "2.2.0",
-    "uid-number"          : "0.0.5"
+    "punt"                : "2.2.0"
   },
   "devDependencies": {
     "mocha": "^1.20.1",

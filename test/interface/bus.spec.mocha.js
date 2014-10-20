@@ -1,6 +1,6 @@
 
 var should = require('should');
-var Ipm2   = require('pm2-interface');
+var Ipm2   = require('../../lib/Interactor/pm2-interface');
 var pm2    = require('../..');
 var Plan   = require('../helpers/plan.js');
 

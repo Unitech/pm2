@@ -166,9 +166,6 @@ $ pm2 start app.json                # Start processes with options declared in a
 
 $ pm2 start app.js -e err.log -o out.log  # Start and specify error and out log
 
-$ pm2 --run-as-user foo start app.js  # Start app.js as user foo instead of the user that started pm2
-
-$ pm2 --run-as-user foo --run-as-group bar start app.js  # Start app.js as foo:bar instead of the user:group that started pm2
 ```
 
 For scripts in other languages:
@@ -223,8 +220,6 @@ Options:
     --merge-logs                 merge logs
     --watch                      watch folder(s) for changes. When `true`, watching all folders from root. Can also be a string or an array of strings for paths to watch for changes.
     --node-args <node_args>      space-delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
-    --run-as-user <run_as_user>    The user or uid to run a managed process as
-    --run-as-group <run_as_group>  The group or gid to run a managed process as
 ```
 
 <a name="update-pm2"/>
@@ -586,11 +581,6 @@ $ cat node-app-1.json
   "script" : "app.js",
   "cwd" : "/srv/node-app-1/current"
 }
-
-$ pm2 --run-as-user app start node-app-1.json
-
-$ ps aux | grep node-app
-root 14735 5.8 1.1 752476 83932 ? Sl 00:08 0:00 pm2: node-app-1  <-- owned by the default user (root), not app
 ```
 - JSON app declarations are additive.  Continuing from above:
 ```bash
@@ -615,8 +605,6 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "error_file"       : "/var/log/node-app/node-app.stderr.log",
   "out_file"         : "log/node-app.stdout.log",
   "pid_file"         : "pids/node-geo-api.pid",
-  "run_as_user"      : "app",
-  "run_as_group"     : "www-data",
   "instances"        : "6", //or 'max'
   "min_uptime"       : "200", // milliseconds, defaults to 1000
   "max_restarts"     : "10", // defaults to 15
