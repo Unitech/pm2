@@ -8,11 +8,9 @@ PM2 is constantly under inspection by [more than 300 tests](https://travis-ci.or
 Compatible with CoffeeScript.
 Works on Linux & MacOSx.
 
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
+[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
-
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Install PM2
 
