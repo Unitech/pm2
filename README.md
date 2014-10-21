@@ -12,6 +12,8 @@ Works on Linux & MacOSx.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Install PM2
 
 ```bash
