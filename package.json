@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "engines": {
     "node": ">=0.10"
   },
@@ -13,7 +13,7 @@
   "author": {
     "name": "Strzelewicz Alexandre",
     "email": "as@unitech.io",
-    "url": "http://pm2.io"
+    "url": "https://keymetrics.io"
   },
   "maintainers": [
     "tknew <strzelewicz.alexandre@gmail.com",
@@ -131,7 +131,7 @@
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
-    "axm"                 : "0.2.15",
+    "axm"                 : "latest",
     "pm2-axon"            : "2.0.7",
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "~0.1.0",

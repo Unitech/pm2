@@ -42,6 +42,7 @@ spec "Programmatic test"
 spec "Interactor daemonizer test"
 mocha ./test/interface/bus.spec.mocha.js
 spec "Protocol communication test"
-
+mocha ./test/interface/bus.fork.spec.mocha.js
+spec "Protocol communication test"
 
 echo "########## PROGRAMMATIC TEST DONE #########"
