@@ -38,8 +38,8 @@ spec "Satan test"
 mocha ./test/programmatic/programmatic.js
 spec "Programmatic test"
 
-#mocha ./test/interface/interactor.daemonizer.mocha.js
-spec "Interactor daemonizer test"
+mocha ./test/interface/remote.mocha.js
+spec "Remote interactions test"
 mocha ./test/interface/bus.spec.mocha.js
 spec "Protocol communication test"
 mocha ./test/interface/bus.fork.spec.mocha.js

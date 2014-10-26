@@ -237,7 +237,7 @@ describe('God', function() {
 
   });
 
-  describe.only('Multi launching', function() {
+  describe('Multi launching', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
@@ -299,6 +299,67 @@ describe('God', function() {
         }, 500);
       });
     });
+
+  });
+
+  describe('Lock/Unlock system', function() {
+
+    it('should launch processes', function(done) {
+      God.prepare(getConf(), function(err, procs) {
+	      God.getFormatedProcesses().length.should.equal(2);
+
+        var command = procs[0].pm2_env.command;
+
+        should.exist(command);
+        command.should.have.properties(['locked', 'metadata', 'started_at', 'finished_at']);
+
+        done();
+      });
+    });
+
+    it('should lock a process', function(done) {
+      God.lock({ name : 'echo', meta : 'pulling...' }, function(err, procs) {
+        var processes = God.findByName('echo');
+
+        should(err).be.null;
+
+        processes.forEach(function(proc) {
+          proc.pm2_env.command.locked.should.be.true;
+        });
+
+        done();
+      });
+    });
+
+    it('should trying to relock fail', function(done) {
+      God.lock({ name : 'echo', meta : { command : 'restart'  }}, function(err, procs) {
+
+        should.exist(err);
+
+        var processes = God.findByName('echo');
+
+        processes.forEach(function(proc) {
+          proc.pm2_env.command.locked.should.be.true;
+        });
+
+        done();
+      });
+    });
+
+    it('should unlock processes', function(done) {
+      God.unlock({ name : 'echo', meta : { result : 'successsss'} }, function(err, procs) {
+        var processes = God.findByName('echo');
+
+        should(err).be.null;
+
+        processes.forEach(function(proc) {
+          proc.pm2_env.command.locked.should.be.false;
+        });
+
+        done();
+      });
+    });
+
   });
 
   it('should report pm2 version', function(done) {
