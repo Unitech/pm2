@@ -1,10 +1,11 @@
 
-var pm2      = require('../..');
+var cmd_pm2  = require('../..');
 var should   = require('should');
 var nssocket = require('nssocket');
 var events   = require('events');
 var util     = require('util');
 var Cipher   = require('../../lib/Interactor/Cipher.js');
+var cst      = require('../../constants.js');
 
 var Interactor = require('../../lib/Interactor/InteractorDaemonizer.js');
 
@@ -59,7 +60,7 @@ function createMockServer(cb) {
     console.log('Got new connection in Mock server');
 
     send_cmd.on('cmd', function(data) {
-      console.log('Sending command %s', data);
+      console.log('Sending command %j', data);
       _socket.send(data._type, data);
     });
 
@@ -83,13 +84,13 @@ function createMockServer(cb) {
 }
 
 function startSomeApps(cb) {
-  pm2.connect(function() {
-    pm2.start('./test/fixtures/child.js', {instances : 4}, function() {
-      pm2.disconnect();
+  cmd_pm2.connect(function() {
+    cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, function() {
       return cb();
     });
   });
 }
+
 describe('Test remote PM2 actions', function() {
   var server;
   var interactor;
@@ -98,6 +99,10 @@ describe('Test remote PM2 actions', function() {
   after(function(done) {
     server.close();
     Interactor.killDaemon(function() {
+      var fs = require('fs');
+
+      fs.unlinkSync(cst.INTERACTION_CONF);
+
       pm2.kill();
       done();
     });
@@ -132,18 +137,193 @@ describe('Test remote PM2 actions', function() {
 
 
   it('should act on PM2', function(done) {
-    send_cmd.once('pm2_action:result', function(pck) {
-      console.log('-------------');
-      console.log(pck);
-      setTimeout(function() {
-        done();
-      }, 5000);
+    send_cmd.once('trigger:pm2:result', function(pck) {
+
+      /**
+       * Once remote command is finished...
+       */
+      pck.ret.data.success.should.be.true
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          // 2 - Lock must be unset at the end of command
+          proc.pm2_env.command.locked.should.be.false;
+        });
+      });
+
+      done();
     });
 
     send_cmd.emit('cmd', {
       _type : 'trigger:pm2:action',
       method_name : 'restart',
-      parameters : '1'
+      parameters : {name : 'child' }
+    });
+
+    setTimeout(function() {
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          // 1 - Lock must be set while processing
+          proc.pm2_env.command.locked.should.be.true;
+        });
+      });
+    }, 80);
+  });
+
+  it('should act on PM2 but handle failure', function(done) {
+    send_cmd.once('trigger:pm2:result', function(pck) {
+      /**
+       * Once remote command is finished...
+       */
+
+      should.exist(pck.ret.err);
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          // 2 - Lock must be unset at the end of command
+          proc.pm2_env.command.locked.should.be.false;
+        });
+      });
+
+      done();
+    });
+
+    send_cmd.emit('cmd', {
+      _type : 'trigger:pm2:action',
+      method_name : 'restart',
+      parameters : {name : 'childe' }
+    });
+  });
+
+  it('should RELOAD', function(done) {
+    send_cmd.once('trigger:pm2:result', function(pck) {
+      /**
+       * Once remote command is finished...
+       */
+
+      should.not.exist(pck.err);
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          // 2 - Lock must be unset at the end of command
+          proc.pm2_env.command.locked.should.be.false;
+          proc.pm2_env.restart_time.should.eql(2);
+        });
+      });
+
+      done();
+    });
+
+    send_cmd.emit('cmd', {
+      _type : 'trigger:pm2:action',
+      method_name : 'reload',
+      parameters : {name : 'child' }
+    });
+  });
+
+  it('should gracefulRELOAD', function(done) {
+    send_cmd.once('trigger:pm2:result', function(pck) {
+      /**
+       * Once remote command is finished...
+       */
+
+      should.not.exist(pck.err);
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          // 2 - Lock must be unset at the end of command
+          proc.pm2_env.command.locked.should.be.false;
+          proc.pm2_env.restart_time.should.eql(3);
+        });
+      });
+
+      done();
+    });
+
+    send_cmd.emit('cmd', {
+      _type : 'trigger:pm2:action',
+      method_name : 'gracefulReload',
+      parameters : {name : 'child' }
+    });
+  });
+
+  it('should RESET metadata', function(done) {
+    send_cmd.once('trigger:pm2:result', function(pck) {
+      /**
+       * Once remote command is finished...
+       */
+      should.not.exist(pck.err);
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          // 2 - Lock must be unset at the end of command
+          proc.pm2_env.command.locked.should.be.false;
+          proc.pm2_env.restart_time.should.eql(0);
+        });
+      });
+
+      done();
+    });
+
+    send_cmd.emit('cmd', {
+      _type : 'trigger:pm2:action',
+      method_name : 'reset',
+      parameters : {name : 'child' }
+    });
+  });
+
+  it('should delete all processes', function(done) {
+    cmd_pm2.delete('all', {}, function() {
+      startSomeApps(function() {
+        cmd_pm2.list(function(err, ret) {
+          ret.forEach(function(proc) {
+            proc.pm2_env.restart_time.should.eql(0);
+          });
+          done();
+        });
+      });
+    });
+  });
+
+  it('should test .remote', function(done) {
+    cmd_pm2.remote('restart', {
+      name : 'child'
+    }, function(err, procs) {
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          proc.pm2_env.restart_time.should.eql(1);
+        });
+        done();
+      });
+    });
+  });
+
+  it('should test .remote', function(done) {
+    cmd_pm2.remote('restart', {
+      name : 'UNKNOWN_NAME'
+    }, function(err, procs) {
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          proc.pm2_env.restart_time.should.eql(1);
+        });
+        done();
+      });
+    });
+  });
+
+  it('should test .remote #2', function(done) {
+    cmd_pm2.remote('reload', {
+      name : 'child'
+    }, function(err, procs) {
+
+      cmd_pm2.list(function(err, ret) {
+        ret.forEach(function(proc) {
+          proc.pm2_env.restart_time.should.eql(2);
+        });
+        done();
+      });
     });
   });
 

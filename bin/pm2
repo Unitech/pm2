@@ -397,7 +397,7 @@ commander.command('ecosystem')
 commander.command('reset <name|id|all>')
   .description('reset counters for process')
   .action(function(proc_id) {
-    CLI.resetMetaProcess(proc_id);
+    CLI.reset(proc_id);
   });
 
 commander.command('describe <id>')

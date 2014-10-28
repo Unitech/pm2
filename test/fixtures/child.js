@@ -1,8 +1,19 @@
 
+
+
 var http = require('http');
-var i = 0;
 
 http.createServer(function(req, res) {
   res.writeHead(200);
-  res.end("hello world\n" + i++);
-}).listen(8004);
+  res.end('hey');
+}).listen(8000);
+
+process.on('message', function(msg) {
+  if (msg == 'shutdown') {
+    console.log('Closing all connections...');
+    setTimeout(function() {
+      console.log('Finished closing connections');
+      process.exit(0);
+    }, 100);
+  }
+});

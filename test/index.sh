@@ -38,6 +38,8 @@ spec "Satan test"
 mocha ./test/programmatic/programmatic.js
 spec "Programmatic test"
 
+mocha ./test/interface/interactor.daemonizer.mocha.js
+spec "Remote interactor keys save verification"
 mocha ./test/interface/remote.mocha.js
 spec "Remote interactions test"
 mocha ./test/interface/bus.spec.mocha.js
