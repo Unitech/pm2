@@ -1,0 +1,8 @@
+
+[{
+  "name" : "inside",
+  "script":"examples/inside.js"
+},{
+  "name" : "echo",
+  "script":"examples/echo.js"
+}]
