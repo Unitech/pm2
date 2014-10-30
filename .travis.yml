@@ -4,6 +4,7 @@ branches:
     - master
     - development
     - api
+    - travis
 node_js:
    - "0.11.14"
    - "0.11.13"
