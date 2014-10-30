@@ -522,7 +522,7 @@ commander.command('kill')
 commander.command('pull <name>')
   .description('updates repository for a given app')
   .action(function(pm2_name) {
-    CLI.pullProcessName(pm2_name);
+    CLI.pullAndRestart(pm2_name);
   });
 
 //
