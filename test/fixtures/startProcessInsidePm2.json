@@ -1,0 +1,7 @@
+[{
+	"name"      : "masterProcess",
+	"script"    : "./startProcessInsidePm2.js",
+	"exec_mode" : "fork_mode",
+	"min_uptime" : "100",
+	"max_restarts" : "50"
+}]

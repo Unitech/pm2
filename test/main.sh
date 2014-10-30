@@ -56,4 +56,7 @@ spec "Reset meta"
 bash ./test/bash/startOrX.sh
 spec "startOrX commands"
 
+bash ./test/bash/inside-pm2.sh
+spec "Starting a process inside a PM2 process"
+
 $pm2 kill
