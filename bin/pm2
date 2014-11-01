@@ -516,6 +516,14 @@ commander.command('kill')
     CLI.killDaemon();
   }));
 
+//
+// Update repository for a given app
+//
+commander.command('pull <name>')
+  .description('updates repository for a given app')
+  .action(function(pm2_name) {
+    CLI.pullAndRestart(pm2_name);
+  });
 
 //
 // Catch all
