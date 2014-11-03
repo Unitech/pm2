@@ -526,6 +526,24 @@ commander.command('pull <name>')
   });
 
 //
+// Update repository to the next commit for a given app
+//
+commander.command('forward <name>')
+  .description('updates repository to the next commit for a given app')
+  .action(function(pm2_name) {
+    CLI.forward(pm2_name);
+  });
+
+//
+// Downgrade repository to the previous commit for a given app
+//
+commander.command('backward <name>')
+  .description('downgrades repository to the previous commit for a given app')
+  .action(function(pm2_name) {
+    CLI.backward(pm2_name);
+  });
+
+//
 // Catch all
 //
 commander.command('*')
