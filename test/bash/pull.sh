@@ -8,7 +8,7 @@ echo -e "\033[1mRunning tests:\033[0m"
 cd $file_path
 
 #
-# Different way to stop process
+# Testing pull,forward,backward methods
 #
 git clone https://github.com/Unitech/angular-bridge.git
 $pm2 start ./angular-bridge/index.js --name angular
