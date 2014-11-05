@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.11.2",
+  "version": "0.12.0",
   "engines": {
     "node": ">=0.10"
   },
@@ -72,9 +72,7 @@
   "description": "Modern CLI process manager for Node apps with a builtin load-balancer. Perfectly designed for microservices architecture.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh",
-    "preinstall": "bash ./scripts/preinstall.sh",
-    "postinstall": "bash ./scripts/postinstall.sh"
+    "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh"
   },
   "keywords": [
     "cli",
