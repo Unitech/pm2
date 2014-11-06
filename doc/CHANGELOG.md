@@ -1,7 +1,20 @@
 
 # 0.11.2
 
+- Inner iteraction with PM2 possible #782
+- Better vizion system
+- backward / forward / pull command
+- Doc moved to doc
+- remove uidnumber module
+- pre install / post install scripts removed
+- Remote Lock System
+- More God tests
+- GRACEFUL_LISTEN_TIMEOUT constant configurable
+- Logs are closed in Fork mode when reloading
+- Fix not tty
+- Fix cluster structure nullification
 - Pre Windows Support
+- Send revision process on each process event
 - Upgrade Commander (better help display)
 - Upgrade chokidar to 0.10.x
 - Better interactor
@@ -11,16 +24,16 @@
 - Remove --run-as-user option
 - Better CLI interface for interactor
 - axm:monitor axm:dynamic
-- remove uidnumber module
 - Temporaly merge pm2-interface with pm2
 - Cache cpu infos
 - Make revision transit in God.bus broadcast
 - Ignore useless events in God.bus broadcast
 
-
-# 0.11.x
+# 0.11.0-1
 
 - Multi user support and privilege containment: UNIX sockets instead of TCP
+- Reload refactoring
+- Process on uncaughtexcption to flush process list
 - pm2 logs display state change of processes
 
 # 0.10.x
