@@ -141,7 +141,8 @@
     "pm2-rpc-fallback"    : "3.0.9",
 
     "vizion"              : "~0.1.0",
-    "punt"                : "2.2.0"
+    "punt"                : "2.2.0",
+    "shelljs"             : "0.3.0"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
