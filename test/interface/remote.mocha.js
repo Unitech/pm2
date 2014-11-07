@@ -273,16 +273,19 @@ describe('Test remote PM2 actions', function() {
   });
 
   it('should delete all processes', function(done) {
-    cmd_pm2.delete('all', {}, function() {
-      startSomeApps(function() {
-        cmd_pm2.list(function(err, ret) {
-          ret.forEach(function(proc) {
-            proc.pm2_env.restart_time.should.eql(0);
+  	//This timeout is requried otherwise the test halts and never progresses
+  	setTimeout(function(){
+      cmd_pm2.delete('all', {}, function() {
+        startSomeApps(function() {
+          cmd_pm2.list(function(err, ret) {
+            ret.forEach(function(proc) {
+              proc.pm2_env.restart_time.should.eql(0);
+            });
+            done();
           });
-          done();
         });
       });
-    });
+    }, 2000);
   });
 
   it('should test .remote', function(done) {
