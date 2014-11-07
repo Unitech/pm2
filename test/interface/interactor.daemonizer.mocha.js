@@ -3,6 +3,7 @@ var fs = require('fs');
 var os = require('os');
 var cst = require('../../constants');
 var interactorDaemonizer = require('../../lib/Interactor/InteractorDaemonizer');
+var json5  = require('../../lib/tools/json5.js');
 
 describe('Daemonizer interactor', function() {
   before(function(done) {
@@ -58,7 +59,7 @@ describe('Daemonizer interactor', function() {
       data.secret_key.should.eql('XXXS2');
       data.public_key.should.eql('XXXP2');
 
-      var interaction_conf     = JSON.parse(fs.readFileSync(cst.INTERACTION_CONF));
+      var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
       interaction_conf.secret_key.should.eql('XXXS2');
       interaction_conf.public_key.should.eql('XXXP2');
       interaction_conf.machine_name.should.eql(os.hostname());
@@ -75,7 +76,7 @@ describe('Daemonizer interactor', function() {
       data.secret_key.should.eql('XXXS3');
       data.public_key.should.eql('XXXP3');
 
-      var interaction_conf     = JSON.parse(fs.readFileSync(cst.INTERACTION_CONF));
+      var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
       interaction_conf.secret_key.should.eql('XXXS3');
       interaction_conf.public_key.should.eql('XXXP3');
       interaction_conf.machine_name.should.eql(os.hostname());
