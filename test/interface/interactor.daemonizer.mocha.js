@@ -32,6 +32,9 @@ describe('Daemonizer interactor', function() {
       should(err).be.null;
       data.secret_key.should.eql('XXXS');
       data.public_key.should.eql('XXXP');
+
+      should.exist(data.version_management.active);
+      should(data.version_management.password).be.null;
       try {
         fs.statSync(cst.INTERACTION_CONF);
       } catch(e) {
@@ -62,6 +65,10 @@ describe('Daemonizer interactor', function() {
       var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
       interaction_conf.secret_key.should.eql('XXXS2');
       interaction_conf.public_key.should.eql('XXXP2');
+
+      should.exist(interaction_conf.version_management.active);
+      should(interaction_conf.version_management.password).be.null;
+
       interaction_conf.machine_name.should.eql(os.hostname());
       return done();
     });
