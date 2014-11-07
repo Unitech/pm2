@@ -3,7 +3,7 @@
 
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
-PM2 is constantly under inspection by [more than 300 tests](https://travis-ci.org/Unitech/PM2).
+PM2 is constantly assailed by [more than 300 tests](https://travis-ci.org/Unitech/PM2).
 
 Compatible with CoffeeScript.
 Works on Linux & MacOSx.
@@ -20,7 +20,7 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
 
-We recommend Node.js 0.11.14.
+Node.js 0.11.14 is recommended for cluster mode and features related.
 
 ## Start an application
 
@@ -129,6 +129,10 @@ Thanks in advance and we hope that you like PM2!
 ## Know more about PM2
 
 [Advanced README.md](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md)
+
+## Changelog
+
+[CHANGELOG](https://github.com/Unitech/PM2/blob/master/doc/CHANGELOG.md)
 
 ## Contributors
 

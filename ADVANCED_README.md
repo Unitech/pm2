@@ -1,6 +1,5 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
-
 Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
 Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
 
