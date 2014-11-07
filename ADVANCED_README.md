@@ -622,7 +622,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 ```
 
 <a name="deployment"/>
-# Deployment (PM2 >= 0.9.0)
+# Deployment
 
 PM2 embed a simple and powerful deployment system with revision tracing.
 It's based on <a href="https://github.com/visionmedia/deploy">https://github.com/visionmedia/deploy</a>
