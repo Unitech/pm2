@@ -70,6 +70,7 @@ var default_conf = {
 
   GRACEFUL_TIMEOUT         : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
   GRACEFUL_LISTEN_TIMEOUT  : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 4000,
+  WORKER_INTERVAL          : 30000,
 
   DEBUG                    : process.env.PM2_DEBUG || false,
   WEB_INTERFACE            : parseInt(process.env.PM2_API_PORT)  || 9615,
