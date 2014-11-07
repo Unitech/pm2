@@ -26,8 +26,8 @@ var csts = {
   PREFIX_MSG_WARNING     : '\x1B[33m[PM2] [WARN] \x1B[39m',
   PREFIX_MSG_SUCCESS     : '\x1B[36;1m[PM2] \x1B[39;0m',
 
-  SAMPLE_FILE_PATH       : '../lib/sample.json',
-  SAMPLE_CONF_FILE       : '../lib/sample-conf.js',
+  SAMPLE_FILE_PATH       : '../lib/samples/sample.json5',
+  SAMPLE_CONF_FILE       : '../lib/samples/sample-conf.js',
 
   CENTOS_STARTUP_SCRIPT  : '../lib/scripts/pm2-init-centos.sh',
   UBUNTU_STARTUP_SCRIPT  : '../lib/scripts/pm2-init.sh',
@@ -77,7 +77,7 @@ var default_conf = {
 
   INTERACTOR_LOG_FILE_PATH : p.join(PM2_ROOT_PATH, 'agent.log'),
   INTERACTOR_PID_PATH      : p.join(PM2_ROOT_PATH, 'agent.pid'),
-  INTERACTION_CONF         : p.join(PM2_ROOT_PATH, 'agent.json')
+  INTERACTION_CONF         : p.join(PM2_ROOT_PATH, 'agent.json5')
 };
 
 /**
