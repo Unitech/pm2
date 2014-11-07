@@ -1,6 +1,7 @@
 
 # 0.11.2
 
+- Support PM2 files paths relocation (logs, pid) via PM2_HOME option
 - Rename process running with PM2 <version> - app_name
 - Inner iteraction with PM2 possible #782
 - Better vizion system
