@@ -10,6 +10,8 @@ cd $file_path
 #
 # Testing pull,forward,backward methods
 #
+git config user.email "jshkurti@student.42.fr"
+git config user.name "jshkurti"
 git clone https://github.com/keymetrics/app-playground.git
 cd app-playground
 git checkout hotfix
