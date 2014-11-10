@@ -16,7 +16,7 @@ git clone https://github.com/keymetrics/app-playground.git
 cd app-playground
 git checkout hotfix
 PM2_WORKER_INTERVAL=1000 $pm2 start ./process.json --name app
-sleep 4
+sleep 5
 
 OUT=`$pm2 ls | grep errored | wc -l`
 [ $OUT -eq 1 ] || fail "$1"
@@ -53,20 +53,26 @@ OUT=`$pm2 jlist | egrep -oh '"unstaged":true' | wc -c`
 [ $OUT -eq 16 ] || fail "$1"
 success "$1"
 
+cat INTER ##
+cat INTER ##
+cat INTER ##
+cat INTER ##
+
 rm ./TRACE
-sleep 4
+sleep 5
 OUT=`$pm2 jlist | egrep -oh '"unstaged":false' | wc -c`
+echo $OUT
 [ $OUT -eq 17 ] || fail "$1"
 success "$1"
 
 echo H>H
 git add H
 git commit -m 'local'
-sleep 4
+sleep 5
 OUT=`$pm2 jlist | egrep -oh '"ahead":true' | wc -c`
 [ $OUT -eq 13 ] || fail "$1"
 success "$1"
 
-$pm2 kill
-cd ..
-rm -rf ./app-playground
+#$pm2 kill
+#cd ..
+#rm -rf ./app-playground
