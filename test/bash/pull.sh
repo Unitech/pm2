@@ -55,8 +55,8 @@ success "$1"
 
 rm ./TRACE
 sleep 4
-OUT=`$pm2 jlist | egrep -oh '"unstaged":true' | wc -c`
-[ $OUT -eq 0 ] || fail "$1"
+OUT=`$pm2 jlist | egrep -oh '"unstaged":false' | wc -c`
+[ $OUT -eq 17 ] || fail "$1"
 success "$1"
 
 echo H>H
