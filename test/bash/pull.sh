@@ -1,4 +1,4 @@
-B1;2802;0c#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/include.sh"
