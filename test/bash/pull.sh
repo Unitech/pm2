@@ -13,14 +13,14 @@ cd $file_path
 git clone https://github.com/keymetrics/app-playground.git
 cd app-playground
 git checkout hotfix
-$pm2 start ./process.json --name app
-sleep 5
+PM2_WORKER_INTERVAL=1000 $pm2 start ./process.json --name app
+sleep 4
 
 OUT=`$pm2 ls | grep errored | wc -l`
 [ $OUT -eq 1 ] || fail "$1"
 success "$1"
 
-OUT=`$pm2 desc 0 | grep remote | egrep -oh 'https://([^ ]+)'`
+OUT=`$pm2 info 0 | grep remote | egrep -oh 'https://([^ ]+)'`
 [ $OUT = "https://github.com/keymetrics/app-playground.git" ] || fail "$1"
 success "$1"
 
@@ -42,6 +42,27 @@ success "$1"
 
 OUT=`$pm2 ls | grep "16 " | wc -l`
 [ $OUT -eq 1 ] || fail "$1"
+success "$1"
+
+#
+# Testing refresh-versioning worker
+#
+OUT=`$pm2 jlist | egrep -oh '"unstaged":true' | wc -c`
+[ $OUT -eq 16 ] || fail "$1"
+success "$1"
+
+rm ./TRACE
+sleep 4
+OUT=`$pm2 jlist | egrep -oh '"unstaged":true' | wc -c`
+[ $OUT -eq 0 ] || fail "$1"
+success "$1"
+
+echo H>H
+git add H
+git commit -m 'local'
+sleep 4
+OUT=`$pm2 jlist | egrep -oh '"ahead":true' | wc -c`
+[ $OUT -eq 13 ] || fail "$1"
 success "$1"
 
 $pm2 kill
