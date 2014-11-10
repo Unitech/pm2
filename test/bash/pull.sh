@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+B1;2802;0c#!/usr/bin/env bash
 
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/include.sh"
@@ -10,8 +10,8 @@ cd $file_path
 #
 # Testing pull,forward,backward methods
 #
-git config user.email "jshkurti@student.42.fr"
-git config user.name "jshkurti"
+git config --global user.email "jshkurti@student.42.fr"
+git config --global user.name "jshkurti"
 git clone https://github.com/keymetrics/app-playground.git
 cd app-playground
 git checkout hotfix
