@@ -288,8 +288,8 @@ commander.command('update')
 //
 // Interact
 //
-commander.command('interact [secret_key] [public_key] [machine_name]')
-  .description('agent actions for keymetrics.io')
+commander.command('interact [secret_key|command] [public_key] [machine_name]')
+  .description('agent actions for keymetrics.io - command can be stop|info|delete|restart')
   .action(function(secret_key, public_key, machine) {
     if (secret_key == 'stop' || secret_key == 'kill') {
       console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
@@ -313,7 +313,7 @@ commander.command('interact [secret_key] [public_key] [machine_name]')
       });
       return false;
     }
-    if (secret_key == 'start')
+    if (secret_key == 'start' || secret_key == 'restart')
       return CLI.interact(null, null, null);
     if (secret_key && !public_key) {
       console.error(chalk.cyan('[Keymetrics.io]') + ' Command [%s] unknown or missing public key', secret_key);
@@ -321,19 +321,6 @@ commander.command('interact [secret_key] [public_key] [machine_name]')
     }
     return CLI.interact(secret_key, public_key, machine);
   });
-
-commander.command('killInteract')
-  .description('stop agent')
-  .action(function() {
-    return CLI.killInteract();
-  });
-
-commander.command('infoInteract')
-  .description('get information about agent')
-  .action(function() {
-    CLI.infoInteract();
-  });
-
 
 //
 // Web interface
