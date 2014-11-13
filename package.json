@@ -133,7 +133,7 @@
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
-    "axm"                 : "latest",
+    "axm"                 : "0.2.*",
     "vizion"              : "latest",
 
     "pm2-axon"            : "2.0.7",
