@@ -33,5 +33,3 @@ $pm2 gracefulReload graceful
 OUT=`grep "Finished closing connections" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Process not restarted gracefuly"
 success "Process restarted gracefuly"
-
-$pm2 kill
