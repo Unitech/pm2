@@ -172,10 +172,10 @@ describe('Test remote PM2 actions', function() {
 
   it('should act on PM2 but handle failure', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
+
       /**
        * Once remote command is finished...
        */
-
       should.exist(pck.ret.err);
 
       cmd_pm2.list(function(err, ret) {
