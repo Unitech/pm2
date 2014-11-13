@@ -1,6 +1,7 @@
 
 # 0.12.0 - clear water ops
 
+- startOrRestart conf.json update environment variables #805 #812
 - pm2 start my/bin/file work out of the box
 - JSON5 support
 - PM2_HOME supported - PM2 files paths relocation (logs, pid) via PM2_HOME option
