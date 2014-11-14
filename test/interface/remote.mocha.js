@@ -111,12 +111,12 @@ describe('Test remote PM2 actions', function() {
   before(function(done) {
     createMockServer(function(err, _server) {
       server = _server;
-      forkInteractor(function(err, _interactor) {
-        interactor = _interactor;
-        console.log('Interactor forked');
-        forkPM2(function(err, _pm2) {
-          pm2 = _pm2;
-          console.log('PM2 forked');
+      forkPM2(function(err, _pm2) {
+        pm2 = _pm2;
+        console.log('PM2 forked');
+        forkInteractor(function(err, _interactor) {
+          interactor = _interactor;
+          console.log('Interactor forked');
           startSomeApps(function() {
             done();
           });
@@ -172,26 +172,15 @@ describe('Test remote PM2 actions', function() {
 
   it('should act on PM2 but handle failure', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
-
-      /**
-       * Once remote command is finished...
-       */
-      should.exist(pck.ret.err);
-
-      cmd_pm2.list(function(err, ret) {
-        ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
-        });
-      });
-
+      // Error is present telling process does not exists
+      pck.ret.err.should.not.be.null;
       done();
     });
 
     send_cmd.emit('cmd', {
       _type : 'trigger:pm2:action',
       method_name : 'restart',
-      parameters : {name : 'childe' }
+      parameters : {name : 'UNKNOWN APP' }
     });
   });
 
@@ -201,7 +190,7 @@ describe('Test remote PM2 actions', function() {
        * Once remote command is finished...
        */
 
-      should.not.exist(pck.err);
+      should(pck.ret.err).be.null;
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
@@ -227,7 +216,7 @@ describe('Test remote PM2 actions', function() {
        * Once remote command is finished...
        */
 
-      should.not.exist(pck.err);
+      should(pck.ret.err).be.null;
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
@@ -252,7 +241,7 @@ describe('Test remote PM2 actions', function() {
       /**
        * Once remote command is finished...
        */
-      should.not.exist(pck.err);
+      should(pck.ret.err).be.null;
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
