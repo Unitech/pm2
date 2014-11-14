@@ -620,26 +620,6 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 }]
 ```
 
-### Non-JS intepreters
-
-To run a non-JS interpreter you must set `exec_mode` to `fork_mode` and `exec_interpreter` to your interpreter of choice. For example:
-
-```json
-{
-  "apps" : [{
-    "name"       : "bash-worker",
-    "script"     : "./a-bash-script",
-    "exec_interpreter": "bash",
-    "exec_mode"  : "fork_mode"
-  }, {
-    "name"       : "ruby-worker",
-    "script"     : "./some-ruby-script",
-    "exec_interpreter": "ruby",
-    "exec_mode"  : "fork_mode"
-  }]
-}
-```
-
 <a name="deployment"/>
 # Deployment
 
@@ -1019,6 +999,27 @@ $ pm2 start my-python-script.py -x --interpreter python
 ```
 
 The interpreter is deduced from the file extension from the [following list](https://github.com/Unitech/pm2/blob/master/lib/interpreter.json).
+
+### JSON configuration
+
+To run a non-JS interpreter you must set `exec_mode` to `fork_mode` and `exec_interpreter` to your interpreter of choice. 
+For example:
+
+```json
+{
+  "apps" : [{
+    "name"       : "bash-worker",
+    "script"     : "./a-bash-script",
+    "exec_interpreter": "bash",
+    "exec_mode"  : "fork_mode"
+  }, {
+    "name"       : "ruby-worker",
+    "script"     : "./some-ruby-script",
+    "exec_interpreter": "ruby",
+    "exec_mode"  : "fork_mode"
+  }]
+}
+```
 
 <a name="a96"/>
 ## JSON app configuration via pipe from stdout
