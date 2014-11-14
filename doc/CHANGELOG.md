@@ -8,6 +8,7 @@
 - post_updates commands are searched in process.json/ecosystem.json/package.json
 - Worker system to verify up to date repositories
 - Rename process running with PM2 <version> - app_name
+- Process Lock system
 - Inner iteraction with PM2 possible #782
 - Better vizion system
 - backward / forward / pull command
