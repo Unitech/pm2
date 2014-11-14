@@ -506,7 +506,9 @@ commander.command('ilogs')
 commander.command('kill')
   .description('kill daemon')
   .action(failOnUnknown(function(arg) {
-    CLI.killDaemon();
+    CLI.killDaemon(function() {
+      process.exit(cst.SUCCESS_EXIT);
+    });
   }));
 
 //
