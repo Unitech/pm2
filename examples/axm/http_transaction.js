@@ -3,10 +3,18 @@
 var axm = require('axm');
 axm.http();
 
+var probe = axm.probe();
+
 var http = require('http');
+
+var meter = probe.meter({
+  name    : 'req/min',
+  seconds : 60
+});
 
 http.createServer(function(req, res) {
   res.writeHead(200);
+  meter.mark();
   res.end('transaction');
 }).listen(9010);
 

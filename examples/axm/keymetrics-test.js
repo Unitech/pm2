@@ -2,7 +2,7 @@
 var pm2 = require('../..');
 
 pm2.connect(function() {
-  //pm2.delete('all', function() {
+  pm2.delete('all', function() {
     pm2.start('examples/axm/event.js', function() {
       pm2.start('examples/axm/http_app.js', {instances:4},function() {
         pm2.start('examples/axm/probes.js',function() {
@@ -18,5 +18,5 @@ pm2.connect(function() {
         });
       });
     });
-  //});
+  });
 });

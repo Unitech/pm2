@@ -133,7 +133,7 @@
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
-    "axm"                 : "0.2.*",
+    "axm"                 : "~0.2.*",
     "vizion"              : "latest",
 
     "pm2-axon"            : "2.0.7",
@@ -147,11 +147,11 @@
     "isbinaryfile"        : "^2.0.2"
   },
   "devDependencies": {
-    "mocha": "^1.20.1",
-    "should": "^4.0.0",
-    "better-assert": "^1.0.0",
-    "promise-spawner": "^0.0.3",
-    "punt": "*"
+    "mocha"           : "^1.20.1",
+    "should"          : "^4.0.0",
+    "better-assert"   : "^1.0.0",
+    "promise-spawner" : "^0.0.3",
+    "punt"            : "*"
   },
   "optionalDependencies": {
     "pm2-logs": "~0.1.1",
