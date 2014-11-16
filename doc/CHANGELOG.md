@@ -1,4 +1,10 @@
 
+# 0.12.1
+
+- Fix Worker bug
+- Harden Lock system
+- Add backward compatibility for older PM2 on kill action
+
 # 0.12.0 - clear water ops
 
 - startOrRestart conf.json update environment variables #805 #812
