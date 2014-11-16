@@ -84,13 +84,12 @@ var default_conf = {
 /**
  * Extend with optional configuration file
  */
-
 if (fs.existsSync(csts.PM2_CONF_FILE)) {
   try {
     var extra = require(csts.PM2_CONF_FILE)(PM2_ROOT_PATH);
     default_conf = util._extend(default_conf, extra);
   } catch(e) {
-    console.error(e.stack || e);
+    //console.error(e.stack || e);
   }
 }
 
