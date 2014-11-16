@@ -1,12 +1,15 @@
 
 # 0.12.1
 
-- Fix Worker bug
 - Harden Lock system
-- Add backward compatibility for older PM2 on kill action
+- Fix Worker bug / Refactor Worker
+- Cleanly close interactor sockets on end
+- Add backward compatibility for older PM2 on kill action via system signal SIGQUIT
+- once listener for killDaemon
 
 # 0.12.0 - clear water ops
 
+- better ecosystem.json5 file with embedded comments
 - startOrRestart conf.json update environment variables #805 #812
 - pm2 start my/bin/file work out of the box
 - JSON5 support
