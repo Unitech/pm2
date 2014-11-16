@@ -71,7 +71,7 @@ var default_conf = {
 
   GRACEFUL_TIMEOUT         : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
   GRACEFUL_LISTEN_TIMEOUT  : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 4000,
-  WORKER_INTERVAL          : parseInt(process.env.PM2_WORKER_INTERVAL) || 30000,
+  WORKER_INTERVAL          : process.env.PM2_WORKER_INTERVAL || 30000,
 
   DEBUG                    : process.env.PM2_DEBUG || false,
   WEB_INTERFACE            : parseInt(process.env.PM2_API_PORT)  || 9615,
@@ -86,7 +86,6 @@ var default_conf = {
  * Extend with optional configuration file
  */
 if (fs.existsSync(csts.PM2_CONF_FILE)) {
-  console.log('exists');
   try {
     var extra = require(csts.PM2_CONF_FILE)(PM2_ROOT_PATH);
     default_conf = util._extend(default_conf, extra);
