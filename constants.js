@@ -57,7 +57,7 @@ var csts = {
  * Defaults variables
  */
 var default_conf = {
-  PM2_ROOT_PATH        : PM2_ROOT_PATH,
+  PM2_ROOT_PATH            : PM2_ROOT_PATH,
   PM2_LOG_FILE_PATH        : p.join(PM2_ROOT_PATH, 'pm2.log'),
   PM2_PID_FILE_PATH        : p.join(PM2_ROOT_PATH, 'pm2.pid'),
   DEFAULT_PID_PATH         : p.join(PM2_ROOT_PATH, 'pids'),
