@@ -69,7 +69,7 @@
     }
   ],
   "homepage": "https://github.com/Unitech/pm2",
-  "description": "Modern CLI process manager for Node apps with a builtin load-balancer. Perfectly designed for microservices architecture.",
+  "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh"
