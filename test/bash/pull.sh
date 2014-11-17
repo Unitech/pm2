@@ -31,58 +31,49 @@ git checkout hotfix
 $pm2 start ./process.json --name app
 sleep 5
 
-#
-# @joni please replace $1 by sentences
-# else we cant understand what is happening
-#
 
 OUT=`$pm2 ls | grep errored | wc -l`
-[ $OUT -eq 1 ] || fail "$1"
-success "$1"
+[ $OUT -eq 1 ] || fail "Process should be errored because node_modules are missing"
+success "Process should be errored because node_modules are missing"
 
 OUT=`$pm2 info 0 | grep remote | egrep -oh 'https://([^ ]+)'`
-[ $OUT = "https://github.com/keymetrics/app-playground.git" ] || fail "$1"
-success "$1"
+[ $OUT = "https://github.com/keymetrics/app-playground.git" ] || fail "Remote URL should be right"
+success "Remote URL should be right"
 
 OUT=`$pm2 backward app | wc -l`
-
-[ $OUT -eq 13 ] || fail "$1"
-success "$1"
-
-OUT=`$pm2 forward app | wc -l`
-[ $OUT -eq 13 ] || fail "$1"
-success "$1"
+[ $OUT -eq 13 ] || fail "Backward method should work properly and print adequate output"
+success "Backward method should work properly and print adequate output"
 
 OUT=`$pm2 forward app | wc -l`
-[ $OUT -eq 2 ] || fail "$1"
-success "$1"
+[ $OUT -eq 13 ] || fail "Forward method should work properly and print adequate output"
+success "Forward method should work properly and print adequate output"
+
+OUT=`$pm2 forward app | wc -l`
+[ $OUT -eq 2 ] || fail "Forward method should fail and thus print 2-lined output"
+success "Forward method should fail and thus print 2-lined output"
 
 OUT=`$pm2 pull app | wc -l`
-[ $OUT -eq 2 ] || fail "$1"
-success "$1"
-
-OUT=`$pm2 ls | grep "16 " | wc -l`
-[ $OUT -eq 1 ] || fail "$1"
-success "$1"
+[ $OUT -eq 2 ] || fail "Pull method should 'fail' because it is already up-to-date"
+success "Pull method should 'fail' because it is already up-to-date"
 
 #
 # Testing refresh-versioning worker
 #
 
 OUT=`$pm2 jlist | egrep -oh '"unstaged":true' | wc -c`
-[ $OUT -eq 16 ] || fail "$1"
-success "$1"
+[ $OUT -eq 16 ] || fail "Worker: unstaged flag should be true"
+success "Worker: unstaged flag should be true"
 
 git add --all
 git commit -m 'staged now'
 sleep 5
 OUT=`$pm2 jlist | egrep -oh '"unstaged":false' | wc -c`
-[ $OUT -eq 17 ] || fail "$1"
-success "$1"
+[ $OUT -eq 17 ] || fail "Worker: unstaged flag should be false this time"
+success "Worker: unstaged flag should be false this time"
 
 OUT=`$pm2 jlist | egrep -oh '"ahead":true' | wc -c`
-[ $OUT -eq 13 ] || fail "$1"
-success "$1"
+[ $OUT -eq 13 ] || fail "Worker: ahead flag should be true"
+success "Worker: ahead flag should be true"
 
 $pm2 kill
 cd ..
