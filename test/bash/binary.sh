@@ -17,28 +17,28 @@ function getInterpreter() {
 $pm2 start `which watch` -- ls
 
 OUT=$(getInterpreter)
-[ $OUT = "none" ] || fail "$1"
+[ $OUT="none" ] || fail "$1"
 success "$1"
 
 $pm2 kill
 $pm2 start binary-js-file
 
 OUT=$(getInterpreter)
-[ $OUT = "node" ] || fail "$1"
+[ $OUT="node" ] || fail "$1"
 success "$1"
 
 $pm2 kill
 $pm2 start binary-js-file.js
 
 OUT=$(getInterpreter)
-[ $OUT = "node" ] || fail "$1"
+[ $OUT="node" ] || fail "$1"
 success "$1"
 
 $pm2 kill
 $pm2 start binary-py-file.py
 
 OUT=$(getInterpreter)
-[ $OUT = "python" ] || fail "$1"
+[ $OUT="python" ] || fail "$1"
 success "$1"
 
 $pm2 kill
