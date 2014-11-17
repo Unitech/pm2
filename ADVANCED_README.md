@@ -207,6 +207,7 @@ Options:
     -f --force                   force actions
     -n --name <name>             set a <name> for script
     -i --instances <number>      launch [number|'max'] (load balanced) instances (for networked app)
+    -l --log [path]              specify entire log file (error and out are both included)
     -o --output <path>           specify out log file
     -e --error <path>            specify error log file
     -p --pid <pid>               specify pid file
@@ -360,6 +361,57 @@ $ pm2 reloadLogs
 --merge-logs : merge logs from different instances but keep error and out separated
 --log-date-format <format>: prefix logs with formated timestamp (http://momentjs.com/docs/#/parsing/string-format/)
 ```
+
+### Merge `out` and `err` logs
+- If you only want to merge `out` and `err` logs into one output file, try with the following examples:
+
+  ```bash
+  $ pm2 start name.js -o name.log -e name.log
+  ```
+
+  ```JSON
+  {
+    "apps" : [{
+      "name"        : "name",
+      "script"      : "name.js",
+      "err_file"    : "name.log",
+      "out_file"    : "name.log"
+    }]
+  }
+  ```
+
+- How about merge `out` and `err` logs into one, and also keep the separated logs? e.g.:
+
+  ```bash
+  $ pm2 start -l
+  ```
+
+  ```bash
+  $ pm2 start -l name.log
+  ```
+
+  ```JSON
+  {
+    "apps" : [{
+      "name"        : "name",
+      "script"      : "name.js",
+      "log_file"    : true
+    }]
+  }
+  ```
+
+  ```JSON
+  {
+    "apps" : [{
+      "name"        : "name",
+      "script"      : "name.js",
+      "log_file"    : "name.log"
+    }]
+  }
+  ```
+
+  **Notes:** When you providing a Boolean (`true`) value for `-l, --log` option or `log_file` property, it means a merged log file will be automatic generated, i.e. `~/.pm2/logs/[name]-[id].log`, otherwise it's specific.
+
 
 <a name="a5"/>
 ## Clustering (cluster_mode)
@@ -546,6 +598,7 @@ You can define parameters for your apps in `processes.json`:
     "script"     : "./examples/child.js",
     "instances"  : "4",
     "log_date_format"  : "YYYY-MM-DD",
+    "log_file"   : "./examples/child.log",
     "error_file" : "./examples/child-err.log",
     "out_file"   : "./examples/child-out.log",
     "pid_file"   : "./examples/child.pid",
@@ -1002,7 +1055,7 @@ The interpreter is deduced from the file extension from the [following list](htt
 
 ### JSON configuration
 
-To run a non-JS interpreter you must set `exec_mode` to `fork_mode` and `exec_interpreter` to your interpreter of choice. 
+To run a non-JS interpreter you must set `exec_mode` to `fork_mode` and `exec_interpreter` to your interpreter of choice.
 For example:
 
 ```json
