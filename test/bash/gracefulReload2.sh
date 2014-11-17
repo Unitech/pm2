@@ -20,6 +20,12 @@ cat /dev/null > $OUT_LOG
 #### Graceful reload name
 $pm2 gracefulReload graceful2
 
+echo "PATH: $OUT_LOG"
+
+TEXT=$(cat $OUT_LOG)
+
+echo "TEXT: $TEXT"
+
 OUT=`grep "Finished closing connections" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Non-listening process not restarted gracefuly"
 success "Non-listening process restarted gracefuly"
