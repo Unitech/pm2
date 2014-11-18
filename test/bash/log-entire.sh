@@ -68,7 +68,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 
 $pm2 reloadLogs
 
-sleep 0.6
+sleep 1
 
 test
 
@@ -78,7 +78,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 
 $pm2 restart all
 
-sleep 0.6
+sleep 1
 
 test
 
@@ -88,7 +88,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 
 $pm2 reload all
 
-sleep 0.6
+sleep 1
 
 test
 
@@ -99,7 +99,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 $pm2 desc "throw-later" | grep -w "entire log path"
 spec "\"entire log path\" should exists."
 
-sleep 0.6
+sleep 1
 
 test
 
@@ -109,7 +109,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 
 $pm2 flush
 
-sleep 0.6
+sleep 1
 
 test
 
@@ -120,7 +120,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 $pm2 jlist | grep -w "pm_log_path"
 spec "\"entire log path\" should exists."
 
-sleep 0.6
+sleep 1
 
 test
 
