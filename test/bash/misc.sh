@@ -101,7 +101,7 @@ rm outmerge*
 ########### coffee cluster test
 $pm2 delete all
 
-$pm2 start echo.coffee
+$pm2 start echo.coffee -i 1
 
 should 'process should not have been restarted' 'restart_time: 0' 1
 should 'process should be online' "status: 'online'" 1
