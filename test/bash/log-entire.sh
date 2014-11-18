@@ -128,9 +128,8 @@ head ">> START JSON"
 
 $pm2 start throw-later.json
 
-sleep 0.5
+sleep 1
 
 test
 
 $pm2 kill
-
