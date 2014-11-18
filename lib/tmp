@@ -1,0 +1,24 @@
+
+
+  // var rpcCall = 'findByScript';
+  //   var rpcArg = p.basename(appPaths.script);
+
+  //   //find script by port
+  //   if (appPaths.port) {
+  //     rpcCall = 'findByPort';
+  //     rpcArg = appPaths.port;
+  //   }
+
+  //   Satan.executeRemote(rpcCall, rpcArg, function(err, exec) {
+  //     if (exec && !opts.force) {
+  //       printError('Script already launched, add -f option to force re execution');
+  //       nextApp();
+  //       return false;
+  //     } else {
+  //       launchApp(appPaths);
+  //       return false;
+  //     }
+  //   });
+
+  //   return false;
+  // })(appConf);

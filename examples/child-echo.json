@@ -5,7 +5,6 @@
     "instances":3
   },{
     "script":"examples/echo.js",
-    "name":"API-io",
     "instances":2
   }],
   "deploy" : {
