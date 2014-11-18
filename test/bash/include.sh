@@ -49,7 +49,7 @@ function spec {
 }
 
 function ispec {
-  [ $? -eq 1 ] || fail "$1"
+  [ $? -ne 0 ] || fail "$1"
   success "$1"
 }
 
