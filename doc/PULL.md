@@ -1,4 +1,3 @@
-
 ### Manage your repository (revision control)
 
 For each app started with PM2, if a revision control system exists, pm2 will recognize it.
@@ -56,3 +55,14 @@ Your file should look something like this :
 }
 
 ```
+
+
+
+For the moment it works with Git, Subversion and Mercurial.
+
+| Feature | git | svn | hg |
+|:-------:|:---:|:---:|:--:|
+| metadata |   :white_check_mark:   |   :white_check_mark:   |   :white_check_mark:   |
+| backward |   :white_check_mark:   |   :x:   |   :x:   |
+| pull |   :white_check_mark:   |   :white_check_mark:   |   :x:   |
+| forward |   :white_check_mark:   |   :x:   |   :x:   |
