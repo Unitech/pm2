@@ -5,7 +5,7 @@ For each app started with PM2, if a revision control system exists, pm2 will rec
 You can see metadata about the repository:
 
 ```bash
-$ pm2 info <app name/app id>
+$ pm2 info <app name|app id>
 ```
 ![Metadata](https://github.com/unitech/pm2/raw/development/pres/pm2-versioning-metadata.png)
 
@@ -18,16 +18,19 @@ $ pm2 backward <app name>
 Switches your local repository to the previous commit if there is one.
 
 
+
 ```bash
 $ pm2 forward <app name>
 ```
 Switches your local repository to the next (more recent) commit if there is one.
 
 
+
 ```bash
 $ pm2 pull <app name>
 ```
 Updates your local repository to the most recent remote commit for the current branch.
+
 
 
 
@@ -45,7 +48,9 @@ Your file should look something like this :
       "instances"          : "max",
       "name"               : "my_app",
       "script"             : "app.js",
-      "post_update"        : ["npm i", "echo App is being updated and restarted"]
+      "post_update"        : ["echo App has been updated, running npm install...",
+                              "npm install",
+                              "echo App is being restarted now"]
     }
   ]
 }
