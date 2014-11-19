@@ -50,7 +50,7 @@ head ">> START CLUSTERMODE"
 
 $pm2 start throw-later.js -i 1 -o out.log -e err.log -l entire.log
 
-sleep 0.5
+sleep 1
 
 test
 
@@ -58,7 +58,7 @@ head ">> START CLUSTERMODE WITH BEING MERGED"
 
 $pm2 start throw-later.js -i 1 -o out.log -e err.log -l entire.log --merge-logs
 
-sleep 0.5
+sleep 1
 
 test
 
