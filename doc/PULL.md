@@ -60,9 +60,8 @@ Your file should look something like this :
 
 For the moment it works with Git, Subversion and Mercurial.
 
-| Feature | git | svn | hg |
-|:-------:|:---:|:---:|:--:|
-| metadata |   :white_check_mark:   |   :white_check_mark:   |   :white_check_mark:   |
-| backward |   :white_check_mark:   |   :x:   |   :x:   |
-| pull |   :white_check_mark:   |   :white_check_mark:   |   :x:   |
-| forward |   :white_check_mark:   |   :x:   |   :x:   |
+| Feature: | metadata | backward | pull | forward |
+|:--------:|:--------:|:--------:|:----:|:-------:|
+| Git | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Subversion | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| Mercurial | :white_check_mark: | :x: | :x: | :x: |
