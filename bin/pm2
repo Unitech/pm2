@@ -159,7 +159,7 @@ commander.command('start <file|json|stdin>')
         process.stdin.pause();
         CLI.startJson(cmd, commander, 'pipe');
       });
-    } else if (cmd.indexOf('.json') > 0)
+    } else if (cmd.slice(-5) == '.json')
       CLI.startJson(cmd, commander, 'file');
     else
       CLI.start(cmd, commander);
