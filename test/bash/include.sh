@@ -44,11 +44,13 @@ function success {
 }
 
 function spec {
+  sleep 0.3
   [ $? -eq 0 ] || fail "$1"
   success "$1"
 }
 
 function ispec {
+  sleep 0.3
   [ $? -ne 0 ] || fail "$1"
   success "$1"
 }
