@@ -12,7 +12,7 @@ var PM2_ROOT_PATH = '';
 if (process.env.PM2_HOME)
   PM2_ROOT_PATH = process.env.PM2_HOME;
 else
-  PM2_ROOT_PATH = p.resolve(process.env.HOME || process.env.HOMEPATH, '.pm2');
+  PM2_ROOT_PATH = p.resolve(process.env.HOME || process.env.HOMEPATH || '', '.pm2');
 
 /**
  * Constants variables used by PM2
