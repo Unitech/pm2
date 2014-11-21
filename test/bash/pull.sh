@@ -75,6 +75,10 @@ OUT=`$pm2 jlist | egrep -oh '"ahead":true' | wc -c`
 [ $OUT -eq 13 ] || fail "Worker: ahead flag should be true"
 success "Worker: ahead flag should be true"
 
+OUT=`$pm2 pull app 83dfc32383a84e146005d8981bcae2c52a5b123b | egrep -oh 'Current commit 83dfc32383a84e146005d8981bcae2c52a5b123b' | wc -c`
+[ $OUT -eq 56 ] || fail "Commit ID should be correct"
+success "Commit ID should be correct"
+
 $pm2 kill
 cd ..
 rm -rf ./app-playground
