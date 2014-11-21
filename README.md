@@ -112,8 +112,7 @@ $ pm2 save
 
 We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
 
-- [Try the beta](https://app.keymetrics.io/#/)
-
+- [Register to Keymetrics I/O](https://keymetrics.io/) 
 
 Thanks in advance and we hope that you like PM2!
 
