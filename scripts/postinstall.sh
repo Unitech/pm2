@@ -8,7 +8,9 @@ then
     then
         ./bin/pm2 resurrect
     fi
-    exit 0;
-else
-    exit 0;
 fi
+
+# This makes sure that the .pm2 directory is created (eg invoke CLI)
+./bin/pm2 -v
+
+exit 0;
