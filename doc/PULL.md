@@ -26,9 +26,10 @@ Switches your local repository to the next (more recent) commit if there is one.
 
 
 ```bash
-$ pm2 pull <app name>
+$ pm2 pull <app name> [commit ID]
 ```
-Updates your local repository to the most recent remote commit for the current branch.
+Updates your local repository to the most recent remote commit for the current branch
+or to the optional specified commit ID.
 
 
 
