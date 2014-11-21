@@ -516,7 +516,7 @@ commander.command('kill')
 // Update repository for a given app
 //
 
-commander.command('pull <name> [commit id]')
+commander.command('pull <name> [commit_id]')
   .description('updates repository for a given app')
   .action(function(pm2_name, commit_id) {
     if (commit_id !== undefined) {
