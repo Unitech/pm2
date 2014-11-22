@@ -40,7 +40,7 @@ sleep 1
 
 OUT=`cat $OUT_LOG | head -n 1`
 
-if [ $OUT = "undefined" ]
+if [ $OUT="undefined" ]
 then
     success "environment variable not defined"
 else
