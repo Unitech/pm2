@@ -14,7 +14,7 @@ var cst = require('../../constants.js');
  * @return AssignmentExpression
  */
 function getConf() {
-  var a = Common.resolveAppPaths({
+  var a = Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
     name : 'echo',
     instances : 2
@@ -23,7 +23,7 @@ function getConf() {
 }
 
 function getConf2() {
-  return Common.resolveAppPaths({
+  return Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
     instances       : 4,
     exec_mode       : 'cluster_mode',
@@ -32,7 +32,7 @@ function getConf2() {
 }
 
 function getConf3() {
-  return Common.resolveAppPaths({
+  return Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
     instances       : 10,
     exec_mode       : 'cluster_mode',
@@ -41,7 +41,7 @@ function getConf3() {
 }
 
 function getConf4() {
-  return Common.resolveAppPaths({
+  return Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/args.js'),
     args            : "['-d', '-a']",
     instances       : '1',
@@ -253,7 +253,7 @@ describe('God', function() {
     });
 
     it('should launch multiple processes depending on CPUs available', function(done) {
-      God.prepare(Common.resolveAppPaths({
+      God.prepare(Common.prepareAppConf({
         script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         name : 'child',
         instances:3
@@ -273,7 +273,7 @@ describe('God', function() {
     });
 
     it('should dump process list', function(done) {
-      God.prepare(Common.resolveAppPaths({
+      God.prepare(Common.resolveAppPathspPaths({
         script    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         name      : 'child',
         instances : 3
