@@ -117,7 +117,7 @@ head ">> JLIST"
 
 $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 
-$pm2 jlist | grep -w "pm_log_path"
+$pm2 jlist | grep -w "pm_log_path" | wc -l
 spec "\"entire log path\" should exists."
 
 sleep 1
