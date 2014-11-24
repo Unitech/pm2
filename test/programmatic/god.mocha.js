@@ -273,7 +273,7 @@ describe('God', function() {
     });
 
     it('should dump process list', function(done) {
-      God.prepare(Common.resolveAppPathspPaths({
+      God.prepare(Common.prepareAppConf({
         script    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         name      : 'child',
         instances : 3
