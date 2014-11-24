@@ -110,5 +110,8 @@
   },
   "force": {
     "type": "boolean"
+  },
+  "post_update": {
+    "type": "array"
   }
 }
