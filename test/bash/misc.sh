@@ -13,7 +13,7 @@ echo -e "\033[1mRunning tests:\033[0m"
 # -max-memory-restart option && maxMemoryRestart (via JSON file)
 #
 $pm2 kill
-PM2_WORKER_INTERVAL=1000 $pm2 start big-array.js --max-memory-restart=19
+PM2_WORKER_INTERVAL=1000 $pm2 start big-array.js --max-memory-restart=19000000
 sleep 7
 $pm2 list
 should 'process should have been restarted' 'restart_time: 0' 0
