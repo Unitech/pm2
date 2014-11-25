@@ -28,6 +28,9 @@ cd app-playground
 
 git checkout hotfix
 
+# set max_memory_restart to 160M by default. MAC does not support `sed -i`
+echo `sed -e 's/"160"/"160M"/' process.json` >| process.json
+
 $pm2 start ./process.json --name app
 sleep 5
 

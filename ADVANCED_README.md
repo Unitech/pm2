@@ -12,6 +12,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [Examples](#a3)
 - [Different ways to launch a process](#a667)
 - [Options](#a987)
+  - [Schema](#a988)
 - [How to update PM2?](#update-pm2)
 
 ### Features
@@ -26,6 +27,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [Reloading without downtime](#a690)
 - [Make PM2 restart on server reboot](#a8)
 - [JSON app declaration](#a10)
+  - [Schema](#a988)
 
 ### Deployment - ecosystem.json
 
@@ -101,7 +103,8 @@ $ pm2 start app.js
 $ pm2 start app.js --name my-api # Name process
 
 # Cluster mode
-$ pm2 start app.js -i max        # Will start maximum processes with LB depending on available CPUs
+$ pm2 start app.js -i 0        # Will start maximum processes with LB depending on available CPUs
+$ pm2 start app.js -i max      # Same as above, but deprecated yet.
 
 # Listing
 
@@ -156,7 +159,7 @@ $ pm2 start app.js --name serverone # Start a process an name it as server one
 
 $ pm2 start app.js --node-args="--debug=7001" # --node-args to pass options to node V8
 
-$ pm2 start app.js -i max    # Start maximum processes depending on available CPUs (cluster mode)
+$ pm2 start app.js -i 0             # Start maximum processes depending on available CPUs (cluster mode)
 
 $ pm2 start app.js --log-date-format "YYYY-MM-DD HH:mm Z"    # Log will be prefixed with custom time format
 
@@ -199,28 +202,228 @@ The interpreter is set by default with this equivalence:
 ```
 Options:
 
-    -h, --help                   output usage information
-    -V, --version                output the version number
-    -v --verbose                 verbose level
-    -s --silent                  hide all messages
-    -m --mini-list               display a compacted list without formatting
-    -f --force                   force actions
-    -n --name <name>             set a <name> for script
-    -i --instances <number>      launch [number|'max'] (load balanced) instances (for networked app)
-    -l --log [path]              specify entire log file (error and out are both included)
-    -o --output <path>           specify out log file
-    -e --error <path>            specify error log file
-    -p --pid <pid>               specify pid file
-    -x --execute-command         execute a program using fork system
-    -u --user <username>         define user when generating startup script
-    -c --cron <cron_pattern>     restart a running process based on a cron pattern
-    -w --write                   write configuration in local folder
-    --interpreter <interpreter>  the interpreter pm2 should use for executing app (bash, python...)
-    --no-daemon                  run pm2 daemon in the foreground if it doesn't exist already
-    --merge-logs                 merge logs
-    --watch                      watch folder(s) for changes. When `true`, watching all folders from root. Can also be a string or an array of strings for paths to watch for changes.
-    --node-args <node_args>      space-delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
+   -h, --help                           output usage information
+   -V, --version                        output the version number
+   -v --version                         get version
+   -s --silent                          hide all messages
+   -m --mini-list                       display a compacted list without formatting
+   -f --force                           force actions
+   -n --name <name>                     set a <name> for script
+   -i --instances <number>              launch [number] instances (for networked app)(load balanced)
+   -l --log [path]                      specify entire log file (error and out are both included)
+   -o --output <path>                   specify out log file
+   -e --error <path>                    specify error log file
+   -p --pid <pid>                       specify pid file
+   --max-memory-restart <memory>        specify max memory amount used to autorestart (in megaoctets)
+   --env <environment_name>             specify environment to get specific env variables (for JSON declaration)
+   -x --execute-command                 execute a program using fork system
+   -u --user <username>                 define user when generating startup script
+   -c --cron <cron_pattern>             restart a running process based on a cron pattern
+   -w --write                           write configuration in local folder
+   --interpreter <interpreter>          the interpreter pm2 should use for executing app (bash, python...)
+   --log-date-format <momentjs format>  add custom prefix timestamp to logs
+   --no-daemon                          run pm2 daemon in the foreground if it doesn't exist already
+   --merge-logs                         merge logs from different instances but keep error and out separated
+   --watch                              watch application folder for changes
+   --ignore-watch <folders|files>       folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules "some scripts""
+   --node-args <node_args>              space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
+   --no-color                           skip colors
 ```
+
+<a name="a988"/>
+## Schema
+
+The completely definitions:
+
+```JSON
+{
+  "script": {
+    "type": "string",
+    "require": true
+  },
+  "args": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "node_args": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "name": {
+    "type": "string"
+  },
+  "max_memory_restart": {
+    "type": [
+      "string",
+      "number"
+    ],
+    "regex": "^\\d+(G|M|K)?$",
+    "ext_type": "sbyte",
+    "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
+  },
+  "instances": {
+    "type": "number",
+    "min": 0
+  },
+  "log_file": {
+    "type": [
+      "boolean",
+      "string"
+    ],
+    "alias": "log"
+  },
+  "error_file": {
+    "type": "string",
+    "alias": "error"
+  },
+  "out_file": {
+    "type": "string",
+    "alias": "output"
+  },
+  "pid_file": {
+    "type": "string",
+    "alias": "pid"
+  },
+  "cron_restart": {
+    "type": "string",
+    "alias": "cron"
+  },
+  "cwd": {
+    "type": "string"
+  },
+  "merge_logs": {
+    "type": "boolean"
+  },
+  "watch": {
+    "type": "boolean"
+  },
+  "ignore_watch": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "env": {
+    "type": ["object", "string"]
+  },
+  "^env_\\S*$": {
+    "type": [
+      "object",
+      "string"
+    ]
+  },
+  "log_date_format": {
+    "type": "string"
+  },
+  "min_uptime": {
+    "type": [
+      "number",
+      "string"
+    ],
+    "regex": "^\\d+(h|m|s)?$",
+    "desc": "it should be a NUMBER - milliseconds, \"[NUMBER]h\"(hours), \"[NUMBER]m\"(minutes) or \"[NUMBER]s\"(seconds)",
+    "min": 100,
+    "ext_type": "stime"
+  },
+  "max_restarts": {
+    "type": "number",
+    "min": 0
+  },
+  "exec_mode": {
+    "type": "string",
+    "regex": "^(cluster|fork)(_mode)?$",
+    "alias": "executeCommand",
+    "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only"
+  },
+  "exec_interpreter": {
+    "type": "string",
+    "alias": "interpreter"
+  },
+  "write": {
+    "type": "boolean"
+  },
+  "force": {
+    "type": "boolean"
+  }
+}
+```
+
+All the keys can be used in a JSON configured file, and just need to make a small change in CLI, e.g.:
+
+```
+exec_interpreter  -> --interpreter
+exec_mode         -> --execute_command
+max_restarts      -> --max_restarts
+force             -> --force
+```
+
+Yap, if the `alias` exists, you can using it as a CLI option, but do not forget to turn the camelCasing to underscore split - `executeCommand` to `--execute_command`.
+
+
+
+**Notes**
+- Using quote to make an ESC, e.g.:
+
+  ```
+  $pm2 start test.js --node-args "port=3001 sitename='first pm2 app'"
+  ```
+
+  The `nodeArgs` will be
+
+  ```JSON
+  [
+    "port=3001",
+    "sitename=first pm2 app"
+  ]
+  ```
+
+  But not
+
+  ```JSON
+  [
+    "port=3001",
+    "sitename='first",
+    "pm2",
+    "app'"
+  ]
+  ```
+
+- RegExp key
+
+  Matches the keys of configured JSON by RegExp but not a specific String, e.g. `^env_\\S*$` will match all `env` keys like `env_production`, `env_test`, and make sure the values conform to the schemas.
+
+- Special `ext_type`
+
+  - min_uptime
+
+    Value of `min_uptime` could be:
+
+      - **Number**
+        e.g. `"min_uptime": 3000` means 3000 milliseconds.
+      - **String**
+        In the meantime we are making it briefness and easy configuration: `h`, `m` and `s`, e.g.: `"min_uptime": "1h"` means one hour, `"min_uptime": "5m"` means five minutes and `"min_uptime": "10s"` means ten seconds (At last, it will be transformed into milliseconds).
+
+  - max_memory_restart
+
+    Value of `max_memory_restart` could be:
+      - **Number**
+        e.g. `"max_memory_restart": 1024` means 1024 bytes (**NOT BITS**).
+      - **String**
+        In the meantime we are making it briefness and easy configuration: `G`, `M` and `K`, e.g.: `"max_memory_restart": "1G"` means one gigabytes, `"max_memory_restart": "5M"` means five megabytes and `"max_memory_restart": "10K"` means ten kilobytes (At last, it will be transformed into byte(s)).
+
+- Optional values
+
+  Like `exec_mode`, value could be one of `cluster` (`cluster_mode`) or `fork` (`fork_mode`) only.
+
+- Should known
+
+  - maximum
+
+    `"instances": 0` means starting maximum processes depending on available CPUs (cluster mode)
 
 <a name="update-pm2"/>
 ## How to update PM2
@@ -307,7 +510,7 @@ JSON:
 {
   "name" : "max_mem",
   "script" : "big-array.js",
-  "max_memory_restart" : "20"
+  "max_memory_restart" : "20M"
 }
 ```
 
@@ -425,6 +628,12 @@ $ pm2 start app.js -i 1
 ```
 
 To launch `max` instances (`max` depending on the number of CPUs available) and set the load balancer to balance queries among process:
+
+```bash
+$ pm2 start app.js --name "API" -i 0
+```
+
+DEPRECATED (STILL COMPATIBLE):
 
 ```bash
 $ pm2 start app.js --name "API" -i max
@@ -652,20 +861,21 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "cwd"              : "/srv/node-app/current",
   "args"             : "['--toto=heya coco', '-d', '1']",
   "script"           : "bin/app.js",
-  "node_args"        : "--harmony",
+  "node_args"        : ["--harmony", " --max-stack-size=102400000"],
   "log_date_format"  : "YYYY-MM-DD HH:mm Z",
   "error_file"       : "/var/log/node-app/node-app.stderr.log",
   "out_file"         : "log/node-app.stdout.log",
   "pid_file"         : "pids/node-geo-api.pid",
-  "instances"        : "6", //or 'max'
-  "min_uptime"       : "200", // milliseconds, defaults to 1000
-  "max_restarts"     : "10", // defaults to 15
+  "instances"        : 6, //or 0 => 'max'
+  "min_uptime"       : "200s", // 200 seconds, defaults to 1000
+  "max_restarts"     : 10, // defaults to 15
+  "max_memory_restart": "1M", // 1 megabytes, e.g.: "2G", "10M", "100K", 1024... the default unit is byte.
   "cron_restart"     : "1 0 * * *",
   "watch"            : false,
   "ignoreWatch"      : ["[\\/\\\\]\\./", "node_modules"],
   "merge_logs"       : true,
   "exec_interpreter" : "node",
-  "exec_mode"        : "fork_mode",
+  "exec_mode"        : "fork",
   "env": {
     "NODE_ENV": "production",
     "AWESOME_SERVICE_API_TOKEN": "xxx"
