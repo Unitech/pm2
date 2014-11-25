@@ -22,6 +22,8 @@
 - pid deletion has been resurected [f2ce631]
 - worker refactor [29fc72b]
 
+Big thanks to @Tjatse !
+
 # 0.12.1
 
 - Harden Lock system

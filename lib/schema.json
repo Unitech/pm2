@@ -61,7 +61,11 @@
     "type": "boolean"
   },
   "watch": {
-    "type": "boolean"
+    "type": [
+      "boolean",
+      "array",
+      "string"
+    ]
   },
   "ignore_watch": {
     "type": [
