@@ -144,7 +144,7 @@
 
     "punt"                : "2.2.0",
     "shelljs"             : "0.3.0",
-    "isbinaryfile"        : "^2.0.2"
+    "isbinaryfile"        : "^2.0.3"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
