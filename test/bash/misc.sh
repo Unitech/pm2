@@ -24,7 +24,7 @@ $pm2 delete all
 # Via JSON
 #
 $pm2 start max-mem.json
-sleep 7
+sleep 3
 $pm2 list
 should 'process should been restarted' 'restart_time: 0' 0
 
