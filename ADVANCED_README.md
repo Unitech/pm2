@@ -1374,6 +1374,7 @@ Don't use the *cluster_mode* via -i option.
 - [Cron string as argument](https://github.com/Unitech/pm2/issues/496#issuecomment-49323861)
 - [Restart when process reaches a specific memory amount](https://github.com/Unitech/pm2/issues/141)
 - [Sticky sessions and socket.io discussion](https://github.com/Unitech/PM2/issues/637)
+- [EACCESS - understanding pm2 user/root rights](https://github.com/Unitech/PM2/issues/837)
 
 <a name="a20"/>
 ## External resources and articles
