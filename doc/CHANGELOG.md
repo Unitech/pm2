@@ -1,4 +1,27 @@
 
+# 0.12.2
+
+- max-memory-restart option [#697] [#141]
+- JSON validation (cf ADVANCED_README.md) [#768] [#838]
+- CLI/JSON refactoring
+- watch fixes
+- execute binary softwares
+- node_args refactored (ESC support) [#838]
+- reload env graceful and peaceful [#838]
+- min_uptime added [#838]
+- startOrRestart conf.json does update environment variables [#805]
+- vizion only refresh ahead and unstaged flags [f1f829c]
+- worker restart cluster process if it's equal to 0 && online [c2e3581]
+- pm2 pull <name> [commit_id] [c2e3581] [4021902]
+- fix reloadLogs for fork mode [c0143cc][197781e]
+- waterfall logs stream [#822]
+- --log option to have a merged error and out output [#822]
+- God core refactors
+- test refactoring
+- update isBinaryFile [636fd99]
+- pid deletion has been resurected [f2ce631]
+- worker refactor [29fc72b]
+
 # 0.12.1
 
 - Harden Lock system
