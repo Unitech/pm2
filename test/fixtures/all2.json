@@ -8,14 +8,14 @@
   },
   "env_test" : {
     "NODE_ENV" : "test",
-    "TOTO" : "heyamota"
+    "TOTO"     : "heyamota"
   }
 },{
-  "name"      : "child",
-  "script"    : "./test/fixtures/child.js",
-  "instances" : "1",
+  "name"       : "child",
+  "script"     : "./test/fixtures/child.js",
+  "instances"  : "1",
   "error_file" : "./child-err.log",
-  "out_file" : "./child-out.log"
+  "out_file"   : "./child-out.log"
 },{
   "name"      : "api-2",
   "script"    : "./test/fixtures/server.js",
