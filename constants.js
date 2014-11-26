@@ -46,6 +46,9 @@ var csts = {
   ERRORED_STATUS         : 'errored',
   ONE_LAUNCH_STATUS      : 'one-launch-status',
 
+  CLUSTER_MODE_ID        : 'cluster_mode',
+  FORK_MODE_ID           : 'fork_mode',
+
   KEYMETRICS_ROOT_URL    : 'root.keymetrics.io',
 
   REMOTE_PORT            : 41624,

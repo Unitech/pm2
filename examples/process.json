@@ -1,7 +1,7 @@
 {
   "apps" : [{
     "exec_interpreter"   : "node",
-    "exec_mode"          : "cluser_mode",
+    "exec_mode"          : "cluster_mode",
     "instances"          : "max",
     "log_date_format"    : "YYYY-MM-DD HH:mm Z",
     "max_memory_restart" : "160",
@@ -11,6 +11,6 @@
     "cwd"                : "examples",
     "node_args"          : "--harmony",
     "ignoreWatch"        : ["[\\/\\\\]\\./", "log"],
-    "watch"              : true
+    "watch"              : "truee"
   }]
 }

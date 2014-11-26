@@ -20,7 +20,8 @@
     "soyuka <soyuka@gmail.com>",
     "Alex Kocharin <alex@kocharin.ru>",
     "achingbrain <alex@achingbrain.net>",
-    "Joni Shkurti <jshkurti@student.42.fr>"
+    "Joni Shkurti <jshkurti@student.42.fr>",
+    "Jun Tjatse <thisnamemeansnothing@gmail.com>"
   ],
   "contributors": [
     {
@@ -34,6 +35,10 @@
     {
       "name": "Joni Shkurti",
       "email": "jshkurti@student.42.fr"
+    },
+    {
+      "name" : "Jun Tjatse",
+      "email" : "thisnamemeansnothing@gmail.com"
     },
     {
       "name": "Xu Jingxin",
@@ -144,7 +149,7 @@
 
     "punt"                : "2.2.0",
     "shelljs"             : "0.3.0",
-    "isbinaryfile"        : "~2.0.3"
+    "isbinaryfile"        : "^2.0.3"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",

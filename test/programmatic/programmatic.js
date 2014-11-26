@@ -294,7 +294,9 @@ describe('PM2 programmatic calls', function() {
         pm2.list(function(err, ret) {
           should(err).be.null;
           should(ret[0].pm2_env['NODE_ENV']).not.exist;
+
           ret.forEach(function(app) {
+            console.log(app.pm2_env.name, app.pm2_env.restart_time);
             app.pm2_env.restart_time.should.eql(1);
           });
           setTimeout(function() { done(); }, 500);
