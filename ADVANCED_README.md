@@ -934,7 +934,10 @@ It contains this:
       "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
       "path" : "/var/www/development",
-      "post-deploy" : "pm2 startOrRestart ecosystem.json --env dev"
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env dev",
+      "env"  : {
+        "NODE_ENV": "dev"
+      }
     }
   }
 }
