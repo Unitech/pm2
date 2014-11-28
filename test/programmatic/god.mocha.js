@@ -53,7 +53,7 @@ function getConf4() {
 describe('God', function() {
   before(function(done) {
     God.deleteAll({}, function(err, dt) {
-      done();
+      setTimeout(done, 1000);
     });
   });
 
@@ -77,7 +77,7 @@ describe('God', function() {
   describe('Special functions for God', function() {
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
 
@@ -88,7 +88,7 @@ describe('God', function() {
         God.stopProcessName('echo', function() {
           God.getFormatedProcesses().length.should.equal(2);
           God.deleteAll({}, function() {
-            done();
+            setTimeout(done, 1000);
           });
         });
       });
@@ -100,7 +100,7 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
 
@@ -120,7 +120,7 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
     it('should start a process', function(done) {
@@ -202,7 +202,7 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
 
@@ -240,14 +240,14 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        setTimeout(done, 50);
+        setTimeout(done, 1000);
       });
     });
 
 
     afterEach(function(done) {
       God.deleteAll({}, function(err, dt) {
-        setTimeout(done, 50);
+        setTimeout(done, 1000);
       });
     });
 
