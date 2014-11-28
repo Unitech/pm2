@@ -37,9 +37,18 @@ sleep 0.5
 grep "YES" out-env.log &> /dev/null
 spec "should contain env variable"
 
+
 $pm2 restart env-refreshed.json
 >out-env.log
 
 sleep 0.5
 grep "HEYYYY" out-env.log &> /dev/null
 spec "should contain refreshed env variable via json"
+
+
+$pm2 start env-ecosystem.json --env production
+>out-env.log
+
+sleep 0.5
+grep "No worries!" out-env.log &> /dev/null
+spec "should use deploy.production.env.TEST_VARIABLE"
