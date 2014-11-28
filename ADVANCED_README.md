@@ -502,7 +502,7 @@ Value passed is in megaoctets. Internally it uses the V8 flag `--max-old-space-s
 
 CLI:
 ```bash
-$ pm2 start big-array.js --max-memory-restart 20
+$ pm2 start big-array.js --max-memory-restart 20M
 ```
 
 JSON:
@@ -513,6 +513,8 @@ JSON:
   "max_memory_restart" : "20M"
 }
 ```
+
+Units can be K(ilobyte), M(egabyte), G(igabyte).
 
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
