@@ -1,6 +1,8 @@
 
 # 0.12.2
 
+- treeKill copyright and update [#848] [#849]
+- Allow environment variables per each ecosystem deploy [#847]
 - max-memory-restart option [#697] [#141]
 - JSON validation (cf ADVANCED_README.md) [#768] [#838]
 - CLI/JSON refactoring
