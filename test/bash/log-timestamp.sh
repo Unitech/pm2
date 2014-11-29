@@ -20,7 +20,9 @@ function grep_log {
     OUT=`cat ~/.pm2/pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   else
     echo "travis"
-    OUT=`eval "$pm2 $1 | grep -n \"[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}\" | wc -l"`
+    eval "$pm2 $1 | grep -n \"[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}\" >| pm2.log"
+    sleep 0.3
+    OUT=`cat pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   fi
 }
 function no_prefix {
@@ -95,5 +97,6 @@ prefix "restart echo-pm2.json" 1
 head ">> STOP-JSON (PREFIX)"
 prefix "restart echo-pm2.json" 0
 
+rm -rf pm2.log
 unset PM2_LOG_DATE_FORMAT
 touch ~/.pm2/pm2.log
