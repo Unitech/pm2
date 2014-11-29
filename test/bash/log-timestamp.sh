@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 SRC=$(cd $(dirname "$0"); pwd)
@@ -9,30 +8,48 @@ function head {
 }
 function no_prefix {
   sleep 0.3
-  OUT=`cat ~/.pm2/pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
+  OUT=`cat $pm2_log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   [ $OUT -eq 0 ] || fail "expect no timestamp prefix in pm2.log, but currently existing."
   success "have no timestamp prefix"
   if [ "$1" -ne 1 ]; then
     $pm2 kill
-    rm -rf ~/.pm2/pm2.log
+    rm -rf $pm2_log
   fi
 }
 function prefix {
   sleep 0.3
-  OUT=`cat ~/.pm2/pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
+  OUT=`cat $pm2_log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   [ $OUT -ne 0 ] || fail "expect have timestamp prefix in pm2.log, but currently does not exist."
   success "have timestamp prefix"
   if [ "$1" -ne 1 ]; then
     $pm2 kill
-    rm -rf ~/.pm2/pm2.log
+    rm -rf $pm2_log
   fi
 }
 
 cd $file_path
 
+if [ -z $PM2_HOME ]; then
+  if [ -z $HOME ];then
+    if [ -z $HOMEPATH ]; then
+      fail "can not locate pm2 home"
+    else
+      pm2_log="$HOMEPATH/.pm2"
+    fi
+  else
+    pm2_log="$HOME/.pm2"
+  fi
+else
+  pm2_log="$PM2_HOME"
+fi
+
+pm2_log="$pm2_log/pm2.log"
+
+echo "root: $pm2_log";
+
 $pm2 kill
 
-rm -rf ~/.pm2/pm2.log
+rm -rf $pm2_log
 
 unset PM2_LOG_DATE_FORMAT
 
