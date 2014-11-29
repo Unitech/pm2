@@ -20,7 +20,7 @@ function grep_log {
     OUT=`cat ~/.pm2/pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   else
     echo "travis"
-    eval "$pm2 $1 | grep -n \"[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}\" >| pm2.log"
+    eval "$pm2 $1 >| pm2.log"
     sleep 0.3
     OUT=`cat pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   fi
