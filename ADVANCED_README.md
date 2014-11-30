@@ -775,7 +775,7 @@ If `--watch` is enabled, stopping it won't stop watching:
 
 Restart toggle the `watch` parameter when triggered.
 
-To watch specifics paths, please use a JSON app declaration, `watch` can take a string or an array of paths. Default is `true`:
+To watch specific paths, please use a JSON app declaration, `watch` can take a string or an array of paths. Default is `true`:
 
 ```json
 {
