@@ -28,6 +28,7 @@ function grep_log {
 function no_prefix {
   eval "grep_log \"$1\""
   echo "line count: $OUT"
+  cat ~/.pm2/pm2.log
   [ $OUT -eq 0 ] || fail "expect no timestamp prefix in pm2.log, but currently existing."
   success "have no timestamp prefix"
   rm_pm2log "$2"
@@ -51,7 +52,7 @@ then
   rm -rf ~/.pm2/pm2.log
 fi
 
-unset PM2_LOG_DATE_FORMAT
+export PM2_LOG_DATE_FORMAT=""
 
 head ">> LIST (NO PREFIX)"
 no_prefix "ls" 0
