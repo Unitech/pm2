@@ -530,6 +530,19 @@ $ pm2 monit
 <a name="a9"/>
 ## Logs management
 
+### Enable Timestamp Prefix of `pm2.log`
+
+```
+export PM2_LOG_DATE_FORMAT="YYYY-MM-DD HH:mm Z"
+```
+
+If this env-variable has been changed, you need to dump your processes and kill daemon, restart it again to take effect, e.g.:
+
+```bash
+$ pm2 dump
+$ pm2 [resurrect|save]
+```
+
 ### Displaying logs in realtime
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
