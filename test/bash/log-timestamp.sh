@@ -44,15 +44,13 @@ function prefix {
 
 cd $file_path
 
-$pm2 kill
-
-sleep 0.5
-
 if [ -z $TRAVIS ]
 then
   echo "removing pm2.log"
   rm -rf ~/.pm2/pm2.log
 fi
+
+$pm2 kill
 
 unset PM2_LOG_DATE_FORMAT
 export PM2_LOG_DATE_FORMAT=""
