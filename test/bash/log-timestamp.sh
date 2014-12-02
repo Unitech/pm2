@@ -19,9 +19,9 @@ function grep_log {
     sleep 0.3
     OUT=`cat ~/.pm2/pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   else
+    rm -rf pm2.log
     echo "travis"
     eval "$pm2 $1 >| pm2.log"
-    cat pm2.log
     sleep 0.3
     OUT=`cat pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   fi
@@ -57,6 +57,8 @@ fi
 unset PM2_LOG_DATE_FORMAT
 export PM2_LOG_DATE_FORMAT=""
 
+head ">>>>>>> $PM2_LOG_DATE_FORMAT"
+
 head ">> LIST (NO PREFIX)"
 no_prefix "ls" 0
 
@@ -79,6 +81,7 @@ head ">> STOP-JSON (NO PREFIX)"
 no_prefix "stop echo-pm2.json" 0
 
 export PM2_LOG_DATE_FORMAT="YYYY-MM-DD HH:mm Z"
+head ">>>>>>> $PM2_LOG_DATE_FORMAT"
 
 head ">> LIST (PREFIX)"
 prefix "ls" 0
