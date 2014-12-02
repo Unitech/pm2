@@ -23,6 +23,7 @@ function grep_log {
     echo "travis"
     eval "$pm2 $1 >| pm2.log"
     sleep 0.3
+    cat pm2.log
     OUT=`cat pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   fi
 }
