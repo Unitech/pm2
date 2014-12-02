@@ -42,6 +42,14 @@ function prefix {
 
   rm_pm2log "$2"
 }
+function changeENV {
+  if [ -z $TRAVIS ]
+  then
+    node -e "process.env.PM2_LOG_DATE_FORMAT=\"$1\""
+  fi
+  unset PM2_LOG_DATE_FORMAT
+  export PM2_LOG_DATE_FORMAT="$1"
+}
 
 cd $file_path
 
@@ -55,8 +63,7 @@ then
   rm -rf ~/.pm2/pm2.log
 fi
 
-unset PM2_LOG_DATE_FORMAT
-export PM2_LOG_DATE_FORMAT=""
+changeENV ""
 
 head ">>>>>>> $PM2_LOG_DATE_FORMAT"
 
@@ -81,7 +88,7 @@ no_prefix "restart echo-pm2.json" 1
 head ">> STOP-JSON (NO PREFIX)"
 no_prefix "stop echo-pm2.json" 0
 
-export PM2_LOG_DATE_FORMAT="YYYY-MM-DD HH:mm Z"
+changeENV "YYYY-MM-DD HH:mm Z"
 head ">>>>>>> $PM2_LOG_DATE_FORMAT"
 
 head ">> LIST (PREFIX)"
