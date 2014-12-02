@@ -1,0 +1,23 @@
+{
+  "apps" : [{
+    "name"      : "env2",
+    "script"    : "./env.js",
+    "out_file"  : "out-env.log",
+    "merge_logs" : true,
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "node",
+      "host" : "212.83.163.1",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:repo.git",
+      "path" : "/var/www/production",
+      "env"  : {
+        "TEST_VARIABLE": "No worries!"
+      }
+    }
+  }
+}

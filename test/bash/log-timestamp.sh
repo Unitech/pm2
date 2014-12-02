@@ -17,6 +17,7 @@ function grep_log {
     echo "not travis"
     eval "$pm2 $1"
     sleep 0.3
+    cat ~/.pm2/pm2.log
     OUT=`cat ~/.pm2/pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   else
     echo "travis"
@@ -43,8 +44,6 @@ function prefix {
 
 cd $file_path
 
-$pm2 kill
-
 if [ -z $TRAVIS ]
 then
   echo "removing pm2.log"
@@ -52,6 +51,9 @@ then
 fi
 
 unset PM2_LOG_DATE_FORMAT
+export PM2_LOG_DATE_FORMAT=""
+
+$pm2 kill
 
 head ">> LIST (NO PREFIX)"
 no_prefix "ls" 0

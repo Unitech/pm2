@@ -502,7 +502,7 @@ Value passed is in megaoctets. Internally it uses the V8 flag `--max-old-space-s
 
 CLI:
 ```bash
-$ pm2 start big-array.js --max-memory-restart 20
+$ pm2 start big-array.js --max-memory-restart 20M
 ```
 
 JSON:
@@ -513,6 +513,8 @@ JSON:
   "max_memory_restart" : "20M"
 }
 ```
+
+Units can be K(ilobyte), M(egabyte), G(igabyte).
 
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
@@ -786,7 +788,7 @@ If `--watch` is enabled, stopping it won't stop watching:
 
 Restart toggle the `watch` parameter when triggered.
 
-To watch specifics paths, please use a JSON app declaration, `watch` can take a string or an array of paths. Default is `true`:
+To watch specific paths, please use a JSON app declaration, `watch` can take a string or an array of paths. Default is `true`:
 
 ```json
 {
@@ -947,7 +949,10 @@ It contains this:
       "ref"  : "origin/master",
       "repo" : "git@github.com:repo.git",
       "path" : "/var/www/development",
-      "post-deploy" : "pm2 startOrRestart ecosystem.json --env dev"
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env dev",
+      "env"  : {
+        "NODE_ENV": "dev"
+      }
     }
   }
 }
