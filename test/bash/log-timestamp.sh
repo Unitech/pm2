@@ -19,10 +19,11 @@ function grep_log {
     sleep 0.3
     OUT=`cat ~/.pm2/pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   else
+    rm -rf pm2.log
     echo "travis"
     eval "$pm2 $1 >| pm2.log"
-    cat pm2.log
     sleep 0.3
+    cat pm2.log
     OUT=`cat pm2.log | grep -n "[0-9]\{4\}\-[0-9]\{2\}\-[0-9]\{2\}" | wc -l`
   fi
 }
@@ -41,6 +42,14 @@ function prefix {
 
   rm_pm2log "$2"
 }
+function changeENV {
+  if [ -z $TRAVIS ]
+  then
+    node -e "process.env.PM2_LOG_DATE_FORMAT=\"$1\""
+  fi
+  unset PM2_LOG_DATE_FORMAT
+  export PM2_LOG_DATE_FORMAT="$1"
+}
 
 cd $file_path
 
@@ -54,8 +63,9 @@ then
   rm -rf ~/.pm2/pm2.log
 fi
 
-unset PM2_LOG_DATE_FORMAT
-export PM2_LOG_DATE_FORMAT=""
+changeENV ""
+
+head ">>>>>>> $PM2_LOG_DATE_FORMAT"
 
 head ">> LIST (NO PREFIX)"
 no_prefix "ls" 0
@@ -78,7 +88,8 @@ no_prefix "restart echo-pm2.json" 1
 head ">> STOP-JSON (NO PREFIX)"
 no_prefix "stop echo-pm2.json" 0
 
-export PM2_LOG_DATE_FORMAT="YYYY-MM-DD HH:mm Z"
+changeENV "YYYY-MM-DD HH:mm Z"
+head ">>>>>>> $PM2_LOG_DATE_FORMAT"
 
 head ">> LIST (PREFIX)"
 prefix "ls" 0
