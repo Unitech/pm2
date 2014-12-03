@@ -26,6 +26,31 @@ function spec {
 
 $pm2 kill
 
+# Clean up house
+if [ -z $PM2_HOME ]; then
+  if [ -z $HOME ]; then
+    if [ -z $HOMEPATH ]; then
+      ROOT="$HOMEPATH"
+    fi
+  else
+    ROOT="$HOME"
+  fi
+else
+  ROOT="$PM2_HOME"
+fi
+
+if [ $ROOT ]; then
+  ROOT="$ROOT/.pm2"
+  if [ ! -d $ROOT ]; then
+    echo "$ROOT does not exist"
+  else
+    rm -rf "$ROOT"
+    echo "$ROOT should be removed"
+  fi
+else
+  echo "have no permission to access pm2 root"
+fi
+
 # if [ $TRAVIS ]
 # then
 #   export DEBUG="pm2:*"
