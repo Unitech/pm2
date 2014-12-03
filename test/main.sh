@@ -14,6 +14,9 @@ echo "Node version = " $nodeVersion
 $node -e "var os = require('os'); console.log('arch : %s\nplatform : %s\nrelease : %s\ntype : %s\nmem : %d', os.arch(), os.platform(), os.release(), os.type(), os.totalmem())"
 echo "###################### !DEBUG! ###########################"
 
+# Clean up house
+rm -rf ~/.pm2
+
 # if [ $TRAVIS ]
 # then
 #   export DEBUG="*"
