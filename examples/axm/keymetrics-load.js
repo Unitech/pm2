@@ -1,6 +1,6 @@
 
 
-var pm2 = require('..');
+var pm2 = require('../..');
 
 pm2.connect(function() {
   pm2.delete('all', function() {
