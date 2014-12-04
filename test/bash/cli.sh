@@ -64,10 +64,13 @@ $pm2 kill
 
 $pm2 start echo.js -p echo.pid
 
+sleep 0.5
 ls echo-0.pid
 spec "should pid file exists"
 
 $pm2 stop all
+
+sleep 0.5
 
 ls echo-0.pid
 ispec "should pid file be deleted once stopped"
