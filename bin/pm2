@@ -487,9 +487,14 @@ commander.command('reloadLogs')
 // Log streaming
 //
 commander.command('logs [id|name]')
+  .option('--lines <N>', 'output the last N lines, instead of the last 20')
   .description('stream logs file. Default stream all logs')
-  .action(function(id) {
-    CLI.streamLogs(id);
+  .action(function(id, cmd) {
+    var line = 20;
+    if(typeof cmd.lines == 'number'){
+      line = cmd.lines;
+    }
+    CLI.streamLogs(id, line);
   });
 
 commander.command('ilogs')
