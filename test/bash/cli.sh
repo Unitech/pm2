@@ -177,7 +177,7 @@ should 'should has restarted process' 'restart_time: 1' 1
 $pm2 restart all
 spec "Should restart all processes"
 
-sleep 0.3
+sleep 1
 $http_get -q http://localhost:9615/ -O $JSON_FILE
 OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 

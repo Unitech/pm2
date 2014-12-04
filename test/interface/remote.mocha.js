@@ -84,11 +84,13 @@ function createMockServer(cb) {
 }
 
 function startSomeApps(cb) {
-  cmd_pm2.connect(function() {
-    cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, function() {
-      return cb();
+  setTimeout(function() {
+    cmd_pm2.connect(function() {
+      cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, function() {
+        return setTimeout(cb, 200);
+      });
     });
-  });
+  }, 500);
 }
 
 describe('Test remote PM2 actions', function() {
