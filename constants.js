@@ -80,7 +80,7 @@ var default_conf = {
   WEB_INTERFACE            : parseInt(process.env.PM2_API_PORT)  || 9615,
   MODIFY_REQUIRE           : process.env.PM2_MODIFY_REQUIRE || false,
 
-  PM2_LOG_DATE_FORMAT      : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DD HH:mm:ss Z',
+  PM2_LOG_DATE_FORMAT      : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DD HH:mm:ss',
 
   INTERACTOR_LOG_FILE_PATH : p.join(PM2_ROOT_PATH, 'agent.log'),
   INTERACTOR_PID_PATH      : p.join(PM2_ROOT_PATH, 'agent.pid'),
