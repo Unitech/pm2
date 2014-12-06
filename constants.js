@@ -60,32 +60,10 @@ var csts = {
 /**
  * Defaults variables
  */
-var default_conf = {
-  PM2_ROOT_PATH            : PM2_ROOT_PATH,
-  PM2_LOG_FILE_PATH        : p.join(PM2_ROOT_PATH, 'pm2.log'),
-  PM2_PID_FILE_PATH        : p.join(PM2_ROOT_PATH, 'pm2.pid'),
-  DEFAULT_PID_PATH         : p.join(PM2_ROOT_PATH, 'pids'),
-  DEFAULT_LOG_PATH         : p.join(PM2_ROOT_PATH, 'logs'),
-  DUMP_FILE_PATH           : p.join(PM2_ROOT_PATH, 'dump.pm2'),
-
-  DAEMON_RPC_PORT          : p.join(PM2_ROOT_PATH, 'rpc.sock'),
-  DAEMON_PUB_PORT          : p.join(PM2_ROOT_PATH, 'pub.sock'),
-  INTERACTOR_RPC_PORT      : p.join(PM2_ROOT_PATH, 'interactor.sock'),
-
-  GRACEFUL_TIMEOUT         : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
-  GRACEFUL_LISTEN_TIMEOUT  : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 4000,
-  WORKER_INTERVAL          : process.env.PM2_WORKER_INTERVAL || 30000,
-
-  DEBUG                    : process.env.PM2_DEBUG || false,
-  WEB_INTERFACE            : parseInt(process.env.PM2_API_PORT)  || 9615,
-  MODIFY_REQUIRE           : process.env.PM2_MODIFY_REQUIRE || false,
-
-  PM2_LOG_DATE_FORMAT      : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DD HH:mm:ss',
-
-  INTERACTOR_LOG_FILE_PATH : p.join(PM2_ROOT_PATH, 'agent.log'),
-  INTERACTOR_PID_PATH      : p.join(PM2_ROOT_PATH, 'agent.pid'),
-  INTERACTION_CONF         : p.join(PM2_ROOT_PATH, 'agent.json5')
-};
+var default_conf = util._extend({
+  PM2_ROOT_PATH: PM2_ROOT_PATH,
+  WORKER_INTERVAL: process.env.PM2_WORKER_INTERVAL || 30000
+}, require('./lib/samples/sample-conf.js')(PM2_ROOT_PATH));
 
 /**
  * Extend with optional configuration file
