@@ -26,7 +26,6 @@ head "config literal substitution (pro env)"
 $pm2 start literal-subs.json --env pro
 
 OUT=`$pm2 jlist 0`
-echo "$OUT"
 
 head ">> name"
 TEST_CASE="Substitution-\${ MODE | substr(5, 3) | capitalize } should be substituded by Substitution-Pro"
@@ -60,7 +59,7 @@ test $COUNT "$TEST_CASE"
 
 head ">> pid_file"
 TEST_CASE="\"pid_file\":\"\${ MODE | lower | replace('-\\\\w+$', '') }.pid\" should be substituded by \"pid_file\":\"subs.pid\""
-COUNT=`echo "$OUT" | egrep '"pm_pid_path":"[^\"]+subs-\d.pid"' | wc -l`
+COUNT=`echo "$OUT" | egrep '"pm_pid_path":"[^\"]+subs-0.pid"' | wc -l`
 test $COUNT "$TEST_CASE"
 
 head ">> log_date_format"
@@ -77,8 +76,6 @@ head "config literal substitution (dev env)"
 $pm2 start literal-subs.json --env dev
 
 OUT=`$pm2 jlist 0`
-
-echo "$OUT"
 
 head ">> name"
 TEST_CASE="Substitution-\${ MODE | substr(5, 3) | capitalize } should be substituded by Substitution-Dev"
@@ -112,7 +109,7 @@ test $COUNT "$TEST_CASE"
 
 head ">> pid_file"
 TEST_CASE="\"pid_file\":\"\${ MODE | lower | replace('-\\\\w+$', '') }.pid\" should be substituded by \"pid_file\":\"subs.pid\""
-COUNT=`echo "$OUT" | egrep '"pm_pid_path":"[^\"]+subs-\d.pid"' | wc -l`
+COUNT=`echo "$OUT" | egrep '"pm_pid_path":"[^\"]+subs-0.pid"' | wc -l`
 test $COUNT "$TEST_CASE"
 
 head ">> log_date_format"
