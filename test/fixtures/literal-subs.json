@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "Substitution-${ MODE | substr(5, 3) | capitalize }",
+      "script": "literal-${ MODE | lower }.js",
+      "args": [
+        "${ MODE | upper }"
+      ],
+      "log_file": "${ MODE | lower }.log",
+      "error_file": "${ MODE | lower }-err.log",
+      "out_file": "${ MODE | lower }-out.log",
+      "pid_file": "${ MODE | lower | replace('-\\\\w+$', '') }.pid",
+      "merge_logs": true,
+      "log_date_format":"${ LOG_PREFIX | def('YYYY-MM-DD HH:mm') }",
+      "env_dev": {
+        "MODE": "Subs-dev"
+      },
+      "env_pro": {
+        "MODE": "Subs-pro",
+        "LOG_PREFIX":"YYYY-MM-DD HH:mm:ss Z"
+      }
+    }
+  ]
+}
