@@ -26,6 +26,7 @@ head "config literal substitution (pro env)"
 $pm2 start literal-subs.json --env pro
 
 OUT=`$pm2 jlist 0`
+echo "$OUT"
 
 head ">> name"
 TEST_CASE="Substitution-\${ MODE | substr(5, 3) | capitalize } should be substituded by Substitution-Pro"
@@ -76,6 +77,8 @@ head "config literal substitution (dev env)"
 $pm2 start literal-subs.json --env dev
 
 OUT=`$pm2 jlist 0`
+
+echo "$OUT"
 
 head ">> name"
 TEST_CASE="Substitution-\${ MODE | substr(5, 3) | capitalize } should be substituded by Substitution-Dev"
