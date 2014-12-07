@@ -966,33 +966,33 @@ It will be substituted to:
 ## Substitution Usage
 
 ```javascript
-"$ { [ENVIRONMENT_VARIABLE] | [FILTERS] | ... }"
+{"key": "${ [ENVIRONMENT_VARIABLE] | [FILTER] | ... }"}
 ```
 
 ### Filters
 
-The env-vars can be modified by filters, and filters can be chained together, like `$ { VAR1 | uppercase | substr(5)}`, including:
+The env-vars can be modified by filters, and filters can be chained together, like `${ VAR1 | upper | substr(5) | replace('worker', 'employee') | def('factory') }`, including:
 
 - **esc**
-Backslash-escapes specific characters, like `'`, `"` and `\`, e.g. `$ { VAR1 | esc }`.
+Backslash-escapes specific characters, like `'`, `"` and `\`, e.g. `${ VAR1 | esc }`.
 
 - **upper**
-Converts the variable value to uppercase letters, e.g. `$ { VAR1 | upper }`.
+Converts the variable value to uppercase letters, e.g. `${ VAR1 | upper }`.
 
 - **lower**
-Converts the variable value to lowercase letters, e.g. `$ { VAR1 | lower }`.
+Converts the variable value to lowercase letters, e.g. `${ VAR1 | lower }`.
 
 - **capitalize**
-Upper-cases the first letter of the variable value and lowercase the rest, e.g. `$ { VAR1 | capitalize }`.
+Upper-cases the first letter of the variable value and lowercase the rest, e.g. `${ VAR1 | capitalize }`.
 
 - **def**
-If the variable is `null`, `undefined` or `""`, the default value will be used, e.g. `$ { VAR1 | def("var1_value") }`.
+If the variable is `null`, `undefined` or `""` (empty), the default value will be used, e.g. `${ VAR1 | def('var1_value') }`.
 
 - **substr**
-Returns the substring of variable value, uses JavaScript's built-in `String.substr()` method, e.g. `$ { VAR1 | substr(3, 5) }` or `$ { VAR1 | substr(7) }`.
+Returns the substring of variable value, uses JavaScript's built-in `String.substr()` method, e.g. `${ VAR1 | substr(3, 5) }` or `${ VAR1 | substr(7) }`.
 
 - **replace**
-Returns a new string with the matched search pattern replaced by the given replacement string, uses JavaScript's built-in `String.replace()` method, e.g. `$ { VAR1 | replace('abc', 'def') }`, `$ { VAR1 | replace('-\\\\w+$', '') }` or `$ { VAR1 | replace('-\\\\w+$', '', 'ig') }`
+Returns a new string with the matched search pattern replaced by the given replacement string, uses JavaScript's built-in `String.replace()` method, e.g. `${ VAR1 | replace('abc', 'def') }`, `${ VAR1 | replace('-\\\\w+$', '') }` or `${ VAR1 | replace('-\\\\w+$', '', 'ig') }`
 
 **Notes**
 - All the string parameters should be wrapped by single quote - `'`.
