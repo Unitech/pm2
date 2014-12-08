@@ -125,7 +125,7 @@
   "dependencies": {
     "async"               : "~0.9.0",
     "chalk"               : "~0.5.1",
-    "chokidar"            : "~0.10.1",
+    "chokidar"            : "~0.12.0",
     "cli-table"           : "0.3.0",
     "coffee-script"       : "1.8.0",
     "colors"              : "0.6.2",
