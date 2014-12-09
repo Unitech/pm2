@@ -2,6 +2,7 @@
 var p    = require('path');
 var fs   = require('fs');
 var util = require('util');
+var chalk = require('chalk')
 
 /**
  * Handle PM2 root folder relocation
@@ -21,10 +22,10 @@ var csts = {
 
   CODE_UNCAUGHTEXCEPTION : 100,
   CONCURRENT_ACTIONS     : 1,
-  PREFIX_MSG             : '\x1B[32m[PM2] \x1B[39m',
-  PREFIX_MSG_ERR         : '\x1B[31m[PM2] [ERROR] \x1B[39m',
-  PREFIX_MSG_WARNING     : '\x1B[33m[PM2] [WARN] \x1B[39m',
-  PREFIX_MSG_SUCCESS     : '\x1B[36;1m[PM2] \x1B[39;0m',
+  PREFIX_MSG             : chalk.green('[PM2] '),
+  PREFIX_MSG_ERR         : chalk.red('[PM2] [ERROR] '),
+  PREFIX_MSG_WARNING     : chalk.yellow('[PM2] [WARN] '),
+  PREFIX_MSG_SUCCESS     : chalk.cyan('[PM2] '),
 
   SAMPLE_FILE_PATH       : '../lib/samples/sample.json5',
   SAMPLE_CONF_FILE       : '../lib/samples/sample-conf.js',
