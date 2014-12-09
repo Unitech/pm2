@@ -14,7 +14,7 @@ var cst = require('../../constants.js');
  * @return AssignmentExpression
  */
 function getConf() {
-  var a = Common.resolveAppPaths({
+  var a = Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
     name : 'echo',
     instances : 2
@@ -23,7 +23,7 @@ function getConf() {
 }
 
 function getConf2() {
-  return Common.resolveAppPaths({
+  return Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
     instances       : 4,
     exec_mode       : 'cluster_mode',
@@ -32,7 +32,7 @@ function getConf2() {
 }
 
 function getConf3() {
-  return Common.resolveAppPaths({
+  return Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
     instances       : 10,
     exec_mode       : 'cluster_mode',
@@ -41,7 +41,7 @@ function getConf3() {
 }
 
 function getConf4() {
-  return Common.resolveAppPaths({
+  return Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/args.js'),
     args            : "['-d', '-a']",
     instances       : '1',
@@ -53,7 +53,7 @@ function getConf4() {
 describe('God', function() {
   before(function(done) {
     God.deleteAll({}, function(err, dt) {
-      done();
+      setTimeout(done, 1000);
     });
   });
 
@@ -69,7 +69,6 @@ describe('God', function() {
     God.should.have.property('stopAll');
     God.should.have.property('reloadLogs');
     God.should.have.property('stopProcessId');
-    God.should.have.property('reload');
     God.should.have.property('reloadProcessName');
     God.should.have.property('sendSignalToProcessId');
     God.should.have.property('sendSignalToProcessName');
@@ -78,7 +77,7 @@ describe('God', function() {
   describe('Special functions for God', function() {
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
 
@@ -89,7 +88,7 @@ describe('God', function() {
         God.stopProcessName('echo', function() {
           God.getFormatedProcesses().length.should.equal(2);
           God.deleteAll({}, function() {
-            done();
+            setTimeout(done, 1000);
           });
         });
       });
@@ -101,7 +100,7 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
 
@@ -121,7 +120,7 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
     it('should start a process', function(done) {
@@ -203,7 +202,7 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        done();
+        setTimeout(done, 1000);
       });
     });
 
@@ -241,19 +240,19 @@ describe('God', function() {
 
     before(function(done) {
       God.deleteAll({}, function(err, dt) {
-        setTimeout(done, 50);
+        setTimeout(done, 1000);
       });
     });
 
 
     afterEach(function(done) {
       God.deleteAll({}, function(err, dt) {
-        setTimeout(done, 50);
+        setTimeout(done, 1000);
       });
     });
 
     it('should launch multiple processes depending on CPUs available', function(done) {
-      God.prepare(Common.resolveAppPaths({
+      God.prepare(Common.prepareAppConf({
         script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         name : 'child',
         instances:3
@@ -273,7 +272,7 @@ describe('God', function() {
     });
 
     it('should dump process list', function(done) {
-      God.prepare(Common.resolveAppPaths({
+      God.prepare(Common.prepareAppConf({
         script    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
         name      : 'child',
         instances : 3

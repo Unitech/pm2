@@ -1,6 +1,42 @@
 
+# 0.12.2
+
+- treeKill copyright and update [#848] [#849]
+- Allow environment variables per each ecosystem deploy [#847]
+- max-memory-restart option [#697] [#141]
+- JSON validation (cf ADVANCED_README.md) [#768] [#838]
+- CLI/JSON refactoring
+- watch fixes
+- execute binary softwares
+- node_args refactored (ESC support) [#838]
+- reload env graceful and peaceful [#838]
+- min_uptime added [#838]
+- startOrRestart conf.json does update environment variables [#805]
+- vizion only refresh ahead and unstaged flags [f1f829c]
+- worker restart cluster process if it's equal to 0 && online [c2e3581]
+- pm2 pull <name> [commit_id] [c2e3581] [4021902]
+- fix reloadLogs for fork mode [c0143cc][197781e]
+- waterfall logs stream [#822]
+- --log option to have a merged error and out output [#822]
+- God core refactors
+- test refactoring
+- update isBinaryFile [636fd99]
+- pid deletion has been resurected [f2ce631]
+- worker refactor [29fc72b]
+
+Big thanks to @Tjatse !
+
+# 0.12.1
+
+- Harden Lock system
+- Fix Worker bug / Refactor Worker
+- Cleanly close interactor sockets on end
+- Add backward compatibility for older PM2 on kill action via system signal SIGQUIT
+- once listener for killDaemon
+
 # 0.12.0 - clear water ops
 
+- better ecosystem.json5 file with embedded comments
 - startOrRestart conf.json update environment variables #805 #812
 - pm2 start my/bin/file work out of the box
 - JSON5 support

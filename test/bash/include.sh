@@ -44,12 +44,16 @@ function success {
 }
 
 function spec {
-  [ $? -eq 0 ] || fail "$1"
+  RET=$?
+  sleep 0.3
+  [ $RET -eq 0 ] || fail "$1"
   success "$1"
 }
 
 function ispec {
-  [ $? -eq 1 ] || fail "$1"
+  RET=$?
+  sleep 0.3
+  [ $RET -ne 0 ] || fail "$1"
   success "$1"
 }
 

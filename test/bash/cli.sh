@@ -21,7 +21,6 @@ success "$1"
 $pm2 stop 12412
 $pm2 stop 0
 
-
 OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
 [ $OUT -eq 1 ] || fail "$1"
 success "$1"
@@ -56,11 +55,48 @@ ispec "should exit with right exit code when no process found"
 $pm2 updatePM2
 spec "should update pm2"
 
+
+
+#
+# Verify PID
+#
+$pm2 kill
+
+$pm2 start echo.js -p echo.pid
+
+sleep 0.5
+ls echo-0.pid
+spec "should pid file exists"
+
+$pm2 stop all
+
+sleep 0.5
+
+ls echo-0.pid
+ispec "should pid file be deleted once stopped"
+
+$pm2 kill
+
+$pm2 start echo.js -p echo.pid -i 1
+
+ls echo-0.pid
+spec "should pid file exists"
+
+$pm2 stop all
+
+ls echo-0.pid
+ispec "should pid file be deleted once stopped"
+
+$pm2 kill
+
+
+
+
+
+
 #
 # Main tests
 #
-
-
 $pm2 kill
 spec "kill daemon"
 
@@ -144,7 +180,7 @@ should 'should has restarted process' 'restart_time: 1' 1
 $pm2 restart all
 spec "Should restart all processes"
 
-sleep 0.3
+sleep 1
 $http_get -q http://localhost:9615/ -O $JSON_FILE
 OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 

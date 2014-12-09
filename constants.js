@@ -3,6 +3,7 @@ var p    = require('path');
 var fs   = require('fs');
 var util = require('util');
 var chalk = require('chalk')
+var debug = require('debug')('pm2:constants');
 
 /**
  * Handle PM2 root folder relocation
@@ -46,6 +47,9 @@ var csts = {
   ERRORED_STATUS         : 'errored',
   ONE_LAUNCH_STATUS      : 'one-launch-status',
 
+  CLUSTER_MODE_ID        : 'cluster_mode',
+  FORK_MODE_ID           : 'fork_mode',
+
   KEYMETRICS_ROOT_URL    : 'root.keymetrics.io',
 
   REMOTE_PORT            : 41624,
@@ -57,41 +61,20 @@ var csts = {
 /**
  * Defaults variables
  */
-var default_conf = {
-  PM2_ROOT_PATH        : PM2_ROOT_PATH,
-  PM2_LOG_FILE_PATH        : p.join(PM2_ROOT_PATH, 'pm2.log'),
-  PM2_PID_FILE_PATH        : p.join(PM2_ROOT_PATH, 'pm2.pid'),
-  DEFAULT_PID_PATH         : p.join(PM2_ROOT_PATH, 'pids'),
-  DEFAULT_LOG_PATH         : p.join(PM2_ROOT_PATH, 'logs'),
-  DUMP_FILE_PATH           : p.join(PM2_ROOT_PATH, 'dump.pm2'),
-
-  DAEMON_RPC_PORT          : p.join(PM2_ROOT_PATH, 'rpc.sock'),
-  DAEMON_PUB_PORT          : p.join(PM2_ROOT_PATH, 'pub.sock'),
-  INTERACTOR_RPC_PORT      : p.join(PM2_ROOT_PATH, 'interactor.sock'),
-
-  GRACEFUL_TIMEOUT         : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
-  GRACEFUL_LISTEN_TIMEOUT  : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 4000,
-  WORKER_INTERVAL          : process.env.PM2_WORKER_INTERVAL || 30000,
-
-  DEBUG                    : process.env.PM2_DEBUG || false,
-  WEB_INTERFACE            : parseInt(process.env.PM2_API_PORT)  || 9615,
-  MODIFY_REQUIRE           : process.env.PM2_MODIFY_REQUIRE || false,
-
-  INTERACTOR_LOG_FILE_PATH : p.join(PM2_ROOT_PATH, 'agent.log'),
-  INTERACTOR_PID_PATH      : p.join(PM2_ROOT_PATH, 'agent.pid'),
-  INTERACTION_CONF         : p.join(PM2_ROOT_PATH, 'agent.json5')
-};
+var default_conf = util._extend({
+  PM2_ROOT_PATH: PM2_ROOT_PATH,
+  WORKER_INTERVAL: process.env.PM2_WORKER_INTERVAL || 30000
+}, require('./lib/samples/sample-conf.js')(PM2_ROOT_PATH));
 
 /**
  * Extend with optional configuration file
  */
-
 if (fs.existsSync(csts.PM2_CONF_FILE)) {
   try {
     var extra = require(csts.PM2_CONF_FILE)(PM2_ROOT_PATH);
     default_conf = util._extend(default_conf, extra);
   } catch(e) {
-    console.error(e.stack || e);
+    debug(e.stack || e);
   }
 }
 
@@ -103,6 +86,7 @@ var conf = util._extend(default_conf, csts);
 
 if (process.platform === 'win32' ||
     process.platform === 'win64') {
+  debug('Windows detected');
   conf.DAEMON_RPC_PORT = '\\\\.\\pipe\\rpc.sock';
   conf.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub.sock';
   conf.INTERACTOR_RPC_PORT = '\\\\.\\pipe\\interactor.sock';

@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.0",
+  "version": "0.12.2",
   "engines": {
     "node": ">=0.10"
   },
@@ -20,7 +20,8 @@
     "soyuka <soyuka@gmail.com>",
     "Alex Kocharin <alex@kocharin.ru>",
     "achingbrain <alex@achingbrain.net>",
-    "Joni Shkurti <jshkurti@student.42.fr>"
+    "Joni Shkurti <jshkurti@student.42.fr>",
+    "Jun Tjatse <thisnamemeansnothing@gmail.com>"
   ],
   "contributors": [
     {
@@ -34,6 +35,10 @@
     {
       "name": "Joni Shkurti",
       "email": "jshkurti@student.42.fr"
+    },
+    {
+      "name" : "Jun Tjatse",
+      "email" : "thisnamemeansnothing@gmail.com"
     },
     {
       "name": "Xu Jingxin",
@@ -69,7 +74,7 @@
     }
   ],
   "homepage": "https://github.com/Unitech/pm2",
-  "description": "Modern CLI process manager for Node apps with a builtin load-balancer. Perfectly designed for microservices architecture.",
+  "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh"
@@ -133,7 +138,7 @@
     "nssocket"            : "0.5.1",
     "pidusage"            : "0.1.0",
 
-    "axm"                 : "0.2.*",
+    "axm"                 : "~0.2.*",
     "vizion"              : "latest",
 
     "pm2-axon"            : "2.0.7",
@@ -144,14 +149,14 @@
 
     "punt"                : "2.2.0",
     "shelljs"             : "0.3.0",
-    "isbinaryfile"        : "^2.0.2"
+    "isbinaryfile"        : "^2.0.3"
   },
   "devDependencies": {
-    "mocha": "^1.20.1",
-    "should": "^4.0.0",
-    "better-assert": "^1.0.0",
-    "promise-spawner": "^0.0.3",
-    "punt": "*"
+    "mocha"           : "^1.20.1",
+    "should"          : "^4.0.0",
+    "better-assert"   : "^1.0.0",
+    "promise-spawner" : "^0.0.3",
+    "punt"            : "*"
   },
   "optionalDependencies": {
     "pm2-logs": "~0.1.1",

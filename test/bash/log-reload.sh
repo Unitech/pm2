@@ -29,7 +29,7 @@ $pm2 kill
 
 $pm2 start echo.js -o out-rel.log -e err-rel.log -x --merge-logs
 
-sleep 0.5
+sleep 2
 
 grep "ok" out-rel.log
 spec "Should have written te right stuff in out log in fork mode"

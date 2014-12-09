@@ -25,6 +25,7 @@ commander.version(pkg.version)
   .option('-f --force', 'force actions')
   .option('-n --name <name>', 'set a <name> for script')
   .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
+  .option('-l --log [path]', 'specify entire log file (error and out are both included)')
   .option('-o --output <path>', 'specify out log file')
   .option('-e --error <path>', 'specify error log file')
   .option('-p --pid <pid>', 'specify pid file')
@@ -36,13 +37,11 @@ commander.version(pkg.version)
   .option('-w --write', 'write configuration in local folder')
   .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
   .option('--log-date-format <momentjs format>', 'add custom prefix timestamp to logs')
-  .option('--no-daemon', "run pm2 daemon in the foreground if it doesn't exist already")
+  .option('--no-daemon', 'run pm2 daemon in the foreground if it doesn\'t exist already')
   .option('--merge-logs', 'merge logs from different instances but keep error and out separated')
   .option('--watch', 'watch application folder for changes')
-  .option('--node-args <node_args>', "space delimited arguments to pass to node in cluster mode - e.g. --node-args=\"--debug=7001 --trace-deprecation\"",
-          function(val) {
-            return val.split(' ');
-          })
+  .option('--ignore-watch <folders|files>', 'folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules \"some scripts\""')
+  .option('--node-args <node_args>', 'space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"')
   .option('--no-color', 'skip colors')
   .usage('[cmd] app');
 
@@ -158,7 +157,7 @@ commander.command('start <file|json|stdin>')
         process.stdin.pause();
         CLI.startJson(cmd, commander, 'pipe');
       });
-    } else if (cmd.indexOf('.json') > 0)
+    } else if (cmd.slice(-5) == '.json')
       CLI.startJson(cmd, commander, 'file');
     else
       CLI.start(cmd, commander);
@@ -488,9 +487,14 @@ commander.command('reloadLogs')
 // Log streaming
 //
 commander.command('logs [id|name]')
+  .option('--lines <N>', 'output the last N lines, instead of the last 20')
   .description('stream logs file. Default stream all logs')
-  .action(function(id) {
-    CLI.streamLogs(id);
+  .action(function(id, cmd) {
+    var line = 20;
+    if(typeof cmd.lines == 'number'){
+      line = cmd.lines;
+    }
+    CLI.streamLogs(id, line);
   });
 
 commander.command('ilogs')
@@ -506,16 +510,25 @@ commander.command('ilogs')
 commander.command('kill')
   .description('kill daemon')
   .action(failOnUnknown(function(arg) {
-    CLI.killDaemon();
+    CLI.killDaemon(function() {
+      process.exit(cst.SUCCESS_EXIT);
+    });
   }));
 
 //
 // Update repository for a given app
 //
-commander.command('pull <name>')
+
+commander.command('pull <name> [commit_id]')
   .description('updates repository for a given app')
-  .action(function(pm2_name) {
-    CLI.pullAndRestart(pm2_name);
+  .action(function(pm2_name, commit_id) {
+    if (commit_id !== undefined) {
+      CLI.pullCommitId(
+        {pm2_name: pm2_name,
+         commit_id: commit_id});
+    }
+    else
+      CLI.pullAndRestart(pm2_name);
   });
 
 //

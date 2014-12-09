@@ -12,11 +12,18 @@ var meter = probe.meter({
   seconds : 60
 });
 
+
+function rand(array) {
+  return array[Math.floor(Math.random()*array.length)];
+}
+
+var error_code = [200, 404, 500];
+
 http.createServer(function(req, res) {
-  res.writeHead(200);
+  res.writeHead(rand(error_code));
   meter.mark();
   res.end('transaction');
-}).listen(9010);
+}).listen(9011);
 
 setInterval(function() {
   request(['/user', '/bla', '/user/lol/delete', '/POST/POST'][Math.floor((Math.random() * 4))]);
@@ -33,12 +40,17 @@ function makeid()
   return text;
 }
 
+var methods = ['GET', 'POST', 'DELETE', 'PUT'];
+
 function request(path) {
+  var meth = rand(methods);
+  console.log('Doing a request to url %s with method %s',
+              path, meth);
   var options = {
     hostname: '127.0.0.1'
-    ,port: 9010
+    ,port: 9011
     ,path: path || '/users'
-    ,method: 'GET'
+    ,method: meth
     ,headers: { 'Content-Type': 'application/json' }
   };
 

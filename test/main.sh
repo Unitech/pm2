@@ -19,6 +19,8 @@ echo "###################### !DEBUG! ###########################"
 #   export DEBUG="*"
 # fi
 
+bash ./test/bash/log-timestamp.sh
+spec "timetstamp prefix of pm2.log"
 bash ./test/bash/cli.sh
 spec "CLI basic test"
 bash ./test/bash/watch.sh
@@ -57,6 +59,8 @@ bash ./test/bash/startOrX.sh
 spec "startOrX commands"
 bash ./test/bash/binary.sh
 spec "binary test"
+bash ./test/bash/log-entire.sh
+spec "merge stdout && stderr"
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"

@@ -6,7 +6,7 @@ PM2 is a production process manager for Node.js applications with a built-in loa
 PM2 is constantly assailed by [more than 300 tests](https://travis-ci.org/Unitech/PM2).
 
 Compatible with CoffeeScript.
-Works on Linux & MacOSx.
+Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -20,7 +20,7 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
 
-Node.js 0.11.14 is recommended for cluster mode and features related.
+Node.js 0.11.14 is recommended for cluster mode and reload feature.
 
 ## Start an application
 

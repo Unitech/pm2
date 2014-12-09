@@ -8,4 +8,4 @@ setInterval(function() {
     user : 'Francois Debiole'
   });
 
-}, 900);
+}, 1000);

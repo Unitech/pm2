@@ -1,0 +1,10 @@
+{
+  "apps" : [{
+    "name"        : "throw-later",
+    "script"      : "throw-later.js",
+    "error_file"  : "err.log",
+    "out_file"    : "out.log",
+    "log_file"    : "entire.log",
+    "merge_logs"  : true
+  }]
+}
