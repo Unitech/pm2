@@ -28,6 +28,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [Make PM2 restart on server reboot](#a8)
 - [JSON app declaration](#a10)
   - [Schema](#a988)
+  - [Literal Substitution](#subs)
 
 ### Deployment - ecosystem.json
 
@@ -897,6 +898,116 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   }
 }]
 ```
+
+<a name="subs" />
+# Literal Substitution
+
+When we're declaring a JSON configured file, it allows string literals with embedded expressions in them (using the ES6 delimiter). This is often referred to as string interpolation - substitute template string for environment variables, e.g.:
+```
+{
+  "apps": [
+    {
+      "name": "Substitution-${ MODE | substr(5, 3) | capitalize }",
+      "script": "literal-${ MODE | lower }.js",
+      "args": [
+        "${ MODE | upper }"
+      ],
+      "log_file": "${ MODE | lower }.log",
+      "error_file": "${ MODE | lower }-err.log",
+      "out_file": "${ MODE | lower }-out.log",
+      "pid_file": "${ MODE | lower | replace('-\\\\w+$', '') }.pid",
+      "merge_logs": true,
+      "log_date_format":"${ LOG_PREFIX | def('YYYY-MM-DD HH:mm') }",
+      "env_dev": {
+        "MODE": "Subs-dev"
+      },
+      "env_pro": {
+        "MODE": "Subs-pro",
+        "LOG_PREFIX":"YYYY-MM-DD HH:mm:ss Z"
+      }
+    }
+  ]
+}
+```
+
+Running command below:
+```bash
+$ pm2 start subs.json --env dev
+```
+
+It will be substituted to:
+```
+{
+  "apps": [
+    {
+      "name": "Substitution-Dev",
+      "script": "literal-subs-dev.js",
+      "args": [
+        "SUBS-DEV"
+      ],
+      "log_file": "subs-dev.log",
+      "error_file": "subs-dev-err.log",
+      "out_file": "subs-dev-out.log",
+      "pid_file": "subs.pid",
+      "merge_logs": true,
+      "log_date_format":"YYYY-MM-DD HH:mm",
+      "env_dev": {
+        "MODE": "Subs-dev"
+      },
+      "env_pro": {
+        "MODE": "Subs-pro",
+        "LOG_PREFIX":"YYYY-MM-DD HH:mm:ss Z"
+      }
+    }
+  ]
+}
+```
+
+## Substitution Usage
+
+```javascript
+{"key": "${ [ENVIRONMENT_VARIABLE] | [FILTER] | ... }"}
+```
+
+### Filters
+
+The env-vars can be modified by filters, and filters can be chained together, like `${ VAR1 | upper | substr(5) | replace('worker', 'employee') | def('factory') }`, including:
+
+- **esc**
+Backslash-escapes specific characters, like `'`, `"` and `\`, e.g. `${ VAR1 | esc }`.
+
+- **upper**
+Converts the variable value to uppercase letters, e.g. `${ VAR1 | upper }`.
+
+- **lower**
+Converts the variable value to lowercase letters, e.g. `${ VAR1 | lower }`.
+
+- **capitalize**
+Upper-cases the first letter of the variable value and lowercase the rest, e.g. `${ VAR1 | capitalize }`.
+
+- **def**
+If the variable is `null`, `undefined` or `""` (empty), the default value will be used, e.g. `${ VAR1 | def('var1_value') }`.
+
+- **substr**
+Returns the substring of variable value, uses JavaScript's built-in `String.substr()` method, e.g. `${ VAR1 | substr(3, 5) }` or `${ VAR1 | substr(7) }`.
+
+- **replace**
+Returns a new string with the matched search pattern replaced by the given replacement string, uses JavaScript's built-in `String.replace()` method, e.g. `${ VAR1 | replace('abc', 'def') }`, `${ VAR1 | replace('-\\\\w+$', '') }` or `${ VAR1 | replace('-\\\\w+$', '', 'ig') }`
+
+**Notes**
+- All the string parameters should be wrapped by single quote - `'`.
+- Available json properties:
+  - name
+  - script
+  - args
+  - node_args
+  - log_file
+  - out_file
+  - error_file
+  - pid_file
+  - log_date_format
+- If you start a PM2 process by LITERAL SUBSTITUTION JSON declaration, `restart/reload/stop` must be ran with `$ pm2 restart <JSON_FILE> --env <ENV>` too (**--env <ENV> is required**).
+- `restart/reload/stop` will not change the substituted string.
 
 <a name="deployment"/>
 # Deployment
