@@ -407,6 +407,12 @@ commander.command('info <id>')
     CLI.describe(proc_id);
   });
 
+commander.command('show <id>')
+  .description('(alias) describe all parameters of a process id')
+  .action(function(proc_id) {
+    CLI.describe(proc_id);
+  });
+
 //
 // List command
 //
