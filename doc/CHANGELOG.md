@@ -23,6 +23,12 @@
 - update isBinaryFile [636fd99]
 - pid deletion has been resurected [f2ce631]
 - worker refactor [29fc72b]
+- fix no color [3feead2]
+- upgrade chokidar 0.12 with follow symlink [4ac0e74]
+- refactor Reload [cf94517][f1eb17]
+- avoid truncate with pm2 logs command [26aff8b]
+- God print log with timestamp via PM2_LOG_DATE_FORMAT [bf2bf8a][3eaed07]
+- new treekill system [11fe5f4]
 
 Big thanks to @Tjatse !
 
