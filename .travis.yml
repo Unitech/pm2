@@ -16,3 +16,6 @@ node_js:
 os:
   - linux
   - osx
+matrix:
+  allow_failures:
+    - os: osx
