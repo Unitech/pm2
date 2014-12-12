@@ -7,7 +7,6 @@ echo -e "\033[1mRunning tests:\033[0m"
 
 cd $file_path
 
-export PM2_WORKER_INTERVAL=1000
 $pm2 interact kill
 
 #
@@ -58,6 +57,13 @@ success "Forward method should fail and thus print 2-lined output"
 OUT=`$pm2 pull app | wc -l`
 [ $OUT -eq 2 ] || fail "Pull method should 'fail' because it is already up-to-date"
 success "Pull method should 'fail' because it is already up-to-date"
+
+export PM2_WORKER_INTERVAL=1000
+
+$pm2 kill
+
+$pm2 start ./process.json --name app
+sleep 5
 
 #
 # Testing refresh-versioning worker
