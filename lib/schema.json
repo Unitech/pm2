@@ -31,6 +31,9 @@
     "type": "number",
     "min": 0
   },
+  "port": {
+    "type": "number"
+  },
   "log_file": {
     "type": [
       "boolean",
