@@ -20,7 +20,7 @@
     "soyuka <soyuka@gmail.com>",
     "Alex Kocharin <alex@kocharin.ru>",
     "achingbrain <alex@achingbrain.net>",
-    "Joni Shkurti <jshkurti@student.42.fr>",
+    "Joni Shkurti <jonishkurti90@gmail.com>",
     "Jun Tjatse <thisnamemeansnothing@gmail.com>"
   ],
   "contributors": [
@@ -140,6 +140,7 @@
 
     "axm"                 : "~0.2.*",
     "vizion"              : "latest",
+    "observe-js"          : "^0.4.2",
 
     "pm2-axon"            : "2.0.7",
     "pm2-axon-rpc"        : "0.3.6",
