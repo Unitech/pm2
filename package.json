@@ -16,12 +16,30 @@
     "url": "https://keymetrics.io"
   },
   "maintainers": [
-    "tknew <strzelewicz.alexandre@gmail.com",
-    "soyuka <soyuka@gmail.com>",
-    "Alex Kocharin <alex@kocharin.ru>",
-    "achingbrain <alex@achingbrain.net>",
-    "Joni Shkurti <jshkurti@student.42.fr>",
-    "Jun Tjatse <thisnamemeansnothing@gmail.com>"
+    {
+      "name": "tknew",
+      "email": "strzelewicz.alexandre@gmail.com"
+    },
+    {
+      "name": "soyuka",
+      "email": "soyuka@gmail.com"
+    },
+    {
+      "name": "rlidwka",
+      "email": "alex@kocharin.ru"
+    },
+    {
+      "name": "achingbrain",
+      "email": "alex@achingbrain.net"
+    },
+    {
+      "name": "jshkurti",
+      "email": "jshkurti@student.42.fr"
+    },
+    {
+      "name": "tjatse",
+      "email": "thisnamemeansnothing@gmail.com"
+    }
   ],
   "contributors": [
     {
