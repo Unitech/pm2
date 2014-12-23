@@ -170,6 +170,7 @@
     "isbinaryfile"        : "^2.0.3"
   },
   "devDependencies": {
+    "jshint"          : "^2.5.11",
     "mocha"           : "^1.20.1",
     "should"          : "^4.0.0",
     "better-assert"   : "^1.0.0",
