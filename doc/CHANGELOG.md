@@ -1,3 +1,10 @@
+# 0.12.3
+
+- fixed critical bug: `process.env` flattens all env-vars [#898]
+- npm maintainers format [#894]
+- fix `pm2 desc` crash bug [#892]
+- fix CLI typo [#888]
+- `port` config [#885]
 
 # 0.12.2
 
