@@ -43,7 +43,7 @@ function getConf3() {
 function getConf4() {
   return Common.prepareAppConf({
     script : path.resolve(process.cwd(), 'test/fixtures/args.js'),
-    args            : "['-d', '-a']",
+    args            : ['-d', '-a'],
     instances       : '1',
     name : 'child'
   });
