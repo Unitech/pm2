@@ -4,5 +4,6 @@
   ".rb": "ruby",
   ".php": "php",
   ".pl" : "perl",
-  ".js" : "node"
+  ".js" : "node",
+  ".coffee" : "coffee"
 }
