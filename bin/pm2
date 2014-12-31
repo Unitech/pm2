@@ -79,9 +79,12 @@ commander.on('--help', function() {
 });
 
 if (process.argv.indexOf('-s') > -1) {
-  global.console = {};
-  global.console.log = function(){};
-  global.console.error = function(){};
+  for(var key in console){
+    var code = key.charCodeAt(0);
+    if(code >= 97 && code <= 122){
+      console[key] = function(){};
+    }
+  }
 }
 
 function beginCommandProcessing() {
