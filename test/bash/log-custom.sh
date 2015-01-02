@@ -8,6 +8,7 @@ cd $file_path
 
 $pm2 kill
 
+CURRENT_YEAR=`date +"%Y"`
 
 # CLUSTERMODE YYYY
 $pm2 start echo.js --log-date-format "YYYY" -o out-rel.log --merge-logs
@@ -16,7 +17,7 @@ $pm2 start echo.js --log-date-format "YYYY" -o out-rel.log --merge-logs
 
 sleep 2
 
-grep "2014" out-rel.log
+grep $CURRENT_YEAR out-rel.log
 spec "Should have written year in log file according to format YYYY"
 
 rm out-rel.log
@@ -42,7 +43,7 @@ $pm2 start echo.js --log-date-format "YYYY" -o out-rel.log --merge-logs -x
 
 sleep 2
 
-grep "2014" out-rel.log
+grep $CURRENT_YEAR out-rel.log
 spec "Should have written year in log file according to format YYYY"
 
 rm out-rel.log
