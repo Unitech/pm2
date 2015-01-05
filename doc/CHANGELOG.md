@@ -1,3 +1,10 @@
+# 0.12.3
+
+- fixed critical bug: `process.env` flattens all env-vars [#898]
+- npm maintainers format [#894]
+- fix `pm2 desc` crash bug [#892]
+- fix CLI typo [#888]
+- `port` config [#885]
 
 # 0.12.2
 
@@ -28,6 +35,7 @@
 - refactor Reload [cf94517][f1eb17]
 - avoid truncate with pm2 logs command [26aff8b]
 - God print log with timestamp via PM2_LOG_DATE_FORMAT [bf2bf8a][3eaed07]
+- better test suit
 - new treekill system [11fe5f4]
 
 Big thanks to @Tjatse !

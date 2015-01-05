@@ -15,14 +15,14 @@ should 'should has forked app' 'restart_time: 1' 1
 ########### Fork mode
 $pm2 kill
 
-$pm2 start bashscript.sh -x --interpreter bash
+$pm2 start bashscript.sh
 should 'should has forked app' 'fork_mode' 1
 
 ########### Auto Detective Interpreter In Fork mode
 
 $pm2 kill
 
-$pm2 start echo.coffee -x --interpreter coffee
+$pm2 start echo.coffee
 should 'should has forked app' 'fork_mode' 1
 
 ### Dump resurrect should be ok

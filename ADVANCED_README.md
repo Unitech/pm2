@@ -1225,7 +1225,7 @@ And with JSON declaration:
 ## CoffeeScript
 
 ```bash
-$ pm2 start my_app.coffee
+$ pm2 start server.coffee --interpreter coffee
 ```
 
 That's all!

@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "engines": {
     "node": ">=0.10"
   },
@@ -16,12 +16,30 @@
     "url": "https://keymetrics.io"
   },
   "maintainers": [
-    "tknew <strzelewicz.alexandre@gmail.com",
-    "soyuka <soyuka@gmail.com>",
-    "Alex Kocharin <alex@kocharin.ru>",
-    "achingbrain <alex@achingbrain.net>",
-    "Joni Shkurti <jonishkurti90@gmail.com>",
-    "Jun Tjatse <thisnamemeansnothing@gmail.com>"
+    {
+      "name": "tknew",
+      "email": "strzelewicz.alexandre@gmail.com"
+    },
+    {
+      "name": "soyuka",
+      "email": "soyuka@gmail.com"
+    },
+    {
+      "name": "rlidwka",
+      "email": "alex@kocharin.ru"
+    },
+    {
+      "name": "achingbrain",
+      "email": "alex@achingbrain.net"
+    },
+    {
+      "name": "jshkurti",
+      "email": "jonishkurti90@gmail.com"
+    },
+    {
+      "name": "tjatse",
+      "email": "thisnamemeansnothing@gmail.com"
+    }
   ],
   "contributors": [
     {
@@ -34,7 +52,7 @@
     },
     {
       "name": "Joni Shkurti",
-      "email": "jshkurti@student.42.fr"
+      "email": "jonishkurti90@gmail.com"
     },
     {
       "name" : "Jun Tjatse",
