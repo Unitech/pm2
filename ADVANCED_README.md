@@ -783,8 +783,8 @@ $ pm2 start app.js --watch
 ```
 
 If `--watch` is enabled, stopping it won't stop watching:
-- `pm2 stop 0` 'll not stop watching
-- `pm2 stop --watch 0` 'll stop watching
+- `pm2 stop 0` will not stop watching
+- `pm2 stop --watch 0` will stop watching
 
 Restart toggle the `watch` parameter when triggered.
 
