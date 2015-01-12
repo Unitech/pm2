@@ -715,7 +715,7 @@ Then use the command:
 $ pm2 gracefulReload [all|name]
 ```
 
-When PM2 starts a new process to replace an old one, it will wait for the new process to begin listening to a connection or a timeout before sending the shutdown message to the old one. You can define the timeout value with the `PM2_GRACEFUL_LISTEN_TIMEOUT` environamente variable. I f a script does not need to listen to a connection, it can manually tell PM2 that the process has started up by calling `process.send('online')`.
+When PM2 starts a new process to replace an old one, it will wait for the new process to begin listening to a connection or a timeout before sending the shutdown message to the old one. You can define the timeout value with the `PM2_GRACEFUL_LISTEN_TIMEOUT` environamente variable. If a script does not need to listen to a connection, it can manually tell PM2 that the process has started up by calling `process.send('online')`.
 
 <a name="a8"/>
 ## Startup script
