@@ -15,6 +15,7 @@ var Satan     = require('../lib/Satan');
 var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
 var pkg       = require('../package.json');
+var platform  = require('os').platform();
 
 CLI.pm2Init();
 
@@ -364,10 +365,10 @@ commander.command('resurrect')
 //
 // Set pm2 to startup
 //
-commander.command('startup <platform>')
+commander.command('startup [platform]')
   .description('auto resurrect process at startup. [platform] = ubuntu, centos, gentoo or systemd')
-  .action(function(platform) {
-    CLI.startup(platform, commander);
+  .action(function(_platform, cmd) {
+    CLI.startup(_platform || platform, commander);
   });
 
 
