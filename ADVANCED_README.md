@@ -424,6 +424,9 @@ Yap, if the `alias` exists, you can using it as a CLI option, but do not forget 
   - maximum
 
     `"instances": 0` means starting maximum processes depending on available CPUs (cluster mode)
+  - array
+
+    `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
 
 <a name="update-pm2"/>
 ## How to update PM2
@@ -812,7 +815,7 @@ You can define parameters for your apps in `processes.json`:
   "apps" : [{
     "name"        : "echo",
     "script"      : "examples/args.js",
-    "args"        : "['--toto=heya coco', '-d', '1']",
+    "args"        : ["--toto=heya coco", "-d", "1"],
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
     "watch"       : true,
@@ -825,7 +828,7 @@ You can define parameters for your apps in `processes.json`:
   },{
     "name"       : "api",
     "script"     : "./examples/child.js",
-    "instances"  : "4",
+    "instances"  : 4,
     "log_date_format"  : "YYYY-MM-DD",
     "log_file"   : "./examples/child.log",
     "error_file" : "./examples/child-err.log",
@@ -836,7 +839,7 @@ You can define parameters for your apps in `processes.json`:
   },{
     "name"       : "auto-kill",
     "script"     : "./examples/killfast.js",
-    "min_uptime" : "100",
+    "min_uptime" : "100s",
     "exec_mode"  : "fork_mode"
   }]
 }
@@ -875,11 +878,11 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 - **cwd:** your JSON declaration does not need to reside with your script.  If you wish to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
 
 - The following are valid options for JSON app declarations:
-```
+```json
 [{
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
-  "args"             : "['--toto=heya coco', '-d', '1']",
+  "args"             : ["--toto=heya coco", "-d", "1"]",
   "script"           : "bin/app.js",
   "node_args"        : ["--harmony", " --max-stack-size=102400000"],
   "log_date_format"  : "YYYY-MM-DD HH:mm Z",
@@ -1218,7 +1221,7 @@ $ pm2 start my_app.js --node-args="--harmony"
 
 And with JSON declaration:
 
-```bash
+```json
 [{
   "name" : "ES6",
   "script" : "es6.js",
