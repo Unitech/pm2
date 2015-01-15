@@ -1,3 +1,14 @@
+# 0.12.4
+
+- Never start a process that already has a PID [#938]
+- 1. Make platform auto detecting. 2. Support darwin startup script. [#936]
+- Fix #857 #935, add scriptArgs back [d61d710]
+- Fix broken link upstart [f8ff296]
+- Fixed: multiple calls to vizion.parse() for the same process [0e798b1]
+- fix 2015 test easter egg - Happy New Year! [85d11d5]
+- fixes #906 [#911]
+- add back automatic coffee interpreter #488 #901 [e9a69fe]
+
 # 0.12.3
 
 - fixed critical bug: `process.env` flattens all env-vars [#898]
