@@ -36,6 +36,7 @@ var csts = {
   SYSTEMD_STARTUP_SCRIPT : '../lib/scripts/pm2.service',
   AMAZON_STARTUP_SCRIPT  : '../lib/scripts/pm2-init-amazon.sh',
   GENTOO_STARTUP_SCRIPT  : '../lib/scripts/pm2',
+  DARWIN_STARTUP_SCRIPT  : '../lib/scripts/io.keymetrics.PM2.plist',
 
   SUCCESS_EXIT           : 0,
   ERROR_EXIT             : 1,
