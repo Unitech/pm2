@@ -97,7 +97,11 @@ $ pm2 reload all           # Reload all apps in 0s manner
 PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
 
 ```bash
-$ pm2 startup <ubuntu|centos|gentoo|systemd>
+$ pm2 startup
+# auto-detect platform
+$ pm2 startup [platform]
+# render startup-script for a specific platform, the [platform] could be one of:
+#   ubuntu|centos|redhat|gentoo|systemd|darwin
 ```
 
 To save a process list just do:
