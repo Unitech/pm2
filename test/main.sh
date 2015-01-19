@@ -65,9 +65,9 @@ spec "merge stdout && stderr"
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
 
-if [ -n "`which git`" ]; then
-    bash ./test/bash/pull.sh
-    spec "Testing pull/forward/backward CLI commands"
-fi
+# if [ -n "`which git`" ]; then
+#     bash ./test/bash/pull.sh
+#     spec "Testing pull/forward/backward CLI commands"
+# fi
 
 $pm2 kill
