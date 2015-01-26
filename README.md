@@ -26,7 +26,6 @@ Node.js 0.11.14 is recommended for cluster mode and reload feature.
 
 ```bash
 $ pm2 start app.js
-$ pm2 start app.js -i max  # Enable load-balancer and cluster features
 ```
 
 ## Main features
@@ -83,6 +82,8 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
+Please take in account that this feature is still in beta.
+
 With the cluster mode, PM2 enables load balancing between each worker.
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
 
@@ -116,7 +117,9 @@ $ pm2 save
 
 We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
 
-- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
+- [Register](https://app.keymetrics.io/#/register)
+
+<!-- - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license -->
 
 Thanks in advance and we hope that you like PM2!
 
