@@ -793,7 +793,7 @@ To watch specific paths, please use a JSON app declaration, `watch` can take a s
 ```json
 {
   "watch": ["server", "client"],
-  "ignoreWatch" : ["node_modules", "client/img"]
+  "ignore_watch" : ["node_modules", "client/img"]
 }
 ```
 
@@ -809,7 +809,7 @@ You can define parameters for your apps in `processes.json`:
     "script"      : "examples/args.js",
     "args"        : "['--toto=heya coco', '-d', '1']",
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
-    "ignoreWatch" : ["[\\/\\\\]\\./", "node_modules"],
+    "ignore_watch" : ["[\\/\\\\]\\./", "node_modules"],
     "watch"       : true,
     "node_args"   : "--harmony",
     "cwd"         : "/this/is/a/path/to/start/script",
@@ -887,7 +887,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "max_memory_restart": "1M", // 1 megabytes, e.g.: "2G", "10M", "100K", 1024... the default unit is byte.
   "cron_restart"     : "1 0 * * *",
   "watch"            : false,
-  "ignoreWatch"      : ["[\\/\\\\]\\./", "node_modules"],
+  "ignore_watch"      : ["[\\/\\\\]\\./", "node_modules"],
   "merge_logs"       : true,
   "exec_interpreter" : "node",
   "exec_mode"        : "fork",
