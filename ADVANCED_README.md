@@ -424,6 +424,9 @@ Yap, if the `alias` exists, you can using it as a CLI option, but do not forget 
   - maximum
 
     `"instances": 0` means starting maximum processes depending on available CPUs (cluster mode)
+  - array
+
+    `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
 
 <a name="update-pm2"/>
 ## How to update PM2
@@ -715,7 +718,7 @@ Then use the command:
 $ pm2 gracefulReload [all|name]
 ```
 
-When PM2 starts a new process to replace an old one, it will wait for the new process to begin listening to a connection or a timeout before sending the shutdown message to the old one. You can define the timeout value with the `PM2_GRACEFUL_LISTEN_TIMEOUT` environamente variable. I f a script does not need to listen to a connection, it can manually tell PM2 that the process has started up by calling `process.send('online')`.
+When PM2 starts a new process to replace an old one, it will wait for the new process to begin listening to a connection or a timeout before sending the shutdown message to the old one. You can define the timeout value with the `PM2_GRACEFUL_LISTEN_TIMEOUT` environamente variable. If a script does not need to listen to a connection, it can manually tell PM2 that the process has started up by calling `process.send('online')`.
 
 <a name="a8"/>
 ## Startup script
@@ -724,7 +727,11 @@ PM2 has the amazing ability to **generate startup scripts and configure them**.
 PM2 is also smart enough to **save all your process list** and to **bring back all your processes on restart**.
 
 ```bash
-$ pm2 startup [ubuntu|centos|gentoo|systemd]
+$ pm2 startup
+# auto-detect platform
+$ pm2 startup [platform]
+# render startup-script for a specific platform, the [platform] could be one of:
+#   ubuntu|centos|redhat|gentoo|systemd|darwin
 ```
 
 Once you have started the apps and want to keep them on server reboot do:
@@ -746,9 +753,10 @@ Three types of startup scripts are available:
 The startup options are using:
 
 - **ubuntu** will use `updaterc.d` and the script `lib/scripts/pm2-init.sh`
-- **centos** will use `chkconfig` and the script `lib/scripts/pm2-init-centos.sh`
+- **centos**/**redhat** will use `chkconfig` and the script `lib/scripts/pm2-init-centos.sh`
 - **gentoo** will use `rc-update` and the script `lib/scripts/pm2`
 - **systemd** will use `systemctl` and the script `lib/scripts/pm2.service`
+- **darwin** will use `launchd` to load a specific `plist` to resurrect processes after reboot.
 
 ### User permissions
 
@@ -807,7 +815,7 @@ You can define parameters for your apps in `processes.json`:
   "apps" : [{
     "name"        : "echo",
     "script"      : "examples/args.js",
-    "args"        : "['--toto=heya coco', '-d', '1']",
+    "args"        : ["--toto=heya coco", "-d", "1"],
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "ignore_watch" : ["[\\/\\\\]\\./", "node_modules"],
     "watch"       : true,
@@ -820,7 +828,7 @@ You can define parameters for your apps in `processes.json`:
   },{
     "name"       : "api",
     "script"     : "./examples/child.js",
-    "instances"  : "4",
+    "instances"  : 4,
     "log_date_format"  : "YYYY-MM-DD",
     "log_file"   : "./examples/child.log",
     "error_file" : "./examples/child-err.log",
@@ -831,7 +839,7 @@ You can define parameters for your apps in `processes.json`:
   },{
     "name"       : "auto-kill",
     "script"     : "./examples/killfast.js",
-    "min_uptime" : "100",
+    "min_uptime" : "100s",
     "exec_mode"  : "fork_mode"
   }]
 }
@@ -870,11 +878,11 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 - **cwd:** your JSON declaration does not need to reside with your script.  If you wish to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
 
 - The following are valid options for JSON app declarations:
-```
+```json
 [{
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
-  "args"             : "['--toto=heya coco', '-d', '1']",
+  "args"             : ["--toto=heya coco", "-d", "1"]",
   "script"           : "bin/app.js",
   "node_args"        : ["--harmony", " --max-stack-size=102400000"],
   "log_date_format"  : "YYYY-MM-DD HH:mm Z",
@@ -1213,7 +1221,7 @@ $ pm2 start my_app.js --node-args="--harmony"
 
 And with JSON declaration:
 
-```bash
+```json
 [{
   "name" : "ES6",
   "script" : "es6.js",
