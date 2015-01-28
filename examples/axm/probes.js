@@ -84,7 +84,14 @@ setInterval(function() {
 }, 1500);
 
 
+axm.catchAll();
 
+axm.action('throw error', function(reply) {
+  setTimeout(function() {
+    console.log('log message from echo auto kill');
+    throw new Error('Exitasdsadasdsda unacepted 222222 !!');
+  }, 2000);
+});
 
 
 axm.action('dec', function(reply) {

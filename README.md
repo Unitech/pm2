@@ -26,7 +26,6 @@ Node.js 0.11.14 is recommended for cluster mode and reload feature.
 
 ```bash
 $ pm2 start app.js
-$ pm2 start app.js -i max  # Enable load-balancer and cluster features
 ```
 
 ## Main features
@@ -83,6 +82,8 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
+Please take in account that this feature is still in beta.
+
 With the cluster mode, PM2 enables load balancing between each worker.
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
 
@@ -97,7 +98,11 @@ $ pm2 reload all           # Reload all apps in 0s manner
 PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
 
 ```bash
-$ pm2 startup <ubuntu|centos|gentoo|systemd>
+$ pm2 startup
+# auto-detect platform
+$ pm2 startup [platform]
+# render startup-script for a specific platform, the [platform] could be one of:
+#   ubuntu|centos|redhat|gentoo|systemd|darwin
 ```
 
 To save a process list just do:
@@ -112,7 +117,9 @@ $ pm2 save
 
 We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
 
-- [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license
+- [Register](https://app.keymetrics.io/#/register)
+
+<!-- - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license -->
 
 Thanks in advance and we hope that you like PM2!
 
@@ -122,7 +129,7 @@ Thanks in advance and we hope that you like PM2!
 - [JSON application declaration](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a10)
 - [Using PM2 in your code](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#programmatic-example)
 - [Deployment workflow](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#deployment)
-- [Startup script generation (SystemV/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a8)
+- [Startup script generation (SystemV/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#startup-script)
 - [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#9)
 - [GracefullReload](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a690)
 

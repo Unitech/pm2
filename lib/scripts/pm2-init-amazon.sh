@@ -24,7 +24,7 @@ PM2=%PM2_PATH%
 USER=%USER%
 
 export PATH=$PATH:%NODE_PATH%
-export HOME="%HOME_PATH%"
+export PM2_HOME="%HOME_PATH%"
 
 lockfile="/var/lock/subsys/pm2-init.sh"
 
