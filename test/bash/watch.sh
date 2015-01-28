@@ -191,3 +191,23 @@ $pm2 restart "server-2"
 
 should 'right processes should have been restarted' 'restart_time: 1' 4
 rm server-watch.js
+
+#########################
+# test chokidar options #
+#########################
+
+$pm2 kill
+
+$pm2 start server-watch.json
+
+touch ./donotwatchme.sym/fail
+
+sleep 2
+
+$pm2 list
+
+should 'process should have been restarted' 'restart_time: 0' 1
+
+rm donotwatchme.sym/fail
+
+$pm2 kill
