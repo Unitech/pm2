@@ -6,7 +6,6 @@ branches:
     - api
     - travis
 node_js:
-   - "iojs"
    - "0.11"
    - "0.11.14"
    - "0.11.13"
