@@ -7,7 +7,10 @@
 - Fixed: multiple calls to vizion.parse() for the same process [0e798b1]
 - fix 2015 test easter egg - Happy New Year! [85d11d5]
 - fixes #906 [#911]
-- add back automatic coffee interpreter #488 #901 [e9a69fe]
+- Add back automatic coffee interpreter #488 #901 [e9a69fe]
+- Upgrade cli-table, commander, colors, moment dependencies [0cc58ce][a4b7d8d]
+- Domain system to patch fix the exception thrown by the cluster module
+- Fix #830 #249 #954 when there is no HOME env to default to /etc/.pm2 [17d022c]
 
 # 0.12.3
 
