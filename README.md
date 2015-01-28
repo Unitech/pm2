@@ -5,6 +5,7 @@ PM2 is a production process manager for Node.js applications with a built-in loa
 
 PM2 is constantly assailed by [more than 300 tests](https://travis-ci.org/Unitech/PM2).
 
+Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
 Compatible with CoffeeScript.
 Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 
@@ -18,9 +19,9 @@ Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 $ npm install pm2 -g
 ```
 
-*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
+*npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
 
-Node.js 0.11.14 is recommended for cluster mode and reload feature.
+Node.js 0.11.15 or io.js is recommended for cluster mode and reload feature, but still remember that cluster mode is in beta.
 
 ## Start an application
 
@@ -115,11 +116,9 @@ $ pm2 save
 
 ![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
 
-We're going to release a very nice product, a dashboard to monitor every part of your Node.js applications. Here are some links:
+We are working on Keymetrics, a monitoring SaaS for PM2. It's still in beta, feel free to give it a try:
 
-- [Register](https://app.keymetrics.io/#/register)
-
-<!-- - [Pitch + Survey](https://docs.google.com/forms/d/1FuCjIhrGg-ItxInq2nLreoe9GS-gZWJNkNWE0JJajw8/viewform) People who fill the survey will be eligible for free license -->
+[Try PM2 monitoring](https://app.keymetrics.io/#/register)
 
 Thanks in advance and we hope that you like PM2!
 
