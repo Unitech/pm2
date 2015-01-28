@@ -21,8 +21,6 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
 
-Node.js 0.11.15 or io.js is recommended for cluster mode and reload feature, but still remember that cluster mode is in beta.
-
 ## Start an application
 
 ```bash
@@ -83,7 +81,7 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
-Please take in account that this feature is still in beta.
+**Warning**: It's still a beta feature. If you want to use the embed cluster module or reload with 0s downtime, we recommend the use of node#0.11.15+ or io.js#1.0.2+. We do not support node#0.10.* cluster module anymore!
 
 With the cluster mode, PM2 enables load balancing between each worker.
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
