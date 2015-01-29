@@ -206,7 +206,7 @@ sleep 2
 
 $pm2 list
 
-should 'process should have been restarted' 'restart_time: 0' 1
+should 'process should not have been restarted' 'restart_time: 0' 1
 
 rm donotwatchme.sym/fail
 
