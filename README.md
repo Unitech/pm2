@@ -136,7 +136,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## Changelog
 
-[CHANGELOG](https://github.com/Unitech/PM2/blob/master/doc/CHANGELOG.md)
+[CHANGELOG](https://github.com/Unitech/PM2/blob/master/CHANGELOG.md)
 
 ## Contributors
 
