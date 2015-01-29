@@ -1,7 +1,7 @@
 [{
   "name"      : "server-watch",
   "script"    : "./server-watch.bak.js",
-  "watch"     : "./server-watch.json",
+  "watch"     : ["./server-watch.json", "./donotwatchme.sym"],
   "ignore_watch" : "./donotwatchme.dir",
   "watch_options" : {
     "followSymlinks": false
