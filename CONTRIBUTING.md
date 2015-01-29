@@ -34,4 +34,6 @@ If your issue is flagged as `need data` be sure that there won't be any upgrade 
 2. Create a different branch to do your fixes/improvements if it's core-related.
 3. Please add unit tests! There are lots of tests take examples from there!
 4. Try to be as clear as possible in your commits
-5. Pull request on pm2 from your branch
+5. Pull request on the **development branch** from your fork
+
+We 'd like to keep our master branch as clean as possible, please avoid PRs on master, thanks!
