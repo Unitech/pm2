@@ -307,6 +307,9 @@ The completely definitions:
       "string"
     ]
   },
+  "watch_options": {
+    "type": "object"
+  },
   "env": {
     "type": ["object", "string"]
   },
@@ -801,7 +804,24 @@ To watch specific paths, please use a JSON app declaration, `watch` can take a s
 ```json
 {
   "watch": ["server", "client"],
-  "ignore_watch" : ["node_modules", "client/img"]
+  "ignore_watch" : ["node_modules", "client/img"],
+  "watch_options": {
+    "followSymlinks": false 
+  }
+}
+```
+
+As specified in the [Schema](#a988):
+- `watch` can be a boolean, an array of paths or a string representing a path. Default to `false`
+- `ignore_watch` can be an array of paths or a string, it'll be interpreted by [chokidar](https://github.com/paulmillr/chokidar#path-filtering) as a glob or a regular expression.
+- `watch_options` is an object that will replace options given to chokidar. Please refer to [chokidar documentation](https://github.com/paulmillr/chokidar#api) for the definition.
+
+PM2 is giving chokidar these Default options:
+
+```
+var watch_options = {
+  persistent    : true,
+  ignoreInitial : true
 }
 ```
 
