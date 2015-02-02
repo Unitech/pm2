@@ -21,6 +21,17 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server#how-to-install-using-nvm)*
 
+### Windows
+
+Make sure you have tail.exe in your path, confirm using "where"
+
+```
+C:\>where tail
+C:\Program Files (x86)\Git\bin\tail.exe
+```
+
+Tail can be found as part of Git, Cygwin and MingW packages.
+
 ## Start an application
 
 ```bash
