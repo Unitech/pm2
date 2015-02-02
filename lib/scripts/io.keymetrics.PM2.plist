@@ -8,8 +8,9 @@
 	<string>%USER%</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>%PM2_PATH%</string>
-		<string>resurrect</string>
+		<string>/bin/sh</string>
+		<string>-c</string>
+		<string>%PM2_PATH% resurrect</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
