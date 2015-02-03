@@ -30,7 +30,7 @@ C:\>where tail
 C:\Program Files (x86)\Git\bin\tail.exe
 ```
 
-Tail can be found as part of Git, Cygwin and MingW packages.
+Tail can be found as part of [Git](https://msysgit.github.io/), Cygwin and MingW packages. Tail needs to be able to support "-f" and "-n" options.
 
 ## Start an application
 
