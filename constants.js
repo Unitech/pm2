@@ -55,6 +55,7 @@ var csts = {
 
   KEYMETRICS_ROOT_URL    : 'root.keymetrics.io',
 
+  REMOTE_PORT_TCP        : 80,
   REMOTE_PORT            : 41624,
   REMOTE_REVERSE_PORT    : 43554,
   REMOTE_HOST            : 's1.keymetrics.io',
