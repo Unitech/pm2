@@ -1,4 +1,4 @@
-var axm = require('axm');
+var axm = require('pmx');
 var fs  = require('fs');
 var path = require('path');
 

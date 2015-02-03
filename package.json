@@ -156,7 +156,7 @@
     "nssocket"            : "0.5.3",
     "pidusage"            : "0.1.0",
 
-    "axm"                 : "~0.2.*",
+    "pmx"                 : "latest",
     "vizion"              : "latest",
     "observe-js"          : "^0.4.2",
 

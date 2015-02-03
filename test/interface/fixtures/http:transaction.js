@@ -1,5 +1,5 @@
 
-var axm = require('axm');
+var axm = require('pmx');
 axm.http();
 
 var http = require('http');

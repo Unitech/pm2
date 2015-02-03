@@ -1,5 +1,5 @@
 
-var axm = require('axm');
+var axm = require('pmx');
 
 axm.action('refresh:db', { comment : 'Refresh the database' }, function(reply) {
   console.log('Refreshing');
