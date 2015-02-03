@@ -200,14 +200,14 @@ $pm2 kill
 
 $pm2 start server-watch.json
 
-touch ./donotwatchme.sym/fail
+# touch ./donotwatchme.sym/fail
 
-sleep 2
+# sleep 2
 
-$pm2 list
+# $pm2 list
 
-should 'process should not have been restarted' 'restart_time: 0' 1
+# should 'process should not have been restarted' 'restart_time: 0' 1
 
-rm donotwatchme.sym/fail
+# rm donotwatchme.sym/fail
 
-$pm2 kill
+#$pm2 kill
