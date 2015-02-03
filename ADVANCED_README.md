@@ -84,8 +84,6 @@ If the above fails use:
 $ npm install git://github.com/Unitech/pm2#master -g
 ```
 
-We recommend Node.JS 0.11.14 for handling the cluster_mode (if you add the -i options to enable scaling and reload).
-
 <a name="a2"/>
 ## Usage
 
@@ -806,7 +804,7 @@ To watch specific paths, please use a JSON app declaration, `watch` can take a s
   "watch": ["server", "client"],
   "ignore_watch" : ["node_modules", "client/img"],
   "watch_options": {
-    "followSymlinks": false 
+    "followSymlinks": false
   }
 }
 ```
