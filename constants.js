@@ -17,6 +17,8 @@ else if (process.env.HOME || process.env.HOMEPATH)
 else
   PM2_ROOT_PATH = p.resolve('/etc', '.pm2');
 
+debug("PM2_ROOT_PATH: " + PM2_ROOT_PATH)
+
 /**
  * Constants variables used by PM2
  */
