@@ -154,7 +154,7 @@
     "json-stringify-safe" : "5.0.0",
     "moment"              : "2.9.0",
     "nssocket"            : "0.5.3",
-    "pidusage"            : "0.1.0",
+    "pidusage"            : "0.1.1",
 
     "pmx"                 : "latest",
     "vizion"              : "latest",
