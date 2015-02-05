@@ -21,17 +21,6 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
 
-### Windows
-
-Make sure you have tail.exe in your path, confirm using "where"
-
-```
-C:\>where tail
-C:\Program Files (x86)\Git\bin\tail.exe
-```
-
-Tail can be found as part of [Git](https://msysgit.github.io/), Cygwin and MingW packages. Tail needs to be able to support "-f" and "-n" options.
-
 ## Start an application
 
 ```bash

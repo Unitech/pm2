@@ -29,6 +29,10 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [JSON app declaration](#a10)
   - [Schema](#a988)
 
+### Windows specifics
+
+- [Windows](#windows)
+
 ### Deployment - ecosystem.json
 
 - [Getting started with deployment](#deployment)
@@ -923,6 +927,18 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   }
 }]
 ```
+
+<a name="windows"/>
+# Windows
+
+Make sure you have tail.exe in your path, confirm using "where"
+
+```
+C:\>where tail
+C:\Program Files (x86)\Git\bin\tail.exe
+```
+
+Tail can be found as part of [Git](https://msysgit.github.io/), Cygwin and MingW packages. Tail needs to be able to support "-f" and "-n" options.
 
 <a name="deployment"/>
 # Deployment
