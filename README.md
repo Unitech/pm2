@@ -130,7 +130,7 @@ Thanks in advance and we hope that you like PM2!
 - [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#9)
 - [GracefullReload](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a690)
 
-## Know more about PM2
+## Learn more about PM2
 
 [Advanced README.md](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md)
 

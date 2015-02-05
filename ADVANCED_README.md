@@ -900,7 +900,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 [{
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
-  "args"             : ["--toto=heya coco", "-d", "1"]",
+  "args"             : ["--toto=heya coco", "-d", "1"],
   "script"           : "bin/app.js",
   "node_args"        : ["--harmony", " --max-stack-size=102400000"],
   "log_date_format"  : "YYYY-MM-DD HH:mm Z",
