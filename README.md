@@ -81,7 +81,7 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
-**Warning**: It's still a beta feature. If you want to use the embed cluster module or reload with 0s downtime, we recommend the use of node#0.11.16+ or io.js#1.0.2+. We do not support node#0.10.* cluster module anymore!
+**Warning**: It's still a beta feature. If you want to use the embed cluster module or reload with 0s downtime, we recommend the use of node#0.12.0+ node#0.11.16+ or io.js#1.0.2+. We do not support node#0.10.* cluster module anymore!
 
 With the cluster mode, PM2 enables load balancing between each worker.
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
