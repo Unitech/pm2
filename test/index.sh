@@ -49,4 +49,7 @@ spec "Protocol communication test"
 mocha ./test/interface/bus.fork.spec.mocha.js
 spec "Protocol communication test"
 
-echo "########## PROGRAMMATIC TEST DONE #########"
+echo "   ______  ________________________"
+echo "  / __/ / / / ___/ ___/ __/ __/ __/"
+echo " _\ \/ /_/ / /__/ /__/ _/_\ \_\ \  "
+echo "/___/\____/\___/\___/___/___/___/  "
