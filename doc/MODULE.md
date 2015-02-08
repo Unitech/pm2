@@ -16,6 +16,8 @@ $ pm2 uninstall module-probe
 
 ## Writing a module
 
+**THE API IS STILL UNDER INSPECTION**
+
 A module is a classic NPM module that contains at least these files:
 - **package.json** with all dependencies needed to run this module and the app to be run
 - **conf.js** containing user and internals configuration variables
@@ -25,6 +27,24 @@ Publishing a module consist of doing:
 
 ```bash
 $ npm publish
+```
+
+## Development workflow
+
+A workflow is available to easily develop new modules:
+
+```bash
+$ pm2 install .
+$ pm2 logs
+$ pm2 uninstall .
+```
+
+- Every time an update is made the module will be automatically restarted
+- Use pm2 logs to see how your app behaves
+- To debug what is send to pm2 just set the variable
+
+```
+process.env.MODULE_DEBUG = true;
 ```
 
 ## Pre flight checks
@@ -59,6 +79,15 @@ module.exports = {
   my_conf_var1  : 1000,
   my_conf_var2 : true
 };
+```
+
+- Here is a boilerplate for the main file that will be runned:
+
+```javascript
+var pmx     = require('pmx');
+
+// Load confjs file and init module as PM2 module
+var conf    = pmx.loadConfig();
 ```
 
 **internals.pid** allows you to monitor a specific PID instead of the PID of the current process.
