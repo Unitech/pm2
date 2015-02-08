@@ -1,6 +1,7 @@
 language: node_js
 branches:
   only:
+    - poc-plugin
     - master
     - development
     - api
