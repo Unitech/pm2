@@ -59,3 +59,11 @@ ispec "Module should be installed"
 
 $pm2 update
 should 'should module not be online' 'online' 0
+
+#
+# Install local module
+#
+
+#
+# Watch feature
+#

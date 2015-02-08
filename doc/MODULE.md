@@ -5,6 +5,8 @@ A PM2 module is basically a NPM module. But this time it's not a library, but a 
 
 Internally it embed the NPM install procedure. So a PM2 module will be published to NPM and installed from NPM.
 
+![Process listing](https://github.com/unitech/pm2/raw/poc-plugin/pres/pm2-module.png)
+
 ## Basics
 
 ```bash
@@ -78,3 +80,5 @@ module.exports = {
 
 1- send conf.internals to PM2 with msg type axm:option:configuration
 1- Attach this data to pm2_env.axm_options
+
+1- pm2_env.axm_options for the values of the probes
