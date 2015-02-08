@@ -288,6 +288,18 @@ commander.command('update')
     CLI.updatePM2()
   });
 
+commander.command('install')
+  .description('install a plugin / app and run it forever')
+  .action(function(plugin_name) {
+    CLI.install(plugin_name);
+  });
+
+commander.command('uninstall')
+  .description('uninstall a plugin / app')
+  .action(function(plugin_name) {
+    CLI.uninstall(plugin_name);
+  });
+
 //
 // Interact
 //
