@@ -2,7 +2,7 @@
   "apps" : [{
     "exec_interpreter"   : "node",
     "exec_mode"          : "cluster_mode",
-    "instances"          : "max",
+    "instances"          : 0,
     "log_date_format"    : "YYYY-MM-DD HH:mm Z",
     "max_memory_restart" : "160",
     "merge_logs"         : true,
@@ -11,6 +11,6 @@
     "cwd"                : "examples",
     "node_args"          : "--harmony",
     "ignoreWatch"        : ["[\\/\\\\]\\./", "log"],
-    "watch"              : "truee"
+    "watch"              : true
   }]
 }
