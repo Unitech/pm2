@@ -146,3 +146,5 @@ Thanks in advance and we hope that you like PM2!
 
 Files in `lib/` are made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
 Except the file `lib/CLI.js` who is made under the terms of the Apache V2 license.
+
+[![Analytics](https://ga-beacon.appspot.com/UA-51734350-4/Unitech/pm2?pixel)](https://github.com/Unitech/pm2)
