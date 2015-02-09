@@ -14,13 +14,31 @@ $ pm2 install module-probe
 $ pm2 uninstall module-probe
 ```
 
+## Configuration
+
+```bash
+$ pm2 set <key> <value>
+$ pm2 unset <key>
+```
+
+The key will become an environment variable accesible inside the module
+
+E.g.
+
+```bash
+$ pm2 set pmx_timeout value
+```
+
+```javascript
+console.log(process.env.pmx_timeout);
+```
+
 ## Writing a module
 
 **THE API IS STILL UNDER INSPECTION**
 
 A module is a classic NPM module that contains at least these files:
 - **package.json** with all dependencies needed to run this module and the app to be run
-- **conf.js** containing user and internals configuration variables
 - **index.js** a script that init the module and do whatever you need
 
 Publishing a module consist of doing:
@@ -57,28 +75,6 @@ process.env.MODULE_DEBUG = true;
     "script" : "probe.js"
   }]
   [...]
-```
-
-- the conf.js MUST be present, it's a requirement
-
-```javascript
-var pmx     = require('pmx');
-var fs      = require('fs');
-var path    = require('path');
-
-module.exports = {
-  internals : {
-    comment          : 'This module monitors PM2',
-    errors           : false,
-    latency          : false,
-    versioning       : false,
-    show_module_meta : true,
-    pid              : pmx.getPID(path.join(process.env.HOME, '.pm2', 'pm2.pid'))
-  },
-
-  my_conf_var1  : 1000,
-  my_conf_var2 : true
-};
 ```
 
 - Here is a boilerplate for the main file that will be runned:
