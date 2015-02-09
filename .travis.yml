@@ -1,17 +1,17 @@
 language: node_js
 branches:
   only:
+    - poc-plugin
     - master
     - development
     - api
     - travis
 node_js:
-   - "0.12.0"
+   - "0.12"
    - "0.11"
-   - "0.11.14"
+   - "0.11.15"
    - "0.10"
-   - "0.10.36"
-   - "iojs"
+   - "0.10.35"
 os:
   - linux
   - osx
