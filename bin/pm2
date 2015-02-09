@@ -279,14 +279,41 @@ commander.command('ping')
 commander.command('updatePM2')
   .description('update in-memory PM2 with local PM2')
   .action(function() {
-    CLI.updatePM2()
+    CLI.updatePM2();
   });
 
 commander.command('update')
   .description('(alias) update in-memory PM2 with local PM2')
   .action(function() {
-    CLI.updatePM2()
+    CLI.updatePM2();
   });
+
+/**
+ * Module specifics
+ */
+commander.command('install <module|git:// url>')
+  .description('install or update a module and run it forever')
+  .action(function(plugin_name) {
+    CLI.install(plugin_name);
+  });
+
+commander.command('uninstall <module>')
+  .description('stop and uninstall a module')
+  .action(function(plugin_name) {
+    CLI.uninstall(plugin_name);
+  });
+
+commander.command('publish')
+  .description('Publish the module you are currently on')
+  .action(CLI.publish);
+
+commander.command('set')
+  .description('sets the specified config <key> <value>')
+  .action(CLI.set);
+
+commander.command('unset')
+  .description('clears the specified config <key>')
+  .action(CLI.unset);
 
 //
 // Interact

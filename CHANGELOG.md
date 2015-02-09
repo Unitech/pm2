@@ -1,3 +1,16 @@
+
+# 1.0
+
+- Plugin system (pm2 install module / pm2 uninstall module)
+- Configuration system (pm2 set <key> <value> / pm2 unset <key>)
+- New colors for grid list
+- Separation between modules and applications when listing
+- Enhancement of startJson command (force_name and additional_env options)
+
+# 0.12.5
+
+- Windows support
+
 # 0.12.4
 
 - Never start a process that already has a PID [#938]
