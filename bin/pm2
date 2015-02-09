@@ -279,13 +279,13 @@ commander.command('ping')
 commander.command('updatePM2')
   .description('update in-memory PM2 with local PM2')
   .action(function() {
-    CLI.updatePM2()
+    CLI.updatePM2();
   });
 
 commander.command('update')
   .description('(alias) update in-memory PM2 with local PM2')
   .action(function() {
-    CLI.updatePM2()
+    CLI.updatePM2();
   });
 
 commander.command('install')
@@ -299,6 +299,14 @@ commander.command('uninstall')
   .action(function(plugin_name) {
     CLI.uninstall(plugin_name);
   });
+
+commander.command('set')
+  .description('sets the specified config <key> for plugins')
+  .action(CLI.set);
+
+commander.command('unset')
+  .description('clears the specified config <key> for plugins')
+  .action(CLI.unset);
 
 //
 // Interact

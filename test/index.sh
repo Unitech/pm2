@@ -39,6 +39,8 @@ mocha ./test/programmatic/programmatic.js
 spec "Programmatic test"
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
+mocha ./test/programmatic/configuration.mocha.js
+spec "Configuration system working"
 
 mocha ./test/interface/interactor.daemonizer.mocha.js
 spec "Remote interactor keys save verification"

@@ -48,7 +48,9 @@ spec "Second hard cli tests"
 bash ./test/bash/misc.sh
 spec "MISC features"
 bash ./test/bash/fork.sh
-spec "Fork verified"
+spec "Fork system working"
+bash ./test/bash/get_set.sh
+spec "Configuration system working"
 bash ./test/bash/infinite_loop.sh
 spec "Infinite loop stop"
 bash ./test/bash/env-refresh.sh
