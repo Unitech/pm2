@@ -301,11 +301,11 @@ commander.command('uninstall')
   });
 
 commander.command('set')
-  .description('sets the specified config <key> for plugins')
+  .description('sets the specified config <key> <value>')
   .action(CLI.set);
 
 commander.command('unset')
-  .description('clears the specified config <key> for plugins')
+  .description('clears the specified config <key>')
   .action(CLI.unset);
 
 //

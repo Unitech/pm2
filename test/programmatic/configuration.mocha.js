@@ -50,4 +50,11 @@ describe('Configuration via SET / GET tests', function() {
       done();
     });
   });
+
+  it('should get all values SYNCHRONOUSLY', function() {
+    var data = Configuration.getAllSync();
+
+    should(data.key1).not.exists;
+    data.key2.should.eql('val2');
+  });
 });
