@@ -7,11 +7,6 @@ branches:
     - api
     - travis
 node_js:
-   - "0.12"
-   - "0.11"
-   - "0.11.15"
-   - "0.10"
-   - "0.10.35"
    - "iojs"
 os:
   - linux
