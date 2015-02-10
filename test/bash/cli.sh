@@ -207,8 +207,10 @@ spec "Dump file should be present"
 $pm2 stop all
 spec "Should stop all processes"
 
-sleep 0.5
-OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
+sleep 0.7
+$pm2 prettylist > tmp_out.txt
+OUT=`cat tmp_out.txt | grep -o "stopped" | wc -l`
+rm tmp_out.txt
 echo $OUT
 [ $OUT -eq 8 ] || fail "Process not stopped"
 success "Process succesfully stopped"
