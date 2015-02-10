@@ -207,10 +207,9 @@ spec "Dump file should be present"
 $pm2 stop all
 spec "Should stop all processes"
 
-sleep 0.7
-$pm2 prettylist > tmp_out.txt
-OUT=`cat tmp_out.txt | grep -o "stopped" | wc -l`
-rm tmp_out.txt
+sleep 0.5
+$pm2 prettylist > /tmp/tmp_out.txt
+OUT=`cat /tmp/tmp_out.txt | grep -o "stopped" | wc -l`
 echo $OUT
 [ $OUT -eq 8 ] || fail "Process not stopped"
 success "Process succesfully stopped"
@@ -245,7 +244,8 @@ $pm2 resurrect
 spec "Should resurrect all apps"
 
 sleep 0.5
-OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
+$pm2 prettylist > /tmp/tmp_out.txt
+OUT=`cat /tmp/tmp_out.txt | grep -o "restart_time" | wc -l`
 [ $OUT -eq 8 ] || fail "Not valid process number"
 success "Processes valid"
 
