@@ -8,6 +8,11 @@ branches:
     - travis
 node_js:
    - "iojs"
+   - "0.12"
+   - "0.11"
+   - "0.11.14"
+   - "0.10"
+   - "0.10.34"
 os:
   - linux
   - osx
