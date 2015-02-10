@@ -209,7 +209,7 @@ spec "Should stop all processes"
 
 sleep 0.5
 OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
-echo $OUT
+$pm2 prettylist
 [ $OUT -eq 8 ] || fail "Process not stopped"
 success "Process succesfully stopped"
 
