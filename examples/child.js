@@ -1,4 +1,4 @@
-
+require('pmx').init();
 
 var http = require('http');
 
