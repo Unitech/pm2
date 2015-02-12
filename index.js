@@ -1,1 +1,1 @@
-module.exports = require('./lib/CLI.js');
+module.exports = require('./lib/PM2.js')
