@@ -116,7 +116,7 @@ $ pm2 save
 
 We are working on Keymetrics, a monitoring SaaS for PM2. It's still in beta, feel free to give it a try:
 
-[Try PM2 monitoring](https://app.keymetrics.io/#/register)
+[Discover Keymetrics monitoring for PM2](https://keymetrics.io/)
 
 Thanks in advance and we hope that you like PM2!
 
