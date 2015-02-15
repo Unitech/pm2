@@ -101,7 +101,7 @@ $ pm2 startup
 # auto-detect platform
 $ pm2 startup [platform]
 # render startup-script for a specific platform, the [platform] could be one of:
-#   ubuntu|centos|redhat|gentoo|systemd|darwin
+#   ubuntu|centos|amazon|redhat|gentoo|systemd|darwin
 ```
 
 To save a process list just do:
