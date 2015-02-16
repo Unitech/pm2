@@ -5,6 +5,6 @@
   "merge_logs" : true,
   "env": {
     "NODE_ENV": "production",
-    "TEST_VARIABLE": "HEYYYY"
+    "TEST_VARIABLE": { "HEYYYY": true }
   }
 }]
