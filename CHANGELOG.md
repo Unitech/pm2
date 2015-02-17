@@ -1,3 +1,7 @@
+# 0.12.5
+
+- Windows support
+
 # 0.12.4
 
 - Never start a process that already has a PID [#938]
