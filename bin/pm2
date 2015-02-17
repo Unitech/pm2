@@ -318,14 +318,12 @@ commander.command('unset')
 //
 // Interact
 //
-commander.command('interact [secret_key|command] [public_key] [machine_name]')
-  .description('agent actions for keymetrics.io - command can be stop|info|delete|restart')
-  .action(function(secret_key, public_key, machine) {
-    if (secret_key == 'stop' || secret_key == 'kill') {
-      console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
-      CLI.killInteract(function() {
-        console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
-        return process.exit(cst.SUCCESS_EXIT);
+function interact(secret_key, public_key, machine) {
+  if (secret_key == 'stop' || secret_key == 'kill') {
+    console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
+    CLI.killInteract(function() {
+      console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
+      return process.exit(cst.SUCCESS_EXIT);
       });
       return false;
     }
@@ -350,7 +348,14 @@ commander.command('interact [secret_key|command] [public_key] [machine_name]')
       return process.exit(cst.ERROR_EXIT);
     }
     return CLI.interact(secret_key, public_key, machine);
-  });
+}
+commander.command('interact [secret_key|command] [public_key] [machine_name]')
+  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .action(interact);
+
+commander.command('link [secret_key|command] [public_key] [machine_name]')
+  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .action(interact);
 
 //
 // Web interface
