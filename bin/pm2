@@ -335,7 +335,10 @@ function interact(secret_key, public_key, machine) {
       CLI.killInteract(function() {
         try {
           fs.unlinkSync(cst.INTERACTION_CONF);
-        } catch(e) { console.log(e.stack) }
+        } catch(e) {
+          console.log(chalk.cyan('[Keymetrics.io]') + ' No interaction config file found');
+          return process.exit(cst.SUCCESS_EXIT);
+        }
         console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
         return process.exit(cst.SUCCESS_EXIT);
       });
