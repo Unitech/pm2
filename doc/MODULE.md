@@ -3,7 +3,7 @@
 
 A PM2 module is basically a NPM module. But this time it's not a library, but a process that will be run with PM2.
 
-Internally it embed the NPM install procedure. So a PM2 module will be published to NPM and installed from NPM.
+Internally it embeds the NPM install procedure. So a PM2 module will be published to NPM and installed from NPM.
 
 ![Process listing](https://github.com/unitech/pm2/raw/poc-plugin/pres/pm2-module.png)
 
