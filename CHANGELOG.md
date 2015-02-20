@@ -1,11 +1,16 @@
 
-# 1.0
+# 1.0.0
 
 - Plugin system (pm2 install module / pm2 uninstall module)
 - Configuration system (pm2 set <key> <value> / pm2 unset <key>)
 - New colors for grid list
 - Separation between modules and applications when listing
 - Enhancement of startJson command (force_name and additional_env options)
+- Fix #990 : pm2 flush while pm2 logs was open bug
+- Fix #1002 : pm2 monit bug
+- Fix #1024 : enhancement
+- Fix #1011 : json-stringify-safe bug
+- Fix #1007 #1028 #1013 #1009 : pm2 desc bug
 
 # 0.12.5
 
