@@ -11,6 +11,7 @@
 - Fix #1024 : enhancement
 - Fix #1011 : json-stringify-safe bug
 - Fix #1007 #1028 #1013 #1009 : pm2 desc bug
+- Fix : pm2 interact delete when file doesn't exist bug
 
 # 0.12.5
 
