@@ -1,5 +1,5 @@
 
-# 1.0.0
+# 0.12.6
 
 - Plugin system (pm2 install module / pm2 uninstall module)
 - Configuration system (pm2 set <key> <value> / pm2 unset <key>)
