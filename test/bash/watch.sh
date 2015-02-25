@@ -13,7 +13,7 @@ function waituntil {
   echo ""
 }
 
-echo -e "\033[1mRunning tests:\033[0m"
+echo -e "\033[1mWatcher tests:\033[0m"
 
 #####################
 # Watch for changes #
