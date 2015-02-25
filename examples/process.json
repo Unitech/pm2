@@ -5,7 +5,7 @@
     "instances"          : 0,
     "log_date_format"    : "YYYY-MM-DD HH:mm Z",
     "max_memory_restart" : "160",
-    "merge_logs"         : true,
+    "merge_logs"         : false,
     "name"               : "hapi_playground",
     "script"             : "child.js",
     "cwd"                : "examples",
