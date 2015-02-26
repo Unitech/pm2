@@ -43,6 +43,7 @@ commander.version(pkg.version)
   .option('--watch', 'watch application folder for changes')
   .option('--ignore-watch <folders|files>', 'folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules \"some scripts\""')
   .option('--node-args <node_args>', 'space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"')
+  .option('--no-treekill', 'Don\'t kill child processes when killing the parent - e.g. spawn detached process')
   .option('--no-color', 'skip colors')
   .usage('[cmd] app');
 
