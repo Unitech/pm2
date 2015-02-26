@@ -229,6 +229,7 @@ Options:
    --watch                              watch application folder for changes
    --ignore-watch <folders|files>       folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules "some scripts""
    --node-args <node_args>              space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
+   --treekill                           Kill detached processes when stopping, default behavior is to kill only direct childrens
    --no-color                           skip colors
 ```
 
@@ -353,6 +354,9 @@ The completely definitions:
   },
   "force": {
     "type": "boolean"
+  },
+  "treekill": {
+    "type": "boolean" 
   }
 }
 ```

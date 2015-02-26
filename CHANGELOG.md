@@ -1,3 +1,5 @@
+# future
+- Fix #1036 : don't kill detached processes, an option has been added to keep the old behavior
 
 # 0.12.6
 
