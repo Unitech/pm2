@@ -14,14 +14,18 @@ cleanup() {
   rm childrens.log childrensdetached.log
 }
 
+writelogs() {
+  echo "Some logs" >> childrens.log
+  echo "Some logs" >> childrensdetached.log
+}
+
 ###############
 $pm2 kill
 
 echo "Starting and stoping a process which has child"
 echo "We're testing that childs are beeing killed even detached"
 
-echo "Some logs" >> childrens.log
-echo "Some logs" >> childrensdetached.log
+writelogs
 
 $pm2 start childrens.js
 
@@ -39,19 +43,21 @@ fi
 
 OUT=`ps -ef|grep 'tail -F ./childrensdetached.log'|grep -v grep|wc -l`
 
-if [ $OUT -eq 0 ]
+if [ $OUT -eq 1 ]
 then
-    success "We killed the child process"
+    success "We didn't killed the detached child process"
 else
     cleanup
-    fail "Failed to kill the child process"
+    fail "Failed not to kill the detached child process"
 fi
 
 $pm2 kill
+cleanup
+writelogs
 
-echo "Now let's enable --no-treekill"
+echo "Now let's enable --treekill to kill detached child too"
 
-$pm2 start childrens.js --no-treekill
+$pm2 start childrens.js --treekill
 
 $pm2 stop childrens.js
 
@@ -68,12 +74,12 @@ fi
 
 OUT=`ps -ef|grep 'tail -F ./childrensdetached.log'|grep -v grep|wc -l`
 
-if [ $OUT -eq 1 ]
+if [ $OUT -eq 0 ]
 then
-    success "We didn't killed the child process"
+    success "We killed the detached child process!"
 else
     cleanup
-    fail "Failed not to kill the child process"
+    fail "Failed kill the detached child process"
 fi
 
 cleanup
