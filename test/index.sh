@@ -39,6 +39,8 @@ mocha ./test/programmatic/programmatic.js
 spec "Programmatic test"
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
+mocha ./test/programmatic/configuration.mocha.js
+spec "Configuration system working"
 
 mocha ./test/interface/interactor.daemonizer.mocha.js
 spec "Remote interactor keys save verification"
@@ -49,4 +51,7 @@ spec "Protocol communication test"
 mocha ./test/interface/bus.fork.spec.mocha.js
 spec "Protocol communication test"
 
-echo "########## PROGRAMMATIC TEST DONE #########"
+echo "   ______  ________________________"
+echo "  / __/ / / / ___/ ___/ __/ __/ __/"
+echo " _\ \/ /_/ / /__/ /__/ _/_\ \_\ \  "
+echo "/___/\____/\___/\___/___/___/___/  "

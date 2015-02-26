@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.3",
+  "version": "0.12.6",
   "engines": {
     "node": ">=0.10"
   },
@@ -144,19 +144,19 @@
     "async"               : "~0.9.0",
     "chalk"               : "~0.5.1",
     "chokidar"            : "~0.12.0",
-    "cli-table"           : "0.3.0",
+    "cli-table"           : "0.3.1",
     "coffee-script"       : "1.8.0",
-    "colors"              : "0.6.2",
-    "commander"           : "2.4.0",
+    "colors"              : "1.0.3",
+    "commander"           : "2.6.0",
     "cron"                : "1.0.5",
     "debug"               : "2.1.0",
     "eventemitter2"       : "0.4.14",
     "json-stringify-safe" : "5.0.0",
-    "moment"              : "~2.8.3",
-    "nssocket"            : "0.5.1",
-    "pidusage"            : "0.1.0",
+    "moment"              : "2.9.0",
+    "nssocket"            : "0.5.3",
+    "pidusage"            : "0.1.1",
 
-    "axm"                 : "~0.2.*",
+    "pmx"                 : "latest",
     "vizion"              : "latest",
     "observe-js"          : "^0.4.2",
 
@@ -166,7 +166,6 @@
     "pm2-multimeter"      : "0.1.2",
     "pm2-rpc-fallback"    : "3.0.9",
 
-    "punt"                : "2.2.0",
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3"
   },

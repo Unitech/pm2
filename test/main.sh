@@ -48,7 +48,9 @@ spec "Second hard cli tests"
 bash ./test/bash/misc.sh
 spec "MISC features"
 bash ./test/bash/fork.sh
-spec "Fork verified"
+spec "Fork system working"
+bash ./test/bash/get_set.sh
+spec "Configuration system working"
 bash ./test/bash/infinite_loop.sh
 spec "Infinite loop stop"
 bash ./test/bash/env-refresh.sh
@@ -61,6 +63,8 @@ bash ./test/bash/binary.sh
 spec "binary test"
 bash ./test/bash/log-entire.sh
 spec "merge stdout && stderr"
+bash ./test/bash/module.sh
+spec "module system"
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
@@ -69,5 +73,10 @@ spec "Starting a process inside a PM2 process"
 #     bash ./test/bash/pull.sh
 #     spec "Testing pull/forward/backward CLI commands"
 # fi
+
+echo "   ______  ________________________"
+echo "  / __/ / / / ___/ ___/ __/ __/ __/"
+echo " _\ \/ /_/ / /__/ /__/ _/_\ \_\ \  "
+echo "/___/\____/\___/\___/___/___/___/  "
 
 $pm2 kill

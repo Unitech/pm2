@@ -29,6 +29,10 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [JSON app declaration](#a10)
   - [Schema](#a988)
 
+### Windows specifics
+
+- [Windows](#windows)
+
 ### Deployment - ecosystem.json
 
 - [Getting started with deployment](#deployment)
@@ -83,8 +87,6 @@ If the above fails use:
 ```bash
 $ npm install git://github.com/Unitech/pm2#master -g
 ```
-
-We recommend Node.JS 0.11.14 for handling the cluster_mode (if you add the -i options to enable scaling and reload).
 
 <a name="a2"/>
 ## Usage
@@ -306,6 +308,9 @@ The completely definitions:
       "array",
       "string"
     ]
+  },
+  "watch_options": {
+    "type": "object"
   },
   "env": {
     "type": ["object", "string"]
@@ -731,7 +736,7 @@ $ pm2 startup
 # auto-detect platform
 $ pm2 startup [platform]
 # render startup-script for a specific platform, the [platform] could be one of:
-#   ubuntu|centos|redhat|gentoo|systemd|darwin
+#   ubuntu|centos|redhat|gentoo|systemd|darwin|amazon
 ```
 
 Once you have started the apps and want to keep them on server reboot do:
@@ -801,7 +806,24 @@ To watch specific paths, please use a JSON app declaration, `watch` can take a s
 ```json
 {
   "watch": ["server", "client"],
-  "ignore_watch" : ["node_modules", "client/img"]
+  "ignore_watch" : ["node_modules", "client/img"],
+  "watch_options": {
+    "followSymlinks": false
+  }
+}
+```
+
+As specified in the [Schema](#a988):
+- `watch` can be a boolean, an array of paths or a string representing a path. Default to `false`
+- `ignore_watch` can be an array of paths or a string, it'll be interpreted by [chokidar](https://github.com/paulmillr/chokidar#path-filtering) as a glob or a regular expression.
+- `watch_options` is an object that will replace options given to chokidar. Please refer to [chokidar documentation](https://github.com/paulmillr/chokidar#api) for the definition.
+
+PM2 is giving chokidar these Default options:
+
+```
+var watch_options = {
+  persistent    : true,
+  ignoreInitial : true
 }
 ```
 
@@ -882,7 +904,7 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
 [{
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
-  "args"             : ["--toto=heya coco", "-d", "1"]",
+  "args"             : ["--toto=heya coco", "-d", "1"],
   "script"           : "bin/app.js",
   "node_args"        : ["--harmony", " --max-stack-size=102400000"],
   "log_date_format"  : "YYYY-MM-DD HH:mm Z",
@@ -905,6 +927,18 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   }
 }]
 ```
+
+<a name="windows"/>
+# Windows
+
+Make sure you have tail.exe in your path, confirm using "where"
+
+```
+C:\>where tail
+C:\Program Files (x86)\Git\bin\tail.exe
+```
+
+Tail can be found as part of [Git](https://msysgit.github.io/), Cygwin and MingW packages. Tail needs to be able to support "-f" and "-n" options.
 
 <a name="deployment"/>
 # Deployment

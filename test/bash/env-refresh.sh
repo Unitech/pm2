@@ -42,7 +42,7 @@ $pm2 restart env-refreshed.json
 >out-env.log
 
 sleep 0.5
-grep "HEYYYY" out-env.log &> /dev/null
+grep '{"HEYYYY":true}' out-env.log &> /dev/null
 spec "should contain refreshed env variable via json"
 
 

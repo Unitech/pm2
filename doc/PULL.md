@@ -44,7 +44,7 @@ Your file should look something like this :
   [
     {
       "exec_interpreter"   : "node",
-      "exec_mode"          : "cluser_mode",
+      "exec_mode"          : "cluster_mode",
       "instances"          : "max",
       "name"               : "my_app",
       "script"             : "app.js",

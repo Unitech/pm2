@@ -1,6 +1,6 @@
 
 
-var axm = require('axm');
+var axm = require('pmx');
 axm.http();
 
 var probe = axm.probe();

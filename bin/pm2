@@ -279,26 +279,51 @@ commander.command('ping')
 commander.command('updatePM2')
   .description('update in-memory PM2 with local PM2')
   .action(function() {
-    CLI.updatePM2()
+    CLI.updatePM2();
   });
 
 commander.command('update')
   .description('(alias) update in-memory PM2 with local PM2')
   .action(function() {
-    CLI.updatePM2()
+    CLI.updatePM2();
   });
+
+/**
+ * Module specifics
+ */
+commander.command('install <module|git:// url>')
+  .description('install or update a module and run it forever')
+  .action(function(plugin_name) {
+    CLI.install(plugin_name);
+  });
+
+commander.command('uninstall <module>')
+  .description('stop and uninstall a module')
+  .action(function(plugin_name) {
+    CLI.uninstall(plugin_name);
+  });
+
+commander.command('publish')
+  .description('Publish the module you are currently on')
+  .action(CLI.publish);
+
+commander.command('set')
+  .description('sets the specified config <key> <value>')
+  .action(CLI.set);
+
+commander.command('unset')
+  .description('clears the specified config <key>')
+  .action(CLI.unset);
 
 //
 // Interact
 //
-commander.command('interact [secret_key|command] [public_key] [machine_name]')
-  .description('agent actions for keymetrics.io - command can be stop|info|delete|restart')
-  .action(function(secret_key, public_key, machine) {
-    if (secret_key == 'stop' || secret_key == 'kill') {
-      console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
-      CLI.killInteract(function() {
-        console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
-        return process.exit(cst.SUCCESS_EXIT);
+function interact(secret_key, public_key, machine) {
+  if (secret_key == 'stop' || secret_key == 'kill') {
+    console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
+    CLI.killInteract(function() {
+      console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
+      return process.exit(cst.SUCCESS_EXIT);
       });
       return false;
     }
@@ -310,7 +335,10 @@ commander.command('interact [secret_key|command] [public_key] [machine_name]')
       CLI.killInteract(function() {
         try {
           fs.unlinkSync(cst.INTERACTION_CONF);
-        } catch(e) { console.log(e.stack) }
+        } catch(e) {
+          console.log(chalk.cyan('[Keymetrics.io]') + ' No interaction config file found');
+          return process.exit(cst.SUCCESS_EXIT);
+        }
         console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
         return process.exit(cst.SUCCESS_EXIT);
       });
@@ -323,7 +351,14 @@ commander.command('interact [secret_key|command] [public_key] [machine_name]')
       return process.exit(cst.ERROR_EXIT);
     }
     return CLI.interact(secret_key, public_key, machine);
-  });
+}
+commander.command('interact [secret_key|command] [public_key] [machine_name]')
+  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .action(interact);
+
+commander.command('link [secret_key|command] [public_key] [machine_name]')
+  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .action(interact);
 
 //
 // Web interface
@@ -366,7 +401,7 @@ commander.command('resurrect')
 // Set pm2 to startup
 //
 commander.command('startup [platform]')
-  .description('auto resurrect process at startup. [platform] = ubuntu, centos, gentoo or systemd')
+  .description('auto resurrect process at startup. [platform] = ubuntu, centos, redhat, gentoo, systemd, darwin, amazon')
   .action(function(_platform, cmd) {
     CLI.startup(_platform || platform, commander);
   });

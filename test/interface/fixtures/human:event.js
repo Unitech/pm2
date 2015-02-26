@@ -1,5 +1,5 @@
 
-var axm = require('axm');
+var axm = require('pmx');
 
 setInterval(function() {
   axm.emit('content:page:created', {

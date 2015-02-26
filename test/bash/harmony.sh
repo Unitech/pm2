@@ -8,16 +8,6 @@ $pm2 kill
 
 echo "################ HARMONY ES6"
 
-NODE_VER=`node -v`
-if [ "$NODE_VER" != "v0.11.15" ]; then
-  $pm2 start harmony.js
-  sleep 2
-  $pm2 list
-  should 'should FAIL when not passing harmony option to V8' 'restart_time: 0' 0
-  $pm2 list
-  $pm2 delete all
-fi
-
 $pm2 start harmony.js --node-args="--harmony"
 sleep 2
 $pm2 list

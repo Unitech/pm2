@@ -208,7 +208,9 @@ $pm2 stop all
 spec "Should stop all processes"
 
 sleep 0.5
-OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
+$pm2 prettylist > /tmp/tmp_out.txt
+OUT=`cat /tmp/tmp_out.txt | grep -o "stopped" | wc -l`
+echo $OUT
 [ $OUT -eq 8 ] || fail "Process not stopped"
 success "Process succesfully stopped"
 
@@ -242,7 +244,8 @@ $pm2 resurrect
 spec "Should resurrect all apps"
 
 sleep 0.5
-OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
+$pm2 prettylist > /tmp/tmp_out.txt
+OUT=`cat /tmp/tmp_out.txt | grep -o "restart_time" | wc -l`
 [ $OUT -eq 8 ] || fail "Not valid process number"
 success "Processes valid"
 

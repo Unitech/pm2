@@ -1,12 +1,14 @@
 
-var axm = require('axm');
+var axm = require('pmx');
 axm.http();
 
 var http = require('http');
 
 http.createServer(function(req, res) {
   res.writeHead(200);
-  res.end('transaction');
+  setTimeout(function() {
+    res.end('transaction');
+  }, 1000);
 }).listen(9010);
 
 setInterval(function() {

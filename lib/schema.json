@@ -76,6 +76,9 @@
       "string"
     ]
   },
+  "watch_options": {
+    "type": "object"
+  },
   "env": {
     "type": ["object", "string"]
   },
