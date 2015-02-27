@@ -1,3 +1,7 @@
+# Next release
+
+- Fix #929 #1043
+- Fix #1039 : Better algorithm for vision recursive parsing to avoid infinite loops
 
 # 0.12.6
 
