@@ -1,6 +1,7 @@
-# Next release
+# 0.12.7
 
-- Fix #929 #1043 : Bug pm2 stop doesn't stop the process, instead it restarts
+- pm2 logs : Now shows merged logs
+- Fix #929 #1043 : Bug pm2 stop/restart not working properly
 - Fix #1039 : Better algorithm for vision recursive parsing to avoid infinite loops
 
 # 0.12.6
