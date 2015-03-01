@@ -35,8 +35,6 @@ console.log(process.env.pmx_timeout);
 
 ## Writing a module
 
-**THE API IS STILL UNDER INSPECTION**
-
 A module is a classic NPM module that contains at least these files:
 - **package.json** with all dependencies needed to run this module and the app to be run
 - **index.js** a script that init the module and do whatever you need
@@ -77,33 +75,33 @@ process.env.MODULE_DEBUG = true;
   [...]
 ```
 
+> If this is not present in the package.json it will try to get the first binary (bin attr), if it's not present it will start the file declared as the index.js else it will fail.
+
 - Here is a boilerplate for the main file that will be runned:
 
 ```javascript
 var pmx     = require('pmx');
 
 // Load confjs file and init module as PM2 module
-var conf    = pmx.loadConfig();
+var conf    = pmx.initModule();
 ```
 
-**internals.pid** allows you to monitor a specific PID instead of the PID of the current process.
+An object can be passed to initModule:
 
-**internals.errors|latency|versioning|show_module_meta** allows you to show or hide panel in the keymetrics dashboard.
-
-**internals.name|comment** allows you to display some metadata in keymetrics
+```json
+{
+    errors           : false,
+    latency          : false,
+    versioning       : false,
+    show_module_meta : false
+    pid              : pid_number (overidde pid to monitor // use pmx.getPID(FILE)),
+    comment          : string (comment to be displayed in dashboard)
+}
+```
 
 ## Internals
 
 ### Start
 
 1- When a plugin is installed, it does an npm install and move it to .pm2/node_modules/module-name
-1- Then the package.json is started with watch option, forced name (= name folder) and started as module
-
 -> pm2_env.pmx_module flag is set to true. Allows to differenciate it from other classic processes
-
-### loadConfig()
-
-1- send conf.internals to PM2 with msg type axm:option:configuration
-1- Attach this data to pm2_env.axm_options
-
-1- pm2_env.axm_options for the values of the probes
