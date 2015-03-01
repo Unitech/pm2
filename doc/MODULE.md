@@ -10,28 +10,19 @@ Internally it embeds the NPM install procedure. So a PM2 module will be publishe
 ## Basics
 
 ```bash
-$ pm2 install module-probe
-$ pm2 uninstall module-probe
+$ pm2 install npm-module
+$ pm2 uninstall npm-module
 ```
 
-## Configuration
+Npm module can be a published npm package but can also be:
 
-```bash
-$ pm2 set <key> <value>
-$ pm2 unset <key>
-```
-
-The key will become an environment variable accesible inside the module
-
-E.g.
-
-```bash
-$ pm2 set pmx_timeout value
-```
-
-```javascript
-console.log(process.env.pmx_timeout);
-```
+npm install <tarball file>
+npm install <tarball url>
+npm install <folder>
+npm install [@<scope>/]<name>
+npm install [@<scope>/]<name>@<tag>
+npm install [@<scope>/]<name>@<version>
+npm install [@<scope>/]<name>@<version range>
 
 ## Writing a module
 
@@ -98,6 +89,35 @@ An object can be passed to initModule:
     comment          : string (comment to be displayed in dashboard)
 }
 ```
+
+## Configuration
+
+```bash
+$ pm2 set <npm-module.key> <value>
+$ pm2 unset <npm-module.key>
+```
+
+The key will become an environment variable accessible inside the module or via the object returned by `pmx.initModule()`.
+
+Example:
+
+```bash
+$ pm2 set server-monitoring.security true
+```
+
+Once you start the module called 'server-monitoring' you will be able to access to these custom variables:
+
+```javascript
+console.log(process.env.security);
+
+// Or
+
+var conf = pmx.initModule();
+
+console.log(conf.security);
+```
+
+**NOTE** These variables are written in `~/.pm2/module_conf.json`, so if you prefer, you can directly edit these variables in this file.
 
 ## Internals
 
