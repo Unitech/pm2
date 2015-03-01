@@ -307,11 +307,11 @@ commander.command('publish')
   .description('Publish the module you are currently on')
   .action(CLI.publish);
 
-commander.command('set')
+commander.command('set <key> <value>')
   .description('sets the specified config <key> <value>')
   .action(CLI.set);
 
-commander.command('unset')
+commander.command('unset <key>')
   .description('clears the specified config <key>')
   .action(CLI.unset);
 
