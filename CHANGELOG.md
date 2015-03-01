@@ -1,10 +1,11 @@
+# 0.12.7
 
-# 1.0.0
+- pm2 logs : Now shows merged logs
+- Fix #929 #1043 : Bug pm2 stop/restart not working properly
+- Fix #1039 : Better algorithm for vision recursive parsing to avoid infinite loops
 
-- Plugin system (pm2 install module / pm2 uninstall module)
-- Configuration system (pm2 set <key> <value> / pm2 unset <key>)
-- New colors for grid list
-- Separation between modules and applications when listing
+# 0.12.6
+
 - Enhancement of startJson command (force_name and additional_env options)
 - Fix #990 : pm2 flush while pm2 logs was open bug
 - Fix #1002 : pm2 monit bug
