@@ -102,7 +102,7 @@ The key will become an environment variable accessible inside the module or via 
 Example:
 
 ```bash
-$ pm2 set server-monitoring.security true
+$ pm2 set 'server-monitoring.security' true
 ```
 
 Once you start the module called 'server-monitoring' you will be able to access to these custom variables:
