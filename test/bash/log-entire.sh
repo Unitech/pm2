@@ -17,7 +17,7 @@ function test_dir {
   echo "$result"
 }
 function test {
-  sleep 1.5
+  sleep 3
 
   out_file=$(test_dir "out")
   err_file=$(test_dir "err")
