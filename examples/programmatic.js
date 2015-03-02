@@ -1,18 +1,40 @@
-var pm2 = require('../');
 
-// Connect or launch PM2
-pm2.connect(function(err) {
+var pm2 = require('..');
 
-  // Start a script on the current folder
-  pm2.start('./test/fixtures/server.js', { name: 'test' }, function(err, proc) {
-    if (err) throw new Error('err');
+pm2.connect(function() {
 
-    // Get all processes running
-    pm2.list(function(err, process_list) {
-      console.log(process_list);
+  pm2.start('echo.js', function() {
 
-      // Disconnect to PM2
-      pm2.disconnect(function() { process.exit(0) });
-    });
+    setInterval(function() {
+      pm2.restart('echo', function() {
+      });
+    }, 2000);
+
   });
-})
+
+
+});
+
+pm2.launchBus(function(err, bus) {
+  console.log('connected', bus);
+
+  bus.on('log:out', function(data) {
+    if (data.process.name == 'echo')
+      console.log(arguments);
+  });
+
+  bus.on('reconnect attempt', function() {
+    console.log('Bus reconnecting');
+  });
+
+  bus.on('close', function() {
+    console.log('Bus closed');
+  });
+
+});
+
+/**
+ * Exiting
+ */
+//pm2.disconnectBus(); // For Bus system
+//pm2.disconnect();    // For RPC connection
