@@ -11,6 +11,18 @@ echo "################## RELOAD ###################"
 $pm2 kill
 
 echo "Reloading"
+
+$pm2 start delayed_exit.js
+should 'should start processes' 'online' 1
+$pm2 stop delayed_exit.js
+sleep 3
+should 'should stop processes' 'stopped' 1
+$pm2 restart delayed_exit.js
+should 'should restart processes' 'restart_time: 0' 1
+$pm2 restart delayed_exit.js
+should 'should restart processes' 'restart_time: 1' 1
+$pm2 kill
+
 $pm2 start child.js -i 4
 should 'should start processes' 'online' 4
 $pm2 restart all
