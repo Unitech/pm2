@@ -110,11 +110,12 @@ To save a process list just do:
 $ pm2 save
 ```
 
-## Monitoring dashboard
+## Keymetrics monitoring
 
-![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
+![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)
 
-We are working on Keymetrics, a monitoring SaaS for PM2. It's still in beta, feel free to give it a try:
+If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps accross servers.
+Feel fry to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.keymetrics.io/#/register)
 
