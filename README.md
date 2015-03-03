@@ -1,15 +1,14 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
-
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
-PM2 is constantly assailed by [more than 300 tests](https://travis-ci.org/Unitech/PM2).
+PM2 is constantly assailed by [more than 400 tests](https://travis-ci.org/Unitech/PM2).
 
 Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
 Compatible with CoffeeScript.
-Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
+Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)[![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)[![Inline docs](http://inch-ci.org/github/unitech/pm2.svg?branch=master)](http://inch-ci.org/github/unitech/pm2)
+[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2)[![Gitter](https://badges.gitter.im/Join Chat.svg)] (https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2) [![Inline docs](http://inch-ci.org/github/unitech/pm2.svg?branch=master)](http://inch-ci.org/github/unitech/pm2)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
@@ -145,7 +144,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## License
 
-Files in `lib/` are made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
-Except the file `lib/CLI.js` who is made under the terms of the Apache V2 license.
+PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
+For other license [contact us](https://keymetrics.io/contact/).
 
 [![Analytics](https://ga-beacon.appspot.com/UA-51734350-4/Unitech/pm2?pixel)](https://github.com/Unitech/pm2)
