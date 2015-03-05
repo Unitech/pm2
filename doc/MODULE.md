@@ -93,8 +93,8 @@ An object can be passed to initModule:
 ## Configuration
 
 ```bash
-$ pm2 set <npm-module.key> <value>
-$ pm2 unset <npm-module.key>
+$ pm2 set module:option_name <value>
+$ pm2 unset module:option_name
 ```
 
 The key will become an environment variable accessible inside the module or via the object returned by `pmx.initModule()`.
@@ -102,22 +102,19 @@ The key will become an environment variable accessible inside the module or via 
 Example:
 
 ```bash
-$ pm2 set 'server-monitoring.security' true
+$ pm2 set server-monitoring:security true
 ```
 
 Once you start the module called 'server-monitoring' you will be able to access to these custom variables:
 
 ```javascript
-console.log(process.env.security);
-
-// Or
-
 var conf = pmx.initModule();
 
 console.log(conf.security);
 ```
 
 **NOTE** These variables are written in `~/.pm2/module_conf.json`, so if you prefer, you can directly edit these variables in this file.
+**NOTE2** When you set a new value the target module is restarted
 
 ## Internals
 
