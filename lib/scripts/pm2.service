@@ -5,6 +5,7 @@ After=network.target remote-fs.target
 [Service]
 Type=forking
 User=%USER%
+PIDFile=%PIDFILE%
 
 ExecStart=%PM2_PATH% resurrect
 ExecReload=%PM2_PATH% reload all

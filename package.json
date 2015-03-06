@@ -166,7 +166,8 @@
     "pm2-multimeter"      : "0.1.2",
 
     "shelljs"             : "0.3.0",
-    "isbinaryfile"        : "^2.0.3"
+    "isbinaryfile"        : "^2.0.3",
+    "sync-exec"           : "*"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
