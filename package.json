@@ -167,7 +167,7 @@
 
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",
-    "sync-exec"           : "*"
+    "sync-exec"           : "*",
     "ini"                 : "*"
   },
   "devDependencies": {
