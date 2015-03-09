@@ -1,4 +1,4 @@
-{
+{ 
   "name": "pm2",
   "preferGlobal": "true",
   "version": "0.12.7",
