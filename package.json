@@ -168,6 +168,7 @@
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",
     "sync-exec"           : "*"
+    "ini"                 : "*"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
