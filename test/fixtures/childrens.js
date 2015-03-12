@@ -11,3 +11,6 @@ var a = spawn('tail', ['-F', './childrensdetached.log'], {detached: true, stdio:
 a.unref()
 var b = spawn('tail', ['-F', './childrens.log'])
 
+b.on('error', function(err) {
+  console.log(err)
+})
