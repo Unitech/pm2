@@ -1,6 +1,14 @@
 # future
 - Fix #1036 : don't kill detached processes, an option has been added to keep the old behavior
 
+# 0.12.7
+
+- pm2 logs : Now shows merged logs
+- Fix #929 #1043 : Bug pm2 stop/restart not working properly
+- Fix #1039 : Better algorithm for vision recursive parsing to avoid infinite loops
+- Automatize #858 #905: Directly init pm2 folder if not present when using it programmatically
+- Add Bus system from PM2 programmatic API
+
 # 0.12.6
 
 - Enhancement of startJson command (force_name and additional_env options)

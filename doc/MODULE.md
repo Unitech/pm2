@@ -1,7 +1,7 @@
 
 # Modules system
 
-A PM2 module is basically a NPM module. But this time it's not a library, but a process that will be run with PM2.
+A PM2 module is basically a NPM module. But this time it's not a library, but a process that will be runned with PM2.
 
 Internally it embeds the NPM install procedure. So a PM2 module will be published to NPM and installed from NPM.
 
@@ -10,32 +10,22 @@ Internally it embeds the NPM install procedure. So a PM2 module will be publishe
 ## Basics
 
 ```bash
-$ pm2 install module-probe
-$ pm2 uninstall module-probe
+$ pm2 install npm-module
+$ pm2 uninstall npm-module
+$ pm2 publish
 ```
 
-## Configuration
+Npm module can be a published npm package but can also be:
 
-```bash
-$ pm2 set <key> <value>
-$ pm2 unset <key>
-```
-
-The key will become an environment variable accesible inside the module
-
-E.g.
-
-```bash
-$ pm2 set pmx_timeout value
-```
-
-```javascript
-console.log(process.env.pmx_timeout);
-```
+npm install <tarball file>
+npm install <tarball url>
+npm install <folder>
+npm install [@<scope>/]<name>
+npm install [@<scope>/]<name>@<tag>
+npm install [@<scope>/]<name>@<version>
+npm install [@<scope>/]<name>@<version range>
 
 ## Writing a module
-
-**THE API IS STILL UNDER INSPECTION**
 
 A module is a classic NPM module that contains at least these files:
 - **package.json** with all dependencies needed to run this module and the app to be run
@@ -47,19 +37,21 @@ Publishing a module consist of doing:
 $ npm publish
 ```
 
+It will automatically increment the patch version and publish it to NPM.
+
 ## Development workflow
 
-A workflow is available to easily develop new modules:
+A workflow is available to easily develop new modules within the PM2 context
 
 ```bash
 $ pm2 install .
-$ pm2 logs
+$ pm2 logs .
 $ pm2 uninstall .
 ```
 
 - Every time an update is made the module will be automatically restarted
 - Use pm2 logs to see how your app behaves
-- To debug what is send to pm2 just set the variable
+- To debug what is send to pm2 just set the following variable:
 
 ```
 process.env.MODULE_DEBUG = true;
@@ -77,33 +69,54 @@ process.env.MODULE_DEBUG = true;
   [...]
 ```
 
+> If this is not present in the package.json it will try to get the first binary (bin attr), if it's not present it will start the file declared as the index.js else it will fail.
+
 - Here is a boilerplate for the main file that will be runned:
 
 ```javascript
 var pmx     = require('pmx');
 
 // Load confjs file and init module as PM2 module
-var conf    = pmx.loadConfig();
+var conf    = pmx.initModule();
 ```
 
-**internals.pid** allows you to monitor a specific PID instead of the PID of the current process.
+An object can be passed to initModule:
 
-**internals.errors|latency|versioning|show_module_meta** allows you to show or hide panel in the keymetrics dashboard.
+```json
+{
+    errors           : false,
+    latency          : false,
+    versioning       : false,
+    show_module_meta : false
+    pid              : pid_number (overidde pid to monitor // use pmx.getPID(FILE)),
+    comment          : string (comment to be displayed in dashboard)
+}
+```
 
-**internals.name|comment** allows you to display some metadata in keymetrics
+These variables are accessible in the front end of Keymetrics.
 
-## Internals
+## Configuration
 
-### Start
+```bash
+$ pm2 set module:option_name <value>
+$ pm2 unset module:option_name
+```
 
-1- When a plugin is installed, it does an npm install and move it to .pm2/node_modules/module-name
-1- Then the package.json is started with watch option, forced name (= name folder) and started as module
+The key will become an environment variable accessible inside the module or via the object returned by `pmx.initModule()`.
 
--> pm2_env.pmx_module flag is set to true. Allows to differenciate it from other classic processes
+Example:
 
-### loadConfig()
+```bash
+$ pm2 set server-monitoring:security true
+```
 
-1- send conf.internals to PM2 with msg type axm:option:configuration
-1- Attach this data to pm2_env.axm_options
+Once you start the module called 'server-monitoring' you will be able to access to these custom variables:
 
-1- pm2_env.axm_options for the values of the probes
+```javascript
+var conf = pmx.initModule();
+
+console.log(conf.security);
+```
+
+**NOTE** These variables are written in `~/.pm2/module_conf.json`, so if you prefer, you can directly edit these variables in this file.
+**NOTE2** When you set a new value the target module is restarted

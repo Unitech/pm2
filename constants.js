@@ -24,7 +24,7 @@ debug("PM2_ROOT_PATH: " + PM2_ROOT_PATH);
  */
 var csts = {
   PM2_CONF_FILE          : p.join(PM2_ROOT_PATH, 'conf.js'),
-  PM2_MODULE_CONF_FILE   : p.join(PM2_ROOT_PATH, 'module_env.json5'),
+  PM2_MODULE_CONF_FILE   : p.join(PM2_ROOT_PATH, 'module_conf.json'),
 
   CODE_UNCAUGHTEXCEPTION : 100,
   CONCURRENT_ACTIONS     : 1,
