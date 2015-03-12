@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.6",
+  "version": "0.12.7",
   "engines": {
     "node": ">=0.10"
   },
@@ -158,16 +158,15 @@
 
     "pmx"                 : "latest",
     "vizion"              : "latest",
-    "observe-js"          : "^0.4.2",
 
     "pm2-axon"            : "latest",
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "latest",
     "pm2-multimeter"      : "0.1.2",
-    "pm2-rpc-fallback"    : "3.0.9",
 
     "shelljs"             : "0.3.0",
-    "isbinaryfile"        : "^2.0.3"
+    "isbinaryfile"        : "^2.0.3",
+    "semver"              : "4.3.1"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
