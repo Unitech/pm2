@@ -6,9 +6,10 @@
 
 # 0.12.8 (Current Stabe)
 
-- Fix : #1091
 - Fix : `Channel closed error`
 - Fix : `Resource leak error`
+- Fix#1091 : when passing a wrong formated number to `-i` infinite loop
+- Fix #1068 #1096 : restart fails after reloadLogs()
 - New : When PM2 is being killed, all restarts are blocked to avoid conflict
 - New : PM2 dumps the process list before exiting if it is killed by signal
 - Refactored stop/restart for better stability
