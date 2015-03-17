@@ -536,8 +536,8 @@ commander.command('logs [id|name]')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
     var line = 20;
-    if(typeof cmd.lines == 'number'){
-      line = cmd.lines;
+    if(!isNaN(cmd.lines)){
+      line = parseInt(cmd.lines);
     }
     CLI.streamLogs(id, line);
   });

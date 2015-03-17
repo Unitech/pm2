@@ -84,4 +84,30 @@ describe('Configuration via SET / GET tests', function() {
 
   });
 
+  describe('Sub value system with :', function() {
+    it('should set a sub key', function(done) {
+      Configuration.set('module-name2:var1', 'val1', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should set a second sub key', function(done) {
+      Configuration.set('module-name2:var2', 'val2', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get the val', function(done) {
+      Configuration.getAll(function(err, data) {
+        should(err).not.exists;
+        data['module-name2']['var1'].should.eql('val1');
+        data['module-name2']['var2'].should.eql('val2');
+        done();
+      });
+    });
+
+  });
+
 });
