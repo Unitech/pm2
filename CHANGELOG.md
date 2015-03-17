@@ -1,3 +1,10 @@
+# 0.12.8
+
+- Fix `Channel closed error`
+- Fix `Resource leak error`
+- Refactored stop/restart for better stability
+
+
 # 0.12.7
 
 - pm2 logs : Now shows merged logs
