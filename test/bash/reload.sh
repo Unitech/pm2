@@ -20,6 +20,7 @@ should 'should stop processes' 'stopped' 1
 $pm2 restart delayed_exit.js
 should 'should restart processes' 'restart_time: 0' 1
 $pm2 restart delayed_exit.js
+sleep 3
 should 'should restart processes' 'restart_time: 1' 1
 $pm2 kill
 
