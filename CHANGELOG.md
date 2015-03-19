@@ -3,6 +3,7 @@
 - `--no-vizion` flag : starts an app completely without vizion features
 - `--no-restart` flag : starts PM2 without automatic restart feature
 - dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
+- Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
 
 # 0.12.8 (Current Stabe)
 
