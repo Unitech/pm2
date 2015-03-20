@@ -3,7 +3,10 @@
 - `--no-vizion` flag : starts an app completely without vizion features
 - `--no-restart` flag : starts PM2 without automatic restart feature
 - dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
+
 - Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
+- Fix #1111 : More verbosity on writeFileSync errors
+- New env setting: PM2_KILL_TIMEOUT (ms) : time to wait before a process is considered dead
 
 # 0.12.8 (Current Stabe)
 
