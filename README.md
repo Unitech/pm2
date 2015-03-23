@@ -115,7 +115,7 @@ $ pm2 save
 ![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)
 
 If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps accross servers.
-Feel fry to try it:
+Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.keymetrics.io/#/register)
 
