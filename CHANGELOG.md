@@ -7,8 +7,10 @@
 - Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
 - Fix #1111 : More verbosity on writeFileSync errors
 - New env setting: PM2_KILL_TIMEOUT (ms) : time to wait before a process is considered dead
+- New env setting: PM2_CONCURRENT_ACTIONS : use it with care, value >1 is considered instable
+- Refactored reload/gracefulReload for better stability
 
-# 0.12.8 (Current Stabe)
+# 0.12.8 (Current Stable)
 
 - Fix : `Channel closed error`
 - Fix : `Resource leak error`
