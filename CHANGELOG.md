@@ -4,7 +4,7 @@
 - `--no-restart` flag : starts PM2 without automatic restart feature
 - dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
 
-# 0.12.8 (Current Stabe)
+# 0.12.8 (Current Stable)
 
 - Fix : `Channel closed error`
 - Fix : `Resource leak error`
