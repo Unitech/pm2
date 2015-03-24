@@ -4,13 +4,16 @@
 - `--no-restart` flag : starts PM2 without automatic restart feature
 - dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
 
+# 0.12.9 (Current Stable)
+
+- Fix #1119 : Safe params so cli-table won't fail
 - Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
 - Fix #1111 : More verbosity on writeFileSync errors
 - New env setting: PM2_KILL_TIMEOUT (ms) : time to wait before a process is considered dead
 - New env setting: PM2_CONCURRENT_ACTIONS : use it with care, value >1 is considered instable
 - Refactored reload/gracefulReload for better stability
 
-# 0.12.8 (Current Stable)
+# 0.12.8
 
 - Fix : `Channel closed error`
 - Fix : `Resource leak error`
