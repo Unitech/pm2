@@ -27,7 +27,6 @@ var csts = {
   PM2_MODULE_CONF_FILE   : p.join(PM2_ROOT_PATH, 'module_conf.json'),
 
   CODE_UNCAUGHTEXCEPTION : 100,
-  CONCURRENT_ACTIONS     : 1,
   PREFIX_MSG             : chalk.green('[PM2] '),
   PREFIX_MSG_ERR         : chalk.red('[PM2][ERROR] '),
   PREFIX_MSG_MOD         : chalk.green('[PM2][Module] '),

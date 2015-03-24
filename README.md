@@ -10,6 +10,7 @@ Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
 [![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Gitter](https://badges.gitter.im/Join Chat.svg)] (https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2) [![Inline docs](http://inch-ci.org/github/unitech/pm2.svg?branch=master)](http://inch-ci.org/github/unitech/pm2)
 
+
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
 ## Install PM2
@@ -114,7 +115,7 @@ $ pm2 save
 ![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)
 
 If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps accross servers.
-Feel fry to try it:
+Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.keymetrics.io/#/register)
 

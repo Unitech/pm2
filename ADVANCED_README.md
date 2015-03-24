@@ -1252,6 +1252,7 @@ PM2_BIND_ADDR
 PM2_API_PORT
 PM2_GRACEFUL_TIMEOUT
 PM2_MODIFY_REQUIRE
+PM2_KILL_TIMEOUT
 ```
 
 ## API health endpoint
@@ -1454,7 +1455,7 @@ Don't use the *cluster_mode* via -i option.
 <a name="a20"/>
 ## External resources and articles
 
-- [Goodbye node-forever, hello pm2](http://devo.ps/blog/2013/06/26/goodbye-node-forever-hello-pm2.html)
+- [Goodbye node-forever, hello pm2](http://devo.ps/blog/goodbye-node-forever-hello-pm2/)
 - [https://serversforhackers.com/editions/2014/11/04/pm2/](https://serversforhackers.com/editions/2014/11/04/pm2/)
 - http://www.allaboutghost.com/keep-ghost-running-with-pm2/
 - http://blog.ponyfoo.com/2013/09/19/deploying-node-apps-to-aws-using-grunt

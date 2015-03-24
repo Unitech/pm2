@@ -1,7 +1,7 @@
 
 # Modules system
 
-A PM2 module is basically a NPM module. But this time it's not a library, but a process that will be run with PM2.
+A PM2 module is basically a NPM module. But this time it's not a library, but a process that will be runned with PM2.
 
 Internally it embeds the NPM install procedure. So a PM2 module will be published to NPM and installed from NPM.
 
@@ -12,6 +12,7 @@ Internally it embeds the NPM install procedure. So a PM2 module will be publishe
 ```bash
 $ pm2 install npm-module
 $ pm2 uninstall npm-module
+$ pm2 publish
 ```
 
 Npm module can be a published npm package but can also be:
@@ -36,19 +37,21 @@ Publishing a module consist of doing:
 $ npm publish
 ```
 
+It will automatically increment the patch version and publish it to NPM.
+
 ## Development workflow
 
-A workflow is available to easily develop new modules:
+A workflow is available to easily develop new modules within the PM2 context
 
 ```bash
 $ pm2 install .
-$ pm2 logs
+$ pm2 logs .
 $ pm2 uninstall .
 ```
 
 - Every time an update is made the module will be automatically restarted
 - Use pm2 logs to see how your app behaves
-- To debug what is send to pm2 just set the variable
+- To debug what is send to pm2 just set the following variable:
 
 ```
 process.env.MODULE_DEBUG = true;
@@ -90,11 +93,13 @@ An object can be passed to initModule:
 }
 ```
 
+These variables are accessible in the front end of Keymetrics.
+
 ## Configuration
 
 ```bash
-$ pm2 set <npm-module.key> <value>
-$ pm2 unset <npm-module.key>
+$ pm2 set module:option_name <value>
+$ pm2 unset module:option_name
 ```
 
 The key will become an environment variable accessible inside the module or via the object returned by `pmx.initModule()`.
@@ -102,26 +107,16 @@ The key will become an environment variable accessible inside the module or via 
 Example:
 
 ```bash
-$ pm2 set 'server-monitoring.security' true
+$ pm2 set server-monitoring:security true
 ```
 
 Once you start the module called 'server-monitoring' you will be able to access to these custom variables:
 
 ```javascript
-console.log(process.env.security);
-
-// Or
-
 var conf = pmx.initModule();
 
 console.log(conf.security);
 ```
 
 **NOTE** These variables are written in `~/.pm2/module_conf.json`, so if you prefer, you can directly edit these variables in this file.
-
-## Internals
-
-### Start
-
-1- When a plugin is installed, it does an npm install and move it to .pm2/node_modules/module-name
--> pm2_env.pmx_module flag is set to true. Allows to differenciate it from other classic processes
+**NOTE2** When you set a new value the target module is restarted
