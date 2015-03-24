@@ -20,7 +20,7 @@ NAME=pm2
 PM2=%PM2_PATH%
 USER=%USER%
 
-export PATH=$PATH:%NODE_PATH%
+export PATH=%NODE_PATH%:$PATH
 export PM2_HOME="%HOME_PATH%"
 
 super() {
