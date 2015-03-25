@@ -1,8 +1,11 @@
 # Coming Next
 
+- `--no-logs` flag : doesn't save any logs (some people use their own logging system)
 - `--no-vizion` flag : starts an app completely without vizion features
 - `--no-restart` flag : starts PM2 without automatic restart feature
 - dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
+- YAML support for apps declarations
+- Improve app declaration file parsing (log_file, out_file, error_file)
 
 # 0.12.9 (Current Stable)
 
