@@ -6,6 +6,7 @@
 
 # 0.12.9 (Current Stable)
 
+- Fix #1121 : NODE_PATH before PATH so custom node versions come first
 - Fix #1119 : Safe params so cli-table won't fail
 - Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
 - Fix #1111 : More verbosity on writeFileSync errors
