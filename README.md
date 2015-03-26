@@ -2,6 +2,12 @@
 
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
+Starting an application in production mode is as easy as:
+
+```bash
+$ pm2 start app.js
+```
+
 PM2 is constantly assailed by [more than 400 tests](https://travis-ci.org/Unitech/PM2).
 
 Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
@@ -21,11 +27,13 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
 
-## Start an application in production mode
+## Start an application
 
 ```bash
 $ pm2 start app.js
 ```
+
+Your app is now put in background, kept alive forever and monitored.
 
 ## Main features
 
@@ -133,7 +141,7 @@ Thanks in advance and we hope that you like PM2!
 - [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a9)
 - [GracefullReload](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a690)
 
-## Learn more about PM2
+## PM2 Full documentation
 
 [Advanced README.md](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md)
 
