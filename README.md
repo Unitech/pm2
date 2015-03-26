@@ -122,7 +122,7 @@ $ pm2 save
 
 ## Keymetrics monitoring
 
-![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)
+[![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)](https://app.keymetrics.io/#/register)
 
 If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps accross servers.
 Feel free to try it:
