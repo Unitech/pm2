@@ -21,7 +21,7 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
 
-## Start an application
+## Start an application in production mode
 
 ```bash
 $ pm2 start app.js
@@ -92,6 +92,8 @@ $ pm2 start app.js -i max  # Enable load-balancer and cluster features
 $ pm2 reload all           # Reload all apps in 0s manner
 ```
 
+[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
+
 ### Startup script generation
 
 PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
@@ -121,7 +123,7 @@ Feel free to try it:
 
 Thanks in advance and we hope that you like PM2!
 
-## Other PM2 features
+## More PM2 features
 
 - [Watch & Restart](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a890)
 - [JSON application declaration](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a10)
