@@ -15,7 +15,7 @@
 - Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
 - Fix #1111 : More verbosity on writeFileSync errors
 - New env setting: PM2_KILL_TIMEOUT (ms) : time to wait before a process is considered dead
-- New env setting: PM2_CONCURRENT_ACTIONS : use it with care, value bigger than 1 is considered instable
+- New env setting: PM2_CONCURRENT_ACTIONS : use it with care, value bigger than 1 is considered unstable
 - Refactored reload/gracefulReload for better stability
 
 # 0.12.8
