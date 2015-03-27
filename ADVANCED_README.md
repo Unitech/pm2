@@ -285,8 +285,6 @@ $ pm2 delete web-interface
 <a name="a6"/>
 ## Process listing
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
-
 To list all running processes:
 
 ```bash
@@ -325,8 +323,6 @@ Units can be K(ilobyte), M(egabyte), G(igabyte).
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
-
 Monitor all processes launched:
 
 ```bash
@@ -350,8 +346,6 @@ $ pm2 [resurrect|save]
 ```
 
 ### Displaying logs in realtime
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
 Displaying logs of specified process or all processes in realtime:
 
