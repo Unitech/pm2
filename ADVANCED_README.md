@@ -21,7 +21,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [Monitoring CPU/Memory usage](#a7)
 - [Logs management](#a9)
 - [Clustering](#a5)
-- [Watch & Restart](#a890)
+- [Watch & Restart](#watch--restart)
 - [Reloading without downtime](#a690)
 - [Make PM2 restart on server reboot](#a8)
 - [JSON app declaration](#json-app-declaration)
