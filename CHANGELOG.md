@@ -7,6 +7,10 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.12.10 (Coming soon)
+
+- Fix : PM2 interactor doesn't send data about dead processes ('_old_') anymore.
+
 # 0.12.9 (Current Stable)
 
 - Fix #1124 : PM2_PROGRAMMATIC flag wasn't handled properly
