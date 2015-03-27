@@ -1,4 +1,4 @@
-# PM2
+# PM2 production process manager
 
 ## Table of contents
 
@@ -7,7 +7,7 @@
 - [Installation](#a1)
 - [Usage](#a2)
 - [Examples](#a3)
-- [Different ways to launch a process](#a667)
+- [Different ways to launch a process](#raw-examples)
 - [Options](#a987)
   - [Schema](#a988)
 - [How to update PM2?](#update-pm2)
