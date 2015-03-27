@@ -1,5 +1,3 @@
-![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
-
 Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
 Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
 
@@ -26,7 +24,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [Watch & Restart](#a890)
 - [Reloading without downtime](#a690)
 - [Make PM2 restart on server reboot](#a8)
-- [JSON app declaration](#a10)
+- [JSON app declaration](#json-app-declaration)
   - [Schema](#a988)
 
 ### Windows specifics
@@ -232,206 +230,6 @@ Options:
    --no-color                           skip colors
 ```
 
-<a name="a988"/>
-## Schema
-
-The completely definitions:
-
-```JSON
-{
-  "script": {
-    "type": "string",
-    "require": true
-  },
-  "args": {
-    "type": [
-      "array",
-      "string"
-    ]
-  },
-  "node_args": {
-    "type": [
-      "array",
-      "string"
-    ]
-  },
-  "name": {
-    "type": "string"
-  },
-  "max_memory_restart": {
-    "type": [
-      "string",
-      "number"
-    ],
-    "regex": "^\\d+(G|M|K)?$",
-    "ext_type": "sbyte",
-    "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
-  },
-  "instances": {
-    "type": "number",
-    "min": 0
-  },
-  "log_file": {
-    "type": [
-      "boolean",
-      "string"
-    ],
-    "alias": "log"
-  },
-  "error_file": {
-    "type": "string",
-    "alias": "error"
-  },
-  "out_file": {
-    "type": "string",
-    "alias": "output"
-  },
-  "pid_file": {
-    "type": "string",
-    "alias": "pid"
-  },
-  "cron_restart": {
-    "type": "string",
-    "alias": "cron"
-  },
-  "cwd": {
-    "type": "string"
-  },
-  "merge_logs": {
-    "type": "boolean"
-  },
-  "watch": {
-    "type": "boolean"
-  },
-  "ignore_watch": {
-    "type": [
-      "array",
-      "string"
-    ]
-  },
-  "watch_options": {
-    "type": "object"
-  },
-  "env": {
-    "type": ["object", "string"]
-  },
-  "^env_\\S*$": {
-    "type": [
-      "object",
-      "string"
-    ]
-  },
-  "log_date_format": {
-    "type": "string"
-  },
-  "min_uptime": {
-    "type": [
-      "number",
-      "string"
-    ],
-    "regex": "^\\d+(h|m|s)?$",
-    "desc": "it should be a NUMBER - milliseconds, \"[NUMBER]h\"(hours), \"[NUMBER]m\"(minutes) or \"[NUMBER]s\"(seconds)",
-    "min": 100,
-    "ext_type": "stime"
-  },
-  "max_restarts": {
-    "type": "number",
-    "min": 0
-  },
-  "exec_mode": {
-    "type": "string",
-    "regex": "^(cluster|fork)(_mode)?$",
-    "alias": "executeCommand",
-    "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only"
-  },
-  "exec_interpreter": {
-    "type": "string",
-    "alias": "interpreter"
-  },
-  "write": {
-    "type": "boolean"
-  },
-  "force": {
-    "type": "boolean"
-  }
-}
-```
-
-All the keys can be used in a JSON configured file, and just need to make a small change in CLI, e.g.:
-
-```
-exec_interpreter  -> --interpreter
-exec_mode         -> --execute_command
-max_restarts      -> --max_restarts
-force             -> --force
-```
-
-Yap, if the `alias` exists, you can using it as a CLI option, but do not forget to turn the camelCasing to underscore split - `executeCommand` to `--execute_command`.
-
-
-
-**Notes**
-- Using quote to make an ESC, e.g.:
-
-  ```
-  $pm2 start test.js --node-args "port=3001 sitename='first pm2 app'"
-  ```
-
-  The `nodeArgs` will be
-
-  ```JSON
-  [
-    "port=3001",
-    "sitename=first pm2 app"
-  ]
-  ```
-
-  But not
-
-  ```JSON
-  [
-    "port=3001",
-    "sitename='first",
-    "pm2",
-    "app'"
-  ]
-  ```
-
-- RegExp key
-
-  Matches the keys of configured JSON by RegExp but not a specific String, e.g. `^env_\\S*$` will match all `env` keys like `env_production`, `env_test`, and make sure the values conform to the schemas.
-
-- Special `ext_type`
-
-  - min_uptime
-
-    Value of `min_uptime` could be:
-
-      - **Number**
-        e.g. `"min_uptime": 3000` means 3000 milliseconds.
-      - **String**
-        In the meantime we are making it briefness and easy configuration: `h`, `m` and `s`, e.g.: `"min_uptime": "1h"` means one hour, `"min_uptime": "5m"` means five minutes and `"min_uptime": "10s"` means ten seconds (At last, it will be transformed into milliseconds).
-
-  - max_memory_restart
-
-    Value of `max_memory_restart` could be:
-      - **Number**
-        e.g. `"max_memory_restart": 1024` means 1024 bytes (**NOT BITS**).
-      - **String**
-        In the meantime we are making it briefness and easy configuration: `G`, `M` and `K`, e.g.: `"max_memory_restart": "1G"` means one gigabytes, `"max_memory_restart": "5M"` means five megabytes and `"max_memory_restart": "10K"` means ten kilobytes (At last, it will be transformed into byte(s)).
-
-- Optional values
-
-  Like `exec_mode`, value could be one of `cluster` (`cluster_mode`) or `fork` (`fork_mode`) only.
-
-- Should known
-
-  - maximum
-
-    `"instances": 0` means starting maximum processes depending on available CPUs (cluster mode)
-  - array
-
-    `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
 
 <a name="update-pm2"/>
 ## How to update PM2
@@ -786,7 +584,6 @@ To bring back the latest dump:
 $ pm2 [resurrect|save]
 ```
 
-<a name="a890"/>
 ## Watch & Restart
 
 PM2 can automatically restart your app when a file changes in the current directory or its subdirectories:
@@ -827,7 +624,6 @@ var watch_options = {
 }
 ```
 
-<a name="a10"/>
 ## JSON app declaration
 
 You can define parameters for your apps in `processes.json`:
@@ -927,6 +723,208 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   }
 }]
 ```
+
+<a name="a988"/>
+## Schema
+
+The completely definitions:
+
+```JSON
+{
+  "script": {
+    "type": "string",
+    "require": true
+  },
+  "args": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "node_args": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "name": {
+    "type": "string"
+  },
+  "max_memory_restart": {
+    "type": [
+      "string",
+      "number"
+    ],
+    "regex": "^\\d+(G|M|K)?$",
+    "ext_type": "sbyte",
+    "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
+  },
+  "instances": {
+    "type": "number",
+    "min": 0
+  },
+  "log_file": {
+    "type": [
+      "boolean",
+      "string"
+    ],
+    "alias": "log"
+  },
+  "error_file": {
+    "type": "string",
+    "alias": "error"
+  },
+  "out_file": {
+    "type": "string",
+    "alias": "output"
+  },
+  "pid_file": {
+    "type": "string",
+    "alias": "pid"
+  },
+  "cron_restart": {
+    "type": "string",
+    "alias": "cron"
+  },
+  "cwd": {
+    "type": "string"
+  },
+  "merge_logs": {
+    "type": "boolean"
+  },
+  "watch": {
+    "type": "boolean"
+  },
+  "ignore_watch": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "watch_options": {
+    "type": "object"
+  },
+  "env": {
+    "type": ["object", "string"]
+  },
+  "^env_\\S*$": {
+    "type": [
+      "object",
+      "string"
+    ]
+  },
+  "log_date_format": {
+    "type": "string"
+  },
+  "min_uptime": {
+    "type": [
+      "number",
+      "string"
+    ],
+    "regex": "^\\d+(h|m|s)?$",
+    "desc": "it should be a NUMBER - milliseconds, \"[NUMBER]h\"(hours), \"[NUMBER]m\"(minutes) or \"[NUMBER]s\"(seconds)",
+    "min": 100,
+    "ext_type": "stime"
+  },
+  "max_restarts": {
+    "type": "number",
+    "min": 0
+  },
+  "exec_mode": {
+    "type": "string",
+    "regex": "^(cluster|fork)(_mode)?$",
+    "alias": "executeCommand",
+    "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only"
+  },
+  "exec_interpreter": {
+    "type": "string",
+    "alias": "interpreter"
+  },
+  "write": {
+    "type": "boolean"
+  },
+  "force": {
+    "type": "boolean"
+  }
+}
+```
+
+All the keys can be used in a JSON configured file, and just need to make a small change in CLI, e.g.:
+
+```
+exec_interpreter  -> --interpreter
+exec_mode         -> --execute_command
+max_restarts      -> --max_restarts
+force             -> --force
+```
+
+Yap, if the `alias` exists, you can using it as a CLI option, but do not forget to turn the camelCasing to underscore split - `executeCommand` to `--execute_command`.
+
+
+
+**Notes**
+- Using quote to make an ESC, e.g.:
+
+  ```
+  $pm2 start test.js --node-args "port=3001 sitename='first pm2 app'"
+  ```
+
+  The `nodeArgs` will be
+
+  ```JSON
+  [
+    "port=3001",
+    "sitename=first pm2 app"
+  ]
+  ```
+
+  But not
+
+  ```JSON
+  [
+    "port=3001",
+    "sitename='first",
+    "pm2",
+    "app'"
+  ]
+  ```
+
+- RegExp key
+
+  Matches the keys of configured JSON by RegExp but not a specific String, e.g. `^env_\\S*$` will match all `env` keys like `env_production`, `env_test`, and make sure the values conform to the schemas.
+
+- Special `ext_type`
+
+  - min_uptime
+
+    Value of `min_uptime` could be:
+
+      - **Number**
+        e.g. `"min_uptime": 3000` means 3000 milliseconds.
+      - **String**
+        In the meantime we are making it briefness and easy configuration: `h`, `m` and `s`, e.g.: `"min_uptime": "1h"` means one hour, `"min_uptime": "5m"` means five minutes and `"min_uptime": "10s"` means ten seconds (At last, it will be transformed into milliseconds).
+
+  - max_memory_restart
+
+    Value of `max_memory_restart` could be:
+      - **Number**
+        e.g. `"max_memory_restart": 1024` means 1024 bytes (**NOT BITS**).
+      - **String**
+        In the meantime we are making it briefness and easy configuration: `G`, `M` and `K`, e.g.: `"max_memory_restart": "1G"` means one gigabytes, `"max_memory_restart": "5M"` means five megabytes and `"max_memory_restart": "10K"` means ten kilobytes (At last, it will be transformed into byte(s)).
+
+- Optional values
+
+  Like `exec_mode`, value could be one of `cluster` (`cluster_mode`) or `fork` (`fork_mode`) only.
+
+- Should known
+
+  - maximum
+
+    `"instances": 0` means starting maximum processes depending on available CPUs (cluster mode)
+  - array
+
+    `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
+
 
 <a name="windows"/>
 # Windows

@@ -2,6 +2,12 @@
 
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
+Starting an application in production mode is as easy as:
+
+```bash
+$ pm2 start app.js
+```
+
 PM2 is constantly assailed by [more than 400 tests](https://travis-ci.org/Unitech/PM2).
 
 Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
@@ -26,6 +32,8 @@ $ npm install pm2 -g
 ```bash
 $ pm2 start app.js
 ```
+
+Your app is now put in background, kept alive forever and monitored.
 
 ## Main features
 
@@ -92,6 +100,8 @@ $ pm2 start app.js -i max  # Enable load-balancer and cluster features
 $ pm2 reload all           # Reload all apps in 0s manner
 ```
 
+[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
+
 ### Startup script generation
 
 PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
@@ -112,7 +122,7 @@ $ pm2 save
 
 ## Keymetrics monitoring
 
-![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)
+[![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)](https://app.keymetrics.io/#/register)
 
 If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps accross servers.
 Feel free to try it:
@@ -121,7 +131,7 @@ Feel free to try it:
 
 Thanks in advance and we hope that you like PM2!
 
-## Other PM2 features
+## More PM2 features
 
 - [Watch & Restart](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a890)
 - [JSON application declaration](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a10)
@@ -131,7 +141,7 @@ Thanks in advance and we hope that you like PM2!
 - [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a9)
 - [GracefullReload](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a690)
 
-## Learn more about PM2
+## PM2 Full documentation
 
 [Advanced README.md](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md)
 
