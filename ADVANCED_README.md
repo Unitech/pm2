@@ -786,7 +786,6 @@ To bring back the latest dump:
 $ pm2 [resurrect|save]
 ```
 
-<a name="a890"/>
 ## Watch & Restart
 
 PM2 can automatically restart your app when a file changes in the current directory or its subdirectories:
@@ -827,7 +826,6 @@ var watch_options = {
 }
 ```
 
-<a name="a10"/>
 ## JSON app declaration
 
 You can define parameters for your apps in `processes.json`:
