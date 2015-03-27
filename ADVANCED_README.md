@@ -1158,7 +1158,7 @@ pm2.connect(function(err) {
     <tr>
       <td>Options </td>
       <td>
-      nodeArgs(arr), scriptArgs(arr), name(str), instances(int), error(str), output(str), pid(int), cron(str), mergeLogs(bool), watch(bool), runAsUser(int), runAsGroup(int), executeCommand(bool), interpreter(str), write(bool)</td>
+      nodeArgs(arr), scriptArgs(arr), name(str), instances(int), error(str), output(str), pid(str), cron(str), mergeLogs(bool), watch(bool), runAsUser(int), runAsGroup(int), executeCommand(bool), interpreter(str), write(bool)</td>
     </tr>
     <tr>
       <td><b>Restart</b></td>
