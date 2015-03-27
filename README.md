@@ -133,8 +133,8 @@ Thanks in advance and we hope that you like PM2!
 
 ## More PM2 features
 
-- [Watch & Restart](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a890)
-- [JSON application declaration](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a10)
+- [Watch & Restart](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#watch--restart)
+- [JSON application declaration](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration)
 - [Using PM2 in your code](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#programmatic-example)
 - [Deployment workflow](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment)
 - [Startup script generation (SystemV/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#startup-script)
