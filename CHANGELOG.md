@@ -10,6 +10,7 @@
 # 0.12.10 (Coming soon)
 
 - Fix : PM2 interactor doesn't send data about dead processes ('_old_') anymore.
+- Fix #1137 : Safe params for 'pm2 list' so cli-table won't fail
 
 # 0.12.9 (Current Stable)
 
