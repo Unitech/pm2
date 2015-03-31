@@ -19,12 +19,13 @@
 NAME=pm2
 PM2=%PM2_PATH%
 USER=%USER%
+SHELL=/bin/bash
 
 export PATH=%NODE_PATH%:$PATH
 export PM2_HOME="%HOME_PATH%"
 
 super() {
-    su - $USER -c "PATH=$PATH; $*"
+    su - $USER -s $SHELL -c "PATH=$PATH; $*"
 }
 
 start() {
