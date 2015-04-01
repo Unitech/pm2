@@ -19,13 +19,24 @@
 NAME=pm2
 PM2=%PM2_PATH%
 USER=%USER%
-SHELL=/bin/bash
 
 export PATH=%NODE_PATH%:$PATH
 export PM2_HOME="%HOME_PATH%"
 
+get_user_shell() {
+    local shell=$(getent passwd $1 | cut -d: -f7)
+
+    if [[ $shell == *"/sbin/nologin" ]] || [[ $shell == "/bin/false" ]];
+    then
+      shell="/bin/bash"
+    fi
+
+    echo "$shell"
+}
+
 super() {
-    su - $USER -s $SHELL -c "PATH=$PATH; $*"
+    local shell=$(get_user_shell $USER)
+    su - $USER -s $shell -c "PATH=$PATH; $*"
 }
 
 start() {
