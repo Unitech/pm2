@@ -1,5 +1,4 @@
-Master: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2)
-Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=development)](https://travis-ci.org/Unitech/PM2)
+# PM2 production process manager
 
 ## Table of contents
 
@@ -8,7 +7,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [Installation](#a1)
 - [Usage](#a2)
 - [Examples](#a3)
-- [Different ways to launch a process](#a667)
+- [Different ways to launch a process](#raw-examples)
 - [Options](#a987)
   - [Schema](#a988)
 - [How to update PM2?](#update-pm2)
@@ -21,7 +20,7 @@ Development: [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=d
 - [Monitoring CPU/Memory usage](#a7)
 - [Logs management](#a9)
 - [Clustering](#a5)
-- [Watch & Restart](#a890)
+- [Watch & Restart](#watch--restart)
 - [Reloading without downtime](#a690)
 - [Make PM2 restart on server reboot](#a8)
 - [JSON app declaration](#json-app-declaration)
@@ -285,8 +284,6 @@ $ pm2 delete web-interface
 <a name="a6"/>
 ## Process listing
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
-
 To list all running processes:
 
 ```bash
@@ -325,8 +322,6 @@ Units can be K(ilobyte), M(egabyte), G(igabyte).
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
-
 Monitor all processes launched:
 
 ```bash
@@ -350,8 +345,6 @@ $ pm2 [resurrect|save]
 ```
 
 ### Displaying logs in realtime
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
 Displaying logs of specified process or all processes in realtime:
 
