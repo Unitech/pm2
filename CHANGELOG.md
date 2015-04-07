@@ -7,12 +7,13 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.10 (Coming soon)
+# 0.12.10 (Current Stable)
 
 - Fix : PM2 interactor doesn't send data about dead processes ('_old_') anymore.
 - Fix #1137 : Safe params for 'pm2 list' so cli-table won't fail
+- Refactored reverse interaction with keymetrics for better stability and more verbosity on Rollback/Pull/Upgrade operations
 
-# 0.12.9 (Current Stable)
+# 0.12.9
 
 - Fix #1124 : PM2_PROGRAMMATIC flag wasn't handled properly
 - Fix #1121 : NODE_PATH before PATH so custom node versions come first
