@@ -24,7 +24,6 @@ PM2=%PM2_PATH%
 USER=%USER%
 
 export PATH=%NODE_PATH%:$PATH
-export PATH=$PATH:%NODE_PATH%
 if [[ "$USER" == "root" ]]; then
     export PM2_HOME="%HOME_PATH%"
 else

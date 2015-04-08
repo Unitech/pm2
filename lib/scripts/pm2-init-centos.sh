@@ -24,7 +24,11 @@ PM2=%PM2_PATH%
 USER=%USER%
 
 export PATH=%NODE_PATH%:$PATH
-export PM2_HOME="%HOME_PATH%"
+if [[ "$USER" == "root" ]]; then
+    export PM2_HOME="%HOME_PATH%"
+else
+    export PM2_HOME=/home/$USER/.pm2
+fi
 
 lockfile="/var/lock/subsys/pm2-init.sh"
 
