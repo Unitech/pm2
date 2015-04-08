@@ -28,8 +28,7 @@
     "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
   },
   "instances": {
-    "type": "number",
-    "min": 0
+    "type": "number"
   },
   "port": {
     "type": "number"
