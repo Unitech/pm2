@@ -104,7 +104,7 @@ $ pm2 reload all           # Reload all apps in 0s manner
 
 ### Startup script generation
 
-PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
+PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.  Execute the startup command only as the user to be running the PM2 daemon.
 
 ```bash
 $ pm2 startup
