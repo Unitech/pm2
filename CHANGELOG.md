@@ -7,6 +7,10 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.12.11 (Coming next)
+
+- VersioningManagment: exec() timeout configurable via .json
+
 # 0.12.10 (Current Stable)
 
 - Fix : PM2 interactor doesn't send data about dead processes ('_old_') anymore.
