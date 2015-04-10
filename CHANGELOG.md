@@ -7,9 +7,18 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.11 (Coming next)
+# 0.12.11 (Next release)
 
 - VersioningManagment: exec() timeout configurable via .json
+
+- Fix #1143 :
+If we start let's say 4 instances of an app (cluster_mode),
+Each app will have a value in process.env.NODE_APP_INSTANCE which will be 0 for the first one,
+1, 2 and 3 for the next ones.
+
+- Fix #1154 :
+Negative arguments to '-i' are substracted to CPU cores number.
+E.g: 'pm2 start app.js -i -3' in a 8 cpus environment will start 5 instances (8 - 3).
 
 # 0.12.10 (Current Stable)
 
