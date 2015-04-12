@@ -319,6 +319,14 @@ JSON:
 
 Units can be K(ilobyte), M(egabyte), G(igabyte).
 
+>
+Actually the way it works when you type : 
+`pm2 start app.js --max-memory-restart 50M`
+commander module will transform it to `maxMemoryRestart: "50M"`, then after being processed by PM2 logic it will become an env variable as follows `max_memory_restart : 52428800 // in bytes this time`.
+But since programmatic interface doesn't use commander you have to give it raw-mode : `maxMemoryRestart`.
+
+From [this issue comment](https://github.com/Unitech/PM2/issues/1159#issuecomment-91615025).
+
 <a name="a7"/>
 ## Monitoring CPU/Memory usage
 
