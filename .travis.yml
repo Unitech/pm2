@@ -6,6 +6,7 @@ branches:
     - development
     - api
     - travis
+    - wraped_fork
 node_js:
    - "iojs"
    - "0.12"
