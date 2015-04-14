@@ -595,6 +595,15 @@ commander.command('backward <name>')
   });
 
 //
+// Force PM2 to trigger garbage collection
+//
+commander.command('gc')
+  .description('force PM2 to trigger garbage collection')
+  .action(function() {
+    CLI.forceGc();
+  });
+
+//
 // Catch all
 //
 commander.command('*')
