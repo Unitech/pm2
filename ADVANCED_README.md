@@ -320,7 +320,7 @@ JSON:
 Units can be K(ilobyte), M(egabyte), G(igabyte).
 
 >
-Actually the way it works when you type : 
+Actually the way it works when you type :
 `pm2 start app.js --max-memory-restart 50M`
 commander module will transform it to `maxMemoryRestart: "50M"`, then after being processed by PM2 logic it will become an env variable as follows `max_memory_restart : 52428800 // in bytes this time`.
 But since programmatic interface doesn't use commander you have to give it raw-mode : `maxMemoryRestart`.
@@ -378,6 +378,12 @@ You can also reload all logs via the command line with:
 
 ```bash
 $ pm2 reloadLogs
+```
+
+### Manually triggering garbage collection for PM2
+
+```bash
+$ pm2 gc
 ```
 
 ### Options
