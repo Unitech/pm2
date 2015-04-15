@@ -261,7 +261,7 @@ describe('PM2 programmatic calls', function() {
   describe('start OR restart', function() {
     beforeEach(function(done) {
       pm2.delete('all', function(err, ret) {
-        setTimeout(done, 1000);
+        done();
       });
     });
 
@@ -284,7 +284,7 @@ describe('PM2 programmatic calls', function() {
 
     it('should start a JSON object in fork mode', function(done) {
       pm2.start({
-        script : 'test/fixtures/child.js',
+        script : 'test/fixtures/echo.js',
         instances : 4,
         exec_mode : 'fork'
       }, function(err, dt) {
