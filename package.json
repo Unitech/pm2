@@ -94,8 +94,10 @@
   "homepage": "https://github.com/Unitech/pm2",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
+  "man": "./man/pm2.1",
   "scripts": {
-    "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh"
+    "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh",
+    "man": "md2man-roff ADVANCED_README.md > man/pm2.1"
   },
   "keywords": [
     "cli",

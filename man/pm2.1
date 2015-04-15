@@ -1,0 +1,1668 @@
+.TH PM2 production process manager
+.SH Table of contents
+.SS Quick start
+.RS
+.IP \(bu 2
+Installation
+\[la]#a1\[ra]
+.IP \(bu 2
+Usage
+\[la]#a2\[ra]
+.IP \(bu 2
+Examples
+\[la]#a3\[ra]
+.IP \(bu 2
+Different ways to launch a process
+\[la]#raw-examples\[ra]
+.IP \(bu 2
+Options
+\[la]#a987\[ra]
+.RS
+.IP \(bu 2
+Schema
+\[la]#a988\[ra]
+.RE
+.IP \(bu 2
+How to update PM2?
+\[la]#update-pm2\[ra]
+.RE
+.SS Features
+.RS
+.IP \(bu 2
+Transitional state of apps
+\[la]#a4\[ra]
+.IP \(bu 2
+Process listing
+\[la]#a6\[ra]
+.IP \(bu 2
+Automatic restart process based on memory
+\[la]#max-memory-restart\[ra]
+.IP \(bu 2
+Monitoring CPU/Memory usage
+\[la]#a7\[ra]
+.IP \(bu 2
+Logs management
+\[la]#a9\[ra]
+.IP \(bu 2
+Clustering
+\[la]#a5\[ra]
+.IP \(bu 2
+Watch & Restart
+\[la]#watch--restart\[ra]
+.IP \(bu 2
+Reloading without downtime
+\[la]#a690\[ra]
+.IP \(bu 2
+Make PM2 restart on server reboot
+\[la]#a8\[ra]
+.IP \(bu 2
+JSON app declaration
+\[la]#json-app-declaration\[ra]
+.RS
+.IP \(bu 2
+Schema
+\[la]#a988\[ra]
+.RE
+.RE
+.SS Windows specifics
+.RS
+.IP \(bu 2
+Windows
+\[la]#windows\[ra]
+.RE
+.SS Deployment \- ecosystem.json
+.RS
+.IP \(bu 2
+Getting started with deployment
+\[la]#deployment\[ra]
+.IP \(bu 2
+Deployment options
+\[la]#deployment-help\[ra]
+.IP \(bu 2
+Considerations
+\[la]#considerations\[ra]
+.IP \(bu 2
+Contributing
+\[la]#deployment-contribution\[ra]
+.RE
+.SS Using PM2 programmatically (via API)
+.RS
+.IP \(bu 2
+Simple example
+\[la]#programmatic-example\[ra]
+.IP \(bu 2
+Programmatic API
+\[la]#programmatic-api\[ra]
+.RE
+.SS Specific
+.RS
+.IP \(bu 2
+Specific features
+\[la]#a77\[ra]
+.IP \(bu 2
+Configuration file
+\[la]#a989\[ra]
+.IP \(bu 2
+Enabling Harmony ES6
+\[la]#a66\[ra]
+.IP \(bu 2
+CoffeeScript
+\[la]#a19\[ra]
+.IP \(bu 2
+Testing PM2 on your prod environment
+\[la]#a149\[ra]
+.IP \(bu 2
+JSON app via pipe
+\[la]#a96\[ra]
+.RE
+.SS Knowledge
+.RS
+.IP \(bu 2
+Stateless apps ?
+\[la]#stateless-apps\[ra]
+.IP \(bu 2
+Transitional state of apps
+\[la]#a4\[ra]
+.IP \(bu 2
+Setup PM2 on server: tutorial
+\[la]#a89\[ra]
+.IP \(bu 2
+Logs and PID files
+\[la]#a34\[ra]
+.IP \(bu 2
+Execute any script: What is fork mode ?
+\[la]#a23\[ra]
+.RE
+.SS More
+.RS
+.IP \(bu 2
+Contributing/Development mode
+\[la]#a27\[ra]
+.IP \(bu 2
+Known bugs and workaround
+\[la]#a21\[ra]
+.IP \(bu 2
+They talk about it
+\[la]#a20\[ra]
+.IP \(bu 2
+License
+\[la]#a15\[ra]
+.RE
+.ti 0
+\l'\n(.lu'
+.SH Quick start
+.PP
+<a name="a1"/>
+.SH Installation
+.PP
+The latest PM2 stable version is installable via NPM:
+.PP
+.RS
+.nf
+$ npm install pm2@latest \-g
+.fi
+.RE
+.PP
+If the above fails use:
+.PP
+.RS
+.nf
+$ npm install git://github.com/Unitech/pm2#master \-g
+.fi
+.RE
+.PP
+<a name="a2"/>
+.SH Usage
+.PP
+Hello world:
+.PP
+.RS
+.nf
+$ pm2 start app.js
+.fi
+.RE
+.PP
+<a name="a3"/>
+.SH Raw Examples
+.PP
+.RS
+.nf
+# Fork mode
+$ pm2 start app.js \-\-name my\-api # Name process
+# Cluster mode
+$ pm2 start app.js \-i 0        # Will start maximum processes with LB depending on available CPUs
+$ pm2 start app.js \-i max      # Same as above, but deprecated yet.
+# Listing
+$ pm2 list               # Display all processes status
+$ pm2 jlist              # Print process list in raw JSON
+$ pm2 prettylist         # Print process list in beautified JSON
+$ pm2 describe 0         # Display all informations about a specific process
+$ pm2 monit              # Monitor all processes
+# Logs
+$ pm2 logs               # Display all processes logs in streaming
+$ pm2 ilogs              # Advanced termcaps interface to display logs
+$ pm2 flush              # Empty all log file
+$ pm2 reloadLogs         # Reload all logs
+# Actions
+$ pm2 stop all           # Stop all processes
+$ pm2 restart all        # Restart all processes
+$ pm2 reload all         # Will 0s downtime reload (for NETWORKED apps)
+$ pm2 gracefulReload all # Send exit message then reload (for networked apps)
+$ pm2 stop 0             # Stop specific process id
+$ pm2 restart 0          # Restart specific process id
+$ pm2 delete 0           # Will remove process from pm2 list
+$ pm2 delete all         # Will remove all processes from pm2 list
+# Misc
+$ pm2 reset <process>    # Reset meta data (restarted time...)
+$ pm2 updatePM2          # Update in memory pm2
+$ pm2 ping               # Ensure pm2 daemon has been launched
+$ pm2 sendSignal SIGUSR2 my\-app # Send system signal to script
+$ pm2 start app.js \-\-no\-daemon
+.fi
+.RE
+.SH Different ways to launch a process
+.PP
+.RS
+.nf
+$ pm2 start app.js           # Start app.js
+$ pm2 start app.js \-\- \-a 23  # Pass arguments '\-a 23' argument to app.js script
+$ pm2 start app.js \-\-name serverone # Start a process an name it as server one
+                                    # you can now stop the process by doing
+                                    # pm2 stop serverone
+$ pm2 start app.js \-\-node\-args="\-\-debug=7001" # \-\-node\-args to pass options to node V8
+$ pm2 start app.js \-i 0             # Start maximum processes depending on available CPUs (cluster mode)
+$ pm2 start app.js \-\-log\-date\-format "YYYY\-MM\-DD HH:mm Z"    # Log will be prefixed with custom time format
+$ pm2 start app.json                # Start processes with options declared in app.json
+                                    # Go to chapter Multi process JSON declaration for more
+$ pm2 start app.js \-e err.log \-o out.log  # Start and specify error and out log
+.fi
+.RE
+.PP
+For scripts in other languages:
+.PP
+.RS
+.nf
+$ pm2 start echo.pl \-\-interpreter=perl
+$ pm2 start echo.coffee
+$ pm2 start echo.php
+$ pm2 start echo.py
+$ pm2 start echo.sh
+$ pm2 start echo.rb
+.fi
+.RE
+.PP
+The interpreter is set by default with this equivalence:
+.PP
+.RS
+.nf
+{
+  ".sh": "bash",
+  ".py": "python",
+  ".rb": "ruby",
+  ".coffee" : "coffee",
+  ".php": "php",
+  ".pl" : "perl",
+  ".js" : "node"
+}
+.fi
+.RE
+.PP
+<a name="a987"/>
+.SH Options
+.PP
+.RS
+.nf
+Options:
+   \-h, \-\-help                           output usage information
+   \-V, \-\-version                        output the version number
+   \-v \-\-version                         get version
+   \-s \-\-silent                          hide all messages
+   \-m \-\-mini\-list                       display a compacted list without formatting
+   \-f \-\-force                           force actions
+   \-n \-\-name <name>                     set a <name> for script
+   \-i \-\-instances <number>              launch [number] instances (for networked app)(load balanced)
+   \-l \-\-log [path]                      specify entire log file (error and out are both included)
+   \-o \-\-output <path>                   specify out log file
+   \-e \-\-error <path>                    specify error log file
+   \-p \-\-pid <pid>                       specify pid file
+   \-\-max\-memory\-restart <memory>        specify max memory amount used to autorestart (in megaoctets)
+   \-\-env <environment_name>             specify environment to get specific env variables (for JSON declaration)
+   \-x \-\-execute\-command                 execute a program using fork system
+   \-u \-\-user <username>                 define user when generating startup script
+   \-c \-\-cron <cron_pattern>             restart a running process based on a cron pattern
+   \-w \-\-write                           write configuration in local folder
+   \-\-interpreter <interpreter>          the interpreter pm2 should use for executing app (bash, python...)
+   \-\-log\-date\-format <momentjs format>  add custom prefix timestamp to logs
+   \-\-no\-daemon                          run pm2 daemon in the foreground if it doesn't exist already
+   \-\-merge\-logs                         merge logs from different instances but keep error and out separated
+   \-\-watch                              watch application folder for changes
+   \-\-ignore\-watch <folders|files>       folder/files to be ignored watching, chould be a specific name or regex \- e.g. \-\-ignore\-watch="test node_modules "some scripts""
+   \-\-node\-args <node_args>              space delimited arguments to pass to node in cluster mode \- e.g. \-\-node\-args="\-\-debug=7001 \-\-trace\-deprecation"
+   \-\-no\-color                           skip colors
+.fi
+.RE
+.PP
+<a name="update\-pm2"/>
+.SH How to update PM2
+.PP
+Install the latest pm2 version :
+.PP
+.RS
+.nf
+$ npm install pm2@latest \-g
+.fi
+.RE
+.PP
+Then update the in\-memory PM2 :
+.PP
+.RS
+.nf
+$ pm2 updatePM2
+.fi
+.RE
+.SH Features
+.PP
+<a name="a4"/>
+.SH Transitional state of apps (important)
+.PP
+PM2 is a process manager. PM2 can start, stop, restart and \fIdelete\fP processes.
+.PP
+Start a process:
+.PP
+.RS
+.nf
+$ pm2 start app.js \-\-name "my\-api"
+$ pm2 start web.js \-\-name "web\-interface"
+.fi
+.RE
+.PP
+Now let's say I need to stop the web\-interface:
+.PP
+.RS
+.nf
+$ pm2 stop web\-interface
+.fi
+.RE
+.PP
+As you can see \fBthe process hasn't disappeared\fP\&. It's still there but in \fB\fCstopped\fR status.
+.PP
+To restart it just do:
+.PP
+.RS
+.nf
+$ pm2 restart web\-interface
+.fi
+.RE
+.PP
+Now I want to \fBdelete\fP the app from the PM2 process list.
+To do so:
+.PP
+.RS
+.nf
+$ pm2 delete web\-interface
+.fi
+.RE
+.PP
+<a name="a6"/>
+.SH Process listing
+.PP
+To list all running processes:
+.PP
+.RS
+.nf
+$ pm2 list
+# Or
+$ pm2 [list|ls|l|status]
+.fi
+.RE
+.PP
+To get more details about a specific process:
+.PP
+.RS
+.nf
+$ pm2 describe 0
+.fi
+.RE
+.PP
+<a name="max\-memory\-restart"/>
+.SH Automatic restart process based on memory
+.PP
+Value passed is in megaoctets. Internally it uses the V8 flag \fB\fC\-\-max\-old\-space\-size=MEM\fR to make a process exit when memory exceed a certain amount of RAM used.
+.PP
+CLI:
+\fB\fCbash
+$ pm2 start big\-array.js \-\-max\-memory\-restart 20M
+\fR
+.PP
+JSON:
+\fB\fCjson
+{
+  "name" : "max_mem",
+  "script" : "big\-array.js",
+  "max_memory_restart" : "20M"
+}
+\fR
+.PP
+Units can be 
+.BR K (ilobyte), 
+.BR M (egabyte), 
+.BR G (igabyte).
+.PP
+.RS
+Actually the way it works when you type : 
+\fB\fCpm2 start app.js \-\-max\-memory\-restart 50M\fR
+commander module will transform it to \fB\fCmaxMemoryRestart: "50M"\fR, then after being processed by PM2 logic it will become an env variable as follows \fB\fCmax_memory_restart : 52428800 // in bytes this time\fR\&.
+But since programmatic interface doesn't use commander you have to give it raw\-mode : \fB\fCmaxMemoryRestart\fR\&.
+.RE
+.PP
+From this issue comment
+\[la]https://github.com/Unitech/PM2/issues/1159#issuecomment-91615025\[ra]\&.
+.PP
+<a name="a7"/>
+.SH Monitoring CPU/Memory usage
+.PP
+Monitor all processes launched:
+.PP
+.RS
+.nf
+$ pm2 monit
+.fi
+.RE
+.PP
+<a name="a9"/>
+.SH Logs management
+.SS Enable Timestamp Prefix of \fB\fCpm2.log\fR
+.PP
+.RS
+.nf
+export PM2_LOG_DATE_FORMAT="YYYY\-MM\-DD HH:mm Z"
+.fi
+.RE
+.PP
+If this env\-variable has been changed, you need to dump your processes and kill daemon, restart it again to take effect, e.g.:
+.PP
+.RS
+.nf
+$ pm2 dump
+$ pm2 [resurrect|save]
+.fi
+.RE
+.SS Displaying logs in realtime
+.PP
+Displaying logs of specified process or all processes in realtime:
+.PP
+.RS
+.nf
+$ pm2 logs
+$ pm2 logs big\-api
+$ pm2 flush # Clear all the logs
+.fi
+.RE
+.SS Advanced log interface
+.PP
+Navigate between processes logs in realtime with an ergonomic interface:
+.PP
+.RS
+.nf
+$ pm2 ilogs
+.fi
+.RE
+.SS Reloading all logs (SIGUSR2/Logrotate)
+.PP
+To reload all logs, you can send \fB\fCSIGUSR2\fR to the PM2 process.
+.PP
+You can also reload all logs via the command line with:
+.PP
+.RS
+.nf
+$ pm2 reloadLogs
+.fi
+.RE
+.SS Options
+.PP
+.RS
+.nf
+\-\-merge\-logs : merge logs from different instances but keep error and out separated
+\-\-log\-date\-format <format>: prefix logs with formated timestamp (http://momentjs.com/docs/#/parsing/string\-format/)
+.fi
+.RE
+.SS Merge \fB\fCout\fR and \fB\fCerr\fR logs
+.RS
+.IP \(bu 2
+If you only want to merge \fB\fCout\fR and \fB\fCerr\fR logs into one output file, try with the following examples:
+.RE
+.PP
+.RS
+.nf
+  $ pm2 start name.js \-o name.log \-e name.log
+.fi
+.RE
+.PP
+.RS
+.nf
+  {
+    "apps" : [{
+      "name"        : "name",
+      "script"      : "name.js",
+      "err_file"    : "name.log",
+      "out_file"    : "name.log"
+    }]
+  }
+.fi
+.RE
+.RS
+.IP \(bu 2
+How about merge \fB\fCout\fR and \fB\fCerr\fR logs into one, and also keep the separated logs? e.g.:
+.RE
+.PP
+.RS
+.nf
+  $ pm2 start \-l
+.fi
+.RE
+.PP
+.RS
+.nf
+  $ pm2 start \-l name.log
+.fi
+.RE
+.PP
+.RS
+.nf
+  {
+    "apps" : [{
+      "name"        : "name",
+      "script"      : "name.js",
+      "log_file"    : true
+    }]
+  }
+.fi
+.RE
+.PP
+.RS
+.nf
+  {
+    "apps" : [{
+      "name"        : "name",
+      "script"      : "name.js",
+      "log_file"    : "name.log"
+    }]
+  }
+.fi
+.RE
+.IP
+\fBNotes:\fP When you providing a Boolean (\fB\fCtrue\fR) value for \fB\fC\-l, \-\-log\fR option or \fB\fClog_file\fR property, it means a merged log file will be automatic generated, i.e. \fB\fC~/.pm2/logs/[name]\-[id].log\fR, otherwise it's specific.
+.PP
+<a name="a5"/>
+.SH Clustering (cluster_mode)
+.PP
+The \fIcluster_mode\fP will automatically wrap your Node.js app into the cluster module and will enable you to reload your app without downtime and to scale your processes across all CPUs available.
+.PP
+To enable the \fIcluster_mode\fP, just pass the \-i <instances> option:
+.PP
+.RS
+.nf
+$ pm2 start app.js \-i 1
+.fi
+.RE
+.PP
+To launch \fB\fCmax\fR instances (\fB\fCmax\fR depending on the number of CPUs available) and set the load balancer to balance queries among process:
+.PP
+.RS
+.nf
+$ pm2 start app.js \-\-name "API" \-i 0
+.fi
+.RE
+.PP
+DEPRECATED (STILL COMPATIBLE):
+.PP
+.RS
+.nf
+$ pm2 start app.js \-\-name "API" \-i max
+.fi
+.RE
+.PP
+If your app is well\-designed (\fBstateless\fP) you'll be able to \fBprocess many more queries\fP\&.
+.PP
+Important concepts to make a Node.js app stateless:
+.RS
+.IP \(bu 2
+Sessions must not be stored in memory but shared via a database (Redis, Mongo, whatever)
+.IP \(bu 2
+WebSocket/Socket.io should communicate via a database
+\[la]http://socket.io/docs/using-multiple-nodes/#passing-events-between-nodes\[ra]
+.RE
+.PP
+<a name="a690"/>
+.SH Reloading without downtime
+.PP
+As opposed to \fB\fCrestart\fR, which kills and restarts the process, \fB\fCreload\fR achieves a 0\-second\-downtime reload.
+.PP
+\fBWarning\fP This feature only works for apps in \fIcluster_mode\fP, that uses HTTP/HTTPS/Socket connections.
+.PP
+To reload an app:
+.PP
+.RS
+.nf
+$ pm2 reload api
+.fi
+.RE
+.PP
+If the reload system hasn't managed to reload your app, a timeout will simply kill the process and will restart it.
+.SS Graceful reload
+.PP
+Sometimes you can experience a \fBvery long reload, or a reload that doesn't work\fP (fallback to restart).
+.PP
+It means that your app \fBstill has open connections on exit\fP\&.
+.PP
+To work around this problem you have to use the graceful reload.
+Graceful reload is a mechanism that will send a \fBshutdown\fP message to your process before reloading it.
+You can control the time that the app has to shutdown via the \fB\fCPM2_GRACEFUL_TIMEOUT\fR environment variable.
+.PP
+Example:
+.PP
+.RS
+.nf
+process.on('message', function(msg) {
+  if (msg == 'shutdown') {
+    // Your process is going to be reloaded
+    // You have to close all database/socket.io/* connections
+    console.log('Closing all connections...');
+    // You will have 4000ms to close all connections before
+    // the reload mechanism will try to do its job
+    setTimeout(function() {
+      console.log('Finished closing connections');
+      // This timeout means that all connections have been closed
+      // Now we can exit to let the reload mechanism do its job
+      process.exit(0);
+    }, 1500);
+  }
+});
+.fi
+.RE
+.PP
+Then use the command:
+.PP
+.RS
+.nf
+$ pm2 gracefulReload [all|name]
+.fi
+.RE
+.PP
+When PM2 starts a new process to replace an old one, it will wait for the new process to begin listening to a connection or a timeout before sending the shutdown message to the old one. You can define the timeout value with the \fB\fCPM2_GRACEFUL_LISTEN_TIMEOUT\fR environamente variable. If a script does not need to listen to a connection, it can manually tell PM2 that the process has started up by calling \fB\fCprocess.send('online')\fR\&.
+.PP
+<a name="a8"/>
+.SH Startup script
+.PP
+PM2 has the amazing ability to \fBgenerate startup scripts and configure them\fP\&.
+PM2 is also smart enough to \fBsave all your process list\fP and to \fBbring back all your processes on restart\fP\&.
+.PP
+.RS
+.nf
+$ pm2 startup
+# auto\-detect platform
+$ pm2 startup [platform]
+# render startup\-script for a specific platform, the [platform] could be one of:
+#   ubuntu|centos|redhat|gentoo|systemd|darwin|amazon
+.fi
+.RE
+.PP
+Once you have started the apps and want to keep them on server reboot do:
+.PP
+.RS
+.nf
+$ pm2 save
+.fi
+.RE
+.PP
+\fBWarning\fP It's tricky to make this feature work generically, so once PM2 has setup your startup script, reboot your server to make sure that PM2 has launched your apps!
+.SS More information
+.PP
+Three types of startup scripts are available:
+.RS
+.IP \(bu 2
+SystemV init script (with the option \fB\fCubuntu\fR or \fB\fCcentos\fR)
+.IP \(bu 2
+OpenRC init script (with the option \fB\fCgentoo\fR)
+.IP \(bu 2
+SystemD init script (with the \fB\fCsystemd\fR option)
+.RE
+.PP
+The startup options are using:
+.RS
+.IP \(bu 2
+\fBubuntu\fP will use \fB\fCupdaterc.d\fR and the script \fB\fClib/scripts/pm2\-init.sh\fR
+.IP \(bu 2
+\fBcentos\fP/\fBredhat\fP will use \fB\fCchkconfig\fR and the script \fB\fClib/scripts/pm2\-init\-centos.sh\fR
+.IP \(bu 2
+\fBgentoo\fP will use \fB\fCrc\-update\fR and the script \fB\fClib/scripts/pm2\fR
+.IP \(bu 2
+\fBsystemd\fP will use \fB\fCsystemctl\fR and the script \fB\fClib/scripts/pm2.service\fR
+.IP \(bu 2
+\fBdarwin\fP will use \fB\fClaunchd\fR to load a specific \fB\fCplist\fR to resurrect processes after reboot.
+.RE
+.SS User permissions
+.PP
+Let's say you want the startup script to be executed under another user.
+.PP
+Just use the \fB\fC\-u <username>\fR option !
+.PP
+.RS
+.nf
+$ pm2 startup ubuntu \-u www
+.fi
+.RE
+.SS Related commands
+.PP
+Dump all processes status and environment managed by PM2:
+\fB\fCbash
+$ pm2 dump
+\fR
+It populates the file \fB\fC~/.pm2/dump.pm2\fR by default.
+.PP
+To bring back the latest dump:
+\fB\fCbash
+$ pm2 [resurrect|save]
+\fR
+.SH Watch & Restart
+.PP
+PM2 can automatically restart your app when a file changes in the current directory or its subdirectories:
+.PP
+.RS
+.nf
+$ pm2 start app.js \-\-watch
+.fi
+.RE
+.PP
+If \fB\fC\-\-watch\fR is enabled, stopping it won't stop watching:
+\- \fB\fCpm2 stop 0\fR will not stop watching
+\- \fB\fCpm2 stop \-\-watch 0\fR will stop watching
+.PP
+Restart toggle the \fB\fCwatch\fR parameter when triggered.
+.PP
+To watch specific paths, please use a JSON app declaration, \fB\fCwatch\fR can take a string or an array of paths. Default is \fB\fCtrue\fR:
+.PP
+.RS
+.nf
+{
+  "watch": ["server", "client"],
+  "ignore_watch" : ["node_modules", "client/img"],
+  "watch_options": {
+    "followSymlinks": false
+  }
+}
+.fi
+.RE
+.PP
+As specified in the Schema
+\[la]#a988\[ra]:
+\- \fB\fCwatch\fR can be a boolean, an array of paths or a string representing a path. Default to \fB\fCfalse\fR
+\- \fB\fCignore_watch\fR can be an array of paths or a string, it'll be interpreted by chokidar
+\[la]https://github.com/paulmillr/chokidar#path-filtering\[ra] as a glob or a regular expression.
+\- \fB\fCwatch_options\fR is an object that will replace options given to chokidar. Please refer to chokidar documentation
+\[la]https://github.com/paulmillr/chokidar#api\[ra] for the definition.
+.PP
+PM2 is giving chokidar these Default options:
+.PP
+.RS
+.nf
+var watch_options = {
+  persistent    : true,
+  ignoreInitial : true
+}
+.fi
+.RE
+.SH JSON app declaration
+.PP
+You can define parameters for your apps in \fB\fCprocesses.json\fR:
+.PP
+.RS
+.nf
+{
+  "apps" : [{
+    "name"        : "echo",
+    "script"      : "examples/args.js",
+    "args"        : ["\-\-toto=heya coco", "\-d", "1"],
+    "log_date_format"  : "YYYY\-MM\-DD HH:mm Z",
+    "ignore_watch" : ["[\\\\/\\\\\\\\]\\\\./", "node_modules"],
+    "watch"       : true,
+    "node_args"   : "\-\-harmony",
+    "cwd"         : "/this/is/a/path/to/start/script",
+    "env": {
+        "NODE_ENV": "production",
+        "AWESOME_SERVICE_API_TOKEN": "xxx"
+    }
+  },{
+    "name"       : "api",
+    "script"     : "./examples/child.js",
+    "instances"  : 4,
+    "log_date_format"  : "YYYY\-MM\-DD",
+    "log_file"   : "./examples/child.log",
+    "error_file" : "./examples/child\-err.log",
+    "out_file"   : "./examples/child\-out.log",
+    "pid_file"   : "./examples/child.pid",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 9005
+  },{
+    "name"       : "auto\-kill",
+    "script"     : "./examples/killfast.js",
+    "min_uptime" : "100s",
+    "exec_mode"  : "fork_mode"
+  }]
+}
+.fi
+.RE
+.PP
+Then run:
+\fB\fCbash
+$ pm2 start processes.json
+$ pm2 stop processes.json
+$ pm2 delete processes.json
+$ pm2 restart processes.json
+\fR
+.PP
+\fBA few notes about JSON app declarations:\fP
+.RS
+.IP \(bu 2
+All command line options passed when using the JSON app declaration will be dropped i.e.
+.RE
+.PP
+.RS
+.nf
+$ cat node\-app\-1.json
+{
+  "name" : "node\-app\-1",
+  "script" : "app.js",
+  "cwd" : "/srv/node\-app\-1/current"
+}
+.fi
+.RE
+.RS
+.IP \(bu 2
+JSON app declarations are additive.  Continuing from above:
+\fB\fCbash
+$ pm2 start node\-app\-2.json
+$ ps aux | grep node\-app
+root  14735  5.8  1.1  752476  83932 ? Sl 00:08 0:00 pm2: node\-app\-1
+root  24271  0.0  0.3  696428  24208 ? Sl 17:36 0:00 pm2: node\-app\-2
+\fR
+Note that if you execute \fB\fCpm2 start node\-app\-2\fR again, it will spawn an additional instance node\-app\-2.
+.IP \(bu 2
+\fBcwd:\fP your JSON declaration does not need to reside with your script.  If you wish to maintain the 
+.BR JSON (s) 
+in a location other than your script (say, \fB\fC/etc/pm2/conf.d/node\-app.json\fR) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
+.IP \(bu 2
+The following are valid options for JSON app declarations:
+\fB\fCjson
+[{
+"name"             : "node\-app",
+"cwd"              : "/srv/node\-app/current",
+"args"             : ["\-\-toto=heya coco", "\-d", "1"],
+"script"           : "bin/app.js",
+"node_args"        : ["\-\-harmony", " \-\-max\-stack\-size=102400000"],
+"log_date_format"  : "YYYY\-MM\-DD HH:mm Z",
+"error_file"       : "/var/log/node\-app/node\-app.stderr.log",
+"out_file"         : "log/node\-app.stdout.log",
+"pid_file"         : "pids/node\-geo\-api.pid",
+"instances"        : 6, //or 0 => 'max'
+"min_uptime"       : "200s", // 200 seconds, defaults to 1000
+"max_restarts"     : 10, // defaults to 15
+"max_memory_restart": "1M", // 1 megabytes, e.g.: "2G", "10M", "100K", 1024... the default unit is byte.
+"cron_restart"     : "1 0 * * *",
+"watch"            : false,
+"ignore_watch"      : ["[\\\\/\\\\\\\\]\\\\./", "node_modules"],
+"merge_logs"       : true,
+"exec_interpreter" : "node",
+"exec_mode"        : "fork",
+"env": {
+"NODE_ENV": "production",
+"AWESOME_SERVICE_API_TOKEN": "xxx"
+}
+}]
+\fR
+.RE
+.PP
+<a name="a988"/>
+.SH Schema
+.PP
+The completely definitions:
+.PP
+.RS
+.nf
+{
+  "script": {
+    "type": "string",
+    "require": true
+  },
+  "args": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "node_args": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "name": {
+    "type": "string"
+  },
+  "max_memory_restart": {
+    "type": [
+      "string",
+      "number"
+    ],
+    "regex": "^\\\\d+(G|M|K)?$",
+    "ext_type": "sbyte",
+    "desc": "it should be a NUMBER \- byte, \\"[NUMBER]G\\"(Gigabyte), \\"[NUMBER]M\\"(Megabyte) or \\"[NUMBER]K\\"(Kilobyte)"
+  },
+  "instances": {
+    "type": "number",
+    "min": 0
+  },
+  "log_file": {
+    "type": [
+      "boolean",
+      "string"
+    ],
+    "alias": "log"
+  },
+  "error_file": {
+    "type": "string",
+    "alias": "error"
+  },
+  "out_file": {
+    "type": "string",
+    "alias": "output"
+  },
+  "pid_file": {
+    "type": "string",
+    "alias": "pid"
+  },
+  "cron_restart": {
+    "type": "string",
+    "alias": "cron"
+  },
+  "cwd": {
+    "type": "string"
+  },
+  "merge_logs": {
+    "type": "boolean"
+  },
+  "watch": {
+    "type": "boolean"
+  },
+  "ignore_watch": {
+    "type": [
+      "array",
+      "string"
+    ]
+  },
+  "watch_options": {
+    "type": "object"
+  },
+  "env": {
+    "type": ["object", "string"]
+  },
+  "^env_\\\\S*$": {
+    "type": [
+      "object",
+      "string"
+    ]
+  },
+  "log_date_format": {
+    "type": "string"
+  },
+  "min_uptime": {
+    "type": [
+      "number",
+      "string"
+    ],
+    "regex": "^\\\\d+(h|m|s)?$",
+    "desc": "it should be a NUMBER \- milliseconds, \\"[NUMBER]h\\"(hours), \\"[NUMBER]m\\"(minutes) or \\"[NUMBER]s\\"(seconds)",
+    "min": 100,
+    "ext_type": "stime"
+  },
+  "max_restarts": {
+    "type": "number",
+    "min": 0
+  },
+  "exec_mode": {
+    "type": "string",
+    "regex": "^(cluster|fork)(_mode)?$",
+    "alias": "executeCommand",
+    "desc": "it should be \\"cluster\\"(\\"cluster_mode\\") or \\"fork\\"(\\"fork_mode\\") only"
+  },
+  "exec_interpreter": {
+    "type": "string",
+    "alias": "interpreter"
+  },
+  "write": {
+    "type": "boolean"
+  },
+  "force": {
+    "type": "boolean"
+  }
+}
+.fi
+.RE
+.PP
+All the keys can be used in a JSON configured file, and just need to make a small change in CLI, e.g.:
+.PP
+.RS
+.nf
+exec_interpreter  \-> \-\-interpreter
+exec_mode         \-> \-\-execute_command
+max_restarts      \-> \-\-max_restarts
+force             \-> \-\-force
+.fi
+.RE
+.PP
+Yap, if the \fB\fCalias\fR exists, you can using it as a CLI option, but do not forget to turn the camelCasing to underscore split \- \fB\fCexecuteCommand\fR to \fB\fC\-\-execute_command\fR\&.
+.PP
+\fBNotes\fP
+\- Using quote to make an ESC, e.g.:
+.PP
+.RS
+.nf
+  $pm2 start test.js \-\-node\-args "port=3001 sitename='first pm2 app'"
+.fi
+.RE
+.IP
+The \fB\fCnodeArgs\fR will be
+.PP
+.RS
+.nf
+  [
+    "port=3001",
+    "sitename=first pm2 app"
+  ]
+.fi
+.RE
+.IP
+But not
+.PP
+.RS
+.nf
+  [
+    "port=3001",
+    "sitename='first",
+    "pm2",
+    "app'"
+  ]
+.fi
+.RE
+.RS
+.IP \(bu 2
+RegExp key
+.RE
+.IP
+Matches the keys of configured JSON by RegExp but not a specific String, e.g. \fB\fC^env_\\\\S*$\fR will match all \fB\fCenv\fR keys like \fB\fCenv_production\fR, \fB\fCenv_test\fR, and make sure the values conform to the schemas.
+.RS
+.IP \(bu 2
+Special \fB\fCext_type\fR
+.RS
+.IP \(bu 2
+min_uptime
+.RE
+.PP
+Value of \fB\fCmin_uptime\fR could be:
+  \- \fBNumber\fP
+    e.g. \fB\fC"min_uptime": 3000\fR means 3000 milliseconds.
+  \- \fBString\fP
+    In the meantime we are making it briefness and easy configuration: \fB\fCh\fR, \fB\fCm\fR and \fB\fCs\fR, e.g.: \fB\fC"min_uptime": "1h"\fR means one hour, \fB\fC"min_uptime": "5m"\fR means five minutes and \fB\fC"min_uptime": "10s"\fR means ten seconds (At last, it will be transformed into milliseconds).
+\- max\fImemory\fPrestart
+.PP
+Value of \fB\fCmax_memory_restart\fR could be:
+  \- \fBNumber\fP
+    e.g. \fB\fC"max_memory_restart": 1024\fR means 1024 bytes (\fBNOT BITS\fP).
+  \- \fBString\fP
+    In the meantime we are making it briefness and easy configuration: \fB\fCG\fR, \fB\fCM\fR and \fB\fCK\fR, e.g.: \fB\fC"max_memory_restart": "1G"\fR means one gigabytes, \fB\fC"max_memory_restart": "5M"\fR means five megabytes and \fB\fC"max_memory_restart": "10K"\fR means ten kilobytes (At last, it will be transformed into 
+.BR byte (s)).
+.IP \(bu 2
+Optional values
+.RE
+.IP
+Like \fB\fCexec_mode\fR, value could be one of \fB\fCcluster\fR (\fB\fCcluster_mode\fR) or \fB\fCfork\fR (\fB\fCfork_mode\fR) only.
+.RS
+.IP \(bu 2
+Should known
+.RS
+.IP \(bu 2
+maximum
+.RE
+.PP
+\fB\fC"instances": 0\fR means starting maximum processes depending on available CPUs (cluster mode)
+\- array
+.PP
+\fB\fCargs\fR, \fB\fCnode_args\fR and \fB\fCignore_watch\fR could be type of \fB\fCArray\fR (e.g.: \fB\fC"args": ["\-\-toto=heya coco", "\-d", "1"]\fR) or \fB\fCstring\fR (e.g.: \fB\fC"args": "\-\-to='heya coco' \-d 1"\fR)
+.RE
+.PP
+<a name="windows"/>
+.SH Windows
+.PP
+Make sure you have tail.exe in your path, confirm using "where"
+.PP
+.RS
+.nf
+C:\\>where tail
+C:\\Program Files (x86)\\Git\\bin\\tail.exe
+.fi
+.RE
+.PP
+Tail can be found as part of Git
+\[la]https://msysgit.github.io/\[ra], Cygwin and MingW packages. Tail needs to be able to support "\-f" and "\-n" options.
+.PP
+<a name="deployment"/>
+.SH Deployment
+.PP
+PM2 embed a simple and powerful deployment system with revision tracing.
+It's based on <a href="
+\[la]https://github.com/visionmedia/deploy">https://github.com/visionmedia/deploy\[ra]</a>
+.PP
+A step\-by\-step tutorial is available here : Deploy and Iterate faster with PM2 deploy
+\[la]https://keymetrics.io/2014/06/25/ecosystem-json-deploy-and-iterate-faster/\[ra]
+.SH Getting started with deployment
+.PP
+Please read the Considerations to use PM2 deploy
+\[la]#considerations\[ra]
+.PP
+1\- Generate a sample ecosystem.json file that list processes and deployment environment
+.PP
+.RS
+.nf
+$ pm2 ecosystem
+.fi
+.RE
+.PP
+In the current folder a \fB\fCecosystem.json\fR file will be created.
+It contains this:
+.PP
+.RS
+.nf
+{
+  "apps" : [{
+    "name"      : "API",
+    "script"    : "app.js",
+    "env": {
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  },{
+    "name"      : "WEB",
+    "script"    : "web.js"
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "node",
+      "host" : "212.83.163.1",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:repo.git",
+      "path" : "/var/www/production",
+      "post\-deploy" : "pm2 startOrRestart ecosystem.json \-\-env production"
+    },
+    "dev" : {
+      "user" : "node",
+      "host" : "212.83.163.1",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:repo.git",
+      "path" : "/var/www/development",
+      "post\-deploy" : "pm2 startOrRestart ecosystem.json \-\-env dev",
+      "env"  : {
+        "NODE_ENV": "dev"
+      }
+    }
+  }
+}
+.fi
+.RE
+.PP
+Edit the file according to your needs.
+.PP
+2\- Be sure that you have the public ssh key on your local machine
+.PP
+.RS
+.nf
+$ ssh\-keygen \-t rsa
+$ ssh\-copy\-id root@myserver.com
+.fi
+.RE
+.PP
+3\- Now initialize the remote folder with:
+.PP
+.RS
+.nf
+$ pm2 deploy <configuration_file> <environment> setup
+.fi
+.RE
+.PP
+E.g:
+.PP
+.RS
+.nf
+$ pm2 deploy ecosystem.json production setup
+.fi
+.RE
+.PP
+This command will create all the folders on your remote server.
+.PP
+4\- Deploy your code
+.PP
+.RS
+.nf
+$ pm2 deploy ecosystem.json production
+.fi
+.RE
+.PP
+Now your code will be populated, installed and started with PM2
+.PP
+<a name="deployment\-help"/>
+.SH Deployment options
+.PP
+Display deploy help via \fB\fCpm2 deploy help\fR:
+.PP
+.RS
+.nf
+$ pm2 deploy <configuration_file> <environment> <command>
+  Commands:
+    setup                run remote setup commands
+    update               update deploy to the latest release
+    revert [n]           revert to [n]th last deployment or 1
+    curr[ent]            output current release commit
+    prev[ious]           output previous release commit
+    exec|run <cmd>       execute the given <cmd>
+    list                 list previous deploy commits
+    [ref]                deploy to [ref], the "ref" setting, or latest tag
+.fi
+.RE
+.SH Commands
+.PP
+.RS
+.nf
+$ pm2 startOrRestart all.json            # Invoke restart on all apps in JSON
+$ pm2 startOrReload all.json             # Invoke reload
+$ pm2 startOrGracefulReload all.json     # Invoke gracefulReload
+.fi
+.RE
+.SH Using file key for authenticating
+.PP
+Just add the "key" attribute with file path to the .pem key within the attributes "user", "hosts"...
+.PP
+.RS
+.nf
+    "production" : {
+      "key"  : "/path/to/some.pem",
+      "user" : "node",
+      "host" : "212.83.163.1",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:repo.git",
+      "path" : "/var/www/production",
+      "post\-deploy" : "pm2 startOrRestart ecosystem.json \-\-env production"
+    },
+.fi
+.RE
+.PP
+<a name="considerations"/>
+.SH Considerations
+.RS
+.IP \(bu 2
+You might want to commit your node_modules folder (#622
+\[la]https://github.com/Unitech/pm2/issues/622\[ra]) or add the \fB\fCnpm install\fR command to the \fB\fCpost\-deploy\fR section: \fB\fC"post\-deploy" : "npm install && pm2 startOrRestart ecosystem.json \-\-env production"\fR
+.IP \(bu 2
+Verify that your remote server has the permission to git clone the repository
+.IP \(bu 2
+You can declare specific environment variable depending on the environment you want to deploy the code to. For instance to declare variables for the production environment, just add "env_production": {} and declare that variables.
+.IP \(bu 2
+PM2 will look by default to \fB\fCecosystem.json\fR\&. So you can skip the <configuration_file> options if it's the case
+.IP \(bu 2
+You can embed the "apps" & "deploy" section in the package.json
+.IP \(bu 2
+It deploys your code via ssh, you don't need any dependencies
+.IP \(bu 2
+Process are initialized / started automatically depending on application name in \fB\fCecosystem.json\fR
+.IP \(bu 2
+PM2\-deploy repository is there: pm2\-deploy
+\[la]https://github.com/Unitech/pm2-deploy\[ra]
+.RE
+.PP
+<a name="deployment\-contribution"/>
+.SH Contributing
+.PP
+The module is <a href="
+\[la]https://github.com/Unitech/pm2-deploy">https://github.com/Unitech/pm2-deploy\[ra]</a>
+Feel free to PR for any changes or fix.
+.PP
+<a name="programmatic\-example"/>
+.SH Using PM2 programmatically
+.PP
+PM2 can be used programmatically, meaning that you can embed a process manager directly in your code, spawn processes, keep them alive even if the main script is exited.
+.PP
+Check out this article
+\[la]http://keymetrics.io/2014/07/02/manage-processes-programmatically-with-pm2/\[ra] for more informations.
+.SH Simple example
+.PP
+This will require pm2, launch \fB\fCtest.js\fR, list processes then exit the script.
+You will notice that after exiting this script you will be able to see \fB\fCtest.js\fR process with \fB\fCpm2 list\fR
+.PP
+.RS
+.nf
+$ npm install pm2 \-\-save
+.fi
+.RE
+.PP
+.RS
+.nf
+var pm2 = require('pm2');
+// Connect or launch PM2
+pm2.connect(function(err) {
+  // Start a script on the current folder
+  pm2.start('test.js', { name: 'test' }, function(err, proc) {
+    if (err) throw new Error('err');
+    // Get all processes running
+    pm2.list(function(err, process_list) {
+      console.log(process_list);
+      // Disconnect to PM2
+      pm2.disconnect(function() { process.exit(0) });
+    });
+  });
+})
+.fi
+.RE
+.PP
+<a name="programmatic\-api"/>
+.SH Programmatic API
+.PP
+\fBConsideration with .connect\fP: the .connect method connect to the local PM2, but if PM2 is not up, it will launch it and will put in in background as you launched it via CLI.
+.PP
+<a name="a77"/>
+.SH Special features
+.PP
+Launching PM2 without daemonizing itself:
+.PP
+.RS
+.nf
+$ pm2 start app.js \-\-no\-daemon
+.fi
+.RE
+.PP
+Sending a system signal to a process:
+.PP
+.RS
+.nf
+$ pm2 sendSignal SIGUSR2 my\-app
+.fi
+.RE
+.PP
+<a name="a989"/>
+.SH Configuration file
+.PP
+You can specify the following options by editing the file \fB\fC~/.pm2/custom_options.sh\fR:
+.PP
+.RS
+.nf
+PM2_RPC_PORT
+PM2_PUB_PORT
+PM2_BIND_ADDR
+PM2_API_PORT
+PM2_GRACEFUL_TIMEOUT
+PM2_MODIFY_REQUIRE
+PM2_KILL_TIMEOUT
+.fi
+.RE
+.SH API health endpoint
+.PP
+.RS
+.nf
+$ pm2 web
+.fi
+.RE
+.PP
+<a name="a66"/>
+.SH Enabling Harmony ES6
+.PP
+The \fB\fC\-\-node\-args\fR option permit to launch script with V8 flags, so to enable harmony for a process just do this:
+\fB\fCbash
+$ pm2 start my_app.js \-\-node\-args="\-\-harmony"
+\fR
+.PP
+And with JSON declaration:
+.PP
+.RS
+.nf
+[{
+  "name" : "ES6",
+  "script" : "es6.js",
+  "node_args" : "\-\-harmony"
+}]
+.fi
+.RE
+.PP
+<a name="a19"/>
+.SH CoffeeScript
+.PP
+.RS
+.nf
+$ pm2 start server.coffee \-\-interpreter coffee
+.fi
+.RE
+.PP
+That's all!
+.SH Knowledge
+.PP
+<a name="stateless\-apps"/>
+.SH Stateless apps
+.PP
+We recommend (and you must) write stateless NodeJS apps. Apps that don't retain any form of local variables or local instances or whatever local.
+Every data, states, websocket session, session data, must be shared via any kind of database.
+.PP
+We recommend using Redis for sharing session data, websocket.
+.RS
+.IP \(bu 2
+SocketIO with Redis : https://github.com/LearnBoost/Socket.IO/wiki/Configuring\-Socket.IO
+\[la]Configuring SocketIO\[ra]
+.IP \(bu 2
+Redis session store for Connect : https://github.com/visionmedia/connect\-redis
+\[la]Connect-redis\[ra]
+.RE
+.PP
+We recommend following the 12 factor convention : http://12factor.net/
+\[la]http://12factor.net/\[ra]
+.PP
+<a name="a89"/>
+.SH Setup pm2 on a server
+.PP
+How To Use pm2 to Setup a Node.js Production Environment On An Ubuntu VPS
+\[la]https://www.digitalocean.com/community/articles/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps\[ra]
+.PP
+<a name="a34"/>
+.SH Log and PID files
+.PP
+By default, logs (error and output), pid files, dumps, and PM2 logs are located in \fB\fC~/.pm2/\fR:
+.PP
+.RS
+.nf
+\&.pm2/
+├── dump.pm2
+├── custom_options.sh
+├── pm2.log
+├── pm2.pid
+├── logs
+└── pids
+.fi
+.RE
+.PP
+<a name="a23"/>
+.SH Execute any kind of script
+.PP
+In fork mode almost all options are the same as the cluster mode. But there is no \fB\fCreload\fR
+\[la]#reloading-without-downtime\[ra] or \fB\fCgracefulReload\fR command.
+.PP
+You can also exec scripts written in other languages:
+.PP
+.RS
+.nf
+$ pm2 start my\-bash\-script.sh \-x \-\-interpreter bash
+$ pm2 start my\-python\-script.py \-x \-\-interpreter python
+.fi
+.RE
+.PP
+The interpreter is deduced from the file extension from the following list
+\[la]https://github.com/Unitech/pm2/blob/master/lib/interpreter.json\[ra]\&.
+.SS JSON configuration
+.PP
+To run a non\-JS interpreter you must set \fB\fCexec_mode\fR to \fB\fCfork_mode\fR and \fB\fCexec_interpreter\fR to your interpreter of choice.
+For example:
+.PP
+.RS
+.nf
+{
+  "apps" : [{
+    "name"       : "bash\-worker",
+    "script"     : "./a\-bash\-script",
+    "exec_interpreter": "bash",
+    "exec_mode"  : "fork_mode"
+  }, {
+    "name"       : "ruby\-worker",
+    "script"     : "./some\-ruby\-script",
+    "exec_interpreter": "ruby",
+    "exec_mode"  : "fork_mode"
+  }]
+}
+.fi
+.RE
+.PP
+<a name="a96"/>
+.SH JSON app configuration via pipe from stdout
+.PP
+Pull\-requests:
+\- #273
+\[la]https://github.com/Unitech/pm2/pull/273\[ra]
+\- #279
+\[la]https://github.com/Unitech/pm2/pull/279\[ra]
+.PP
+.RS
+.nf
+#!/bin/bash
+read \-d '' my_json <<_EOF_
+[{
+    "name"       : "app1",
+    "script"     : "/home/projects/pm2_nodetest/app.js",
+    "instances"  : "4",
+    "error_file" : "./logz/child\-err.log",
+    "out_file"   : "./logz/child\-out.log",
+    "pid_file"   : "./logz/child.pid",
+    "exec_mode"  : "cluster_mode",
+    "port"       : 4200
+}]
+_EOF_
+echo $my_json | pm2 start \-
+.fi
+.RE
+.PP
+<a name="a149"/>
+.SH Is my production server ready for PM2?
+.PP
+Just try the tests before using PM2 on your production server
+.PP
+.RS
+.nf
+$ git clone https://github.com/Unitech/pm2.git
+$ cd pm2
+$ npm install  # Or do NODE_ENV=development npm install if some packages are missing
+$ npm test
+.fi
+.RE
+.PP
+If a test is broken please report us issues here
+\[la]https://github.com/Unitech/pm2/issues?state=open\[ra]
+Also make sure you have all dependencies needed. For Ubuntu:
+.PP
+.RS
+.nf
+$ sudo apt\-get install build\-essential
+# nvm is a Node.js version manager \- https://github.com/creationix/nvm
+$ wget \-qO\- https://raw.github.com/creationix/nvm/master/install.sh | sh
+$ nvm install v0.11.14
+$ nvm use v0.11.14
+$ nvm alias default v0.11.14
+.fi
+.RE
+.PP
+<a name="a27"/>
+.SH Contributing/Development mode
+.PP
+To hack PM2, it's very simple:
+.PP
+.RS
+.nf
+$ pm2 kill   # kill the current pm2
+$ git clone my_pm2_fork.git
+$ cd pm2/
+$ DEBUG=* PM2_DEBUG=true ./bin/pm2 \-\-no\-daemon
+.fi
+.RE
+.PP
+Each time you edit the code, be sure to kill and restart PM2 to make changes taking effect.
+.SH Install PM2 development
+.PP
+.RS
+.nf
+$ npm install git://github.com/Unitech/pm2#development \-g
+.fi
+.RE
+.PP
+<a name="a21"/>
+.SH Known bugs and workarounds
+.PP
+First, install the lastest PM2 version:
+.PP
+.RS
+.nf
+$ npm install \-g pm2@latest
+.fi
+.RE
+.SS Node 0.10.x doesn't free the script port when stopped in cluster_mode
+.PP
+Don't use the \fIcluster_mode\fP via \-i option.
+.SS User tips from issues
+.RS
+.IP \(bu 2
+Vagrant and pm2 #289
+\[la]https://github.com/Unitech/pm2/issues/289#issuecomment-42900019\[ra]
+.IP \(bu 2
+Start the same app on different ports #322
+\[la]https://github.com/Unitech/pm2/issues/322#issuecomment-46792733\[ra]
+.IP \(bu 2
+Using ansible with pm2
+\[la]https://github.com/Unitech/pm2/issues/88#issuecomment-49106686\[ra]
+.IP \(bu 2
+Cron string as argument
+\[la]https://github.com/Unitech/pm2/issues/496#issuecomment-49323861\[ra]
+.IP \(bu 2
+Restart when process reaches a specific memory amount
+\[la]https://github.com/Unitech/pm2/issues/141\[ra]
+.IP \(bu 2
+Sticky sessions and socket.io discussion
+\[la]https://github.com/Unitech/PM2/issues/637\[ra]
+.IP \(bu 2
+EACCESS \- understanding pm2 user/root rights
+\[la]https://github.com/Unitech/PM2/issues/837\[ra]
+.RE
+.PP
+<a name="a20"/>
+.SH External resources and articles
+.RS
+.IP \(bu 2
+Goodbye node\-forever, hello pm2
+\[la]http://devo.ps/blog/goodbye-node-forever-hello-pm2/\[ra]
+.IP \(bu 2
+https://serversforhackers.com/editions/2014/11/04/pm2/
+\[la]https://serversforhackers.com/editions/2014/11/04/pm2/\[ra]
+.IP \(bu 2
+\[la]http://www.allaboutghost.com/keep-ghost-running-with-pm2/\[ra]
+.IP \(bu 2
+\[la]http://blog.ponyfoo.com/2013/09/19/deploying-node-apps-to-aws-using-grunt\[ra]
+.IP \(bu 2
+\[la]http://www.allaboutghost.com/keep-ghost-running-with-pm2/\[ra]
+.IP \(bu 2
+\[la]http://bioselemental.com/keeping-ghost-alive-with-pm2/\[ra]
+.IP \(bu 2
+\[la]http://blog.chyld.net/installing-ghost-on-ubuntu-13-10-aws-ec2-instance-with-pm2/\[ra]
+.IP \(bu 2
+\[la]http://blog.marvinroger.fr/gerer-ses-applications-node-en-production-pm2/\[ra]
+.IP \(bu 2
+\[la]https://www.codersgrid.com/2013/06/29/pm2-process-manager-for-node-js/\[ra]
+.IP \(bu 2
+\[la]http://www.z-car.com/blog/programming/how-to-rotate-logs-using-pm2-process-manager-for-node-js\[ra]
+.IP \(bu 2
+\[la]http://yosoftware.com/blog/7-tips-for-a-node-js/\[ra]
+.IP \(bu 2
+\[la]https://www.exponential.io/blog/nodeday-2014-moving-a-large-developer-workforce-to-nodejs\[ra]
+.IP \(bu 2
+\[la]http://blog.rapsli.ch/posts/2013/2013-10-17-node-monitor-pm2.html\[ra]
+.IP \(bu 2
+\[la]https://coderwall.com/p/igdqyw\[ra]
+.IP \(bu 2
+\[la]http://revdancatt.com/2013/09/17/node-day-1-getting-the-server-installing-node-and-pm2/\[ra]
+.IP \(bu 2
+\[la]https://medium.com/tech-talk/e7c0b0e5ce3c\[ra]
+.RE
+.SH Contributors
+.PP
+Contributors
+\[la]https://github.com/Unitech/PM2/graphs/contributors\[ra]
+.SH Sponsors
+.PP
+Thanks to Devo.ps
+\[la]http://devo.ps/\[ra] and Wiredcraft
+\[la]http://wiredcraft.com/\[ra] for their knowledge and expertise.
+.PP
+<a name="a15"/>
+.SH License
+.PP
+Files in \fB\fClib/\fR are made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
+Except the file \fB\fClib/CLI.js\fR who is made under the terms of the Apache V2 license.
