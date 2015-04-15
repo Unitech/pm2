@@ -9,6 +9,9 @@
 
 # 0.12.11 (Next release)
 
+- New: pm2.start() now handles json objects as param
+- Added: timestamps to KM agent logs
+- Fix: now properly closes all fds after logging has finished.
 - New command: pm2 gc (manually triggers garbage collection for PM2)
 - VersioningManagment: exec() timeout configurable via .json
 - Fix #1143 :
