@@ -261,7 +261,7 @@ describe('PM2 programmatic calls', function() {
   describe('start OR restart', function() {
     beforeEach(function(done) {
       pm2.delete('all', function(err, ret) {
-        done();
+        setTimeout(done, 1000);
       });
     });
 
