@@ -62,6 +62,12 @@
   "merge_logs": {
     "type": "boolean"
   },
+  "vizion" : {
+    "type": "boolean"
+  },
+  "autorestart" : {
+    "type": "boolean"
+  },
   "watch": {
     "type": [
       "boolean",
