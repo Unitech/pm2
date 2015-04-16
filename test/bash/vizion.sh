@@ -7,6 +7,8 @@ cd $file_path
 
 echo "################## VIZION ###################"
 
+mv git .git
+
 ###############
 $pm2 kill
 $pm2 start killtoofast.js
@@ -25,3 +27,5 @@ $pm2 start no-vizion.json
 sleep 1
 
 should 'should not have versioning metadata' 'versioning: \[Object\]' 0
+
+mv .git git
