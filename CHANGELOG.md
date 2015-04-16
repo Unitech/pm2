@@ -8,10 +8,10 @@
 # 0.12.11 (Current stable)
 
 - `--no-autorestart` flag : starts an app without automatic restart feature
-`"autorestart" : false` in JSON declaration
+(`"autorestart" : false` in JSON declaration)
 
 - `--no-vizion` flag : starts an app completely without vizion features
-`"vizion" : false` in JSON declaration
+(`"vizion" : false` in JSON declaration)
 
 - Fix #1146 : add module._initPaths() on ProcessContainer.js so it forces each
 new process to take the current NODE_PATH env value in account

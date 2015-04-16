@@ -92,7 +92,7 @@ $pm2 start killtoofast.js --no-autorestart
 should 'should not restart' 'restart_time: 0' 1
 
 $pm2 delete all
-$pm2 start no-restart.js
+$pm2 start no-restart.json
 should 'should not restart' 'restart_time: 0' 1
 
 #$pm2 web
