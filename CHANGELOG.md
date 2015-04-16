@@ -7,8 +7,10 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.11 (Next release)
+# 0.12.11 (Current stable)
 
+- Fix #1146 : add module._initPaths() on ProcessContainer.js so it forces each
+new process to take the current NODE_PATH env value in account
 - New: pm2.start() now handles json objects as param
 - Added: timestamps to KM agent logs
 - Fix: now properly closes all fds after logging has finished.
@@ -22,7 +24,7 @@ Each app will have a value in process.env.NODE_APP_INSTANCE which will be 0 for 
 Negative arguments to '-i' are substracted to CPU cores number.
 E.g: 'pm2 start app.js -i -3' in a 8 cpus environment will start 5 instances (8 - 3).
 
-# 0.12.10 (Current Stable)
+# 0.12.10
 
 - Fix : PM2 interactor doesn't send data about dead processes ('_old_') anymore.
 - Fix #1137 : Safe params for 'pm2 list' so cli-table won't fail
