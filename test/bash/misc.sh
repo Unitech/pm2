@@ -10,7 +10,7 @@ echo -e "\033[1mRunning tests:\033[0m"
 #
 # Max memory auto restart option
 #
-# -max-memory-restart option && maxMemoryRestart (via JSON file)
+# --max-memory-restart option && maxMemoryRestart (via JSON file)
 #
 $pm2 kill
 PM2_WORKER_INTERVAL=1000 $pm2 start big-array.js --max-memory-restart="20M"
@@ -105,3 +105,16 @@ $pm2 start echo.coffee -i 1
 
 should 'process should not have been restarted' 'restart_time: 0' 1
 should 'process should be online' "status: 'online'" 1
+
+########### garbage collection
+
+$pm2 list
+
+OUT_LOG=`$pm2 gc`
+
+if [ "$OUT_LOG" = "[PM2] Garbage collection manually triggered" ]
+then
+    success "garbage collector manually triggered"
+else
+    fail "garbage collector could not be triggered"
+fi

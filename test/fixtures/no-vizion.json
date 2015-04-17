@@ -1,0 +1,7 @@
+[
+  {
+    "name"        : "no_vizion",
+    "script"      : "./killtoofast.js",
+    "vizion" : false
+  }
+]

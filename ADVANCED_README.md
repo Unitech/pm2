@@ -143,6 +143,8 @@ $ pm2 updatePM2          # Update in memory pm2
 $ pm2 ping               # Ensure pm2 daemon has been launched
 $ pm2 sendSignal SIGUSR2 my-app # Send system signal to script
 $ pm2 start app.js --no-daemon
+$ pm2 start app.js --no-vizion
+$ pm2 start app.js --no-autorestart
 ```
 
 ## Different ways to launch a process
@@ -227,6 +229,8 @@ Options:
    --ignore-watch <folders|files>       folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules "some scripts""
    --node-args <node_args>              space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"
    --no-color                           skip colors
+   --no-vizion                          skip vizion features (versioning control)
+   --no-autorestart                     do not automatically restart apps
 ```
 
 
@@ -319,8 +323,8 @@ JSON:
 
 Units can be K(ilobyte), M(egabyte), G(igabyte).
 
->
-Actually the way it works when you type : 
+
+Actually the way it works when you type:
 `pm2 start app.js --max-memory-restart 50M`
 commander module will transform it to `maxMemoryRestart: "50M"`, then after being processed by PM2 logic it will become an env variable as follows `max_memory_restart : 52428800 // in bytes this time`.
 But since programmatic interface doesn't use commander you have to give it raw-mode : `maxMemoryRestart`.
@@ -378,6 +382,12 @@ You can also reload all logs via the command line with:
 
 ```bash
 $ pm2 reloadLogs
+```
+
+### Manually triggering garbage collection for PM2
+
+```bash
+$ pm2 gc
 ```
 
 ### Options
@@ -638,6 +648,8 @@ You can define parameters for your apps in `processes.json`:
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "ignore_watch" : ["[\\/\\\\]\\./", "node_modules"],
     "watch"       : true,
+    "vizion"      : true,
+    "autorestart" : true,
     "node_args"   : "--harmony",
     "cwd"         : "/this/is/a/path/to/start/script",
     "env": {
@@ -718,6 +730,8 @@ Note that if you execute `pm2 start node-app-2` again, it will spawn an addition
   "merge_logs"       : true,
   "exec_interpreter" : "node",
   "exec_mode"        : "fork",
+  "autorestart"      : false, // enable/disable automatic restart when an app crashes or exits
+  "vizion"           : false, // enable/disable vizion features (versioning control)
   "env": {
     "NODE_ENV": "production",
     "AWESOME_SERVICE_API_TOKEN": "xxx"
@@ -1154,7 +1168,7 @@ pm2.connect(function(err) {
     </tr>
     <tr>
       <td><b>Start</b></td>
-      <td>pm2.start(script_path|json_path, options, fn(err, proc){})</td>
+      <td>pm2.start(script_path|json_object|json_path, options, fn(err, proc){})</td>
     </tr>
     <tr>
       <td>Options </td>
