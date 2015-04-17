@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.7",
+  "version": "0.12.11",
   "engines": {
     "node": ">=0.10"
   },
@@ -143,7 +143,7 @@
   "dependencies": {
     "async"               : "~0.9.0",
     "chalk"               : "~0.5.1",
-    "chokidar"            : "~0.12.0",
+    "chokidar"            : "^1.0.0",
     "cli-table"           : "0.3.1",
     "coffee-script"       : "1.8.0",
     "colors"              : "1.0.3",
@@ -166,7 +166,7 @@
 
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",
-    "semver"              : "4.3.1"
+    "semver"              : "4.3.3"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",

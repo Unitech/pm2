@@ -27,7 +27,6 @@ var csts = {
   PM2_MODULE_CONF_FILE   : p.join(PM2_ROOT_PATH, 'module_conf.json'),
 
   CODE_UNCAUGHTEXCEPTION : 100,
-  CONCURRENT_ACTIONS     : 1,
   PREFIX_MSG             : chalk.green('[PM2] '),
   PREFIX_MSG_ERR         : chalk.red('[PM2][ERROR] '),
   PREFIX_MSG_MOD         : chalk.green('[PM2][Module] '),
@@ -74,7 +73,8 @@ var csts = {
  */
 var default_conf = util._extend({
   PM2_ROOT_PATH: PM2_ROOT_PATH,
-  WORKER_INTERVAL: process.env.PM2_WORKER_INTERVAL || 30000
+  WORKER_INTERVAL: process.env.PM2_WORKER_INTERVAL || 30000,
+  KILL_TIMEOUT: process.env.PM2_KILL_TIMEOUT || 800
 }, require('./lib/samples/sample-conf.js')(PM2_ROOT_PATH));
 
 /**

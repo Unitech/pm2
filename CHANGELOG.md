@@ -1,3 +1,67 @@
+# Coming Next
+
+- `--no-logs` flag : doesn't save any logs (some people use their own logging system)
+- dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
+- YAML support for apps declarations
+- Improve app declaration file parsing (log_file, out_file, error_file)
+
+# 0.12.11 (Current stable)
+
+- `--no-autorestart` flag : starts an app without automatic restart feature
+(`"autorestart" : false` in JSON declaration)
+
+- `--no-vizion` flag : starts an app completely without vizion features
+(`"vizion" : false` in JSON declaration)
+
+- Fix #1146 : add module._initPaths() on ProcessContainer.js so it forces each
+new process to take the current NODE_PATH env value in account
+
+- New: pm2.start() now handles json objects as param
+
+- Added: timestamps to KM agent logs
+
+- Fix: now properly closes all fds after logging has finished.
+
+- New command: pm2 gc (manually triggers garbage collection for PM2)
+
+- VersioningManagment: exec() timeout configurable via .json
+
+- Fix #1143 :
+If we start let's say 4 instances of an app (cluster_mode),
+Each app will have a value in process.env.NODE_APP_INSTANCE which will be 0 for the first one,
+1, 2 and 3 for the next ones.
+
+- Fix #1154 :
+Negative arguments to '-i' are substracted to CPU cores number.
+E.g: 'pm2 start app.js -i -3' in a 8 cpus environment will start 5 instances (8 - 3).
+
+# 0.12.10
+
+- Fix : PM2 interactor doesn't send data about dead processes ('_old_') anymore.
+- Fix #1137 : Safe params for 'pm2 list' so cli-table won't fail
+- Refactored reverse interaction with keymetrics for better stability and more verbosity on Rollback/Pull/Upgrade operations
+
+# 0.12.9
+
+- Fix #1124 : PM2_PROGRAMMATIC flag wasn't handled properly
+- Fix #1121 : NODE_PATH before PATH so custom node versions come first
+- Fix #1119 : Safe params so cli-table won't fail
+- Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
+- Fix #1111 : More verbosity on writeFileSync errors
+- New env setting: PM2_KILL_TIMEOUT (ms) : time to wait before a process is considered dead
+- New env setting: PM2_CONCURRENT_ACTIONS : use it with care, value bigger than 1 is considered unstable
+- Refactored reload/gracefulReload for better stability
+
+# 0.12.8
+
+- Fix : `Channel closed error`
+- Fix : `Resource leak error`
+- Fix#1091 : when passing a wrong formated number to `-i` infinite loop
+- Fix #1068 #1096 : restart fails after reloadLogs()
+- New : When PM2 is being killed, all restarts are blocked to avoid conflict
+- New : PM2 dumps the process list before exiting if it is killed by signal
+- Refactored stop/restart for better stability
+
 # 0.12.7
 
 - pm2 logs : Now shows merged logs

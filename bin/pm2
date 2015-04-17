@@ -44,13 +44,16 @@ commander.version(pkg.version)
   .option('--ignore-watch <folders|files>', 'folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules \"some scripts\""')
   .option('--node-args <node_args>', 'space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"')
   .option('--no-color', 'skip colors')
+  .option('--no-vizion', 'start an app without vizion feature (versioning control)')
+  .option('--no-autorestart', 'start an app without automatic restart')
+
   .usage('[cmd] app');
 
 commander.on('--help', function() {
   console.log('  Basic Examples:');
   console.log('');
   console.log('    Start an app using all CPUs available + set a name :');
-  console.log('    $ pm2 start app.js -i max --name "api"');
+  console.log('    $ pm2 start app.js -i 0 --name "api"');
   console.log('');
   console.log('    Restart the previous app launched, by name :');
   console.log('    $ pm2 restart api');
@@ -161,10 +164,10 @@ commander.command('start <file|json|stdin>')
         process.stdin.pause();
         CLI.startJson(cmd, commander, 'pipe');
       });
-    } else if (cmd.slice(-5) == '.json')
-      CLI.startJson(cmd, commander, 'file');
-    else
+    }
+    else {
       CLI.start(cmd, commander);
+    }
   });
 
 commander.command('deploy <file|environment>')
@@ -592,6 +595,15 @@ commander.command('backward <name>')
   .description('downgrades repository to the previous commit for a given app')
   .action(function(pm2_name) {
     CLI.backward(pm2_name);
+  });
+
+//
+// Force PM2 to trigger garbage collection
+//
+commander.command('gc')
+  .description('force PM2 to trigger garbage collection')
+  .action(function() {
+    CLI.forceGc();
   });
 
 //

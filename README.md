@@ -1,15 +1,21 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
-
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
-PM2 is constantly assailed by [more than 300 tests](https://travis-ci.org/Unitech/PM2).
+Starting an application in production mode is as easy as:
+
+```bash
+$ pm2 start app.js
+```
+
+PM2 is constantly assailed by [more than 400 tests](https://travis-ci.org/Unitech/PM2).
 
 Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
 Compatible with CoffeeScript.
-Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
+Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
-[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2) [![Inline docs](http://inch-ci.org/github/unitech/pm2.svg?branch=master)](http://inch-ci.org/github/unitech/pm2)
+[![NPM version](https://badge.fury.io/js/pm2.png)](http://badge.fury.io/js/pm2) [![Gitter](https://badges.gitter.im/Join Chat.svg)] (https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://api.travis-ci.org/Unitech/PM2.png?branch=master)](https://travis-ci.org/Unitech/PM2) [![Inline docs](http://inch-ci.org/github/unitech/pm2.svg?branch=master)](http://inch-ci.org/github/unitech/pm2)
+
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
@@ -26,6 +32,8 @@ $ npm install pm2 -g
 ```bash
 $ pm2 start app.js
 ```
+
+Your app is now put in background, kept alive forever and monitored.
 
 ## Main features
 
@@ -92,9 +100,11 @@ $ pm2 start app.js -i max  # Enable load-balancer and cluster features
 $ pm2 reload all           # Reload all apps in 0s manner
 ```
 
+[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
+
 ### Startup script generation
 
-PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
+PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.  Execute the startup command only as the user to be running the PM2 daemon.
 
 ```bash
 $ pm2 startup
@@ -110,29 +120,30 @@ To save a process list just do:
 $ pm2 save
 ```
 
-## Monitoring dashboard
+## Keymetrics monitoring
 
-![Dashboard](http://leapfrogui.com/controlfrog/img/cf-layout-1.png)
+[![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)](https://app.keymetrics.io/#/register)
 
-We are working on Keymetrics, a monitoring SaaS for PM2. It's still in beta, feel free to give it a try:
+If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps accross servers.
+Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.keymetrics.io/#/register)
 
 Thanks in advance and we hope that you like PM2!
 
-## Other PM2 features
+## More PM2 features
 
-- [Watch & Restart](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a890)
-- [JSON application declaration](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a10)
-- [Using PM2 in your code](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#programmatic-example)
-- [Deployment workflow](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#deployment)
+- [Watch & Restart](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#watch--restart)
+- [JSON application declaration](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration)
+- [Using PM2 in your code](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#programmatic-example)
+- [Deployment workflow](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment)
 - [Startup script generation (SystemV/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#startup-script)
-- [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#9)
-- [GracefullReload](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#a690)
+- [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a9)
+- [GracefullReload](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a690)
 
-## Learn more about PM2
+## PM2 Full documentation
 
-[Advanced README.md](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md)
+[Advanced README.md](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md)
 
 ## Changelog
 
@@ -144,7 +155,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## License
 
-Files in `lib/` are made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
-Except the file `lib/CLI.js` who is made under the terms of the Apache V2 license.
+PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
+For other license [contact us](https://keymetrics.io/contact/).
 
 [![Analytics](https://ga-beacon.appspot.com/UA-51734350-4/Unitech/pm2?pixel)](https://github.com/Unitech/pm2)
