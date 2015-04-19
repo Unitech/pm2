@@ -10,8 +10,16 @@ Internally it embeds the NPM install procedure. So a PM2 module will be publishe
 ## Basics
 
 ```bash
+# Install module
 $ pm2 install npm-module
+
+# Uninstall module
 $ pm2 uninstall npm-module
+
+# Update module
+$ pm2 install npm-module
+
+# Publish current folder module
 $ pm2 publish
 ```
 
@@ -98,9 +106,18 @@ These variables are accessible in the front end of Keymetrics.
 ## Configuration
 
 ```bash
+$ pm2 conf module.option [value]
+```
+
+OR
+
+```bash
 $ pm2 set module:option_name <value>
+$ pm2 get module:option_name <value>
 $ pm2 unset module:option_name
 ```
+
+The separator can be both `:` or `.`
 
 The key will become an environment variable accessible inside the module or via the object returned by `pmx.initModule()`.
 

@@ -312,11 +312,27 @@ commander.command('publish')
 
 commander.command('set <key> <value>')
   .description('sets the specified config <key> <value>')
-  .action(CLI.set);
+  .action(function(key, value) {
+    CLI.set(key, value);
+  });
+
+commander.command('get <key>')
+  .description('get value for <key>')
+  .action(function(key) {
+    CLI.get(key);
+  });
+
+commander.command('conf <key> [value]')
+  .description('clears the specified config <key>')
+  .action(function(key, value) {
+    CLI.conf(key, value);
+  });
 
 commander.command('unset <key>')
   .description('clears the specified config <key>')
-  .action(CLI.unset);
+  .action(function(key) {
+    CLI.unset(key);
+  });
 
 //
 // Interact
