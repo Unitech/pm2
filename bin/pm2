@@ -323,7 +323,13 @@ commander.command('get <key>')
   });
 
 commander.command('conf <key> [value]')
-  .description('clears the specified config <key>')
+  .description('get / set module config values')
+  .action(function(key, value) {
+    CLI.conf(key, value);
+  });
+
+commander.command('config <key> [value]')
+  .description('get / set module config values')
   .action(function(key, value) {
     CLI.conf(key, value);
   });
