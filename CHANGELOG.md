@@ -5,6 +5,11 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.12.12 (Coming next)
+
+- Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
+
+
 # 0.12.11 (Current stable)
 
 - `--no-autorestart` flag : starts an app without automatic restart feature
