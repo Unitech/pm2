@@ -117,7 +117,7 @@ $ pm2 monit              # Monitor all processes
 
 # Logs
 
-$ pm2 logs               # Display all processes logs in streaming
+$ pm2 logs [--raw]       # Display all processes logs in streaming
 $ pm2 ilogs              # Advanced termcaps interface to display logs
 $ pm2 flush              # Empty all log file
 $ pm2 reloadLogs         # Reload all logs
@@ -362,6 +362,7 @@ Displaying logs of specified process or all processes in realtime:
 
 ```bash
 $ pm2 logs
+$ pm2 logs --raw
 $ pm2 logs big-api
 $ pm2 flush # Clear all the logs
 ```

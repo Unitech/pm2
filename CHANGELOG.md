@@ -8,7 +8,7 @@
 # 0.12.12 (Coming next)
 
 - Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
-
+- `pm2 logs --raw` flag : show logs in raw format
 
 # 0.12.11 (Current stable)
 
