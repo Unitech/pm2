@@ -35,8 +35,17 @@ mocha ./test/programmatic/god.mocha.js
 spec "God test"
 mocha ./test/programmatic/satan.mocha.js
 spec "Satan test"
+
+#
+# Programmatic API test
+#
 mocha ./test/programmatic/programmatic.js
 spec "Programmatic test"
+mocha ./test/programmatic/logs.js
+spec "Logs test"
+mocha ./test/programmatic/max_memory_limit.js
+spec "Max memory tests"
+
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
 mocha ./test/programmatic/configuration.mocha.js
@@ -50,8 +59,3 @@ mocha ./test/interface/bus.spec.mocha.js
 spec "Protocol communication test"
 mocha ./test/interface/bus.fork.spec.mocha.js
 spec "Protocol communication test"
-
-echo "   ______  ________________________"
-echo "  / __/ / / / ___/ ___/ __/ __/ __/"
-echo " _\ \/ /_/ / /__/ /__/ _/_\ \_\ \  "
-echo "/___/\____/\___/\___/___/___/___/  "

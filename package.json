@@ -95,7 +95,7 @@
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh"
+    "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
   },
   "keywords": [
     "cli",
