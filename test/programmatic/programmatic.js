@@ -372,4 +372,28 @@ describe('PM2 programmatic calls', function() {
 
   });
 
+  describe('Connect / Disconnect', function() {
+    it('should disconnect', function() {
+      pm2.disconnect();
+    });
+
+    it('should connect', function(done) {
+      pm2.connect(function() {
+        done();
+      });
+    });
+
+    it('should disconnect with callback', function(done) {
+      pm2.disconnect(done);
+    });
+
+    it('should connect', function(done) {
+      pm2.connect(function() {
+        done();
+      });
+    });
+
+
+  });
+
 });
