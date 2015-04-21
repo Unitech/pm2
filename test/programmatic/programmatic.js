@@ -392,8 +392,6 @@ describe('PM2 programmatic calls', function() {
         done();
       });
     });
-
-
   });
 
 });
