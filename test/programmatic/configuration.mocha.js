@@ -82,6 +82,38 @@ describe('Configuration via SET / GET tests', function() {
       });
     });
 
+    it('should get the val with .get', function(done) {
+      Configuration.get('module-name.var1', function(err, data) {
+        should(err).not.exists;
+        data.should.eql('val1');
+        done();
+      });
+    });
+
+    it('should get the val with .get', function(done) {
+      Configuration.get('module-name.var2', function(err, data) {
+        should(err).not.exists;
+        data.should.eql('val2');
+        done();
+      });
+    });
+
+    it('should NOT get the val with .get', function(done) {
+      Configuration.get('moduleasd-name.var2', function(err, data) {
+        should(err).exists;
+        should(data).be.null;
+        done();
+      });
+    });
+
+    it('should NOT get the val with .get', function(done) {
+      Configuration.get('module-name.var3', function(err, data) {
+        should(err).exists;
+        should(data).be.null;
+        done();
+      });
+    });
+
   });
 
   describe('Sub value system with :', function() {

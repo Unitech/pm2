@@ -52,3 +52,14 @@ $pm2 start env-ecosystem.json --env production
 sleep 0.5
 grep "No worries!" out-env.log &> /dev/null
 spec "should use deploy.production.env.TEST_VARIABLE"
+
+
+$pm2 kill
+$pm2 l
+NODE_PATH='/test' $pm2 start local_require.js
+should 'should have loaded the right globalPaths' 'restart_time: 0' 1
+
+$pm2 kill
+$pm2 l
+NODE_PATH='/test2' $pm2 start local_require.js -i 1
+should 'should have loaded the right globalPaths' 'restart_time: 0' 1
