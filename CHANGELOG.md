@@ -8,6 +8,7 @@
 # 0.12.12 (Coming next)
 
 - Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
+- `pm2 logs --raw` flag : show logs in raw format
 - New command: pm2 scale <app_name> <number> - scale up/down an application
 - Added: Expose kill method programmatically
 - Added: Call disconnect without a function
