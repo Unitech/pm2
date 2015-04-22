@@ -29,7 +29,7 @@ describe('Cluster programmatic tests', function() {
       pm2.delete('all', done);
     });
 
-    it('should restart process based on memory limit (UGLY WAY)', function(done) {
+    it('should start 4 processes', function(done) {
       pm2.start({
         script    : 'test/fixtures/echo.js',
         instances : 4
@@ -44,7 +44,7 @@ describe('Cluster programmatic tests', function() {
       });
     });
 
-    it('should restart process based on memory limit (JSON WAY)', function(done) {
+    it('should start maximum process depending on number of CPUs', function(done) {
       pm2.start({
         script    : 'test/fixtures/echo.js',
         instances : 0
@@ -59,7 +59,7 @@ describe('Cluster programmatic tests', function() {
       });
     });
 
-    it('should restart process based on memory limit (JSON WAY)', function(done) {
+    it('should start maximum process depending on number of CPUs minus 1', function(done) {
       pm2.start({
         script    : 'test/fixtures/echo.js',
         instances : -1
@@ -75,7 +75,7 @@ describe('Cluster programmatic tests', function() {
     });
   });
 
-  describe('Test methods', function() {
+  describe('Action methods', function() {
     before(function(done) {
       pm2.start({
         script    : 'test/fixtures/child.js',
