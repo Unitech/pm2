@@ -22,9 +22,14 @@ $pm2 restart all.json
 should 'should stop processes' 'online' 6
 should 'should all script been restarted one time' 'restart_time: 1' 6
 
+########## PIPE command
+
 $pm2 kill
 
-sleep 2
+cat all.json | $pm2 start -
+should 'should start processes' 'online' 6
+
+$pm2 kill
 
 #
 # CWD OPTION
