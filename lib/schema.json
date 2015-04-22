@@ -33,6 +33,9 @@
   "port": {
     "type": "number"
   },
+  "auto_gc" : {
+    "type" : "boolean"
+  },
   "log_file": {
     "type": [
       "boolean",
