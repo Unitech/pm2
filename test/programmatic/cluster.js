@@ -42,6 +42,7 @@ describe('Cluster programmatic tests', function() {
       });
     });
 
+
     // Travis PB
     it.skip('should start maximum process depending on number of CPUs', function(done) {
       pm2.start({
