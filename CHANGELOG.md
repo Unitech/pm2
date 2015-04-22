@@ -5,6 +5,11 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.12.13 (In progress)
+
+- Enhanced: Call reload instead of restart when max-memory-limit reached
+- Enhanced: Modules are compatible ES6 by default by adding --harmony flag
+
 # 0.12.12 (Current stable)
 
 - `pm2 logs --raw` flag : show logs in raw format
