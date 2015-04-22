@@ -9,6 +9,18 @@
 
 - Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
 - `pm2 logs --raw` flag : show logs in raw format
+- New command: pm2 scale <app_name> <number> - scale up/down an application
+- Added: Expose kill method programmatically
+- Added: Call disconnect without a function
+- Added: Programmatic call to .connect can no take no-daemon-option
+- Fixed: starting a JSON programmatically return a process list coming from God
+- Fixed: Reflect dump functions from CLI and God
+- Enhanced: New CLI API for configuring modules (pm2 conf module.option [value])
+- Added: Using Keymetrics harden PM2 by enabling a WatchDog that auto restart PM2 in case of crash
+- Added: Expose pm2 gc programmatically
+- Added: pm2 install <module_name> update the module
+- Enhanced: 4 new test suits for PM2 programmatics call
+- Enhanced: Documentation restructured
 
 # 0.12.11 (Current stable)
 

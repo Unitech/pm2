@@ -162,7 +162,7 @@ commander.command('start <file|json|stdin>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (cmd) {
         process.stdin.pause();
-        CLI.startJson(cmd, commander, 'pipe');
+        CLI._startJson(cmd, commander, 'pipe');
       });
     }
     else {
@@ -212,6 +212,15 @@ commander.command('restart <id|name|all|json|stdin>')
   .description('restart a process')
   .action(function(param) {
     CLI.restart(param);
+  });
+
+//
+// Scale up/down a process in cluster mode
+//
+commander.command('scale <app_name> <total_number>')
+  .description('scale up/down a process in cluster mode depending on total_number param')
+  .action(function(app_name, number) {
+    CLI.scale(app_name, number);
   });
 
 //

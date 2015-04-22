@@ -71,14 +71,4 @@ spec "vizion features (versioning control)"
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
 
-# if [ -n "`which git`" ]; then
-#     bash ./test/bash/pull.sh
-#     spec "Testing pull/forward/backward CLI commands"
-# fi
-
-echo "   ______  ________________________"
-echo "  / __/ / / / ___/ ___/ __/ __/ __/"
-echo " _\ \/ /_/ / /__/ /__/ _/_\ \_\ \  "
-echo "/___/\____/\___/\___/___/___/___/  "
-
 $pm2 kill
