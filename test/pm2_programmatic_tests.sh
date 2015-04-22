@@ -47,6 +47,9 @@ mocha ./test/programmatic/max_memory_limit.js
 spec "Max memory tests"
 mocha ./test/programmatic/cluster.js
 spec "Cluster tests"
+mocha ./test/programmatic/misc_commands.js
+spec "MISC tests"
+
 
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
