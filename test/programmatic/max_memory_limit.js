@@ -55,13 +55,50 @@ describe('Max memory restart programmatic', function() {
         setTimeout(function() {
           pm2.list(function(err, ret) {
             should(err).be.null;
-            console.log(ret[0]);
             ret[0].pm2_env.restart_time.should.not.eql(0);
             done();
           });
         }, 3000);
       });
     });
+
+    it('should restart process based on memory limit (JSON WAY)', function(done) {
+      pm2.start({
+        script : process.cwd() + '/test/fixtures/big-array.js',
+        max_memory_restart : '10M',
+        exec_mode : 'cluster'
+      }, function(err, data) {
+        should(err).be.null;
+
+        setTimeout(function() {
+          pm2.list(function(err, ret) {
+            should(err).be.null;
+            ret[0].pm2_env.restart_time.should.not.eql(0);
+            done();
+          });
+        }, 3000);
+      });
+    });
+
+    it('should restart CLUSTER process based on memory limit (JSON WAY)', function(done) {
+      pm2.start({
+        script : process.cwd() + '/test/fixtures/big-array.js',
+        max_memory_restart : '10M',
+        exec_mode : 'cluster'
+      }, function(err, data) {
+        should(err).be.null;
+
+        setTimeout(function() {
+          pm2.list(function(err, ret) {
+            should(err).be.null;
+            ret[0].pm2_env.restart_time.should.not.eql(0);
+            done();
+          });
+        }, 3000);
+      });
+    });
+
+
   });
 
 });
