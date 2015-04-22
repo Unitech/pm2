@@ -27,6 +27,8 @@ bash ./test/bash/json_file.sh
 spec "JSON file test"
 bash ./test/bash/watch.sh
 spec "Watch feature"
+bash ./test/bash/json_watch.sh
+spec "JSON Watch feature"
 bash ./test/bash/harmony.sh
 spec "Harmony test"
 bash ./test/bash/log-custom.sh
