@@ -127,5 +127,48 @@ describe('Cluster programmatic tests', function() {
     });
   });
 
+  describe('Scaling feature', function() {
+    before(function(done) {
+      pm2.delete('all', function() {
+        pm2.start({
+          script    : 'test/fixtures/child.js',
+          instances : 4,
+          name      : 'child'
+        }, done);
+      });
+    });
+
+    it('should scale up application to 8', function(done) {
+      pm2.scale('child', 8, function(err, procs) {
+        should(err).be.null;
+
+        pm2.list(function(err, procs) {
+          should(err).be.null;
+          procs.length.should.eql(8);
+          done();
+        });
+      });
+    });
+
+    it('should scale down application to 2', function(done) {
+      pm2.scale('child', 2, function(err, procs) {
+        should(err).be.null;
+
+        pm2.list(function(err, procs) {
+          should(err).be.null;
+          procs.length.should.eql(2);
+          done();
+        });
+      });
+    });
+
+    it('should do nothing', function(done) {
+      pm2.scale('child', 2, function(err, procs) {
+        should(err).not.be.null;
+        done();
+      });
+    });
+  });
+
 
 });

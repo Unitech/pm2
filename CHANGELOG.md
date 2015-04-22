@@ -8,6 +8,7 @@
 # 0.12.12 (Coming next)
 
 - Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
+- New command: pm2 scale <app_name> <number> - scale up/down an application
 - Added: Expose kill method programmatically
 - Added: Call disconnect without a function
 - Added: Programmatic call to .connect can no take no-daemon-option
