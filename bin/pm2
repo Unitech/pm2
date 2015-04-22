@@ -162,7 +162,7 @@ commander.command('start <file|json|stdin>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (cmd) {
         process.stdin.pause();
-        CLI.startJson(cmd, commander, 'pipe');
+        CLI._startJson(cmd, commander, 'pipe');
       });
     }
     else {
