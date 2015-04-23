@@ -35,7 +35,7 @@ $ pm2 start app.js
 
 Your app is now put in background, kept alive forever and monitored.
 
-You can also use pm2 programmatically:
+Or you can use pm2 programmatically:
 
 ```javascript
 var pm2 = require('pm2');
