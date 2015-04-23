@@ -5,14 +5,19 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.12 (Coming next)
+# 0.12.13 (In progress)
 
-- Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
+- Enhanced: Call reload instead of restart when max-memory-limit reached
+- Enhanced: Modules are compatible ES6 by default by adding --harmony flag
+
+# 0.12.12 (Current stable)
+
 - `pm2 logs --raw` flag : show logs in raw format
 - New command: pm2 scale <app_name> <number> - scale up/down an application
+- Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
 - Added: Expose kill method programmatically
 - Added: Call disconnect without a function
-- Added: Programmatic call to .connect can no take no-daemon-option
+- Added: Programmatic call to .connect can now take no-daemon-option
 - Fixed: starting a JSON programmatically return a process list coming from God
 - Fixed: Reflect dump functions from CLI and God
 - Enhanced: New CLI API for configuring modules (pm2 conf module.option [value])
@@ -22,7 +27,7 @@
 - Enhanced: 4 new test suits for PM2 programmatics call
 - Enhanced: Documentation restructured
 
-# 0.12.11 (Current stable)
+# 0.12.11
 
 - `--no-autorestart` flag : starts an app without automatic restart feature
 (`"autorestart" : false` in JSON declaration)
