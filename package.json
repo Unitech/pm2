@@ -166,7 +166,7 @@
 
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",
-    "semver"              : "4.3.3"
+    "semver"              : "4.3.3",
     "sync-exec"           : "*",
     "ini"                 : "*"
   },
