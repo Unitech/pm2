@@ -1,7 +1,7 @@
 { 
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.8",
+  "version": "0.12.12",
   "engines": {
     "node": ">=0.10"
   },
@@ -95,7 +95,7 @@
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh"
+    "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
   },
   "keywords": [
     "cli",
@@ -143,7 +143,7 @@
   "dependencies": {
     "async"               : "~0.9.0",
     "chalk"               : "~0.5.1",
-    "chokidar"            : "~0.12.0",
+    "chokidar"            : "^1.0.0",
     "cli-table"           : "0.3.1",
     "coffee-script"       : "1.8.0",
     "colors"              : "1.0.3",
@@ -166,7 +166,7 @@
 
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",
-    "semver"              : "4.3.1",
+    "semver"              : "4.3.3"
     "sync-exec"           : "*",
     "ini"                 : "*"
   },

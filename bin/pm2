@@ -44,13 +44,16 @@ commander.version(pkg.version)
   .option('--ignore-watch <folders|files>', 'folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules \"some scripts\""')
   .option('--node-args <node_args>', 'space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"')
   .option('--no-color', 'skip colors')
+  .option('--no-vizion', 'start an app without vizion feature (versioning control)')
+  .option('--no-autorestart', 'start an app without automatic restart')
+
   .usage('[cmd] app');
 
 commander.on('--help', function() {
   console.log('  Basic Examples:');
   console.log('');
   console.log('    Start an app using all CPUs available + set a name :');
-  console.log('    $ pm2 start app.js -i max --name "api"');
+  console.log('    $ pm2 start app.js -i 0 --name "api"');
   console.log('');
   console.log('    Restart the previous app launched, by name :');
   console.log('    $ pm2 restart api');
@@ -159,12 +162,12 @@ commander.command('start <file|json|stdin>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (cmd) {
         process.stdin.pause();
-        CLI.startJson(cmd, commander, 'pipe');
+        CLI._startJson(cmd, commander, 'pipe');
       });
-    } else if (cmd.slice(-5) == '.json')
-      CLI.startJson(cmd, commander, 'file');
-    else
+    }
+    else {
       CLI.start(cmd, commander);
+    }
   });
 
 commander.command('deploy <file|environment>')
@@ -209,6 +212,15 @@ commander.command('restart <id|name|all|json|stdin>')
   .description('restart a process')
   .action(function(param) {
     CLI.restart(param);
+  });
+
+//
+// Scale up/down a process in cluster mode
+//
+commander.command('scale <app_name> <total_number>')
+  .description('scale up/down a process in cluster mode depending on total_number param')
+  .action(function(app_name, number) {
+    CLI.scale(app_name, number);
   });
 
 //
@@ -309,11 +321,33 @@ commander.command('publish')
 
 commander.command('set <key> <value>')
   .description('sets the specified config <key> <value>')
-  .action(CLI.set);
+  .action(function(key, value) {
+    CLI.set(key, value);
+  });
+
+commander.command('get <key>')
+  .description('get value for <key>')
+  .action(function(key) {
+    CLI.get(key);
+  });
+
+commander.command('conf <key> [value]')
+  .description('get / set module config values')
+  .action(function(key, value) {
+    CLI.conf(key, value);
+  });
+
+commander.command('config <key> [value]')
+  .description('get / set module config values')
+  .action(function(key, value) {
+    CLI.conf(key, value);
+  });
 
 commander.command('unset <key>')
   .description('clears the specified config <key>')
-  .action(CLI.unset);
+  .action(function(key) {
+    CLI.unset(key);
+  });
 
 //
 // Interact
@@ -532,14 +566,18 @@ commander.command('reloadLogs')
 // Log streaming
 //
 commander.command('logs [id|name]')
+  .option('--raw', 'logs without timestamps and other PM2 indicators')
   .option('--lines <N>', 'output the last N lines, instead of the last 20')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
     var line = 20;
+    var raw  = false;
     if(!isNaN(cmd.lines)){
       line = parseInt(cmd.lines);
     }
-    CLI.streamLogs(id, line);
+    if (cmd.parent.rawArgs.indexOf('--raw') !== -1)
+      raw = true;
+    CLI.streamLogs(id, line, raw);
   });
 
 commander.command('ilogs')
@@ -592,6 +630,15 @@ commander.command('backward <name>')
   .description('downgrades repository to the previous commit for a given app')
   .action(function(pm2_name) {
     CLI.backward(pm2_name);
+  });
+
+//
+// Force PM2 to trigger garbage collection
+//
+commander.command('gc')
+  .description('force PM2 to trigger garbage collection')
+  .action(function() {
+    CLI.forceGc();
   });
 
 //

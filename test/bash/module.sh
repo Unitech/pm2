@@ -22,6 +22,10 @@ $pm2 install pm2-probe
 spec "Should install a module"
 should 'should app be online' 'online' 1
 
+$pm2 install pm2-probe
+spec "Should update a module"
+should 'should app be online' 'online' 1
+
 ls ~/.pm2/node_modules/pm2-probe
 spec "Module should be installed"
 

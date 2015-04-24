@@ -1,10 +1,80 @@
 # Coming Next
 
-- `--no-vizion` flag : starts an app completely without vizion features
-- `--no-restart` flag : starts PM2 without automatic restart feature
+- `--no-logs` flag : doesn't save any logs (some people use their own logging system)
 - dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
+- YAML support for apps declarations
+- Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.8 (Current Stable)
+# 0.12.13 (In progress)
+
+- Enhanced: Call reload instead of restart when max-memory-limit reached
+- Enhanced: Modules are compatible ES6 by default by adding --harmony flag
+
+# 0.12.12 (Current stable)
+
+- `pm2 logs --raw` flag : show logs in raw format
+- New command: pm2 scale <app_name> <number> - scale up/down an application
+- Fix #1177 : no concurrent vizion.parse() for the same process event when it restarts
+- Added: Expose kill method programmatically
+- Added: Call disconnect without a function
+- Added: Programmatic call to .connect can now take no-daemon-option
+- Fixed: starting a JSON programmatically return a process list coming from God
+- Fixed: Reflect dump functions from CLI and God
+- Enhanced: New CLI API for configuring modules (pm2 conf module.option [value])
+- Added: Using Keymetrics harden PM2 by enabling a WatchDog that auto restart PM2 in case of crash
+- Added: Expose pm2 gc programmatically
+- Added: pm2 install <module_name> update the module
+- Enhanced: 4 new test suits for PM2 programmatics call
+- Enhanced: Documentation restructured
+
+# 0.12.11
+
+- `--no-autorestart` flag : starts an app without automatic restart feature
+(`"autorestart" : false` in JSON declaration)
+
+- `--no-vizion` flag : starts an app completely without vizion features
+(`"vizion" : false` in JSON declaration)
+
+- Fix #1146 : add module._initPaths() on ProcessContainer.js so it forces each
+new process to take the current NODE_PATH env value in account
+
+- New: pm2.start() now handles json objects as param
+
+- Added: timestamps to KM agent logs
+
+- Fix: now properly closes all fds after logging has finished.
+
+- New command: pm2 gc (manually triggers garbage collection for PM2)
+
+- VersioningManagment: exec() timeout configurable via .json
+
+- Fix #1143 :
+If we start let's say 4 instances of an app (cluster_mode),
+Each app will have a value in process.env.NODE_APP_INSTANCE which will be 0 for the first one,
+1, 2 and 3 for the next ones.
+
+- Fix #1154 :
+Negative arguments to '-i' are substracted to CPU cores number.
+E.g: 'pm2 start app.js -i -3' in a 8 cpus environment will start 5 instances (8 - 3).
+
+# 0.12.10
+
+- Fix : PM2 interactor doesn't send data about dead processes ('_old_') anymore.
+- Fix #1137 : Safe params for 'pm2 list' so cli-table won't fail
+- Refactored reverse interaction with keymetrics for better stability and more verbosity on Rollback/Pull/Upgrade operations
+
+# 0.12.9
+
+- Fix #1124 : PM2_PROGRAMMATIC flag wasn't handled properly
+- Fix #1121 : NODE_PATH before PATH so custom node versions come first
+- Fix #1119 : Safe params so cli-table won't fail
+- Fix #1099 : Bug when app name starts by digit (e.g '1-myApp')
+- Fix #1111 : More verbosity on writeFileSync errors
+- New env setting: PM2_KILL_TIMEOUT (ms) : time to wait before a process is considered dead
+- New env setting: PM2_CONCURRENT_ACTIONS : use it with care, value bigger than 1 is considered unstable
+- Refactored reload/gracefulReload for better stability
+
+# 0.12.8
 
 - Fix : `Channel closed error`
 - Fix : `Resource leak error`

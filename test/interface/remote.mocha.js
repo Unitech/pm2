@@ -106,7 +106,8 @@ describe('Test remote PM2 actions', function() {
       fs.unlinkSync(cst.INTERACTION_CONF);
 
       pm2.kill();
-      done();
+
+      pm2.on('exit', function() {done()});
     });
   });
 
