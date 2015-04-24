@@ -35,6 +35,23 @@ $ pm2 start app.js
 
 Your app is now put in background, kept alive forever and monitored.
 
+Or you can use pm2 programmatically:
+
+```javascript
+var pm2 = require('pm2');
+
+pm2.connect(function() {
+  pm2.start({
+    script    : 'app.js',
+    exec_mode : 'cluster',
+    instances : 4,
+    max_memory_restart : '100M'
+  }, function(err, apps) {
+    pm2.disconnect();
+  });
+});
+```
+
 ## Main features
 
 ### Process management

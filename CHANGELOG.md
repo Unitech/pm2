@@ -7,8 +7,10 @@
 
 # 0.12.13 (In progress)
 
-- Enhanced: Call reload instead of restart when max-memory-limit reached
-- Enhanced: Modules are compatible ES6 by default by adding --harmony flag
+- Enhanced  : Call reload instead of restart when max-memory-limit reached
+- Enhanced  : Modules are compatible ES6 by default by adding --harmony flag
+- Enhanced  : Dump feature is now smarter
+- Fix #1206 : fix `pm2 logs` bug when merged_logs
 
 # 0.12.12 (Current stable)
 
