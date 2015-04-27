@@ -9,7 +9,7 @@ export PATH=%NODE_PATH%:$PATH
 export PM2_HOME="%HOME_PATH%"
 
 super() {
-    su - $USER -c "PATH=$PATH; $*"
+    su - $USER -c "PATH=$PATH; PM2_HOME=$PM2_HOME $*"
 }
 
 depend() {
