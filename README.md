@@ -1,6 +1,8 @@
 ![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
 
-PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
+**P**(rocess) **M**(anager) **2**
+
+PM2 is a production process manager for Node.js / io.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 Starting an application in production mode is as easy as:
 
@@ -34,6 +36,23 @@ $ pm2 start app.js
 ```
 
 Your app is now put in background, kept alive forever and monitored.
+
+Or you can use pm2 programmatically:
+
+```javascript
+var pm2 = require('pm2');
+
+pm2.connect(function() {
+  pm2.start({
+    script    : 'app.js',         // Script to be run
+    exec_mode : 'cluster',        // Allow your app to be clustered
+    instances : 4,                // Optional: Scale your app by 4
+    max_memory_restart : '100M'   // Optional: Restart your app if it reaches 100Mo
+  }, function(err, apps) {
+    pm2.disconnect();
+  });
+});
+```
 
 ## Main features
 
