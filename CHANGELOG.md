@@ -5,6 +5,10 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.12.14 (Next release)
+
+- `ilogs` is no longer part of PM2
+
 # 0.12.13 (Current Stable)
 
 - Enhanced  : PM2 doesn't leave processes behind when it crashes
