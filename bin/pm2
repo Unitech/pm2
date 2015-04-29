@@ -217,7 +217,7 @@ commander.command('restart <id|name|all|json|stdin>')
 //
 // Scale up/down a process in cluster mode
 //
-commander.command('scale <app_name> <total_number>')
+commander.command('scale <app_name> <number>')
   .description('scale up/down a process in cluster mode depending on total_number param')
   .action(function(app_name, number) {
     CLI.scale(app_name, number);
@@ -578,12 +578,6 @@ commander.command('logs [id|name]')
     if (cmd.parent.rawArgs.indexOf('--raw') !== -1)
       raw = true;
     CLI.streamLogs(id, line, raw);
-  });
-
-commander.command('ilogs')
-  .description('advanced interface to display logs')
-  .action(function(id) {
-    CLI.ilogs(id);
   });
 
 

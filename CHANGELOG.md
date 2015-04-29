@@ -5,14 +5,20 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.13 (In progress)
+# 0.12.14 (Next release)
 
+- `ilogs` is no longer part of PM2
+
+# 0.12.13 (Current Stable)
+
+- Enhanced  : PM2 doesn't leave processes behind when it crashes
 - Enhanced  : Call reload instead of restart when max-memory-limit reached
 - Enhanced  : Modules are compatible ES6 by default by adding --harmony flag
 - Enhanced  : Dump feature is now smarter
 - Fix #1206 : fix `pm2 logs` bug when merged_logs
+- Fix       : pm2 scale doesn't try to scale a fork_mode process
 
-# 0.12.12 (Current stable)
+# 0.12.12
 
 - `pm2 logs --raw` flag : show logs in raw format
 - New command: pm2 scale <app_name> <number> - scale up/down an application
