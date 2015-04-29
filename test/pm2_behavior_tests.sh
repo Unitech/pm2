@@ -67,6 +67,8 @@ bash ./test/bash/module.sh
 spec "module system"
 bash ./test/bash/vizion.sh
 spec "vizion features (versioning control)"
+bash ./test/bash/pmx_injection.sh
+spec "automatic pmx injection"
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
