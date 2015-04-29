@@ -580,12 +580,6 @@ commander.command('logs [id|name]')
     CLI.streamLogs(id, line, raw);
   });
 
-commander.command('ilogs')
-  .description('advanced interface to display logs')
-  .action(function(id) {
-    CLI.ilogs(id);
-  });
-
 
 //
 // Kill

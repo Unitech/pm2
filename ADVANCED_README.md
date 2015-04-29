@@ -118,7 +118,6 @@ $ pm2 monit              # Monitor all processes
 # Logs
 
 $ pm2 logs [--raw]       # Display all processes logs in streaming
-$ pm2 ilogs              # Advanced termcaps interface to display logs
 $ pm2 flush              # Empty all log file
 $ pm2 reloadLogs         # Reload all logs
 
