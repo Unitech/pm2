@@ -109,15 +109,17 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
-**Warning**: It's still a beta feature. If you want to use the embed cluster module or reload with 0s downtime, we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore!
+**Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore.
 
-With the cluster mode, PM2 enables load balancing between each worker.
+With the cluster mode, PM2 enables load balancing between multiple application to use all CPUs available in a server.
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
 
 ```bash
 $ pm2 start app.js -i max  # Enable load-balancer and cluster features
 
 $ pm2 reload all           # Reload all apps in 0s manner
+
+$ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
 ```
 
 [More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
