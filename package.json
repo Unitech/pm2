@@ -164,6 +164,9 @@
     "pm2-deploy"          : "latest",
     "pm2-multimeter"      : "0.1.2",
 
+    "babel"               : "^5.x",
+    "is-iojs"             : "1.1.0",
+
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",
     "semver"              : "4.3.3"
