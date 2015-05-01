@@ -109,6 +109,10 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
+Supported by all major Node.js frameworks and any Node.js / io.js applications
+
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
+
 **Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore.
 
 With the cluster mode, PM2 enables load balancing between multiple application to use all CPUs available in a server.
