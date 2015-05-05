@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.13",
+  "version": "0.12.14",
   "engines": {
     "node": ">=0.10"
   },
@@ -163,6 +163,9 @@
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "latest",
     "pm2-multimeter"      : "0.1.2",
+
+    "babel"               : "^5.x",
+    "is-iojs"             : "1.1.0",
 
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",

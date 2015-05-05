@@ -25,6 +25,7 @@ commander.version(pkg.version)
   .option('-m --mini-list', 'display a compacted list without formatting')
   .option('-f --force', 'force actions')
   .option('-n --name <name>', 'set a <name> for script')
+  .option('--next-gen-js', 'enable es6/es7 compatibility (cluster / fork)')
   .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
   .option('-l --log [path]', 'specify entire log file (error and out are both included)')
   .option('-o --output <path>', 'specify out log file')
@@ -578,12 +579,6 @@ commander.command('logs [id|name]')
     if (cmd.parent.rawArgs.indexOf('--raw') !== -1)
       raw = true;
     CLI.streamLogs(id, line, raw);
-  });
-
-commander.command('ilogs')
-  .description('advanced interface to display logs')
-  .action(function(id) {
-    CLI.ilogs(id);
   });
 
 

@@ -5,7 +5,13 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.13 (Current Stable)
+# 0.12.14 (Current Stable)
+
+- `ilogs` is no longer part of PM2
+- Improved interaction with Keymetrics
+- BabelJS is now integrated into PM2
+
+# 0.12.13
 
 - Enhanced  : PM2 doesn't leave processes behind when it crashes
 - Enhanced  : Call reload instead of restart when max-memory-limit reached

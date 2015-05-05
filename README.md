@@ -109,15 +109,21 @@ $ pm2 flush          # Clear all the logs
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
-**Warning**: It's still a beta feature. If you want to use the embed cluster module or reload with 0s downtime, we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore!
+Supported by all major Node.js frameworks and any Node.js / io.js applications
 
-With the cluster mode, PM2 enables load balancing between each worker.
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
+
+**Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore.
+
+With the cluster mode, PM2 enables load balancing between multiple application to use all CPUs available in a server.
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
 
 ```bash
 $ pm2 start app.js -i max  # Enable load-balancer and cluster features
 
 $ pm2 reload all           # Reload all apps in 0s manner
+
+$ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
 ```
 
 [More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
@@ -158,7 +164,7 @@ Thanks in advance and we hope that you like PM2!
 - [Using PM2 in your code](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#programmatic-example)
 - [Deployment workflow](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment)
 - [Startup script generation (SystemV/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#startup-script)
-- [Advanced log management (flush, reload, ilogs)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a9)
+- [Advanced log management (flush, reload, logs)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a9)
 - [GracefullReload](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a690)
 
 ## PM2 Full documentation
