@@ -29,6 +29,8 @@ bash ./test/bash/watch.sh
 spec "Watch feature"
 bash ./test/bash/harmony.sh
 spec "Harmony test"
+bash ./test/bash/es6.sh
+spec "Next gen JS with Babel"
 bash ./test/bash/log-custom.sh
 spec "Custom log timestamp"
 bash ./test/bash/reload.sh

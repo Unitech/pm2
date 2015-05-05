@@ -27,6 +27,9 @@
     "ext_type": "sbyte",
     "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
   },
+  "next_gen_js" : {
+    "type" : "boolean"
+  },
   "instances": {
     "type": "number"
   },
