@@ -459,11 +459,11 @@ Options:
 
 ```
 {
-  "script"        : "echo.js",
-  "err_file"      : "err.log",
-  "out_file"      : "out.log",
-  "merge_logs"    : true,
-  log_date_format : "YYYY-MM-DD HH:mm Z"
+  "script"          : "echo.js",
+  "err_file"        : "err.log",
+  "out_file"        : "out.log",
+  "merge_logs"      : true,
+  "log_date_format" : "YYYY-MM-DD HH:mm Z"
 }
 ```
 
