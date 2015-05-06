@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var commander = require('commander');
+
+var debug     = require('debug')('pm2:cli');
+var Satan     = require('../lib/Satan');
+var CLI       = require('../lib/CLI');
+var cst       = require('../constants.js');
+var pkg       = require('../package.json');
+var platform  = require('os').platform();
+var moment    = require('moment');
+var Common    = require('../lib/Common');
+var chalk     = require('chalk');
+
+process.env.PM2_SILENT = true;
+
+commander.version(pkg.version)
+  .option('--raw', 'raw log output')
+  .option('--next-gen-js', 'enable es6/es7 compatibility');
+
+CLI.pm2Init();
+
+Satan.start(false, function() {
+  commander.parse(process.argv);
+});
+
+commander.command('run <file|environment>')
+  .description('deploy your json')
+
+  .action(function(cmd, opts) {
+    commander.watch = true;
+    commander.autorestart = false;
+    var needRaw = opts.parent.rawArgs.indexOf('--raw') > -1 || false;
+
+    CLI.start(cmd, commander, function() {
+
+
+      CLI.launchBus(function(err, bus) {
+        if (err) throw new Error(err);
+
+        bus.on('log:out', function(data) {
+          process.stdout.write((needRaw ? '' : chalk.green(data.process.name) + ': ') + data.data.str);
+        });
+
+        bus.on('log:err', function(data) {
+          process.stderr.write((needRaw ? '' : chalk.red(data.process.name) + ': ') + data.process.name + data.data.str);
+        });
+
+        bus.on('process:event', function(data) {
+
+          if (data.event == 'exit' && data.process.exit_code != 0) {
+            console.log(moment().format('h:mm:ss a') + chalk.bold.red(' [Crash] Process ' + data.process.name + ' crashed with code ' + data.process.exit_code + ' - waiting for file changes'));
+          }
+          else if (data.event == 'exit') {
+            console.log(moment().format('h:mm:ss a') + chalk.bold.blue(' [Exited] Process ' + data.process.name + ' exited with code ' + data.process.exit_code + ' - waiting for file changes'));
+          }
+          else if (data.event == 'online') {
+            console.log(moment().format('h:mm:ss a') + chalk.bold.green(' [Online] Process ' + data.process.name + ' started'));
+          }
+        });
+      });
+
+      process.on('SIGINT', function() {
+        CLI.delete(cmd, '', function() {
+          Common.exitCli(cst.SUCCESS_EXIT);
+        });
+      });
+
+    });
+  });
