@@ -146,7 +146,7 @@ To save a process list just do:
 $ pm2 save
 ```
 
-## Run Next generation Javascript
+### Run Next generation Javascript
 
 PM2 embeds [BabelJS](https://babeljs.io/) to use [next generation Javascript](http://es6-features.org/) both in development and production.
 
