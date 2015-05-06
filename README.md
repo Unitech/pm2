@@ -146,6 +146,18 @@ To save a process list just do:
 $ pm2 save
 ```
 
+### Development mode
+
+![Monit](https://github.com/unitech/pm2/raw/development/pres/pm2-dev.png)
+
+PM2 comes with a development tool that allow you to start an application and restart it on file change.
+
+```
+# Start your application in development mode
+# = Print the logs and restart on file change
+$ pm2-dev run my-app.js
+```
+
 ### Run Next generation Javascript
 
 PM2 embeds [BabelJS](https://babeljs.io/) to use [next generation Javascript](http://es6-features.org/) both in development and production.
