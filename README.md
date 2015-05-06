@@ -82,7 +82,7 @@ To have more details on a specific process:
 $ pm2 describe 0
 ```
 
-### Monitoring
+### CPU / Memory Monitoring
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
 
@@ -144,6 +144,22 @@ To save a process list just do:
 
 ```bash
 $ pm2 save
+```
+
+## Run Next generation Javascript
+
+PM2 embeds [BabelJS](https://babeljs.io/) to use [next generation Javascript](http://es6-features.org/) both in development and production.
+
+All features are supported, like watch and restart, cluster mode, reload and related.
+
+To run an ES6/ES7 applications:
+
+```bash
+# Enable ES6/ES7 live compilation
+$ pm2 start app.js --next-gen-js
+
+# Or use the .es extension to automatically enable it
+$ pm2 start app.es
 ```
 
 ## Keymetrics monitoring
