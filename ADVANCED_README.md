@@ -9,7 +9,7 @@
 - [Examples](#a3)
 - [Different ways to launch a process](#raw-examples)
 - [Options](#a987)
-  - [Schema](#a988)
+  - [Schema](#schema)
 - [How to update PM2?](#update-pm2)
 
 ### Features
@@ -21,10 +21,11 @@
 - [Logs management](#a9)
 - [Clustering](#a5)
 - [Watch & Restart](#watch--restart)
-- [Reloading without downtime](#a690)
+- [Reloading without downtime](#hot-reload--0s-reload)
 - [Make PM2 restart on server reboot](#a8)
 - [JSON app declaration](#json-app-declaration)
-  - [Schema](#a988)
+  - [Options list](#list-of-all-json-declaration-fields-avaibles)
+  - [Schema](#schema)
 
 ### Windows specifics
 
@@ -724,7 +725,7 @@ The following are valid options for JSON app declarations:
 |     autorestart    | boolean |                   false                   |                                                   true by default. if false, PM2 will not restart your app if it crashes or ends peacefully                                                  |
 |       vizion       | boolean |                   false                   |                                               true by default. if false, PM2 will start without vizion features (versioning control metadatas)                                               |
 |     post_update    |   list  | ["npm install", "echo launching the app"] |                                        a list of commands which will be executed after you perform a Pull/Upgrade operation from Keymetrics dashboard                                        |
-|        force       | boolean |                    true                   |                                          defaults to false. if true, you can start the same script several times which isn't allowed by PM2 normally                                         |
+|        force       | boolean |                    true                   |                                          defaults to false. if true, you can start the same script several times which is usually not allowed by PM2                                          |
 |     next_gen_js    | boolean |                    true                   |                             defaults to false. if true, PM2 will launch your app using embedded BabelJS features which means you can run ES6/ES7 javascript code                             |
 
 ### Schema
