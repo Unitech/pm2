@@ -148,8 +148,6 @@ $ pm2 save
 
 ### Development mode
 
-![Monit](https://github.com/unitech/pm2/raw/development/pres/pm2-dev.png)
-
 PM2 comes with a development tool that allow you to start an application and restart it on file change.
 
 ```
