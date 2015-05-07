@@ -865,7 +865,7 @@ $ cat node-app-1.json
 }
 ```
 
-- JSON app declarations are additive.  Continuing from above:
+- You can start as many JSON app declarations as you want.  Continuing from above:
 ```bash
 $ pm2 start node-app-2.json
 $ ps aux | grep node-app
@@ -875,10 +875,10 @@ root  24271  0.0  0.3  696428  24208 ? Sl 17:36 0:00 pm2: node-app-2
 
 Note that if you execute `pm2 start node-app-2` again, it will spawn an additional instance node-app-2.
 
-- **cwd:** your JSON declaration does not need to reside with your script.  If you wish to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
+- **cwd:** your JSON declaration does not need to reside with your script.  If you wish to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the `cwd` feature (Note, this can be really helpful for capistrano style directory structures that uses symlinks). Files can be either relative to the `cwd` directory, or absolute (see example below).
 
 
-- All the keys can be used in a JSON configured file, and just need to make a small change in CLI, e.g.:
+- All the keys can be used in a JSON configured file, but will remain almost the same on the command line e.g.:
 
 ```
 exec_interpreter  -> --interpreter
@@ -887,18 +887,17 @@ max_restarts      -> --max_restarts
 force             -> --force
 ```
 
-If the `alias` exists, you can using it as a CLI option, but do not forget to turn the camelCasing to underscore split - `executeCommand` to `--execute_command`.
-
+If the `alias` exists, you can use it as a CLI option, but do not forget to turn the camelCasing to underscore split `executeCommand` to `--execute_command`.
 
 
 **Notes**
-- Using quote to make an ESC, e.g.:
+- Using quotes to make an ESC, e.g.:
 
   ```
   $pm2 start test.js --node-args "port=3001 sitename='first pm2 app'"
   ```
 
-  The `nodeArgs` will be
+  The `nodeArgs` argument will be parsed as
 
   ```JSON
   [
@@ -907,7 +906,7 @@ If the `alias` exists, you can using it as a CLI option, but do not forget to tu
   ]
   ```
 
-  But not
+  but not
 
   ```JSON
   [
@@ -920,36 +919,36 @@ If the `alias` exists, you can using it as a CLI option, but do not forget to tu
 
 - RegExp key
 
-  Matches the keys of configured JSON by RegExp but not a specific String, e.g. `^env_\\S*$` will match all `env` keys like `env_production`, `env_test`, and make sure the values conform to the schemas.
+  Matches the keys of configured JSON by RegExp (not by string comparison), e.g. `^env_\\S*$` will match all `env` keys like `env_production`, `env_test`, and valid them according to the schemas specifications.
 
 - Special `ext_type`
 
   - min_uptime
 
-    Value of `min_uptime` could be:
+    Value of `min_uptime` can be:
 
       - **Number**
         e.g. `"min_uptime": 3000` means 3000 milliseconds.
       - **String**
-        In the meantime we are making it briefness and easy configuration: `h`, `m` and `s`, e.g.: `"min_uptime": "1h"` means one hour, `"min_uptime": "5m"` means five minutes and `"min_uptime": "10s"` means ten seconds (At last, it will be transformed into milliseconds).
+        Therefore, we are making it short and easy to configure: `h`, `m` and `s`, e.g.: `"min_uptime": "1h"` means one hour, `"min_uptime": "5m"` means five minutes and `"min_uptime": "10s"` means ten seconds (those will be transformed into milliseconds).
 
   - max_memory_restart
 
-    Value of `max_memory_restart` could be:
+    Value of `max_memory_restart` can be:
       - **Number**
         e.g. `"max_memory_restart": 1024` means 1024 bytes (**NOT BITS**).
       - **String**
-        In the meantime we are making it briefness and easy configuration: `G`, `M` and `K`, e.g.: `"max_memory_restart": "1G"` means one gigabytes, `"max_memory_restart": "5M"` means five megabytes and `"max_memory_restart": "10K"` means ten kilobytes (At last, it will be transformed into byte(s)).
+        Therefore, we are making it short and easy to configure: `G`, `M` and `K`, e.g.: `"max_memory_restart": "1G"` means one gigabytes, `"max_memory_restart": "5M"` means five megabytes and `"max_memory_restart": "10K"` means ten kilobytes (those will be transformed into byte(s)).
 
 - Optional values
 
-  Like `exec_mode`, value could be one of `cluster` (`cluster_mode`) or `fork` (`fork_mode`) only.
+  For example `exec_mode` can take `cluster` (`cluster_mode`) or `fork` (`fork_mode`) as possible values.
 
-- Should known
+- Things to know
 
   - maximum
 
-    `"instances": 0` means starting maximum processes depending on available CPUs (cluster mode)
+    `"instances": 0` means that we will launch the maximum processes possible according to the numbers of CPUs (cluster mode)
   - array
 
     `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
