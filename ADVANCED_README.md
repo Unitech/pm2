@@ -9,7 +9,7 @@
 - [Examples](#a3)
 - [Different ways to launch a process](#raw-examples)
 - [Options](#a987)
-  - [Schema](#a988)
+  - [Schema](#schema)
 - [How to update PM2?](#update-pm2)
 
 ### Features
@@ -21,10 +21,11 @@
 - [Logs management](#a9)
 - [Clustering](#a5)
 - [Watch & Restart](#watch--restart)
-- [Reloading without downtime](#a690)
+- [Reloading without downtime](#hot-reload--0s-reload)
 - [Make PM2 restart on server reboot](#a8)
 - [JSON app declaration](#json-app-declaration)
-  - [Schema](#a988)
+  - [Options list](#list-of-all-json-declaration-fields-avaibles)
+  - [Schema](#schema)
 
 ### Windows specifics
 
@@ -698,6 +699,35 @@ The following are valid options for JSON app declarations:
 }
 ```
 
+### List of all JSON-declaration fields avaibles
+
+|        Field       |   Type  |                  Example                  |                                                                                          Description                                                                                         |
+|:------------------:|:-------:|:-----------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|        name        |  string |                  "myAPI"                  |                                                                                name your app will have in PM2                                                                                |
+|       script       |  string |                "bin/app.js"               |                                                                                       path of your app                                                                                       |
+|        args        |   list  |       ["--enable-logs", "-n", "15"]       |                                                                        arguments given to your app when it is launched                                                                       |
+|      node_args     |   list  |   ["--harmony", "--max-stack-size=1024"]  |                                                                          arguments given to node when it is launched                                                                         |
+|         cwd        |  string |            "/var/www/app/prod"            |                                                                      the directory from which your app will be launched                                                                      |
+|      exec_mode     |  string |                 "cluster"                 |                                                    "fork" mode is used by default, "cluster" mode can be configured with `instances` field                                                   |
+|      instances     |  number |                     4                     | number of instances for your clustered app, `0` means as much instances as you have CPU cores. a negative value means CPU cores - value (e.g -1 on a 4 cores machine will spawn 3 instances) |
+|  exec_interpreter  |  string |                   "node"                  |                       defaults to "node". can be "python", "ruby", "bash" or whatever interpreter you wish to use. "none" will execute your app as a binary executable                       |
+|   log_date_format  |  string |            "YYYY-MM-DD HH:mm Z"           |                                                                   format in which timestamps will be displayed in the logs                                                                   |
+|     error_file     |  string |  "/var/log/node-app/node-app.stderr.log"  |                             path to the specified error log file. PM2 generates one by default if not specified and you can find it by typing `pm2 desc <app id>`                            |
+|      out_file      |  string |  "/var/log/node-app/node-app.stdout.log"  |                            path to the specified output log file. PM2 generates one by default if not specified and you can find it by typing `pm2 desc <app id>`                            |
+|      pid_file      |  string |          "pids/node-geo-api.pid"          |                                path to the specified pid file. PM2 generates one by default if not specified and you can find it by typing `pm2 desc <app id>`                               |
+|     merge_logs     | boolean |                   false                   |                                                      defaults to false. if true, it will merge stdout and stderr logs into the same file                                                     |
+|    cron_restart    |  string |                "1 0 * * *"                |                                      a cron pattern to restart your app. only works in "cluster" mode for now. soon to be avaible in "fork" mode as well                                     |
+|        watch       | boolean |                    true                   |                 enables the watch feature, defaults to "false". if true, it will restart your app everytime a file change is detected on the folder or subfolder of your app.                |
+|    ignore_watch    |   list  |     ["[\\/\\\\]\\./", "node_modules"]     |                                                            list of regex to ignore some file or folder names by the watch feature                                                            |
+|    max_restarts    |  number |                     10                    |                   number of consecutive unstable restarts (less than 1sec interval) before your app is considered errored and stop being restarted by PM2. defaults to 15.                   |
+| max_memory_restart |  string |                   "150M"                  |                      your app will be restarted by PM2 if it exceeds the amount of memory specified. human-friendly format : it can be "10M", "100K", "2G" and so on...                      |
+|         env        |  object |   {"NODE_ENV": "production", "ID": "42"}  |                                                                          env variables which will appear in your app                                                                         |
+|     autorestart    | boolean |                   false                   |                                                   true by default. if false, PM2 will not restart your app if it crashes or ends peacefully                                                  |
+|       vizion       | boolean |                   false                   |                                               true by default. if false, PM2 will start without vizion features (versioning control metadatas)                                               |
+|     post_update    |   list  | ["npm install", "echo launching the app"] |                                        a list of commands which will be executed after you perform a Pull/Upgrade operation from Keymetrics dashboard                                        |
+|        force       | boolean |                    true                   |                                          defaults to false. if true, you can start the same script several times which is usually not allowed by PM2                                          |
+|     next_gen_js    | boolean |                    true                   |                             defaults to false. if true, PM2 will launch your app using embedded BabelJS features which means you can run ES6/ES7 javascript code                             |
+
 ### Schema
 
 The completely definitions:
@@ -835,7 +865,7 @@ $ cat node-app-1.json
 }
 ```
 
-- JSON app declarations are additive.  Continuing from above:
+- You can start as many JSON app declarations as you want.  Continuing from above:
 ```bash
 $ pm2 start node-app-2.json
 $ ps aux | grep node-app
@@ -845,10 +875,10 @@ root  24271  0.0  0.3  696428  24208 ? Sl 17:36 0:00 pm2: node-app-2
 
 Note that if you execute `pm2 start node-app-2` again, it will spawn an additional instance node-app-2.
 
-- **cwd:** your JSON declaration does not need to reside with your script.  If you wish to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the cwd feature.  (Note, this is especially helpful for capistrano style directory structures that use symlinks.)  Files can be either relative to the cwd directory, or absolute (example below.)
+- **cwd:** your JSON declaration does not need to reside with your script.  If you wish to maintain the JSON(s) in a location other than your script (say, `/etc/pm2/conf.d/node-app.json`) you will need to use the `cwd` feature (Note, this can be really helpful for capistrano style directory structures that uses symlinks). Files can be either relative to the `cwd` directory, or absolute (see example below).
 
 
-- All the keys can be used in a JSON configured file, and just need to make a small change in CLI, e.g.:
+- All the keys can be used in a JSON configured file, but will remain almost the same on the command line e.g.:
 
 ```
 exec_interpreter  -> --interpreter
@@ -857,18 +887,17 @@ max_restarts      -> --max_restarts
 force             -> --force
 ```
 
-If the `alias` exists, you can using it as a CLI option, but do not forget to turn the camelCasing to underscore split - `executeCommand` to `--execute_command`.
-
+If the `alias` exists, you can use it as a CLI option, but do not forget to turn the camelCasing to underscore split `executeCommand` to `--execute_command`.
 
 
 **Notes**
-- Using quote to make an ESC, e.g.:
+- Using quotes to make an ESC, e.g.:
 
   ```
   $pm2 start test.js --node-args "port=3001 sitename='first pm2 app'"
   ```
 
-  The `nodeArgs` will be
+  The `nodeArgs` argument will be parsed as
 
   ```JSON
   [
@@ -877,7 +906,7 @@ If the `alias` exists, you can using it as a CLI option, but do not forget to tu
   ]
   ```
 
-  But not
+  but not
 
   ```JSON
   [
@@ -890,36 +919,36 @@ If the `alias` exists, you can using it as a CLI option, but do not forget to tu
 
 - RegExp key
 
-  Matches the keys of configured JSON by RegExp but not a specific String, e.g. `^env_\\S*$` will match all `env` keys like `env_production`, `env_test`, and make sure the values conform to the schemas.
+  Matches the keys of configured JSON by RegExp (not by string comparison), e.g. `^env_\\S*$` will match all `env` keys like `env_production`, `env_test`, and valid them according to the schemas specifications.
 
 - Special `ext_type`
 
   - min_uptime
 
-    Value of `min_uptime` could be:
+    Value of `min_uptime` can be:
 
       - **Number**
         e.g. `"min_uptime": 3000` means 3000 milliseconds.
       - **String**
-        In the meantime we are making it briefness and easy configuration: `h`, `m` and `s`, e.g.: `"min_uptime": "1h"` means one hour, `"min_uptime": "5m"` means five minutes and `"min_uptime": "10s"` means ten seconds (At last, it will be transformed into milliseconds).
+        Therefore, we are making it short and easy to configure: `h`, `m` and `s`, e.g.: `"min_uptime": "1h"` means one hour, `"min_uptime": "5m"` means five minutes and `"min_uptime": "10s"` means ten seconds (those will be transformed into milliseconds).
 
   - max_memory_restart
 
-    Value of `max_memory_restart` could be:
+    Value of `max_memory_restart` can be:
       - **Number**
         e.g. `"max_memory_restart": 1024` means 1024 bytes (**NOT BITS**).
       - **String**
-        In the meantime we are making it briefness and easy configuration: `G`, `M` and `K`, e.g.: `"max_memory_restart": "1G"` means one gigabytes, `"max_memory_restart": "5M"` means five megabytes and `"max_memory_restart": "10K"` means ten kilobytes (At last, it will be transformed into byte(s)).
+        Therefore, we are making it short and easy to configure: `G`, `M` and `K`, e.g.: `"max_memory_restart": "1G"` means one gigabytes, `"max_memory_restart": "5M"` means five megabytes and `"max_memory_restart": "10K"` means ten kilobytes (those will be transformed into byte(s)).
 
 - Optional values
 
-  Like `exec_mode`, value could be one of `cluster` (`cluster_mode`) or `fork` (`fork_mode`) only.
+  For example `exec_mode` can take `cluster` (`cluster_mode`) or `fork` (`fork_mode`) as possible values.
 
-- Should known
+- Things to know
 
   - maximum
 
-    `"instances": 0` means starting maximum processes depending on available CPUs (cluster mode)
+    `"instances": 0` means that we will launch the maximum processes possible according to the numbers of CPUs (cluster mode)
   - array
 
     `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
