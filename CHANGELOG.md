@@ -14,7 +14,7 @@
 
 - `ilogs` is no longer part of PM2
 - Improved interaction with Keymetrics
-- BabelJS is now integrated into PM2
+- BabelJS is now integrated into PM2 (`--next-gen-js` flag)
 
 # 0.12.13
 
