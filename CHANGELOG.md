@@ -5,7 +5,7 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.15
+# 0.12.15 (Coming next)
 
 - pm2-dev run app.js : start an app in dev mode
 - --no-daemon command now display logs of all processes (Docker)
