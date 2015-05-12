@@ -7,7 +7,7 @@
 
 # 0.12.15 (Coming next)
 
-- pm2-dev run app.js : start an app in dev mode
+- pm2-dev run app.js : start an app in dev mode (--no-daemon --watch and logs stream)
 - --no-daemon command now display logs of all processes (Docker)
 
 # 0.12.14 (Current Stable)
