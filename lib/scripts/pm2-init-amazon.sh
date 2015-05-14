@@ -24,22 +24,30 @@ PM2=%PM2_PATH%
 USER=%USER%
 
 export PATH=%NODE_PATH%:$PATH
-export PM2_HOME="%HOME_PATH%"
+if [[ "$USER" == "root" ]]; then
+    export PM2_HOME="%HOME_PATH%"
+else
+    export PM2_HOME=/home/$USER/.pm2
+fi
 
 lockfile="/var/lock/subsys/pm2-init.sh"
 
+super() {
+    su - $USER -c "PATH=$PATH; $*"
+}
+
 start() {
     echo "Starting $NAME"
-    $PM2 resurrect
+    super $PM2 resurrect
     retval=$?
     [ $retval -eq 0 ] && touch $lockfile
 }
 
 stop() {
     echo "Stopping $NAME"
-    $PM2 dump
-    $PM2 delete all
-    $PM2 kill
+    super $PM2 dump
+    super $PM2 delete all
+    super $PM2 kill
     rm -f $lockfile
 }
 
@@ -51,12 +59,12 @@ restart() {
 
 reload() {
     echo "Reloading $NAME"
-    $PM2 reload all
+    super $PM2 reload all
 }
 
 status() {
     echo "Status for $NAME:"
-    $PM2 list
+    super $PM2 list
     RETVAL=$?
 }
 
