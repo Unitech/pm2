@@ -7,6 +7,7 @@
 
 # 0.12.15 (Coming next)
 
+- `pm2 logs --raw` now shows 20 last lines of each log file
 - pm2-dev run app.js : start an app in dev mode (--no-daemon --watch and stream logs of all launched apps)
 - --no-daemon command now display logs of all processes (Docker)
 
@@ -265,7 +266,7 @@ Big thanks to @Tjatse !
 - Better performance on interface
 - Fix tests
 - Enable PM2_NODE_OPTIONS and node-args for fork mode
-- Dependencies updated
+     Updated: 2015/05/17 18:49:39 by jshkurti         ###   ########.fr         
 - Faster monitoring system
 - AXM actions unification
 - Socket errors handled
