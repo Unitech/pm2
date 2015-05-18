@@ -37,6 +37,27 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
+  it('should not propagate args to any pm2 instances launched by the script',
+    function (done) {
+      pm2.launchBus(function (err, bus) {
+        if (err) {
+          return done(err);
+        }
+        var handler = function (evt) {
+          if (evt.process.name === 'insidePm2Process' && evt.event === 'online') {
+            evt.process.args[0].should.equal('bar');
+            done();
+          }
+        };
+        bus.on('process:event', handler)
+      });
+      pm2.start(process.cwd() + '/test/fixtures/cli-args.js', {rawArgs: ['--', 'foo']},
+        function (err, proc) {
+          should(err).be.null;
+          proc[0].pm2_env.args[0].should.equal('foo');
+        });
+    });
+
   it('should start a script and force to launch it', function(done) {
     pm2.start(process.cwd() + '/test/fixtures/child.js', {
       force : true,
