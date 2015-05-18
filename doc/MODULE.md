@@ -25,6 +25,7 @@ $ pm2 publish
 
 Npm module can be a published npm package but can also be:
 
+```bash
 npm install <tarball file>
 npm install <tarball url>
 npm install <folder>
@@ -32,6 +33,7 @@ npm install [@<scope>/]<name>
 npm install [@<scope>/]<name>@<tag>
 npm install [@<scope>/]<name>@<version>
 npm install [@<scope>/]<name>@<version range>
+```
 
 ## Writing a module
 
