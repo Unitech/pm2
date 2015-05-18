@@ -405,12 +405,12 @@ When PM2 starts a new process to replace an old one, it will wait for the new pr
 ## Logs management
 
 
-PM2 allows you to manage logs easily. You can display all applications logs in real-time, flush and reload them.
-There are also differents way to configure how PM2 should handle your logs (separated in differents files, merged, with timestamp...) without modifying anything from your code.
+PM2 allows you to manage logs easily. You can display all application logs in real-time, flush them, and reload them.
+There are also different ways to configure how PM2 will handle your logs (separated in different files, merged, with timestamp...) without modifying anything in your code.
 
 ### Displaying logs in real-time
 
-Displaying logs of specified process or all processes in real-time:
+Displaying logs of a specified process or of all processes in real-time:
 
 ```bash
 $ pm2 logs
