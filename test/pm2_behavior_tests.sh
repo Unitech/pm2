@@ -69,6 +69,8 @@ bash ./test/bash/module.sh
 spec "module system"
 bash ./test/bash/vizion.sh
 spec "vizion features (versioning control)"
+bash ./test/bash/wrapped_fork.sh
+spec "wrapped fork"
 bash ./test/bash/pmx_injection.sh
 spec "automatic pmx injection"
 
