@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.14",
+  "version": "0.12.15",
   "engines": {
     "node": ">=0.10"
   },
@@ -138,7 +138,8 @@
     "dev ops"
   ],
   "bin": {
-    "pm2": "./bin/pm2"
+    "pm2"    : "./bin/pm2",
+    "pm2-dev": "./bin/pm2-dev"
   },
   "dependencies": {
     "async"               : "~0.9.0",

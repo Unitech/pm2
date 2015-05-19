@@ -5,11 +5,19 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.14 (Current Stable)
+# 0.12.15 (Current Stable)
+
+- Fix #941 : Env variables overrided when an app is restarted
+- max_memory_restart now performs a graceful reload
+- `pm2 logs --raw` now shows 20 last lines of each log file
+- pm2-dev run app.js : start an app in dev mode (--no-daemon --watch and stream logs of all launched apps)
+- --no-daemon command now display logs of all processes (Docker)
+
+# 0.12.14
 
 - `ilogs` is no longer part of PM2
 - Improved interaction with Keymetrics
-- BabelJS is now integrated into PM2
+- BabelJS is now integrated into PM2 (`--next-gen-js` flag)
 
 # 0.12.13
 
