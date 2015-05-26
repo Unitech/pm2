@@ -5,6 +5,10 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.12.16 (Coming soon)
+
+
+
 # 0.12.15 (Current Stable)
 
 - Fix #941 : Env variables overrided when an app is restarted
