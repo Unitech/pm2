@@ -5,7 +5,7 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.16 (Coming soon)
+# 0.12.16 (Coming next)
 
 - Fix #1285 : PID file was deleting after a reload/gracefulReload
 
