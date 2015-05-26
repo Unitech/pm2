@@ -7,7 +7,7 @@
 
 # 0.12.16 (Coming soon)
 
-
+- Fix #1285 : PID file was deleting after a reload/gracefulReload
 
 # 0.12.15 (Current Stable)
 
