@@ -461,14 +461,14 @@ Options:
 ```
 {
   "script"          : "echo.js",
-  "err_file"        : "err.log",
+  "error_file"        : "err.log",
   "out_file"        : "out.log",
   "merge_logs"      : true,
   "log_date_format" : "YYYY-MM-DD HH:mm Z"
 }
 ```
 
-**Note**: To merge all logs into the same file set the same value for `err_file`, `out_file`.
+**Note**: To merge all logs into the same file set the same value for `error_file`, `out_file`.
 
 <a name="max-memory-restart"/>
 ## Max Memory Restart
