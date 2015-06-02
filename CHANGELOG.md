@@ -8,7 +8,8 @@
 # 0.12.16 (Coming next)
 
 - Feature : Now shows on Keymetrica which node.js or io.js version you are using
-- Fix #1285 : PID file was deleting after a reload/gracefulReload
+- Enhance pm2-dev
+- Fix #1285 : PID file was deleted after a reload/gracefulReload
 
 # 0.12.15 (Current Stable)
 
