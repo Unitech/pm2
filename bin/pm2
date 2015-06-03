@@ -332,7 +332,7 @@ commander.command('get <key>')
     CLI.get(key);
   });
 
-commander.command('conf <key> [value]')
+commander.command('conf [key] [value]')
   .description('get / set module config values')
   .action(function(key, value) {
     CLI.conf(key, value);

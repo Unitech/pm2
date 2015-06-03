@@ -8,6 +8,7 @@
 # 0.12.16 (Coming next)
 
 - Feature : Now shows on Keymetrica which node.js or io.js version you are using
+- pm2 conf display all configuration values
 - Enhance pm2-dev
 - File transmission added
 - Better error messages when validating data passed via CLI
