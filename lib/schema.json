@@ -37,7 +37,13 @@
     "type": "number"
   },
   "auto_gc" : {
-    "type" : "boolean"
+    "type": [
+      "string",
+      "number"
+    ],
+    "regex": "^\\d+(G|M|K)?$",
+    "ext_type": "sbyte",
+    "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
   },
   "log_file": {
     "type": [
