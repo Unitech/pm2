@@ -7,9 +7,8 @@
 
 # 0.12.16 (Coming next)
 
-- Feature : Now shows on Keymetrics which node.js or io.js version you are using
 - Feature : File transmission added in Agent
-- Feature : Transmit Node.js version in Agent
+- Feature : Transmit Node.js/io.js version in Agent
 - Feature : Parameters can be passed to remote actions
 - Feature : Support JS in addition to JSON and JSON5 config files #1298
 - Enhanced: pm2 conf display all configuration values
