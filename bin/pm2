@@ -22,6 +22,7 @@ CLI.pm2Init();
 commander.version(pkg.version)
   .option('-v --version', 'get version')
   .option('-s --silent', 'hide all messages', false)
+  .option('-a --auto-gc', '(HIGH LOAD) let PM2 handle the garbage collector for better performance')
   .option('-m --mini-list', 'display a compacted list without formatting')
   .option('-f --force', 'force actions')
   .option('-n --name <name>', 'set a <name> for script')
