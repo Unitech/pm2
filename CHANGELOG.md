@@ -14,6 +14,7 @@
 - Enhanced: pm2 conf display all configuration values
 - Enhanced: pm2-dev
 - Enhanced: Better error messages when validating data passed via CLI
+- Enhanced: Smaller memory footprint for PM2 (~20%)
 - Fix #1285 : PID file was deleted after a reload/gracefulReload
 
 # 0.12.15 (Current Stable)
