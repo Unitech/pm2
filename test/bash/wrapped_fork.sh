@@ -11,8 +11,11 @@ $pm2 kill
 
 echo "Testing wrapped fork mode values"
 
+rm path-check1.txt
+rm path-check2.txt
+
 node path-check.js > path-check1.txt
-$pm2 start path-check.js -o path-check2.txt
+$pm2 start path-check.js --no-autorestart -o path-check2.txt
 sleep 1
 
 OUT=`diff path-check1.txt path-check2.txt`
