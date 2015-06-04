@@ -29,7 +29,7 @@ export PM2_HOME="%HOME_PATH%"
 lockfile="/var/lock/subsys/pm2-init.sh"
 
 super() {
-    su - $USER -c "PATH=$PATH; $*"
+    su - $USER -c "PATH=$PATH; PM2_HOME=$PM2_HOME $*"
 }
 
 start() {

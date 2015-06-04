@@ -22,6 +22,29 @@ $pm2 restart all.json
 should 'should stop processes' 'online' 6
 should 'should all script been restarted one time' 'restart_time: 1' 6
 
+$pm2 kill
+
+########## JS style
+
+$pm2 start configuration.json
+should 'should start processes' 'online' 6
+
+$pm2 stop configuration.json
+should 'should stop processes' 'stopped' 6
+
+$pm2 delete configuration.json
+should 'should start processes' 'online' 0
+
+$pm2 start configuration.json
+should 'should start processes' 'online' 6
+
+$pm2 restart configuration.json
+should 'should stop processes' 'online' 6
+should 'should all script been restarted one time' 'restart_time: 1' 6
+
+$pm2 delete configuration.json
+should 'should delete processes' 'online' 0
+
 ########## PIPE command
 
 $pm2 kill

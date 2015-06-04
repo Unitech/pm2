@@ -5,12 +5,41 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.13 (In progress)
+# 0.12.16 (Coming next)
 
-- Enhanced: Call reload instead of restart when max-memory-limit reached
-- Enhanced: Modules are compatible ES6 by default by adding --harmony flag
+- Feature : Now shows on Keymetrica which node.js or io.js version you are using
+- pm2 conf display all configuration values
+- Enhance pm2-dev
+- File transmission added
+- Better error messages when validating data passed via CLI
+- Transmit Node.js version
+- Parameters can be passed to remote actions
+- Fix #1285 : PID file was deleted after a reload/gracefulReload
 
-# 0.12.12 (Current stable)
+# 0.12.15 (Current Stable)
+
+- Fix #941 : Env variables overrided when an app is restarted
+- max_memory_restart now performs a graceful reload
+- `pm2 logs --raw` now shows 20 last lines of each log file
+- pm2-dev run app.js : start an app in dev mode (--no-daemon --watch and stream logs of all launched apps)
+- --no-daemon command now display logs of all processes (Docker)
+
+# 0.12.14
+
+- `ilogs` is no longer part of PM2
+- Improved interaction with Keymetrics
+- BabelJS is now integrated into PM2 (`--next-gen-js` flag)
+
+# 0.12.13
+
+- Enhanced  : PM2 doesn't leave processes behind when it crashes
+- Enhanced  : Call reload instead of restart when max-memory-limit reached
+- Enhanced  : Modules are compatible ES6 by default by adding --harmony flag
+- Enhanced  : Dump feature is now smarter
+- Fix #1206 : fix `pm2 logs` bug when merged_logs
+- Fix       : pm2 scale doesn't try to scale a fork_mode process
+
+# 0.12.12
 
 - `pm2 logs --raw` flag : show logs in raw format
 - New command: pm2 scale <app_name> <number> - scale up/down an application

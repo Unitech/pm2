@@ -26,6 +26,7 @@ commander.version(pkg.version)
   .option('-m --mini-list', 'display a compacted list without formatting')
   .option('-f --force', 'force actions')
   .option('-n --name <name>', 'set a <name> for script')
+  .option('--next-gen-js', 'enable es6/es7 compatibility (cluster / fork)')
   .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
   .option('-l --log [path]', 'specify entire log file (error and out are both included)')
   .option('-o --output <path>', 'specify out log file')
@@ -218,7 +219,7 @@ commander.command('restart <id|name|all|json|stdin>')
 //
 // Scale up/down a process in cluster mode
 //
-commander.command('scale <app_name> <total_number>')
+commander.command('scale <app_name> <number>')
   .description('scale up/down a process in cluster mode depending on total_number param')
   .action(function(app_name, number) {
     CLI.scale(app_name, number);
@@ -332,7 +333,7 @@ commander.command('get <key>')
     CLI.get(key);
   });
 
-commander.command('conf <key> [value]')
+commander.command('conf [key] [value]')
   .description('get / set module config values')
   .action(function(key, value) {
     CLI.conf(key, value);
@@ -579,12 +580,6 @@ commander.command('logs [id|name]')
     if (cmd.parent.rawArgs.indexOf('--raw') !== -1)
       raw = true;
     CLI.streamLogs(id, line, raw);
-  });
-
-commander.command('ilogs')
-  .description('advanced interface to display logs')
-  .action(function(id) {
-    CLI.ilogs(id);
   });
 
 
