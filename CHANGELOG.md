@@ -7,7 +7,14 @@
 
 # 0.12.16 (Coming next)
 
-- Fix #1285 : PID file was deleting after a reload/gracefulReload
+- Feature : Now shows on Keymetrica which node.js or io.js version you are using
+- pm2 conf display all configuration values
+- Enhance pm2-dev
+- File transmission added
+- Better error messages when validating data passed via CLI
+- Transmit Node.js version
+- Parameters can be passed to remote actions
+- Fix #1285 : PID file was deleted after a reload/gracefulReload
 
 # 0.12.15 (Current Stable)
 
