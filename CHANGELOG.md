@@ -7,13 +7,14 @@
 
 # 0.12.16 (Coming next)
 
-- Feature : Now shows on Keymetrica which node.js or io.js version you are using
-- pm2 conf display all configuration values
-- Enhance pm2-dev
-- File transmission added
-- Better error messages when validating data passed via CLI
-- Transmit Node.js version
-- Parameters can be passed to remote actions
+- Feature : Now shows on Keymetrics which node.js or io.js version you are using
+- Feature : File transmission added in Agent
+- Feature : Transmit Node.js version in Agent
+- Feature : Parameters can be passed to remote actions
+- Feature : Support JS in addition to JSON and JSON5 config files #1298
+- Enhanced: pm2 conf display all configuration values
+- Enhanced: pm2-dev
+- Enhanced: Better error messages when validating data passed via CLI
 - Fix #1285 : PID file was deleted after a reload/gracefulReload
 
 # 0.12.15 (Current Stable)
