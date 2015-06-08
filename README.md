@@ -16,8 +16,7 @@ Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://git
 Compatible with CoffeeScript.
 Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
-[![NPM version](https://badge.fury.io/js/pm2.svg)](http://badge.fury.io/js/pm2) [![Gitter](https://badges.gitter.im/Unitech/PM2.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://api.travis-ci.org/Unitech/PM2.svg?branch=master)](https://travis-ci.org/Unitech/PM2) [![Inline docs](http://inch-ci.org/github/unitech/pm2.svg?branch=master)](http://inch-ci.org/github/unitech/pm2)
-
+[![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://img.shields.io/travis/Unitech/PM2.svg?style=flat-square)](https://travis-ci.org/Unitech/PM2)[![Dependencies](https://img.shields.io/david/Unitech/pm2.svg?style=flat-square)](https://david-dm.org/Unitech/pm2)[![Gitter](https://badges.gitter.im/Unitech/PM2.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
