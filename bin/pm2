@@ -568,7 +568,7 @@ commander.command('reloadLogs')
 //
 commander.command('logs [id|name]')
   .option('--raw', 'logs without timestamps and other PM2 indicators')
-  .option('--lines <N>', 'output the last N lines, instead of the last 20')
+  .option('--lines <N>', 'output the last N lines, instead of the last 20 by default')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
     var line = 20;
