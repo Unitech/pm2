@@ -5,6 +5,7 @@
 ### Quick start
 
 - [Installation](#a1)
+- [Folder structure](#pm2-folder-structure)
 - [Usage](#a2)
 - [Examples](#a3)
 - [Different ways to launch a process](#raw-examples)
@@ -21,6 +22,7 @@
 - [Monitoring CPU/Memory usage](#a7)
 - [Logs management](#a9)
 - [Clustering](#a5)
+- [Multiple PM2 on the same server](#multiple-pm2)
 - [Watch & Restart](#watch--restart)
 - [Reloading without downtime](#hot-reload--0s-reload)
 - [Make PM2 restart on server reboot](#a8)
@@ -86,6 +88,19 @@ If the above fails use:
 ```bash
 $ npm install git://github.com/Unitech/pm2#master -g
 ```
+
+<a name="pm2-folder-structure"/>
+## PM2 configuration folder structure
+
+Once PM2 is started, it automatically create these folders:
+- `$HOME/.pm2` will contain all PM2 related files
+- `$HOME/.pm2/logs` will contain all applications logs
+- `$HOME/.pm2/pids` will contain all applications pids
+- `$HOME/.pm2/pm2.log` PM2 logs
+- `$HOME/.pm2/pm2.pid` PM2 pid
+- `$HOME/.pm2/rpc.sock` Socket file for remote commands
+- `$HOME/.pm2/pub.sock` Socket file for publishable events
+- `$HOME/.pm2/conf.js` PM2 Configuration
 
 <a name="a2"/>
 ## Usage
@@ -583,17 +598,39 @@ Just use the `-u <username>` option !
 $ pm2 startup ubuntu -u www
 ```
 
+<a name="multiple-pm2"/>
 ### Related commands
 
 Dump all processes status and environment managed by PM2:
+
 ```bash
-$ pm2 dump
+$ pm2 [dump|save]
 ```
+
 It populates the file `~/.pm2/dump.pm2` by default.
 
 To bring back the latest dump:
+
 ```bash
-$ pm2 [resurrect|save]
+$ pm2 resurrect
+```
+
+## Multiple PM2 on the same server
+
+The client and daemon communicates via socket files available in $HOME/.pm2/[pub.sock|rpc.sock]
+
+You can start multiple PM2 instances by changing the `PM2_HOME` environmnent variable.
+
+```bash
+$ PM2_HOME='.pm2' pm2 start echo.js --name="echo-node-1"
+$ PM2_HOME='.pm3' pm2 start echo.js --name="echo-node-2"
+```
+
+This will start two different PM2 instances. To list processes managed by each different instances do:
+
+```bash
+$ PM2_HOME='.pm2' pm2 list
+$ PM2_HOME='.pm3' pm2 list
 ```
 
 ## Watch & Restart
@@ -638,8 +675,7 @@ var watch_options = {
 
 ## JSON app declaration
 
-
-PM2 empowers your process management workflow, by allowing you to fine-tune the behavior, options, environment variables, logs files... of each process you need to manage via JSON configuration.
+PM2 empowers your process management workflow, by allowing you to fine-tune the behavior, options, environment variables, logs files... of each process you need to manage via JSON/JSON5/JS configuration.
 
 It's particularly usefull for micro service based applications.
 
