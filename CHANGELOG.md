@@ -5,19 +5,20 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.16 (Coming next)
+# 0.12.16 (Current stable)
 
-- Feature : Now shows on Keymetrics which node.js or io.js version you are using
 - Feature : File transmission added in Agent
-- Feature : Transmit Node.js version in Agent
+- Feature : Transmit Node.js/io.js version in Agent
 - Feature : Parameters can be passed to remote actions
 - Feature : Support JS in addition to JSON and JSON5 config files #1298
 - Enhanced: pm2 conf display all configuration values
 - Enhanced: pm2-dev
 - Enhanced: Better error messages when validating data passed via CLI
+- Enhanced: Smaller memory footprint for PM2 (~30%)
 - Fix #1285 : PID file was deleted after a reload/gracefulReload
+- Fix : ENOMEM made PM2 crash
 
-# 0.12.15 (Current Stable)
+# 0.12.15
 
 - Fix #941 : Env variables overrided when an app is restarted
 - max_memory_restart now performs a graceful reload

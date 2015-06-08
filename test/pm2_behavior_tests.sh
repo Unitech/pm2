@@ -19,6 +19,8 @@ echo "###################### !DEBUG! ###########################"
 #   export DEBUG="*"
 # fi
 
+bash ./test/bash/pmx_injection.sh
+spec "automatic pmx injection"
 bash ./test/bash/log-timestamp.sh
 spec "timetstamp prefix of pm2.log"
 bash ./test/bash/cli.sh
