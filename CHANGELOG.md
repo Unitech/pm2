@@ -5,6 +5,10 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.12.17 (next release)
+
+- Upgrade shelljs, semver, colors, chalk, coffee-script, async, json-stringify-safe, cron, debug, commander
+
 # 0.12.16 (Current stable)
 
 - Feature : File transmission added in Agent
