@@ -8,8 +8,7 @@ const PATH_FIXTURES = process.cwd() + '/test/interface/fixtures/';
 
 var PROCESS_ARCH  = Object.keys({
   pm_id  : 0,
-  name   : 'app',
-  status : ['online', 'offline']
+  name   : 'app'
   // server: 'server name' - attached in interactor
 });
 
