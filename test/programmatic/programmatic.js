@@ -28,9 +28,9 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should start a script', function(done) {
-    pm2.start(process.cwd() + '/test/fixtures/child.js',
-              {instances : 1},
-              function(err, data) {
+    pm2.start(process.cwd() + '/test/fixtures/child.js', {
+      instances : 1
+    }, function(err, data) {
       proc1 = data[0];
       should(err).be.null;
       done();

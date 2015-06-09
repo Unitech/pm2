@@ -23,6 +23,8 @@ bash ./test/bash/pmx_injection.sh
 spec "automatic pmx injection"
 bash ./test/bash/log-timestamp.sh
 spec "timetstamp prefix of pm2.log"
+bash ./test/bash/smart-start.sh
+spec "smart start test"
 bash ./test/bash/cli.sh
 spec "CLI basic test"
 bash ./test/bash/json_file.sh

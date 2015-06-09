@@ -154,7 +154,7 @@ function failOnUnknown(fn) {
 //
 // Start command
 //
-commander.command('start <file|json|stdin>')
+commander.command('start <file|json|stdin|app_name|pm_id>')
   .option('--watch', 'Watch folder for changes')
   .description('start and daemonize an app')
   .action(function(cmd) {

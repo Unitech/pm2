@@ -5,8 +5,13 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.12.17 (next release)
+# 0.14.0 - HellFire (pre 1.0)
 
+- Smart start (pm2 start app.js ; pm2 stop app ; pm2 start app)
+- Reduced memory footprint
+- Reduced pipelined data
+- Reduced CPU usage
+- Faster command processing
 - Upgrade shelljs, semver, colors, chalk, coffee-script, async, json-stringify-safe, cron, debug, commander
 
 # 0.12.16 (Current stable)
