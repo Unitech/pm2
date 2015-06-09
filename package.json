@@ -1,4 +1,4 @@
-{
+{ 
   "name": "pm2",
   "preferGlobal": "true",
   "version": "0.12.16",
@@ -170,7 +170,9 @@
 
     "shelljs"             : "0.3.0",
     "isbinaryfile"        : "^2.0.3",
-    "semver"              : "4.3.3"
+    "semver"              : "4.3.3",
+    "sync-exec"           : "*",
+    "ini"                 : "*"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
