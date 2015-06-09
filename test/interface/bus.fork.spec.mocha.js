@@ -124,7 +124,6 @@ describe('PM2 BUS / RPC', function() {
           event.should.eql('log:out');
 
           data.should.have.properties(LOG_EVENT);
-          data.process.should.have.properties(PROCESS_ARCH);
           plan.ok(true);
         }
         if (event == 'log:err') {
