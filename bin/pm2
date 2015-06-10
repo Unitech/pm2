@@ -72,7 +72,7 @@ commander.on('--help', function() {
   console.log('    $ pm2 kill');
   console.log('');
   console.log('    Update pm2 :');
-  console.log('    $ npm install pm2@latest -g ; pm2 updatePM2');
+  console.log('    $ npm install pm2@latest -g ; pm2 update');
   console.log('');
   console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
   console.log('');
