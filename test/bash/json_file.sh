@@ -36,11 +36,13 @@ should 'should all script been restarted one time' 'restart_time: 3' 6
 ## Smart restart
 ##
 $pm2 start all.json
+sleep 1
 should 'should smart restart processes' 'online' 6
 should 'should all script been restarted one time' 'restart_time: 4' 6
 
 $pm2 stop all.json
-should 'should smart restart processes' 'stopped' 6
+sleep 1
+should 'should stop processes' 'stopped' 6
 
 $pm2 start all.json
 should 'should smart restart processes' 'online' 6
