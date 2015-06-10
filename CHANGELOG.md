@@ -18,6 +18,9 @@
 - Reduced CPU usage
 - Faster command processing
 - Upgrade shelljs, semver, colors, chalk, coffee-script, async, json-stringify-safe, cron, debug, commander
+- `pm2 logs` completely refactored :
+  -> Now you don't need to install tail on Windows
+  -> You don't need to exit and `pm2 logs` again when a new app is launched (this one will be detected and added to the real-time logs output)
 
 # 0.12.16 (Current stable)
 
@@ -378,7 +381,7 @@ Big thanks to @Tjatse !
 
 - Adds option to switch to a different user/group before starting a managed process #329
 - watch doesnt watch node_module folder
-- default log files and pid files location can be overidded by PM2_LOG_DIR / PM2_PID_DIR
+- default log files and pid files location can be overrided by PM2_LOG_DIR / PM2_PID_DIR
 
 
 # 0.8.1
