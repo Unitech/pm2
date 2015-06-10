@@ -716,11 +716,19 @@ $ pm2 start processes.json
 # Stop
 $ pm2 stop processes.json
 
+# Restart
+$ pm2 start processes.json
+## Or
+$ pm2 restart processes.json
+
+# Reload
+$ pm2 reload processes.json
+
+# Graceful Reload
+$ pm2 gracefulReload processes.json
+
 # Delete from PM2
 $ pm2 delete processes.json
-
-# Restart all
-$ pm2 restart processes.json
 ```
 
 ### Options

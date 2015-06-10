@@ -70,15 +70,15 @@ $ pm2 list
 Managing your processes is straightforward:
 
 ```bash
-$ pm2 stop     <app_name|id|all>
-$ pm2 restart  <app_name|id|all>
-$ pm2 delete   <app_name|id|all>
+$ pm2 stop     <app_name|id|'all'|json_conf>
+$ pm2 restart  <app_name|id|'all'|json_conf>
+$ pm2 delete   <app_name|id|'all'|json_conf>
 ```
 
 To have more details on a specific process:
 
 ```bash
-$ pm2 describe 0
+$ pm2 describe <id|app_name>
 ```
 
 ### CPU / Memory Monitoring
@@ -100,7 +100,7 @@ Displaying logs of a specified process or all processes, in real time:
 ```bash
 $ pm2 logs
 $ pm2 logs --raw
-$ pm2 logs big-api
+$ pm2 logs <app_name>
 $ pm2 flush          # Clear all the logs
 ```
 
