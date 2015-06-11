@@ -33,9 +33,7 @@ sleep 1
 
 shouldnot 'process should have been restarted' 'restart_time: 0' 1
 
-
-
-$pm2 delete all
+$pm2 kill
 
 $pm2 start es6/main.js --next-gen-js
 sleep 1
