@@ -10,6 +10,7 @@
 - Removed: pm2.startJSON() method, now call pm2.start()
 - API Change: pm2 start <app_name|app_id> restart an application already launched
 - API Change: pm2 start <json> restart all json apps if already launched
+- pm2 start all - restart all applications
 - pm2 reload <json_file> possible
 - pm2 gracefulReload <json_file> possible
 - Smart start (pm2 start app.js ; pm2 stop app ; pm2 start app)

@@ -47,6 +47,13 @@ should 'should stop processes' 'stopped' 6
 $pm2 start all.json
 should 'should smart restart processes' 'online' 6
 
+$pm2 stop all.json
+sleep 1
+should 'should stop processes' 'stopped' 6
+
+$pm2 start all
+should 'should smart restart processes' 'online' 6
+
 $pm2 kill
 
 ########## JS style
