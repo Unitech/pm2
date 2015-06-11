@@ -19,15 +19,16 @@
 - Faster command processing
 - Upgrade shelljs, semver, colors, chalk, coffee-script, async, json-stringify-safe, cron, debug, commander
 - Fix: launchBus() only connects and disconnects once
-- `pm2 logs` completely refactored :
-  -> Now you don't need to install tail on Windows
-  -> You don't need to Ctrl^C and `pm2 logs` again when a new app is launched (this one will be detected and added to the real-time logs output)
-  -> Logs are shown in chronological order at a file level (modified date)
-  -> More verbosity : tailed logs are explicitely separated from the real-time logs
-  -> Real-time now logs use the `bus` event emitter
-  -> PM2 logs added to the `bus`
-  -> `--lines <n>` and `--raw` flags available for `pm2 logs` command
-  -> Now you can exclusively show PM2 logs by doing `pm2 logs PM2`
+
+- Refactored `pm2 logs` :
+  - Now you don't need to install tail on Windows
+  - You don't need to Ctrl^C and `pm2 logs` again when a new app is launched (this one will be detected and added to the real-time logs output)
+  - Logs are shown in chronological order at a file level (modified date)
+  - More verbosity : tailed logs are explicitely separated from the real-time logs
+  - Real-time logs now use the `bus` event emitter
+  - PM2 logs added to the `bus`
+  - `--lines <n>` and `--raw` flags available for `pm2 logs` command
+  - Now you can exclusively show PM2 logs by doing `pm2 logs PM2`
 
 # 0.12.16 (Current stable)
 
