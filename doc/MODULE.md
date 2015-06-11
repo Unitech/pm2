@@ -98,7 +98,7 @@ An object can be passed to initModule:
     latency          : false,
     versioning       : false,
     show_module_meta : false
-    pid              : pid_number (overidde pid to monitor // use pmx.getPID(FILE)),
+    pid              : pid_number (override pid to monitor // use pmx.getPID(FILE)),
     comment          : string (comment to be displayed in dashboard)
 }
 ```

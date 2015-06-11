@@ -568,17 +568,24 @@ commander.command('reloadLogs')
 //
 commander.command('logs [id|name]')
   .option('--raw', 'logs without timestamps and other PM2 indicators')
-  .option('--lines <N>', 'output the last N lines, instead of the last 20')
+  .option('--lines <n>', 'output the last N lines, instead of the last 20 by default')
+  .option('--timestamp [format]', 'add timestamps (default format YYYY-MM-DD-HH:mm:ss)')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
     var line = 20;
     var raw  = false;
+    var timestamp = false;
+
     if(!isNaN(cmd.lines)){
       line = parseInt(cmd.lines);
     }
+
     if (cmd.parent.rawArgs.indexOf('--raw') !== -1)
       raw = true;
-    CLI.streamLogs(id, line, raw);
+
+    if (cmd.timestamp)
+      timestamp = typeof cmd.timestamp === 'string' ? cmd.timestamp : 'YYYY-MM-DD-HH:mm:ss';
+    CLI.streamLogs(id, line, raw, timestamp);
   });
 
 
