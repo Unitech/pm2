@@ -28,6 +28,7 @@
   - Real-time logs now use the `bus` event emitter
   - PM2 logs added to the `bus`
   - `--lines <n>` and `--raw` flags available for `pm2 logs` command
+  - New flag : '--timestamp [format]' // default format is 'YYYY-MM-DD-HH:mm:ss'
   - Now you can exclusively show PM2 logs by doing `pm2 logs PM2`
 
 # 0.12.16 (Current stable)
