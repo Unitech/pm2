@@ -100,8 +100,12 @@ Displaying logs of a specified process or all processes, in real time:
 
 ```bash
 $ pm2 logs
-$ pm2 logs --raw
 $ pm2 logs big-api
+$ pm2 logs --raw
+$ pm2 logs --lines 5
+$ pm2 logs --timestamp "HH:mm:ss"
+$ pm2 logs <app_name>
+
 $ pm2 flush          # Clear all the logs
 ```
 
