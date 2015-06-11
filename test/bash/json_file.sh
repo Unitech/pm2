@@ -6,7 +6,7 @@ cd $file_path
 
 echo -e "\033[1mRunning tests for json files :\033[0m"
 
-$pm2 start all.json
+PM2_WORKER_INTERVAL=90000 $pm2 start all.json
 should 'should start processes' 'online' 6
 
 $pm2 stop all.json
@@ -51,7 +51,7 @@ $pm2 kill
 
 ########## JS style
 
-$pm2 start configuration.json
+PM2_WORKER_INTERVAL=90000 $pm2 start configuration.json
 should 'should start processes' 'online' 6
 
 $pm2 stop configuration.json
