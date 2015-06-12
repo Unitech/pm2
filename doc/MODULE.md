@@ -5,7 +5,7 @@ A PM2 module is basically a NPM module. But this time it's not a library, but a 
 
 Internally it embeds the NPM install procedure. So a PM2 module will be published to NPM and installed from NPM.
 
-![Process listing](https://github.com/unitech/pm2/raw/poc-plugin/pres/pm2-module.png)
+![Process listing](https://github.com/unitech/pm2/raw/master/pres/pm2-module.png)
 
 ## Basics
 
@@ -98,7 +98,7 @@ An object can be passed to initModule:
     latency          : false,
     versioning       : false,
     show_module_meta : false
-    pid              : pid_number (overidde pid to monitor // use pmx.getPID(FILE)),
+    pid              : pid_number (override pid to monitor // use pmx.getPID(FILE)),
     comment          : string (comment to be displayed in dashboard)
 }
 ```

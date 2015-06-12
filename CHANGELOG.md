@@ -5,6 +5,33 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
+# 0.14.0 - CrystalClear (pre 1.0)
+
+- Removed: pm2.startJSON() method, now call pm2.start()
+- API Change: pm2 start <app_name|app_id> restart an application already launched
+- API Change: pm2 start <json> restart all json apps if already launched
+- pm2 start all - restart all applications
+- pm2 reload <json_file> possible
+- pm2 gracefulReload <json_file> possible
+- Smart start (pm2 start app.js ; pm2 stop app ; pm2 start app)
+- Reduced memory footprint
+- Reduced pipelined data
+- Reduced CPU usage
+- Faster command processing
+- Upgrade shelljs, semver, colors, chalk, coffee-script, async, json-stringify-safe, cron, debug, commander
+- Fix: launchBus() only connects and disconnects once
+
+- Refactored `pm2 logs` :
+  - Now you don't need to install tail on Windows
+  - You don't need to Ctrl^C and `pm2 logs` again when a new app is launched (this one will be detected and added to the real-time logs output)
+  - Logs are shown in chronological order at a file level (modified date)
+  - More verbosity : tailed logs are explicitely separated from the real-time logs
+  - Real-time logs now use the `bus` event emitter
+  - PM2 logs added to the `bus`
+  - `--lines <n>` and `--raw` flags available for `pm2 logs` command
+  - New flag : '--timestamp [format]' // default format is 'YYYY-MM-DD-HH:mm:ss'
+  - Now you can exclusively show PM2 logs by doing `pm2 logs PM2`
+
 # 0.12.16 (Current stable)
 
 - Feature : File transmission added in Agent
@@ -364,7 +391,7 @@ Big thanks to @Tjatse !
 
 - Adds option to switch to a different user/group before starting a managed process #329
 - watch doesnt watch node_module folder
-- default log files and pid files location can be overidded by PM2_LOG_DIR / PM2_PID_DIR
+- default log files and pid files location can be overrided by PM2_LOG_DIR / PM2_PID_DIR
 
 
 # 0.8.1

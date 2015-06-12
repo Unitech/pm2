@@ -6,7 +6,7 @@ cd $file_path
 
 echo -e "\033[1mRunning tests for json files :\033[0m"
 
-$pm2 start all.json
+PM2_WORKER_INTERVAL=90000 $pm2 start all.json
 should 'should start processes' 'online' 6
 
 $pm2 stop all.json
@@ -22,11 +22,43 @@ $pm2 restart all.json
 should 'should stop processes' 'online' 6
 should 'should all script been restarted one time' 'restart_time: 1' 6
 
+$pm2 reload all.json
+sleep 1
+should 'should reload processes' 'online' 6
+should 'should all script been restarted one time' 'restart_time: 2' 6
+
+$pm2 gracefulReload all.json
+sleep 1
+should 'should graceful reload processes' 'online' 6
+should 'should all script been restarted one time' 'restart_time: 3' 6
+
+##
+## Smart restart
+##
+$pm2 start all.json
+sleep 1
+should 'should smart restart processes' 'online' 6
+should 'should all script been restarted one time' 'restart_time: 4' 6
+
+$pm2 stop all.json
+sleep 1
+should 'should stop processes' 'stopped' 6
+
+$pm2 start all.json
+should 'should smart restart processes' 'online' 6
+
+# $pm2 stop all.json
+# sleep 1
+# should 'should stop processes' 'stopped' 6
+
+# $pm2 start all
+# should 'should smart restart processes' 'online' 6
+
 $pm2 kill
 
 ########## JS style
 
-$pm2 start configuration.json
+PM2_WORKER_INTERVAL=90000 $pm2 start configuration.json
 should 'should start processes' 'online' 6
 
 $pm2 stop configuration.json
