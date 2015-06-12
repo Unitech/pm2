@@ -30,9 +30,9 @@ $pm2 start 0
 should 'process should have been started' 'restart_time: 2' 1
 should 'process should have been started' 'online' 1
 
-$pm2 stop echo
-should 'process should have been started' 'stopped' 1
+# $pm2 stop echo
+# should 'process should have been started' 'stopped' 1
 
-$pm2 start all
-should 'process should have been started' 'restart_time: 2' 1
-should 'process should have been started' 'online' 1
+# $pm2 start all
+# should 'process should have been started' 'restart_time: 2' 1
+# should 'process should have been started' 'online' 1
