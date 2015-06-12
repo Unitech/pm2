@@ -5,7 +5,7 @@
 - YAML support for apps declarations
 - Improve app declaration file parsing (log_file, out_file, error_file)
 
-# 0.14.0 - HellFire (pre 1.0)
+# 0.14.0 - CrystalClear (pre 1.0)
 
 - Removed: pm2.startJSON() method, now call pm2.start()
 - API Change: pm2 start <app_name|app_id> restart an application already launched
