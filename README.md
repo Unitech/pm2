@@ -53,6 +53,17 @@ pm2.connect(function() {
 });
 ```
 
+## Update PM2
+
+```bash
+# Install latest pm2 version
+$ npm install pm2 -g
+# Save process list, exit old PM2 & restore all processes
+$ pm2 update
+```
+
+*PM2 updates are seamless*
+
 ## Main features
 
 ### Process management
