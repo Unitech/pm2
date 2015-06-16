@@ -34,7 +34,7 @@ spec "Module should be installed"
 # one time in the raw env, and a second time prefixed with the module name
 #
 OUT=`$pm2 prettylist | grep -o "config1xxx" | wc -l`
-[ $OUT -eq 2 ] || fail "$1"
+[ $OUT -eq 5 ] || fail "$1"
 success "$1"
 
 $pm2 update
