@@ -1,9 +1,8 @@
-# Coming Next
+# 0.14.1
 
-- `--no-logs` flag : doesn't save any logs (some people use their own logging system)
-- dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
-- YAML support for apps declarations
-- Improve app declaration file parsing (log_file, out_file, error_file)
+- Improved pm2-dev
+- Now when apps list is empty, the `id` counter is set to 0
+- Removed pres/keymetrics.js post-install script
 
 # 0.14.0 - CrystalClear (pre 1.0)
 
@@ -32,7 +31,7 @@
   - New flag : '--timestamp [format]' // default format is 'YYYY-MM-DD-HH:mm:ss'
   - Now you can exclusively show PM2 logs by doing `pm2 logs PM2`
 
-# 0.12.16 (Current stable)
+# 0.12.16
 
 - Feature : File transmission added in Agent
 - Feature : Transmit Node.js/io.js version in Agent
