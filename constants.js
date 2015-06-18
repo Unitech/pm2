@@ -63,8 +63,8 @@ var csts = {
 
   DEFAULT_MODULE_JSON    : 'package.json',
 
-  REMOTE_PORT_TCP        : 80,
-  REMOTE_PORT            : 41624,
+  REMOTE_PORT_TCP        : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
+  REMOTE_PORT            : isNaN(parseInt(process.env.KEYMETRICS_REVERSE_PORT)) ? 41624 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
   REMOTE_REVERSE_PORT    : 43554,
   REMOTE_HOST            : 's1.keymetrics.io',
   SEND_INTERVAL          : 1000
