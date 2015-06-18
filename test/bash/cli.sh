@@ -16,6 +16,8 @@ $pm2 start echo.js -f
 
 OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
 sleep 1
+echo $OUT
+$pm2 prettylist | grep -o restart_time
 [ $OUT -eq 3 ] || fail "$1"
 success "$1"
 
