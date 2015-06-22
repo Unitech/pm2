@@ -88,8 +88,13 @@ var conf    = pmx.initModule({
         actions: false
       },
 
-      // Name of custom metrics to be displayed in block style (like cpu or mem)
-      main_probes : ['Processes']
+      block : {
+        // Display remote action block
+        actions : true,
+
+        // Name of custom metrics to be displayed in block style (like cpu or mem)
+        main_probes : ['Processes']
+      },
 
       // Status Green / Yellow / Red (maybe for probes?)
     }
