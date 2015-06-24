@@ -1,4 +1,4 @@
-# 0.14.1
+# 0.14.2
 
 - Improved pm2-dev
 - Now when apps list is empty, the `id` counter is set to 0
