@@ -3,6 +3,8 @@
 - Improved pm2-dev
 - Now when apps list is empty, the `id` counter is set to 0
 - Removed pres/keymetrics.js post-install script
+- Fix : `pm2 logs` allocation error
+- Fix : `pm2 prettylist|jlist` truncated output
 
 # 0.14.0 - CrystalClear (pre 1.0)
 
