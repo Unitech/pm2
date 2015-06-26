@@ -47,6 +47,7 @@ commander.version(pkg.version)
   .option('--no-color', 'skip colors')
   .option('--no-vizion', 'start an app without vizion feature (versioning control)')
   .option('--no-autorestart', 'start an app without automatic restart')
+  .option('--no-treekill', 'Only kill main process not detached childrens')
 
   .usage('[cmd] app');
 
