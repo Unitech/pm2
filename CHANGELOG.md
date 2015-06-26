@@ -1,6 +1,7 @@
 # 0.14.3
 
 - `pm2 flush` now flushes pm2.log as well
+- New flag : `--no-treekill` : when used PM2 won't kill children processes
 
 # 0.14.2 (Current Stable)
 
