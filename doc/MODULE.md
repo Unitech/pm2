@@ -94,7 +94,7 @@ var conf    = pmx.initModule({
 
         // Display CPU / Memory
         cpu     : true,
-        memory  : true,
+        mem     : true,
 
         // Display meta block
         meta    : true,
