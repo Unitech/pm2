@@ -3,6 +3,9 @@
 - `pm2 flush` now flushes pm2.log as well
 - New flag : `--no-treekill` : when used PM2 won't kill children processes
 - New flags : `pm2 logs [ 'all' | 'PM2' | app_name | app_id] [--err | --out] [--lines <n>] [--raw] [--timestamp [format]]`
+- Enhancement: Module installable via Github: `pm2 install username/repository`
+- Feature: PMX has *scoped function* -> pm2 stores temporary output from custom functions
+- Fix: Interactor issue when doing an heapdump
 
 # 0.14.2 (Current Stable)
 
