@@ -108,13 +108,19 @@ $ pm2 monit
 
 Displaying logs of a specified process or all processes, in real time:
 
+`pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--ti\
+mestamp [format]]`
+
+Examples:
+
 ```bash
 $ pm2 logs
-$ pm2 logs <app_name>
-$ pm2 logs --raw
+$ pm2 logs WEB-API --err
+$ pm2 logs all --raw
 $ pm2 logs --lines 5
 $ pm2 logs --timestamp "HH:mm:ss"
-$ pm2 logs WEB-API --lines 0 --timestamp "HH:mm"
+$ pm2 logs WEB-API --lines 0 --timestamp "HH:mm" --out
+$ pm2 logs PM2 --timestamp
 
 $ pm2 flush          # Clear all the logs
 ```

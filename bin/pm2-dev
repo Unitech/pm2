@@ -40,7 +40,7 @@ function run(cmd, opts) {
     timestamp = 'YYYY-MM-DD-HH:mm:ss';
 
   CLI.start(cmd, commander, function(err, obj) {
-    Log.stream('all', needRaw, timestamp);
+    Log.stream('all', needRaw, timestamp, false);
 
     process.on('SIGINT', function() {
       CLI.delete(cmd, '', function() {
