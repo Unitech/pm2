@@ -12,6 +12,9 @@ Internally it embeds the NPM install procedure. So a PM2 module will be publishe
 # INSTALL
 $ pm2 install npm-module
 
+# INSTALL GIT
+$ pm2 install pm2-hive/pm2-docker
+
 # UNINSTALL
 $ pm2 uninstall npm-module
 
