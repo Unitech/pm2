@@ -12,6 +12,9 @@ Internally it embeds the NPM install procedure. So a PM2 module will be publishe
 # INSTALL
 $ pm2 install npm-module
 
+# INSTALL GIT
+$ pm2 install pm2-hive/pm2-docker
+
 # UNINSTALL
 $ pm2 uninstall npm-module
 
@@ -28,7 +31,7 @@ $ pm2 publish
 
 - A package.json must be present with some extra fields like `config` for configuration variables and `apps` to declare the [behavior of this module](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#options-1):
 
-```json
+```javascript
 {
   "name": "pm2-logrotate", // Used as module name
   "version": "1.0.0",      // Used as module version
@@ -92,6 +95,12 @@ var conf    = pmx.initModule({
         // Display remote action block
         actions : true,
 
+        // Display CPU / Memory
+        cpu     : true,
+        mem     : true,
+
+        // Display meta block
+        meta    : true,
         // Name of custom metrics to be displayed in block style (like cpu or mem)
         main_probes : ['Processes']
       },
