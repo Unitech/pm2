@@ -73,6 +73,8 @@ bash ./test/bash/module.sh
 spec "module system"
 bash ./test/bash/vizion.sh
 spec "vizion features (versioning control)"
+bash ./test/bash/wrapped_fork.sh
+spec "wrapped fork"
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
