@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.16",
+  "version": "0.14.2",
   "engines": {
     "node": ">=0.10"
   },
@@ -55,6 +55,9 @@
       "email": "jonishkurti90@gmail.com"
     },
     {
+      "name": "James Ide"
+    },
+    {
       "name" : "Jun Tjatse",
       "email" : "thisnamemeansnothing@gmail.com"
     },
@@ -95,7 +98,7 @@
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
+    "test": "PM2_CONCURRENT_ACTIONS=1 NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
   },
   "keywords": [
     "cli",
@@ -142,18 +145,17 @@
     "pm2-dev": "./bin/pm2-dev"
   },
   "dependencies": {
-    "async"               : "~0.9.0",
-    "chalk"               : "~0.5.1",
+    "async"               : "1.2.1",
+    "chalk"               : "1.0.0",
     "chokidar"            : "^1.0.0",
     "cli-table"           : "0.3.1",
-    "coffee-script"       : "1.8.0",
-    "colors"              : "1.0.3",
-    "commander"           : "2.6.0",
-    "cron"                : "1.0.5",
-    "debug"               : "2.1.0",
+    "coffee-script"       : "1.9.3",
+    "colors"              : "1.1.0",
+    "commander"           : "2.8.1",
+    "cron"                : "1.0.9",
+    "debug"               : "2.2.0",
     "eventemitter2"       : "0.4.14",
-    "json-stringify-safe" : "5.0.0",
-    "moment"              : "2.9.0",
+    "moment"              : "2.10.3",
     "nssocket"            : "0.5.3",
     "pidusage"            : "0.1.1",
 
@@ -164,19 +166,19 @@
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "latest",
     "pm2-multimeter"      : "0.1.2",
+    "safe-clone-deep"     : "1.0.5",
 
     "babel"               : "^5.x",
     "is-iojs"             : "1.1.0",
 
-    "shelljs"             : "0.3.0",
+    "shelljs"             : "0.5.1",
     "isbinaryfile"        : "^2.0.3",
-    "semver"              : "4.3.3"
+    "semver"              : "4.3.6"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
     "should"          : "^4.0.0",
     "better-assert"   : "^1.0.0",
-    "promise-spawner" : "^0.0.3",
     "punt"            : "*"
   },
   "optionalDependencies": {
@@ -190,5 +192,5 @@
     "type": "git",
     "url": "git://github.com/Unitech/pm2.git"
   },
-  "license": "AGPLv3"
+  "license": "AGPL-3.0"
 }

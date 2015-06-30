@@ -16,8 +16,7 @@ Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://git
 Compatible with CoffeeScript.
 Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
-[![NPM version](https://badge.fury.io/js/pm2.svg)](http://badge.fury.io/js/pm2) [![Gitter](https://badges.gitter.im/Unitech/PM2.svg)](https://gitter.im/Unitech/PM2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://api.travis-ci.org/Unitech/PM2.svg?branch=master)](https://travis-ci.org/Unitech/PM2) [![Inline docs](http://inch-ci.org/github/unitech/pm2.svg?branch=master)](http://inch-ci.org/github/unitech/pm2)
-
+[![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![NPM Downloads](https://img.shields.io/npm/dm/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://img.shields.io/travis/Unitech/PM2/master.svg?style=flat-square)](https://travis-ci.org/Unitech/PM2)[![Dependencies](https://img.shields.io/david/Unitech/pm2.svg?style=flat-square)](https://david-dm.org/Unitech/pm2)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
@@ -54,6 +53,17 @@ pm2.connect(function() {
 });
 ```
 
+## Update PM2
+
+```bash
+# Install latest pm2 version
+$ npm install pm2 -g
+# Save process list, exit old PM2 & restore all processes
+$ pm2 update
+```
+
+*PM2 updates are seamless*
+
 ## Main features
 
 ### Process management
@@ -71,15 +81,15 @@ $ pm2 list
 Managing your processes is straightforward:
 
 ```bash
-$ pm2 stop     <app_name|id|all>
-$ pm2 restart  <app_name|id|all>
-$ pm2 delete   <app_name|id|all>
+$ pm2 stop     <app_name|id|'all'|json_conf>
+$ pm2 restart  <app_name|id|'all'|json_conf>
+$ pm2 delete   <app_name|id|'all'|json_conf>
 ```
 
 To have more details on a specific process:
 
 ```bash
-$ pm2 describe 0
+$ pm2 describe <id|app_name>
 ```
 
 ### CPU / Memory Monitoring
@@ -98,10 +108,20 @@ $ pm2 monit
 
 Displaying logs of a specified process or all processes, in real time:
 
+`pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--ti\
+mestamp [format]]`
+
+Examples:
+
 ```bash
 $ pm2 logs
-$ pm2 logs --raw
-$ pm2 logs big-api
+$ pm2 logs WEB-API --err
+$ pm2 logs all --raw
+$ pm2 logs --lines 5
+$ pm2 logs --timestamp "HH:mm:ss"
+$ pm2 logs WEB-API --lines 0 --timestamp "HH:mm" --out
+$ pm2 logs PM2 --timestamp
+
 $ pm2 flush          # Clear all the logs
 ```
 
@@ -189,7 +209,7 @@ Thanks in advance and we hope that you like PM2!
 - [JSON application declaration](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration)
 - [Using PM2 in your code](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#programmatic-example)
 - [Deployment workflow](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment)
-- [Startup script generation (SystemV/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#startup-script)
+- [Startup script generation (SystemD/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#startup-script)
 - [Advanced log management (flush, reload, logs)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a9)
 - [GracefullReload](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a690)
 

@@ -94,7 +94,7 @@ function startSomeApps(cb) {
         name : 'custom-action'
       }, cb);
     });
-  }, 500);
+  }, 1200);
 }
 
 function startBus(cb) {
@@ -158,9 +158,18 @@ describe('CUSTOM ACTIONS', function() {
   it('should trigger remote action successfully', function(done) {
     var plan = new Plan(2, done);
 
-    server.once('trigger:action:success', function(pck) {
+    var success = function(pck) {
       plan.ok(true);
-    });
+      server.removeListener('trigger:action:failure', failure);
+    };
+
+    var failure = function(pck) {
+      plan.ok(false);
+    };
+
+    server.once('trigger:action:success', success);
+
+    server.once('trigger:action:failure', failure);
 
     pm2_bus.on('axm:reply', function(pck) {
       pck.data.return.success.should.be.true;
@@ -178,13 +187,18 @@ describe('CUSTOM ACTIONS', function() {
   it('should trigger failure action', function(done) {
     var plan = new Plan(1, done);
 
-    server.once('trigger:action:success', function(pck) {
+    var success = function(pck) {
       plan.ok(false);
-    });
+    };
 
-    server.once('trigger:action:failure', function(pck) {
+    var failure = function(pck) {
+      server.removeListener('trigger:action:success', success);
       plan.ok(true);
-    });
+    };
+
+    server.once('trigger:action:success', success);
+
+    server.once('trigger:action:failure', failure);
 
     pm2_bus.on('axm:reply', function(pck) {
       plan.ok(false);

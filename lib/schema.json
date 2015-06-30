@@ -80,6 +80,9 @@
   "autorestart" : {
     "type": "boolean"
   },
+  "treekill" : {
+    "type": "boolean"
+  },
   "watch": {
     "type": [
       "boolean",

@@ -33,9 +33,7 @@ spec "Module should be installed"
 # Should configuration variable be present two times
 # one time in the raw env, and a second time prefixed with the module name
 #
-OUT=`$pm2 prettylist | grep -o "config1xxx" | wc -l`
-[ $OUT -eq 2 ] || fail "$1"
-success "$1"
+should 'should have config variable' 'config1xxx' 5
 
 $pm2 update
 spec "Should update succesfully"

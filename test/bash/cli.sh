@@ -14,25 +14,18 @@ $pm2 start echo.js
 $pm2 start echo.js -f
 $pm2 start echo.js -f
 
-OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
-[ $OUT -eq 3 ] || fail "$1"
-success "$1"
+should 'should have start 3 apps' 'restart_time' 3
 
 $pm2 stop 12412
 $pm2 stop 0
 
-OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
-[ $OUT -eq 1 ] || fail "$1"
-success "$1"
+should 'should have stopped 1 apps' 'stopped' 1
 
 $pm2 stop asdsdaecho.js
 
 $pm2 stop echo
 
-$pm2 list
-OUT=`$pm2 prettylist | grep -o "stopped" | wc -l`
-[ $OUT -eq 3 ] || fail "$1"
-success "$1"
+should 'should have stopped 3 apps' 'stopped' 3
 
 
 #
@@ -208,11 +201,7 @@ $pm2 stop all
 spec "Should stop all processes"
 
 sleep 0.5
-$pm2 prettylist > /tmp/tmp_out.txt
-OUT=`cat /tmp/tmp_out.txt | grep -o "stopped" | wc -l`
-echo $OUT
-[ $OUT -eq 8 ] || fail "Process not stopped"
-success "Process succesfully stopped"
+should 'should have stopped 8 apps' 'stopped' 8
 
 
 $pm2 kill
@@ -224,17 +213,11 @@ $pm2 kill
 PROC_NAME='ECHONEST'
 # Launch a script with name option
 $pm2 start echo.js --name $PROC_NAME -f
-OUT=`$pm2 prettylist | grep -o "ECHONEST" | wc -l`
-[ $OUT -gt 0 ] || fail "Process not launched"
-success "Processes sucessfully launched with a specific name"
+should 'should have started app with name' 'ECHONEST' 5
 
 # Restart a process by name
 $pm2 restart $PROC_NAME
-OUT=`$pm2 prettylist | grep -o "restart_time: 1" | wc -l`
-[ $OUT -gt 0 ] || fail "Process name not restarted"
-success "Processes sucessfully restarted with a specific name"
-
-
+should 'should have restarted app by name' 'restart_time: 1' 1
 
 
 
@@ -244,10 +227,7 @@ $pm2 resurrect
 spec "Should resurrect all apps"
 
 sleep 0.5
-$pm2 prettylist > /tmp/tmp_out.txt
-OUT=`cat /tmp/tmp_out.txt | grep -o "restart_time" | wc -l`
-[ $OUT -eq 8 ] || fail "Not valid process number"
-success "Processes valid"
+should 'should have resurrected all processes' 'restart_time' 8
 
 
 
@@ -255,9 +235,7 @@ $pm2 delete all
 spec "Should delete all processes"
 
 sleep 0.5
-OUT=`$pm2 prettylist | grep -o "restart_time" | wc -l`
-[ $OUT -eq 0 ] || fail "Process not stopped"
-success "Process succesfully stopped"
+should 'should have deleted process' 'restart_time' 0
 
 #
 # Cron

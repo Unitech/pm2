@@ -8,8 +8,7 @@ const PATH_FIXTURES = process.cwd() + '/test/interface/fixtures/';
 
 var PROCESS_ARCH  = Object.keys({
   pm_id  : 0,
-  name   : 'app',
-  status : ['online', 'offline']
+  name   : 'app'
   // server: 'server name' - attached in interactor
 });
 
@@ -124,7 +123,6 @@ describe('PM2 BUS / RPC', function() {
           event.should.eql('log:out');
 
           data.should.have.properties(LOG_EVENT);
-          data.process.should.have.properties(PROCESS_ARCH);
           plan.ok(true);
         }
         if (event == 'log:err') {
