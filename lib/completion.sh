@@ -1,9 +1,7 @@
-###-begin-{pkgname}-completion-###
-### credits to npm and node-tabtab, this file is coming directly from isaacs/npm repo
+###-begin-pm2-completion-###
+### credits to for the completion file model
 #
-# npm command completion script
-#
-# Installation: {completer} completion >> ~/.bashrc  (or ~/.zshrc)
+# Installation: pm2 completion >> ~/.bashrc  (or ~/.zshrc)
 #
 
 COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
@@ -11,18 +9,18 @@ COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
 export COMP_WORDBREAKS
 
 if type complete &>/dev/null; then
-  _{pkgname}_completion () {
+  _pm2_completion () {
     local si="$IFS"
     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
                            COMP_LINE="$COMP_LINE" \
                            COMP_POINT="$COMP_POINT" \
-                           {completer} completion -- "${COMP_WORDS[@]}" \
+                           pm2 completion -- "${COMP_WORDS[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
   }
-  complete -o default -F _{pkgname}_completion {pkgname}
+  complete -o default -F _pm2_completion pm2
 elif type compctl &>/dev/null; then
-  _{pkgname}_completion () {
+  _pm2_completion () {
     local cword line point words si
     read -Ac words
     read -cn cword
@@ -33,10 +31,10 @@ elif type compctl &>/dev/null; then
     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
                        COMP_LINE="$line" \
                        COMP_POINT="$point" \
-                       {completer} completion -- "${words[@]}" \
+                       pm2 completion -- "${words[@]}" \
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  compctl -K _{pkgname}_completion + -f + {pkgname}
+  compctl -K _pm2_completion pm2
 fi
-###-end-{pkgname}-completion-###
+###-end-pm2-completion-###
