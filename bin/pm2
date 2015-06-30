@@ -16,6 +16,7 @@ var CLI       = require('../lib/CLI');
 var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 var platform  = require('os').platform();
+var tabtab    = require('../lib/completion.js');
 
 CLI.pm2Init();
 
@@ -114,6 +115,32 @@ function beginCommandProcessing() {
   commander.parse(process.argv);
 }
 
+function checkCompletion(){
+  return tabtab.complete('pm2', function(err, data) {
+    if(err || !data) return;
+    if(/^--\w?/.test(data.last)) return tabtab.log(commander.options.map(function (data) {
+      return data.long;
+    }), data);
+    if(/^-\w?/.test(data.last)) return tabtab.log(commander.options.map(function (data) {
+      return data.short;
+    }), data);
+    // array containing commands after which process name should be listed
+    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward'];
+    if(cmdProcess.indexOf(data.prev) > -1) {
+      CLI.connect(function() {
+        CLI.list(function(err, list){
+          tabtab.log(list.map(function(el){ return el.name}), data);
+            CLI.disconnect();
+          });
+      });
+    }
+    else if (data.prev == 'pm2')
+      tabtab.log(commander.commands.map(function (data) {
+      return data._name;
+    }), data);
+  });
+};
+
 if (process.argv.indexOf('--no-daemon') > -1) {
   //
   // Start daemon if it does not exist
@@ -131,10 +158,17 @@ if (process.argv.indexOf('--no-daemon') > -1) {
     });
   });
 }
-else
+else {
   Satan.start(false, function() {
-    beginCommandProcessing();
+    if (process.argv.slice(2)[0] === 'completion') {
+      checkCompletion();
+      CLI.disconnect();
+    }
+    else
+      beginCommandProcessing();
   });
+}
+
 
 
 //
