@@ -19,10 +19,10 @@ $pm2 kill
 
 echo "Testing pmx injection in fork mode"
 
-#$pm2 start child.js
-#sleep 1
-#should 'should have injected pmx in cluster mode' 'Loop delay' 1
-#should_more 'should have http monitored in cluster mode' 'pmx:http:latency' 1
+$pm2 start child.js
+sleep 1
+should 'should have injected pmx in cluster mode' 'Loop delay' 1
+should_more 'should have http monitored in cluster mode' 'pmx:http:latency' 1
 
 $pm2 delete all
 $pm2 start child.js -i 2
@@ -32,11 +32,11 @@ should_more 'should have http monitored in cluster mode' 'pmx:http:latency' 2
 
 echo "################## PMX OPTIONS OVERRIDE  ###################"
 
-#$pm2 delete all
-#$pm2 start child_no_http.js
-#sleep 1
-#should_more 'should not have http monitored in fork mode' '"latency":true' 0
-#should_more 'should not have http monitored in fork mode' '"latency":false' 1
+$pm2 delete all
+$pm2 start child_no_http.js
+sleep 1
+should_more 'should not have http monitored in fork mode' '"latency":true' 0
+should_more 'should not have http monitored in fork mode' '"latency":false' 1
 
 $pm2 delete all
 $pm2 start child_no_http.js -i 2
