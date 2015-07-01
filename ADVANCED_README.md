@@ -12,7 +12,7 @@
 - [Options](#a987)
   - [Schema](#schema)
 - [How to update PM2?](#update-pm2)
-- [PM2 auto-completion](#auto-completion)
+- [PM2 tab-completion](#tab-completion)
 - [Allow PM2 to bind apps on port 80/443 without root](#authbind-pm2)
 
 ### Features
@@ -266,25 +266,32 @@ Then update the in-memory PM2 :
 $ pm2 update
 ```
 
-<a name="auto-completion"/>
-## PM2 auto-completion
+<a name="tab-completion"/>
+## PM2 tab-completion
+
+Tab-completion for pm2.
 
 Append pm2 completion script to your .bashrc or .zshrc file:
 
 ```bash
 $ pm2 completion install
 ```
+Or manually append completion script to your ~/.bashrc or ~/.zshrc file:
 
-Add pm2 completion to your current session:
+```bash
+$ pm2 completion >> ~/.bashrc # or ~/.zshrc
+```
+
+Then source your .bashrc or .zshrc file for current session:
+
+```bash
+$ pm2 source ~/.bashrc # or ~/.zshrc
+```
+
+You can add pm2 completion to your current session this way:
 
 ```bash
 $ . <(pm2 completion)
-```
-
-Manually append completion script to your ~/.bashrc or ~/.zshrc file:
-
-```bash
-$ pm2 completion >> ~/.bashrc
 ```
 
 <a name="authbind-pm2"/>
