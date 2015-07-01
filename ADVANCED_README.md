@@ -285,7 +285,7 @@ $ pm2 completion >> ~/.bashrc # or ~/.zshrc
 Then source your .bashrc or .zshrc file for current session:
 
 ```bash
-$ pm2 source ~/.bashrc # or ~/.zshrc
+$ source ~/.bashrc # or ~/.zshrc
 ```
 
 You can add pm2 completion to your current session this way:
