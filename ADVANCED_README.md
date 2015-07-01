@@ -27,7 +27,7 @@
 - [Watch & Restart](#watch--restart)
 - [Reloading without downtime](#hot-reload--0s-reload)
 - [Make PM2 restart on server reboot](#a8)
-- [JSON app declaration](#json-app-declaration)
+- [JS/JSON app declaration](#json-app-declaration)
   - [Options list](#list-of-all-json-declaration-fields-avaibles)
   - [Schema](#schema)
 
@@ -669,7 +669,7 @@ If `--watch` is enabled, stopping it won't stop watching:
 
 Restart toggle the `watch` parameter when triggered.
 
-To watch specific paths, please use a JSON app declaration, `watch` can take a string or an array of paths. Default is `true`:
+To watch specific paths, please use a JS/JSON app declaration, `watch` can take a string or an array of paths. Default is `true`:
 
 ```json
 {
@@ -695,13 +695,13 @@ var watch_options = {
 }
 ```
 
-## JSON app declaration
+## JS/JSON app declaration
 
 PM2 empowers your process management workflow, by allowing you to fine-tune the behavior, options, environment variables, logs files... of each process you need to manage via JSON/JSON5/JS configuration.
 
 It's particularly usefull for micro service based applications.
 
-You can define parameters for your apps in a JSON file:
+You can define parameters for your apps in a JS/JSON file:
 
 ```json
 {
@@ -733,24 +733,24 @@ Then you can run:
 
 ```bash
 # Start all apps
-$ pm2 start processes.json
+$ pm2 start processes.js[on]
 
 # Stop
-$ pm2 stop processes.json
+$ pm2 stop processes.js[on]
 
 # Restart
-$ pm2 start processes.json
+$ pm2 start processes.js[on]
 ## Or
-$ pm2 restart processes.json
+$ pm2 restart processes.js[on]
 
 # Reload
-$ pm2 reload processes.json
+$ pm2 reload processes.js[on]
 
 # Graceful Reload
-$ pm2 gracefulReload processes.json
+$ pm2 gracefulReload processes.js[on]
 
 # Delete from PM2
-$ pm2 delete processes.json
+$ pm2 delete processes.js[on]
 ```
 
 ### Options
