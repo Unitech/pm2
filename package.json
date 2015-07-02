@@ -173,6 +173,7 @@
 
     "shelljs"             : "0.5.1",
     "isbinaryfile"        : "^2.0.3",
+    "blessed"             : "0.1.61",
     "semver"              : "4.3.6"
   },
   "devDependencies": {

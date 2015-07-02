@@ -1,3 +1,7 @@
+# 0.14.4
+
+- New command : `pm2 iprobe [app_name|app_id|'ALL']`
+
 # 0.14.3 (Current Stable)
 
 - `pm2 flush` now flushes pm2.log as well
