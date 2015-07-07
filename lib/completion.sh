@@ -1,5 +1,5 @@
 ###-begin-pm2-completion-###
-### credits to for the completion file model
+### credits to npm for the completion file model
 #
 # Installation: pm2 completion >> ~/.bashrc  (or ~/.zshrc)
 #
@@ -35,6 +35,6 @@ elif type compctl &>/dev/null; then
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  compctl -K _pm2_completion pm2
+  compctl -K _pm2_completion + -f + pm2
 fi
 ###-end-pm2-completion-###

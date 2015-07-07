@@ -126,7 +126,7 @@ function checkCompletion(){
       return data.short;
     }), data);
     // array containing commands after which process name should be listed
-    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward'];
+    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
     if(cmdProcess.indexOf(data.prev) > -1) {
       CLI.connect(function() {
         CLI.list(function(err, list){
@@ -686,6 +686,16 @@ commander.command('gc')
   .description('force PM2 to trigger garbage collection')
   .action(function() {
     CLI.forceGc();
+  });
+
+//
+// Display probes in a graphical way
+//
+commander.command('iprobe [app_name|app_id]')
+  .description('displays probes in a graphical way')
+  .action(function(pm2_id) {
+    pm2_id = pm2_id || 'ALL';
+    CLI.IProbe(pm2_id);
   });
 
 //

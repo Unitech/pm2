@@ -1,13 +1,18 @@
-# 0.14.3
+# 0.14.4
+
+- New command : `pm2 iprobe [app_name|app_id|'ALL']`
+
+# 0.14.3 (Current Stable)
 
 - `pm2 flush` now flushes pm2.log as well
 - New flag : `--no-treekill` : when used PM2 won't kill children processes
-- New flags : `pm2 logs [ 'all' | 'PM2' | app_name | app_id] [--err | --out] [--lines <n>] [--raw] [--timestamp [format]]`
-- Enhancement: Module installable via Github: `pm2 install username/repository`
+- New flags : `pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--timestamp [format]]`
+- Enhancement: Modules installable via Github: `pm2 install username/repository`
 - Feature: PMX has *scoped function* -> pm2 stores temporary output from custom functions
 - Fix: Interactor issue when doing an heapdump
+- Feature: PM2 CLI autocompletion
 
-# 0.14.2 (Current Stable)
+# 0.14.2
 
 - Improved pm2-dev
 - Now when apps list is empty, the `id` counter is set to 0
