@@ -139,7 +139,7 @@ With the cluster mode, PM2 enables load balancing between multiple application t
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
 
 ```bash
-$ pm2 start app.js -i max  # Enable load-balancer and cluster features
+$ pm2 start app.js -i 0  # Enable load-balancer and cluster features
 
 $ pm2 reload all           # Reload all apps in 0s manner
 
