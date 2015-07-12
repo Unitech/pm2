@@ -140,6 +140,24 @@ describe('Configuration via SET / GET tests', function() {
       });
     });
 
+    it('should get the val', function(done) {
+      Configuration.unset('module-name2:var2', function(err, data) {
+        should(err).not.exists;
+        data['module-name2']['var1'].should.eql('val1');
+        should(data['module-name2']['var2']).not.exists;
+        done();
+      });
+    });
+
+  });
+
+  describe('Password encryption', function() {
+    it('should encrypt password when setting pm2:passwd', function(done) {
+      Configuration.set('pm2:passwd', 'testpass', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
   });
 
 });
