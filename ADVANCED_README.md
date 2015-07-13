@@ -764,7 +764,7 @@ $ pm2 delete processes.js[on]
 
 The following are valid options for JSON app declarations:
 
-```json
+```js
 {
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
