@@ -7,6 +7,7 @@ var util     = require('util');
 var Cipher   = require('../../lib/Interactor/Cipher.js');
 var cst      = require('../../constants.js');
 var Plan     = require('../helpers/plan.js');
+var Configuration = require('../../lib/Configuration.js');
 
 var Interactor = require('../../lib/Interactor/InteractorDaemonizer.js');
 var gl_interactor_process;
@@ -16,9 +17,9 @@ var send_cmd = new events.EventEmitter();
 process.env.NODE_ENV = 'local_test';
 
 var meta_connect = {
-  secret_key : 'osef',
-  public_key : 'osef',
-  machine_name : 'osef'
+  secret_key : 'test-secret-key',
+  public_key : 'test-public-key',
+  machine_name : 'test-machine-name'
 };
 
 /**
@@ -27,9 +28,15 @@ var meta_connect = {
  * @return pm2
  */
 function forkPM2(cb) {
-  var pm2 = require('child_process').fork('lib/Satan.js', [], {
-    detached   : true
-  });
+  var opts = {
+    detached   : true,
+    silent     : true
+  };
+
+  if (process.env.DEBUG)
+    opts.silent = false;
+
+  var pm2 = require('child_process').fork('lib/Satan.js', [], opts);
 
   pm2.unref();
 
@@ -60,10 +67,9 @@ function forkInteractor(cb) {
 function createMockServer(cb) {
   var server = nssocket.createServer(function(_socket) {
 
-    console.log('Got new connection in Mock server');
-
     send_cmd.on('cmd', function(data) {
-      console.log('Sending command %j', data);
+      if (process.env.DEBUG)
+        console.log('Sending command %j', data);
       _socket.send(data._type, data);
     });
 
@@ -143,9 +149,19 @@ describe('REMOTE PM2 ACTIONS', function() {
    * PM2 agent is now identified
    */
   describe('PM2 is identified', function() {
-    it('should restart command via scoped pm2 action', function(done) {
+    before(function(done) {
+      Configuration.unset('pm2:passwd', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should restart command via scoped pm2 action (no pass needed)', function(done) {
       var plan = new Plan(4, function() {
         // Double check that process has been unlocked
+
+        gl_interactor_process.removeListener('message', actionCheck);
+
         cmd_pm2.list(function(err, ret) {
           ret.forEach(function(proc) {
             proc.pm2_env.command.locked.should.be.false;
@@ -154,7 +170,7 @@ describe('REMOTE PM2 ACTIONS', function() {
         done();
       });
 
-      gl_interactor_process.on('message', function(pck) {
+      function actionCheck(pck) {
         if (pck.event == 'pm2:scoped:stream' && pck.data.out === 'Action restart received') {
           return plan.ok(true);
         }
@@ -168,7 +184,9 @@ describe('REMOTE PM2 ACTIONS', function() {
           return plan.ok(true);
         }
         return false;
-      });
+      }
+
+      gl_interactor_process.on('message', actionCheck);
 
       send_cmd.emit('cmd', {
         _type : 'trigger:pm2:scoped:action',
@@ -179,5 +197,100 @@ describe('REMOTE PM2 ACTIONS', function() {
     });
 
   });
+
+  describe('Password verification', function() {
+
+    before(function(done) {
+      Configuration.unset('pm2:passwd', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should error when call an action that is password protected', function(done) {
+      function actionCheck(pck) {
+        if (pck.event == 'pm2:scoped:error' && pck.data.out.indexOf('Missing password') > -1) {
+          gl_interactor_process.removeListener('message', actionCheck);
+          done();
+        }
+      };
+
+      gl_interactor_process.on('message', actionCheck);
+
+      send_cmd.emit('cmd', {
+        _type : 'trigger:pm2:scoped:action',
+        method_name : 'install',
+        uuid : '5678',
+        parameters : { name : 'child' }
+      });
+    });
+
+    it('should fail when password passed but no pm2 password configured', function(done) {
+      function actionCheck(pck) {
+        if (pck.event == 'pm2:scoped:error' && pck.data.out.indexOf('Password at PM2') > -1) {
+          gl_interactor_process.removeListener('message', actionCheck);
+          done();
+        }
+      };
+
+      gl_interactor_process.on('message', actionCheck);
+
+      send_cmd.emit('cmd', {
+        _type : 'trigger:pm2:scoped:action',
+        method_name : 'install',
+        uuid : '5678',
+        password : 'random-pass',
+        parameters : { name : 'pm2-module' }
+      });
+    });
+
+    it('should set a password', function(done) {
+      Configuration.set('pm2:passwd', 'testpass', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should fail when wrong password', function(done) {
+      function actionCheck(pck) {
+        if (pck.event == 'pm2:scoped:error' && pck.data.out.indexOf('Wrong password') > -1) {
+          gl_interactor_process.removeListener('message', actionCheck);
+          done();
+        }
+      };
+
+      gl_interactor_process.on('message', actionCheck);
+
+      send_cmd.emit('cmd', {
+        _type : 'trigger:pm2:scoped:action',
+        method_name : 'install',
+        uuid : '5678',
+        password : 'random-pass',
+        parameters : { name : 'pm2-module' }
+      });
+    });
+
+    it('should work when good password passed', function(done) {
+      function actionCheck(pck) {
+        if (pck.event === 'pm2:scoped:end') {
+          gl_interactor_process.removeListener('message', actionCheck);
+          done();
+        }
+      };
+
+      gl_interactor_process.on('message', actionCheck);
+
+      send_cmd.emit('cmd', {
+        _type       : 'trigger:pm2:scoped:action',
+        method_name : 'ping',
+        uuid        : '56789',
+        password    : 'testpass',
+        parameters  : {}
+      });
+    });
+
+
+  });
+
 
 });
