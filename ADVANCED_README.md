@@ -702,6 +702,8 @@ var watch_options = {
 }
 ```
 
+When working with NFS devices you'll need to set `polling: true` as stated in [this chokidar issue](https://github.com/paulmillr/chokidar/issues/242).  
+
 ## JS/JSON app declaration
 
 PM2 empowers your process management workflow, by allowing you to fine-tune the behavior, options, environment variables, logs files... of each process you need to manage via JSON/JSON5/JS configuration.
