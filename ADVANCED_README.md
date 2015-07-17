@@ -702,7 +702,7 @@ var watch_options = {
 }
 ```
 
-When working with NFS devices you'll need to set `polling: true` as stated in [this chokidar issue](https://github.com/paulmillr/chokidar/issues/242).  
+When working with NFS devices you'll need to set `usePolling: true` as stated in [this chokidar issue](https://github.com/paulmillr/chokidar/issues/242).  
 
 ## JS/JSON app declaration
 
