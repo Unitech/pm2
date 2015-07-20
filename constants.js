@@ -46,6 +46,8 @@ var csts = {
   GENTOO_STARTUP_SCRIPT  : '../lib/scripts/pm2',
   DARWIN_STARTUP_SCRIPT  : '../lib/scripts/io.keymetrics.PM2.plist',
 
+  LOGROTATE_SCRIPT       : '../lib/scripts/logrotate.d/pm2',
+
   SUCCESS_EXIT           : 0,
   ERROR_EXIT             : 1,
 
