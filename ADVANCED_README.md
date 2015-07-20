@@ -766,7 +766,7 @@ $ pm2 delete processes.js[on]
 
 The following are valid options for JSON app declarations:
 
-```json
+```js
 {
   "name"             : "node-app",
   "cwd"              : "/srv/node-app/current",
@@ -1421,8 +1421,8 @@ Every data, states, websocket session, session data, must be shared via any kind
 
 We recommend using Redis for sharing session data, websocket.
 
-- SocketIO with Redis : [https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO](Configuring SocketIO)
-- Redis session store for Connect : [https://github.com/visionmedia/connect-redis](Connect-redis)
+- [Configuring SocketIO](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO)
+- [Redis session store for Connect](https://github.com/visionmedia/connect-redis)
 
 We recommend following the 12 factor convention : [http://12factor.net/](http://12factor.net/)
 
