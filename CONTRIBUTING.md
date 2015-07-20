@@ -10,6 +10,7 @@ Please try following these rules it will make the task easier for you and for us
   - pm2 version `pm2 --version`
   - nodejs version `node --version`
   - operating system
+  - `head -n 50 ~/.pm2/pm2.log` output
 
 #### 3. Provide details about your issue:
   - What are the steps that brought me to the issue?
