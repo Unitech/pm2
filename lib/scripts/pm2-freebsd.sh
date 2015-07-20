@@ -9,7 +9,7 @@ load_rc_config $name
  
 : ${pm2_user="%USER%"}
  
-command="/usr/local/bin/${name}"
+command="%PM2_PATH%"
 pidfile="/home/${pm2_user}/.pm2/${name}.pid"
 start_cmd="${name}_start"
 stop_cmd="${name}_stop"
