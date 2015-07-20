@@ -7,7 +7,7 @@ rcvar=${name}_enable
  
 load_rc_config $name
  
-: ${pm2_user="root"}
+: ${pm2_user="%USER%"}
  
 command="/usr/local/bin/${name}"
 pidfile="/home/${pm2_user}/.pm2/${name}.pid"
