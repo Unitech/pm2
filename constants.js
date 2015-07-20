@@ -13,7 +13,7 @@ var PM2_ROOT_PATH = '';
 if (process.env.PM2_HOME)
   PM2_ROOT_PATH = process.env.PM2_HOME;
 else if (process.env.HOME || process.env.HOMEPATH)
-  PM2_ROOT_PATH = p.resolve(process.env.HOME || process.env.HOMEPATH, '.pm2');
+  PM2_ROOT_PATH = p.resolve(process.env.HOME || (process.env.HOMEDRIVE + process.env.HOMEPATH), '.pm2');
 else
   PM2_ROOT_PATH = p.resolve('/etc', '.pm2');
 
