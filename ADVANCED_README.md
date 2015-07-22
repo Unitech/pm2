@@ -27,7 +27,7 @@
 - [Watch & Restart](#watch--restart)
 - [Reloading without downtime](#hot-reload--0s-reload)
 - [Make PM2 restart on server reboot](#a8)
-- [JS/JSON app declaration](#json-app-declaration)
+- [JS/JSON app declaration](#jsjson-app-declaration)
   - [Options list](#list-of-all-json-declaration-fields-avaibles)
   - [Schema](#schema)
 
