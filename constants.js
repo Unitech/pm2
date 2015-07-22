@@ -26,7 +26,7 @@ var csts = {
   PM2_CONF_FILE          : p.join(PM2_ROOT_PATH, 'conf.js'),
   PM2_MODULE_CONF_FILE   : p.join(PM2_ROOT_PATH, 'module_conf.json'),
 
-  BABEL_EXEC_PATH        : p.join(__dirname, 'node_modules', 'babel', 'bin', 'babel-node'),
+  BABEL_EXEC_PATH        : p.join(__dirname, 'node_modules', 'babel', 'bin', 'babel-node.js'),
 
   CODE_UNCAUGHTEXCEPTION : 100,
   PREFIX_MSG             : chalk.green('[PM2] '),
