@@ -93,14 +93,12 @@ function createMockServer(cb) {
 }
 
 function startSomeApps(cb) {
-  setTimeout(function() {
-    cmd_pm2.connect(function() {
-      cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, cb);
-    });
-  }, 500);
+  cmd_pm2.connect(function() {
+    cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, cb);
+  });
 }
 
-describe('REMOTE PM2 ACTIONS', function() {
+describe('SCOPED PM2 ACTIONS', function() {
   var server;
   var interactor;
   var pm2;
@@ -148,7 +146,7 @@ describe('REMOTE PM2 ACTIONS', function() {
   /**
    * PM2 agent is now identified
    */
-  describe('PM2 is identified', function() {
+  describe('Test non auth remote commands', function() {
     before(function(done) {
       Configuration.unset('pm2:passwd', function(err, data) {
         should(err).not.exists;
@@ -157,7 +155,7 @@ describe('REMOTE PM2 ACTIONS', function() {
     });
 
     it('should restart command via scoped pm2 action (no pass needed)', function(done) {
-      var plan = new Plan(4, function() {
+      var plan = new Plan(2, function() {
         // Double check that process has been unlocked
 
         gl_interactor_process.removeListener('message', actionCheck);
@@ -171,18 +169,12 @@ describe('REMOTE PM2 ACTIONS', function() {
       });
 
       function actionCheck(pck) {
-        if (pck.event == 'pm2:scoped:stream' && pck.data.out === 'Action restart received') {
+        if (pck.event == 'pm2:scoped:stream' && pck.data.out === 'Action restart received')
           return plan.ok(true);
-        }
-        if (pck.event == 'pm2:scoped:stream' && pck.data.out.indexOf('unlocked') > -1) {
+        if (pck.event == 'pm2:scoped:end')
           return plan.ok(true);
-        }
-        if (pck.event == 'pm2:scoped:stream' && pck.data.out.indexOf('locked') > -1) {
-          return plan.ok(true);
-        }
-        if (pck.event == 'pm2:scoped:end') {
-          return plan.ok(true);
-        }
+        if (pck.event == 'pm2:scoped:error')
+          return plan.ok(false, pck);
         return false;
       }
 
@@ -190,10 +182,11 @@ describe('REMOTE PM2 ACTIONS', function() {
 
       send_cmd.emit('cmd', {
         _type : 'trigger:pm2:scoped:action',
-        method_name : 'restart',
+        action_name : 'restart',
         uuid : '1234',
-        parameters : { name : 'child' }
+        options : { args : ['child'] }
       });
+
     });
 
   });
@@ -219,9 +212,9 @@ describe('REMOTE PM2 ACTIONS', function() {
 
       send_cmd.emit('cmd', {
         _type : 'trigger:pm2:scoped:action',
-        method_name : 'install',
+        action_name : 'install',
         uuid : '5678',
-        parameters : { name : 'child' }
+        options : { args : ['child'] }
       });
     });
 
@@ -237,10 +230,10 @@ describe('REMOTE PM2 ACTIONS', function() {
 
       send_cmd.emit('cmd', {
         _type : 'trigger:pm2:scoped:action',
-        method_name : 'install',
+        action_name : 'install',
         uuid : '5678',
         password : 'random-pass',
-        parameters : { name : 'pm2-module' }
+        options : { args : ['pm2-module'] }
       });
     });
 
@@ -255,7 +248,7 @@ describe('REMOTE PM2 ACTIONS', function() {
       function actionCheck(pck) {
         if (pck.event == 'pm2:scoped:error' && pck.data.out.indexOf('Wrong password') > -1) {
           gl_interactor_process.removeListener('message', actionCheck);
-          done();
+          setTimeout(done, 100);
         }
       };
 
@@ -263,10 +256,10 @@ describe('REMOTE PM2 ACTIONS', function() {
 
       send_cmd.emit('cmd', {
         _type : 'trigger:pm2:scoped:action',
-        method_name : 'install',
+        action_name : 'install',
         uuid : '5678',
         password : 'random-pass',
-        parameters : { name : 'pm2-module' }
+        options : { args : ['pm2-module'] }
       });
     });
 
@@ -276,16 +269,20 @@ describe('REMOTE PM2 ACTIONS', function() {
           gl_interactor_process.removeListener('message', actionCheck);
           done();
         }
+        if (pck.event === 'pm2:scoped:error') {
+          gl_interactor_process.removeListener('message', actionCheck);
+          done('{ERROR} Wrong password!' + JSON.stringify(pck));
+        }
       };
 
       gl_interactor_process.on('message', actionCheck);
 
       send_cmd.emit('cmd', {
         _type       : 'trigger:pm2:scoped:action',
-        method_name : 'ping',
-        uuid        : '56789',
+        action_name : 'ping',
+        uuid        : '5678',
         password    : 'testpass',
-        parameters  : {}
+        options        : {}
       });
     });
 
