@@ -1,6 +1,11 @@
+
 # 0.14.4
 
 - New command : `pm2 iprobe [app_name|app_id|'ALL']`
+- Feature: FreeBSD startup script
+- Fix: Remove forced GC
+- Fix: #1444 --next-gen-js in fork mode
+- Fix: Windows path fix
 
 # 0.14.3 (Current Stable)
 
