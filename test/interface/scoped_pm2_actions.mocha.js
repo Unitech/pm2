@@ -246,7 +246,7 @@ describe('SCOPED PM2 ACTIONS', function() {
 
     it('should fail when wrong password', function(done) {
       function actionCheck(pck) {
-        if (pck.event == 'pm2:scoped:error' && pck.data.out.indexOf('Wrong password') > -1) {
+        if (pck.event == 'pm2:scoped:error' && pck.data.out.indexOf('Password does not match') > -1) {
           gl_interactor_process.removeListener('message', actionCheck);
           setTimeout(done, 100);
         }
