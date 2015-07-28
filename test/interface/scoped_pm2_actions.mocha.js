@@ -1,5 +1,5 @@
 
-var cmd_pm2  = require('../..');
+var CLI  = require('../..');
 var should   = require('should');
 var nssocket = require('nssocket');
 var events   = require('events');
@@ -8,7 +8,7 @@ var Cipher   = require('../../lib/Interactor/Cipher.js');
 var cst      = require('../../constants.js');
 var Plan     = require('../helpers/plan.js');
 var Configuration = require('../../lib/Configuration.js');
-
+var Helpers          = require('../helpers/apps.js');
 var Interactor = require('../../lib/Interactor/InteractorDaemonizer.js');
 var gl_interactor_process;
 
@@ -24,35 +24,10 @@ var meta_connect = {
 
 /**
  * Description
- * @method forkPM2
- * @return pm2
- */
-function forkPM2(cb) {
-  var opts = {
-    detached   : true,
-    silent     : true
-  };
-
-  if (process.env.DEBUG)
-    opts.silent = false;
-
-  var pm2 = require('child_process').fork('lib/Satan.js', [], opts);
-
-  pm2.unref();
-
-  pm2.on('message', function() {
-    cb(null, pm2);
-  });
-}
-
-/**
- * Description
  * @method forkInteractor
  * @return CallExpression
  */
 function forkInteractor(cb) {
-  console.log('Launching interactor');
-
   Interactor.launchAndInteract(meta_connect, function(err, data, interactor_process) {
     gl_interactor_process = interactor_process;
     cb();
@@ -93,8 +68,8 @@ function createMockServer(cb) {
 }
 
 function startSomeApps(cb) {
-  cmd_pm2.connect(function() {
-    cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, cb);
+  CLI.connect(function() {
+    CLI.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, cb);
   });
 }
 
@@ -119,12 +94,10 @@ describe('SCOPED PM2 ACTIONS', function() {
   before(function(done) {
     createMockServer(function(err, _server) {
       server = _server;
-      forkPM2(function(err, _pm2) {
+      Helpers.forkPM2(function(err, _pm2) {
         pm2 = _pm2;
-        console.log('PM2 forked');
         forkInteractor(function(err, _interactor) {
           interactor = _interactor;
-          console.log('Interactor forked');
           startSomeApps(function() {
             done();
           });
@@ -160,7 +133,7 @@ describe('SCOPED PM2 ACTIONS', function() {
 
         gl_interactor_process.removeListener('message', actionCheck);
 
-        cmd_pm2.list(function(err, ret) {
+        CLI.list(function(err, ret) {
           ret.forEach(function(proc) {
             proc.pm2_env.command.locked.should.be.false;
           });
@@ -238,7 +211,7 @@ describe('SCOPED PM2 ACTIONS', function() {
     });
 
     it('should set a password', function(done) {
-      Configuration.set('pm2:passwd', 'testpass', function(err, data) {
+      CLI.set('pm2:passwd', 'testpass', function(err, data) {
         should(err).not.exists;
         done();
       });

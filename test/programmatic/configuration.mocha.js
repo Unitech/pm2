@@ -178,7 +178,8 @@ describe('Configuration via SET / GET tests', function() {
 
   });
 
-  describe('Password encryption', function() {
+  // Password encryption moved outside Configuration library
+  describe.skip('Password encryption', function() {
     it('should encrypt password when setting pm2:passwd', function(done) {
       Configuration.set('pm2:passwd', 'testpass', function(err, data) {
         should(err).not.exists;

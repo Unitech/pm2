@@ -1,5 +1,6 @@
 
 var path = require('path');
+var CLI  = require('../..');
 
 var APPS = {};
 
@@ -8,11 +9,28 @@ var APPS = {};
  * @method forkPM2
  * @return pm2
  */
-APPS.forkPM2 = function() {
+APPS.forkPM2 = function(cb) {
   var pm2 = require('child_process').fork('lib/Satan.js', [], {
-    env : process.env
+    env : process.env,
+    silent : process.env.DEBUG ? false : true
   });
-  return pm2;
+
+  pm2.unref();
+
+  pm2.on('message', function() {
+    return cb(null, pm2);
+  });
+};
+
+APPS.startSomeApps = function(cb) {
+  setTimeout(function() {
+    CLI.connect(function() {
+      CLI.start({
+        script : './test/fixtures/events/custom_action.js',
+        name : 'custom-action'
+      }, cb);
+    });
+  }, 1200);
 };
 
 /**
@@ -22,7 +40,7 @@ APPS.forkPM2 = function() {
  * @param {} script
  * @param {} name
  * @param {} cb
- * @return 
+ * @return
  */
 APPS.launchApp = function(ipm2, script, name, cb) {
   ipm2.rpc.prepare({
@@ -42,7 +60,7 @@ APPS.launchApp = function(ipm2, script, name, cb) {
  * @param {} script
  * @param {} name
  * @param {} cb
- * @return 
+ * @return
  */
 APPS.launchAppFork = function(ipm2, script, name, cb) {
   ipm2.rpc.prepare({
