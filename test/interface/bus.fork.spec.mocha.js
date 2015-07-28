@@ -133,7 +133,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'log:out.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'log_out.js', {}, function(err, data) {
         should(err).be.null;
       });
     });
@@ -149,7 +149,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'process:exception.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'process_exception.js', {}, function(err, data) {
         should(err).be.null;
       });
     });
@@ -165,7 +165,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'human:event.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'human_event.js', {}, function(err, data) {
         should(err).be.null;
       });
     });
@@ -180,7 +180,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'http:transaction.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'http_transaction.js', {}, function(err, data) {
         should(err).be.null;
       });
     });
