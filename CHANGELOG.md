@@ -6,7 +6,8 @@
 - Interactor Remote action refactor
 - .getSync method to get configuration variable synchronously
 - Add password protected PM2 methods (install, delete)
-- pm2 get display all confs
+- pm2 get|pm2 conf display all confs
+- Password protected PM2 flag
 
 # 0.14.5
 
