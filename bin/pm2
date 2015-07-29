@@ -707,13 +707,6 @@ commander.command('deepUpdate')
     CLI.deepUpdate();
   });
 
-commander.command('testUpdate')
-  .description('ddd')
-  .action(function() {
-    console.log('testUpdate');
-    process.exit(0);
-  });
-
 //
 // Catch all
 //
