@@ -361,7 +361,7 @@ commander.command('set <key> <value>')
     CLI.set(key, value);
   });
 
-commander.command('get <key>')
+commander.command('get [key]')
   .description('get value for <key>')
   .action(function(key) {
     CLI.get(key);
@@ -476,6 +476,14 @@ commander.command('startup [platform]')
     CLI.startup(_platform || platform, commander);
   });
 
+//
+// Logrotate
+// 
+commander.command('logrotate')
+  .description('copy default logrotate configuration')
+  .action(function(cmd) {
+    CLI.logrotate(commander);
+  });
 
 //
 // Sample generate

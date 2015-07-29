@@ -522,6 +522,26 @@ Options:
 -e --error <path>            specify error log file
 ```
 
+### Settings up a native logrotate
+
+```bash
+$ sudo pm2 logrotate -u user
+```
+
+This will write a basic logrotate configuration to `/etc/logrotate.d/pm2-user` that will look like this:
+
+```
+/home/user/.pm2/pm2.log /home/user/.pm2/logs/*.log {
+        rotate 12
+        weekly
+        missingok
+        notifempty
+        compress
+        delaycompress
+        create 0640 user user
+}
+```
+
 ### JSON / Programmatic
 
 ```

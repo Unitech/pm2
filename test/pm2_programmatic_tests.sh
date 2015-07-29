@@ -36,9 +36,6 @@ spec "God test"
 mocha ./test/programmatic/satan.mocha.js
 spec "Satan test"
 
-#
-# Programmatic API test
-#
 mocha ./test/programmatic/programmatic.js
 spec "Programmatic test"
 mocha ./test/programmatic/logs.js
@@ -50,16 +47,23 @@ spec "Cluster tests"
 mocha ./test/programmatic/misc_commands.js
 spec "MISC tests"
 
-
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
 mocha ./test/programmatic/configuration.mocha.js
 spec "Configuration system working"
 
+mocha ./test/interface/interactor.connect.mocha.js
+spec "Interactor test #1 with password setting"
+mocha ./test/interface/interactor.connect.two.mocha.js
+spec "Interactor test #2 with password setting"
 mocha ./test/interface/interactor.daemonizer.mocha.js
 spec "Remote interactor keys save verification"
 mocha ./test/interface/remote.mocha.js
 spec "Remote interactions test"
+mocha ./test/interface/scoped_pm2_actions.mocha.js
+spec "Scoped PM2 Remote interactions test"
+mocha ./test/interface/password.mocha.js
+spec "Password library checking"
 mocha ./test/interface/custom-actions.mocha.js
 spec "Custom actions test"
 mocha ./test/interface/bus.spec.mocha.js

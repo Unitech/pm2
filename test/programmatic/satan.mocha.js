@@ -17,7 +17,9 @@ describe('Satan', function() {
   it('should start Satan interaction', function(done) {
     Satan.start(function(err) {
       should(err).be.null;
-      done();
+      pm2.delete('all', function(err, ret) {
+        done();
+      });
     });
   });
 
