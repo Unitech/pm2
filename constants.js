@@ -47,6 +47,8 @@ var csts = {
   DARWIN_STARTUP_SCRIPT  : '../lib/scripts/io.keymetrics.PM2.plist',
   FREEBSD_STARTUP_SCRIPT : '../lib/scripts/pm2-freebsd.sh',
 
+  LOGROTATE_SCRIPT       : '../lib/scripts/logrotate.d/pm2',
+
   SUCCESS_EXIT           : 0,
   ERROR_EXIT             : 1,
 
