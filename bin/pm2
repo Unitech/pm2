@@ -699,6 +699,22 @@ commander.command('iprobe [app_name|app_id]')
   });
 
 //
+// Perform a deep update of PM2
+//
+commander.command('deepUpdate')
+  .description('peforms a deep update of PM2')
+  .action(function() {
+    CLI.deepUpdate();
+  });
+
+commander.command('testUpdate')
+  .description('ddd')
+  .action(function() {
+    console.log('testUpdate');
+    process.exit(0);
+  });
+
+//
 // Catch all
 //
 commander.command('*')
