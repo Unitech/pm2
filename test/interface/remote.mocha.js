@@ -14,9 +14,9 @@ var send_cmd = new events.EventEmitter();
 process.env.NODE_ENV = 'local_test';
 
 var meta_connect = {
-  secret_key : 'osef',
-  public_key : 'osef',
-  machine_name : 'osef'
+  secret_key : 'test-secret-key',
+  public_key : 'test-public-key',
+  machine_name : 'test-machine-name'
 };
 
 /**
@@ -25,9 +25,15 @@ var meta_connect = {
  * @return pm2
  */
 function forkPM2(cb) {
-  var pm2 = require('child_process').fork('lib/Satan.js', [], {
-    detached   : true
-  });
+  var opts = {
+    detached   : true,
+    silent     : true
+  };
+
+  if (process.env.DEBUG)
+    opts.silent = false;
+
+  var pm2 = require('child_process').fork('lib/Satan.js', [], opts);
 
   pm2.unref();
 
@@ -60,7 +66,8 @@ function createMockServer(cb) {
     console.log('Got new connection in Mock server');
 
     send_cmd.on('cmd', function(data) {
-      console.log('Sending command %j', data);
+      if (process.env.DEBUG)
+        console.log('Sending command %j', data);
       _socket.send(data._type, data);
     });
 

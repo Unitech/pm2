@@ -16,7 +16,7 @@ $pm2 kill
 #
 #
 
-$pm2 set 'pm2-probe.config1xxx' true
+$pm2 set 'pm2-probe:config1xxx' true
 
 $pm2 install pm2-probe
 spec "Should install a module"
@@ -33,7 +33,17 @@ spec "Module should be installed"
 # Should configuration variable be present two times
 # one time in the raw env, and a second time prefixed with the module name
 #
-should 'should have config variable' 'config1xxx' 5
+should 'should have config variable' "config1xxx: 'true'" 4
+
+#
+# Change variable value
+#
+
+$pm2 set 'pm2-probe:config1xxx' false
+
+sleep 1
+
+should 'should have config variable' "config1xxx: 'false'" 4
 
 $pm2 update
 spec "Should update succesfully"
@@ -71,3 +81,38 @@ ispec "Module should be installed"
 
 $pm2 update
 should 'should module not be online' 'online' 0
+
+#
+# Module test
+#
+
+cd module-fixture
+
+$pm2 kill
+
+# Unset all possible variables for module
+$pm2 unset example-module
+
+# Install local module in development mode
+$pm2 install .
+sleep 0.5
+spec 'Should have installed module'
+
+# Default configuration variable in package.json (under "config" attribute)
+# Only 2 occurences because this is the first start
+should 'should have config variable' "var2: false" 2
+
+# Override environment variable
+$pm2 set example-module:var2 true
+sleep 0.5
+should 'should module been restarted after setting variable' 'restart_time: 1' 1
+
+# 4 occurences because of a restart
+should 'should have config variable modified' "var2: 'true'" 4
+
+$pm2 set example-module:newvar true
+sleep 0.5
+should 'should module been restarted after setting variable' 'restart_time: 2' 1
+
+# 4 occurences because of a restart
+should 'should have config variable modified' "newvar: 'true'" 4

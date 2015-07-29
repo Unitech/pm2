@@ -361,7 +361,7 @@ commander.command('set <key> <value>')
     CLI.set(key, value);
   });
 
-commander.command('get <key>')
+commander.command('get [key]')
   .description('get value for <key>')
   .action(function(key) {
     CLI.get(key);
@@ -694,6 +694,16 @@ commander.command('gc')
   .description('force PM2 to trigger garbage collection')
   .action(function() {
     CLI.forceGc();
+  });
+
+//
+// Display probes in a graphical way
+//
+commander.command('iprobe [app_name|app_id]')
+  .description('displays probes in a graphical way')
+  .action(function(pm2_id) {
+    pm2_id = pm2_id || 'ALL';
+    CLI.IProbe(pm2_id);
   });
 
 //

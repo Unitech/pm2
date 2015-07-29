@@ -109,19 +109,6 @@ describe('CUSTOM ACTIONS', function() {
   var interactor;
   var pm2;
 
-  after(function(done) {
-    server.close();
-    Interactor.killDaemon(function() {
-      var fs = require('fs');
-
-      fs.unlinkSync(cst.INTERACTION_CONF);
-
-      pm2.kill();
-
-      pm2.on('exit', function() {done()});
-    });
-  });
-
   before(function(done) {
     createMockServer(function(err, _server) {
       server = _server;
@@ -138,6 +125,19 @@ describe('CUSTOM ACTIONS', function() {
           });
         });
       });
+    });
+  });
+
+  after(function(done) {
+    server.close();
+    Interactor.killDaemon(function() {
+      var fs = require('fs');
+
+      fs.unlinkSync(cst.INTERACTION_CONF);
+
+      pm2.kill();
+
+      pm2.on('exit', function() {done()});
     });
   });
 

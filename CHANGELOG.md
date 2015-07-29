@@ -1,3 +1,26 @@
+
+# 1.0
+
+- Scoped PM2 actions
+- Password encryption via pm2 set pm2:passwd xxxx
+- Interactor Remote action refactor
+- .getSync method to get configuration variable synchronously
+- Add password protected PM2 methods (install, delete)
+- pm2 get|pm2 conf display all confs
+- Password protected PM2 flag
+
+# 0.14.5
+
+- Hot fix
+
+# 0.14.4
+
+- New command : `pm2 iprobe [app_name|app_id|'ALL']`
+- Feature: FreeBSD startup script
+- Fix: Remove forced GC
+- Fix: #1444 --next-gen-js in fork mode
+- Fix: Windows path fix
+
 # 0.14.3 (Current Stable)
 
 - `pm2 flush` now flushes pm2.log as well

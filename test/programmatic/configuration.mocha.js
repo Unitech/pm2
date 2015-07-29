@@ -140,6 +140,52 @@ describe('Configuration via SET / GET tests', function() {
       });
     });
 
+    it('should unset the val', function(done) {
+      Configuration.unset('module-name2:var2', function(err, data) {
+        should(err).not.exists;
+        data['module-name2']['var1'].should.eql('val1');
+        should(data['module-name2']['var2']).not.exists;
+        done();
+      });
+    });
+
+  });
+
+  describe('Sync', function() {
+    it('should set a sub key', function(done) {
+      Configuration.set('module-name2:var1', 'val1', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should set a second sub key', function(done) {
+      Configuration.set('module-name2:var2', 'val2', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get the val', function() {
+      var data = Configuration.getSync('module-name2:var2');
+      data.should.eql('val2');
+    });
+
+    it('should get null for unknown val', function() {
+      var data = Configuration.getSync('module-name2:var23333');
+      should(data).be.null;
+    });
+
+  });
+
+  // Password encryption moved outside Configuration library
+  describe.skip('Password encryption', function() {
+    it('should encrypt password when setting pm2:passwd', function(done) {
+      Configuration.set('pm2:passwd', 'testpass', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
   });
 
 });

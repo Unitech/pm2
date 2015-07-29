@@ -1,0 +1,21 @@
+{
+  "name": "example-module",
+  "version": "0.3.21",
+  "description": "Keymetrics++ and PM2 adapter",
+  "main": "scoped-action.js",
+  "dependencies": {
+  },
+  "scripts": {
+    "test": "DEBUG='axm:*' mocha test/*.mocha.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keymetrics/pmx.git"
+  },
+  "config" : {
+    "aconfig-var" : true,
+    "var2" : false
+  },
+  "author": "Keymetrics I/O",
+  "license": "MIT"
+}
