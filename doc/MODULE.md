@@ -210,6 +210,9 @@ var conf    = pmx.initModule({
         // Display meta block
         meta    : true,
 
+        // Display metadata about the probe (restart nb, interpreter...)
+        meta_block : true,
+
         // Name of custom metrics the more important (like cpu or mem)
         // (for Display purposes)
         main_probes : ['Processes']
