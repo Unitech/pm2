@@ -10,5 +10,5 @@ pmx.action('db:test', {comment: 'Simply test'}, function(reply) {
   });
 
 pmx.action('throw', {comment: 'Simply test'}, function(reply) {
-  pmx.notify(new Error({test: "WOWOWOWOWOW", length: 12}));
+  throw { success : 'false', length: 12 };
 });
