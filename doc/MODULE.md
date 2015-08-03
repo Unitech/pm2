@@ -291,6 +291,10 @@ pmx.configureModule({
 });
 ```
 
+## .getConf()
+
+Get configuration variables for modules (same object than what is returned by pmx.initModule())
+
 ## .resolvePidPaths([])
 
 Pass an array of possible pid file path location to be resolved.
