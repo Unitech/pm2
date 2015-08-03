@@ -10,7 +10,7 @@
     "script"             : "child.js",
     "cwd"                : "examples",
     "node_args"          : "--harmony",
-    "ignoreWatch"        : ["[\\/\\\\]\\./", "log"],
+    "ignore_watch"        : ["[\\/\\\\]\\./", "log"],
     "watch"              : true
   }]
 }

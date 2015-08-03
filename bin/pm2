@@ -476,6 +476,14 @@ commander.command('startup [platform]')
     CLI.startup(_platform || platform, commander);
   });
 
+//
+// Logrotate
+// 
+commander.command('logrotate')
+  .description('copy default logrotate configuration')
+  .action(function(cmd) {
+    CLI.logrotate(commander);
+  });
 
 //
 // Sample generate
@@ -696,6 +704,15 @@ commander.command('iprobe [app_name|app_id]')
   .action(function(pm2_id) {
     pm2_id = pm2_id || 'ALL';
     CLI.IProbe(pm2_id);
+  });
+
+//
+// Perform a deep update of PM2
+//
+commander.command('deepUpdate')
+  .description('peforms a deep update of PM2')
+  .action(function() {
+    CLI.deepUpdate();
   });
 
 //

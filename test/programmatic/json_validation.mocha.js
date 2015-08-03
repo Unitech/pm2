@@ -14,7 +14,7 @@ describe('JSON validation tests', function() {
       "script"             : "chidld.js",
       "cwd"                : "examadsples",
       "node_args"          : "--harmoasdny",
-      "ignoreWatch"        : ["[\\/\\\\]\\./", "log"],
+      "ignore_watch"        : ["[\\/\\\\]\\./", "log"],
       "watch"              : "true"
     });
 
@@ -42,7 +42,7 @@ describe('JSON validation tests', function() {
       "cwd"                : "examples",
       "node_args"          : "--harmony",
       "max_memory_restart" : "10M",
-      "ignoreWatch"        : ["[\\/\\\\]\\./", "log"],
+      "ignore_watch"        : ["[\\/\\\\]\\./", "log"],
       "watch"              : true,
       "node_args"          : ["hey","hay"],
       "env"                : {}
