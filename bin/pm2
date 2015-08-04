@@ -33,6 +33,7 @@ commander.version(pkg.version)
   .option('-e --error <path>', 'specify error log file')
   .option('-p --pid <pid>', 'specify pid file')
   .option('--max-memory-restart <memory>', 'specify max memory amount used to autorestart (in megaoctets)')
+  .option('--restart-delay <delay>', 'specify a delay between restarts (in milliseconds)')
   .option('--env <environment_name>', 'specify environment to get specific env variables (for JSON declaration)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('-u --user <username>', 'define user when generating startup script')
@@ -48,7 +49,7 @@ commander.version(pkg.version)
   .option('--no-color', 'skip colors')
   .option('--no-vizion', 'start an app without vizion feature (versioning control)')
   .option('--no-autorestart', 'start an app without automatic restart')
-  .option('--no-treekill', 'Only kill main process not detached childrens')
+  .option('--no-treekill', 'Only kill the main process, not detached children')
 
   .usage('[cmd] app');
 
@@ -478,7 +479,7 @@ commander.command('startup [platform]')
 
 //
 // Logrotate
-// 
+//
 commander.command('logrotate')
   .description('copy default logrotate configuration')
   .action(function(cmd) {
