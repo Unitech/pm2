@@ -19,6 +19,8 @@ echo "###################### !DEBUG! ###########################"
 #   export DEBUG="*"
 # fi
 
+bash ./test/bash/file-descriptor.sh
+spec "testing file descriptors"
 bash ./test/bash/pmx_injection.sh
 spec "automatic pmx injection"
 bash ./test/bash/log-timestamp.sh

@@ -579,13 +579,13 @@ commander.command('prettylist')
 commander.command('monit')
   .description('launch termcaps monitoring')
   .action(function() {
-    CLI.monit()
+    CLI.monit();
   });
 
 commander.command('m')
   .description('(alias) launch termcaps monitoring')
   .action(function() {
-    CLI.monit()
+    CLI.monit();
   });
 
 
