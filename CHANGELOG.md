@@ -1,6 +1,7 @@
 # Next
 
 - New flag `--no-pmx` : starts an app without injecting pmx
+- New feature : cron restart now works in fork mode as well
 
 # 0.14.6
 
