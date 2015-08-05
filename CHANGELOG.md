@@ -1,5 +1,5 @@
 
-# 1.0
+# 0.14.6
 
 - Scoped PM2 actions
 - Password encryption via pm2 set pm2:passwd xxxx
@@ -8,6 +8,12 @@
 - Add password protected PM2 methods (install, delete)
 - pm2 get|pm2 conf display all confs
 - Password protected PM2 flag
+- New flag : `--restart-delay <ms>` (or `restart_delay` in JSON declaration)
+- New command : `pm2 deepUpdate`
+- New command (beta) : `pm2 logrotate`
+- Enhancement : pm2 handles processes that can't be killed in a better way
+- Fix : some ignore_watch issues
+- Fix : some pm2 startup systemd issues
 
 # 0.14.5
 
