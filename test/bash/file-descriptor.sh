@@ -18,7 +18,7 @@ sleep 1
 lsof -c PM2 > /tmp/empty_pm2_out.dat
 
 $pm2 start echo.js -i 3
-$pm2 start child.js -i 3
+$pm2 start killtoofast.js -i 3
 $pm2 delete all
 
 sleep 1
