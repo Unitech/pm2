@@ -14,14 +14,14 @@ lsof -c PM2 > /tmp/no_pm2_out.dat
 
 $pm2 list
 
-sleep 1
+sleep 3
 lsof -c PM2 > /tmp/empty_pm2_out.dat
 
 $pm2 start echo.js -i 3
 $pm2 start killtoofast.js -i 3
 $pm2 delete all
 
-sleep 1
+sleep 3
 lsof -c PM2 > /tmp/empty_pm2_out2.dat
 
 OUT1=`cat /tmp/empty_pm2_out.dat | wc -l`
@@ -36,7 +36,7 @@ fi
 $pm2 start killtoofast.js -i 6
 $pm2 kill
 
-sleep 1
+sleep 3
 lsof -c PM2 > /tmp/no_pm2_out2.dat
 diff /tmp/no_pm2_out.dat /tmp/no_pm2_out2.dat
 
