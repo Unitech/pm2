@@ -1,3 +1,6 @@
+# Next
+
+- New flag `--no-pmx` : starts an app without injecting pmx
 
 # 0.14.6
 

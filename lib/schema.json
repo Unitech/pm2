@@ -71,6 +71,9 @@
   "vizion" : {
     "type": "boolean"
   },
+  "pmx" : {
+    "type": "boolean"
+  },
   "autorestart" : {
     "type": "boolean"
   },
