@@ -133,14 +133,14 @@ function checkCompletion(){
       CLI.connect(function() {
         CLI.list(function(err, list){
           tabtab.log(list.map(function(el){ return el.name}), data);
-            CLI.disconnect();
-          });
+          CLI.disconnect();
+        });
       });
     }
     else if (data.prev == 'pm2')
       tabtab.log(commander.commands.map(function (data) {
-      return data._name;
-    }), data);
+        return data._name;
+      }), data);
   });
 };
 
@@ -390,46 +390,50 @@ commander.command('unset <key>')
 //
 // Interact
 //
-function interact(secret_key, public_key, machine) {
+function interact(secret_key, public_key, machine, opts) {
+  var recycle = opts.recycle || false;
+
   if (secret_key == 'stop' || secret_key == 'kill') {
     console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
     CLI.killInteract(function() {
       console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
       return process.exit(cst.SUCCESS_EXIT);
-      });
-      return false;
-    }
-    if (secret_key == 'info') {
-      console.log(chalk.cyan('[Keymetrics.io]') + ' Getting agent information...');
-      return CLI.infoInteract();
-    }
-    if (secret_key == 'delete') {
-      CLI.killInteract(function() {
-        try {
-          fs.unlinkSync(cst.INTERACTION_CONF);
-        } catch(e) {
-          console.log(chalk.cyan('[Keymetrics.io]') + ' No interaction config file found');
-          return process.exit(cst.SUCCESS_EXIT);
-        }
-        console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
+    });
+    return false;
+  }
+  if (secret_key == 'info') {
+    console.log(chalk.cyan('[Keymetrics.io]') + ' Getting agent information...');
+    return CLI.infoInteract();
+  }
+  if (secret_key == 'delete') {
+    CLI.killInteract(function() {
+      try {
+        fs.unlinkSync(cst.INTERACTION_CONF);
+      } catch(e) {
+        console.log(chalk.cyan('[Keymetrics.io]') + ' No interaction config file found');
         return process.exit(cst.SUCCESS_EXIT);
-      });
-      return false;
-    }
-    if (secret_key == 'start' || secret_key == 'restart')
-      return CLI.interact(null, null, null);
-    if (secret_key && !public_key) {
-      console.error(chalk.cyan('[Keymetrics.io]') + ' Command [%s] unknown or missing public key', secret_key);
-      return process.exit(cst.ERROR_EXIT);
-    }
-    return CLI.interact(secret_key, public_key, machine);
+      }
+      console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
+      return process.exit(cst.SUCCESS_EXIT);
+    });
+    return false;
+  }
+  if (secret_key == 'start' || secret_key == 'restart')
+    return CLI.interact(null, null, null);
+  if (secret_key && !public_key) {
+    console.error(chalk.cyan('[Keymetrics.io]') + ' Command [%s] unknown or missing public key', secret_key);
+    return process.exit(cst.ERROR_EXIT);
+  }
+  return CLI.interact(secret_key, public_key, machine, recycle);
 }
 commander.command('interact [secret_key|command] [public_key] [machine_name]')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .option('--recycle', 'for elastic infrastructure')
   .action(interact);
 
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .option('--recycle', 'for elastic infrastructure')
   .action(interact);
 
 //
