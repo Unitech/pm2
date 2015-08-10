@@ -1098,7 +1098,6 @@ $ pm2 start app.js --next-gen-js
 $ pm2 start app.es
 ```
 
-<a name="cloud-providers-installation/>
 # Using PM2 in Cloud Providers
 
 Some time you do no have access to a raw CLI to start your Node.js applications.
