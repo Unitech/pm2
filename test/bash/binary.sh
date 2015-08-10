@@ -42,3 +42,15 @@ OUT=$(getInterpreter)
 success "$1"
 
 $pm2 kill
+
+#
+# Should execute command in $PATH
+#
+$pm2 start ls
+spec "Should script started"
+
+OUT=$(getInterpreter)
+[ $OUT="none" ] || fail "$1"
+success "Right interpreter"
+
+should 'Have the right relative path' '/bin/ls' 1

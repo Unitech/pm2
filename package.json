@@ -119,6 +119,8 @@
     "node-pm2",
     "production",
     "keymetrics",
+    "node.js monitoring",
+    "strong-pm",
     "deploy",
     "deployment",
     "daemon",
@@ -130,6 +132,8 @@
     "monitoring",
     "process manager",
     "forever",
+    "profiling",
+    "probes",
     "forever-monitor",
     "keep process alive",
     "process configuration",
@@ -169,7 +173,6 @@
     "safe-clone-deep"     : "1.0.5",
 
     "babel"               : "^5.x",
-    "is-iojs"             : "1.1.0",
 
     "shelljs"             : "0.5.1",
     "isbinaryfile"        : "^3.0.0",
