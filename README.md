@@ -176,22 +176,6 @@ PM2 comes with a development tool that allow you to start an application and res
 $ pm2-dev run my-app.js
 ```
 
-### Run Next generation Javascript
-
-PM2 embeds [BabelJS](https://babeljs.io/) to use [next generation Javascript](http://es6-features.org/) both in development and production.
-
-All features are supported, like watch and restart, cluster mode, reload and related.
-
-To run an ES6/ES7 applications:
-
-```bash
-# Enable ES6/ES7 live compilation
-$ pm2 start app.js --next-gen-js
-
-# Or use the .es extension to automatically enable it
-$ pm2 start app.es
-```
-
 ## Keymetrics monitoring
 
 [![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)](https://app.keymetrics.io/#/register)

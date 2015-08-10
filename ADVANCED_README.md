@@ -1072,6 +1072,32 @@ If the `alias` exists, you can use it as a CLI option, but do not forget to turn
 
     `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
 
+## Using PM2 in development
+
+PM2 comes with a development tool that allow you to start an application and restart it on file change.
+
+```
+# Start your application in development mode
+# = Print the logs and restart on file change
+$ pm2-dev run my-app.js
+```
+
+## Run Next generation Javascript
+
+PM2 embeds [BabelJS](https://babeljs.io/) to use [next generation Javascript](http://es6-features.org/) both in development and production.
+
+All features are supported, like watch and restart, cluster mode, reload and related.
+
+To run an ES6/ES7 applications:
+
+```bash
+# Enable ES6/ES7 live compilation
+$ pm2 start app.js --next-gen-js
+
+# Or use the .es extension to automatically enable it
+$ pm2 start app.es
+```
+
 <a name="cloud-providers-installation/>
 # Using PM2 in Cloud Providers
 
