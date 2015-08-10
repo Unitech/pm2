@@ -87,7 +87,7 @@ $ npm install pm2@latest -g
 If the above fails use:
 
 ```bash
-$ npm install git://github.com/Unitech/pm2#master -g
+$ npm install Unitech/pm2 -g
 ```
 
 <a name="pm2-folder-structure"/>
@@ -381,7 +381,7 @@ $ pm2 monit
 Please note that [Keymetrics](https://keymetrics.io) allows to monitor applications much better, from errors, performances, vital signs and much more.
 
 <a name="a5"/>
-## Clustering (cluster_mode)
+## Clustering
 
 The **cluster mode** allows to scale your Node.js application accross all CPUs available and to update them without any downtime!
 
@@ -722,7 +722,7 @@ var watch_options = {
 }
 ```
 
-When working with NFS devices you'll need to set `usePolling: true` as stated in [this chokidar issue](https://github.com/paulmillr/chokidar/issues/242).  
+When working with NFS devices you'll need to set `usePolling: true` as stated in [this chokidar issue](https://github.com/paulmillr/chokidar/issues/242).
 
 ## JS/JSON app declaration
 
@@ -1071,18 +1071,6 @@ If the `alias` exists, you can use it as a CLI option, but do not forget to turn
   - array
 
     `args`, `node_args` and `ignore_watch` could be type of `Array` (e.g.: `"args": ["--toto=heya coco", "-d", "1"]`) or `string` (e.g.: `"args": "--to='heya coco' -d 1"`)
-
-<a name="windows"/>
-# Windows
-
-Make sure you have tail.exe in your path, confirm using "where"
-
-```
-C:\>where tail
-C:\Program Files (x86)\Git\bin\tail.exe
-```
-
-Tail can be found as part of [Git](https://msysgit.github.io/), Cygwin and MingW packages. Tail needs to be able to support "-f" and "-n" options.
 
 <a name="deployment"/>
 # Deployment
