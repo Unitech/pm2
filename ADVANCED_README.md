@@ -30,10 +30,13 @@
 - [JS/JSON app declaration](#jsjson-app-declaration)
   - [Options list](#list-of-all-json-declaration-fields-avaibles)
   - [Schema](#schema)
+- [Using PM2 in development](#using-pm2-in-development)
+- [Use ES6](#run-next-generation-javascript)
 
-### Using PM2 in Cloud Providers
+### [Using PM2 in Cloud Providers (Heroku/Google App Engine/Azure)](https://github.com/Unitech/PM2/blob/development/ADVANCED_README.md#using-pm2-in-cloud-providers-1)
 
-- [Heroku - Google App Engine - Azure](#cloud-providers-installation)
+- [Without Keymetrics](#without-keymetrics)
+- [With Keymetrics](#with-keymetrics)
 
 ### Deployment - ecosystem.json
 
@@ -1076,7 +1079,7 @@ If the `alias` exists, you can use it as a CLI option, but do not forget to turn
 
 PM2 comes with a development tool that allow you to start an application and restart it on file change.
 
-```
+```bash
 # Start your application in development mode
 # = Print the logs and restart on file change
 $ pm2-dev run my-app.js
@@ -1109,7 +1112,7 @@ First add PM2 as a dependency in you package.json, then just create a main.js fi
 
 ### Without Keymetrics
 
-```
+```javascript
 var pm2 = require('pm2');
 
 var instances = process.env.WEB_CONCURRENCY || -1; // Set by Heroku or -1 to scale to max cpu core -1
@@ -1135,8 +1138,9 @@ pm2.connect(function() {
 
 ### With Keymetrics
 
-The procedure is the
-```
+The procedure is the same, but this time we will link PM2 to Keymetrics:
+
+```javascript
 var pm2 = require('pm2');
 
 var MACHINE_NAME = 'hk1';
