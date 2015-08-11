@@ -34,7 +34,7 @@ $ npm install pm2 -g
 $ pm2 start app.js
 ```
 
-Your app is now put in background, kept alive forever and monitored.
+Your app is now put in background, monitored and kept alive forever.
 
 ## Module system
 
