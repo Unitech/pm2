@@ -44,7 +44,7 @@ PM2 embbed a simple and powerful module system. Installing a module is straightf
 $ pm2 install <module_name>
 ```
 
-Here are some PM2 compatible modules:
+Here are some PM2 compatible modules (this is standalone Node.js softwares that are managed by PM2):
 
 [**pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed<br/>
 [**pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers<br/>
