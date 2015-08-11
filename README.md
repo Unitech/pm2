@@ -40,9 +40,9 @@ Your app is now put in background, kept alive forever and monitored.
 
 PM2 embbed a simple and powerful module system. Here are some of them:
 
-[**pm2 install pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed
-[**pm2 install pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers
-[**pm2 install pm2-autopull**](https://github.com/pm2-hive/pm2-auto-pull) auto pull all applications managed by PM2
+[**pm2 install pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed<br/>
+[**pm2 install pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers<br/>
+[**pm2 install pm2-autopull**](https://github.com/pm2-hive/pm2-auto-pull) auto pull all applications managed by PM2<br/>
 
 ## Update PM2
 
