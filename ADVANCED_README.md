@@ -1330,8 +1330,7 @@ Check out [this article](http://keymetrics.io/2014/07/02/manage-processes-progra
 
 ## Simple example
 
-This will require pm2, launch `test.js`, list processes then exit the script.
-You will notice that after exiting this script you will be able to see `test.js` process with `pm2 list`
+This example shows you how to start app.js with some configuration attributes. What is passed to start is the same than what you can declare in a JS/JSON configuration file:
 
 ```bash
 $ npm install pm2 --save
@@ -1340,22 +1339,16 @@ $ npm install pm2 --save
 ```javascript
 var pm2 = require('pm2');
 
-// Connect or launch PM2
-pm2.connect(function(err) {
-
-  // Start a script on the current folder
-  pm2.start('test.js', { name: 'test' }, function(err, proc) {
-    if (err) throw new Error('err');
-
-    // Get all processes running
-    pm2.list(function(err, process_list) {
-      console.log(process_list);
-
-      // Disconnect to PM2
-      pm2.disconnect(function() { process.exit(0) });
-    });
+pm2.connect(function() {
+  pm2.start({
+    script    : 'app.js',         // Script to be run
+    exec_mode : 'cluster',        // Allow your app to be clustered
+    instances : 4,                // Optional: Scale your app by 4
+    max_memory_restart : '100M'   // Optional: Restart your app if it reaches 100Mo
+  }, function(err, apps) {
+    pm2.disconnect();
   });
-})
+});
 ```
 
 <a name="programmatic-api"/>

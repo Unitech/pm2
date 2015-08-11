@@ -45,7 +45,7 @@ process.env.MODULE_DEBUG = true;
 
 # What can I expose from a module?
 
-A module can do pretty anything as Node.js application via Keymetrics can. You can use custom metrics, custom actions, scoped actions etc...
+A module can do pretty anything as Node.js application via Keymetrics can. You can use [custom metrics](https://github.com/keymetrics/pmx#measure), [custom actions](https://github.com/keymetrics/pmx#custom-action), scoped actions etc...
 
 You can also report issue via pmx.notify([data])
 Or event via pmx.emit([data])

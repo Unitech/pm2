@@ -36,22 +36,13 @@ $ pm2 start app.js
 
 Your app is now put in background, kept alive forever and monitored.
 
-Or you can use pm2 programmatically:
+## Module system
 
-```javascript
-var pm2 = require('pm2');
+PM2 embbed a simple and powerful module system. Here are some of them:
 
-pm2.connect(function() {
-  pm2.start({
-    script    : 'app.js',         // Script to be run
-    exec_mode : 'cluster',        // Allow your app to be clustered
-    instances : 4,                // Optional: Scale your app by 4
-    max_memory_restart : '100M'   // Optional: Restart your app if it reaches 100Mo
-  }, function(err, apps) {
-    pm2.disconnect();
-  });
-});
-```
+[**pm2 install pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed
+[**pm2 install pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers
+[**pm2 install pm2-autopull**](https://github.com/pm2-hive/pm2-auto-pull) auto pull all applications managed by PM2
 
 ## Update PM2
 
@@ -92,6 +83,29 @@ To have more details on a specific process:
 $ pm2 describe <id|app_name>
 ```
 
+### Load balancing / 0s reload downtime
+
+When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
+
+Supported by all major Node.js frameworks and any Node.js / io.js applications
+
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
+
+**Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore.
+
+With the cluster mode, PM2 enables load balancing between multiple application to use all CPUs available in a server.
+Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
+
+```bash
+$ pm2 start app.js -i 0  # Enable load-balancer and cluster features
+
+$ pm2 reload all           # Reload all apps in 0s manner
+
+$ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
+```
+
+[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
+
 ### CPU / Memory Monitoring
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
@@ -124,29 +138,6 @@ $ pm2 logs PM2 --timestamp
 
 $ pm2 flush          # Clear all the logs
 ```
-
-### Load balancing / 0s reload downtime
-
-When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
-
-Supported by all major Node.js frameworks and any Node.js / io.js applications
-
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
-
-**Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore.
-
-With the cluster mode, PM2 enables load balancing between multiple application to use all CPUs available in a server.
-Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
-
-```bash
-$ pm2 start app.js -i 0  # Enable load-balancer and cluster features
-
-$ pm2 reload all           # Reload all apps in 0s manner
-
-$ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
-```
-
-[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
 
 ### Startup script generation
 
