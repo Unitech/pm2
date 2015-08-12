@@ -175,7 +175,7 @@
     "babel"               : "^5.x",
 
     "shelljs"             : "0.5.1",
-    "isbinaryfile"        : "^3.0.0",
+    "isbinaryfile"        : "^2.0.3",
     "blessed"             : "0.1.61",
     "semver"              : "5.0.1"
   },
