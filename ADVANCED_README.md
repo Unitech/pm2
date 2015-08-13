@@ -1612,7 +1612,7 @@ echo $my_json | pm2 start -
 <a name="a149"/>
 ## Is my production server ready for PM2?
 
-Just try the tests before using PM2 on your production server
+Just try the tests before using PM2 on your production server.
 
 ```bash
 $ git clone https://github.com/Unitech/pm2.git
