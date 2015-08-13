@@ -8,6 +8,7 @@
 - Disable auto-gc on interactor
 - Allow PM2 to execute binaries in $PATH
 - pm2 link priv pub --recyle for elastic infrastructure
+- pm2 deploy now check default file ecosystem.js[on|on5], package.json
 
 # 0.14.6
 
