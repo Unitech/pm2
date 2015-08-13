@@ -1,11 +1,9 @@
-# Next
-
-- New flag `--no-pmx` : starts an app without injecting pmx
-- New feature : cron restart now works in fork mode as well
-
 # 0.14.7
 
-- Disable auto-gc on interactor
+-
+- New flag `--no-pmx` : starts an app without injecting pmx
+- New feature : cron restart now works in fork mode as well
+- Disabled auto-gc on interactor
 - Allow PM2 to execute binaries in $PATH
 - pm2 link priv pub --recyle for elastic infrastructure
 
