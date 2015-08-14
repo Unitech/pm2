@@ -6,12 +6,12 @@ After=network.target remote-fs.target
 Type=forking
 User=%USER%
 
-ExecStart=%PM2_PATH% resurrect
-ExecReload=%PM2_PATH% reload all
+ExecStart=/bin/sh -c 'env PATH=$PATH:%NODE_PATH% pm2 resurrect'
+ExecReload=/bin/sh -c 'env PATH=$PATH:%NODE_PATH% pm2 reload all'
 
-ExecStop=%PM2_PATH% dump
-ExecStop=%PM2_PATH% delete all
-ExecStop=%PM2_PATH% kill
+ExecStop=/bin/sh -c 'env PATH=$PATH:%NODE_PATH% pm2 dump'
+ExecStop=/bin/sh -c 'env PATH=$PATH:%NODE_PATH% pm2 delete all'
+ExecStop=/bin/sh -c 'env PATH=$PATH:%NODE_PATH% pm2 kill'
 
 [Install]
 WantedBy=multi-user.target
