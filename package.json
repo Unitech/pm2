@@ -177,7 +177,8 @@
     "shelljs"             : "0.5.1",
     "isbinaryfile"        : "^2.0.3",
     "blessed"             : "0.1.61",
-    "semver"              : "5.0.1"
+    "semver"              : "5.0.1",
+    "mkdirp"              : "0.5.1"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
