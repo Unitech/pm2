@@ -1,4 +1,4 @@
-![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)
+[![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)](http://pm2.keymetrics.io)
 
 **P**(rocess) **M**(anager) **2**
 
@@ -10,7 +10,9 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 400 tests](https://travis-ci.org/Unitech/PM2).
+PM2 is constantly assailed by [more than 700 tests](https://travis-ci.org/Unitech/PM2).
+
+Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
 Compatible with CoffeeScript.
@@ -36,6 +38,8 @@ $ pm2 start app.js
 
 Your app is now put in background, monitored and kept alive forever.
 
+[More about Process Management](http://pm2.keymetrics.io/docs/usage/quick-start/#cheat-sheet)
+
 ## Module system
 
 PM2 embeds a simple and powerful module system. Installing a module is straightforward:
@@ -49,6 +53,8 @@ Here are some PM2 compatible modules (standalone Node.js applications managed by
 [**pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed<br/>
 [**pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers<br/>
 [**pm2-autopull**](https://github.com/pm2-hive/pm2-auto-pull) auto pull all applications managed by PM2<br/>
+
+[How to write a module](http://pm2.keymetrics.io/docs/advanced/pm2-module-system/)
 
 ## Update PM2
 
@@ -88,6 +94,8 @@ To have more details on a specific process:
 ```bash
 $ pm2 describe <id|app_name>
 ```
+
+[More about Process Management](http://pm2.keymetrics.io/docs/usage/quick-start/#cheat-sheet)
 
 ### Load balancing / 0s reload downtime
 
@@ -145,6 +153,8 @@ $ pm2 logs PM2 --timestamp
 $ pm2 flush          # Clear all the logs
 ```
 
+[More about log management](http://pm2.keymetrics.io/docs/usage/log-management/)
+
 ### Startup script generation
 
 PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.  Execute the startup command only as the user to be running the PM2 daemon.
@@ -162,6 +172,8 @@ To save a process list just do:
 ```bash
 $ pm2 save
 ```
+
+[More about startup scripts](http://pm2.keymetrics.io/docs/usage/startup/)
 
 ### Development mode
 
@@ -184,27 +196,22 @@ Feel free to try it:
 
 Thanks in advance and we hope that you like PM2!
 
-## More PM2 features
+## More about PM2
 
-- [Watch & Restart](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#watch--restart)
-- [JS/JSON application declaration](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#jsjson-app-declaration)
-- [Using PM2 in your code](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#programmatic-example)
-- [Deployment workflow](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment)
-- [Startup script generation (SystemD/Ubuntu/Gentoo/AWS)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#startup-script)
-- [Advanced log management (flush, reload, logs)](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a9)
-- [GracefullReload](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#a690)
+- [Watch & Restart](http://pm2.keymetrics.io/docs/usage/watch-and-restart/)
+- [Application Declaration via JS files](http://pm2.keymetrics.io/docs/usage/application-declaration/)
+- [PM2 API](http://pm2.keymetrics.io/docs/usage/pm2-api/)
+- [Deploying workflow](http://pm2.keymetrics.io/docs/usage/deployment/)
+- [PM2 and Heroku/Azure/App Engine](http://pm2.keymetrics.io/docs/usage/use-pm2-with-cloud-providers/)
+- [PM2 auto completion](http://pm2.keymetrics.io/docs/usage/auto-completion/)
 
-## PM2 Full documentation
-
-[Advanced README.md](https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md)
-
-## Changelog
+## CHANGELOG
 
 [CHANGELOG](https://github.com/Unitech/PM2/blob/master/CHANGELOG.md)
 
 ## Contributors
 
-[Contributors](https://github.com/Unitech/PM2/graphs/contributors)
+[Contributors](http://pm2.keymetrics.io/all-of-fame/)
 
 ## License
 
