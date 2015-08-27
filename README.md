@@ -2,6 +2,8 @@
 
 **P**(rocess) **M**(anager) **2**
 
+Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
+
 PM2 is a production process manager for Node.js / io.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 Starting an application in production mode is as easy as:
@@ -11,7 +13,6 @@ $ pm2 start app.js
 ```
 
 PM2 is constantly assailed by [more than 700 tests](https://travis-ci.org/Unitech/PM2).
-Official website & Documentation : [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
 Compatible with CoffeeScript.
