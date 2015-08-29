@@ -2,6 +2,9 @@
 # 1.0.0-beta
 
 - beta pmx // rm
+- pm2 module:update <module_name>
+- alias pm2 install with pm2 i
+- pm2 publish publish module on NPM + commit on Git
 
 # 0.14.7
 
