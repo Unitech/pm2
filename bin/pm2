@@ -342,26 +342,28 @@ commander.command('update')
  * Module specifics
  */
 commander.command('install <module|git:// url>')
-  .alias('i')
+  .alias('module:install')
   .description('install or update a module and run it forever')
   .action(function(plugin_name) {
     CLI.install(plugin_name);
   });
 
-commander.command('module:update <module|git:// url>')
-  .description('install or update a module and run it forever')
-  .action(function(plugin_name) {
-    CLI.install(plugin_name);
+commander.command('module:generate')
+  .description('Generate a sample module in current folder')
+  .action(function() {
+    CLI.generateModuleSample();
   });
 
 commander.command('uninstall <module>')
-  .alias('ui')
+  .alias('module:uninstall')
   .description('stop and uninstall a module')
   .action(function(plugin_name) {
     CLI.uninstall(plugin_name);
   });
 
+
 commander.command('publish')
+  .alias('module:publish')
   .description('Publish the module you are currently on')
   .action(CLI.publish);
 
