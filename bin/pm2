@@ -331,7 +331,6 @@ commander.command('updatePM2')
   .action(function() {
     CLI.updatePM2();
   });
-
 commander.command('update')
   .description('(alias) update in-memory PM2 with local PM2')
   .action(function() {
@@ -347,6 +346,13 @@ commander.command('install <module|git:// url>')
   .action(function(plugin_name) {
     CLI.install(plugin_name);
   });
+
+commander.command('module:update <module|git:// url>')
+  .description('update a module and run it forever')
+  .action(function(plugin_name) {
+    CLI.install(plugin_name);
+  });
+
 
 commander.command('module:generate')
   .description('Generate a sample module in current folder')
