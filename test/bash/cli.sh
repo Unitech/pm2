@@ -213,7 +213,7 @@ $pm2 kill
 PROC_NAME='ECHONEST'
 # Launch a script with name option
 $pm2 start echo.js --name $PROC_NAME -f
-should 'should have started app with name' 'ECHONEST' 5
+should 'should have started app with name' 'ECHONEST' 7
 
 # Restart a process by name
 $pm2 restart $PROC_NAME

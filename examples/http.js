@@ -1,9 +1,6 @@
 
 var pmx = require('pmx');
-
 var conf = pmx.init();
-
-console.log(conf);
 
 var http = require('http');
 
