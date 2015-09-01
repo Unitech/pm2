@@ -72,3 +72,11 @@ function shouldnot {
     [ $OUT -ne $3 ] || fail "$1"
     success "$1"
 }
+
+function exists {
+    sleep 0.5
+    $pm2 prettylist > /tmp/tmp_out.txt
+    OUT=`cat /tmp/tmp_out.txt | grep -o "$2" | wc -l`
+    [ $OUT -ge 1 ] || fail "$1"
+    success "$1"
+}
