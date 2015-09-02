@@ -51,6 +51,7 @@ commander.version(pkg.version)
   .option('--no-autorestart', 'start an app without automatic restart')
   .option('--no-treekill', 'Only kill the main process, not detached children')
   .option('--no-pmx', 'start an app without pmx')
+  .option('--docker', 'Start a docker container by name/id')
 
   .usage('[cmd] app');
 
