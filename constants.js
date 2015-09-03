@@ -61,6 +61,7 @@ var csts = {
 
   CLUSTER_MODE_ID        : 'cluster_mode',
   FORK_MODE_ID           : 'fork_mode',
+  DOCKER_MODE_ID         : 'docker_mode',
 
   KEYMETRICS_ROOT_URL    : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
 
