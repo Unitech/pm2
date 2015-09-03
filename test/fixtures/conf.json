@@ -1,0 +1,9 @@
+// TG!
+[{
+  // Application 1
+  name      : "echo",
+  script    : 'toto.js',
+  env : {
+    "TOTO" : process.env.NODE_ENV || 'vazytg'
+  }
+}]
