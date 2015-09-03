@@ -1,6 +1,8 @@
 
 var pmx = require('pmx');
-var conf = pmx.init();
+var conf = pmx.init({
+  http: true
+});
 
 var http = require('http');
 
