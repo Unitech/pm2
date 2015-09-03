@@ -5,6 +5,7 @@
 - New command: pm2 module:update <module_name> -> Update a module
 - New command: pm2 module:publish  -> Publish module in current folder + Git push
 - New command: pm2 module:generate -> Generate a sample module
+- Feature: configuration system for raw Node.js applications
 - alias pm2 install with pm2 i
 
 # 0.14.7

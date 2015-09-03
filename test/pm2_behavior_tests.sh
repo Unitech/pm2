@@ -21,8 +21,9 @@ echo "###################### !DEBUG! ###########################"
 
 bash ./test/bash/file-descriptor.sh
 spec "testing file descriptors"
-bash ./test/bash/pmx_injection.sh
-spec "automatic pmx injection"
+# Automatic PMX http disabled
+# bash ./test/bash/pmx_injection.sh
+# spec "automatic pmx injection"
 bash ./test/bash/log-timestamp.sh
 spec "timetstamp prefix of pm2.log"
 bash ./test/bash/smart-start.sh
@@ -77,6 +78,8 @@ bash ./test/bash/vizion.sh
 spec "vizion features (versioning control)"
 bash ./test/bash/wrapped_fork.sh
 spec "wrapped fork"
+bash ./test/bash/app_configuration.sh
+spec "App configuration"
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"

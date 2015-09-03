@@ -354,10 +354,10 @@ commander.command('module:update <module|git:// url>')
   });
 
 
-commander.command('module:generate')
+commander.command('module:generate [app_name]')
   .description('Generate a sample module in current folder')
-  .action(function() {
-    CLI.generateModuleSample();
+  .action(function(app_name) {
+    CLI.generateModuleSample(app_name);
   });
 
 commander.command('uninstall <module>')
