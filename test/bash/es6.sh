@@ -9,7 +9,6 @@ then
     echo "io.js engine"
 else
     echo "Node.js engine"
-    exit
 fi
 
 SRC=$(cd $(dirname "$0"); pwd)
