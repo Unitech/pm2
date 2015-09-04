@@ -1,7 +1,7 @@
 [{
   "name"      : "server-watch",
   "script"    : "./server-watch.bak.js",
-  "watch"     : ["*"],
+  "watch"     : ["**"],
   "ignore_watch" : ["*.log"],
   "watch_options" : {
     "followSymlinks": true
