@@ -1,7 +1,10 @@
+// TG!
 [{
+  // Application 1
   name      : "echo",
   script    : [".", "/", "e", "cho.js"].join('')
 },{
+  // APplication 2
   name      : "child",
   script    : "./child.js",
   instances : "4",

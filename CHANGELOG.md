@@ -7,6 +7,7 @@
 - New command: pm2 module:generate -> Generate a sample module
 - Feature: configuration system for raw Node.js applications
 - alias pm2 install with pm2 i
+- JSON declaration: You can now use process.env in application declaration file
 
 # 0.14.7
 
