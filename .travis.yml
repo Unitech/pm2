@@ -8,8 +8,6 @@ branches:
 node_js:
    - "iojs"
    - "iojs-v2.0"
-   - "iojs-v1.5"
-   - "iojs-v1.0"
    - "0.12"
    - "0.12.0"
    - "0.11"
