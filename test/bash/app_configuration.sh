@@ -20,9 +20,9 @@ $pm2 set echo.config_var false
 
 exists 'should NOW have config variable' "config_var: 'false'"
 
-$pm2 set echo.probes false
+$pm2 set echo.probes true
 
-exists 'should NOW have config variable' "config_var: 'false'"
+exists 'should NOW have config variable' "probes: 'true'"
 
 $pm2 delete all
 
