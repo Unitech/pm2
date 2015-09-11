@@ -42,6 +42,8 @@ mocha ./test/programmatic/logs.js
 spec "Logs test"
 mocha ./test/programmatic/watcher.js
 spec "Watcher"
+mocha ./test/programmatic/modularizer.mocha.js
+spec "Module system"
 mocha ./test/programmatic/max_memory_limit.js
 spec "Max memory tests"
 mocha ./test/programmatic/cluster.js
