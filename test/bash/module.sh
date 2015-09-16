@@ -46,7 +46,7 @@ sleep 1
 should 'should have config variable' "config1xxx: 'false'" 4
 
 $pm2 update
-spec "Should update succesfully"
+spec "Should update successfully"
 should 'and module still online' 'online' 1
 
 $pm2 kill
