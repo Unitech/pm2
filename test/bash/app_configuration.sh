@@ -54,3 +54,8 @@ $pm2 set probe-test.probes.test-probe.value 30
 sleep 2
 
 exists 'probe Loop delay alerted' "alert: { mode: 'threshold', value: 30, cmp: '>' } }"
+
+$pm2 restart all
+sleep 1
+
+exists 'probe Loop delay alerted' "alert: { mode: 'threshold', value: 30, cmp: '>' } }"
