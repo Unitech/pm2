@@ -109,7 +109,7 @@ $pm2 start cluster-pm2.json
 spec "Should start well formated json with name for file prefix"
 
 $pm2 list
-spec "Should list processes succesfully"
+spec "Should list processes successfully"
 
 
 $pm2 start multi-echo.json

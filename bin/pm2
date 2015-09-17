@@ -103,7 +103,7 @@ function beginCommandProcessing() {
   // This message is triggered once the RPC Client is connected to the Daemon
   // in file Satan.js, method Satan.launchRPC
   //
-  debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
+  debug('Got message from Satan as successfully connected to PM2, now parsing arguments');
 
   // Deprecate message for update as there is an automatic update procedure now
   CLI.getVersion(function(err, remote_version) {
