@@ -15,6 +15,7 @@ before_install:
   - git clone https://github.com/creationix/nvm.git ./.nvm
   - cd ./.nvm
   - git submodule update --init --recursive
+  - cd ..
   - source ./.nvm/nvm.sh
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
