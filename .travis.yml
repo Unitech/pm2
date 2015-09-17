@@ -11,10 +11,10 @@ env:
 os:
   - linux
   - osx
-# pre-install to bring in the correct version of node via nvm
 before_install:
-  - git submodule update --init --recursive
   - git clone https://github.com/creationix/nvm.git ./.nvm
+  - cd ./.nvm
+  - git submodule update --init --recursive
   - source ./.nvm/nvm.sh
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
