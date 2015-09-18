@@ -15,7 +15,8 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - .\node_modules\.bin\mocha test\programmatic\*.mocha.js --no-exit
+  - ps: ".\node_modules\.bin\mocha test\programmatic\*.mocha.js --no-exit"
+  - cmd: ".\node_modules\.bin\mocha test\programmatic\*.mocha.js --no-exit"
 
 # Don't actually build.
 build: off
