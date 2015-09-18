@@ -17,5 +17,6 @@ test_script:
   # run tests
   - .\node_modules\.bin\mocha test\programmatic\*.mocha.js --no-exit
 
-# Don't actually build.
-build: off
+
+build:
+  verbosity: detailed
