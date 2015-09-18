@@ -178,6 +178,33 @@ describe('Configuration via SET / GET tests', function() {
 
   });
 
+  describe('Not split what is inside double quotes', function() {
+    it('should do it', function(done) {
+      Configuration.set('module-name2:"var2:toto"', 'val2', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get the val', function() {
+      var data = Configuration.getSync('module-name2:"var2:toto"');
+      data.should.eql('val2');
+    });
+
+    it('should do it', function(done) {
+      Configuration.set('module-name3."var45.toto"', 'val2', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get the val', function() {
+      var data = Configuration.getSync('module-name3."var45.toto"');
+      data.should.eql('val2');
+    });
+
+  });
+
   // Password encryption moved outside Configuration library
   describe.skip('Password encryption', function() {
     it('should encrypt password when setting pm2:passwd', function(done) {
