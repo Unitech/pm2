@@ -14,8 +14,8 @@ test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
-  - ps: .\node_modules\.bin\mocha test\programmatic\*.mocha.js --no-exit & .\node_modules\.bin\mocha test\programmatic\*.js --no-exit
-  - cmd: .\node_modules\.bin\mocha test\programmatic\*.js --no-exit & .\node_modules\.bin\mocha test\programmatic\*.js --no-exit
+  - ps: .\node_modules\.bin\mocha test\programmatic\*.mocha.js --no-exit
+  - cmd: .\node_modules\.bin\mocha test\programmatic\*.js --no-exit
 
 # Don't actually build.
 build: off
