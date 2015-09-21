@@ -51,6 +51,7 @@ commander.version(pkg.version)
   .option('--no-autorestart', 'start an app without automatic restart')
   .option('--no-treekill', 'Only kill the main process, not detached children')
   .option('--no-pmx', 'start an app without pmx')
+  .option('--docker', 'Start a docker container by name/id')
 
   .usage('[cmd] app');
 
@@ -239,7 +240,7 @@ commander.command('stop <id|name|all|json|stdin>')
   .option('--watch', 'Stop watching folder for changes')
   .description('stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
-    CLI.stop(param);
+    CLI.stop(param, commander);
   });
 
 //
@@ -249,7 +250,7 @@ commander.command('restart <id|name|all|json|stdin>')
   .option('--watch', 'Toggle watching folder for changes')
   .description('restart a process')
   .action(function(param) {
-    CLI.restart(param);
+    CLI.restart(param, commander);
   });
 
 //

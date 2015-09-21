@@ -33,6 +33,9 @@
   "next_gen_js" : {
     "type" : "boolean"
   },
+  "docker" : {
+    "type" : "boolean"
+  },
   "instances": {
     "type": "number"
   },
