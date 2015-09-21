@@ -1,13 +1,17 @@
 
 # 1.0.0-beta
 
-- beta pmx // rm
 - New command: pm2 module:update <module_name> -> Update a module
 - New command: pm2 module:publish  -> Publish module in current folder + Git push
-- New command: pm2 module:generate -> Generate a sample module
+- New command: pm2 module:generate [module name] -> Generate a sample module
 - Feature: configuration system for raw Node.js applications
 - alias pm2 install with pm2 i
 - JSON declaration: You can now use process.env in application declaration file
+- watch has been refactored for windows and tests
+- allow installation of specific module version
+- wrap final process kill intro try catch (c4aecc8)
+- Appveyor to test PM2 under Windows added (+ fix some incorect file name)
+- Allow to escape key name when using pm2 conf system
 
 # 0.14.7
 
