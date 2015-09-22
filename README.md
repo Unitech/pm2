@@ -28,7 +28,9 @@ Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 $ npm install pm2 -g
 ```
 
-*npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
+*npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/) *
+
+*[pm2 is not yet compatible with io.js-v3.0.0](https://github.com/nodejs/node/issues/2308) *
 
 ## Start an application
 
