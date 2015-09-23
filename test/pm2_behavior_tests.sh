@@ -33,7 +33,7 @@ spec "CLI basic test"
 bash ./test/bash/json_file.sh
 spec "JSON file test"
 bash ./test/bash/harmony.sh
-spec "Next gen JS with Babel"
+spec "Harmony test"
 bash ./test/bash/log-custom.sh
 spec "Custom log timestamp"
 bash ./test/bash/reload.sh
