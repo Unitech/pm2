@@ -20,7 +20,6 @@ process.env.PM2_SILENT = true;
 commander.version(pkg.version)
   .option('--raw', 'raw log output')
   .option('--timestamp [format]', 'add timestamps to logs')
-  .option('--next-gen-js', 'enable es6/es7 compatibility')
   .usage('[cmd] app');
 
 CLI.pm2Init();

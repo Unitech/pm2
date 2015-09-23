@@ -172,8 +172,6 @@
     "pm2-multimeter"      : "0.1.2",
     "safe-clone-deep"     : "1.0.5",
 
-    "babel"               : "^5.x",
-
     "shelljs"             : "0.5.1",
     "isbinaryfile"        : "^2.0.3",
     "blessed"             : "0.1.61",

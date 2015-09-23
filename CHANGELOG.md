@@ -1,4 +1,14 @@
 
+# 1.0
+
+## Breaking change
+
+- --next-gen-js option has been removed
+
+## Update
+
+- babel dependency removed
+
 # 0.15.0 (pre 1.0)
 
 - New command: pm2 module:update <module_name> -> Update a module
