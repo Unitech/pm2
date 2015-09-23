@@ -4,10 +4,12 @@
 ## Breaking change
 
 - --next-gen-js option has been removed
+- pm2 iprobe command removed
 
 ## Update
 
 - babel dependency removed
+- blessed dependency removed
 - chalk, safe-clone-deep, shelljs, semver upgraded
 
 # 0.15.0 (pre 1.0)

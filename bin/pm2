@@ -718,16 +718,6 @@ commander.command('gc')
   });
 
 //
-// Display probes in a graphical way
-//
-commander.command('iprobe [app_name|app_id]')
-  .description('displays probes in a graphical way')
-  .action(function(pm2_id) {
-    pm2_id = pm2_id || 'ALL';
-    CLI.IProbe(pm2_id);
-  });
-
-//
 // Perform a deep update of PM2
 //
 commander.command('deepUpdate')
