@@ -8,6 +8,7 @@
 ## Update
 
 - babel dependency removed
+- chalk, safe-clone-deep, shelljs, semver upgraded
 
 # 0.15.0 (pre 1.0)
 
