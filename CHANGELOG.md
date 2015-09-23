@@ -6,14 +6,11 @@
 - --next-gen-js option has been removed
 - pm2 iprobe command removed
 
-## Update
+## Changelog
 
 - babel dependency removed
 - blessed dependency removed
 - chalk, safe-clone-deep, shelljs, semver upgraded
-
-# 0.15.0 (pre 1.0)
-
 - New command: pm2 module:update <module_name> -> Update a module
 - New command: pm2 module:publish  -> Publish module in current folder + Git push
 - New command: pm2 module:generate [module name] -> Generate a sample module
