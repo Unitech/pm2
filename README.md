@@ -2,7 +2,7 @@
 
 **P**(rocess) **M**(anager) **2**
 
-PM2 is a production process manager for Node.js / io.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
+PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 Starting an application in production mode is as easy as:
 
@@ -14,8 +14,6 @@ PM2 is constantly assailed by [more than 700 tests](https://travis-ci.org/Unitec
 
 Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
-Compatible with [io.js](https://github.com/iojs/io.js) and [Node.js](https://github.com/joyent/node).
-Compatible with CoffeeScript.
 Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 
 [![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![NPM Downloads](https://img.shields.io/npm/dm/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://img.shields.io/travis/Unitech/PM2/master.svg?style=flat-square)](https://travis-ci.org/Unitech/PM2)[![Dependencies](https://img.shields.io/david/Unitech/pm2.svg?style=flat-square)](https://david-dm.org/Unitech/pm2)
@@ -28,7 +26,7 @@ Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 $ npm install pm2 -g
 ```
 
-*npm is a builtin CLI when you install Node.js - [Installing Node.js or io.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
+*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
 
 ## Start an application
 
@@ -101,11 +99,11 @@ $ pm2 describe <id|app_name>
 
 When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
 
-Supported by all major Node.js frameworks and any Node.js / io.js applications
+Supported by all major Node.js frameworks and any Node.js applications
 
 ![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
 
-**Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+`, `node#0.11.16+` or `io.js#1.0.2+`. We do not support `node#0.10.*`'s cluster module anymore.
+**Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+` or `node#0.11.16+`. We do not support `node#0.10.*`'s cluster module anymore.
 
 With the cluster mode, PM2 enables load balancing between multiple application to use all CPUs available in a server.
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
