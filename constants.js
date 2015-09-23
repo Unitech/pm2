@@ -63,7 +63,7 @@ var csts = {
   FORK_MODE_ID           : 'fork_mode',
 
   KEYMETRICS_ROOT_URL    : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
-  KEYMETRICS_BANNER      : './lib/keymetrics',
+  KEYMETRICS_BANNER      : '../lib/keymetrics',
   DEFAULT_MODULE_JSON    : 'package.json',
 
   REMOTE_PORT_TCP        : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
