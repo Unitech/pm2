@@ -1,5 +1,5 @@
 
-# 1.0.0-beta
+# 0.15.0 (pre 1.0)
 
 - New command: pm2 module:update <module_name> -> Update a module
 - New command: pm2 module:publish  -> Publish module in current folder + Git push
