@@ -134,8 +134,7 @@ $ pm2 monit
 
 Displaying logs of a specified process or all processes, in real time:
 
-`pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--ti\
-mestamp [format]]`
+`pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--timestamp [format]]`
 
 Examples:
 
