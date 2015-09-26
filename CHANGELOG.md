@@ -8,6 +8,7 @@
 
 ## Changelog
 
+- pm2 multiset "k1 v1 k2 v2 k3 v3"
 - babel dependency removed
 - blessed dependency removed
 - chalk, safe-clone-deep, shelljs, semver upgraded

@@ -205,6 +205,26 @@ describe('Configuration via SET / GET tests', function() {
 
   });
 
+  describe('Multiset', function() {
+    it('should mutliset configuration', function(done) {
+      Configuration.multiset('module-name3."var45.toto" val2 k2 v2 k3 v3', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get values', function(done) {
+      var data = Configuration.getSync('module-name3."var45.toto"');
+      data.should.eql('val2');
+      data = Configuration.getSync('k2');
+      data.should.eql('v2');
+      data = Configuration.getSync('k3');
+      data.should.eql('v3');
+      done();
+    });
+
+  });
+
   // Password encryption moved outside Configuration library
   describe.skip('Password encryption', function() {
     it('should encrypt password when setting pm2:passwd', function(done) {
