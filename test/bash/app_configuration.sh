@@ -23,6 +23,12 @@ exists 'should NOW have config variable' "config_var: 'false'"
 $pm2 set echo.probes true
 
 exists 'should NOW have config variable' "probes: 'true'"
+should 'should have start 3 apps' 'restart_time: 2' 1
+
+$pm2 multiset "echo.conf false"
+
+exists 'should NOW have config variable' "conf: 'false'"
+should 'should have start 3 apps' 'restart_time: 3' 1
 
 $pm2 delete all
 
