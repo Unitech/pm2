@@ -62,6 +62,7 @@ mocha ./test/interface/interactor.connect.two.mocha.js
 spec "Interactor test #2 with password setting"
 mocha ./test/interface/interactor.daemonizer.mocha.js
 spec "Remote interactor keys save verification"
+sleep 2
 mocha ./test/interface/remote.mocha.js
 spec "Remote interactions test"
 mocha ./test/interface/scoped_pm2_actions.mocha.js

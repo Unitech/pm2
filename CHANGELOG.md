@@ -1,5 +1,5 @@
 
-# 1.0
+# 0.15.6 & 1.0
 
 ## Breaking change
 

@@ -44,10 +44,12 @@ describe('Modularizer programmatic tests', function() {
   });
 
   it('should list 0 module', function(done) {
-    pm2.list(function(err, procs) {
-      procs.length.should.eql(0);
-      done()
-    });
+    setTimeout(function() {
+      pm2.list(function(err, procs) {
+        procs.length.should.eql(0);
+        done()
+      });
+    }, 500);
   });
 
 });
