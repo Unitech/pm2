@@ -13,7 +13,7 @@ $pm2 stop all.json
 should 'should stop processes' 'stopped' 6
 
 $pm2 delete all.json
-should 'should start processes' 'online' 0
+should 'should delete all processes' 'name' 0
 
 $pm2 start all.json
 should 'should start processes' 'online' 6

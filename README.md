@@ -16,7 +16,7 @@ Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 
-[![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![NPM Downloads](https://img.shields.io/npm/dm/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://img.shields.io/travis/Unitech/PM2/master.svg?style=flat-square)](https://travis-ci.org/Unitech/PM2)[![Dependencies](https://img.shields.io/david/Unitech/pm2.svg?style=flat-square)](https://david-dm.org/Unitech/pm2)
+[![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![NPM Downloads](https://img.shields.io/npm/dm/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://img.shields.io/travis/Unitech/PM2/master.svg?style=flat-square)](https://travis-ci.org/Unitech/PM2)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
