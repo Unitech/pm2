@@ -186,7 +186,7 @@ $ pm2-dev run my-app.js
 
 [![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)](https://app.keymetrics.io/#/register)
 
-If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps accross servers.
+If you manage your NodeJS app with PM2, Keymetrics makes it easy to monitor and manage apps across servers.
 Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.keymetrics.io/#/register)
