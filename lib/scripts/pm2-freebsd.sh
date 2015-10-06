@@ -33,7 +33,7 @@ pm2_start() {
 }
  
 pm2_stop() {
-        echo "Stoping ${name}..."
+        echo "Stopping ${name}..."
         super $command dump
         super $command delete all
         super $command kill
