@@ -30,9 +30,6 @@
   "restart_delay": {
     "type" : "number"
   },
-  "next_gen_js" : {
-    "type" : "boolean"
-  },
   "instances": {
     "type": "number"
   },

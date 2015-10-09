@@ -1,6 +1,6 @@
 [
   {
-    "name"        : "no_restart",
+    "name"        : "no_restart_app",
     "script"      : "./killtoofast.js",
     "autorestart" : false
   }
