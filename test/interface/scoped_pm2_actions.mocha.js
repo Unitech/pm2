@@ -132,12 +132,6 @@ describe('SCOPED PM2 ACTIONS', function() {
         // Double check that process has been unlocked
 
         gl_interactor_process.removeListener('message', actionCheck);
-
-        CLI.list(function(err, ret) {
-          ret.forEach(function(proc) {
-            proc.pm2_env.command.locked.should.be.false;
-          });
-        });
         done();
       });
 

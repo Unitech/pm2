@@ -154,13 +154,6 @@ describe('REMOTE PM2 ACTIONS', function() {
        */
       pck.ret.data.success.should.be.true
 
-      cmd_pm2.list(function(err, ret) {
-        ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
-        });
-      });
-
       done();
     });
 
@@ -169,15 +162,6 @@ describe('REMOTE PM2 ACTIONS', function() {
       method_name : 'restart',
       parameters : {name : 'child' }
     });
-
-    setTimeout(function() {
-      cmd_pm2.list(function(err, ret) {
-        ret.forEach(function(proc) {
-          // 1 - Lock must be set while processing
-          proc.pm2_env.command.locked.should.be.true;
-        });
-      });
-    }, 80);
   });
 
   it('should act on PM2 but handle failure', function(done) {
@@ -204,8 +188,6 @@ describe('REMOTE PM2 ACTIONS', function() {
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
           proc.pm2_env.restart_time.should.eql(2);
         });
       });
@@ -230,8 +212,6 @@ describe('REMOTE PM2 ACTIONS', function() {
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
           proc.pm2_env.restart_time.should.eql(3);
         });
       });
@@ -255,8 +235,6 @@ describe('REMOTE PM2 ACTIONS', function() {
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
           proc.pm2_env.restart_time.should.eql(0);
         });
       });
