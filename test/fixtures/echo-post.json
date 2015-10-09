@@ -1,0 +1,7 @@
+{
+  "name" : "echo-json",
+  "script" : "echo.js",
+  "log_date_format"    : "DD",
+  "out_file" : "echo-test.log",
+  "merge_logs" : true
+}

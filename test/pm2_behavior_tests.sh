@@ -32,6 +32,8 @@ bash ./test/bash/cli.sh
 spec "CLI basic test"
 bash ./test/bash/json_file.sh
 spec "JSON file test"
+bash ./test/bash/json-reload.sh
+spec "JSON reload test"
 bash ./test/bash/harmony.sh
 spec "Harmony test"
 bash ./test/bash/log-custom.sh
