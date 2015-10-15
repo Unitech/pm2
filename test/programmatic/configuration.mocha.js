@@ -152,18 +152,35 @@ describe('Configuration via SET / GET tests', function() {
   });
 
   describe('Sync', function() {
-    it('should set a sub key', function(done) {
-      Configuration.set('module-name2:var1', 'val1', function(err, data) {
-        should(err).not.exists;
-        done();
-      });
+    before(function() {
+      Configuration.unsetSync('module-name2');
     });
 
+    it('should have 0 modules listed', function(done) {
+      var data = Configuration.getSync('module-name2');
+
+      should(data).be.null;
+      done();
+    });
+
+    it('should set a sub key', function(done) {
+      var ret = Configuration.setSync('module-name2:var1', 'val1');
+
+      done();
+    });
+
+    it('should have one key', function(done) {
+      var data = Configuration.getSync('module-name2');
+
+      data['var1'].should.eql('val1');
+      done();
+    });
+
+
     it('should set a second sub key', function(done) {
-      Configuration.set('module-name2:var2', 'val2', function(err, data) {
-        should(err).not.exists;
-        done();
-      });
+      var ret = Configuration.setSync('module-name2:var2', 'val2');
+
+      done();
     });
 
     it('should get the val', function() {

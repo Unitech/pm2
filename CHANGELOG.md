@@ -8,6 +8,8 @@
 
 ## Changelog
 
+- pm2.update added
+- small db for pm2 modules added (solve npm 3.x issue)
 - pm2 multiset "k1 v1 k2 v2 k3 v3"
 - babel dependency removed
 - blessed dependency removed

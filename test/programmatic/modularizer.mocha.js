@@ -28,8 +28,16 @@ describe('Modularizer programmatic tests', function() {
     ret.length.should.eql(0);
   });
 
+
   it('should install a module', function(done) {
-    Modularizer.install('.', done);
+    Modularizer.install('pm2-server-monit', function() {
+      setTimeout(done, 100);
+    });
+  });
+
+  it('should list 1 module', function() {
+    var ret = Modularizer.listModules();
+    ret.length.should.eql(1);
   });
 
   it('should list 1 module', function(done) {
@@ -39,8 +47,21 @@ describe('Modularizer programmatic tests', function() {
     });
   });
 
+  it('should deep update PM2', function(done) {
+    pm2.updatePM2(function(err, procs) {
+      done()
+    });
+  });
+
+  it('should still list 1 module', function(done) {
+    pm2.list(function(err, procs) {
+      procs.length.should.eql(1);
+      done()
+    });
+  });
+
   it('should uninstall a module', function(done) {
-    Modularizer.uninstall('pm2', done);
+    Modularizer.uninstall('pm2-server-monit', done);
   });
 
   it('should list 0 module', function(done) {
@@ -49,7 +70,12 @@ describe('Modularizer programmatic tests', function() {
         procs.length.should.eql(0);
         done()
       });
-    }, 500);
+    }, 50);
+  });
+
+  it('should list 0 module', function() {
+    var ret = Modularizer.listModules();
+    ret.length.should.eql(0);
   });
 
 });
