@@ -173,7 +173,6 @@
 
     "shelljs"             : "0.5.3",
     "isbinaryfile"        : "^2.0.3",
-    "blessed"             : "0.1.61",
     "semver"              : "5.0.3",
     "mkdirp"              : "0.5.1"
   },
