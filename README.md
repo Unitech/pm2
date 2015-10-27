@@ -208,7 +208,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## Contributors
 
-[Contributors](http://pm2.keymetrics.io/all-of-fame/)
+[Contributors](http://pm2.keymetrics.io/hall-of-fame/)
 
 ## License
 

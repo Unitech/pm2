@@ -226,7 +226,7 @@
 
 ## Contributors
 
-[Contributors](http://pm2.keymetrics.io/all-of-fame/)
+[Contributors](http://pm2.keymetrics.io/hall-of-fame/)
 
 ## Sponsors
 
