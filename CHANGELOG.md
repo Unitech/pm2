@@ -8,6 +8,14 @@
 
 ## Changelog
 
+- New module system backward compatible and compatible with NPM 3.x
+- Possibility to install module from tgz (#1713)
+- ecosystem generated file via pm2 generate uptaded (not json5 prefix anymore, and updated comments)
+- always prefix logs #1695
+- blessed dependency removed
+- drop locking system
+- add callback to deploy (#1673)
+- typo fixes
 - pm2.update added
 - small db for pm2 modules added (solve npm 3.x issue)
 - pm2 multiset "k1 v1 k2 v2 k3 v3"
