@@ -180,4 +180,13 @@ describe('Watcher', function() {
       })
     }) 
   })
+
+  /**
+   * Test #1668
+   */
+  it('should delete from json', function(cb) {
+    testPM2Env('server-watch:exit')(cb)
+
+    pm2.delete(paths.json, errShouldBeNull)
+  })
 })
