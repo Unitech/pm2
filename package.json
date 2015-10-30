@@ -169,7 +169,6 @@
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "latest",
     "pm2-multimeter"      : "0.1.2",
-    "safe-clone-deep"     : "1.0.5",
 
     "shelljs"             : "0.5.3",
     "isbinaryfile"        : "^2.0.3",
