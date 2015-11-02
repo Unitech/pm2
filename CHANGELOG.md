@@ -8,8 +8,14 @@
 
 ## Changelog
 
+### 0.15.9
+
 - Chokidar upgraded to 1.2
 - Fix startup script via new --hp option
+- Fix JSON refresh system
+
+### 0.15.1-8
+
 - JSON refresh available
 - New module system backward compatible and compatible with NPM 3.x
 - Possibility to install module from tgz (#1713)
