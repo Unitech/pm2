@@ -206,6 +206,18 @@ Thanks in advance and we hope that you like PM2!
 
 [CHANGELOG](https://github.com/Unitech/PM2/blob/master/CHANGELOG.md)
 
+## Issues
+
+So that we've every information we need, we recommend the use of `report_issue.sh` located in `pathtopm2/lib/scripts/report_issue.sh` or in [this gist](https://gist.github.com/soyuka/fdc7be1ab6ee4f1344fa). To use it you'll need node, pm2 and [jq](https://stedolan.github.io/jq/). Then just run:
+
+```
+bash report_issue.sh > output.md
+```
+
+`output.md` will have a lot of useful informations, please check if there is nothing that should remain private in it! Use it as a base message to fire an issue, thanks!
+
+Note that using `DEBUG="pm2:*" pm2 start --no-daemon buggy.js` is recommended to get more informations.
+
 ## Contributors
 
 [Contributors](http://pm2.keymetrics.io/hall-of-fame/)
