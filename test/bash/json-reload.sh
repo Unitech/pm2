@@ -37,10 +37,30 @@ sleep 1
 
 grep $CURRENT_YEAR echo-test.log
 spec "Should have written year in log file according to format YYYY"
+grep "SUSU" echo-test.log
+spec "Should have written new string depending on ECHO_MSG"
 
-$pm2 stop echo-post.json
+$pm2 restart echo-post.json
 >echo-test.log
-$pm2 start echo-post.json
 
 grep $CURRENT_YEAR echo-test.log
 ispec "Should have not written year in log file according to format"
+
+grep "YAY" echo-test.log
+spec "Should have written new string depending on ECHO_MSG"
+
+# Switch to production environment
+$pm2 restart echo-post.json --env production
+>echo-test.log
+
+sleep 0.2
+
+grep "WOW" echo-test.log
+spec "Should have written new string depending on ECHO_MSG"
+
+# Go back to original environment
+
+$pm2 restart echo-post.json
+sleep 0.2
+grep "YAY" echo-test.log
+spec "Should have written new string depending on ECHO_MSG"
