@@ -7,11 +7,8 @@ branches:
     - travis
 node_js:
    - "iojs"
-   - "iojs-v2.0"
    - "0.12"
-   - "0.12.0"
    - "0.11"
-   - "0.10"
    - "4"
 os:
   - linux
