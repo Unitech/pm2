@@ -10,13 +10,13 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 700 tests](https://travis-ci.org/Unitech/PM2).
+PM2 is constantly assailed by [more than 700 tests](https://travis-ci.org/Unitech/pm2).
 
 Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
 
-[![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![NPM Downloads](https://img.shields.io/npm/dm/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://api.travis-ci.org/Unitech/pm2.svg)](https://travis-ci.org/Unitech/PM2)
+[![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![NPM Downloads](https://img.shields.io/npm/dm/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://api.travis-ci.org/Unitech/pm2.svg)](https://travis-ci.org/Unitech/pm2)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
