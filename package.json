@@ -149,12 +149,12 @@
     "pm2-dev": "./bin/pm2-dev"
   },
   "dependencies": {
-    "async"               : "1.4.2",
+    "async"               : "1.5",
     "chalk"               : "1.1.1",
-    "chokidar"            : "~1.1.0",
+    "chokidar"            : "~1.2.0",
     "cli-table"           : "0.3.1",
     "coffee-script"       : "1.9.3",
-    "commander"           : "2.8.1",
+    "commander"           : "2.9",
     "cron"                : "1.0.9",
     "debug"               : "2.2.0",
     "eventemitter2"       : "0.4.14",
