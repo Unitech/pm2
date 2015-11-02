@@ -8,6 +8,8 @@
 
 ## Changelog
 
+- Fix startup script via new --hp option
+- JSON refresh available
 - New module system backward compatible and compatible with NPM 3.x
 - Possibility to install module from tgz (#1713)
 - ecosystem generated file via pm2 generate uptaded (not json5 prefix anymore, and updated comments)
