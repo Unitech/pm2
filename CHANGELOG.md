@@ -6,7 +6,9 @@
 - --next-gen-js option has been removed
 - pm2 iprobe command removed
 
-## Changelog
+### 0.15.10
+
+- Hot fix #1746
 
 ### 0.15.9
 
