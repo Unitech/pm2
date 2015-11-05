@@ -6,6 +6,11 @@
 - --next-gen-js option has been removed
 - pm2 iprobe command removed
 
+### 0.15.11
+
+- Fix versiong system (reset to default on resurrect/prepare)
+- Increase buffer size for versioning meta parsing
+
 ### 0.15.10
 
 - Hot fix #1746
