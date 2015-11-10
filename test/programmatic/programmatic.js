@@ -1,14 +1,12 @@
 
 /**
- * Test Satan in a programmatic way
+ * PM2 programmatic API tests
  */
 
-var pm2  = require('../..');
+var pm2    = require('../..');
 var should = require('should');
 var assert = require('better-assert');
 var path   = require('path');
-
-//process.env.PM2_SILENT = true;
 
 describe('PM2 programmatic calls', function() {
 
@@ -23,20 +21,17 @@ describe('PM2 programmatic calls', function() {
 
   before(function(done) {
     pm2.connect(function() {
-      setTimeout(function() {
-        pm2.delete('all', function(err, ret) {
-          done();
-        });
-      }, 1000);
+      pm2.delete('all', function(err, ret) {
+        done();
+      });
     });
   });
 
   it('should start a script', function(done) {
-    pm2.start(process.cwd() + '/test/fixtures/child.js',
-              {instances : 1},
-              function(err, data) {
+    pm2.start(process.cwd() + '/test/fixtures/child.js', {
+      instances : 1
+    }, function(err, data) {
       proc1 = data[0];
-
       should(err).be.null;
       done();
     });
@@ -99,7 +94,6 @@ describe('PM2 programmatic calls', function() {
   it('should list processes', function(done) {
     pm2.list(function(err, ret) {
       should(err).be.null;
-      console.log(ret.length);
       ret.length.should.eql(9);
       done();
     });
@@ -264,6 +258,59 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
+  describe('start OR restart', function() {
+    beforeEach(function(done) {
+      pm2.delete('all', function(err, ret) {
+        done();
+      });
+    });
+
+    it('should start a JSON object in cluster mode', function(done) {
+      pm2.start({
+        script : 'test/fixtures/child.js',
+        instances : 4,
+        exec_mode : 'cluster'
+      }, function(err, dt) {
+        should(err).be.null;
+
+        pm2.list(function(err, ret) {
+          should(err).be.null;
+          ret.length.should.eql(4);
+          ret[0].pm2_env.exec_mode.should.eql('cluster_mode');
+          done();
+        });
+      });
+    });
+
+    it('should start a JSON object in fork mode', function(done) {
+      pm2.start({
+        script : 'test/fixtures/echo.js',
+        instances : 4,
+        exec_mode : 'fork'
+      }, function(err, dt) {
+        should(err).be.null;
+
+        pm2.list(function(err, ret) {
+          should(err).be.null;
+          ret.length.should.eql(4);
+          ret[0].pm2_env.exec_mode.should.eql('fork_mode');
+          done();
+        });
+      });
+    });
+
+    it('should start a JSON file', function(done) {
+      pm2.start('test/fixtures/all2.json', function(err, dt) {
+        should(err).be.null;
+
+        pm2.list(function(err, ret) {
+          should(err).be.null;
+          ret.length.should.eql(4);
+          done();
+        });
+      });
+    });
+  });
 
 
   describe('start OR restart', function() {
@@ -296,10 +343,9 @@ describe('PM2 programmatic calls', function() {
           should(ret[0].pm2_env['NODE_ENV']).not.exist;
 
           ret.forEach(function(app) {
-            console.log(app.pm2_env.name, app.pm2_env.restart_time);
             app.pm2_env.restart_time.should.eql(1);
           });
-          setTimeout(function() { done(); }, 500);
+          done();
         });
       });
     });
@@ -324,6 +370,28 @@ describe('PM2 programmatic calls', function() {
       });
     });
 
+  });
+
+  describe('Connect / Disconnect', function() {
+    it('should disconnect', function() {
+      pm2.disconnect();
+    });
+
+    it('should connect', function(done) {
+      pm2.connect(function() {
+        done();
+      });
+    });
+
+    it('should disconnect with callback', function(done) {
+      pm2.disconnect(done);
+    });
+
+    it('should connect', function(done) {
+      pm2.connect(function() {
+        done();
+      });
+    });
   });
 
 });

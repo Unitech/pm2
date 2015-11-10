@@ -1,0 +1,14 @@
+{
+  "name": "module",
+  "version": "1.0.0",
+  "description": "comment",
+  "main": "module.fixture.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config" : {
+    "initial" : "init-val"
+  },
+  "author": "strzel",
+  "license": "ISC"
+}

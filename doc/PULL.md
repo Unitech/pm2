@@ -36,6 +36,8 @@ or to the optional specified commit ID.
 
 Everytime a backward/pull/forward command is executed, pm2 checks in ecosystem.json, process.json and package.json (in that order) for commands to run (e.g. npm install).
 The field should be named post_update and should be an array of commands.
+You can also set the timeout for exec() command with 'exec_timeout' field (in ms).
+By default it is 60000 (60sec).
 Your file should look something like this :
 
 ```json
@@ -50,7 +52,8 @@ Your file should look something like this :
       "script"             : "app.js",
       "post_update"        : ["echo App has been updated, running npm install...",
                               "npm install",
-                              "echo App is being restarted now"]
+                              "echo App is being restarted now"],
+      "exec_timeout"       : 30000
     }
   ]
 }

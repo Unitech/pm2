@@ -301,7 +301,7 @@ describe('God', function() {
 
   });
 
-  describe('Lock/Unlock system', function() {
+  describe.skip('Lock/Unlock system', function() {
 
     it('should launch processes', function(done) {
       God.prepare(getConf(), function(err, procs) {

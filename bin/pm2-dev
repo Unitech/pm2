@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var commander = require('commander');
+
+var debug     = require('debug')('pm2:cli');
+var Satan     = require('../lib/Satan');
+var CLI       = require('../lib/CLI');
+var Log       = require('../lib/Log');
+var cst       = require('../constants.js');
+var pkg       = require('../package.json');
+var platform  = require('os').platform();
+var moment    = require('moment');
+var Common    = require('../lib/Common');
+var chalk     = require('chalk');
+
+process.env.PM2_SILENT = true;
+
+commander.version(pkg.version)
+  .option('--raw', 'raw log output')
+  .option('--timestamp [format]', 'add timestamps to logs')
+  .usage('[cmd] app');
+
+CLI.pm2Init();
+
+Satan.start(false, function() {
+  commander.parse(process.argv);
+});
+
+function run(cmd, opts) {
+  commander.watch = true;
+  commander.autorestart = false;
+
+  var needRaw = opts.parent.rawArgs.indexOf('--raw') > -1 || false;
+  var timestamp = opts.parent.timestamp;
+
+  if (timestamp === true)
+    timestamp = 'YYYY-MM-DD-HH:mm:ss';
+
+  CLI.start(cmd, commander, function(err, obj) {
+    Log.stream('all', needRaw, timestamp, false);
+
+    process.on('SIGINT', function() {
+      CLI.delete(cmd, '', function() {
+        Common.exitCli(cst.SUCCESS_EXIT);
+      });
+      setTimeout(function killAnyway() {
+        Common.exitCli(cst.SUCCESS_EXIT);
+      }, 3000);
+    });
+
+  });
+}
+
+commander.command('*')
+  .description('run <file|json_file> in development mode')
+  .action(function(cmd, opts){
+    run(cmd, opts);
+  });
+
+commander.command('run <file|json_file>')
+  .alias('start')
+  .description('run <file|json_file> in development mode')
+  .action(function(cmd, opts) {
+    run(cmd, opts);
+  });
+
+if (process.argv.length == 2) {
+  commander.outputHelp();
+  process.exit(1);
+}

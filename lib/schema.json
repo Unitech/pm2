@@ -27,9 +27,11 @@
     "ext_type": "sbyte",
     "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
   },
+  "restart_delay": {
+    "type" : "number"
+  },
   "instances": {
-    "type": "number",
-    "min": 0
+    "type": "number"
   },
   "port": {
     "type": "number"
@@ -61,6 +63,18 @@
     "type": "string"
   },
   "merge_logs": {
+    "type": "boolean"
+  },
+  "vizion" : {
+    "type": "boolean"
+  },
+  "pmx" : {
+    "type": "boolean"
+  },
+  "autorestart" : {
+    "type": "boolean"
+  },
+  "treekill" : {
     "type": "boolean"
   },
   "watch": {

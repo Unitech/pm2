@@ -44,3 +44,11 @@ should 'should process restarted' 'restart_time: 3' 5
 
 $pm2 reset all
 should 'should process reseted' 'restart_time: 0' 5
+
+#
+# Restart delay test
+#
+
+$pm2 delete all
+$pm2 start killtoofast.js --restart-delay 5000
+should 'should process not have been restarted yet' 'restart_time: 0' 1

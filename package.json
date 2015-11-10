@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": "true",
-  "version": "0.12.10",
+  "version": "0.15.11",
   "engines": {
     "node": ">=0.10"
   },
@@ -12,7 +12,7 @@
   },
   "author": {
     "name": "Strzelewicz Alexandre",
-    "email": "as@unitech.io",
+    "email": "alexandre@keymetrics.io",
     "url": "https://keymetrics.io"
   },
   "maintainers": [
@@ -55,6 +55,9 @@
       "email": "jonishkurti90@gmail.com"
     },
     {
+      "name": "James Ide"
+    },
+    {
       "name" : "Jun Tjatse",
       "email" : "thisnamemeansnothing@gmail.com"
     },
@@ -91,11 +94,11 @@
       "email": "chris@chriswiggins.co.nz"
     }
   ],
-  "homepage": "https://github.com/Unitech/pm2",
+  "homepage": "http://pm2.keymetrics.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test bash test/index.sh && NODE_ENV=test bash test/main.sh"
+    "test": "PM2_CONCURRENT_ACTIONS=1 NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
   },
   "keywords": [
     "cli",
@@ -116,6 +119,8 @@
     "node-pm2",
     "production",
     "keymetrics",
+    "node.js monitoring",
+    "strong-pm",
     "deploy",
     "deployment",
     "daemon",
@@ -127,6 +132,8 @@
     "monitoring",
     "process manager",
     "forever",
+    "profiling",
+    "probes",
     "forever-monitor",
     "keep process alive",
     "process configuration",
@@ -138,21 +145,20 @@
     "dev ops"
   ],
   "bin": {
-    "pm2": "./bin/pm2"
+    "pm2"    : "./bin/pm2",
+    "pm2-dev": "./bin/pm2-dev"
   },
   "dependencies": {
-    "async"               : "~0.9.0",
-    "chalk"               : "~0.5.1",
-    "chokidar"            : "~0.12.0",
+    "async"               : "1.5",
+    "chalk"               : "1.1.1",
+    "chokidar"            : "~1.2.0",
     "cli-table"           : "0.3.1",
-    "coffee-script"       : "1.8.0",
-    "colors"              : "1.0.3",
-    "commander"           : "2.6.0",
-    "cron"                : "1.0.5",
-    "debug"               : "2.1.0",
+    "coffee-script"       : "1.9.3",
+    "commander"           : "2.9",
+    "cron"                : "1.0.9",
+    "debug"               : "2.2.0",
     "eventemitter2"       : "0.4.14",
-    "json-stringify-safe" : "5.0.0",
-    "moment"              : "2.9.0",
+    "moment"              : "2.10.6",
     "nssocket"            : "0.5.3",
     "pidusage"            : "0.1.1",
 
@@ -163,20 +169,19 @@
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "latest",
     "pm2-multimeter"      : "0.1.2",
+    "safe-clone-deep"     : "1.0.5",
 
-    "shelljs"             : "0.3.0",
+    "shelljs"             : "0.5.3",
     "isbinaryfile"        : "^2.0.3",
-    "semver"              : "4.3.1"
+    "semver"              : "5.0.3",
+    "mkdirp"              : "0.5.1"
   },
   "devDependencies": {
     "mocha"           : "^1.20.1",
     "should"          : "^4.0.0",
-    "better-assert"   : "^1.0.0",
-    "promise-spawner" : "^0.0.3",
-    "punt"            : "*"
+    "better-assert"   : "^1.0.0"
   },
   "optionalDependencies": {
-    "pm2-logs": "~0.1.1",
     "ikt": "git+http://ikt.pm2.io/ikt.git#master"
   },
   "bugs": {
@@ -186,5 +191,5 @@
     "type": "git",
     "url": "git://github.com/Unitech/pm2.git"
   },
-  "license": "AGPLv3"
+  "license": "AGPL-3.0"
 }

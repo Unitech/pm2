@@ -1,0 +1,16 @@
+{
+  "apps" : [{
+    "exec_interpreter"   : "node,
+    "exec_mode"          : "cluster_mode",
+    "instances"          : 0,
+    "log_date_format"    : "YYYY-MM-DD HH:mm Z",
+    "max_memory_restart" : "160",
+    "merge_logs"         : true,
+    "name"               : "hapi_playground",
+    "script"             : "child.js",
+    "cwd"                : "examples",
+    "node_args"          : "--harmony",
+    "ignore_watch"        : ["[\\/\\\\]\\./", "log"],
+    "watch"              : true
+  }]
+}

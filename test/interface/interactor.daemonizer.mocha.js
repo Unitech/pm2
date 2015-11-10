@@ -91,5 +91,97 @@ describe('Daemonizer interactor', function() {
     });
   });
 
+  describe('Recycle option', function() {
+    it('should handle recycle option', function(done) {
+      interactorDaemonizer.getSetKeys('XXXS2', 'XXXP2', null, true, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.recycle.should.be.true;
+
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+        interaction_conf.recycle.should.be.true;
+
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
+
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
+    });
+
+    it('should handle recycle option (obj like)', function(done) {
+      interactorDaemonizer.getSetKeys({
+        secret_key   : 'XXXS2',
+        public_key   : 'XXXP2',
+        machine_name : null,
+        recycle      : true
+      }, function(err, data) {
+          should(err).be.null;
+          data.secret_key.should.eql('XXXS2');
+          data.public_key.should.eql('XXXP2');
+          data.recycle.should.be.true;
+
+          var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+          interaction_conf.secret_key.should.eql('XXXS2');
+          interaction_conf.public_key.should.eql('XXXP2');
+          interaction_conf.recycle.should.be.true;
+
+          should.exist(interaction_conf.version_management.active);
+          should(interaction_conf.version_management.password).be.null;
+
+          interaction_conf.machine_name.should.eql(os.hostname());
+          return done();
+      });
+    });
+
+    it('should handle recycle option opts2', function(done) {
+      interactorDaemonizer.getSetKeys(null, null, null, null, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.recycle.should.be.true;
+
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+        interaction_conf.recycle.should.be.true;
+
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
+
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
+    });
+
+    it('should stop recycle option if passing secret and pub', function(done) {
+      interactorDaemonizer.getSetKeys({
+        secret_key   : 'XXXS2',
+        public_key   : 'XXXP2',
+        machine_name : null
+      }, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.recycle.should.be.false;
+
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+        interaction_conf.recycle.should.be.false;
+
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
+
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
+    });
+
+  });
+
 
 });

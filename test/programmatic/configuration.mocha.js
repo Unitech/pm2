@@ -82,6 +82,38 @@ describe('Configuration via SET / GET tests', function() {
       });
     });
 
+    it('should get the val with .get', function(done) {
+      Configuration.get('module-name.var1', function(err, data) {
+        should(err).not.exists;
+        data.should.eql('val1');
+        done();
+      });
+    });
+
+    it('should get the val with .get', function(done) {
+      Configuration.get('module-name.var2', function(err, data) {
+        should(err).not.exists;
+        data.should.eql('val2');
+        done();
+      });
+    });
+
+    it('should NOT get the val with .get', function(done) {
+      Configuration.get('moduleasd-name.var2', function(err, data) {
+        should(err).exists;
+        should(data).be.null;
+        done();
+      });
+    });
+
+    it('should NOT get the val with .get', function(done) {
+      Configuration.get('module-name.var3', function(err, data) {
+        should(err).exists;
+        should(data).be.null;
+        done();
+      });
+    });
+
   });
 
   describe('Sub value system with :', function() {
@@ -108,6 +140,116 @@ describe('Configuration via SET / GET tests', function() {
       });
     });
 
+    it('should unset the val', function(done) {
+      Configuration.unset('module-name2:var2', function(err, data) {
+        should(err).not.exists;
+        data['module-name2']['var1'].should.eql('val1');
+        should(data['module-name2']['var2']).not.exists;
+        done();
+      });
+    });
+
+  });
+
+  describe('Sync', function() {
+    before(function() {
+      Configuration.unsetSync('module-name2');
+    });
+
+    it('should have 0 modules listed', function(done) {
+      var data = Configuration.getSync('module-name2');
+
+      should(data).be.null;
+      done();
+    });
+
+    it('should set a sub key', function(done) {
+      var ret = Configuration.setSync('module-name2:var1', 'val1');
+
+      done();
+    });
+
+    it('should have one key', function(done) {
+      var data = Configuration.getSync('module-name2');
+
+      data['var1'].should.eql('val1');
+      done();
+    });
+
+
+    it('should set a second sub key', function(done) {
+      var ret = Configuration.setSync('module-name2:var2', 'val2');
+
+      done();
+    });
+
+    it('should get the val', function() {
+      var data = Configuration.getSync('module-name2:var2');
+      data.should.eql('val2');
+    });
+
+    it('should get null for unknown val', function() {
+      var data = Configuration.getSync('module-name2:var23333');
+      should(data).be.null;
+    });
+
+  });
+
+  describe('Not split what is inside double quotes', function() {
+    it('should do it', function(done) {
+      Configuration.set('module-name2:"var2:toto"', 'val2', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get the val', function() {
+      var data = Configuration.getSync('module-name2:"var2:toto"');
+      data.should.eql('val2');
+    });
+
+    it('should do it', function(done) {
+      Configuration.set('module-name3."var45.toto"', 'val2', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get the val', function() {
+      var data = Configuration.getSync('module-name3."var45.toto"');
+      data.should.eql('val2');
+    });
+
+  });
+
+  describe('Multiset', function() {
+    it('should mutliset configuration', function(done) {
+      Configuration.multiset('module-name3."var45.toto" val2 k2 v2 k3 v3', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
+
+    it('should get values', function(done) {
+      var data = Configuration.getSync('module-name3."var45.toto"');
+      data.should.eql('val2');
+      data = Configuration.getSync('k2');
+      data.should.eql('v2');
+      data = Configuration.getSync('k3');
+      data.should.eql('v3');
+      done();
+    });
+
+  });
+
+  // Password encryption moved outside Configuration library
+  describe.skip('Password encryption', function() {
+    it('should encrypt password when setting pm2:passwd', function(done) {
+      Configuration.set('pm2:passwd', 'testpass', function(err, data) {
+        should(err).not.exists;
+        done();
+      });
+    });
   });
 
 });
