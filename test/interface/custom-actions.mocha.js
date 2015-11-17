@@ -207,7 +207,7 @@ describe('CUSTOM ACTIONS', function() {
     server.emit('cmd', {
       _type : 'trigger:action',
       process_id : 0,
-      action_name : 'unknow:action'
+      action_name : 'unknown:action'
     });
   });
 
