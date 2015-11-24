@@ -71,6 +71,9 @@
   "pmx" : {
     "type": "boolean"
   },
+  "automation" : {
+    "type": "boolean"
+  },
   "autorestart" : {
     "type": "boolean"
   },

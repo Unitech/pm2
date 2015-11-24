@@ -33,6 +33,17 @@ should 'should app be online once restart called' 'online' 1
 
 $pm2 delete all
 
+###############
+
+echo "Start application with filename starting with a numeric"
+$pm2 start throw-string.js -l err-string.log --merge-logs --no-automation
+>err-string.log
+sleep 2
+grep 'throw-string.js' err-string.log
+spec "Should have written raw stack when throwing a string"
+
+$pm2 delete all
+
 ####
 
 $pm2 start echo.js --name gege

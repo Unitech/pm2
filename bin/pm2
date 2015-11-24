@@ -51,7 +51,7 @@ commander.version(pkg.version)
   .option('--no-autorestart', 'start an app without automatic restart')
   .option('--no-treekill', 'Only kill the main process, not detached children')
   .option('--no-pmx', 'start an app without pmx')
-
+  .option('--no-automation', 'start an app without pmx')
   .usage('[cmd] app');
 
 commander.on('--help', function() {

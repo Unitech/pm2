@@ -8,6 +8,7 @@
 
 ### 0.15.11
 
+- Add --no-automation flag
 - Fix when starting application with illegal names (#1764)
 - Fix management of app starting with numerics in the filename (#1769)
 - Fix versiong system (reset to default on resurrect/prepare)
