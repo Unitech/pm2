@@ -23,6 +23,28 @@ spec "Should restart an app by script.js (TRANSITIONAL STATE)"
 ###############
 $pm2 delete all
 
+echo "Start application with filename starting with a numeric"
+$pm2 start 001-test.js
+should 'should app be online' 'online' 1
+$pm2 stop 001-test
+should 'should app be stopped' 'stopped' 1
+$pm2 restart 001-test
+should 'should app be online once restart called' 'online' 1
+
+$pm2 delete all
+
+####
+
+$pm2 start echo.js --name gege
+should 'should app be online' 'online' 1
+$pm2 stop gege
+should 'should app be stopped' 'stopped' 1
+$pm2 restart gege
+should 'should app be online once restart called' 'online' 1
+
+###############
+$pm2 delete all
+
 echo "---- BY_NAME Start an app, stop it, if state stopped and started, restart stopped app"
 
 $pm2 start echo.js --name gege
