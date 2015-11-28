@@ -3,9 +3,11 @@
     <img width=710px src="https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png">
   </a>
 
+<br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
+<br/>
 <a href="https://www.npmjs.com/package/pm2">
-    <img title="Module version" src="https://img.shields.io/npm/v/pm2.svg?style=flat-square"/>
+  <img title="Module version" src="https://img.shields.io/npm/v/pm2.svg?style=flat-square"/>
 </a>
 
 <a href="https://www.npmjs.com/package/pm2">
