@@ -1,4 +1,8 @@
-[![PM2](https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png)](http://pm2.keymetrics.io)
+<div align="center">
+  <a href="http://pm2.keymetrics.io">
+    <img width=110px src="https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png">
+  </a>
+</div>
 
 **P**(rocess) **M**(anager) **2**
 
