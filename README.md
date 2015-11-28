@@ -2,9 +2,21 @@
   <a href="http://pm2.keymetrics.io">
     <img width=710px src="https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png">
   </a>
-</div>
 
-**P**(rocess) **M**(anager) **2**
+<b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
+<a href="https://www.npmjs.com/package/pm2">
+    <img title="Module version" src="https://img.shields.io/npm/v/pm2.svg?style=flat-square"/>
+</a>
+
+<a href="https://www.npmjs.com/package/pm2">
+  <img title="NPM Downloads" src="https://img.shields.io/npm/dm/pm2.svg?style=flat-square"/>
+</a>
+
+<a href="https://travis-ci.org/Unitech/pm2">
+  <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" title="Build Status"/>
+</a>
+   
+</div>
 
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
@@ -19,8 +31,6 @@ PM2 is constantly assailed by [more than 700 tests](https://travis-ci.org/Unitec
 Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 Works on Linux (stable) & MacOSx (stable) & Windows (bêta).
-
-[![Version npm](https://img.shields.io/npm/v/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![NPM Downloads](https://img.shields.io/npm/dm/pm2.svg?style=flat-square)](https://www.npmjs.com/package/pm2)[![Build Status](https://travis-ci.org/Unitech/pm2.svg?branch=master)](https://travis-ci.org/Unitech/pm2)
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
