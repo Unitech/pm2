@@ -3,7 +3,6 @@
     <img width=710px src="https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png">
   </a>
 
-<br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
 <br/>
 <a href="https://www.npmjs.com/package/pm2">
@@ -18,6 +17,9 @@
   <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" title="Build Status"/>
 </a>
    
+   
+<br/>
+<br/>
 </div>
 
 PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
