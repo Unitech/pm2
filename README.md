@@ -5,7 +5,7 @@
 
 <br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
-<br/>
+<br/><br/>
 <a href="https://www.npmjs.com/package/pm2">
   <img title="Module version" src="https://img.shields.io/npm/v/pm2.svg?style=flat-square"/>
 </a>
