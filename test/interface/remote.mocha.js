@@ -118,6 +118,7 @@ describe('REMOTE PM2 ACTIONS', function() {
 
   before(function(done) {
     createMockServer(function(err, _server) {
+      console.log('Mock server created');
       server = _server;
       forkPM2(function(err, _pm2) {
         pm2 = _pm2;
