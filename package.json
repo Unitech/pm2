@@ -172,7 +172,6 @@
     "safe-clone-deep"     : "1.0.5",
 
     "shelljs"             : "0.5.3",
-    "isbinaryfile"        : "^2.0.3",
     "semver"              : "5.0.3",
     "mkdirp"              : "0.5.1"
   },
