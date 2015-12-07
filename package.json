@@ -162,10 +162,10 @@
     "nssocket"            : "0.5.3",
     "pidusage"            : "0.1.1",
 
-    "pmx"                 : "latest",
-    "vizion"              : "latest",
+    "pmx"                 : "^0.5",
+    "vizion"              : "^0.2",
 
-    "pm2-axon"            : "latest",
+    "pm2-axon"            : "~2.0.9",
     "pm2-axon-rpc"        : "0.3.6",
     "pm2-deploy"          : "0.2.1",
     "pm2-multimeter"      : "0.1.2",
