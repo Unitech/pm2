@@ -153,21 +153,21 @@
     "chalk"               : "1.1.1",
     "chokidar"            : "~1.2.0",
     "cli-table"           : "0.3.1",
-    "coffee-script"       : "1.9.3",
+    "coffee-script"       : "~1.10.0",
     "commander"           : "2.9",
-    "cron"                : "1.0.9",
+    "cron"                : "1.1.0",
     "debug"               : "2.2.0",
     "eventemitter2"       : "0.4.14",
     "moment"              : "2.10.6",
     "nssocket"            : "0.5.3",
     "pidusage"            : "0.1.1",
 
-    "pmx"                 : "keymetrics/pmx",
+    "pmx"                 : "latest",
     "vizion"              : "latest",
 
     "pm2-axon"            : "latest",
     "pm2-axon-rpc"        : "0.3.6",
-    "pm2-deploy"          : "latest",
+    "pm2-deploy"          : "0.2.1",
     "pm2-multimeter"      : "0.1.2",
     "safe-clone-deep"     : "1.0.5",
 
@@ -177,8 +177,8 @@
     "mkdirp"              : "0.5.1"
   },
   "devDependencies": {
-    "mocha"           : "^1.20.1",
-    "should"          : "^4.0.0",
+    "mocha"           : "2.x",
+    "should"          : "^7.0.0",
     "better-assert"   : "^1.0.0"
   },
   "optionalDependencies": {
