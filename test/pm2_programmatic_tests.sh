@@ -17,6 +17,7 @@ function fail {
 function success {
   echo -e "\033[32m------------> ✔ $1\033[0m"
   $pm2 kill
+  sleep 3
 }
 
 function spec {
@@ -62,9 +63,10 @@ mocha ./test/interface/interactor.connect.mocha.js
 spec "Interactor test #1 with password setting"
 mocha ./test/interface/interactor.connect.two.mocha.js
 spec "Interactor test #2 with password setting"
+
 mocha ./test/interface/interactor.daemonizer.mocha.js
 spec "Remote interactor keys save verification"
-sleep 2
+
 mocha ./test/interface/remote.mocha.js
 spec "Remote interactions test"
 mocha ./test/interface/scoped_pm2_actions.mocha.js
