@@ -8,6 +8,7 @@
 
 ### 0.15.11
 
+- Upgrade pm2-axon, cron, should, mocha, coffee-script NPM packages
 - Show process configuration option when describing process
 - Add --no-automation flag
 - Fix when starting application with illegal names (#1764)
