@@ -53,6 +53,8 @@ mocha ./test/programmatic/cluster.js
 spec "Cluster tests"
 mocha ./test/programmatic/misc_commands.js
 spec "MISC tests"
+mocha ./test/programmatic/send_data_process.mocha.js
+spec "Send data to a process"
 
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
