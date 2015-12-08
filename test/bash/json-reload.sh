@@ -33,7 +33,7 @@ CURRENT_YEAR=`date +"%Y"`
 >echo-test.log
 
 $pm2 start echo-pre.json
-sleep 1
+sleep 2
 
 grep $CURRENT_YEAR echo-test.log
 spec "Should have written year in log file according to format YYYY"
