@@ -1,8 +1,8 @@
 
 process.on('message', function(packet) {
-  if (packet.type == 'process:msg') {
+  if (packet.topic == 'process:msg') {
     process.send({
-      type : 'process:msg',
+      topic : 'process:msg',
       data : {
         success : true
       }
