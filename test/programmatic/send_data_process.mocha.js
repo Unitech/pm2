@@ -37,8 +37,8 @@ describe('PM2 programmatic calls', function() {
   /**
    * process.on('message', function(packet) {
    *   process.send({
-   *     type : 'process:msg',
-   *     data : {
+   *     topic : 'process:msg',
+   *     data  : {
    *       success : true
    *     }
    *   });
@@ -56,22 +56,22 @@ describe('PM2 programmatic calls', function() {
 
   it('should receive data packet', function(done) {
     pm2_bus.on('process:msg', function(packet) {
-      packet.data.success.should.eql(true);
+      packet.raw.data.success.should.eql(true);
+      packet.raw.topic.should.eql('process:msg');
       packet.process.pm_id.should.eql(proc1.pm2_env.pm_id);
+      packet.process.name.should.eql(proc1.pm2_env.name);
       done();
     });
 
-    pm2.sendDataToProcessId({
-      type : 'process:msg',
+    pm2.sendDataToProcessId(proc1.pm2_env.pm_id, {
+      topic : 'process:msg',
       data : {
         some : 'data',
         hello : true
-      },
-      id   : proc1.pm2_env.pm_id
+      }
     }, function(err, res) {
       should(err).be.null;
     });
   });
-
 
 });
