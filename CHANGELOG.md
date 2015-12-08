@@ -8,8 +8,8 @@
 
 ### 0.15.11
 
-- Send SIGINT signal to process instead of SIGTERM [#1819]
-- Avoid writing on std err/out when process is disconnected [#1819]
+- [#1819] Send SIGINT signal to process instead of SIGTERM
+- [#1819][#1794][#1765] Avoid writing on std err/out when process is disconnected
 - Upgrade pm2-axon, cron, should, mocha, coffee-script, chokidar, semver NPM packages
 - Show process configuration option when describing process
 - Add --no-automation flag
