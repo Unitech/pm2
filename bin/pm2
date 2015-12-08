@@ -9,6 +9,7 @@ var p         = path;
 var util      = require('util');
 var cronJob   = require('cron').CronJob;
 var chalk     = require('chalk');
+var async     = require('async');
 
 var debug     = require('debug')('pm2:cli');
 var Satan     = require('../lib/Satan');
@@ -191,7 +192,7 @@ function failOnUnknown(fn) {
 //
 // Start command
 //
-commander.command('start <file|json|stdin|app_name|pm_id>')
+commander.command('start <file|json|stdin|app_name|pm_id...>')
   .option('--watch', 'Watch folder for changes')
   .description('start and daemonize an app')
   .action(function(cmd) {
@@ -204,7 +205,13 @@ commander.command('start <file|json|stdin|app_name|pm_id>')
       });
     }
     else {
-      CLI.start(cmd, commander);
+      async.forEachLimit(cmd, 1, function(script, next) {
+        CLI.start(script, commander, function() {
+          next();
+        });
+      }, function(err) {
+        CLI.list();
+      });
     }
   });
 
@@ -235,21 +242,34 @@ commander.command('startOrGracefulReload <json>')
 //
 // Stop specific id
 //
-commander.command('stop <id|name|all|json|stdin>')
+commander.command('stop <id|name|all|json|stdin...>')
   .option('--watch', 'Stop watching folder for changes')
   .description('stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
-    CLI.stop(param);
+    async.forEachLimit(param, 1, function(script, next) {
+      CLI.stop(script, function() {
+        next();
+      });
+    }, function(err) {
+      CLI.list();
+    });
   });
 
 //
 // Stop All processes
 //
-commander.command('restart <id|name|all|json|stdin>')
+commander.command('restart <id|name|all|json|stdin...>')
   .option('--watch', 'Toggle watching folder for changes')
   .description('restart a process')
   .action(function(param) {
-    CLI.restart(param);
+
+    async.forEachLimit(param, 1, function(script, next) {
+      CLI.restart(script, function() {
+        next();
+      });
+    }, function(err) {
+      CLI.list();
+    });
   });
 
 //
@@ -288,7 +308,7 @@ commander.command('gracefulReload <name|all>')
 //
 // Stop and delete a process by name from database
 //
-commander.command('delete <name|id|script|all|json|stdin>')
+commander.command('delete <name|id|script|all|json|stdin...>')
   .description('stop and delete a process from pm2 process list')
   .action(function(name) {
     if (name == "-") {
@@ -299,7 +319,13 @@ commander.command('delete <name|id|script|all|json|stdin>')
         CLI.delete(param, 'pipe');
       });
     } else
-      CLI.delete(name,'');
+      async.forEachLimit(name, 1, function(script, next) {
+        CLI.delete(script,'', function(err) {
+          next();
+        });
+      }, function(err) {
+        CLI.list();
+      });
   });
 
 //

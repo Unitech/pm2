@@ -30,6 +30,8 @@ bash ./test/bash/smart-start.sh
 spec "smart start test"
 bash ./test/bash/cli.sh
 spec "CLI basic test"
+bash ./test/bash/multiparam.sh
+spec "Multiparam process management"
 bash ./test/bash/json_file.sh
 spec "JSON file test"
 bash ./test/bash/json-reload.sh
