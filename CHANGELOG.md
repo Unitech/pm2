@@ -1,12 +1,5 @@
 
-# 0.15.x & 1.0
-
-## Breaking change
-
-- --next-gen-js option has been removed
-- pm2 iprobe command removed
-
-### 0.15.11
+### 16.0.0
 
 - [#1825] Process management commands (start/restart/stop/delete) can take multiple arguments
 - [#1822] Add new method pm2.sendDataToProcessId(type|data|id) to send data to processes
