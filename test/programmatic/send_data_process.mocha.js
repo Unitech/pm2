@@ -23,10 +23,10 @@ describe('PM2 programmatic calls', function() {
   });
 
   before(function(done) {
-    pm2.launchBus(function(err, bus) {
-      pm2_bus = bus;
+    pm2.connect(function() {
+      pm2.launchBus(function(err, bus) {
+        pm2_bus = bus;
 
-      pm2.connect(function() {
         pm2.delete('all', function(err, ret) {
           done();
         });
