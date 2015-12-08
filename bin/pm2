@@ -210,7 +210,7 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
           next();
         });
       }, function(err) {
-        CLI.list();
+        CLI.speedList(err ? 1 : 0);
       });
     }
   });
@@ -251,7 +251,7 @@ commander.command('stop <id|name|all|json|stdin...>')
         next();
       });
     }, function(err) {
-      CLI.list();
+      CLI.speedList(err ? 1 : 0);
     });
   });
 
@@ -268,7 +268,7 @@ commander.command('restart <id|name|all|json|stdin...>')
         next();
       });
     }, function(err) {
-      CLI.list();
+      CLI.speedList(err ? 1 : 0);
     });
   });
 
@@ -324,7 +324,7 @@ commander.command('delete <name|id|script|all|json|stdin...>')
           next();
         });
       }, function(err) {
-        CLI.list();
+        CLI.speedList(err ? 1 : 0);
       });
   });
 
