@@ -8,6 +8,7 @@
 
 ### 0.15.11
 
+- [#1822] Add new method pm2.sendDataToProcessId(type|data|id) to send data to processes
 - [#1819] Send SIGINT signal to process instead of SIGTERM
 - [#1819][#1794][#1765] Avoid writing on std err/out when process is disconnected
 - Upgrade pm2-axon, cron, should, mocha, coffee-script, chokidar, semver NPM packages
