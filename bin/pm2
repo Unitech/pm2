@@ -206,9 +206,7 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
     }
     else {
       async.forEachLimit(cmd, 1, function(script, next) {
-        CLI.start(script, commander, function() {
-          next();
-        });
+        CLI.start(script, commander, next);
       }, function(err) {
         CLI.speedList(err ? 1 : 0);
       });
@@ -247,9 +245,7 @@ commander.command('stop <id|name|all|json|stdin...>')
   .description('stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
     async.forEachLimit(param, 1, function(script, next) {
-      CLI.stop(script, function() {
-        next();
-      });
+      CLI.stop(script, next);
     }, function(err) {
       CLI.speedList(err ? 1 : 0);
     });
@@ -264,9 +260,7 @@ commander.command('restart <id|name|all|json|stdin...>')
   .action(function(param) {
 
     async.forEachLimit(param, 1, function(script, next) {
-      CLI.restart(script, function() {
-        next();
-      });
+      CLI.restart(script, next);
     }, function(err) {
       CLI.speedList(err ? 1 : 0);
     });
@@ -320,9 +314,7 @@ commander.command('delete <name|id|script|all|json|stdin...>')
       });
     } else
       async.forEachLimit(name, 1, function(script, next) {
-        CLI.delete(script,'', function(err) {
-          next();
-        });
+        CLI.delete(script,'', next);
       }, function(err) {
         CLI.speedList(err ? 1 : 0);
       });
