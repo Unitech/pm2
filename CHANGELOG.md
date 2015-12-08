@@ -8,6 +8,7 @@
 
 ### 0.15.11
 
+- [#1825] Process management commands (start/restart/stop/delete) can take multiple arguments
 - [#1822] Add new method pm2.sendDataToProcessId(type|data|id) to send data to processes
 - [#1819] Send SIGINT signal to process instead of SIGTERM
 - [#1819][#1794][#1765] Avoid writing on std err/out when process is disconnected
