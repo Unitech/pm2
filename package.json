@@ -162,7 +162,7 @@
     "nssocket"            : "0.5.3",
     "pidusage"            : "0.1.1",
 
-    "pmx"                 : "keymetrics/pmx",
+    "pmx"                 : "^0.5",
     "vizion"              : "^0.2",
 
     "pm2-axon"            : "~2.0.9",
