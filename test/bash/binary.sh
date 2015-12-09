@@ -14,10 +14,11 @@ function getInterpreter() {
 #
 # Testing pm2 execution of binary files
 #
-$pm2 start `which watch` -- ls
+$pm2 start `type -p watch` -- ls
 
 OUT=$(getInterpreter)
-[ $OUT="none" ] || fail "$1"
+
+[ $OUT = "none" ] || fail "$1"
 success "$1"
 
 $pm2 kill
