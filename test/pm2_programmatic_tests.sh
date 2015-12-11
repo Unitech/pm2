@@ -51,6 +51,8 @@ mocha ./test/programmatic/cluster.js
 spec "Cluster tests"
 mocha ./test/programmatic/misc_commands.js
 spec "MISC tests"
+mocha ./test/programmatic/signals.js
+spec "SIGINT signal interception + delay customization"
 mocha ./test/programmatic/send_data_process.mocha.js
 spec "Send data to a process"
 
