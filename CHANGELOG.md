@@ -1,5 +1,5 @@
 
-### 16.0.0
+### 1.0.0
 
 - [#1830] Add tests for PM2_KILL_TIMEOUT (SIGKILL delay) + default SIGINT to any kind of procs
 - [#1825] Process management commands (start/restart/stop/delete) can take multiple arguments
