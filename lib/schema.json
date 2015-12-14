@@ -33,6 +33,9 @@
   "instances": {
     "type": "number"
   },
+  "kill_timeout": {
+    "type": "number"
+  },
   "port": {
     "type": "number"
   },
