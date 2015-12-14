@@ -1,6 +1,7 @@
 
 ### 16.0.0
 
+- [#1810] Add --kill-timeout <number> option (delay before process receive a final SIGKILL)
 - [#1830] Add tests for PM2_KILL_TIMEOUT (SIGKILL delay) + default SIGINT to any kind of procs
 - [#1825] Process management commands (start/restart/stop/delete) can take multiple arguments
 - [#1822] Add new method pm2.sendDataToProcessId(type|data|id) to send data to processes
