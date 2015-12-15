@@ -69,19 +69,24 @@
     "type": "boolean"
   },
   "vizion" : {
-    "type": "boolean"
+    "type": "boolean",
+    "default" : true
   },
   "pmx" : {
-    "type": "boolean"
+    "type": "boolean",
+    "default" : true
   },
   "automation" : {
-    "type": "boolean"
+    "type": "boolean",
+    "default" : true
   },
   "autorestart" : {
-    "type": "boolean"
+    "type": "boolean",
+    "default" : true
   },
   "treekill" : {
-    "type": "boolean"
+    "type": "boolean",
+    "default" : true
   },
   "watch": {
     "type": [

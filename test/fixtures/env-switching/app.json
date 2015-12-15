@@ -1,0 +1,15 @@
+{
+  script : './child.js',
+  // Default environment
+  env : {
+    NODE_ENV : 'normal'
+  },
+  // Prod
+  env_production : {
+    NODE_ENV : 'production'
+  },
+  // Test
+  env_test : {
+    NODE_ENV : 'test'
+  }
+}

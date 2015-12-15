@@ -7,7 +7,7 @@ cd $file_path
 echo -e "\033[1mENV REFRESH\033[0m"
 
 #
-# Restart via CLI
+# REFRESH with Restart via CLI
 #
 TEST_VARIABLE='hello1' $pm2 start env.js -o out-env.log --merge-logs --name "env"
 >out-env.log
@@ -24,10 +24,8 @@ spec "should contain refreshed environment variable"
 
 $pm2 delete all
 
-# HEYYYY
-
 #
-# Restart via JSON
+# REFRESH with Restart via JSON
 #
 
 $pm2 start env.json
