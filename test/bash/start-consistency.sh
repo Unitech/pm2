@@ -23,9 +23,13 @@ $pm2 start child.json
 
 LINE_NB_JSON=`$pm2 prettylist | wc -l`
 
-if [ $LINE_NB_JSON -eq $LINE_NB_CLI ]
-then
-    success "Starting a basic JSON is consistent with CLI start"
-else
-    fail "Starting a basic JSON is NOT consistent with CLI start"
-fi
+$pm2 prettylist | grep "vizion: true"
+spec "Vizion"
+
+
+# if [ $LINE_NB_JSON -eq $LINE_NB_CLI ]
+# then
+#     success "Starting a basic JSON is consistent with CLI start"
+# else
+#     fail "Starting a basic JSON is NOT consistent with CLI start"
+# fi
