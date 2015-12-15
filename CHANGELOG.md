@@ -1,5 +1,5 @@
 
-### 16.0.0
+### 1.0.0
 
 - Add default attribute in schema.json to allow to configure default value when passing a JSON
 - JSON and CLI starts are now consistent in terms of option size, attribute number
