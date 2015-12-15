@@ -5,7 +5,11 @@
 - JSON and CLI starts are now consistent in terms of option size, attribute number
 - pm2.restart(json_data, function(err, data) now returns an array of process instead of simple object (success:true))
 - Now pm2 restart process.json --env <X>, refresh environment variable on each restart depending of the X environment
-- mergeEnvironmentVariable fixed weirdly (CLI need refactor)
+- prepareJSON method in PM2 code (God.js) removed
+- partition Common.prepareAppConf (duplicate with verifyConfs)
+- Change signature of Common.prepareAppConf
+- Centralize Interpreter resolution via Common.sink.resolveInterpreter(app) in Common.js
+
 
 - [#1810] Add --kill-timeout <number> option (delay before process receive a final SIGKILL)
 - [#1830] Add tests for PM2_KILL_TIMEOUT (SIGKILL delay) + default SIGINT to any kind of procs
