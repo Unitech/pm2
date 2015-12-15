@@ -60,6 +60,8 @@ spec "Send data to a process"
 
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
+mocha ./test/programmatic/env_switching.js
+spec "JSON environment switching on JSON restart with --env"
 mocha ./test/programmatic/configuration.mocha.js
 spec "Configuration system working"
 

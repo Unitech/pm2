@@ -36,6 +36,8 @@ bash ./test/bash/json_file.sh
 spec "JSON file test"
 bash ./test/bash/json-reload.sh
 spec "JSON reload test"
+bash ./test/bash/start-consistency.sh
+spec "Consistency between a JSON an CLI start"
 bash ./test/bash/harmony.sh
 spec "Harmony test"
 bash ./test/bash/log-custom.sh

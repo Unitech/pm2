@@ -297,7 +297,7 @@ commander.command('restart <id|name|all|json|stdin...>')
     // Commander.js patch
     param = patchCommanderArg(param);
     async.forEachLimit(param, 1, function(script, next) {
-      CLI.restart(script, next);
+      CLI.restart(script, commander, next);
     }, function(err) {
       CLI.speedList(err ? 1 : 0);
     });
