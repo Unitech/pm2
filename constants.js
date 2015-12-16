@@ -5,14 +5,6 @@ var util = require('util');
 var chalk = require('chalk');
 var debug = require('debug')('pm2:constants');
 
-if (process.env.TRAVIS || process.env.NODE_ENV == 'test') {
-  var pkg = require('./package.json');
-
-  console.log(chalk.green.bold('-----------------------------------'));
-  console.log(chalk.green.bold('PM2 constants loaded - version: %s'), pkg.version);
-  console.log(chalk.green.bold('-----------------------------------'));
-}
-
 /**
  * Handle PM2 root folder relocation
  */
