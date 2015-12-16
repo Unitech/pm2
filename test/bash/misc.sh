@@ -105,16 +105,3 @@ $pm2 start echo.coffee -i 1
 
 should 'process should not have been restarted' 'restart_time: 0' 1
 should 'process should be online' "status: 'online'" 1
-
-########### garbage collection
-
-$pm2 list
-
-OUT_LOG=`$pm2 gc`
-
-if [ "$OUT_LOG" = "[PM2] Garbage collection manually triggered" ]
-then
-    success "garbage collector manually triggered"
-else
-    fail "garbage collector could not be triggered"
-fi
