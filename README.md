@@ -247,16 +247,6 @@ $ pm2 save
 
 [More about startup scripts](http://pm2.keymetrics.io/docs/usage/startup/)
 
-### Development mode
-
-PM2 comes with a development tool that allow you to start an application and restart it on file change.
-
-```
-# Start your application in development mode
-# = Print the logs and restart on file change
-$ pm2-dev run my-app.js
-```
-
 ## Keymetrics monitoring
 
 [![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)](https://app.keymetrics.io/#/register)
