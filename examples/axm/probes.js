@@ -40,7 +40,7 @@ var http  = require('http');
 http.createServer(function(req, res) {
   meter.mark();
   res.end('Thanks');
-}).listen(5005);
+}).listen(5006);
 
 /**
  * Meter example
