@@ -30,6 +30,18 @@ $pm2 multiset "echo.conf false"
 exists 'should NOW have config variable' "conf: 'false'"
 should 'should have start 3 apps' 'restart_time: 3' 1
 
+$pm2 get echo.config_var | grep "false"
+spec "Should get method work"
+
+$pm2 get echo | grep "false\|true"
+spec "Should get method work"
+
+$pm2 conf echo.config_var | grep "false"
+spec "Should conf method work"
+
+$pm2 conf echo | grep "false\|true"
+spec "Should get method work"
+
 $pm2 delete all
 
 #
