@@ -12,10 +12,15 @@ var PM2_ROOT_PATH = '';
 
 if (process.env.PM2_HOME)
   PM2_ROOT_PATH = process.env.PM2_HOME;
+else if (process.env.HOME && !process.env.HOMEPATH)
+  PM2_ROOT_PATH = p.resolve(process.env.HOME, '.pm2');
 else if (process.env.HOME || process.env.HOMEPATH)
-  PM2_ROOT_PATH = p.resolve(process.env.HOME || (process.env.HOMEDRIVE + process.env.HOMEPATH), '.pm2');
-else
+  PM2_ROOT_PATH = p.resolve(process.env.HOMEDRIVE, process.env.HOME || process.env.HOMEPATH, '.pm2');
+else {
+  console.error(chalk.bold.red('[PM2][Initialization] Environment variable HOME (Linux) or HOMEPATH (Windows) are not set!'));
+  console.error(chalk.bold.red('[PM2][Initialization] Defaulting to /etc/.pm2'));
   PM2_ROOT_PATH = p.resolve('/etc', '.pm2');
+}
 
 debug("PM2 folder (logs, pids, configuration): " + PM2_ROOT_PATH);
 
