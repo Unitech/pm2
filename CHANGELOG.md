@@ -1,6 +1,14 @@
 
 ### 1.0.0
 
+- [#1844][#1845][#1850] Load configuration in /etc/default/pm2 + add ulimit -n override
+- [#1810] Add --kill-timeout <number> option (delay before process receive a final SIGKILL)
+- [#1830] Add tests for PM2_KILL_TIMEOUT (SIGKILL delay) + default SIGINT to any kind of procs
+- [#1825] Process management commands (start/restart/stop/delete) can take multiple arguments
+- [#1822] Add new method pm2.sendDataToProcessId(type|data|id) to send data to processes
+- [#1819] Send SIGINT signal to process instead of SIGTERM
+- [#1819][#1794][#1765] Avoid writing on std err/out when process is disconnected
+
 - Add default attribute in schema.json to allow to configure default value when passing a JSON
 - JSON and CLI starts are now consistent in terms of option size, attribute number
 - pm2.restart(json_data, function(err, data) now returns an array of process instead of simple object (success:true))
@@ -10,13 +18,6 @@
 - Change signature of Common.prepareAppConf
 - Centralize Interpreter resolution via Common.sink.resolveInterpreter(app) in Common.js
 
-
-- [#1810] Add --kill-timeout <number> option (delay before process receive a final SIGKILL)
-- [#1830] Add tests for PM2_KILL_TIMEOUT (SIGKILL delay) + default SIGINT to any kind of procs
-- [#1825] Process management commands (start/restart/stop/delete) can take multiple arguments
-- [#1822] Add new method pm2.sendDataToProcessId(type|data|id) to send data to processes
-- [#1819] Send SIGINT signal to process instead of SIGTERM
-- [#1819][#1794][#1765] Avoid writing on std err/out when process is disconnected
 - Better meta information when process restart/reload/stop (signal + exit code)
 - Upgrade pm2-axon, cron, should, mocha, coffee-script, chokidar, semver NPM packages
 - Show process configuration option when describing process
