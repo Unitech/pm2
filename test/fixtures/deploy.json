@@ -1,0 +1,33 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+    {
+      name      : "API",
+      script    : "app.js",
+    }
+  ],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy : {
+    production : {
+          user: "user",
+          host: "host",
+          repo: "repo",
+          path: "path",
+          ref:  "ref"
+    },
+    development: {
+          user: "user",
+          host: "host",
+          repo: "repo",
+          path: "path",
+          ref:  "ref"
+    }
+  }
+}
