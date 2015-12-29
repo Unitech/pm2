@@ -160,7 +160,7 @@
     "eventemitter2"       : "0.4.14",
     "moment"              : "2.10.6",
     "nssocket"            : "0.5.3",
-    "pidusage"            : "^1.0.0",
+    "pidusage"            : "^1.0.1",
 
     "pmx"                 : "^0.5",
     "vizion"              : "^0.2",
