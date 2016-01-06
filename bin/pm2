@@ -110,6 +110,8 @@ function beginCommandProcessing() {
 
   // Deprecate message for update as there is an automatic update procedure now
   CLI.getVersion(function(err, remote_version) {
+    if(commander.silent)
+      return;
     if (!err && (pkg.version != remote_version)) {
       console.log('');
       console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 update'));
@@ -590,25 +592,19 @@ commander.command('reset <name|id|all>')
     CLI.reset(proc_id);
   });
 
-commander.command('describe <id>')
+commander.command('describe [id]')
   .description('describe all parameters of a process id')
-  .action(function(proc_id) {
-    CLI.describe(proc_id);
-  });
+  .action(CLI.describe);
 
-commander.command('desc <id>')
+commander.command('desc [id]')
   .description('(alias) describe all parameters of a process id')
-  .action(function(proc_id) {
-    CLI.describe(proc_id);
-  });
+  .action(CLI.describe);
 
-commander.command('info <id>')
+commander.command('info [id]')
   .description('(alias) describe all parameters of a process id')
-  .action(function(proc_id) {
-    CLI.describe(proc_id);
-  });
+  .action(CLI.describe);
 
-commander.command('show <id>')
+commander.command('show [id]')
   .description('(alias) describe all parameters of a process id')
   .action(function(proc_id) {
     CLI.describe(proc_id);
