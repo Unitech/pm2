@@ -124,7 +124,7 @@ $ pm2 generate                  # Generate a sample json configuration file
 
 $ pm2 deploy app.json prod setup    # Setup "prod" remote server
 $ pm2 deploy app.json prod          # Update "prod" remote server
-$ pm2 deploy app.json prod revert 2 # Revert "prod" remove server by 2
+$ pm2 deploy app.json prod revert 2 # Revert "prod" remote server by 2
 
 $ pm2 module:generate [name]    # Generate sample module with name [name]
 $ pm2 install pm2-logrotate     # Install module (here a log rotation system)
