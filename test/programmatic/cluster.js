@@ -13,10 +13,8 @@ describe('Cluster programmatic tests', function() {
 
   before(function(done) {
     pm2.connect(function() {
-      pm2.kill(function() {
-        pm2.connect(function() {
-          done();
-        });
+      pm2.delete('all', function() {
+        done();
       });
     });
   });

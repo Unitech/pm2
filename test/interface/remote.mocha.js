@@ -14,9 +14,9 @@ var send_cmd = new events.EventEmitter();
 process.env.NODE_ENV = 'local_test';
 
 var meta_connect = {
-  secret_key : 'osef',
-  public_key : 'osef',
-  machine_name : 'osef'
+  secret_key : 'test-secret-key',
+  public_key : 'test-public-key',
+  machine_name : 'test-machine-name'
 };
 
 /**
@@ -25,9 +25,15 @@ var meta_connect = {
  * @return pm2
  */
 function forkPM2(cb) {
-  var pm2 = require('child_process').fork('lib/Satan.js', [], {
-    detached   : true
-  });
+  var opts = {
+    detached   : true,
+    silent     : true
+  };
+
+  if (process.env.DEBUG)
+    opts.silent = false;
+
+  var pm2 = require('child_process').fork('lib/Satan.js', [], opts);
 
   pm2.unref();
 
@@ -60,7 +66,8 @@ function createMockServer(cb) {
     console.log('Got new connection in Mock server');
 
     send_cmd.on('cmd', function(data) {
-      console.log('Sending command %j', data);
+      if (process.env.DEBUG)
+        console.log('Sending command %j', data);
       _socket.send(data._type, data);
     });
 
@@ -86,14 +93,12 @@ function createMockServer(cb) {
 function startSomeApps(cb) {
   setTimeout(function() {
     cmd_pm2.connect(function() {
-      cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, function() {
-        return setTimeout(cb, 200);
-      });
+      cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, cb);
     });
   }, 500);
 }
 
-describe('Test remote PM2 actions', function() {
+describe('REMOTE PM2 ACTIONS', function() {
   var server;
   var interactor;
   var pm2;
@@ -113,6 +118,7 @@ describe('Test remote PM2 actions', function() {
 
   before(function(done) {
     createMockServer(function(err, _server) {
+      console.log('Mock server created');
       server = _server;
       forkPM2(function(err, _pm2) {
         pm2 = _pm2;
@@ -138,7 +144,9 @@ describe('Test remote PM2 actions', function() {
     send_cmd.emit('cmd', { _type : 'ask' });
   });
 
-
+  /**
+   * PM2 agent is now identified
+   */
   it('should act on PM2', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
 
@@ -146,13 +154,6 @@ describe('Test remote PM2 actions', function() {
        * Once remote command is finished...
        */
       pck.ret.data.success.should.be.true
-
-      cmd_pm2.list(function(err, ret) {
-        ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
-        });
-      });
 
       done();
     });
@@ -162,15 +163,6 @@ describe('Test remote PM2 actions', function() {
       method_name : 'restart',
       parameters : {name : 'child' }
     });
-
-    setTimeout(function() {
-      cmd_pm2.list(function(err, ret) {
-        ret.forEach(function(proc) {
-          // 1 - Lock must be set while processing
-          proc.pm2_env.command.locked.should.be.true;
-        });
-      });
-    }, 80);
   });
 
   it('should act on PM2 but handle failure', function(done) {
@@ -197,8 +189,6 @@ describe('Test remote PM2 actions', function() {
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
           proc.pm2_env.restart_time.should.eql(2);
         });
       });
@@ -223,8 +213,6 @@ describe('Test remote PM2 actions', function() {
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
           proc.pm2_env.restart_time.should.eql(3);
         });
       });
@@ -248,8 +236,6 @@ describe('Test remote PM2 actions', function() {
 
       cmd_pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
-          // 2 - Lock must be unset at the end of command
-          proc.pm2_env.command.locked.should.be.false;
           proc.pm2_env.restart_time.should.eql(0);
         });
       });

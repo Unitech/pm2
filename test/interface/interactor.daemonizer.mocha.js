@@ -1,9 +1,9 @@
-var should = require('should');
-var fs = require('fs');
-var os = require('os');
-var cst = require('../../constants');
+var should               = require('should');
+var fs                   = require('fs');
+var os                   = require('os');
+var cst                  = require('../../constants');
 var interactorDaemonizer = require('../../lib/Interactor/InteractorDaemonizer');
-var json5  = require('../../lib/tools/json5.js');
+var json5                = require('../../lib/tools/json5.js');
 
 describe('Daemonizer interactor', function() {
   before(function(done) {
@@ -17,78 +17,172 @@ describe('Daemonizer interactor', function() {
     done();
   });
 
-  it('should try get set keys but get error because nothing exposed', function(done) {
-    interactorDaemonizer.getSetKeys(null, null, null, function(err, data) {
-      err.msg.should.not.be.null;
-      done();
+  describe('General tests', function() {
+    it('should try get set keys but get error because nothing exposed', function(done) {
+      interactorDaemonizer.getSetKeys(null, null, null, function(err, data) {
+        err.msg.should.not.be.null;
+        done();
+      });
+    });
+
+    it('should work with env variables and create file', function(done) {
+      process.env.PM2_SECRET_KEY = 'XXXS';
+      process.env.PM2_PUBLIC_KEY = 'XXXP';
+
+      interactorDaemonizer.getSetKeys(null, null, null, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS');
+        data.public_key.should.eql('XXXP');
+
+        should.exist(data.version_management.active);
+        should(data.version_management.password).be.null;
+        try {
+          fs.statSync(cst.INTERACTION_CONF);
+        } catch(e) {
+          return done(e);
+        }
+
+        delete process.env.PM2_SECRET_KEY;
+        delete process.env.PM2_PUBLIC_KEY;
+        return done();
+      });
+    });
+
+    it('should retrieve data from file without env variable', function(done) {
+      interactorDaemonizer.getSetKeys(null, null, null, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS');
+        data.public_key.should.eql('XXXP');
+        return done();
+      });
+    });
+
+    it('should set new keys and write in configuration file', function(done) {
+      interactorDaemonizer.getSetKeys('XXXS2', 'XXXP2', null, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
+
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
+    });
+
+    it('should work with object passed instead of direct params', function(done) {
+      interactorDaemonizer.getSetKeys({
+        secret_key : 'XXXS3',
+        public_key : 'XXXP3'
+      }, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS3');
+        data.public_key.should.eql('XXXP3');
+
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS3');
+        interaction_conf.public_key.should.eql('XXXP3');
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
     });
   });
 
-  it('should work with env variables and create file', function(done) {
-    process.env.PM2_SECRET_KEY = 'XXXS';
-    process.env.PM2_PUBLIC_KEY = 'XXXP';
+  describe('Recycle option', function() {
+    it('should handle recycle option', function(done) {
+      interactorDaemonizer.getSetKeys('XXXS2', 'XXXP2', null, true, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.recycle.should.be.true;
 
-    interactorDaemonizer.getSetKeys(null, null, null, function(err, data) {
-      should(err).be.null;
-      data.secret_key.should.eql('XXXS');
-      data.public_key.should.eql('XXXP');
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+        interaction_conf.recycle.should.be.true;
 
-      should.exist(data.version_management.active);
-      should(data.version_management.password).be.null;
-      try {
-        fs.statSync(cst.INTERACTION_CONF);
-      } catch(e) {
-        return done(e);
-      }
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
 
-      delete process.env.PM2_SECRET_KEY;
-      delete process.env.PM2_PUBLIC_KEY;
-      return done();
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
     });
-  });
 
-  it('should retrieve data from file without env variable', function(done) {
-    interactorDaemonizer.getSetKeys(null, null, null, function(err, data) {
-      should(err).be.null;
-      data.secret_key.should.eql('XXXS');
-      data.public_key.should.eql('XXXP');
-      return done();
+    it('should handle recycle option (obj like)', function(done) {
+      interactorDaemonizer.getSetKeys({
+        secret_key   : 'XXXS2',
+        public_key   : 'XXXP2',
+        machine_name : null,
+        recycle      : true
+      }, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.recycle.should.be.true;
+
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+        interaction_conf.recycle.should.be.true;
+
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
+
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
     });
-  });
 
-  it('should set new keys and write in configuration file', function(done) {
-    interactorDaemonizer.getSetKeys('XXXS2', 'XXXP2', null, function(err, data) {
-      should(err).be.null;
-      data.secret_key.should.eql('XXXS2');
-      data.public_key.should.eql('XXXP2');
+    it('should handle recycle option opts2', function(done) {
+      interactorDaemonizer.getSetKeys(null, null, null, null, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.recycle.should.be.true;
 
-      var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
-      interaction_conf.secret_key.should.eql('XXXS2');
-      interaction_conf.public_key.should.eql('XXXP2');
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+        interaction_conf.recycle.should.be.true;
 
-      should.exist(interaction_conf.version_management.active);
-      should(interaction_conf.version_management.password).be.null;
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
 
-      interaction_conf.machine_name.should.eql(os.hostname());
-      return done();
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
     });
-  });
 
-  it('should work with object passed instead of direct params', function(done) {
-    interactorDaemonizer.getSetKeys({
-      secret_key : 'XXXS3',
-      public_key : 'XXXP3'
-    }, function(err, data) {
-      should(err).be.null;
-      data.secret_key.should.eql('XXXS3');
-      data.public_key.should.eql('XXXP3');
+    it('should stop recycle option if passing secret and pub', function(done) {
+      interactorDaemonizer.getSetKeys({
+        secret_key   : 'XXXS2',
+        public_key   : 'XXXP2',
+        machine_name : null
+      }, function(err, data) {
+        should(err).be.null;
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.recycle.should.be.false;
 
-      var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
-      interaction_conf.secret_key.should.eql('XXXS3');
-      interaction_conf.public_key.should.eql('XXXP3');
-      interaction_conf.machine_name.should.eql(os.hostname());
-      return done();
+        var interaction_conf     = json5.parse(fs.readFileSync(cst.INTERACTION_CONF));
+        interaction_conf.secret_key.should.eql('XXXS2');
+        interaction_conf.public_key.should.eql('XXXP2');
+        interaction_conf.recycle.should.be.false;
+
+        should.exist(interaction_conf.version_management.active);
+        should(interaction_conf.version_management.password).be.null;
+
+        interaction_conf.machine_name.should.eql(os.hostname());
+        return done();
+      });
     });
+
   });
 
 

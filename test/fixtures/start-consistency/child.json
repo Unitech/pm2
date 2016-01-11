@@ -1,0 +1,4 @@
+{
+  script:"./child.js",
+  name  :"child"
+}

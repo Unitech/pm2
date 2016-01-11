@@ -1,9 +1,10 @@
 
 var Config = require('../../lib/tools/Config');
+var Schema = require('../../lib/schema.json');
 
 describe('JSON validation tests', function() {
   it('should fail when passing wrong json', function() {
-    var ret = Config.verifyJSON({
+    var ret = Config.validateJSON({
       "exec_interpreter"   : "node",
       "exec_mode"          : "clusasdter_mode",
       "instances"          : "max",
@@ -14,7 +15,7 @@ describe('JSON validation tests', function() {
       "script"             : "chidld.js",
       "cwd"                : "examadsples",
       "node_args"          : "--harmoasdny",
-      "ignoreWatch"        : ["[\\/\\\\]\\./", "log"],
+      "ignore_watch"        : ["[\\/\\\\]\\./", "log"],
       "watch"              : "true"
     });
 
@@ -26,7 +27,7 @@ describe('JSON validation tests', function() {
   });
 
   it('should succeed while passing right json', function() {
-    var ret = Config.verifyJSON({
+    var ret = Config.validateJSON({
       "exec_interpreter"   : "node",
       "exec_mode"          : "cluster_mode",
       "instances"          : 0,
@@ -42,13 +43,29 @@ describe('JSON validation tests', function() {
       "cwd"                : "examples",
       "node_args"          : "--harmony",
       "max_memory_restart" : "10M",
-      "ignoreWatch"        : ["[\\/\\\\]\\./", "log"],
+      "ignore_watch"        : ["[\\/\\\\]\\./", "log"],
       "watch"              : true,
       "node_args"          : ["hey","hay"],
       "env"                : {}
     });
 
     ret.errors.length.should.eql(0);
+  });
+
+  it('should set default values if some attributes not defined', function(done) {
+    var default_values = Object.keys(Schema).filter(function(attr) {
+      if (Schema[attr].default) return Schema[attr].default;
+      return false;
+    });
+
+    var ret = Config.validateJSON({
+      script : 'test.js',
+      name   : 'toto'
+    });
+
+    // Returned array should contain also default values
+    Object.keys(ret.config).should.containDeep(default_values);;
+    done();
   });
 
 });

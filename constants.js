@@ -12,12 +12,17 @@ var PM2_ROOT_PATH = '';
 
 if (process.env.PM2_HOME)
   PM2_ROOT_PATH = process.env.PM2_HOME;
+else if (process.env.HOME && !process.env.HOMEPATH)
+  PM2_ROOT_PATH = p.resolve(process.env.HOME, '.pm2');
 else if (process.env.HOME || process.env.HOMEPATH)
-  PM2_ROOT_PATH = p.resolve(process.env.HOME || process.env.HOMEPATH, '.pm2');
-else
+  PM2_ROOT_PATH = p.resolve(process.env.HOMEDRIVE, process.env.HOME || process.env.HOMEPATH, '.pm2');
+else {
+  console.error(chalk.bold.red('[PM2][Initialization] Environment variable HOME (Linux) or HOMEPATH (Windows) are not set!'));
+  console.error(chalk.bold.red('[PM2][Initialization] Defaulting to /etc/.pm2'));
   PM2_ROOT_PATH = p.resolve('/etc', '.pm2');
+}
 
-debug("PM2_ROOT_PATH: " + PM2_ROOT_PATH);
+debug("PM2 folder (logs, pids, configuration): " + PM2_ROOT_PATH);
 
 /**
  * Constants variables used by PM2
@@ -25,8 +30,6 @@ debug("PM2_ROOT_PATH: " + PM2_ROOT_PATH);
 var csts = {
   PM2_CONF_FILE          : p.join(PM2_ROOT_PATH, 'conf.js'),
   PM2_MODULE_CONF_FILE   : p.join(PM2_ROOT_PATH, 'module_conf.json'),
-
-  BABEL_EXEC_PATH        : p.join(__dirname, 'node_modules', 'babel', 'bin', 'babel-node'),
 
   CODE_UNCAUGHTEXCEPTION : 100,
   PREFIX_MSG             : chalk.green('[PM2] '),
@@ -45,6 +48,9 @@ var csts = {
   AMAZON_STARTUP_SCRIPT  : '../lib/scripts/pm2-init-amazon.sh',
   GENTOO_STARTUP_SCRIPT  : '../lib/scripts/pm2',
   DARWIN_STARTUP_SCRIPT  : '../lib/scripts/io.keymetrics.PM2.plist',
+  FREEBSD_STARTUP_SCRIPT : '../lib/scripts/pm2-freebsd.sh',
+
+  LOGROTATE_SCRIPT       : '../lib/scripts/logrotate.d/pm2',
 
   SUCCESS_EXIT           : 0,
   ERROR_EXIT             : 1,
@@ -59,13 +65,13 @@ var csts = {
   CLUSTER_MODE_ID        : 'cluster_mode',
   FORK_MODE_ID           : 'fork_mode',
 
-  KEYMETRICS_ROOT_URL    : 'root.keymetrics.io',
-
+  KEYMETRICS_ROOT_URL    : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
+  KEYMETRICS_BANNER      : '../lib/keymetrics',
   DEFAULT_MODULE_JSON    : 'package.json',
 
-  REMOTE_PORT_TCP        : 80,
+  REMOTE_PORT_TCP        : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
   REMOTE_PORT            : 41624,
-  REMOTE_REVERSE_PORT    : 43554,
+  REMOTE_REVERSE_PORT    : isNaN(parseInt(process.env.KEYMETRICS_REVERSE_PORT)) ? 43554 : parseInt(process.env.KEYMETRICS_REVERSE_PORT),
   REMOTE_HOST            : 's1.keymetrics.io',
   SEND_INTERVAL          : 1000
 };
@@ -76,7 +82,7 @@ var csts = {
 var default_conf = util._extend({
   PM2_ROOT_PATH: PM2_ROOT_PATH,
   WORKER_INTERVAL: process.env.PM2_WORKER_INTERVAL || 30000,
-  KILL_TIMEOUT: process.env.PM2_KILL_TIMEOUT || 800
+  KILL_TIMEOUT: process.env.PM2_KILL_TIMEOUT || 1600
 }, require('./lib/samples/sample-conf.js')(PM2_ROOT_PATH));
 
 /**

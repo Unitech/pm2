@@ -23,10 +23,8 @@ describe('Max memory restart programmatic', function() {
     process.env.PM2_WORKER_INTERVAL = 1000;
 
     pm2.connect(function() {
-      pm2.kill(function() {
-        pm2.connect(function() {
-          done();
-        });
+      pm2.delete('all', function() {
+        done();
       });
     });
   });

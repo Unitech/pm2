@@ -1,13 +1,7 @@
 {
   /**
-   * This is a sample configuration file for PM2
-   */
-
-  /**
-   * Here we declare the apps that must be managed by PM2
-   * All options are listed here:
-   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration
-   *
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
    */
   apps : [
 
@@ -28,14 +22,11 @@
       name      : "WEB",
       script    : "web.js"
     }
-
   ],
 
-
   /**
-   * PM2 help you to deploy apps over your servers
-   * For more help go to :
-   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment-pm2--090
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
    */
   deploy : {
     production : {
@@ -44,7 +35,7 @@
       ref  : "origin/master",
       repo : "git@github.com:repo.git",
       path : "/var/www/production",
-      "post-deploy" : "pm2 startOrRestart ecosystem.json5 --env production"
+      "post-deploy" : "npm install ; pm2 startOrRestart ecosystem.json --env production"
     },
     dev : {
       user : "node",
@@ -52,7 +43,7 @@
       ref  : "origin/master",
       repo : "git@github.com:repo.git",
       path : "/var/www/development",
-      "post-deploy" : "pm2 startOrRestart ecosystem.json5 --env dev",
+      "post-deploy" : "npm install ; pm2 startOrRestart ecosystem.json --env dev",
       env  : {
         NODE_ENV: "dev"
       }

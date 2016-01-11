@@ -1,0 +1,4 @@
+{
+  "name" : "max_mem",
+  "script" : "big-array.js"
+}

@@ -19,18 +19,27 @@ echo "###################### !DEBUG! ###########################"
 #   export DEBUG="*"
 # fi
 
+bash ./test/bash/file-descriptor.sh
+spec "testing file descriptors"
+# Automatic PMX http disabled
+# bash ./test/bash/pmx_injection.sh
+# spec "automatic pmx injection"
 bash ./test/bash/log-timestamp.sh
 spec "timetstamp prefix of pm2.log"
+bash ./test/bash/smart-start.sh
+spec "smart start test"
 bash ./test/bash/cli.sh
 spec "CLI basic test"
+bash ./test/bash/multiparam.sh
+spec "Multiparam process management"
 bash ./test/bash/json_file.sh
 spec "JSON file test"
-bash ./test/bash/watch.sh
-spec "Watch feature"
+bash ./test/bash/json-reload.sh
+spec "JSON reload test"
+bash ./test/bash/start-consistency.sh
+spec "Consistency between a JSON an CLI start"
 bash ./test/bash/harmony.sh
 spec "Harmony test"
-bash ./test/bash/es6.sh
-spec "Next gen JS with Babel"
 bash ./test/bash/log-custom.sh
 spec "Custom log timestamp"
 bash ./test/bash/reload.sh
@@ -69,6 +78,10 @@ bash ./test/bash/module.sh
 spec "module system"
 bash ./test/bash/vizion.sh
 spec "vizion features (versioning control)"
+bash ./test/bash/wrapped_fork.sh
+spec "wrapped fork"
+bash ./test/bash/app_configuration.sh
+spec "App configuration"
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"

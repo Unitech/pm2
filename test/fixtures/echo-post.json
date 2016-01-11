@@ -1,0 +1,13 @@
+{
+  "name" : "echo-json",
+  "script" : "echo-env.js",
+  "log_date_format"    : "DD",
+  "out_file" : "echo-test.log",
+  "merge_logs" : true,
+  "env" : {
+    "ECHO_MSG" : "YAY"
+  },
+  "env_production" : {
+    "ECHO_MSG" : "WOW"
+  }
+}

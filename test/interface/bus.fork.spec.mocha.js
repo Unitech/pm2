@@ -8,8 +8,7 @@ const PATH_FIXTURES = process.cwd() + '/test/interface/fixtures/';
 
 var PROCESS_ARCH  = Object.keys({
   pm_id  : 0,
-  name   : 'app',
-  status : ['online', 'offline']
+  name   : 'app'
   // server: 'server name' - attached in interactor
 });
 
@@ -124,7 +123,6 @@ describe('PM2 BUS / RPC', function() {
           event.should.eql('log:out');
 
           data.should.have.properties(LOG_EVENT);
-          data.process.should.have.properties(PROCESS_ARCH);
           plan.ok(true);
         }
         if (event == 'log:err') {
@@ -135,7 +133,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'log:out.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'log_out.js', {}, function(err, data) {
         should(err).be.null;
       });
     });
@@ -151,7 +149,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'process:exception.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'process_exception.js', {}, function(err, data) {
         should(err).be.null;
       });
     });
@@ -167,7 +165,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'human:event.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'human_event.js', {}, function(err, data) {
         should(err).be.null;
       });
     });
@@ -182,7 +180,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'http:transaction.js', {}, function(err, data) {
+      pm2.start(PATH_FIXTURES + 'http_transaction.js', {}, function(err, data) {
         should(err).be.null;
       });
     });

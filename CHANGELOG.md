@@ -1,15 +1,167 @@
-# Coming Next
 
-- `--no-logs` flag : doesn't save any logs (some people use their own logging system)
-- dump/resurrect will leave 'stopped' apps as stopped instead of restarting every app
-- YAML support for apps declarations
-- Improve app declaration file parsing (log_file, out_file, error_file)
+### 1.0.0
 
-# 0.12.16 (Coming next)
+- [#1844][#1845][#1850] Load configuration in /etc/default/pm2 + add ulimit -n override
+- [#1810] Add --kill-timeout <number> option (delay before process receive a final SIGKILL)
+- [#1830] Add tests for PM2_KILL_TIMEOUT (SIGKILL delay) + default SIGINT to any kind of procs
+- [#1825] Process management commands (start/restart/stop/delete) can take multiple arguments
+- [#1822] Add new method pm2.sendDataToProcessId(type|data|id) to send data to processes
+- [#1819] Send SIGINT signal to process instead of SIGTERM
+- [#1819][#1794][#1765] Avoid writing on std err/out when process is disconnected
 
-- Fix #1285 : PID file was deleting after a reload/gracefulReload
+- Add default attribute in schema.json to allow to configure default value when passing a JSON
+- JSON and CLI starts are now consistent in terms of option size, attribute number
+- pm2.restart(json_data, function(err, data) now returns an array of process instead of simple object (success:true))
+- Now pm2 restart process.json --env <X>, refresh environment variable on each restart depending of the X environment
+- prepareJSON method in PM2 code (God.js) removed
+- partition Common.prepareAppConf (duplicate with verifyConfs)
+- Change signature of Common.prepareAppConf
+- Centralize Interpreter resolution via Common.sink.resolveInterpreter(app) in Common.js
 
-# 0.12.15 (Current Stable)
+- Better meta information when process restart/reload/stop (signal + exit code)
+- Upgrade pm2-axon, cron, should, mocha, coffee-script, chokidar, semver NPM packages
+- Show process configuration option when describing process
+- Add --no-automation flag
+- Fix when starting application with illegal names (#1764)
+- Fix management of app starting with numerics in the filename (#1769)
+- Fix versiong system (reset to default on resurrect/prepare)
+- Increase buffer size for versioning meta parsing
+
+### 0.15.10
+
+- Hot fix #1746
+
+### 0.15.9
+
+- Chokidar upgraded to 1.2
+- Fix startup script via new --hp option
+- Fix JSON refresh system
+
+### 0.15.1-8
+
+- JSON refresh available
+- New module system backward compatible and compatible with NPM 3.x
+- Possibility to install module from tgz (#1713)
+- ecosystem generated file via pm2 generate uptaded (not json5 prefix anymore, and updated comments)
+- always prefix logs #1695
+- blessed dependency removed
+- drop locking system
+- add callback to deploy (#1673)
+- typo fixes
+- pm2.update added
+- small db for pm2 modules added (solve npm 3.x issue)
+- pm2 multiset "k1 v1 k2 v2 k3 v3"
+- babel dependency removed
+- blessed dependency removed
+- chalk, safe-clone-deep, shelljs, semver upgraded
+- New command: pm2 module:update <module_name> -> Update a module
+- New command: pm2 module:publish  -> Publish module in current folder + Git push
+- New command: pm2 module:generate [module name] -> Generate a sample module
+- Feature: configuration system for raw Node.js applications
+- alias pm2 install with pm2 i
+- JSON declaration: You can now use process.env in application declaration file
+- watch has been refactored for windows and tests
+- allow installation of specific module version
+- wrap final process kill intro try catch (c4aecc8)
+- Appveyor to test PM2 under Windows added (+ fix some incorect file name)
+- Allow to escape key name when using pm2 conf system
+
+# 0.14.7
+
+- New flag `--no-pmx` : starts an app without injecting pmx
+- New feature : cron restart now works in fork mode as well
+- Disabled auto-gc on interactor
+- Allow PM2 to execute binaries in $PATH
+- pm2 link priv pub --recyle for elastic infrastructure
+- pm2 deploy now check default file ecosystem.js[on|on5], package.json
+
+# 0.14.6
+
+- Scoped PM2 actions
+- Password encryption via pm2 set pm2:passwd xxxx
+- Interactor Remote action refactor
+- .getSync method to get configuration variable synchronously
+- Add password protected PM2 methods (install, delete)
+- pm2 get|pm2 conf display all confs
+- Password protected PM2 flag
+- New flag : `--restart-delay <ms>` (or `restart_delay` in JSON declaration)
+- New command : `pm2 deepUpdate`
+- New command (beta) : `pm2 logrotate`
+- Enhancement : pm2 handles processes that can't be killed in a better way
+- Fix : some ignore_watch issues
+- Fix : some pm2 startup systemd issues
+
+# 0.14.5
+
+- Hot fix
+
+# 0.14.4
+
+- New command : `pm2 iprobe [app_name|app_id|'ALL']`
+- Feature: FreeBSD startup script
+- Fix: Remove forced GC
+- Fix: #1444 --next-gen-js in fork mode
+- Fix: Windows path fix
+
+# 0.14.3 (Current Stable)
+
+- `pm2 flush` now flushes pm2.log as well
+- New flag : `--no-treekill` : when used PM2 won't kill children processes
+- New flags : `pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--timestamp [format]]`
+- Enhancement: Modules installable via Github: `pm2 install username/repository`
+- Feature: PMX has *scoped function* -> pm2 stores temporary output from custom functions
+- Fix: Interactor issue when doing an heapdump
+- Feature: PM2 CLI autocompletion
+
+# 0.14.2
+
+- Improved pm2-dev
+- Now when apps list is empty, the `id` counter is set to 0
+- Removed pres/keymetrics.js post-install script
+- Fix : `pm2 logs` allocation error
+- Fix : `pm2 prettylist|jlist` truncated output
+
+# 0.14.0 - CrystalClear (pre 1.0)
+
+- Removed: pm2.startJSON() method, now call pm2.start()
+- API Change: pm2 start <app_name|app_id> restart an application already launched
+- API Change: pm2 start <json> restart all json apps if already launched
+- pm2 start all - restart all applications
+- pm2 reload <json_file> possible
+- pm2 gracefulReload <json_file> possible
+- Smart start (pm2 start app.js ; pm2 stop app ; pm2 start app)
+- Reduced memory footprint
+- Reduced pipelined data
+- Reduced CPU usage
+- Faster command processing
+- Upgrade shelljs, semver, colors, chalk, coffee-script, async, json-stringify-safe, cron, debug, commander
+- Fix: launchBus() only connects and disconnects once
+
+- Refactored `pm2 logs` :
+  - Now you don't need to install tail on Windows
+  - You don't need to Ctrl^C and `pm2 logs` again when a new app is launched (this one will be detected and added to the real-time logs output)
+  - Logs are shown in chronological order at a file level (modified date)
+  - More verbosity : tailed logs are explicitely separated from the real-time logs
+  - Real-time logs now use the `bus` event emitter
+  - PM2 logs added to the `bus`
+  - `--lines <n>` and `--raw` flags available for `pm2 logs` command
+  - New flag : '--timestamp [format]' // default format is 'YYYY-MM-DD-HH:mm:ss'
+  - Now you can exclusively show PM2 logs by doing `pm2 logs PM2`
+
+# 0.12.16
+
+- Feature : File transmission added in Agent
+- Feature : Transmit Node.js/io.js version in Agent
+- Feature : Parameters can be passed to remote actions
+- Feature : Support JS in addition to JSON and JSON5 config files #1298
+- Enhanced: pm2 conf display all configuration values
+- Enhanced: pm2-dev
+- Enhanced: Better error messages when validating data passed via CLI
+- Enhanced: Smaller memory footprint for PM2 (~30%)
+- Fix #1285 : PID file was deleted after a reload/gracefulReload
+- Fix : ENOMEM made PM2 crash
+
+# 0.12.15
 
 - Fix #941 : Env variables overrided when an app is restarted
 - max_memory_restart now performs a graceful reload
@@ -355,7 +507,7 @@ Big thanks to @Tjatse !
 
 - Adds option to switch to a different user/group before starting a managed process #329
 - watch doesnt watch node_module folder
-- default log files and pid files location can be overidded by PM2_LOG_DIR / PM2_PID_DIR
+- default log files and pid files location can be overrided by PM2_LOG_DIR / PM2_PID_DIR
 
 
 # 0.8.1

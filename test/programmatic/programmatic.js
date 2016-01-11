@@ -12,6 +12,7 @@ describe('PM2 programmatic calls', function() {
 
   var proc1 = null;
   var procs = [];
+  var bus   = null;
 
   after(function(done) {
     pm2.delete('all', function(err, ret) {
@@ -21,16 +22,19 @@ describe('PM2 programmatic calls', function() {
 
   before(function(done) {
     pm2.connect(function() {
-      pm2.delete('all', function(err, ret) {
-        done();
+      pm2.launchBus(function(err, _bus) {
+        bus = _bus;
+        pm2.delete('all', function(err, ret) {
+          done();
+        });
       });
     });
   });
 
   it('should start a script', function(done) {
-    pm2.start(process.cwd() + '/test/fixtures/child.js',
-              {instances : 1},
-              function(err, data) {
+    pm2.start(process.cwd() + '/test/fixtures/child.js', {
+      instances : 1
+    }, function(err, data) {
       proc1 = data[0];
       should(err).be.null;
       done();

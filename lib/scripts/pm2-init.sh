@@ -19,9 +19,25 @@
 NAME=pm2
 PM2=%PM2_PATH%
 USER=%USER%
+DEFAULT=/etc/default/$NAME
 
 export PATH=%NODE_PATH%:$PATH
 export PM2_HOME="%HOME_PATH%"
+
+# The following variables can be overwritten in $DEFAULT
+
+# maximum number of open files
+MAX_OPEN_FILES=
+
+# overwrite settings from default file
+if [ -f "$DEFAULT" ]; then
+	  . "$DEFAULT"
+fi
+
+# set maximum open files if set
+if [ -n "$MAX_OPEN_FILES" ]; then
+    ulimit -n $MAX_OPEN_FILES
+fi
 
 get_user_shell() {
     local shell=$(getent passwd ${1:-`whoami`} | cut -d: -f7 | sed -e 's/[[:space:]]*$//')

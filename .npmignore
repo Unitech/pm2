@@ -1,6 +1,8 @@
 test
 apps
 doc
-examples
 pres
+*.log
+*.pid
+examples
 *.pyc

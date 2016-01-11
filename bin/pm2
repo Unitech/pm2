@@ -2,6 +2,8 @@
 
 'use strict';
 
+var cst       = require('../constants.js');
+
 var commander = require('commander');
 var fs        = require('fs');
 var path      = require('path');
@@ -9,13 +11,14 @@ var p         = path;
 var util      = require('util');
 var cronJob   = require('cron').CronJob;
 var chalk     = require('chalk');
+var async     = require('async');
 
 var debug     = require('debug')('pm2:cli');
 var Satan     = require('../lib/Satan');
 var CLI       = require('../lib/CLI');
-var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 var platform  = require('os').platform();
+var tabtab    = require('../lib/completion.js');
 
 CLI.pm2Init();
 
@@ -25,16 +28,18 @@ commander.version(pkg.version)
   .option('-m --mini-list', 'display a compacted list without formatting')
   .option('-f --force', 'force actions')
   .option('-n --name <name>', 'set a <name> for script')
-  .option('--next-gen-js', 'enable es6/es7 compatibility (cluster / fork)')
   .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
   .option('-l --log [path]', 'specify entire log file (error and out are both included)')
   .option('-o --output <path>', 'specify out log file')
   .option('-e --error <path>', 'specify error log file')
   .option('-p --pid <pid>', 'specify pid file')
+  .option('-k --kill-timeout <delay>', 'delay before sending final SIGKILL signal to process')
   .option('--max-memory-restart <memory>', 'specify max memory amount used to autorestart (in megaoctets)')
+  .option('--restart-delay <delay>', 'specify a delay between restarts (in milliseconds)')
   .option('--env <environment_name>', 'specify environment to get specific env variables (for JSON declaration)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('-u --user <username>', 'define user when generating startup script')
+  .option('--hp <home path>', 'define home path when generating startup script')
   .option('-c --cron <cron_pattern>', 'restart a running process based on a cron pattern')
   .option('-w --write', 'write configuration in local folder')
   .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
@@ -47,7 +52,9 @@ commander.version(pkg.version)
   .option('--no-color', 'skip colors')
   .option('--no-vizion', 'start an app without vizion feature (versioning control)')
   .option('--no-autorestart', 'start an app without automatic restart')
-
+  .option('--no-treekill', 'Only kill the main process, not detached children')
+  .option('--no-pmx', 'start an app without pmx')
+  .option('--no-automation', 'start an app without pmx')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
@@ -72,7 +79,7 @@ commander.on('--help', function() {
   console.log('    $ pm2 kill');
   console.log('');
   console.log('    Update pm2 :');
-  console.log('    $ npm install pm2@latest -g ; pm2 updatePM2');
+  console.log('    $ npm install pm2@latest -g ; pm2 update');
   console.log('');
   console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
   console.log('');
@@ -99,20 +106,46 @@ function beginCommandProcessing() {
   // This message is triggered once the RPC Client is connected to the Daemon
   // in file Satan.js, method Satan.launchRPC
   //
-  debug('Got message from Satan as succesfully connected to PM2, now parsing arguments');
+  debug('Got message from Satan as successfully connected to PM2, now parsing arguments');
 
   // Deprecate message for update as there is an automatic update procedure now
   CLI.getVersion(function(err, remote_version) {
     if (!err && (pkg.version != remote_version)) {
       console.log('');
-      console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 updatePM2'));
+      console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 update'));
       console.log('In memory PM2 version:', chalk.blue.bold(remote_version));
       console.log('Local PM2 version:', chalk.blue.bold(pkg.version));
       console.log('');
     }
-    commander.parse(process.argv);
   });
+  commander.parse(process.argv);
 }
+
+function checkCompletion(){
+  return tabtab.complete('pm2', function(err, data) {
+    if(err || !data) return;
+    if(/^--\w?/.test(data.last)) return tabtab.log(commander.options.map(function (data) {
+      return data.long;
+    }), data);
+    if(/^-\w?/.test(data.last)) return tabtab.log(commander.options.map(function (data) {
+      return data.short;
+    }), data);
+    // array containing commands after which process name should be listed
+    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
+    if(cmdProcess.indexOf(data.prev) > -1) {
+      CLI.connect(function() {
+        CLI.list(function(err, list){
+          tabtab.log(list.map(function(el){ return el.name}), data);
+          CLI.disconnect();
+        });
+      });
+    }
+    else if (data.prev == 'pm2')
+      tabtab.log(commander.commands.map(function (data) {
+        return data._name;
+      }), data);
+  });
+};
 
 if (process.argv.indexOf('--no-daemon') > -1) {
   //
@@ -131,10 +164,17 @@ if (process.argv.indexOf('--no-daemon') > -1) {
     });
   });
 }
-else
+else {
   Satan.start(false, function() {
-    beginCommandProcessing();
+    if (process.argv.slice(2)[0] === 'completion') {
+      checkCompletion();
+      CLI.disconnect();
+    }
+    else
+      beginCommandProcessing();
   });
+}
+
 
 
 //
@@ -151,10 +191,43 @@ function failOnUnknown(fn) {
   };
 }
 
+/**
+ * @todo to remove at some point once it's fixed in official commander.js
+ * https://github.com/tj/commander.js/issues/475
+ *
+ * Patch Commander.js Variadic feature
+ */
+function removeElements(array, args){
+  var indices = [];
+  for(var i = 0; i < args.length; i++){
+    var arg = args[i];
+    var index = array.indexOf(arg);
+    while(index > -1){
+      indices.push(index);
+      index = array.indexOf(arg, index + 1);
+    }
+  }
+  indices.sort();
+  for(var i = 0; i < indices.length; i++){
+    var index = indices[i] - i;
+    array.splice(index, 1);
+  }
+}
+
+function patchCommanderArg(cmd) {
+  var argsIndex;
+  if ((argsIndex = commander.rawArgs.indexOf('--')) >= 0) {
+    var optargs = commander.rawArgs.slice(argsIndex + 1);
+    removeElements(cmd, optargs);
+  }
+  return cmd;
+}
+
+
 //
 // Start command
 //
-commander.command('start <file|json|stdin>')
+commander.command('start <file|json|stdin|app_name|pm_id...>')
   .option('--watch', 'Watch folder for changes')
   .description('start and daemonize an app')
   .action(function(cmd) {
@@ -167,7 +240,13 @@ commander.command('start <file|json|stdin>')
       });
     }
     else {
-      CLI.start(cmd, commander);
+      // Commander.js patch
+      cmd = patchCommanderArg(cmd);
+      async.forEachLimit(cmd, 1, function(script, next) {
+        CLI.start(script, commander, next);
+      }, function(err) {
+        CLI.speedList(err ? 1 : 0);
+      });
     }
   });
 
@@ -198,21 +277,31 @@ commander.command('startOrGracefulReload <json>')
 //
 // Stop specific id
 //
-commander.command('stop <id|name|all|json|stdin>')
+commander.command('stop <id|name|all|json|stdin...>')
   .option('--watch', 'Stop watching folder for changes')
   .description('stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
-    CLI.stop(param);
+    async.forEachLimit(param, 1, function(script, next) {
+      CLI.stop(script, next);
+    }, function(err) {
+      CLI.speedList(err ? 1 : 0);
+    });
   });
 
 //
 // Stop All processes
 //
-commander.command('restart <id|name|all|json|stdin>')
+commander.command('restart <id|name|all|json|stdin...>')
   .option('--watch', 'Toggle watching folder for changes')
   .description('restart a process')
   .action(function(param) {
-    CLI.restart(param);
+    // Commander.js patch
+    param = patchCommanderArg(param);
+    async.forEachLimit(param, 1, function(script, next) {
+      CLI.restart(script, commander, next);
+    }, function(err) {
+      CLI.speedList(err ? 1 : 0);
+    });
   });
 
 //
@@ -251,7 +340,7 @@ commander.command('gracefulReload <name|all>')
 //
 // Stop and delete a process by name from database
 //
-commander.command('delete <name|id|script|all|json|stdin>')
+commander.command('delete <name|id|script|all|json|stdin...>')
   .description('stop and delete a process from pm2 process list')
   .action(function(name) {
     if (name == "-") {
@@ -262,7 +351,11 @@ commander.command('delete <name|id|script|all|json|stdin>')
         CLI.delete(param, 'pipe');
       });
     } else
-      CLI.delete(name,'');
+      async.forEachLimit(name, 1, function(script, next) {
+        CLI.delete(script,'', next);
+      }, function(err) {
+        CLI.speedList(err ? 1 : 0);
+      });
   });
 
 //
@@ -294,7 +387,6 @@ commander.command('updatePM2')
   .action(function() {
     CLI.updatePM2();
   });
-
 commander.command('update')
   .description('(alias) update in-memory PM2 with local PM2')
   .action(function() {
@@ -305,18 +397,35 @@ commander.command('update')
  * Module specifics
  */
 commander.command('install <module|git:// url>')
+  .alias('module:install')
   .description('install or update a module and run it forever')
   .action(function(plugin_name) {
     CLI.install(plugin_name);
   });
 
+commander.command('module:update <module|git:// url>')
+  .description('update a module and run it forever')
+  .action(function(plugin_name) {
+    CLI.install(plugin_name);
+  });
+
+
+commander.command('module:generate [app_name]')
+  .description('Generate a sample module in current folder')
+  .action(function(app_name) {
+    CLI.generateModuleSample(app_name);
+  });
+
 commander.command('uninstall <module>')
+  .alias('module:uninstall')
   .description('stop and uninstall a module')
   .action(function(plugin_name) {
     CLI.uninstall(plugin_name);
   });
 
+
 commander.command('publish')
+  .alias('module:publish')
   .description('Publish the module you are currently on')
   .action(CLI.publish);
 
@@ -326,13 +435,19 @@ commander.command('set <key> <value>')
     CLI.set(key, value);
   });
 
-commander.command('get <key>')
+commander.command('multiset <value>')
+  .description('multiset eg "key1 val1 key2 val2')
+  .action(function(str) {
+    CLI.multiset(str);
+  });
+
+commander.command('get [key]')
   .description('get value for <key>')
   .action(function(key) {
     CLI.get(key);
   });
 
-commander.command('conf <key> [value]')
+commander.command('conf [key] [value]')
   .description('get / set module config values')
   .action(function(key, value) {
     CLI.conf(key, value);
@@ -353,53 +468,57 @@ commander.command('unset <key>')
 //
 // Interact
 //
-function interact(secret_key, public_key, machine) {
+function interact(secret_key, public_key, machine, opts) {
+  var recycle = opts.recycle || false;
+
   if (secret_key == 'stop' || secret_key == 'kill') {
     console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
     CLI.killInteract(function() {
       console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
       return process.exit(cst.SUCCESS_EXIT);
-      });
-      return false;
-    }
-    if (secret_key == 'info') {
-      console.log(chalk.cyan('[Keymetrics.io]') + ' Getting agent information...');
-      return CLI.infoInteract();
-    }
-    if (secret_key == 'delete') {
-      CLI.killInteract(function() {
-        try {
-          fs.unlinkSync(cst.INTERACTION_CONF);
-        } catch(e) {
-          console.log(chalk.cyan('[Keymetrics.io]') + ' No interaction config file found');
-          return process.exit(cst.SUCCESS_EXIT);
-        }
-        console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
+    });
+    return false;
+  }
+  if (secret_key == 'info') {
+    console.log(chalk.cyan('[Keymetrics.io]') + ' Getting agent information...');
+    return CLI.infoInteract();
+  }
+  if (secret_key == 'delete') {
+    CLI.killInteract(function() {
+      try {
+        fs.unlinkSync(cst.INTERACTION_CONF);
+      } catch(e) {
+        console.log(chalk.cyan('[Keymetrics.io]') + ' No interaction config file found');
         return process.exit(cst.SUCCESS_EXIT);
-      });
-      return false;
-    }
-    if (secret_key == 'start' || secret_key == 'restart')
-      return CLI.interact(null, null, null);
-    if (secret_key && !public_key) {
-      console.error(chalk.cyan('[Keymetrics.io]') + ' Command [%s] unknown or missing public key', secret_key);
-      return process.exit(cst.ERROR_EXIT);
-    }
-    return CLI.interact(secret_key, public_key, machine);
+      }
+      console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
+      return process.exit(cst.SUCCESS_EXIT);
+    });
+    return false;
+  }
+  if (secret_key == 'start' || secret_key == 'restart')
+    return CLI.interact(null, null, null);
+  if (secret_key && !public_key) {
+    console.error(chalk.cyan('[Keymetrics.io]') + ' Command [%s] unknown or missing public key', secret_key);
+    return process.exit(cst.ERROR_EXIT);
+  }
+  return CLI.interact(secret_key, public_key, machine, recycle);
 }
 commander.command('interact [secret_key|command] [public_key] [machine_name]')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .option('--recycle', 'for elastic infrastructure')
   .action(interact);
 
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .option('--recycle', 'for elastic infrastructure')
   .action(interact);
 
 //
 // Web interface
 //
 commander.command('web')
-  .description('launch an health API on port ' + cst.WEB_INTERFACE)
+  .description('launch a health API on port ' + cst.WEB_INTERFACE)
   .action(function() {
     console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
     CLI.web();
@@ -441,6 +560,14 @@ commander.command('startup [platform]')
     CLI.startup(_platform || platform, commander);
   });
 
+//
+// Logrotate
+//
+commander.command('logrotate')
+  .description('copy default logrotate configuration')
+  .action(function(cmd) {
+    CLI.logrotate(commander);
+  });
 
 //
 // Sample generate
@@ -535,13 +662,13 @@ commander.command('prettylist')
 commander.command('monit')
   .description('launch termcaps monitoring')
   .action(function() {
-    CLI.monit()
+    CLI.monit();
   });
 
 commander.command('m')
   .description('(alias) launch termcaps monitoring')
   .action(function() {
-    CLI.monit()
+    CLI.monit();
   });
 
 
@@ -567,18 +694,35 @@ commander.command('reloadLogs')
 // Log streaming
 //
 commander.command('logs [id|name]')
+  .option('--err', 'only shows error output')
+  .option('--out', 'only shows standard output')
   .option('--raw', 'logs without timestamps and other PM2 indicators')
-  .option('--lines <N>', 'output the last N lines, instead of the last 20')
+  .option('--lines <n>', 'output the last N lines, instead of the last 20 by default')
+  .option('--timestamp [format]', 'add timestamps (default format YYYY-MM-DD-HH:mm:ss)')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
     var line = 20;
     var raw  = false;
+    var exclusive = false;
+    var timestamp = false;
+
     if(!isNaN(cmd.lines)){
       line = parseInt(cmd.lines);
     }
+
     if (cmd.parent.rawArgs.indexOf('--raw') !== -1)
       raw = true;
-    CLI.streamLogs(id, line, raw);
+
+    if (cmd.timestamp)
+      timestamp = typeof cmd.timestamp === 'string' ? cmd.timestamp : 'YYYY-MM-DD-HH:mm:ss';
+
+    if (cmd.out === true)
+      exclusive = 'out';
+
+    if (cmd.err === true)
+      exclusive = 'err';
+
+    CLI.streamLogs(id, line, raw, timestamp, exclusive);
   });
 
 
@@ -634,6 +778,15 @@ commander.command('gc')
   .description('force PM2 to trigger garbage collection')
   .action(function() {
     CLI.forceGc();
+  });
+
+//
+// Perform a deep update of PM2
+//
+commander.command('deepUpdate')
+  .description('peforms a deep update of PM2')
+  .action(function() {
+    CLI.deepUpdate();
   });
 
 //

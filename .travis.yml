@@ -1,23 +1,16 @@
+sudo: false
 language: node_js
 branches:
   only:
-    - poc-plugin
     - master
     - development
-    - api
     - travis
 node_js:
    - "iojs"
-   - "iojs-v2.0"
-   - "iojs-v1.5"
-   - "iojs-v1.0"
    - "0.12"
-   - "0.12.0"
    - "0.11"
    - "0.10"
+   - "4"
+   - "5"
 os:
   - linux
-  - osx
-matrix:
-  allow_failures:
-    - os: osx
