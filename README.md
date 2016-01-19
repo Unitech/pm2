@@ -132,7 +132,7 @@ $ pm2 uninstall pm2-logrotate   # Uninstall module
 $ pm2 publish                   # Increment version, git push and npm publish
 ```
 
-### Different way of starting processes
+### Different ways of starting processes
 
 ```bash
 $ pm2 start app.js --watch      # Restart application on file change
