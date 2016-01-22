@@ -3,6 +3,7 @@
  * PM2 programmatic API tests
  */
 
+var async  = require('async');
 var pm2    = require('../..');
 var should = require('should');
 var assert = require('better-assert');
@@ -13,10 +14,14 @@ describe('PM2 programmatic calls', function() {
   var proc1 = null;
   var procs = [];
   var bus   = null;
+  var arrayMethodsCount = Object.getOwnPropertyNames(Array.prototype).length;
 
   after(function(done) {
     pm2.delete('all', function(err, ret) {
-      pm2.disconnect(done);
+      pm2.dump(function(err, ret) {
+        pm2.disconnect(done);
+        done();
+      });
     });
   });
 
@@ -51,6 +56,23 @@ describe('PM2 programmatic calls', function() {
       data.length.should.eql(1);
       done();
     });
+  });
+
+  it('should start a script with names equal to any of Array', function(done) {
+    var keys = Object.getOwnPropertyNames(Array.prototype);
+    async.each(keys, start, done);
+
+    function start(name, cb) {
+      pm2.start(process.cwd() + '/test/fixtures/child.js', {
+        force: true,
+        name: name,
+        instances: 1
+      }, function(err, data) {
+        should(err).be.null;
+        data.length.should.eql(1);
+        cb();
+      });
+    }
   });
 
   it('should start a script in a specified cwd', function(done) {
@@ -95,10 +117,11 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
+
   it('should list processes', function(done) {
     pm2.list(function(err, ret) {
       should(err).be.null;
-      ret.length.should.eql(9);
+      ret.length.should.eql(9 + arrayMethodsCount);
       done();
     });
   });
@@ -108,7 +131,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(8);
+        ret.length.should.eql(8 + arrayMethodsCount);
         done();
       });
     });
@@ -137,7 +160,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(8);
+        ret.length.should.eql(8 + arrayMethodsCount);
         done();
       });
     });
@@ -155,7 +178,7 @@ describe('PM2 programmatic calls', function() {
       should(err).be.null;
       pm2.list(function(err, ret) {
         should(err).be.null;
-        ret.length.should.eql(9);
+        ret.length.should.eql(9 + arrayMethodsCount);
         done();
       });
     });
