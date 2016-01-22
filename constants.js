@@ -24,12 +24,15 @@ else {
 
 debug("PM2 folder (logs, pids, configuration): " + PM2_ROOT_PATH);
 
+var PWD = process.env.PWD || process.cwd();
+
 /**
  * Constants variables used by PM2
  */
 var csts = {
   PM2_CONF_FILE          : p.join(PM2_ROOT_PATH, 'conf.js'),
   PM2_MODULE_CONF_FILE   : p.join(PM2_ROOT_PATH, 'module_conf.json'),
+  PWD                    : PWD,
 
   CODE_UNCAUGHTEXCEPTION : 100,
   PREFIX_MSG             : chalk.green('[PM2] '),
