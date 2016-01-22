@@ -45,6 +45,8 @@ mocha ./test/programmatic/watcher.js
 spec "Watcher"
 mocha ./test/programmatic/deploy.js
 spec "Deploy"
+mocha ./test/programmatic/startup.js
+spec "Startup test"
 mocha ./test/programmatic/modularizer.mocha.js
 spec "Module system"
 mocha ./test/programmatic/max_memory_limit.js
