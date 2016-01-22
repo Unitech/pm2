@@ -58,6 +58,14 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
+  it('should get id by name', function(done) {
+    pm2.getProcessIdByName('toto', function(err, id) {
+      should(err).be.null
+      id.should.eql(1)
+      done()
+    });
+  });
+
   it('should start a script with names equal to any of Array', function(done) {
     var keys = Object.getOwnPropertyNames(Array.prototype);
     async.each(keys, start, done);
