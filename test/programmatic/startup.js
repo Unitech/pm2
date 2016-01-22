@@ -24,6 +24,7 @@ describe('CLI.Startup', function() {
   })
 
   it('should get correct home directory from username', function(cb) {
+    this.skip()
     var username = null
     require('child_process')
     .exec('getent passwd "'+process.getuid()+'" | cut -d: -f1', function(err, user) {
