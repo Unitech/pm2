@@ -124,7 +124,7 @@ $ pm2 generate                  # Generate a sample json configuration file
 
 $ pm2 deploy app.json prod setup    # Setup "prod" remote server
 $ pm2 deploy app.json prod          # Update "prod" remote server
-$ pm2 deploy app.json prod revert 2 # Revert "prod" remove server by 2
+$ pm2 deploy app.json prod revert 2 # Revert "prod" remote server by 2
 
 $ pm2 module:generate [name]    # Generate sample module with name [name]
 $ pm2 install pm2-logrotate     # Install module (here a log rotation system)
@@ -132,12 +132,12 @@ $ pm2 uninstall pm2-logrotate   # Uninstall module
 $ pm2 publish                   # Increment version, git push and npm publish
 ```
 
-### Different way of starting processes
+### Different ways of starting processes
 
 ```bash
 $ pm2 start app.js --watch      # Restart application on file change
 $ pm2 start script.sh           # Start bash script
-$ pm2 start app.js -- -a 34     # Start app an pass option -a 34
+$ pm2 start app.js -- -a 34     # Start app and pass option -a 34
 $ pm2 start app.json            # Start all applications declared in app.json
 $ pm2 start my-python-script.py --interpreter python
 ```
