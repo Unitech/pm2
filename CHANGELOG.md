@@ -1,7 +1,8 @@
 
 ### 1.0.1
 
-- [#1895] pm2 id <app_name>: output array of ids for app_name
+- [#1895] pm2 id <app_name>: output array of ids for app_name @soyuka
+- [#1800] pm2 show <app_name>: now also display node.js version @soyuka
 
 ### 1.0.0
 
