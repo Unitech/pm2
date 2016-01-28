@@ -41,6 +41,14 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
+  it('should get id', function(done) {
+    pm2.getProcessIdByName('child', function(err, data) {
+      data[0].should.eql(0);
+      should(err).be.null;
+      done();
+    });
+  });
+
   it('should start a script and force to launch it', function(done) {
     pm2.start(process.cwd() + '/test/fixtures/child.js', {
       force : true,

@@ -1,4 +1,8 @@
 
+### 1.0.1
+
+- [#1895] pm2 id <app_name>: output array of ids for app_name
+
 ### 1.0.0
 
 - [#1844][#1845][#1850] Load configuration in /etc/default/pm2 + add ulimit -n override

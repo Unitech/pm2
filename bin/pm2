@@ -331,11 +331,11 @@ commander.command('gracefulReload <name|all>')
     CLI.gracefulReload(pm2_id);
   });
 
-// commander.command('gracefulStop <name|all>')
-// .description('gracefully reload a process. Send a "shutdown" message to close all connections.')
-//   .action(function(pm2_id) {
-//     CLI.gracefulStop(pm2_id);
-//   });
+commander.command('id <name>')
+  .description('get process id by name')
+  .action(function(name) {
+    CLI.getProcessIdByName(name);
+  });
 
 //
 // Stop and delete a process by name from database
