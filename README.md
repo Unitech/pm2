@@ -70,7 +70,7 @@ Here are some PM2 compatible modules (standalone Node.js applications managed by
 
 [**pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed<br/>
 [**pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers<br/>
-[**pm2-autopull**](https://github.com/pm2-hive/pm2-auto-pull) auto pull all applications managed by PM2<br/>
+[**pm2-auto-pull**](https://github.com/pm2-hive/pm2-auto-pull) auto pull all applications managed by PM2<br/>
 
 [How to write a module](http://pm2.keymetrics.io/docs/advanced/pm2-module-system/)
 
