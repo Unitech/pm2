@@ -95,6 +95,18 @@ $pm2 delete echo.js
 $pm2 list
 should 'should has been deleted process by script' "name: 'echo'" 0
 
+######## Actions on app name as number (#1937)
+$pm2 kill
+$pm2 start echo.js --name "455"
+should 'should restart processes' 'restart_time: 0' 1
+$pm2 restart 455
+should 'should restart processes' 'restart_time: 1' 1
+$pm2 restart 0
+should 'should restart processes' 'restart_time: 2' 1
+$pm2 stop 455
+should 'should app be stopped' 'stopped' 1
+$pm2 delete 455
+should 'should has been deleted process by id' "name: '455'" 0
 
 ########### OPTIONS OUTPUT FILES
 $pm2 kill
