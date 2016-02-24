@@ -61,8 +61,8 @@ start() {
 }
 
 stop() {
-    super $PM2 dump
-    super $PM2 delete all
+    super $PM2 dump && \
+    super $PM2 delete all && \
     super $PM2 kill
 }
 
