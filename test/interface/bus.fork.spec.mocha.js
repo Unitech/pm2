@@ -133,7 +133,7 @@ describe('PM2 BUS / RPC', function() {
       });
     });
 
-    it('should (process:event -> restart overlimit) when autorestart occurs hits max_restarts', function(done) {
+    it('should (process:event -> restart overlimit) when autorestart hits max_restarts', function(done) {
       var plan = new Plan(1, done);
 
       ipm2.bus.on('*', function(event, data) {
