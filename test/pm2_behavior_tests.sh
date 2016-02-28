@@ -82,6 +82,9 @@ bash ./test/bash/wrapped_fork.sh
 spec "wrapped fork"
 bash ./test/bash/app_configuration.sh
 spec "App configuration"
+bash ./test/bash/source_map.sh
+spec "Source map resolution on exception"
+
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"

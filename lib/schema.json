@@ -30,6 +30,10 @@
   "restart_delay": {
     "type" : "number"
   },
+  "source_map_support" : {
+    "type": "boolean",
+    "default" : false
+  },
   "instances": {
     "type": "number"
   },

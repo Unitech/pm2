@@ -172,7 +172,8 @@
 
     "shelljs"             : "0.6.0",
     "semver"              : "~5.1.0",
-    "mkdirp"              : "0.5.1"
+    "mkdirp"              : "0.5.1",
+    "source-map-support"  : "0.4.0"
   },
   "devDependencies": {
     "mocha"           : "2.x",
