@@ -28,7 +28,7 @@ start() {
 stop() {
 	ebegin "Stopping PM2"
 
-	super $PM2 dump
+	#super $PM2 dump
 	super $PM2 delete all
 	super $PM2 kill
 
