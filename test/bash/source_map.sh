@@ -16,15 +16,15 @@ spec "kill daemon"
 rm sm.log
 $pm2 start source-map/main.js -e sm.log --merge-logs
 sleep 1
-cat sm.log | grep "main.js"
-spec "should error be located in main.js file"
+cat sm.log | grep "main.ts"
+spec "should automatically activate source map support (detect main.ts)"
 
 rm sm.log
 $pm2 delete all
 $pm2 start source-map/main.js -e sm.log --merge-logs --source-map-support
 sleep 1
 cat sm.log | grep "main.ts"
-spec "should error be located in main.ts file"
+spec "should force source map support"
 
 #
 # Cluster mode
@@ -33,12 +33,12 @@ rm sm.log
 $pm2 delete all
 $pm2 start source-map/main.js -e sm.log --merge-logs -i 1
 sleep 1
-cat sm.log | grep "main.js"
-spec "should error be located in main.js file"
+cat sm.log | grep "main.ts"
+spec "should automatically activate source map support (detect main.ts)"
 
 rm sm.log
 $pm2 delete all
 $pm2 start source-map/main.js -e sm.log --merge-logs -i 1 --source-map-support
 sleep 1
 cat sm.log | grep "main.ts"
-spec "should error be located in main.ts file"
+spec "should force source map support"
