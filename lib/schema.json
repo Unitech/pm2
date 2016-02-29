@@ -31,8 +31,10 @@
     "type" : "number"
   },
   "source_map_support" : {
-    "type": "boolean",
-    "default" : false
+    "type": "boolean"
+  },
+  "disable_source_map_support" : {
+    "type": "boolean"
   },
   "instances": {
     "type": "number"

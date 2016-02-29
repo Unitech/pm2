@@ -14,6 +14,13 @@ spec "kill daemon"
 # Fork mode
 #
 rm sm.log
+$pm2 start source-map/main.js -e sm.log --merge-logs --disable-source-map-support
+sleep 1
+cat sm.log | grep "main.js"
+spec "should not take source map into account"
+
+rm sm.log
+$pm2 delete all
 $pm2 start source-map/main.js -e sm.log --merge-logs
 sleep 1
 cat sm.log | grep "main.ts"
