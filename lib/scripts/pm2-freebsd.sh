@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# PROVIDE: pm2
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
 . /etc/rc.subr
 
 name=pm2
