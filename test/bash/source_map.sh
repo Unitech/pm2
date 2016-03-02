@@ -22,7 +22,7 @@ spec "should not take source map into account"
 rm sm.log
 $pm2 delete all
 $pm2 start source-map/main.js -e sm.log --merge-logs
-sleep 1
+sleep 1.5
 cat sm.log | grep "main.ts"
 spec "should automatically activate source map support (detect main.ts)"
 
