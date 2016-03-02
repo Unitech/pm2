@@ -5,6 +5,7 @@
 - [#1980] Add Javascript source map resolution when exceptions occurs [Documentation](http://pm2.keymetrics.io/docs/usage/source-map-support/)
 - [#1937] Allow to act on application having numerics as app name
 - [#1945] Fix post_update commands section when file contains Javascript
+- [#624] --only <app-name> to act only on specified app name in json app declaration
 - [0.6.1](https://github.com/keymetrics/pmx/releases/tag/0.6.1) PMX upgrade
 
 ### 1.0.1

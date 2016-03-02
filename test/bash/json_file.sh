@@ -86,18 +86,22 @@ should 'should start processes' 'online' 6
 
 $pm2 kill
 
-#
-# CWD OPTION
-#
+######### --only <app_name> option
 
-#$pm2 kill
+$pm2 start all.json --only echo
+should 'should start processes' 'online' 1
 
-#$pm2 start change_cwd.json
-#sleep 1
-#should 'should start 2 processes' 'online' 2
+$pm2 start all.json --only child
+should 'should start processes' 'online' 5
 
-#$pm2 delete all
+$pm2 restart all.json --only child
+should 'should start processes' 'online' 5
+should 'should all script been restarted one time' 'restart_time: 1' 4
 
-#$pm2 start no_cwd_change.json
-#sleep 1
-#should 'should not start 2 processes because of paths' 'online' 0
+$pm2 delete all.json --only echo
+should 'should start processes' 'online' 4
+
+$pm2 reload all.json --only child
+should 'should all script been restarted one time' 'restart_time: 2' 4
+
+$pm2 kill
