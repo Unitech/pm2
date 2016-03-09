@@ -36,6 +36,8 @@ bash ./test/bash/json_file.sh
 spec "JSON file test"
 bash ./test/bash/json-reload.sh
 spec "JSON reload test"
+bash ./test/bash/app_config_update.sh
+spec "CLI/JSON argument reload"
 bash ./test/bash/start-consistency.sh
 spec "Consistency between a JSON an CLI start"
 bash ./test/bash/harmony.sh
@@ -84,7 +86,6 @@ bash ./test/bash/app_configuration.sh
 spec "App configuration"
 bash ./test/bash/source_map.sh
 spec "Source map resolution on exception"
-
 
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"

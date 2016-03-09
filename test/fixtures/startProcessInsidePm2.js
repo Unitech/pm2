@@ -11,6 +11,5 @@ pm2.connect(function(err) {
 			console.log(err);
 			return process.exit(1);
 		}
-		console.log(proc);
 	});
 });

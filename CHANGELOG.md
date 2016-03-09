@@ -1,4 +1,10 @@
 
+### 1.0.3
+
+- Rename process
+- Update configuration by restarting (for both CLI and JSON)
+- Refactor programmatic system
+
 ### 1.0.2
 
 - [#1035 #1055] Deactivate automatic dump on startup scripts

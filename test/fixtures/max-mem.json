@@ -1,5 +1,6 @@
 {
   "name" : "max_mem",
   "script" : "big-array.js",
-  "max_memory_restart" : "19M"
+  "max_memory_restart" : "19M",
+  "node_args" : "--harmony-proxies"
 }
