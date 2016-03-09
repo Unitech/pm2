@@ -8,12 +8,6 @@ set -e
 # Display all commands executed
 set -o verbose
 
-echo "####################### DEBUG ############################"
-echo "PM2 Command = " $pm2
-echo "Node version = " $nodeVersion
-$node -e "var os = require('os'); console.log('arch : %s\nplatform : %s\nrelease : %s\ntype : %s\nmem : %d', os.arch(), os.platform(), os.release(), os.type(), os.totalmem())"
-echo "###################### !DEBUG! ###########################"
-
 # if [ $TRAVIS ]
 # then
 #   export DEBUG="*"
@@ -21,9 +15,6 @@ echo "###################### !DEBUG! ###########################"
 
 bash ./test/bash/file-descriptor.sh
 spec "testing file descriptors"
-# Automatic PMX http disabled
-# bash ./test/bash/pmx_injection.sh
-# spec "automatic pmx injection"
 bash ./test/bash/log-timestamp.sh
 spec "timetstamp prefix of pm2.log"
 bash ./test/bash/smart-start.sh
@@ -32,11 +23,13 @@ bash ./test/bash/cli.sh
 spec "CLI basic test"
 bash ./test/bash/multiparam.sh
 spec "Multiparam process management"
-bash ./test/bash/json_file.sh
+bash ./test/bash/json-file.sh
 spec "JSON file test"
+bash ./test/bash/piped-config.sh
+spec "Piped JSON file test"
 bash ./test/bash/json-reload.sh
 spec "JSON reload test"
-bash ./test/bash/app_config_update.sh
+bash ./test/bash/app-config-update.sh
 spec "CLI/JSON argument reload"
 bash ./test/bash/start-consistency.sh
 spec "Consistency between a JSON an CLI start"
@@ -62,9 +55,9 @@ bash ./test/bash/misc.sh
 spec "MISC features"
 bash ./test/bash/fork.sh
 spec "Fork system working"
-bash ./test/bash/get_set.sh
+bash ./test/bash/get-set.sh
 spec "Configuration system working"
-bash ./test/bash/infinite_loop.sh
+bash ./test/bash/infinite-loop.sh
 spec "Infinite loop stop"
 bash ./test/bash/env-refresh.sh
 spec "Environment refresh on restart"
@@ -80,13 +73,12 @@ bash ./test/bash/module.sh
 spec "module system"
 bash ./test/bash/vizion.sh
 spec "vizion features (versioning control)"
-bash ./test/bash/wrapped_fork.sh
+bash ./test/bash/wrapped-fork.sh
 spec "wrapped fork"
-bash ./test/bash/app_configuration.sh
+bash ./test/bash/app-configuration.sh
 spec "App configuration"
 bash ./test/bash/source_map.sh
 spec "Source map resolution on exception"
-
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
 
