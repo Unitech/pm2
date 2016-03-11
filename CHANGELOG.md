@@ -1,9 +1,12 @@
 
 ### 1.0.3
 
-- Rename process
-- Update configuration by restarting (for both CLI and JSON)
+- [#133 #1568] Rename process
+- [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart
+- [#1961] Fix kill timeout info log
+- [#1987] Fix FreeBSD startup script
 - Refactor programmatic system
+- Fix random no response from pm2 link and pm2 unlink
 
 ### 1.0.2
 
