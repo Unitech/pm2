@@ -117,3 +117,17 @@ cat outech-0.log > /dev/null
 spec "file outech-0.log exist"
 cat errech-0.log > /dev/null
 spec "file errech-0.log exist"
+
+########### Stdout / Stderr
+
+rm stdout-stderr.log
+$pm2 start stdout-stderr.js -l stdout-stderr.log --merge-logs
+sleep 0.5
+cat stdout-stderr.log | grep "outwrite"
+spec "stdout written"
+cat stdout-stderr.log | grep "outcb"
+spec "stdout cb written"
+cat stdout-stderr.log | grep "errwrite"
+spec "stderr written"
+cat stdout-stderr.log | grep "errcb"
+spec "stderr cb written"
