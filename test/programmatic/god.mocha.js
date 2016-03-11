@@ -69,7 +69,6 @@ describe('God', function() {
     God.should.have.property('stopAll');
     God.should.have.property('reloadLogs');
     God.should.have.property('stopProcessId');
-    God.should.have.property('reloadProcessName');
     God.should.have.property('sendSignalToProcessId');
     God.should.have.property('sendSignalToProcessName');
   });
@@ -217,20 +216,6 @@ describe('God', function() {
           });
           done();
         }, 100);
-      });
-    });
-
-    it('should restart the same process and set it as state online and be up', function(done) {
-      var processes = God.getFormatedProcesses();
-
-      God.reload({}, function(err, dt) {
-	      var processes = God.getFormatedProcesses();
-
-        processes.length.should.equal(4);
-        processes.forEach(function(proc) {
-          proc.pm2_env.restart_time.should.eql(1);
-        });
-        done();
       });
     });
 

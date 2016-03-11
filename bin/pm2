@@ -322,7 +322,7 @@ commander.command('scale <app_name> <number>')
 commander.command('reload <name|all>')
   .description('reload processes (note that its for app using HTTP/HTTPS)')
   .action(function(pm2_id) {
-    CLI.reload(pm2_id);
+    CLI.reload(pm2_id, commander);
   });
 
 //
@@ -331,7 +331,7 @@ commander.command('reload <name|all>')
 commander.command('gracefulReload <name|all>')
   .description('gracefully reload a process. Send a "shutdown" message to close all connections.')
   .action(function(pm2_id) {
-    CLI.gracefulReload(pm2_id);
+    CLI.gracefulReload(pm2_id, commander);
   });
 
 commander.command('id <name>')

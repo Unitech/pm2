@@ -1,10 +1,14 @@
 
 ### 1.0.3
 
-- [#133 #1568] Rename process
-- [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart
+- [#133 #1568] Allow to rename a process via pm2 restart app --name "new-name"
+- [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart (args, node_args, name, max-memory)
+- [#2012 #1650 #1743] CLI/JSON arguments update on reload
+- [#1613] Reload all reload ALL apps (stopped, errored...)
 - [#1961] Fix kill timeout info log
 - [#1987] Fix FreeBSD startup script
+- [#2011] Respect process.stdout/.stderr signature
+- [#1602] Fix zombie process when using babel-node as interpreter
 - Refactor programmatic system
 - Fix random no response from pm2 link and pm2 unlink
 
