@@ -9,6 +9,7 @@
 - [#1987] Fix FreeBSD startup script
 - [#2011] Respect process.stdout/.stderr signature
 - [#1602] Fix zombie process when using babel-node as interpreter
+- [#1283] --skip-env option to not merge update with system env
 - Refactor programmatic system
 - Fix random no response from pm2 link and pm2 unlink
 
