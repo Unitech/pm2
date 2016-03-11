@@ -22,7 +22,34 @@ sleep 1.0
 grep "89hello89" out-env.log &> /dev/null
 spec "should contain refreshed environment variable"
 
+>out-env.log
+TEST_VARIABLE="CLUNEWSTER" $pm2 restart env --skip-env
+sleep 0.5
+grep "89hello89" out-env.log &> /dev/null
+spec "should not change environment (--skip-env)"
+
 $pm2 delete all
+
+#
+# Cluster mode
+#
+>out-env.log
+$pm2 start env.js -o out-env.log --merge-logs
+sleep 0.5
+grep "undefined" out-env.log &> /dev/null
+spec "should contain nothing"
+
+>out-env.log
+TEST_VARIABLE="CLUSTER" $pm2 reload env
+sleep 0.5
+grep "CLUSTER" out-env.log &> /dev/null
+spec "should contain CLUSTER"
+
+>out-env.log
+TEST_VARIABLE="CLUNEWSTER" $pm2 reload env --skip-env
+sleep 0.5
+grep "CLUSTER" out-env.log &> /dev/null
+spec "should contain not change environment (--skip-env)"
 
 #
 # REFRESH with Restart via JSON
