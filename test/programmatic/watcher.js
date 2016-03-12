@@ -26,7 +26,7 @@ function testPM2Env(event) {
   return function(obj, cb) {
     ee.once(event, function(e) {
       if(typeof obj == 'function') {
-        return obj() 
+        return obj(e) 
       }
 
       var value
@@ -114,11 +114,11 @@ describe('Watcher', function() {
 
   it('should stop watching', function(cb) {
     process.argv.push('--watch')
-    // testPM2Env('server-watch:exit')({watch: false}, cb)
-    pm2.stop('server-watch', function() {
-      process.argv.splice(process.argv.indexOf('--watch'), 1);
+    testPM2Env('server-watch:stop')({watch: false}, function() {
+      process.argv.splice(process.argv.indexOf('--watch'), 1) 
       cb()
     })
+    pm2.stop('server-watch', errShouldBeNull)
 
     // this would be better: 
     // pm2.actionFromJson('stopProcessId', extend(json, {watch: false}), errShouldBeNull)
@@ -127,13 +127,13 @@ describe('Watcher', function() {
   })
 
   it('should not watch', function(cb) {
-    testPM2Env('server-watch:online')({restart_time: 2, watch: false}, cb)
-    pm2.restart('server-watch', errShouldBeNull) 
+    testPM2Env('server-watch:online')({watch: false}, cb)
+    pm2.restart(extend(json, {watch: false}), errShouldBeNull)
   })
 
   it('should watch', function(cb) {
     testPM2Env('server-watch:online')({restart_time: 3, watch: true}, cb)
-    pm2.actionFromJson('restartProcessId', extend(json, {watch: true}), errShouldBeNull)
+    pm2.restart(extend(json, {watch: true}), errShouldBeNull)
   })
 
   it('should delete process', function(cb) {
@@ -141,7 +141,9 @@ describe('Watcher', function() {
   })
 
   it('should watch json', function(cb) {
-    testPM2Env('server-watch:online')(cb)
+    testPM2Env('server-watch:online')(function() {
+      cb()
+    })
 
     pm2.start(paths.json, errShouldBeNull)
   })
@@ -185,7 +187,9 @@ describe('Watcher', function() {
    * Test #1668
    */
   it('should delete from json', function(cb) {
-    testPM2Env('server-watch:exit')(cb)
+    testPM2Env('server-watch:exit')(function() {
+      cb() 
+    })
 
     pm2.delete(paths.json, errShouldBeNull)
   })
