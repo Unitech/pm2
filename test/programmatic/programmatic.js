@@ -348,7 +348,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should start', function(done) {
-      pm2._startJson(process.cwd() + '/test/fixtures/all2.json', 'restart', {}, function(err, data) {
+      pm2._startJson(process.cwd() + '/test/fixtures/all2.json', {}, 'restartProcessId', function(err, data) {
         should(err).be.null;
         pm2.list(function(err, ret) {
           should(err).be.null;
@@ -359,7 +359,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should NOW restart action', function(done) {
-      pm2._startJson(process.cwd() + '/test/fixtures/all2.json', 'restart', {}, function(err, data) {
+      pm2._startJson(process.cwd() + '/test/fixtures/all2.json', {}, 'restartProcessId', function(err, data) {
         should(err).be.null;
         pm2.list(function(err, ret) {
           should(err).be.null;
@@ -382,7 +382,7 @@ describe('PM2 programmatic calls', function() {
     it('should start with specific environment variables depending on the env type', function(done) {
       pm2._startJson(process.cwd() + '/test/fixtures/all2.json', {
         env : 'production'
-      }, 'restart', function(err, data) {
+      }, 'restartProcessId', function(err, data) {
         should(err).be.null;
         pm2.list(function(err, ret) {
           should(err).be.null;
