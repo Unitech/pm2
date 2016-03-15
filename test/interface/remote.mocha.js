@@ -150,12 +150,10 @@ describe('REMOTE PM2 ACTIONS', function() {
   it('should act on PM2', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
 
-      /**
-       * Once remote command is finished...
-       */
-      pck.ret.data.success.should.be.true
-
-      done();
+      if (pck.ret.data.length > 0)
+        done()
+      else
+        done(new Error('wrong data rcvied'));
     });
 
     send_cmd.emit('cmd', {
