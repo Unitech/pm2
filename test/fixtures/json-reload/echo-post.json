@@ -9,8 +9,5 @@
   },
   "env_production" : {
     "ECHO_MSG" : "WOW"
-  },
-  "env_testing" : {
-    "ECHO_MSG" : "TEST"
   }
 }

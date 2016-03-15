@@ -240,7 +240,7 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (cmd) {
         process.stdin.pause();
-        CLI._startJson(cmd, commander, 'start', 'pipe');
+        CLI._startJson(cmd, commander, 'restartProcessId', 'pipe');
       });
     }
     else {
