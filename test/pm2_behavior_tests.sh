@@ -29,6 +29,8 @@ bash ./test/bash/piped-config.sh
 spec "Piped JSON file test"
 bash ./test/bash/json-reload.sh
 spec "JSON reload test"
+bash ./test/bash/homogen-json-action.sh
+spec "Homogen json actions"
 bash ./test/bash/app-config-update.sh
 spec "CLI/JSON argument reload"
 bash ./test/bash/start-consistency.sh

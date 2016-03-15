@@ -24,7 +24,7 @@ $pm2 restart max-mem.json
 
 sleep 3
 $pm2 list
-should 'process should has not been restarted' 'restart_time: 1' 0
+should 'process should has been restarted' 'restart_time: 1' 0
 
 $pm2 delete all
 

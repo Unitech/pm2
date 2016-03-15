@@ -23,6 +23,7 @@ file_path="test/fixtures"
 set -o verbose
 
 $pm2 kill
+$pm2 link delete
 
 # Determine wget / curl
 which wget > /dev/null
