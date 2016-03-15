@@ -31,7 +31,7 @@ describe('Max memory restart programmatic', function() {
 
   describe('Max memory limit', function() {
     it('should restart process based on memory limit (UGLY WAY)', function(done) {
-      pm2.start(process.cwd() + '/test/fixtures/big-array.js', {
+      pm2.start(process.cwd() + '/test/fixtures/json-reload/big-array.js', {
         maxMemoryRestart : '10M'
       }, function(err, data) {
         should(err).be.null;
@@ -48,7 +48,7 @@ describe('Max memory restart programmatic', function() {
 
     it('should restart process based on memory limit (JSON WAY)', function(done) {
       pm2.start({
-        script : process.cwd() + '/test/fixtures/big-array.js',
+        script : process.cwd() + '/test/fixtures/json-reload/big-array.js',
         max_memory_restart : '10M'
       }, function(err, data) {
         should(err).be.null;
