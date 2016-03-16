@@ -1,5 +1,5 @@
 
-### 1.0.3
+### 1.1.0
 
 - [#133 #1568] Allow to rename a process via pm2 restart app --name "new-name"
 - [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart (args, node_args, name, max-memory)
@@ -12,6 +12,7 @@
 - [#1283] --skip-env option to not merge update with system env
 - Refactor programmatic system
 - Fix random no response from pm2 link and pm2 unlink
+- API breaking changes
 
 ### 1.0.2
 

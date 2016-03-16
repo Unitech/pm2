@@ -96,7 +96,7 @@ describe('PM2 programmatic calls', function() {
     }, function(err, data) {
       should(err).be.null;
 
-      data[0].pm2_env['NODE_ENV'].should.eql(json_declaration.env_test.NODE_ENV);
+      data[0].pm2_env.env['NODE_ENV'].should.eql(json_declaration.env_test.NODE_ENV);
       done();
     });
   });

@@ -173,7 +173,7 @@ describe('God', function() {
       God.deleteProcessId(clu.pm2_env.pm_id, function(err, dt) {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         God.checkProcess(old_pid).should.be.equal(false);
-        dt.length.should.be.equal(1);
+        God.getFormatedProcesses().length.should.be.equal(1);
         done();
       });
     });

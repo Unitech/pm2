@@ -149,9 +149,8 @@ describe('REMOTE PM2 ACTIONS', function() {
    */
   it('should act on PM2', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
-
       if (pck.ret.data.length > 0)
-        done()
+        done();
       else
         done(new Error('wrong data rcvied'));
     });
