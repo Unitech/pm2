@@ -800,14 +800,16 @@ commander.command('*')
   .action(function() {
     console.log(cst.PREFIX_MSG + '\nCommand not found');
     commander.outputHelp();
+    // Check if it does not forget to close fds from RPC
     process.exit(cst.ERROR_EXIT);
   });
 
 //
-// Display help
+// Display help if 0 arguments passed to pm2
 //
 if (process.argv.length == 2) {
   commander.parse(process.argv);
   commander.outputHelp();
+  // Check if it does not forget to close fds from RPC
   process.exit(cst.ERROR_EXIT);
 }
