@@ -7,7 +7,6 @@ cd $file_path
 
 echo -e "\033[1mRIGHT EXIT CODES:\033[0m"
 
-
 $pm2 kill
 
 $pm2 restart BULLSHIT

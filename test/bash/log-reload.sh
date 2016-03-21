@@ -7,8 +7,6 @@ cd $file_path
 
 echo -e "\033[1mRunning tests:\033[0m"
 
-$pm2 kill
-
 >out-rel.log
 
 $pm2 start echo.js -o out-rel.log --merge-logs -i 1

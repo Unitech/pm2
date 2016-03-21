@@ -10,9 +10,6 @@ cd $file_path
 
 echo -e "\033[1mRunning tests:\033[0m"
 
-$pm2 kill
-spec "kill daemon"
-
 cat all.json | $pm2 start -
 should 'should start processes' 'online' 6
 

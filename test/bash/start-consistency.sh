@@ -9,8 +9,6 @@ cd $file_path
 
 echo -e "\033[1mRunning tests:\033[0m"
 
-$pm2 kill
-
 cd start-consistency;
 
 $pm2 start child.js

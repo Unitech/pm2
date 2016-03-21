@@ -6,8 +6,6 @@ source "${SRC}/include.sh"
 
 cd $file_path
 
-$pm2 kill
-
 CURRENT_YEAR=`date +"%Y"`
 
 # CLUSTERMODE YYYY

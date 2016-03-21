@@ -5,7 +5,6 @@ SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/include.sh"
 
 cd $file_path
-$pm2 kill
 
 echo "################## RESET ###################"
 

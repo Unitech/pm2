@@ -7,8 +7,6 @@ echo -e "\033[1mRunning tests:\033[0m"
 
 cd $file_path
 
-$pm2 kill
-
 cd homogen-json-action
 
 $pm2 start all.json

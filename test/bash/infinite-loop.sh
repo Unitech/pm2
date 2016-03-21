@@ -5,7 +5,6 @@ source "${SRC}/include.sh"
 
 cd $file_path
 
-
 echo "Starting infinite loop tests"
 
 $pm2 start killtoofast.js --name unstable-process
@@ -21,7 +20,7 @@ done
 $pm2 list
 should 'should has stopped unstable process' 'errored' 1
 
-$pm2 kill
+$pm2 delete all
 
 echo "Start infinite loop tests for restart|reload"
 

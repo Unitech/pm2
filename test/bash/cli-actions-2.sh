@@ -9,9 +9,6 @@ cd $file_path
 
 echo -e "\033[1mRunning tests:\033[0m"
 
-$pm2 kill
-spec "kill daemon"
-
 echo "---- Start an app, stop it, if state stopped and started, restart stopped app"
 $pm2 start echo.js
 spec "Should start an app by script.js"

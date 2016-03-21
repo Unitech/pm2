@@ -7,8 +7,6 @@ echo -e "\033[1mRunning tests:\033[0m"
 
 cd $file_path
 
-$pm2 kill
-
 $pm2 start app-config-update/args1.json
 $pm2 prettylist | grep "node_args: \[\]"
 spec "Should application have empty node argument list"

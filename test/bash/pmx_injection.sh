@@ -15,8 +15,6 @@ function should_more {
 
 echo "################## PMX INJECTION  ###################"
 
-$pm2 kill
-
 echo "Testing pmx injection in fork mode"
 
 $pm2 start child.js

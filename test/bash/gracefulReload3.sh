@@ -7,8 +7,6 @@ cd $file_path
 
 echo "################## GRACEFUL RELOAD 3 ###################"
 
-###############
-
 echo "Launching"
 $pm2 start graceful-exit-send.js -i 2 --name="graceful3" -o "grace3.log" -e "grace-err3.log"
 should 'should start processes' 'online' 2

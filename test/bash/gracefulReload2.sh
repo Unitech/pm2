@@ -7,9 +7,6 @@ cd $file_path
 
 echo "################## GRACEFUL RELOAD 2 ###################"
 
-###############
-$pm2 kill
-
 echo "Launching"
 $pm2 start graceful-exit-no-listen.js -i 2 --name="graceful2" -o "grace2.log" -e "grace-err2.log"
 should 'should start processes' 'online' 2

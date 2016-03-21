@@ -9,9 +9,6 @@ cd $file_path
 
 echo -e "\033[1mRunning tests:\033[0m"
 
-$pm2 kill
-spec "kill daemon"
-
 ## Start
 $pm2 start child.js echo.js server.js
 should 'should app be online' 'online' 3

@@ -10,8 +10,6 @@ cd $file_path
 # Test for SMART start
 #
 
-$pm2 kill
-
 $pm2 start echo.js
 should 'process should have been started' 'restart_time: 0' 1
 should 'process should have been started' 'online' 1

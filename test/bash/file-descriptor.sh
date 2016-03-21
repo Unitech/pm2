@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
+#
+# LSOF check
+#
+
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/include.sh"
 
 cd $file_path
 
 echo "################## RELOAD ###################"
-
-###############
-$pm2 kill
 
 lsof -c PM2 > /tmp/no_pm2_out.dat
 

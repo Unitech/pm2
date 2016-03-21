@@ -7,9 +7,6 @@ cd $file_path
 
 echo "################## RELOAD ###################"
 
-###############
-$pm2 kill
-
 echo "Reloading"
 
 $pm2 start delayed_exit.js

@@ -13,14 +13,15 @@ set -o verbose
 #   export DEBUG="*"
 # fi
 
-bash ./test/bash/file-descriptor.sh
-spec "testing file descriptors"
+bash ./test/bash/cli-actions-1.sh
+spec "CLI basic test"
+bash ./test/bash/cli-actions-2.sh
+spec "Second hard cli tests"
+
 bash ./test/bash/log-timestamp.sh
-spec "timetstamp prefix of pm2.log"
+spec "timestamp prefix of pm2.log"
 bash ./test/bash/smart-start.sh
 spec "smart start test"
-bash ./test/bash/cli.sh
-spec "CLI basic test"
 bash ./test/bash/multiparam.sh
 spec "Multiparam process management"
 bash ./test/bash/json-file.sh
@@ -51,8 +52,6 @@ bash ./test/bash/gracefulReload2.sh
 spec "gracefulReload system 2"
 bash ./test/bash/gracefulReload3.sh
 spec "gracefulReload system 3"
-bash ./test/bash/cli2.sh
-spec "Second hard cli tests"
 bash ./test/bash/misc.sh
 spec "MISC features"
 bash ./test/bash/fork.sh

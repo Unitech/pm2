@@ -20,10 +20,9 @@ script="echo"
 
 file_path="test/fixtures"
 
-set -o verbose
+#set -o verbose
 
-$pm2 kill
-$pm2 link delete
+$pm2 delete all
 
 # Determine wget / curl
 which wget > /dev/null

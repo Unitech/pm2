@@ -7,8 +7,6 @@ cd $file_path
 
 echo "################## Wrapped fork ###################"
 
-$pm2 kill
-
 echo "Testing wrapped fork mode values"
 
 rm path-check1.txt
