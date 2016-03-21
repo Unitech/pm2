@@ -1,6 +1,6 @@
 
 var Config = require('../../lib/tools/Config');
-var Schema = require('../../lib/schema.json');
+var Schema = require('../../lib/CLI/schema.json');
 
 describe('JSON validation tests', function() {
   it('should fail when passing wrong json', function() {

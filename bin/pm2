@@ -6,10 +6,6 @@ var cst       = require('../constants.js');
 
 var commander = require('commander');
 var fs        = require('fs');
-var path      = require('path');
-var p         = path;
-var util      = require('util');
-var cronJob   = require('cron').CronJob;
 var chalk     = require('chalk');
 var async     = require('async');
 
@@ -17,7 +13,6 @@ var debug     = require('debug')('pm2:cli');
 var Satan     = require('../lib/Satan');
 var CLI       = require('../lib/CLI');
 var pkg       = require('../package.json');
-var platform  = require('os').platform();
 var tabtab    = require('../lib/completion.js');
 
 CLI.pm2Init();
@@ -179,8 +174,6 @@ else {
   });
 }
 
-
-
 //
 // Helper function to fail when unknown command arguments are passed
 //
@@ -226,7 +219,6 @@ function patchCommanderArg(cmd) {
   }
   return cmd;
 }
-
 
 //
 // Start command
@@ -469,54 +461,15 @@ commander.command('unset <key>')
     CLI.unset(key);
   });
 
-//
-// Interact
-//
-function interact(secret_key, public_key, machine, opts) {
-  var recycle = opts.recycle || false;
-
-  if (secret_key == 'stop' || secret_key == 'kill') {
-    console.log(chalk.cyan('[Keymetrics.io]') + ' Stopping agent...');
-    CLI.killInteract(function() {
-      console.log(chalk.cyan('[Keymetrics.io]') + ' Stopped');
-      return process.exit(cst.SUCCESS_EXIT);
-    });
-    return false;
-  }
-  if (secret_key == 'info') {
-    console.log(chalk.cyan('[Keymetrics.io]') + ' Getting agent information...');
-    return CLI.infoInteract();
-  }
-  if (secret_key == 'delete') {
-    CLI.killInteract(function() {
-      try {
-        fs.unlinkSync(cst.INTERACTION_CONF);
-      } catch(e) {
-        console.log(chalk.cyan('[Keymetrics.io]') + ' No interaction config file found');
-        return process.exit(cst.SUCCESS_EXIT);
-      }
-      console.log(chalk.cyan('[Keymetrics.io]') + ' Agent interaction ended');
-      return process.exit(cst.SUCCESS_EXIT);
-    });
-    return false;
-  }
-  if (secret_key == 'start' || secret_key == 'restart')
-    return CLI.interact(null, null, null);
-  if (secret_key && !public_key) {
-    console.error(chalk.cyan('[Keymetrics.io]') + ' Command [%s] unknown or missing public key', secret_key);
-    return process.exit(cst.ERROR_EXIT);
-  }
-  return CLI.interact(secret_key, public_key, machine, recycle);
-}
 commander.command('interact [secret_key|command] [public_key] [machine_name]')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
   .option('--recycle', 'for elastic infrastructure')
-  .action(interact);
+  .action(CLI._pre_interact);
 
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
   .option('--recycle', 'for elastic infrastructure')
-  .action(interact);
+  .action(CLI._pre_interact);
 
 //
 // Web interface
@@ -561,6 +514,7 @@ commander.command('resurrect')
 commander.command('startup [platform]')
   .description('auto resurrect process at startup. [platform] = ubuntu, centos, redhat, gentoo, systemd, darwin, amazon')
   .action(function(_platform, cmd) {
+    var platform = require('os').platform();
     CLI.startup(_platform || platform, commander);
   });
 
