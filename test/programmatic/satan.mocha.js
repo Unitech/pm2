@@ -53,7 +53,6 @@ describe('Satan', function() {
         methods.should.have.property('getSystemData');
         methods.should.have.property('stopProcessId');
         methods.should.have.property('stopAll');
-        methods.should.have.property('stopProcessName');
         methods.should.have.property('killMe');
         done();
       });
