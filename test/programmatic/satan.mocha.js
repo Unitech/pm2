@@ -43,21 +43,7 @@ describe('Satan', function() {
     Satan.should.have.property('killDaemon');
   });
 
-
   describe('DAEMON', function() {
-    it.skip('should have the right exposed methods via RPC', function(done) {
-      Satan.getExposedMethods(function(err, methods) {
-        assert(err == null);
-        methods.should.have.property('prepare');
-        methods.should.have.property('getMonitorData');
-        methods.should.have.property('getSystemData');
-        methods.should.have.property('stopProcessId');
-        methods.should.have.property('stopAll');
-        methods.should.have.property('killMe');
-        done();
-      });
-    });
-
     it('should get an empty process list', function(done) {
       Satan.executeRemote('getMonitorData', {}, function(err, res) {
         assert(res.length === 0);
