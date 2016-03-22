@@ -1,7 +1,7 @@
 
-var p    = require('path');
-var fs   = require('fs');
-var util = require('util');
+var p     = require('path');
+var fs    = require('fs');
+var util  = require('util');
 var chalk = require('chalk');
 var debug = require('debug')('pm2:constants');
 
@@ -22,7 +22,7 @@ else {
   PM2_ROOT_PATH = p.resolve('/etc', '.pm2');
 }
 
-debug("PM2 folder (logs, pids, configuration): " + PM2_ROOT_PATH);
+debug('PM2 folder (logs, pids, configuration): ' + PM2_ROOT_PATH);
 
 /**
  * Constants variables used by PM2

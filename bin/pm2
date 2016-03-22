@@ -487,14 +487,12 @@ commander.command('web')
 commander.command('dump')
   .description('dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
-    console.log(cst.PREFIX_MSG + 'Dumping processes');
     CLI.dump();
   }));
 
 commander.command('save')
   .description('(alias) dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
-    console.log(cst.PREFIX_MSG + 'Dumping processes');
     CLI.dump();
   }));
 
