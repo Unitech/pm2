@@ -22,7 +22,7 @@ file_path="test/fixtures"
 
 #set -o verbose
 
-$pm2 delete all
+$pm2 kill
 
 # Determine wget / curl
 which wget > /dev/null
