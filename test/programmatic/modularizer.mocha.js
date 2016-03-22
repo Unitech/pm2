@@ -28,7 +28,6 @@ describe('Modularizer programmatic tests', function() {
     ret.length.should.eql(0);
   });
 
-
   it('should install a module', function(done) {
     Modularizer.install('pm2-server-monit', function() {
       setTimeout(done, 100);
