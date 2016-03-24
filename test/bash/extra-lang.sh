@@ -5,6 +5,9 @@ source "${SRC}/include.sh"
 
 cd $file_path/extra-lang
 
+which php
+which python
+
 #
 # JSON
 #
