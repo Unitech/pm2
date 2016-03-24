@@ -13,7 +13,8 @@
     "type": [
       "array",
       "string"
-    ]
+    ],
+    "alias": ["interpreterArgs", "interpreter_args"]
   },
   "name": {
     "type": "string"
@@ -72,7 +73,8 @@
     "type": "string"
   },
   "merge_logs": {
-    "type": "boolean"
+    "type": "boolean",
+    "alias" : "combine_logs"
   },
   "vizion" : {
     "type": "boolean",
@@ -111,7 +113,10 @@
     "type": "object"
   },
   "env": {
-    "type": ["object", "string"]
+    "type": [
+      "object",
+      "string"
+    ]
   },
   "^env_\\S*$": {
     "type": [

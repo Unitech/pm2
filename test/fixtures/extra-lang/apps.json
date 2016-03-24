@@ -1,0 +1,23 @@
+{
+  apps: [{
+    "interpreter"      : "/usr/bin/python3",
+    "name"             : "echo-python",
+    "script"           : "echo.py",
+    "interpreter_args" : "-u",
+    "log"              : "python-app.log",
+    "combine_logs"     : true,
+    "env" : {
+      DEFAULT_STR : "Python"
+    },
+    "env_production" : {
+      DEFAULT_STR : "PythonProduction"
+    }
+  }, {
+    "exec_interpreter" : "/usr/bin/php",
+    "name"             : "echo-php",
+    "script"           : "echo.php",
+    "output"           : "php-app-out.log",
+    "error"            : "php-error.log",
+    "combine_logs"     : true
+  }]
+}

@@ -3,8 +3,6 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/include.sh"
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 cd $file_path
 
 #
@@ -14,7 +12,7 @@ $pm2 start echo.js
 $pm2 start echo.js -f
 $pm2 start echo.js -f
 
-should 'should have start 3 apps' 'restart_time' 3
+should 'should have started 3 apps' 'online' 3
 
 $pm2 stop 12412
 $pm2 stop 0

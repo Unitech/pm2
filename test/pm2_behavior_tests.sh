@@ -28,6 +28,8 @@ bash ./test/bash/json-file.sh
 spec "JSON file test"
 bash ./test/bash/piped-config.sh
 spec "Piped JSON file test"
+bash ./test/bash/extra-lang.sh
+spec "Various programming languages checks (Python, PHP)"
 bash ./test/bash/json-reload.sh
 spec "JSON reload test"
 bash ./test/bash/homogen-json-action.sh

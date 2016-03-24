@@ -1,5 +1,8 @@
 
-### 1.1.0
+### 1.1.0: Homogenization release
+
+This release is about PM2's internals refactoring, homogenization in action commands (in terms of behavior and outputs) and some related changes.
+This version has been heavily tested in testing, production environments and deeply monitored in terms of CPU and Memory usage.
 
 - [#133 #1568] Allow to rename a process via pm2 restart app --name "new-name"
 - [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart (args, node_args, name, max-memory)
@@ -10,6 +13,8 @@
 - [#2011] Respect process.stdout/.stderr signature
 - [#1602] Fix zombie process when using babel-node as interpreter
 - [#1283] --skip-env option to not merge update with system env
+- Option --interpreter-args added (alias of node-args)
+- Allow to use exactly the same option in JSON declaration and CLI (e.g. interpreter) to avoid confusion
 - Refactor programmatic system
 - Fix random no response from pm2 link and pm2 unlink
 - API breaking changes
