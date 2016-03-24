@@ -12,3 +12,7 @@ node_js:
    - "5"
 os:
   - linux
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install python3
+  - sudo apt-get install php5-cli
