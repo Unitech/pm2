@@ -26,6 +26,8 @@ bash ./test/bash/multiparam.sh
 spec "Multiparam process management"
 bash ./test/bash/json-file.sh
 spec "JSON file test"
+bash ./test/bash/yaml-configuration.sh
+spec "YAML configuration support"
 bash ./test/bash/piped-config.sh
 spec "Piped JSON file test"
 bash ./test/bash/extra-lang.sh

@@ -3,8 +3,6 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/include.sh"
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 cd $file_path
 
 $pm2 start app-config-update/args1.json

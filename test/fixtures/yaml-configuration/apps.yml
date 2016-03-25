@@ -1,0 +1,10 @@
+apps:
+  - name: test
+    script: echo.js
+  - name: HTTP
+    script: child.js
+    instances: 4
+  - name: PythonApp
+    script: echo.py
+    interpreter: /usr/bin/python3
+    interpreter_args: -u
