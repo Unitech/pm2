@@ -6,6 +6,7 @@ This version has been heavily tested in testing, production environments and dee
 
 - [#133 #1568] Allow to rename a process via pm2 restart app --name "new-name"
 - [#578] Add YAML support for application configuration file (in extent to JSON and JSON5 support)
+- [Keymetrics agent refactoring] TCP wait, memory consumption divided by two, better offline/online support, keep alive ping system
 - [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart (args, node_args, name, max-memory)
 - [#2012 #1650 #1743] CLI/JSON arguments update on reload
 - [#1613] Reload all reload ALL apps (stopped, errored...)
