@@ -21,6 +21,8 @@ This version has been heavily tested in testing, production environments and dee
 - Fix random no response from pm2 link and pm2 unlink
 - API breaking changes
 
+- command field in process metadata removed (about command locking system) !check rev action!
+
 ### 1.0.2
 
 - [#1035 #1055] Deactivate automatic dump on startup scripts
