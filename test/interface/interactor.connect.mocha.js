@@ -111,44 +111,47 @@ describe('Interactor testing', function() {
     });
   });
 
-  it('should send ask, receive ask:rep and identify agent', function(done) {
-    server.once('ask:rep', function(pck) {
-      var data = Cipher.decipherMessage(pck.data, meta_connect.secret_key);
-      data.machine_name.should.eql(meta_connect.machine_name);
-      done();
+  describe('Reverse Interactor', function() {
+    it('should send ask, receive ask:rep and identify agent', function(done) {
+      server.once('ask:rep', function(pck) {
+        var data = Cipher.decipherMessage(pck.data, meta_connect.secret_key);
+        data.machine_name.should.eql(meta_connect.machine_name);
+        done();
+      });
+
+      server.emit('cmd', { _type : 'ask' });
     });
 
-    server.emit('cmd', { _type : 'ask' });
-  });
 
+    it('should get status via PushInteractor and PM2 should be statused as not protected', function(done) {
+      sock.once('message', function(data) {
+        var dt = JSON.parse(data);
+        dt.public_key.should.eql('osef');
+        dt.sent_at.should.exists;
+        dt.data.server_name.should.eql('osef');
+        dt.data.status.protected.should.be.false;
+        done();
+      });
+    });
 
-  it('should get status via PushInteractor and PM2 should be statused as not protected', function(done) {
-    sock.once('message', function(data) {
-      var dt = JSON.parse(data);
-      dt.public_key.should.eql('osef');
-      dt.sent_at.should.exists;
-      dt.data.server_name.should.eql('osef');
-      dt.data.status.protected.should.be.false;
-      done();
+    it('should set a password', function(done) {
+      CLI.set('pm2:passwd', 'testpass', function(err, data) {
+        should(err).not.exists;
+        setTimeout(done, 1000);
+      });
+    });
+
+    it('should interactor be notified of password set', function(done) {
+      sock.once('message', function(data) {
+        var dt = JSON.parse(data);
+
+        // Has switched to true
+        dt.data.status.protected.should.be.true;
+
+        done();
+      });
     });
   });
 
-  it('should set a password', function(done) {
-    CLI.set('pm2:passwd', 'testpass', function(err, data) {
-      should(err).not.exists;
-      setTimeout(done, 1000);
-    });
-  });
-
-  it('should interactor be notified of password set', function(done) {
-    sock.once('message', function(data) {
-      var dt = JSON.parse(data);
-
-      // Has switched to true
-      dt.data.status.protected.should.be.true;
-
-      done();
-    });
-  });
 
 });

@@ -63,19 +63,17 @@ spec "JSON environment switching on JSON restart with --env"
 mocha ./test/programmatic/configuration.mocha.js
 spec "Configuration system working"
 
+#
+# Interface testing
+#
 mocha ./test/interface/interactor.connect.mocha.js
 spec "Interactor test #1 with password setting"
-mocha ./test/interface/interactor.connect.two.mocha.js
-spec "Interactor test #2 with password setting"
-
-# mocha ./test/interface/interactor.daemonizer.mocha.js
-# spec "Remote interactor keys save verification"
-
+mocha ./test/interface/interactor.daemonizer.mocha.js
+spec "Remote interactor keys save verification"
 mocha ./test/interface/scoped_pm2_actions.mocha.js
 spec "Scoped PM2 Remote interactions test"
 mocha ./test/interface/remote.mocha.js
 spec "Remote interactions test"
-
 mocha ./test/interface/password.mocha.js
 spec "Password library checking"
 mocha ./test/interface/custom-actions.mocha.js
