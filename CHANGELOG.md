@@ -1,12 +1,16 @@
 
 ### 1.1.0: Homogenization release
 
-This release is about PM2's internals refactoring, homogenization in action commands (in terms of behavior and outputs) and some related changes.
-This version has been heavily tested in testing, production environments and deeply monitored in terms of CPU and Memory usage.
+This release is about PM2's internals refactoring, homogenization in action commands (in terms of behavior and outputs).
+Some interesting features has been added, as YAML file support (for application declaration) and some syntaxic sugar.
+The Keymetrics interface has been enhanced, dividing by two the memory usage and avoiding any possible leak in any potential scenarios. Reconnection system has been refactored too, we kindly ask our Keymetrics users to upgrade to this version ASAP.
+
+**This version has been heavily tested in testing, production environments and deeply monitored in terms of CPU and Memory usage.**
 
 - [#133 #1568] Allow to rename a process via pm2 restart app --name "new-name"
 - [#578] Add YAML support for application configuration file (in extent to JSON and JSON5 support)
 - [Keymetrics agent refactoring] TCP wait, memory consumption divided by two, better offline/online support, keep alive ping system
+- [Keymetrics agent refactoring] Hardened reconnection system
 - [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart (args, node_args, name, max-memory)
 - [#2012 #1650 #1743] CLI/JSON arguments update on reload
 - [#1613] Reload all reload ALL apps (stopped, errored...)
@@ -20,8 +24,6 @@ This version has been heavily tested in testing, production environments and dee
 - Refactor programmatic system
 - Fix random no response from pm2 link and pm2 unlink
 - API breaking changes
-
-- command field in process metadata removed (about command locking system) !check rev action!
 
 ### 1.0.2
 

@@ -84,3 +84,5 @@ mocha ./test/interface/bus.fork.spec.mocha.js
 spec "Protocol communication test"
 mocha ./test/interface/request.mocha.js
 spec "Protocol communication test"
+mocha ./test/interface/push_interactor.mocha.js
+spec "Push Interactor + Reconnection communication test"
