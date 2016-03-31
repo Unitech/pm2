@@ -1,5 +1,5 @@
 
-process.env.DEBUG='interface:*';
+process.env.DEBUG='interface:push-interactor';
 process.env.NODE_ENV = 'local_test';
 process.env.PM2_PUBLIC_KEY = 'xxxx';
 process.env.PM2_SECRET_KEY = 'yyyy';
@@ -20,12 +20,21 @@ function listen(cb) {
   sock.bind(8080, cb);
 }
 
+function listenRev(cb) {
+  var listener_server = require('nssocket').createServer(function(_socket) {
+  });
+
+  listener_server.listen(4322, '0.0.0.0', cb);
+}
+
 describe('Programmatically test interactor', function() {
   before(function(done) {
     Helpers.forkPM2(function(err, _pm2) {
       listen(function() {
-        pm2 = _pm2;
-        done();
+        listenRev(function() {
+          pm2 = _pm2;
+          done();
+        });
       });
     });
   });
@@ -49,7 +58,7 @@ describe('Programmatically test interactor', function() {
 
   it('should change urls (forcing reconnection)', function(done) {
     InterfaceD.changeUrls('app.km.io', 'app.km.io:4322');
-    setTimeout(done, 1000);
+    setTimeout(done, 2000);
   });
 
   it('should still receive messages', function(done) {

@@ -1,5 +1,5 @@
 
-process.env.DEBUG="interface:*"
+process.env.DEBUG="interface:*";
 
 var should  = require('should');
 var assert = require('assert');
