@@ -1,6 +1,15 @@
 
 
+var Wrap = require('./wrap.js');
 var axon = require('pm2-axon');
+
+var Module = require('module');
+Wrap.wrap(Module, '_load', function(load) {
+  return function(file) {
+    return load.apply(this, arguments);
+  }
+});
+
 
 var server = axon.socket('sub');
 
@@ -58,10 +67,6 @@ function setupConnection() {
 }
 
 var connection = setupConnection();
-
-connection.on('close', function() {
-  console.log('AYA');
-});
 
 setInterval(function() {
   connection.send();
