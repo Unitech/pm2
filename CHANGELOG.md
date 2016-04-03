@@ -1,5 +1,5 @@
 
-### 1.1.0: Homogenization release
+### 1.1.0: Galactica release
 
 This release is about PM2's internals refactoring, homogenization in action commands (in terms of behavior and outputs).
 Some interesting features has been added, as YAML file support (for application declaration) and some syntaxic sugar.
@@ -8,22 +8,23 @@ The Keymetrics interface has been enhanced, dividing by two the memory usage and
 **This version has been heavily tested in testing, production environments and deeply monitored in terms of CPU and Memory usage.**
 
 - [#133 #1568] Allow to rename a process via pm2 restart app --name "new-name"
-- [#578] Add YAML support for application configuration file (in extent to JSON and JSON5 support)
-- [Keymetrics agent refactoring] TCP wait, memory consumption divided by two, better offline/online support, keep alive ping system
-- [Keymetrics agent refactoring] Hardened reconnection system
 - [#2002 #1921 #1366] Fix CLI/JSON arguments update on restart (args, node_args, name, max-memory)
+- [#578] Add YAML support for application configuration file (in extent to JSON and JSON5 support)
+- [Keymetrics agent refactoring] TCP wait, memory consumption divided by two, reconnection refactoring, keep alive ping system
+- [Keymetrics agent refactoring] Fix random no response from pm2 link and pm2 unlink
+- [#2061] Kill ESRCH of processes in cluster mode with SIGINT catcher fixed
 - [#2012 #1650 #1743] CLI/JSON arguments update on reload
-- [#1613] Reload all reload ALL apps (stopped, errored...)
+- [#1613] Reload all reload ALL applications (stopped, errored...)
 - [#1961] Fix kill timeout info log
 - [#1987] Fix FreeBSD startup script
 - [#2011] Respect process.stdout/.stderr signature
 - [#1602] Fix zombie process when using babel-node as interpreter
 - [#1283] --skip-env option to not merge update with system env
+- Homogeneize actions commands outputs
 - Option --interpreter-args added (alias of node-args)
 - Allow to use exactly the same option in JSON declaration and CLI (e.g. interpreter) to avoid confusion
+- pm2 show, now shows more commands to manage processes
 - Refactor programmatic system
-- Fix random no response from pm2 link and pm2 unlink
-- API breaking changes
 
 ### 1.0.2
 
