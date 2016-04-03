@@ -15,7 +15,7 @@ var moment    = require('moment');
 var Common    = require('../lib/Common');
 var chalk     = require('chalk');
 
-process.env.PM2_SILENT = true;
+process.env.PM2_SILENT = 'true';
 
 commander.version(pkg.version)
   .option('--raw', 'raw log output')
