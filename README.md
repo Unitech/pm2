@@ -280,4 +280,3 @@ Thanks in advance and we hope that you like PM2!
 PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
 For other license [contact us](https://keymetrics.io/contact/).
 
-[![Analytics](https://ga-beacon.appspot.com/UA-51734350-4/Unitech/pm2?pixel)](https://github.com/Unitech/pm2)
