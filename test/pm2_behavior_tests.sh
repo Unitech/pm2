@@ -87,4 +87,7 @@ spec "Source map resolution on exception"
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
 
+bash ./test/bash/pm2-dev.sh
+spec "pm2-dev"
+
 $pm2 kill

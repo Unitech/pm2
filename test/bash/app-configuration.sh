@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 SRC=$(cd $(dirname "$0"); pwd)
