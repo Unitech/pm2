@@ -247,6 +247,58 @@ $ pm2 save
 
 [More about startup scripts](http://pm2.keymetrics.io/docs/usage/startup/)
 
+## Programmatic Usage
+
+You can also use pm2 directly from node.
+
+`npm install pm2 --save`
+
+**`pm2.connect(errback)`** - Connects to a running pm2 daemon ("God") or launches one.  
+
+* `errback(error)` - Called when finished connecting to or launching the pm2 daemon process.
+
+**`pm2.start(options, errback)`** - Connects to a running pm2 daemon ("God") or launches one.  
+**`pm2.start(jsonConfigFile, errback)`**  
+**`pm2.start(script, errback)`**  
+**`pm2.start(script, options, errback)`**  
+**`pm2.start(script, jsonConfigFile, errback)`**  
+
+* `script` - The path of the script to run
+* `options` - An object with the following options:
+  * `script` - The path of the script to run
+  * `exec_mode` - If set to 'cluster', will enable clustering (running multiple instances of the `script`)
+  * `instances` - (*Default: 1*) How many instances of `script` to create. Only relevant in `exec_mode` 'cluster'.
+  * `max_memory_restart` - If set and `script`'s memory usage goes about the configured number, pm2 restarts the `script`. Describe a number of megabytes with the suffix 'M', for example "100M". 
+  * `scriptArgs` - An array of arguments to start the script with.  
+  * `error` - The path to a file to append stderr output to.
+  * `output` - The path to a file to append stdout output to. 
+  * `pid` - The path to a file to write the pid of the started process. The file will be overwritten. Note that the file is not used in any way by pm2 and so the user is free to manipulate or remove that file at any time. The file will be deleted when the process is stopped or the daemon killed.
+  * `name` - An arbitrary name that can be used to interact with (e.g. restart) the process later.
+  * `watch` - If set to `true`, the application will be restarted on change of the `script` file.
+  * `nodeArgs`
+  * `cron`
+  * `mergeLogs`
+  * `runAsUser`
+  * `runAsGroup`
+  * `executeCommand`
+  * `interpreter`
+  * `write`
+* `jsonConfigFile` - The path to a JSON file that can contain the same options as the `options` parameter.
+* `errback(err,proc)` - An errback called when the `script` has been started. 
+
+**`pm2.disconnect()`** - Disconnects from the pm2 daemon.
+
+**`pm2.stop(process, errback)`** - Stops a process.  
+**`pm2.restart(process, errback)`** - Restarts a process.  
+**`pm2.delete(process, errback)`** - ?  
+**`pm2.reload(process, errback)`** - ?  
+**`pm2.gracefulReload(process, errback)`** - ?  
+
+* `process` - Can either be the `name` as given in the `pm2.start` `options`, a process id, or the string "all" to indicate that all scripts should be restarted.
+* `errback(err, proc)`
+
+**`pm2.killDaemon(errback)`** - Kills the pm2 daemon. Note that when the daemon is killed, all its processes are also killed. Also note that you still have to explicitly disconnect from the daemon even after you kill it.
+
 ## Keymetrics monitoring
 
 [![Keymetrics Dashboard](https://keymetrics.io/assets/images/application-demo.png)](https://app.keymetrics.io/#/register)
