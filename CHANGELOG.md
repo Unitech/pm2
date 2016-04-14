@@ -1,4 +1,8 @@
 
+### 1.1.2
+
+- [#2071 #2075] Fix pm2-dev command
+
 ### 1.1.0: Galactica release
 
 This release is about PM2's internals refactoring, homogenization in action commands (in terms of behavior and outputs).
