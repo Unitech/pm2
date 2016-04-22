@@ -6,6 +6,7 @@ After=network.target remote-fs.target
 Type=forking
 User=%USER%
 
+ExecStartPre=%PM2_PATH% kill
 ExecStart=%PM2_PATH% resurrect
 ExecReload=%PM2_PATH% reload all
 
