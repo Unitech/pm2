@@ -1,4 +1,8 @@
 
+### 1.1.3
+
+- Node v6 compatibility
+
 ### 1.1.2
 
 - [#2071 #2075] Fix pm2-dev command
