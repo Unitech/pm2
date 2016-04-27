@@ -9,6 +9,7 @@ node_js:
    - "0.10"
    - "4"
    - "5"
+   - "6"
 os:
   - linux
 before_install:
