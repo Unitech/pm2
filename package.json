@@ -152,7 +152,7 @@
     "async"               : "1.5",
     "chalk"               : "1.1.1",
     "chokidar"            : "~1.4.0",
-    "cli-table"           : "0.3.1",
+    "cli-table2"          : "0.2.0",
     "coffee-script"       : "~1.10.0",
     "commander"           : "^2.9",
     "cron"                : "1.1.0",
