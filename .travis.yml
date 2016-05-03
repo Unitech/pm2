@@ -1,19 +1,26 @@
-language: node_js
-branches:
-  only:
-    - master
-    - development
-    - travis
-node_js:
-   - "0.12"
-   - "0.10"
-   - "4"
-   - "5"
-   - "6"
+language: c
+env:
+  - NODE_VERSION="6"
+  - NODE_VERSION="5"
+  - NODE_VERSION="4"
+  - NODE_VERSION="0.12"
+  - NODE_VERSION="0.10"
 os:
   - linux
+  - osx
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install python3
   - sudo apt-get install php5-cli
+  - echo $TRAVIS_OS_NAME
+  - export PATH=./node_modules/.bin/:$PATH
+  - rm -rf ~/.nvm/ && git clone --depth 1 https://github.com/creationix/nvm.git ~/.nvm
+  - source ~/.nvm/nvm.sh
+  - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
+  - node -v
+install:
+  - npm install
+script:
+  - npm run ci-test
 sudo: required
