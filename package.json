@@ -98,7 +98,7 @@
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "PM2_CONCURRENT_ACTIONS=1 NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
+    "test": "snyk test --dev && PM2_CONCURRENT_ACTIONS=1 NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
   },
   "keywords": [
     "cli",
@@ -174,7 +174,9 @@
     "yamljs"              : "0.2.7",
     "semver"              : "~5.1.0",
     "mkdirp"              : "0.5.1",
-    "source-map-support"  : "0.4.0"
+    "source-map-support"  : "0.4.0",
+
+    "snyk"                : "1.14.3"
   },
   "devDependencies": {
     "mocha"           : "2.x",
