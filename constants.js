@@ -5,6 +5,8 @@ var util  = require('util');
 var chalk = require('chalk');
 var debug = require('debug')('pm2:constants');
 
+var crypto = require('crypto');
+
 /**
  * Handle PM2 root folder relocation
  */
@@ -105,10 +107,18 @@ var conf = util._extend(default_conf, csts);
 
 if (process.platform === 'win32' ||
     process.platform === 'win64') {
+
+  // Create a hash for the PM2 home path, this will be appended to the pipe name
+  var fullPm2Path = p.resolve(PM2_ROOT_PATH);
+  var hash = crypto.createHash('sha256');
+  hash.update(fullPm2Path);
+  var hashedNameAddition = hash.digest('hex');
+
   debug('Windows detected');
-  conf.DAEMON_RPC_PORT = '\\\\.\\pipe\\rpc.sock';
-  conf.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub.sock';
-  conf.INTERACTOR_RPC_PORT = '\\\\.\\pipe\\interactor.sock';
+  conf.DAEMON_RPC_PORT = '\\\\.\\pipe\\rpc_' + hashedNameAddition  + '.sock';
+  conf.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub_' + hashedNameAddition  + '.sock';
+  conf.INTERACTOR_RPC_PORT = '\\\\.\\pipe\\interactor_' + hashedNameAddition  + '.sock';
+
 }
 
 /**
