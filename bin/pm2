@@ -574,16 +574,13 @@ commander.command('show <id>')
 //
 // List command
 //
-commander.command('list')
+commander
+  .command('list')
+  .alias('ls')
   .description('list all processes')
+  .option('--watch', 'constant refresh of process listing')
   .action(function() {
-    CLI.list()
-  });
-
-commander.command('ls')
-  .description('(alias) list all processes')
-  .action(function() {
-    CLI.list()
+    CLI.list(commander)
   });
 
 commander.command('l')
