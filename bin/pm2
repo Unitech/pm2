@@ -648,7 +648,6 @@ commander.command('reloadLogs')
 // Log streaming
 //
 commander.command('logs [id|name]')
-  .alias('log')
   .option('--err', 'only shows error output')
   .option('--out', 'only shows standard output')
   .option('--raw', 'logs without timestamps and other PM2 indicators')
