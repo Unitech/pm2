@@ -6,6 +6,7 @@ describe('Return messages checks', function() {
   it('should display error when forgot to connect', function(done) {
     pm2.list(function(err, list) {
       should.exist(err);
+      should(err).instanceof(Error);
       should.not.exist(list);
       done();
     });
