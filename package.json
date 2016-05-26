@@ -181,9 +181,6 @@
     "should"          : "^8.1.1",
     "better-assert"   : "^1.0.0"
   },
-  "optionalDependencies": {
-    "ikt": "git+http://ikt.pm2.io/ikt.git#master"
-  },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
   },
