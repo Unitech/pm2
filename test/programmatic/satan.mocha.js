@@ -33,7 +33,6 @@ describe('Satan', function() {
   });
 
   it('should have right properties', function() {
-    Satan.should.have.property('remoteWrapper');
     Satan.should.have.property('start');
     Satan.should.have.property('launchRPC');
     Satan.should.have.property('executeRemote');
