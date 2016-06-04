@@ -9,3 +9,4 @@ process.env.PM2_PROGRAMMATIC = 'true';
 CLI.pm2Init();
 
 module.exports = CLI;
+module.exports.api = require('./lib/api.js');
