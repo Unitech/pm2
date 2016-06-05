@@ -99,15 +99,6 @@ if (process.argv.indexOf('-s') > -1) {
 }
 
 function beginCommandProcessing() {
-  //
-  // Wait Satan is connected to God to launch parsing
-  //
-  // This message is triggered once the RPC Client is connected to the Daemon
-  // in file Satan.js, method Satan.launchRPC
-  //
-  debug('Got message from Satan as successfully connected to PM2, now parsing arguments');
-
-  // Deprecate message for update as there is an automatic update procedure now
   cli.getVersion(function(err, remote_version) {
     if (!err && (pkg.version != remote_version)) {
       console.log('');
@@ -164,14 +155,16 @@ if (process.argv.indexOf('--no-daemon') > -1) {
   });
 }
 else {
-// HERE we instanciate the Client object
+  // HERE we instanciate the Client object
   cli.connect(function() {
+    debug('Now connected to daemon');
     if (process.argv.slice(2)[0] === 'completion') {
       checkCompletion();
       cli.disconnect();
     }
-    else
+    else {
       beginCommandProcessing();
+    }
   });
 }
 
