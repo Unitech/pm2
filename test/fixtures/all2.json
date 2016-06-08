@@ -1,6 +1,6 @@
 [{
   "name"      : "echo",
-  "script"    : "./test/fixtures/echo.js",
+  "script"    : "./echo.js",
   "instances" : "1",
   "env_production" : {
     "NODE_ENV" : "production",
@@ -12,12 +12,12 @@
   }
 },{
   "name"       : "child",
-  "script"     : "./test/fixtures/child.js",
+  "script"     : "./child.js",
   "instances"  : "1",
   "error_file" : "./child-err.log",
   "out_file"   : "./child-out.log"
 },{
   "name"      : "api-2",
-  "script"    : "./test/fixtures/server.js",
+  "script"    : "./server.js",
   "instances" : "2"
 }]

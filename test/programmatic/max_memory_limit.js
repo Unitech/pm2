@@ -1,16 +1,24 @@
 
+process.env.NODE_ENV = 'test';
 
-var pm2    = require('../..');
+var PM2    = require('../..');
 var should = require('should');
 var assert = require('better-assert');
 var path   = require('path');
 
+// Change to current folder
+process.chdir(__dirname);
+
 describe('Max memory restart programmatic', function() {
+  this.timeout(10000);
 
   var proc1 = null;
   var procs = [];
+  var pm2 = new PM2({ independant : true });
 
-  after(pm2.disconnect);
+  after(function(done) {
+    pm2.destroy(done)
+  });
 
   afterEach(function(done) {
     pm2.delete('all', function() {
@@ -31,10 +39,10 @@ describe('Max memory restart programmatic', function() {
 
   describe('Max memory limit', function() {
     it('should restart process based on memory limit (UGLY WAY)', function(done) {
-      pm2.start(process.cwd() + '/test/fixtures/json-reload/big-array.js', {
+      pm2.start('../fixtures/json-reload/big-array.js', {
         maxMemoryRestart : '10M'
       }, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
 
         setTimeout(function() {
           pm2.list(function(err, ret) {
@@ -48,10 +56,10 @@ describe('Max memory restart programmatic', function() {
 
     it('should restart process based on memory limit (JSON WAY)', function(done) {
       pm2.start({
-        script : process.cwd() + '/test/fixtures/json-reload/big-array.js',
+        script : '../fixtures/json-reload/big-array.js',
         max_memory_restart : '10M'
       }, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
 
         setTimeout(function() {
           pm2.list(function(err, ret) {
@@ -65,7 +73,7 @@ describe('Max memory restart programmatic', function() {
 
     it('should restart CLUSTER process based on memory limit (JSON WAY)', function(done) {
       pm2.start({
-        script : process.cwd() + '/test/fixtures/big-array-listen.js',
+        script : '../fixtures/big-array-listen.js',
         max_memory_restart : '10M',
         exec_mode : 'cluster'
       }, function(err, data) {

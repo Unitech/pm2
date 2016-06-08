@@ -8,14 +8,17 @@ var Common = require('../../lib/Common');
 
 var cst = require('../../constants.js');
 
+// Change to current folder
+process.chdir(__dirname);
+
 /**
  * Description
  * @method getConf
  * @return AssignmentExpression
  */
 function getConf() {
-  var a = Common.prepareAppConf({
-    script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+  var a = Common.prepareAppConf({ cwd : process.cwd() }, {
+    script : '../fixtures/echo.js',
     name : 'echo',
     instances : 2
   });
@@ -23,8 +26,8 @@ function getConf() {
 }
 
 function getConf2() {
-  return Common.prepareAppConf({
-    script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
+  return Common.prepareAppConf({ cwd : process.cwd() }, {
+    script : '../fixtures/child.js',
     instances       : 4,
     exec_mode       : 'cluster_mode',
     name : 'child'
@@ -32,8 +35,8 @@ function getConf2() {
 }
 
 function getConf3() {
-  return Common.prepareAppConf({
-    script : path.resolve(process.cwd(), 'test/fixtures/child.js'),
+  return Common.prepareAppConf({ cwd : process.cwd() }, {
+    script : '../fixtures/child.js',
     instances       : 10,
     exec_mode       : 'cluster_mode',
     name : 'child'
@@ -41,8 +44,8 @@ function getConf3() {
 }
 
 function getConf4() {
-  return Common.prepareAppConf({
-    script : path.resolve(process.cwd(), 'test/fixtures/args.js'),
+  return Common.prepareAppConf({ cwd : process.cwd() }, {
+    script : '../fixtures/args.js',
     args            : ['-d', '-a'],
     instances       : '1',
     name : 'child'
@@ -73,7 +76,7 @@ function deleteAll(data, cb) {
 describe('God', function() {
   before(function(done) {
     deleteAll({}, function(err, dt) {
-      setTimeout(done, 1000);
+      done()
     });
   });
 
@@ -111,7 +114,7 @@ describe('God', function() {
 
     before(function(done) {
       deleteAll({}, function(err, dt) {
-        setTimeout(done, 1000);
+        done();
       });
     });
     it('should start a process', function(done) {
@@ -158,7 +161,7 @@ describe('God', function() {
 
     before(function(done) {
       deleteAll({}, function(err, dt) {
-        setTimeout(done, 1000);
+        done();
       });
     });
 
@@ -182,20 +185,22 @@ describe('God', function() {
 
     before(function(done) {
       deleteAll({}, function(err, dt) {
-        setTimeout(done, 1000);
+        done();
       });
     });
 
-
     afterEach(function(done) {
+      this.timeout(5000);
       deleteAll({}, function(err, dt) {
-        setTimeout(done, 1000);
+        done();
       });
     });
 
     it('should launch multiple processes depending on CPUs available', function(done) {
-      God.prepare(Common.prepareAppConf({
-        script : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+      this.timeout(5000);
+
+      God.prepare(Common.prepareAppConf({cwd : process.cwd() }, {
+        script : '../fixtures/echo.js',
         name : 'child',
         instances:3
       }), function(err, procs) {
@@ -214,8 +219,8 @@ describe('God', function() {
     });
 
     it('should dump process list', function(done) {
-      God.prepare(Common.prepareAppConf({
-        script    : path.resolve(process.cwd(), 'test/fixtures/echo.js'),
+      God.prepare(Common.prepareAppConf({cwd : process.cwd() }, {
+        script    : '../fixtures/echo.js',
         name      : 'child',
         instances : 3
       }), function(err, procs) {
@@ -238,66 +243,6 @@ describe('God', function() {
           God.getFormatedProcesses()[0].pm2_env.restart_time.should.eql(0);
           done();
         }, 500);
-      });
-    });
-
-  });
-
-  describe.skip('Lock/Unlock system', function() {
-
-    it('should launch processes', function(done) {
-      God.prepare(getConf(), function(err, procs) {
-	      God.getFormatedProcesses().length.should.equal(2);
-
-        var command = procs[0].pm2_env.command;
-
-        should.exist(command);
-        command.should.have.properties(['locked', 'metadata', 'started_at', 'finished_at']);
-
-        done();
-      });
-    });
-
-    it('should lock a process', function(done) {
-      God.lock({ name : 'echo', meta : 'pulling...' }, function(err, procs) {
-        var processes = God.findByName('echo');
-
-        should(err).be.null;
-
-        processes.forEach(function(proc) {
-          proc.pm2_env.command.locked.should.be.true;
-        });
-
-        done();
-      });
-    });
-
-    it('should trying to relock fail', function(done) {
-      God.lock({ name : 'echo', meta : { command : 'restart'  }}, function(err, procs) {
-
-        should.exist(err);
-
-        var processes = God.findByName('echo');
-
-        processes.forEach(function(proc) {
-          proc.pm2_env.command.locked.should.be.true;
-        });
-
-        done();
-      });
-    });
-
-    it('should unlock processes', function(done) {
-      God.unlock({ name : 'echo', meta : { result : 'successsss'} }, function(err, procs) {
-        var processes = God.findByName('echo');
-
-        should(err).be.null;
-
-        processes.forEach(function(proc) {
-          proc.pm2_env.command.locked.should.be.false;
-        });
-
-        done();
       });
     });
 

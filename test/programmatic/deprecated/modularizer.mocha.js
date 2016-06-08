@@ -1,9 +1,10 @@
 
-var pm2         = require('../..');
+var PM2         = require('../..');
 var should      = require('should');
 var Modularizer = require('../../lib/Modularizer');
 
 describe('Modularizer programmatic tests', function() {
+  var pm2 = new PM2();
 
   before(function(done) {
     process.env.PM2_WORKER_INTERVAL = 1000;

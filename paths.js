@@ -5,7 +5,8 @@
  * can be found in the LICENSE file.
  */
 
-var p    = require('path');
+var debug = require('debug')('pm2:paths');
+var p     = require('path');
 
 function getDefaultPM2Home() {
   var PM2_ROOT_PATH;
@@ -22,6 +23,7 @@ function getDefaultPM2Home() {
     PM2_ROOT_PATH = p.resolve('/etc', '.pm2');
   }
 
+  debug('pm2 home resolved to %s', PM2_ROOT_PATH, process.env.HOME);
   return PM2_ROOT_PATH;
 }
 

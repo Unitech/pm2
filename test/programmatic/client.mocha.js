@@ -1,12 +1,12 @@
 
 var should = require('should');
-var Client = require('../../lib/Satan');
+var Client = require('../../lib/Client');
 
 describe('Client Daemon', function() {
   var client;
 
   it('should instanciate a new client', function() {
-    client = new Client();
+    client = new Client({ independant : true });
     should.exist(client.rpc_socket_file);
     should.exist(client.pub_socket_file);
     should.exist(client.pm2_home);

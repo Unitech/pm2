@@ -1,4 +1,6 @@
 
+- kill online interface option (SIGITN + kill Daemon)
+
 - shelljs required in interactor, can be replace with native exec
 - Interactor: REMOTE_HOST and remote_host never used
 - satan refactor for being able to connect to multiple PM2

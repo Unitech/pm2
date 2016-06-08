@@ -7,7 +7,7 @@ var chalk = require('chalk');
 /**
  * Get PM2 path structure
  */
-var path_structure = require('./paths.js')();
+var path_structure = require('./paths.js')(process.env.OVER_HOME);
 
 /**
  * Constants variables used by PM2
@@ -38,6 +38,7 @@ var csts = {
   SUCCESS_EXIT            : 0,
   ERROR_EXIT              : 1,
 
+  IS_WINDOWS              : (process.platform === 'win32' || process.platform === 'win64'),
   ONLINE_STATUS           : 'online',
   STOPPED_STATUS          : 'stopped',
   STOPPING_STATUS         : 'stopping',

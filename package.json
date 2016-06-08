@@ -98,7 +98,8 @@
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "PM2_CONCURRENT_ACTIONS=1 NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
+    "progtest" : "NODE_ENV=test mocha test/programmatic/client.mocha.js",
+    "test": "PM2_CONCURRENT_ACTIONS=1 NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test mocha test/programmatic/*"
   },
   "keywords": [
     "cli",

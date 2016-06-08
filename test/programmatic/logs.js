@@ -1,5 +1,8 @@
 
-var pm2    = require('../..');
+process.env.NODE_ENV = 'test';
+process.env.DEBUG='pm2:*';
+
+var PM2    = require('../..');
 var should = require('should');
 var fs     = require('fs');
 var assert = require('better-assert');
@@ -10,24 +13,32 @@ describe('Max memory restart programmatic', function() {
   var proc1 = null;
   var procs = [];
 
-  after(pm2.disconnect);
-
-  afterEach(function(done) {
-    pm2.delete('all', done);
-  });
+  var pm2 = new PM2({ independant : true });
 
   before(function(done) {
+    this.timeout(5000);
+
     pm2.connect(function() {
+      console.log('connected');
       pm2.delete('all', function() {
         done();
       });
     });
   });
 
+  after(function(done) {
+    pm2.destroy(done);
+  });
+
+  afterEach(function(done) {
+    pm2.delete('all', done);
+  });
+
+
   describe('Log merging', function() {
     it('should process HAS post fixed logs with id (merge_logs: false)', function(done) {
       pm2.start({
-        script: 'test/fixtures/echo.js',
+        script: '../fixtures/echo.js',
         error_file : 'error-echo.log',
         out_file   : 'out-echo.log'
       }, function(err, procs) {
@@ -49,7 +60,7 @@ describe('Max memory restart programmatic', function() {
 
     it('should process HAS NOT post fixed logs with id (merge_logs: true)', function(done) {
       pm2.start({
-        script: 'test/fixtures/echo.js',
+        script: '../fixtures/echo.js',
         error_file : 'error-echo.log',
         out_file   : 'out-echo.log',
         merge_logs : true
@@ -72,7 +83,7 @@ describe('Max memory restart programmatic', function() {
 
     it('should process HAS NOT post fixed logs with id and MERGED FILE (merge_logs: true)', function(done) {
       pm2.start({
-        script: 'test/fixtures/echo.js',
+        script: '../fixtures/echo.js',
         error_file : 'error-echo.log',
         out_file   : 'out-echo.log',
         log_file   : 'merged.log',
@@ -103,7 +114,7 @@ describe('Max memory restart programmatic', function() {
   describe('Log timestamp', function() {
     it('should every file be timestamped', function(done) {
       pm2.start({
-        script          : 'test/fixtures/echo.js',
+        script          : '../fixtures/echo.js',
         error_file      : 'error-echo.log',
         out_file        : 'out-echo.log',
         log_file        : 'merged.log',

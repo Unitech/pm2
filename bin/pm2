@@ -417,7 +417,7 @@ commander.command('uninstall <module>')
 commander.command('publish')
   .alias('module:publish')
   .description('Publish the module you are currently on')
-  .action(cli.publish);
+  .action(cli.publish.bind(cli));
 
 commander.command('set <key> <value>')
   .description('sets the specified config <key> <value>')
@@ -455,15 +455,11 @@ commander.command('unset <key>')
     cli.unset(key);
   });
 
-commander.command('interact [secret_key|command] [public_key] [machine_name]')
-  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
-  .option('--recycle', 'for elastic infrastructure')
-  .action(cli._pre_interact);
-
 commander.command('link [secret_key|command] [public_key] [machine_name]')
+  .alias('interact')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
   .option('--recycle', 'for elastic infrastructure')
-  .action(cli._pre_interact);
+  .action(cli._pre_interact.bind(cli));
 
 //
 // Web interface

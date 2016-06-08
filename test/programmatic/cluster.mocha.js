@@ -1,21 +1,34 @@
 
-var pm2    = require('../..');
+process.env.NODE_ENV = 'test';
+
+var PM2    = require('../..');
 var should = require('should');
 var assert = require('better-assert');
 var path   = require('path');
+
+process.chdir(__dirname);
 
 describe('Cluster programmatic tests', function() {
 
   var proc1 = null;
   var procs = [];
 
-  after(pm2.disconnect);
+  var pm2 = new PM2({ independant : true });
+
+  after(function(done) {
+    this.timeout(5000);
+    pm2.destroy(done)
+  });
 
   before(function(done) {
+    this.timeout(5000);
     pm2.connect(function() {
-      pm2.delete('all', function() {
-        done();
-      });
+
+      setTimeout(function() {
+        pm2.delete('all', function() {
+          done();
+        });
+      }, 2000);
     });
   });
 
@@ -27,7 +40,7 @@ describe('Cluster programmatic tests', function() {
 
     it('should start 4 processes', function(done) {
       pm2.start({
-        script    : 'test/fixtures/echo.js',
+        script    : '../fixtures/echo.js',
         instances : 4
       }, function(err, data) {
         should(err).be.null;
@@ -44,7 +57,7 @@ describe('Cluster programmatic tests', function() {
     // Travis PB
     it.skip('should start maximum process depending on number of CPUs', function(done) {
       pm2.start({
-        script    : 'test/fixtures/echo.js',
+        script    : '../fixtures/echo.js',
         instances : 0
       }, function(err, data) {
         should(err).be.null;
@@ -60,7 +73,7 @@ describe('Cluster programmatic tests', function() {
     // Travis PB
     it.skip('should start maximum process depending on number of CPUs minus 1', function(done) {
       pm2.start({
-        script    : 'test/fixtures/echo.js',
+        script    : '../fixtures/echo.js',
         instances : -1
       }, function(err, data) {
         should(err).be.null;
@@ -77,7 +90,7 @@ describe('Cluster programmatic tests', function() {
   describe('Action methods', function() {
     before(function(done) {
       pm2.start({
-        script    : 'test/fixtures/child.js',
+        script    : '../fixtures/child.js',
         instances : 4
       }, done);
     });
@@ -132,7 +145,7 @@ describe('Cluster programmatic tests', function() {
     before(function(done) {
       pm2.delete('all', function() {
         pm2.start({
-          script    : 'test/fixtures/child.js',
+          script    : '../fixtures/child.js',
           instances : 4,
           name      : 'child'
         }, done);

@@ -1,8 +1,13 @@
 
-var pm2    = require('../..');
+var PM2    = require('../..');
 var should = require('should');
 
 describe('Return messages checks', function() {
+  var pm2 = new PM2({
+    independant : true,
+    cwd : '../fixtures'
+  });
+
   it('should display error when forgot to connect', function(done) {
     pm2.list(function(err, list) {
       should.exist(err);

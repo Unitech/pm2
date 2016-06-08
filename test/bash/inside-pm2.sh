@@ -33,4 +33,4 @@ sleep 1
 grep "hello2" inside-out-1.log &> /dev/null
 spec "Child should have hello2 variable after restart"
 
-$pm2 kill
+#$pm2 kill

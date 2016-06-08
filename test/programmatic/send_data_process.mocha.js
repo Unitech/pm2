@@ -4,12 +4,17 @@
  * PM2 programmatic API tests
  */
 
-var pm2    = require('../..');
+var PM2    = require('../..');
 var should = require('should');
 var assert = require('better-assert');
 var path   = require('path');
 
 describe('PM2 programmatic calls', function() {
+
+  var pm2 = PM2({
+    independant : true,
+    cwd : '../fixtures'
+  });
 
   var pm2_bus = null;
   var proc1   = null;
@@ -17,8 +22,7 @@ describe('PM2 programmatic calls', function() {
 
   after(function(done) {
     pm2.delete('all', function(err, ret) {
-      pm2.disconnectBus();
-      pm2.disconnect(done);
+      pm2.destroy(done);
     });
   });
 
@@ -46,7 +50,7 @@ describe('PM2 programmatic calls', function() {
    */
   it('should start a script', function(done) {
     pm2.start({
-      script : './test/fixtures/send-data-process/return-data.js'
+      script : './send-data-process/return-data.js'
     }, function(err, data) {
       proc1 = data[0];
       should(err).be.null;
