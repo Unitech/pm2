@@ -4,6 +4,7 @@
 - Major PM2 client-side code rewritte for a better code structure and integration
 - Major API rewrite
 
+```javascript
 var PM2 = require('pm2');
 
 var pm2 = new PM2({
@@ -27,6 +28,7 @@ pm2.launchBus((err, bus) => {
     console.log(message);
   });
 });
+```
 
 - Tests are now run in parallel reducing time from 20min to Xmin
 - Startup performance improvement (better performance on ARM)
