@@ -1,4 +1,37 @@
 
+### 2.0.0
+
+- Major PM2 client-side code rewritte for a better code structure and integration
+- Major API rewrite
+
+var PM2 = require('pm2');
+
+var pm2 = new PM2({
+  pm2_home :    // Default is the legacy $USER/.pm2. Now you can override this value
+  cwd      :    // Move to CWD,
+  daemon_mode : // Should the process stay attached to this application,
+  independant : // Create new random instance available for current session
+});
+
+// Connect to local instance for operations
+pm2.connect((err) => {
+  // Ready to interact
+})
+
+pm2.disconnect(cb) // Close connection with current pm2 instance
+pm2.destroy(cb)    // Close and delete all pm2 related files of this session
+
+// Bus system to detect events
+pm2.launchBus((err, bus) => {
+  bus.on('*', (message) => {
+    console.log(message);
+  });
+});
+
+- Tests are now run in parallel reducing time from 20min to Xmin
+- Startup performance improvement (better performance on ARM)
+- pm2-dev now runs in a different PM2 process
+
 ### 1.1.3
 
 - Node v6 compatibility
