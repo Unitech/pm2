@@ -8,18 +8,19 @@ var extend = require('util')._extend
 
 var cwd = p.resolve(__dirname, '../fixtures/watcher')
 
-process.chdir(cwd)
+//process.chdir(cwd)
 
 var paths = {
-  server: p.join(cwd, 'server-watch.js'),
-  bak: p.join(cwd, 'server-watch.bak.js'),
-  json: p.join(cwd, 'server-watch.json')
+  server : p.join(cwd, 'server-watch.js'),
+  bak    : p.join(cwd, 'server-watch.bak.js'),
+  json   : p.join(cwd, 'server-watch.json')
 };
+
 var ee = new EventEmitter()
 
 var json = {
   name  : 'server-watch',
-  script: paths.server,
+  script: './server-watch.js',
   cwd   : cwd
 }
 
@@ -44,16 +45,16 @@ function testPM2Env(event) {
 }
 
 function errShouldBeNull(err) {
-  should(err).be.null
+  should(err).be.null();
 }
 
 describe('Watcher', function() {
   var pm2 = new PM2({
     //independant : true,
-    cwd : '../fixtures'
+    cwd : '../fixtures/watcher'
   });
 
-  this.timeout(10000)
+  this.timeout(2500)
 
   after(function(cb) {
     pm2.destroy(function() {
@@ -96,7 +97,8 @@ describe('Watcher', function() {
   it('should be watching', function(cb) {
     testPM2Env('server-watch:online')({watch: true}, cb)
 
-    pm2.start(extend(json, {watch: true}), errShouldBeNull)
+    var json_app = extend(json, {watch: true});
+    pm2.start(json_app, errShouldBeNull)
   })
 
   it('should be watching after restart', function(cb) {
@@ -142,7 +144,8 @@ describe('Watcher', function() {
       cb()
     })
 
-    pm2.start(paths.json, errShouldBeNull)
+    var json_app = paths.json;
+    pm2.start(json_app, errShouldBeNull)
   })
 
   it('should restart json from file touch', function(cb) {

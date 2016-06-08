@@ -5,7 +5,7 @@
 var commander = require('commander');
 
 var debug     = require('debug')('pm2:cli');
-var Satan     = require('../lib/Satan');
+var PM2       = require('../lib/CLI.js');
 var CLI       = require('../lib/CLI');
 var Log       = require('../lib/CLI/Log');
 var cst       = require('../constants.js');
@@ -14,6 +14,7 @@ var platform  = require('os').platform();
 var moment    = require('moment');
 var Common    = require('../lib/Common');
 var chalk     = require('chalk');
+var path      = require('path');
 
 process.env.PM2_SILENT = 'true';
 
@@ -22,9 +23,11 @@ commander.version(pkg.version)
   .option('--timestamp [format]', 'add timestamps to logs')
   .usage('[cmd] app');
 
-CLI.pm2Init();
+var pm2 = new PM2({
+  pm2_home : path.join(process.env.HOME, '.pm2-dev')
+});
 
-Satan.start(false, function() {
+pm2.connect(function() {
   commander.parse(process.argv);
 });
 
@@ -38,16 +41,16 @@ function run(cmd, opts) {
   if (timestamp === true)
     timestamp = 'YYYY-MM-DD-HH:mm:ss';
 
-  CLI.start(cmd, commander, function(err, obj) {
-    Log.stream('all', needRaw, timestamp, false);
+  pm2.start(cmd, commander, function(err, obj) {
+    Log.stream(pm2.Client, 'all', needRaw, timestamp, false);
 
     process.on('SIGINT', function() {
-      CLI.delete(cmd, '', function() {
-        Common.exitCli(cst.SUCCESS_EXIT);
+      console.log('>>>>> [PM2 DEV] Stopping current development session');
+      pm2.delete('all', function() {
+        pm2.destroy(function() {
+          process.exit(0);
+        });
       });
-      setTimeout(function killAnyway() {
-        Common.exitCli(cst.SUCCESS_EXIT);
-      }, 3000);
     });
 
   });

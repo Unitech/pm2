@@ -9,7 +9,7 @@ describe('Signal kill (+delayed)', function() {
 
   var proc1 = null;
 
-  var pm2 = PM2({
+  var pm2 = new PM2({
     independant : true,
     cwd : '../fixtures'
   });

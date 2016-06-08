@@ -10,26 +10,21 @@ process.chdir(__dirname);
 
 describe('Cluster programmatic tests', function() {
 
-  var proc1 = null;
-  var procs = [];
-
-  var pm2 = new PM2({ independant : true });
-
-  after(function(done) {
-    this.timeout(5000);
-    pm2.destroy(done)
+  var pm2 = new PM2({
+    cwd : '../fixtures',
+    independant : true
   });
 
   before(function(done) {
     this.timeout(5000);
     pm2.connect(function() {
-
-      setTimeout(function() {
-        pm2.delete('all', function() {
-          done();
-        });
-      }, 2000);
+      done();
     });
+  });
+
+  after(function(done) {
+    this.timeout(5000);
+    pm2.destroy(done)
   });
 
   describe('Start with different instances number parameter', function() {
@@ -40,7 +35,7 @@ describe('Cluster programmatic tests', function() {
 
     it('should start 4 processes', function(done) {
       pm2.start({
-        script    : '../fixtures/echo.js',
+        script    : './echo.js',
         instances : 4
       }, function(err, data) {
         should(err).be.null;
