@@ -66,6 +66,7 @@ describe('Http requests', function() {
     });
 
     it('should timeout after 7secs', function(done) {
+      this.timeout(10000);
       HttpRequest.post({
         port : PORT,
         url  : '127.0.0.1',
@@ -90,6 +91,14 @@ describe('Http requests', function() {
         done();
       });
     });
+  });
+
+  // @todo: more behavioral tests (reverse interactor failcheck)
+
+  // @todo: do more tests when doing changeUrls
+  it.skip('should change urls (forcing reconnection)', function(done) {
+    InterfaceD.changeUrls('app.km.io', 'app.km.io:4322');
+    setTimeout(done, 2000);
   });
 
 });

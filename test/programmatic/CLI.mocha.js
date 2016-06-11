@@ -11,7 +11,7 @@ describe('CLI tests', function() {
 
   before(function(done) {
     pm2 = new PM2({
-      indepedant : true
+      independant : true
     });
     pm2.connect(done);
   });
@@ -24,7 +24,7 @@ describe('CLI tests', function() {
   it('should list', function(done) {
     pm2.list(function(err, list) {
       should(err).be.null;
-      console.log(err, list);
+      //console.log(err, list);
       done();
     });
   });
@@ -36,7 +36,7 @@ describe('CLI tests', function() {
     }, function(err, data) {
       should(err).be.null;
 
-      console.log(err);
+      //console.log(err);
 
       pm2.list(function(err, ret) {
         should(err).be.null;

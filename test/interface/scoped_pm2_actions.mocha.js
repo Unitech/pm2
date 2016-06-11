@@ -1,15 +1,15 @@
 
-var CLI  = require('../..');
-var should   = require('should');
-var nssocket = require('nssocket');
-var events   = require('events');
-var util     = require('util');
-var Cipher   = require('../../lib/Interactor/Cipher.js');
-var cst      = require('../../constants.js');
-var Plan     = require('../helpers/plan.js');
+var PM2           = require('../..');
+var should        = require('should');
+var nssocket      = require('nssocket');
+var events        = require('events');
+var util          = require('util');
+var Cipher        = require('../../lib/Interactor/Cipher.js');
+var cst           = require('../../constants.js');
+var Plan          = require('../helpers/plan.js');
 var Configuration = require('../../lib/Configuration.js');
-var Helpers          = require('../helpers/apps.js');
-var Interactor = require('../../lib/Interactor/InteractorDaemonizer.js');
+var Helpers       = require('../helpers/apps.js');
+var Interactor    = require('../../lib/Interactor/InteractorDaemonizer.js');
 var gl_interactor_process;
 
 var send_cmd = new events.EventEmitter();
@@ -68,39 +68,35 @@ function createMockServer(cb) {
 }
 
 function startSomeApps(cb) {
-  CLI.connect(function() {
-    CLI.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, cb);
-  });
+  pm2.start('./child.js', {instances : 1, name : 'child'}, cb);
 }
+
+var pm2 = new PM2({
+  independant : true,
+  cwd         : __dirname + '/../fixtures',
+  secret_key : 'test-secret-key',
+  public_key : 'test-public-key',
+  machine_name : 'test-machine-name'
+});
 
 describe('SCOPED PM2 ACTIONS', function() {
   var server;
   var interactor;
-  var pm2;
-
+  this.timeout(5000);
   after(function(done) {
     server.close();
-    Interactor.killDaemon(function() {
-      var fs = require('fs');
-
-      fs.unlinkSync(cst.INTERACTION_CONF);
-
-      pm2.kill();
-
-      pm2.on('exit', function() {done()});
-    });
+    pm2.destroy(done);
   });
 
   before(function(done) {
     createMockServer(function(err, _server) {
       server = _server;
-      Helpers.forkPM2(function(err, _pm2) {
-        pm2 = _pm2;
-        forkInteractor(function(err, _interactor) {
-          interactor = _interactor;
-          startSomeApps(function() {
-            done();
-          });
+      pm2.connect(function() {
+        startSomeApps(function(err) {
+          gl_interactor_process = pm2.Client.interactor_process;
+          // @todo: would be nice to know when an app is ready
+          // @priotity: minor
+          setTimeout(done, 1500);
         });
       });
     });
@@ -128,14 +124,15 @@ describe('SCOPED PM2 ACTIONS', function() {
     });
 
     it('should restart command via scoped pm2 action (no pass needed)', function(done) {
+      var good = false;
       var plan = new Plan(2, function() {
-        // Double check that process has been unlocked
-
         gl_interactor_process.removeListener('message', actionCheck);
+        good = true;
         done();
       });
 
       function actionCheck(pck) {
+        if (good) return false;
         if (pck.event == 'pm2:scoped:stream' && pck.data.out === 'Action restart received')
           return plan.ok(true);
         if (pck.event == 'pm2:scoped:end')
@@ -205,7 +202,7 @@ describe('SCOPED PM2 ACTIONS', function() {
     });
 
     it('should set a password', function(done) {
-      CLI.set('pm2:passwd', 'testpass', function(err, data) {
+      pm2.set('pm2:passwd', 'testpass', function(err, data) {
         should(err).not.exists;
         done();
       });

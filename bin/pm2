@@ -458,7 +458,6 @@ commander.command('unset <key>')
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .alias('interact')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
-  .option('--recycle', 'for elastic infrastructure')
   .action(cli._pre_interact.bind(cli));
 
 //

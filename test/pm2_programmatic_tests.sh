@@ -10,14 +10,11 @@ set -o verbose
 
 function fail {
   echo -e "######## \033[31m  ✘ $1\033[0m"
-  $pm2 kill
   exit 1
 }
 
 function success {
   echo -e "\033[32m------------> ✔ $1\033[0m"
-  $pm2 kill
-  sleep 0.5
 }
 
 function spec {
@@ -67,23 +64,25 @@ spec "Configuration system working"
 #
 # Interface testing
 #
-# mocha ./test/interface/interactor.connect.mocha.js
-# spec "Interactor test #1 with password setting"
-# mocha ./test/interface/interactor.daemonizer.mocha.js
-# spec "Remote interactor keys save verification"
-# mocha ./test/interface/scoped_pm2_actions.mocha.js
-# spec "Scoped PM2 Remote interactions test"
-# mocha ./test/interface/remote.mocha.js
-# spec "Remote interactions test"
-# mocha ./test/interface/password.mocha.js
-# spec "Password library checking"
-# mocha ./test/interface/custom-actions.mocha.js
-# spec "Custom actions test"
-# mocha ./test/interface/bus.spec.mocha.js
-# spec "Protocol communication test"
-# mocha ./test/interface/bus.fork.spec.mocha.js
-# spec "Protocol communication test"
-# mocha ./test/interface/request.mocha.js
-# spec "Protocol communication test"
-# mocha ./test/interface/push_interactor.mocha.js
-# spec "Push Interactor + Reconnection communication test"
+cd ../interface
+
+echo $PM2_HOME
+
+mocha ./interactor.connect.mocha.js
+spec "Interactor test #1 with password setting"
+mocha ./interactor.daemonizer.mocha.js
+spec "Remote interactor keys save verification"
+mocha ./scoped_pm2_actions.mocha.js
+spec "Scoped PM2 Remote interactions test"
+mocha ./remote.mocha.js
+spec "Remote interactions test"
+mocha ./password.mocha.js
+spec "Password library checking"
+mocha ./custom-actions.mocha.js
+spec "Custom actions test"
+mocha ./bus.spec.mocha.js
+spec "Protocol communication test"
+mocha ./bus.fork.spec.mocha.js
+spec "Protocol communication test"
+mocha ./request.mocha.js
+spec "Protocol communication test"

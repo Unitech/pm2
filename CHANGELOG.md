@@ -2,6 +2,7 @@
 ### 2.0.0
 
 - Major PM2 client-side code rewritte for a better code structure and integration
+- Multiple PM2 on the same host is now fully supported and seamless
 - Major API rewrite
 
 ```javascript
@@ -12,6 +13,9 @@ var pm2 = new PM2({
   cwd      :    // Move to CWD,
   daemon_mode : // Should the process stay attached to this application,
   independant : // Create new random instance available for current session
+  secret_key  : // Keymetrics secret key
+  public_key  : // Keymetrics public key
+  machone_name: // Keymetrics instance name
 });
 
 // Connect to local instance for operations
@@ -28,11 +32,16 @@ pm2.launchBus((err, bus) => {
     console.log(message);
   });
 });
+
+// Connect to different keymetrics bucket
+pm2.interact(opts, cb)
+
 ```
 
 - Tests are now run in parallel reducing time from 20min to Xmin
 - Startup performance improvement (better performance on ARM)
 - pm2-dev now runs in a different PM2 process
+- Keymetrics agents can now be attached to each different PM2 instance
 
 ### 1.1.3
 

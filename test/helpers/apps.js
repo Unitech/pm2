@@ -22,15 +22,11 @@ APPS.forkPM2 = function(cb) {
   });
 };
 
-APPS.startSomeApps = function(cb) {
-  setTimeout(function() {
-    CLI.connect(function() {
-      CLI.start({
-        script : './test/fixtures/events/custom_action.js',
-        name : 'custom-action'
-      }, cb);
-    });
-  }, 1200);
+APPS.startSomeApps = function(pm2, cb) {
+  pm2.start({
+    script : './events/custom_action.js',
+    name   : 'custom-action'
+  }, cb);
 };
 
 /**

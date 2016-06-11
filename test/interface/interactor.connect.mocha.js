@@ -3,26 +3,24 @@ process.env.NODE_ENV = 'local_test';
 process.env.TRAVIS = true;
 process.env.DEBUG='interface:*';
 
-var CLI  = require('../..');
-var should   = require('should');
-var nssocket = require('nssocket');
-var events   = require('events');
-var util     = require('util');
-var axon     = require('pm2-axon');
-var sock      = axon.socket('sub');
+var PM2           = require('../..');
+var should        = require('should');
+var nssocket      = require('nssocket');
+var events        = require('events');
+var util          = require('util');
+var axon          = require('pm2-axon');
+var sock          = axon.socket('sub');
 
-var pub_sock = sock.bind(8080);
-var Cipher   = require('../../lib/Interactor/Cipher.js');
-var cst      = require('../../constants.js');
-var Plan     = require('../helpers/plan.js');
-var Interactor = require('../../lib/Interactor/InteractorDaemonizer.js');
+var pub_sock      = sock.bind(8080);
+var Cipher        = require('../../lib/Interactor/Cipher.js');
+var cst           = require('../../constants.js');
+var Plan          = require('../helpers/plan.js');
 var Configuration = require('../../lib/Configuration.js');
-var Helpers          = require('../helpers/apps.js');
+var Helpers       = require('../helpers/apps.js');
 
 var server = null;
 var listener_server;
 
-var pm2_bus;
 var _socket_list = [];
 
 var meta_connect = {
@@ -30,15 +28,6 @@ var meta_connect = {
   public_key : 'osef',
   machine_name : 'osef'
 };
-
-/**
- * Description
- * @method forkInteractor
- * @return CallExpression
- */
-function forkInteractor(cb) {
-  Interactor.launchAndInteract(meta_connect, cb);
-}
 
 /**
  * Mock server receiving data
@@ -78,31 +67,29 @@ function createMockServer(cb) {
   listener_server.listen(4322, '0.0.0.0');
 }
 
-function startBus(cb) {
-  CLI.launchBus(function(err, bus) {
-    pm2_bus = bus;
-    cb();
-  });
-};
-
 describe('Interactor testing', function() {
+  this.timeout(5000);
+
   var server;
   var interactor;
-  var pm2;
+  var pm2_bus;
+
+  var pm2 = new PM2({
+    independant : true,
+    cwd         : __dirname + '/../fixtures',
+    secret_key : 'osef',
+    public_key : 'osef',
+    machine_name : 'osef'
+  });
 
   before(function(done) {
     Configuration.unset('pm2:passwd', function(err, data) {
       createMockServer(function(err, _server) {
         server = _server;
-        Helpers.forkPM2(function(err, _pm2) {
-          pm2 = _pm2;
-          forkInteractor(function(err, _interactor) {
-            interactor = _interactor;
-            Helpers.startSomeApps(function() {
-              startBus(function() {
-                setTimeout(done, 1000);
-              });
-            });
+
+        pm2.connect(function(err, data) {
+          Helpers.startSomeApps(pm2, function(err, dt) {
+            done();
           });
         });
       });
@@ -111,11 +98,23 @@ describe('Interactor testing', function() {
 
   after(function(done) {
     listener_server.close();
-    Interactor.killDaemon(function() {
-      var fs = require('fs');
-      fs.unlinkSync(cst.INTERACTION_CONF);
-      pm2.on('exit', function() {done()});
-      pm2.kill();
+    pm2.destroy(done);
+  });
+
+  describe('Interactor methods', function() {
+    it('should display info', function(done) {
+      pm2.interactInfos(function(err, meta) {
+        meta.should.have.properties([
+          'machine_name',
+          'public_key',
+          'secret_key',
+          'socket_path',
+          'pm2_home_monitored'
+        ])
+
+        meta.pm2_home_monitored.should.eql(pm2.pm2_home);
+        done();
+      });
     });
   });
 
@@ -143,14 +142,10 @@ describe('Interactor testing', function() {
         procs.length.should.eql(1);
 
         var meta = dt.data.status;
-
         dt.sent_at.should.exists;
-
         meta.protected.should.be.false;
-        // Indicator of a successful reverse connection
         meta.rev_con.should.be.true;
         meta.server_name.should.eql('osef');
-
         done();
       });
 
@@ -192,13 +187,13 @@ describe('Interactor testing', function() {
           done();
         });
 
-        CLI.restart('all', function() {});
+        pm2.restart('all', function() {});
       });
     });
 
     describe('PM2 password checking', function() {
       it('should set a password', function(done) {
-        CLI.set('pm2:passwd', 'testpass', function(err, data) {
+        pm2.set('pm2:passwd', 'testpass', function(err, data) {
           should(err).not.exists;
           setTimeout(done, 1000);
         });
@@ -218,7 +213,6 @@ describe('Interactor testing', function() {
 
   describe('Offline', function() {
     it('should handle offline gracefully', function(done) {
-
       _socket_list.forEach(function(socket, i) {
         _socket_list[i].destroy();
       });
@@ -228,12 +222,7 @@ describe('Interactor testing', function() {
       pub_sock.server.close(function() {
         console.log('Server closed');
       });
-      //sock.destroy();
-      //sock.closeServer();
-
-      //console.log(pub_sock.server, pub_sock.server.destroy);
-
-      setTimeout(done, 7000);
+      setTimeout(done, 500);
     });
   });
 
