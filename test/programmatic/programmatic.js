@@ -22,11 +22,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   after(function(done) {
-    pm2.delete('all', function(err, ret) {
-      pm2.destroy(function() {
-        done();
-      });
-    });
+    pm2.destroy(done);
   });
 
   before(function(done) {
