@@ -58,7 +58,8 @@ describe('REMOTE PM2 ACTIONS', function() {
     cwd         : __dirname + '/../fixtures',
     secret_key : 'test-secret-key',
     public_key : 'test-public-key',
-    machine_name : 'test-machine-name'
+    machine_name : 'test-machine-name',
+    daemon_mode: true
   });;
 
   after(function(done) {

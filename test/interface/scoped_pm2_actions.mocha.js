@@ -76,7 +76,8 @@ var pm2 = new PM2({
   cwd         : __dirname + '/../fixtures',
   secret_key : 'test-secret-key',
   public_key : 'test-public-key',
-  machine_name : 'test-machine-name'
+  machine_name : 'test-machine-name',
+  daemon_mode: true
 });
 
 describe('SCOPED PM2 ACTIONS', function() {

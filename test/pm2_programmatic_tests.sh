@@ -22,7 +22,7 @@ function spec {
   success "$1"
 }
 
-$pm2 kill
+
 
 # if [ $TRAVIS ]
 # then

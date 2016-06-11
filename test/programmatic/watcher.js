@@ -6,9 +6,7 @@ var EventEmitter = require('events').EventEmitter
 var PM2  = require('../..');
 var extend = require('util')._extend
 
-var cwd = p.resolve(__dirname, '../fixtures/watcher')
-
-//process.chdir(cwd)
+var cwd = __dirname + '/../fixtures/watcher';
 
 var paths = {
   server : p.join(cwd, 'server-watch.js'),
@@ -50,8 +48,8 @@ function errShouldBeNull(err) {
 
 describe('Watcher', function() {
   var pm2 = new PM2({
-    //independant : true,
-    cwd : '../fixtures/watcher'
+    independant : true,
+    cwd : __dirname + '/../fixtures/watcher'
   });
 
   this.timeout(2500)

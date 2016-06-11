@@ -11,7 +11,7 @@ describe('Signal kill (+delayed)', function() {
 
   var pm2 = new PM2({
     independant : true,
-    cwd : '../fixtures'
+    cwd : __dirname + '/../fixtures'
   });
 
   after(function(done) {

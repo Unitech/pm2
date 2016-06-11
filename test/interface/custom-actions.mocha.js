@@ -71,7 +71,8 @@ describe('Custom actions', function() {
     cwd         : __dirname + '/../fixtures',
     secret_key : 'osef',
     public_key : 'osef',
-    machine_name : 'osef'
+    machine_name : 'osef',
+    daemon_mode: true
   });;
 
   before(function(done) {

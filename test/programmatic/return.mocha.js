@@ -5,7 +5,7 @@ var should = require('should');
 describe('Return messages checks', function() {
   var pm2 = new PM2({
     independant : true,
-    cwd : '../fixtures'
+    cwd : __dirname + '/../fixtures'
   });
 
   it('should display error when forgot to connect', function(done) {

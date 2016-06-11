@@ -27,7 +27,7 @@ function getConf() {
 
 function getConf2() {
   return Common.prepareAppConf({ cwd : process.cwd() }, {
-    script : '../fixtures/child.js',
+    script : '../fixtures/echo2.js',
     instances       : 4,
     exec_mode       : 'cluster_mode',
     name : 'child'
@@ -36,7 +36,7 @@ function getConf2() {
 
 function getConf3() {
   return Common.prepareAppConf({ cwd : process.cwd() }, {
-    script : '../fixtures/child.js',
+    script : '../fixtures/echo3.js',
     instances       : 10,
     exec_mode       : 'cluster_mode',
     name : 'child'

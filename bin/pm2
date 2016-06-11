@@ -10,11 +10,11 @@ var chalk     = require('chalk');
 var async     = require('async');
 
 var debug     = require('debug')('pm2:cli');
-var CLI       = require('../lib/CLI');
+var PM2       = require('../lib/CLI');
 var pkg       = require('../package.json');
 var tabtab    = require('../lib/completion.js');
 
-var cli = new CLI();
+var pm2 = new PM2();
 
 commander.version(pkg.version)
   .option('-v --version', 'get version')
@@ -99,7 +99,7 @@ if (process.argv.indexOf('-s') > -1) {
 }
 
 function beginCommandProcessing() {
-  cli.getVersion(function(err, remote_version) {
+  pm2.getVersion(function(err, remote_version) {
     if (!err && (pkg.version != remote_version)) {
       console.log('');
       console.log(chalk.red.bold('>>>> In-memory PM2 is out-of-date, do:\n>>>> $ pm2 update'));
@@ -123,10 +123,10 @@ function checkCompletion(){
     // array containing commands after which process name should be listed
     var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
     if(cmdProcess.indexOf(data.prev) > -1) {
-      cli.connect(function() {
-        cli.list(function(err, list){
+      pm2.connect(function() {
+        pm2.list(function(err, list){
           tabtab.log(list.map(function(el){ return el.name}), data);
-          cli.disconnect();
+          pm2.disconnect();
         });
       });
     }
@@ -145,22 +145,24 @@ if (process.argv.indexOf('--no-daemon') > -1) {
   // and starts daemon in the same process if it does not exists
   //
   console.log('pm2 launched in no-daemon mode (you can add DEBUG="*" env variable to get more messages)');
-  cli.pingDaemon(function(ab) {
-    if (ab == true) {
-      console.error('>> pm2 is already daemonized ! You should kill it before launching it in no-daemon mode'.red);
-    }
-    cli.connect(true, function() {
-      beginCommandProcessing();
-    });
+
+  var pm2NoDaeamon = new PM2({
+    daemon_mode : false
   });
+
+  pm2NoDaeamon.connect(function() {
+    pm2 = pm2NoDaeamon;
+    beginCommandProcessing();
+  });
+
 }
 else {
   // HERE we instanciate the Client object
-  cli.connect(function() {
+  pm2.connect(function() {
     debug('Now connected to daemon');
     if (process.argv.slice(2)[0] === 'completion') {
       checkCompletion();
-      cli.disconnect();
+      pm2.disconnect();
     }
     else {
       beginCommandProcessing();
@@ -226,16 +228,16 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (cmd) {
         process.stdin.pause();
-        cli._startJson(cmd, commander, 'restartProcessId', 'pipe');
+        pm2._startJson(cmd, commander, 'restartProcessId', 'pipe');
       });
     }
     else {
       // Commander.js patch
       cmd = patchCommanderArg(cmd);
       async.forEachLimit(cmd, 1, function(script, next) {
-        cli.start(script, commander, next);
+        pm2.start(script, commander, next);
       }, function(err) {
-        cli.speedList(err ? 1 : 0);
+        pm2.speedList(err ? 1 : 0);
       });
     }
   });
@@ -243,25 +245,25 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
 commander.command('deploy <file|environment>')
   .description('deploy your json')
   .action(function(cmd) {
-    cli.deploy(cmd, commander);
+    pm2.deploy(cmd, commander);
   });
 
 commander.command('startOrRestart <json>')
   .description('start or restart JSON file')
   .action(function(file) {
-    cli._startJson(file, commander, 'restartProcessId');
+    pm2._startJson(file, commander, 'restartProcessId');
   });
 
 commander.command('startOrReload <json>')
   .description('start or gracefully reload JSON file')
   .action(function(file) {
-    cli._startJson(file, commander, 'reloadProcessId');
+    pm2._startJson(file, commander, 'reloadProcessId');
   });
 
 commander.command('startOrGracefulReload <json>')
   .description('start or gracefully reload JSON file')
   .action(function(file) {
-    cli._startJson(file, commander, 'softReloadProcessId');
+    pm2._startJson(file, commander, 'softReloadProcessId');
   });
 
 //
@@ -272,9 +274,9 @@ commander.command('stop <id|name|all|json|stdin...>')
   .description('stop a process (to start it again, do pm2 restart <app>)')
   .action(function(param) {
     async.forEachLimit(param, 1, function(script, next) {
-      cli.stop(script, next);
+      pm2.stop(script, next);
     }, function(err) {
-      cli.speedList(err ? 1 : 0);
+      pm2.speedList(err ? 1 : 0);
     });
   });
 
@@ -288,9 +290,9 @@ commander.command('restart <id|name|all|json|stdin...>')
     // Commander.js patch
     param = patchCommanderArg(param);
     async.forEachLimit(param, 1, function(script, next) {
-      cli.restart(script, commander, next);
+      pm2.restart(script, commander, next);
     }, function(err) {
-      cli.speedList(err ? 1 : 0);
+      pm2.speedList(err ? 1 : 0);
     });
   });
 
@@ -300,7 +302,7 @@ commander.command('restart <id|name|all|json|stdin...>')
 commander.command('scale <app_name> <number>')
   .description('scale up/down a process in cluster mode depending on total_number param')
   .action(function(app_name, number) {
-    cli.scale(app_name, number);
+    pm2.scale(app_name, number);
   });
 
 //
@@ -309,7 +311,7 @@ commander.command('scale <app_name> <number>')
 commander.command('reload <name|all>')
   .description('reload processes (note that its for app using HTTP/HTTPS)')
   .action(function(pm2_id) {
-    cli.reload(pm2_id, commander);
+    pm2.reload(pm2_id, commander);
   });
 
 //
@@ -318,13 +320,13 @@ commander.command('reload <name|all>')
 commander.command('gracefulReload <name|all>')
   .description('gracefully reload a process. Send a "shutdown" message to close all connections.')
   .action(function(pm2_id) {
-    cli.gracefulReload(pm2_id, commander);
+    pm2.gracefulReload(pm2_id, commander);
   });
 
 commander.command('id <name>')
   .description('get process id by name')
   .action(function(name) {
-    cli.getProcessIdByName(name);
+    pm2.getProcessIdByName(name);
   });
 
 //
@@ -338,13 +340,13 @@ commander.command('delete <name|id|script|all|json|stdin...>')
       process.stdin.setEncoding('utf8');
       process.stdin.on('data', function (param) {
         process.stdin.pause();
-        cli.delete(param, 'pipe');
+        pm2.delete(param, 'pipe');
       });
     } else
       async.forEachLimit(name, 1, function(script, next) {
-        cli.delete(script,'', next);
+        pm2.delete(script,'', next);
       }, function(err) {
-        cli.speedList(err ? 1 : 0);
+        pm2.speedList(err ? 1 : 0);
       });
   });
 
@@ -356,10 +358,10 @@ commander.command('sendSignal <signal> <pm2_id|name>')
   .action(function(signal, pm2_id) {
     if (isNaN(parseInt(pm2_id))) {
       console.log(cst.PREFIX_MSG + 'Sending signal to process name ' + pm2_id);
-      cli.sendSignalToProcessName(signal, pm2_id);
+      pm2.sendSignalToProcessName(signal, pm2_id);
     } else {
       console.log(cst.PREFIX_MSG + 'Sending signal to process id ' + pm2_id);
-      cli.sendSignalToProcessId(signal, pm2_id);
+      pm2.sendSignalToProcessId(signal, pm2_id);
     }
   });
 
@@ -369,18 +371,18 @@ commander.command('sendSignal <signal> <pm2_id|name>')
 commander.command('ping')
   .description('ping pm2 daemon - if not up it will launch it')
   .action(function() {
-    cli.ping();
+    pm2.ping();
   });
 
 commander.command('updatePM2')
   .description('update in-memory PM2 with local PM2')
   .action(function() {
-    cli.updatePM2();
+    pm2.updatePM2();
   });
 commander.command('update')
   .description('(alias) update in-memory PM2 with local PM2')
   .action(function() {
-    cli.updatePM2();
+    pm2.updatePM2();
   });
 
 /**
@@ -390,75 +392,75 @@ commander.command('install <module|git:// url>')
   .alias('module:install')
   .description('install or update a module and run it forever')
   .action(function(plugin_name) {
-    cli.install(plugin_name);
+    pm2.install(plugin_name);
   });
 
 commander.command('module:update <module|git:// url>')
   .description('update a module and run it forever')
   .action(function(plugin_name) {
-    cli.install(plugin_name);
+    pm2.install(plugin_name);
   });
 
 
 commander.command('module:generate [app_name]')
   .description('Generate a sample module in current folder')
   .action(function(app_name) {
-    cli.generateModuleSample(app_name);
+    pm2.generateModuleSample(app_name);
   });
 
 commander.command('uninstall <module>')
   .alias('module:uninstall')
   .description('stop and uninstall a module')
   .action(function(plugin_name) {
-    cli.uninstall(plugin_name);
+    pm2.uninstall(plugin_name);
   });
 
 
 commander.command('publish')
   .alias('module:publish')
   .description('Publish the module you are currently on')
-  .action(cli.publish.bind(cli));
+  .action(pm2.publish.bind(pm2));
 
 commander.command('set <key> <value>')
   .description('sets the specified config <key> <value>')
   .action(function(key, value) {
-    cli.set(key, value);
+    pm2.set(key, value);
   });
 
 commander.command('multiset <value>')
   .description('multiset eg "key1 val1 key2 val2')
   .action(function(str) {
-    cli.multiset(str);
+    pm2.multiset(str);
   });
 
 commander.command('get [key]')
   .description('get value for <key>')
   .action(function(key) {
-    cli.get(key);
+    pm2.get(key);
   });
 
 commander.command('conf [key] [value]')
   .description('get / set module config values')
   .action(function(key, value) {
-    cli.conf(key, value);
+    pm2.conf(key, value);
   });
 
 commander.command('config <key> [value]')
   .description('get / set module config values')
   .action(function(key, value) {
-    cli.conf(key, value);
+    pm2.conf(key, value);
   });
 
 commander.command('unset <key>')
   .description('clears the specified config <key>')
   .action(function(key) {
-    cli.unset(key);
+    pm2.unset(key);
   });
 
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .alias('interact')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
-  .action(cli._pre_interact.bind(cli));
+  .action(pm2._pre_interact.bind(pm2));
 
 //
 // Web interface
@@ -467,7 +469,7 @@ commander.command('web')
   .description('launch a health API on port ' + cst.WEB_INTERFACE)
   .action(function() {
     console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
-    cli.web();
+    pm2.web();
   });
 
 //
@@ -477,7 +479,7 @@ commander.command('dump')
   .alias('save')
   .description('dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
-    cli.dump();
+    pm2.dump();
   }));
 
 //
@@ -487,7 +489,7 @@ commander.command('resurrect')
   .description('resurrect previously dumped processes')
   .action(failOnUnknown(function() {
     console.log(cst.PREFIX_MSG + 'Resurrecting');
-    cli.resurrect();
+    pm2.resurrect();
   }));
 
 //
@@ -497,7 +499,7 @@ commander.command('startup [platform]')
   .description('auto resurrect process at startup. [platform] = ubuntu, centos, redhat, gentoo, systemd, darwin, amazon')
   .action(function(_platform, cmd) {
     var platform = require('os').platform();
-    cli.startup(_platform || platform, commander);
+    pm2.startup(_platform || platform, commander);
   });
 
 //
@@ -506,7 +508,7 @@ commander.command('startup [platform]')
 commander.command('logrotate')
   .description('copy default logrotate configuration')
   .action(function(cmd) {
-    cli.logrotate(commander);
+    pm2.logrotate(commander);
   });
 
 //
@@ -515,43 +517,43 @@ commander.command('logrotate')
 commander.command('generate')
   .description('generate an ecosystem.json configuration file')
   .action(function(name) {
-    cli.generateSample(name);
+    pm2.generateSample(name);
   });
 
 commander.command('ecosystem')
   .description('generate an ecosystem.json configuration file')
   .action(function(name) {
-    cli.generateSample(name);
+    pm2.generateSample(name);
   });
 
 commander.command('reset <name|id|all>')
   .description('reset counters for process')
   .action(function(proc_id) {
-    cli.reset(proc_id);
+    pm2.reset(proc_id);
   });
 
 commander.command('describe <id>')
   .description('describe all parameters of a process id')
   .action(function(proc_id) {
-    cli.describe(proc_id);
+    pm2.describe(proc_id);
   });
 
 commander.command('desc <id>')
   .description('(alias) describe all parameters of a process id')
   .action(function(proc_id) {
-    cli.describe(proc_id);
+    pm2.describe(proc_id);
   });
 
 commander.command('info <id>')
   .description('(alias) describe all parameters of a process id')
   .action(function(proc_id) {
-    cli.describe(proc_id);
+    pm2.describe(proc_id);
   });
 
 commander.command('show <id>')
   .description('(alias) describe all parameters of a process id')
   .action(function(proc_id) {
-    cli.describe(proc_id);
+    pm2.describe(proc_id);
   });
 
 //
@@ -563,19 +565,19 @@ commander
   .description('list all processes')
   .option('--watch', 'constant refresh of process listing')
   .action(function() {
-    cli.list(commander)
+    pm2.list(commander)
   });
 
 commander.command('l')
   .description('(alias) list all processes')
   .action(function() {
-    cli.list()
+    pm2.list()
   });
 
 commander.command('status')
   .description('(alias) list all processes')
   .action(function() {
-    cli.list()
+    pm2.list()
   });
 
 
@@ -583,14 +585,14 @@ commander.command('status')
 commander.command('jlist')
   .description('list all processes in JSON format')
   .action(function() {
-    cli.jlist()
+    pm2.jlist()
   });
 
 // List in prettified Json
 commander.command('prettylist')
   .description('print json in a prettified JSON')
   .action(failOnUnknown(function() {
-    cli.jlist(true);
+    pm2.jlist(true);
   }));
 
 //
@@ -600,7 +602,7 @@ commander.command('monit')
   .alias('m')
   .description('launch termcaps monitoring')
   .action(function() {
-    cli.monit();
+    pm2.monit();
   });
 
 
@@ -610,7 +612,7 @@ commander.command('monit')
 commander.command('flush')
   .description('flush logs')
   .action(failOnUnknown(function() {
-    cli.flush();
+    pm2.flush();
   }));
 
 //
@@ -619,7 +621,7 @@ commander.command('flush')
 commander.command('reloadLogs')
   .description('reload all logs')
   .action(function() {
-    cli.reloadLogs();
+    pm2.reloadLogs();
   });
 
 //
@@ -654,7 +656,7 @@ commander.command('logs [id|name]')
     if (cmd.err === true)
       exclusive = 'err';
 
-    cli.streamLogs(id, line, raw, timestamp, exclusive);
+    pm2.streamLogs(id, line, raw, timestamp, exclusive);
   });
 
 
@@ -664,7 +666,7 @@ commander.command('logs [id|name]')
 commander.command('kill')
   .description('kill daemon')
   .action(failOnUnknown(function(arg) {
-    cli.killDaemon(function() {
+    pm2.killDaemon(function() {
       process.exit(cst.SUCCESS_EXIT);
     });
   }));
@@ -677,12 +679,12 @@ commander.command('pull <name> [commit_id]')
   .description('updates repository for a given app')
   .action(function(pm2_name, commit_id) {
     if (commit_id !== undefined) {
-      cli.pullCommitId(
+      pm2.pullCommitId(
         {pm2_name: pm2_name,
          commit_id: commit_id});
     }
     else
-      cli.pullAndRestart(pm2_name);
+      pm2.pullAndRestart(pm2_name);
   });
 
 //
@@ -691,7 +693,7 @@ commander.command('pull <name> [commit_id]')
 commander.command('forward <name>')
   .description('updates repository to the next commit for a given app')
   .action(function(pm2_name) {
-    cli.forward(pm2_name);
+    pm2.forward(pm2_name);
   });
 
 //
@@ -700,7 +702,7 @@ commander.command('forward <name>')
 commander.command('backward <name>')
   .description('downgrades repository to the previous commit for a given app')
   .action(function(pm2_name) {
-    cli.backward(pm2_name);
+    pm2.backward(pm2_name);
   });
 
 //
@@ -709,7 +711,7 @@ commander.command('backward <name>')
 commander.command('gc')
   .description('force PM2 to trigger garbage collection')
   .action(function() {
-    cli.forceGc();
+    pm2.forceGc();
   });
 
 //
@@ -718,7 +720,7 @@ commander.command('gc')
 commander.command('deepUpdate')
   .description('performs a deep update of PM2')
   .action(function() {
-    cli.deepUpdate();
+    pm2.deepUpdate();
   });
 
 //

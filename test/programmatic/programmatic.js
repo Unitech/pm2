@@ -10,15 +10,15 @@ var assert = require('better-assert');
 var path   = require('path');
 
 describe('PM2 programmatic calls', function() {
-  this.timeout(5000);
+  this.timeout(10000);
 
   var proc1 = null;
   var procs = [];
   var bus   = null;
 
   var pm2 = new PM2({
-    independant : true,
-    cwd : '../fixtures'
+    cwd : __dirname + '/../fixtures',
+    independant : true
   });
 
   after(function(done) {
@@ -40,6 +40,7 @@ describe('PM2 programmatic calls', function() {
     it('should start a script', function(done) {
       pm2.start({
         script : './child.js',
+        name : 'child',
         instances : 1
       }, function(err, data) {
         proc1 = data[0];
@@ -301,7 +302,7 @@ describe('PM2 programmatic calls', function() {
 
     it('should start a JSON object in cluster mode', function(done) {
       pm2.start({
-        script : './child.js',
+        script : './echo.js',
         instances : 4,
         exec_mode : 'cluster'
       }, function(err, dt) {

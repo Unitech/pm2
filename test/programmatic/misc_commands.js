@@ -6,7 +6,10 @@ var assert = require('better-assert');
 var path   = require('path');
 
 describe('Misc commands', function() {
-  var pm2 = new PM2({ independant : true });
+  var pm2 = new PM2({
+    independant : true,
+    cwd : __dirname + '/../fixtures'
+  });
 
   after(function(done) {
     pm2.destroy(done);
@@ -22,7 +25,7 @@ describe('Misc commands', function() {
 
   it('should start 4 processes', function(done) {
     pm2.start({
-      script    : '../fixtures/echo.js',
+      script    : './echo.js',
       instances : 4,
       name      : 'echo'
     }, function(err, data) {

@@ -13,7 +13,7 @@ describe('PM2 programmatic calls', function() {
 
   var pm2 = PM2({
     independant : true,
-    cwd : '../fixtures'
+    cwd : __dirname + '/../fixtures'
   });
 
   var pm2_bus = null;
