@@ -9,6 +9,7 @@ var path   = require('path');
 process.chdir(__dirname);
 
 describe('Cluster programmatic tests', function() {
+  this.timeout(5000);
 
   var pm2 = new PM2({
     cwd : '../fixtures',
@@ -16,14 +17,12 @@ describe('Cluster programmatic tests', function() {
   });
 
   before(function(done) {
-    this.timeout(5000);
     pm2.connect(function() {
       done();
     });
   });
 
   after(function(done) {
-    this.timeout(5000);
     pm2.destroy(done)
   });
 
