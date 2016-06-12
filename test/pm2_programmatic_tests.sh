@@ -30,35 +30,35 @@ function spec {
 # fi
 cd test/programmatic
 
-mocha ./god.mocha.js
+mocha --opts ./mocha.opts  ./god.mocha.js
 spec "God test"
 
-mocha ./programmatic.js
+mocha --opts ./mocha.opts  ./programmatic.js
 spec "Programmatic test"
-mocha ./logs.js
+mocha --opts ./mocha.opts  ./logs.js
 spec "Logs test"
-mocha ./watcher.js
+mocha --opts ./mocha.opts  ./watcher.js
 spec "Watcher"
-# mocha ./modularizer.mocha.js
+# mocha --opts ./mocha.opts  ./modularizer.mocha.js
 # spec "Module system"
-mocha ./max_memory_limit.js
+mocha --opts ./mocha.opts  ./max_memory_limit.js
 spec "Max memory tests"
-mocha ./cluster.mocha.js
+mocha --opts ./mocha.opts  ./cluster.mocha.js
 spec "Cluster tests"
-mocha ./misc_commands.js
+mocha --opts ./mocha.opts  ./misc_commands.js
 spec "MISC tests"
-mocha ./signals.js
+mocha --opts ./mocha.opts  ./signals.js
 spec "SIGINT signal interception + delay customization"
-mocha ./send_data_process.mocha.js
+mocha --opts ./mocha.opts  ./send_data_process.mocha.js
 spec "Send data to a process"
-mocha ./return.mocha.js
+mocha --opts ./mocha.opts  ./return.mocha.js
 spec "Verify return messages"
 
-mocha ./json_validation.mocha.js
+mocha --opts ./mocha.opts  ./json_validation.mocha.js
 spec "JSON validation test"
-mocha ./env_switching.js
+mocha --opts ./mocha.opts  ./env_switching.js
 spec "JSON environment switching on JSON restart with --env"
-mocha ./configuration.mocha.js
+mocha --opts ./mocha.opts  ./configuration.mocha.js
 spec "Configuration system working"
 
 #
@@ -68,21 +68,21 @@ cd ../interface
 
 echo $PM2_HOME
 
-mocha ./interactor.connect.mocha.js
+mocha --opts ./mocha.opts  ./interactor.connect.mocha.js
 spec "Interactor test #1 with password setting"
-mocha ./interactor.daemonizer.mocha.js
+mocha --opts ./mocha.opts  ./interactor.daemonizer.mocha.js
 spec "Remote interactor keys save verification"
-mocha ./scoped_pm2_actions.mocha.js
+mocha --opts ./mocha.opts  ./scoped_pm2_actions.mocha.js
 spec "Scoped PM2 Remote interactions test"
-mocha ./remote.mocha.js
+mocha --opts ./mocha.opts  ./remote.mocha.js
 spec "Remote interactions test"
-mocha ./password.mocha.js
+mocha --opts ./mocha.opts  ./password.mocha.js
 spec "Password library checking"
-mocha ./custom-actions.mocha.js
+mocha --opts ./mocha.opts  ./custom-actions.mocha.js
 spec "Custom actions test"
-mocha ./bus.spec.mocha.js
+mocha --opts ./mocha.opts  ./bus.spec.mocha.js
 spec "Protocol communication test"
-mocha ./bus.fork.spec.mocha.js
+mocha --opts ./mocha.opts  ./bus.fork.spec.mocha.js
 spec "Protocol communication test"
-mocha ./request.mocha.js
+mocha --opts ./mocha.opts  ./request.mocha.js
 spec "Protocol communication test"
