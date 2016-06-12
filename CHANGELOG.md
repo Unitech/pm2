@@ -38,10 +38,30 @@ pm2.interact(opts, cb)
 
 ```
 
-- Startup performance improvement (better performance on ARM)
+//- Startup performance improvement (better performance on ARM)
 //- New pm2-docker global command
 - pm2-dev now runs in a different PM2 process
 - Keymetrics agents can now be attached to each different PM2 instance
+
+#### Changes notes
+
+- All tests have been adapted for the new API. No major test changes, just fix (like null -> null() with should)
+- Multiple, separated instances of PM2 can now be managed, allowing a better integration with softwares
+- The main file API is ./lib/CLI.js. It is now an object that can be instanciated
+- CPU usage divided by two (results caching + avoiding object transformations)
+- CLI methods have structured into multiple files in the ./lib/CLI/ folder
+- CONCURRENT_ACTIONS, decreasing test times from 20min to 47min and much better CLI reactivity when managing multiple applications + also better when doing a pm2 update. Some errors can happen on older versions (https://gist.github.com/Unitech/8fc88d701504866d8e2b2d7b23d91e20)
+- The client/server file called Satan.js does not exists anymore. It has been replaced by the file combo ./lib/Client.js and ./lib/Daemon.js
+- pm2-dev is now a great stuff for application developping, multi terminal would be great to integrate
+- Keymetrics WatchDog works great
+- pm2 --no-daemon works greatly
+
+- @todo: find new license less restrictive. That disallow PM2 to be forked, modified, published for commercial or any business related purpose (at the private and public domain). That asks for any public/private companies to report any modifications in the PM2 source code via a pull request on the official repository github.com/Unitech/PM2.
+- @todo: optimize interactor (issue on fast reconnect PUSH connection + stop to hit km server for ping)
+
+#### Issues
+
+- The file ./lib/CLI.js is a big fat object, making the CLI experience some lags on startup. It may be because of require also that is called a number of time arround the CLI.
 
 ### 1.1.3
 
