@@ -18,9 +18,7 @@ sleep 1
 
 OUT=`diff path-check1.txt path-check2.txt`
 
-rm path-check1.txt
-rm path-check2.txt
-
+echo $OUT
 [ -z "$OUT" ] || fail "The outputs are not identical"
 success "The outputs are identical"
 
