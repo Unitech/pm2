@@ -419,7 +419,9 @@ commander.command('uninstall <module>')
 commander.command('publish')
   .alias('module:publish')
   .description('Publish the module you are currently on')
-  .action(pm2.publish.bind(pm2));
+  .action(function() {
+    pm2.publish();
+  });
 
 commander.command('set <key> <value>')
   .description('sets the specified config <key> <value>')

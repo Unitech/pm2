@@ -38,8 +38,8 @@ pm2.interact(opts, cb)
 
 ```
 
-- Tests are now run in parallel reducing time from 20min to Xmin
 - Startup performance improvement (better performance on ARM)
+//- New pm2-docker global command
 - pm2-dev now runs in a different PM2 process
 - Keymetrics agents can now be attached to each different PM2 instance
 

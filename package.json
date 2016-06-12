@@ -146,7 +146,8 @@
   ],
   "bin": {
     "pm2"    : "./bin/pm2",
-    "pm2-dev": "./bin/pm2-dev"
+    "pm2-dev": "./bin/pm2-dev",
+    "pm2-docker": "./bin/pm2-docker"
   },
   "dependencies": {
     "async"               : "1.5",
