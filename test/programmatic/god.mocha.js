@@ -105,9 +105,9 @@ describe('God', function() {
 
     it('should fork one process', function(done) {
       God.prepare(getConf(), function(err, procs) {
-        should(err).be.null;
-        pid = procs[0].pid;
+        should(err).be.null();
 	      procs[0].pm2_env.status.should.be.equal('online');
+        var a = God.getFormatedProcesses()
 	      God.getFormatedProcesses().length.should.equal(2);
 	      done();
       });
@@ -233,7 +233,7 @@ describe('God', function() {
         procs.length.should.equal(3);
 
         God.dumpProcessList(function(err) {
-          should(err).be.null;
+          should(err).be.null();
           var apps = fs.readFileSync(cst.DUMP_FILE_PATH);
           apps = JSON.parse(apps);
           apps.length.should.equal(3);
@@ -255,7 +255,7 @@ describe('God', function() {
 
   it('should report pm2 version', function(done) {
     God.getVersion({}, function(err, version) {
-      version.should.not.be.null;
+      version.should.not.be.null();
       done();
     });
   });
