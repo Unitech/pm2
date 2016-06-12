@@ -13,11 +13,8 @@ var debug     = require('debug')('pm2:cli');
 var PM2       = require('../lib/CLI');
 var pkg       = require('../package.json');
 var tabtab    = require('../lib/completion.js');
-var UX        = require('../lib/CLI/CliUx');
 
 var pm2 = new PM2();
-
-UX.processing.start('Processing...');
 
 commander.version(pkg.version)
   .option('-v --version', 'get version')
@@ -149,8 +146,6 @@ if (process.argv.indexOf('--no-daemon') > -1) {
   //
   console.log('pm2 launched in no-daemon mode (you can add DEBUG="*" env variable to get more messages)');
 
-  UX.processing.stop();
-
   var pm2NoDaeamon = new PM2({
     daemon_mode : false
   });
@@ -164,7 +159,6 @@ if (process.argv.indexOf('--no-daemon') > -1) {
 else {
   // HERE we instanciate the Client object
   pm2.connect(function() {
-    UX.processing.stop();
     debug('Now connected to daemon');
     if (process.argv.slice(2)[0] === 'completion') {
       checkCompletion();
