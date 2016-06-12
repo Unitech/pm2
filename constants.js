@@ -1,8 +1,9 @@
 
-var debug = require('debug')('pm2:conf');
-var p     = require('path');
-var util  = require('util');
-var chalk = require('chalk');
+var debug  = require('debug')('pm2:conf');
+var p      = require('path');
+var util   = require('util');
+var chalk  = require('chalk');
+var semver = require('semver');
 
 /**
  * Get PM2 path structure
@@ -61,7 +62,14 @@ var csts = {
   GRACEFUL_TIMEOUT        : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
   GRACEFUL_LISTEN_TIMEOUT : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
 
-  CONCURRENT_ACTIONS      : parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1,
+  // Concurrent actions when doing start/restart/reload
+  CONCURRENT_ACTIONS      : (function() {
+    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
+    if (semver.satisfies(process.versions.node, '>= 4.0.0'))
+      concurrent_actions = 4;
+    debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
+    return concurrent_actions;
+  })(),
 
   DEBUG                   : process.env.PM2_DEBUG || false,
   WEB_INTERFACE           : parseInt(process.env.PM2_API_PORT)  || 9615,
