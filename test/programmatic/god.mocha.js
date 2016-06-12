@@ -1,4 +1,5 @@
 
+var PM2 = new require('../..');
 var God = require('../../lib/God');
 var numCPUs = require('os').cpus().length;
 var fs = require('fs');
@@ -10,6 +11,8 @@ var cst = require('../../constants.js');
 
 // Change to current folder
 process.chdir(__dirname);
+
+var pm2= new PM2();
 
 /**
  * Description
@@ -75,8 +78,10 @@ function deleteAll(data, cb) {
 
 describe('God', function() {
   before(function(done) {
-    deleteAll({}, function(err, dt) {
-      done()
+    pm2.connect(function() {
+      deleteAll({}, function(err, dt) {
+        done()
+      });
     });
   });
 
