@@ -167,7 +167,7 @@
     "vizion"              : "^0.2",
 
     "pm2-axon"            : "~2.0.9",
-    "pm2-axon-rpc"        : "0.3.6",
+    "pm2-axon-rpc"        : "Unitech/pm2-axon-rpc",
     "pm2-deploy"          : "^0.3",
     "pm2-multimeter"      : "0.1.2",
 
