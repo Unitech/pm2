@@ -1,5 +1,0 @@
-Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
-2	:	1465682752.434	     0.533	0	0	1	0	mocha ./programmatic/programmatic.js
-4	:	1465682752.454	     3.006	0	0	0	0	mocha ./programmatic/watcher.js
-3	:	1465682752.440	     3.855	0	0	0	0	mocha ./programmatic/logs.js
-1	:	1465682752.431	     7.362	0	0	0	0	mocha ./programmatic/god.mocha.js
