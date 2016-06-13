@@ -61,8 +61,6 @@ pm2.interact(opts, cb)
 
 - @todo: find new license less restrictive. That disallow PM2 to be forked, modified, published for commercial or any business related purpose (at the private and public domain). That asks for any public/private companies to report any modifications in the PM2 source code via a pull request on the official repository github.com/Unitech/PM2.
 
-- @todo: startup tests (real + programmatic)
-
 - Optimization: The file ./lib/CLI.js is a big fat object, making the CLI experience some lags on startup. It may be because of require also that is called a number of time arround the CLI.
 
 ### 1.1.3
