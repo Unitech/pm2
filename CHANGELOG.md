@@ -55,9 +55,10 @@ pm2.interact(opts, cb)
 - pm2-dev is now a great stuff for application developping, multi terminal would be great to integrate
 - Keymetrics WatchDog works great
 - pm2 --no-daemon works greatly
+- Keymetrics agents now check for online connectivity via DNS lookup instead of PING. Internal IP is now sent to KM. Multi tries on pm2 link command.
 
 - @todo: find new license less restrictive. That disallow PM2 to be forked, modified, published for commercial or any business related purpose (at the private and public domain). That asks for any public/private companies to report any modifications in the PM2 source code via a pull request on the official repository github.com/Unitech/PM2.
-- @todo: optimize interactor (issue on fast reconnect PUSH connection + stop to hit km server for ping)
+
 - @todo: startup tests (real + programmatic)
 
 - Optimization: The file ./lib/CLI.js is a big fat object, making the CLI experience some lags on startup. It may be because of require also that is called a number of time arround the CLI.
