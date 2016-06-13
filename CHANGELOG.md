@@ -58,6 +58,7 @@ pm2.interact(opts, cb)
 - Keymetrics agents now check for online connectivity via DNS lookup instead of PING. Internal IP is now sent to KM. Multi tries on pm2 link command.
 - breaking change: remove .updatePM2() API method
 - Now Keymetrics link is done after applications has been updated (when doing pm2 update)
+- Startup tests under various conditions (hard reboot/sudo reboot) keymetrics links succesfully and process get resurected perfectly
 
 - @todo: find new license less restrictive. That disallow PM2 to be forked, modified, published for commercial or any business related purpose (at the private and public domain). That asks for any public/private companies to report any modifications in the PM2 source code via a pull request on the official repository github.com/Unitech/PM2.
 
