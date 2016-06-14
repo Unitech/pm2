@@ -55,6 +55,8 @@ mocha ./test/programmatic/signals.js
 spec "SIGINT signal interception + delay customization"
 mocha ./test/programmatic/send_data_process.mocha.js
 spec "Send data to a process"
+mocha ./test/programmatic/return.mocha.js
+spec "Verify return messages"
 
 mocha ./test/programmatic/json_validation.mocha.js
 spec "JSON validation test"
