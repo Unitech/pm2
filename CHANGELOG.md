@@ -59,6 +59,7 @@ pm2.interact(opts, cb)
 - breaking change: remove .updatePM2() API method
 - Now Keymetrics link is done after applications has been updated (when doing pm2 update)
 - Startup tests under various conditions (hard reboot/sudo reboot) keymetrics links succesfully and process get resurected perfectly
+- Watch now reload applications instead of restart
 
 - @todo: find new license less restrictive. That disallow PM2 to be forked, modified, published for commercial or any business related purpose (at the private and public domain). That asks for any public/private companies to report any modifications in the PM2 source code via a pull request on the official repository github.com/Unitech/PM2.
 
