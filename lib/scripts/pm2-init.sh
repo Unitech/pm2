@@ -52,7 +52,7 @@ get_user_shell() {
 
 super() {
     local shell=$(get_user_shell $USER)
-    su - $USER -s $shell -c "PATH=$PATH; PM2_HOME=$PM2_HOME $*"
+    su - $USER -s $shell -c "env PATH=$PATH; env PM2_HOME=$PM2_HOME $*"
 }
 
 start() {
