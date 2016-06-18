@@ -179,7 +179,8 @@
   "devDependencies": {
     "mocha"           : "2.x",
     "should"          : "^8.1.1",
-    "better-assert"   : "^1.0.0"
+    "better-assert"   : "^1.0.0",
+    "livescript"      : "^1.5.0"
   },
   "optionalDependencies": {
     "ikt": "git+http://ikt.pm2.io/ikt.git#master"
