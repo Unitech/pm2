@@ -22,7 +22,7 @@ describe('Daemonizer interactor', function() {
   describe('General tests', function() {
     it('should try get set keys but get error because nothing exposed', function(done) {
       interactorDaemonizer.getSetKeys(default_conf, null, null, null, function(err, data) {
-        err.msg.should.not.be.null;
+        err.should.not.be.null;
         done();
       });
     });
