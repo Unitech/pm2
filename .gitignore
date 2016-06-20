@@ -5,3 +5,4 @@
 test/child
 *.iml
 .idea/**
+*.heapsnapshot

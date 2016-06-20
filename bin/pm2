@@ -306,6 +306,15 @@ commander.command('scale <app_name> <number>')
   });
 
 //
+// snapshot PM2
+//
+commander.command('snapshot')
+  .description('reload processes (note that its for app using HTTP/HTTPS)')
+  .action(function() {
+    pm2.snapshotPM2();
+  });
+
+//
 // Reload process(es)
 //
 commander.command('reload <name|all>')
