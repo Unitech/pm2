@@ -45,6 +45,7 @@ pm2.interact(opts, cb)
 
 #### Changes notes
 
+- Display NPM loader when installing module
 - All tests have been adapted for the new API. No major test changes, just fix (like null -> null() with should)
 - Multiple, separated instances of PM2 can now be managed, allowing a better integration with softwares
 - The main file API is ./lib/CLI.js. It is now an object that can be instanciated
