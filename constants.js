@@ -10,12 +10,6 @@ var semver = require('semver');
  */
 var path_structure = require('./paths.js')(process.env.OVER_HOME);
 
-var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
-if (semver.satisfies(process.versions.node, '>= 4.0.0'))
-  concurrent_actions = 4;
-debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
-
-
 /**
  * Constants variables used by PM2
  */
@@ -69,7 +63,13 @@ var csts = {
   GRACEFUL_LISTEN_TIMEOUT : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
 
   // Concurrent actions when doing start/restart/reload
-  CONCURRENT_ACTIONS      : concurrent_actions,
+  CONCURRENT_ACTIONS      : (function() {
+    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
+    if (semver.satisfies(process.versions.node, '>= 4.0.0'))
+      concurrent_actions = 4;
+    debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
+    return concurrent_actions;
+  })(),
 
   DEBUG                   : process.env.PM2_DEBUG || false,
   WEB_INTERFACE           : parseInt(process.env.PM2_API_PORT)  || 9615,
