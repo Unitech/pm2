@@ -27,3 +27,5 @@ Use the command: `tail --lines 50 ~/.pm2/pm2.log`
 ```
 ...
 ```
+
+cf CONTRIBUTING.md for more informations
