@@ -90,4 +90,8 @@ spec "Starting a process inside a PM2 process"
 bash ./test/bash/pm2-dev.sh
 spec "pm2-dev"
 
+bash ./test/bash/multiple-instances.sh
+spec "mutliple instances of pm2"
+
+
 $pm2 kill
