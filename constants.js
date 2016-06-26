@@ -3,6 +3,7 @@ var debug  = require('debug')('pm2:conf');
 var p      = require('path');
 var util   = require('util');
 var chalk  = require('chalk');
+var semver = require('semver');
 
 /**
  * Get PM2 path structure
