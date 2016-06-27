@@ -175,13 +175,13 @@
     "yamljs"              : "0.2.7",
     "semver"              : "~5.1.0",
     "mkdirp"              : "0.5.1",
-    "source-map-support"  : "0.4.0"
+    "source-map-support"  : "0.4.0",
+    "v8-profiler"     : "*"
   },
   "devDependencies": {
     "mocha"           : "2.x",
     "should"          : "^8.1.1",
-    "better-assert"   : "^1.0.0",
-    "v8-profiler"     : "*"
+    "better-assert"   : "^1.0.0"
   },
   "optionalDependencies": {
     "ikt": "git+http://ikt.pm2.io/ikt.git#master"
