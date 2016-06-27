@@ -309,9 +309,18 @@ commander.command('scale <app_name> <number>')
 // snapshot PM2
 //
 commander.command('snapshot')
-  .description('reload processes (note that its for app using HTTP/HTTPS)')
+  .description('snapshot PM2 memory')
   .action(function() {
     pm2.snapshotPM2();
+  });
+
+//
+// snapshot PM2
+//
+commander.command('profile <command>')
+  .description('profile CPU')
+  .action(function(command) {
+    pm2.profilePM2(command);
   });
 
 //
