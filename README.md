@@ -19,6 +19,9 @@
   <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
+<a href="https://snyk.io/test/github/Unitech/pm2/">
+  <img src="https://snyk.io/test/github/Unitech/pm2/badge.svg" alt="Known Vulnerabilities" />
+</a>
 
 <br/>
 <br/>
@@ -279,4 +282,3 @@ Thanks in advance and we hope that you like PM2!
 
 PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
 For other license [contact us](https://keymetrics.io/contact/).
-
