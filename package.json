@@ -153,7 +153,6 @@
     "chalk"               : "^1.1",
     "chokidar"            : "^1.5.0",
     "cli-table2"          : "0.2.0",
-    "coffee-script"       : "~1.10.0",
     "commander"           : "^2.9",
     "cron"                : "1.1.0",
     "debug"               : "2.2.0",
@@ -180,6 +179,7 @@
     "mocha"           : "2.x",
     "should"          : "^8.1.1",
     "better-assert"   : "^1.0.0",
+    "coffee-script"   : "~1.10.0",
     "livescript"      : "^1.5.0"
   },
   "optionalDependencies": {
