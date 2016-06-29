@@ -175,7 +175,7 @@
     "yamljs"              : "0.2.7",
     "semver"              : "~5.1.0",
     "mkdirp"              : "0.5.1",
-    "source-map-support"  : "0.4.0",
+    "source-map-support"  : "0.4.1",
     "v8-profiler"     : "*"
   },
   "devDependencies": {
