@@ -38,13 +38,14 @@ pm2.interact(opts, cb)
 
 ```
 
-//- Startup performance improvement (better performance on ARM)
-//- New pm2-docker global command
+- Startup performance improvement (better performance on ARM)
+- New pm2-docker global command
 - pm2-dev now runs in a different PM2 process
 - Keymetrics agents can now be attached to each different PM2 instance
 
 #### Changes notes
 
+- pm2 update / pm2 resurrect is now faster on Node > 4.0
 - pm2 list processes are now sorted by name instead id
 - Display NPM loader when installing module
 - All tests have been adapted for the new API. No major test changes, just fix (like null -> null() with should)
