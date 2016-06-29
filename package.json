@@ -166,16 +166,16 @@
     "pmx"                 : "^0.6",
     "vizion"              : "^0.2",
 
-    "pm2-axon"            : "~2.0.9",
+    "pm2-axon"            : "2.0.11",
     "pm2-axon-rpc"        : "^0.4.0",
     "pm2-deploy"          : "^0.3",
     "pm2-multimeter"      : "0.1.2",
 
     "shelljs"             : "0.7.0",
-    "yamljs"              : "0.2.7",
+    "yamljs"              : "0.2.8",
     "semver"              : "~5.1.0",
     "mkdirp"              : "0.5.1",
-    "source-map-support"  : "0.4.0",
+    "source-map-support"  : "0.4.1",
     "v8-profiler"     : "*"
   },
   "devDependencies": {
