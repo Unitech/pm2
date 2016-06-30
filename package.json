@@ -158,7 +158,7 @@
     "commander"           : "^2.9",
     "cron"                : "1.1.0",
     "debug"               : "2.2.0",
-    "eventemitter2"       : "0.4.14",
+    "eventemitter2"       : "1.0.5",
     "moment"              : "^2.13",
     "nssocket"            : "0.6.0",
     "pidusage"            : "^1.0.1",
