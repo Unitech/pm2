@@ -1,9 +1,4 @@
 language: node_js
-branches:
-  only:
-    - master
-    - development
-    - travis
 node_js:
    - "0.12"
    - "0.10"

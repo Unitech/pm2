@@ -6,3 +6,4 @@ pres
 *.pid
 examples
 *.pyc
+.github
