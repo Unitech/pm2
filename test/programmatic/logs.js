@@ -1,6 +1,6 @@
 
 process.env.NODE_ENV = 'test';
-process.env.DEBUG='pm2:*';
+//process.env.DEBUG='pm2:*';
 
 var PM2    = require('../..');
 var should = require('should');
@@ -54,8 +54,8 @@ describe('Max memory restart programmatic', function() {
         err_file.should.containEql('error-echo-0.log');
 
         setTimeout(function() {
-          fs.readFileSync(out_file).toString().should.containEql('ok');
-          fs.readFileSync(err_file).toString().should.containEql('thisnok');
+          fs.readFileSync(out_file).toString().should.containEql('echo.js');
+          fs.readFileSync(err_file).toString().should.containEql('echo.js-error');
           done();
         }, 500);
       });
@@ -77,8 +77,8 @@ describe('Max memory restart programmatic', function() {
         err_file.should.containEql('error-echo.log');
 
         setTimeout(function() {
-          fs.readFileSync(out_file).toString().should.containEql('ok');
-          fs.readFileSync(err_file).toString().should.containEql('thisnok');
+          fs.readFileSync(out_file).toString().should.containEql('echo.js');
+          fs.readFileSync(err_file).toString().should.containEql('echo.js-error');
           done();
         }, 500);
       });
@@ -103,10 +103,10 @@ describe('Max memory restart programmatic', function() {
         log_file.should.containEql('merged.log');
 
         setTimeout(function() {
-          fs.readFileSync(out_file).toString().should.containEql('ok');
-          fs.readFileSync(err_file).toString().should.containEql('thisnok');
-          fs.readFileSync(log_file).toString().should.containEql('thisnok');
-          fs.readFileSync(log_file).toString().should.containEql('ok');
+          fs.readFileSync(out_file).toString().should.containEql('echo.js');
+          fs.readFileSync(err_file).toString().should.containEql('echo.js-error');
+          fs.readFileSync(log_file).toString().should.containEql('echo.js-error');
+          fs.readFileSync(log_file).toString().should.containEql('echo.js');
           done();
         }, 500);
       });

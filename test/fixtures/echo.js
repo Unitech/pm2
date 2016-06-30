@@ -1,8 +1,8 @@
 
 setInterval(function() {
   console.log('echo.js');
-}, 500);
+}, 50);
 
 setInterval(function() {
   console.error('echo.js-error');
-}, 500);
+}, 50);
