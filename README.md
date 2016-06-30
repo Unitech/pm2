@@ -34,7 +34,7 @@ $ pm2 start app.js
 
 PM2 is constantly assailed by [more than 1000 tests](https://travis-ci.org/Unitech/pm2).
 
-Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
+Official website: [http://pm2.keymetrics.io/](http://pm2.keymetrics.io/)
 
 Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
@@ -280,3 +280,4 @@ Thanks in advance and we hope that you like PM2!
 PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
 For other license [contact us](https://keymetrics.io/contact/).
 
+[![GA](https://ga-beacon.appspot.com/UA-51734350-7/pm2/readme?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)
