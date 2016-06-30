@@ -34,7 +34,7 @@ $ pm2 start app.js
 
 PM2 is constantly assailed by [more than 1000 tests](https://travis-ci.org/Unitech/pm2).
 
-Official website: [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
+Official website: [http://pm2.keymetrics.io/](http://pm2.keymetrics.io/)
 
 Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
