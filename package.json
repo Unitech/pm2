@@ -174,12 +174,12 @@
 
     "shelljs"             : "0.7.0",
     "yamljs"              : "0.2.8",
-    "semver"              : "~5.1.0",
+    "semver"              : "~5.2.0",
     "mkdirp"              : "0.5.1",
     "source-map-support"  : "0.4.1"
   },
   "devDependencies": {
-    "mocha"           : "2.x",
+    "mocha"           : "^2.5",
     "should"          : "^8.1.1",
     "better-assert"   : "^1.0.0"
   },
