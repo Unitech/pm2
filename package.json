@@ -163,6 +163,7 @@
     "nssocket"            : "0.6.0",
     "pidusage"            : "^1.0.1",
 
+    "fclone"              : "1.0.3",
     "pmx"                 : "^0.6",
     "vizion"              : "^0.2",
 
