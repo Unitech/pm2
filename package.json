@@ -168,7 +168,7 @@
     "vizion"              : "^0.2",
 
     "pm2-axon"            : "2.0.11",
-    "pm2-axon-rpc"        : "^0.4.0",
+    "pm2-axon-rpc"        : "^0.4.3",
     "pm2-deploy"          : "^0.3",
     "pm2-multimeter"      : "0.1.2",
 
