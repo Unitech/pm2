@@ -176,8 +176,7 @@
     "yamljs"              : "0.2.8",
     "semver"              : "~5.1.0",
     "mkdirp"              : "0.5.1",
-    "source-map-support"  : "0.4.1",
-    "v8-profiler"     : "*"
+    "source-map-support"  : "0.4.1"
   },
   "devDependencies": {
     "mocha"           : "2.x",
