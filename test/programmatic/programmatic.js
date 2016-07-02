@@ -16,9 +16,9 @@ describe('PM2 programmatic calls', function() {
   var procs = [];
   var bus   = null;
 
-  var pm2 = new PM2({
+  var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures',
-    independant : true
+    independent : true
   });
 
   after(function(done) {

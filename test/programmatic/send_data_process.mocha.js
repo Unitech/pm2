@@ -11,8 +11,8 @@ var path   = require('path');
 
 describe('PM2 programmatic calls', function() {
 
-  var pm2 = PM2({
-    independant : true,
+  var pm2 = new PM2.custom({
+    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 

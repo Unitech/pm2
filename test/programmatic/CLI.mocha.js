@@ -10,8 +10,8 @@ describe('CLI tests', function() {
   var pm2;
 
   before(function(done) {
-    pm2 = new PM2({
-      independant : true
+    pm2 = new PM2.custom({
+      independent : true
     });
     pm2.connect(done);
   });

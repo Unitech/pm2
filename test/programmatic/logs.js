@@ -13,8 +13,8 @@ describe('Max memory restart programmatic', function() {
   var proc1 = null;
   var procs = [];
 
-  var pm2 = new PM2({
-    independant : true,
+  var pm2 = new PM2.custom({
+    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 

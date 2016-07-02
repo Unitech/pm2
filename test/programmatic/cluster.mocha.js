@@ -11,9 +11,9 @@ process.chdir(__dirname);
 describe('Cluster programmatic tests', function() {
   this.timeout(5000);
 
-  var pm2 = new PM2({
+  var pm2 = new PM2.custom({
     cwd : '../fixtures',
-    independant : true
+    independent : true
   });
 
   before(function(done) {

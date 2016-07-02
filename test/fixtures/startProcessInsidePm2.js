@@ -3,7 +3,7 @@ var PM2 = require('../..');
 /**
  * New gen API
  */
-var pm2 = new PM2();
+var pm2 = new PM2.custom();
 
 //console.log(process.env);
 

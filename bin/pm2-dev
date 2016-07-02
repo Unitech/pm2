@@ -5,7 +5,7 @@
 var commander = require('commander');
 
 var debug     = require('debug')('pm2:cli');
-var PM2       = require('../lib/CLI.js');
+var PM2       = require('..');
 var CLI       = require('../lib/CLI');
 var Log       = require('../lib/CLI/Log');
 var cst       = require('../constants.js');
@@ -23,7 +23,7 @@ commander.version(pkg.version)
   .option('--timestamp [format]', 'add timestamps to logs')
   .usage('[cmd] app');
 
-var pm2 = new PM2({
+var pm2 = new PM2.custom({
   pm2_home : path.join(process.env.HOME, '.pm2-dev')
 });
 

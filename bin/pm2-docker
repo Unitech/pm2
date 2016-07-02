@@ -23,7 +23,7 @@ commander.version(pkg.version)
   .option('--timestamp [format]', 'add timestamps to logs')
   .usage('[cmd] app');
 
-var pm2 = new PM2({
+var pm2 = new PM2.custom({
   pm2_home : path.join(process.env.HOME, '.pm2')
 });
 

@@ -6,7 +6,7 @@ describe('Client Daemon', function() {
   var client;
 
   it('should instanciate a new client', function() {
-    client = new Client({ independant : true });
+    client = new Client({ independent : true });
     should.exist(client.rpc_socket_file);
     should.exist(client.pub_socket_file);
     should.exist(client.pm2_home);

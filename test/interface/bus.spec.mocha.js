@@ -61,8 +61,8 @@ process.on('uncaughtException', function(e) {
 describe('PM2 BUS / RPC', function() {
   this.timeout(5000);
 
-  var pm2 = new PM2({
-    independant : true,
+  var pm2 = new PM2.custom({
+    independent : true,
     cwd         : __dirname + '/../fixtures/interface'
   });
   var pm2_bus;

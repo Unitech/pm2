@@ -53,8 +53,8 @@ function startSomeApps(pm2, cb) {
 describe('REMOTE PM2 ACTIONS', function() {
   var server;
   var interactor;
-  var pm2 = new PM2({
-    independant : true,
+  var pm2 = new PM2.custom({
+    independent : true,
     cwd         : __dirname + '/../fixtures',
     secret_key : 'test-secret-key',
     public_key : 'test-public-key',

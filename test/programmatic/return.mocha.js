@@ -3,8 +3,8 @@ var PM2    = require('../..');
 var should = require('should');
 
 describe('Return messages checks', function() {
-  var pm2 = new PM2({
-    independant : true,
+  var pm2 = new PM2.custom({
+    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 

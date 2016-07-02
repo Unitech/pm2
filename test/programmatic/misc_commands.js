@@ -6,8 +6,8 @@ var assert = require('better-assert');
 var path   = require('path');
 
 describe('Misc commands', function() {
-  var pm2 = new PM2({
-    independant : true,
+  var pm2 = new PM2.custom({
+    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 

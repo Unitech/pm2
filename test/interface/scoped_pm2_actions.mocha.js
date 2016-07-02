@@ -71,8 +71,8 @@ function startSomeApps(cb) {
   pm2.start('./child.js', {instances : 1, name : 'child'}, cb);
 }
 
-var pm2 = new PM2({
-  independant : true,
+var pm2 = new PM2.custom({
+  independent : true,
   cwd         : __dirname + '/../fixtures',
   secret_key : 'test-secret-key',
   public_key : 'test-public-key',

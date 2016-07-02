@@ -12,7 +12,7 @@ var cst = require('../../constants.js');
 // Change to current folder
 process.chdir(__dirname);
 
-var pm2= new PM2();
+var pm2= new PM2.custom();
 
 /**
  * Description

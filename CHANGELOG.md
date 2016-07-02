@@ -8,7 +8,7 @@
 ```javascript
 var PM2 = require('pm2');
 
-var pm2 = new PM2({
+var pm2 = new PM2.custom({
   pm2_home :    // Default is the legacy $USER/.pm2. Now you can override this value
   cwd      :    // Move to CWD,
   daemon_mode : // Should the process stay attached to this application,

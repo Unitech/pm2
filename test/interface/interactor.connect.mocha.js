@@ -74,8 +74,8 @@ describe('Interactor testing', function() {
   var interactor;
   var pm2_bus;
 
-  var pm2 = new PM2({
-    independant : true,
+  var pm2 = new PM2.custom({
+    independent : true,
     cwd         : __dirname + '/../fixtures',
     secret_key : 'osef',
     public_key : 'osef',
