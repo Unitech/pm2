@@ -5,5 +5,6 @@
   ".php": "php",
   ".pl" : "perl",
   ".js" : "node",
-  ".coffee" : "coffee"
+  ".coffee" : "coffee",
+  ".ls" : "lsc"
 }
