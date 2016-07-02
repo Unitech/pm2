@@ -178,7 +178,7 @@
     "source-map-support"  : "0.4.1"
   },
   "devDependencies": {
-    "mocha"           : "^2.5",
+    "mocha"           : "^2.5.3",
     "should"          : "^8.1.1",
     "better-assert"   : "^1.0.0",
     "coffee-script"   : "~1.10.0",
