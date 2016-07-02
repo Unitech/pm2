@@ -5,7 +5,7 @@
 var commander = require('commander');
 
 var debug     = require('debug')('pm2:cli');
-var PM2       = require('../lib/CLI.js');
+var PM2       = require('..');
 var CLI       = require('../lib/CLI');
 var Log       = require('../lib/CLI/Log');
 var cst       = require('../constants.js');
@@ -20,6 +20,7 @@ process.env.PM2_SILENT = 'true';
 
 commander.version(pkg.version)
   .option('--raw', 'raw log output')
+  .option('--auto-exit', 'exit if all processes are errored/stopped or 0 apps launched')
   .option('--timestamp [format]', 'add timestamps to logs')
   .usage('[cmd] app');
 
@@ -31,10 +32,11 @@ pm2.connect(function() {
   commander.parse(process.argv);
 });
 
-function run(cmd, opts) {
-  commander.watch = true;
-  commander.autorestart = false;
+process.on('SIGINT', function() {
+  exitPM2();
+});
 
+function run(cmd, opts) {
   var needRaw = opts.parent.rawArgs.indexOf('--raw') > -1 || false;
   var timestamp = opts.parent.timestamp;
 
@@ -43,16 +45,42 @@ function run(cmd, opts) {
 
   pm2.start(cmd, commander, function(err, obj) {
     Log.stream(pm2.Client, 'all', needRaw, timestamp, false);
+  });
+}
 
-    process.on('SIGINT', function() {
-      console.log('>>>>> [PM2 DEV] Stopping current development session');
-      pm2.delete('all', function() {
-        pm2.destroy(function() {
-          process.exit(0);
-        });
-      });
+function exitPM2() {
+  console.log('Exiting PM2');
+  pm2.delete('all', function() {
+    pm2.disconnect(function() {
+      process.exit(0);
     });
   });
+}
+
+/**
+ * Exit current PM2 instance if 0 app is online
+ * function activated via --auto-exit
+ */
+function autoExit() {
+  setTimeout(function() {
+    pm2.list(function(err, apps) {
+      if (err) console.error(err.stack || err);
+
+      var online_count = 0;
+
+      apps.forEach(function(app) {
+        if (app.pm2_env.status == cst.ONLINE_STATUS ||
+            app.pm2_env.status == cst.LAUNCHING_STATUS)
+          online_count++;
+      });
+
+      if (online_count == 0) {
+        console.log('0 application online, exiting');
+        exitPM2();
+      }
+      autoExit();
+    });
+  }, 3000);
 }
 
 commander.command('*')
@@ -66,6 +94,8 @@ commander.command('run <file|json_file>')
   .alias('start')
   .description('run <file|json_file> in development mode')
   .action(function(cmd, opts) {
+    if (commander.autoExit)
+      autoExit();
     run(cmd, opts);
   });
 
