@@ -182,6 +182,8 @@
     "should"          : "^8.1.1",
     "better-assert"   : "^1.0.0",
     "coffee-script"   : "~1.10.0",
+    "typescript"      : "^1.8.0",
+    "ts-node"         : "^0.9",
     "livescript"      : "^1.5.0"
   },
   "optionalDependencies": {

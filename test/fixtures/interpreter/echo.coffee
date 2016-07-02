@@ -1,3 +1,3 @@
-#!/usr/bin/env lsc
+#!/usr/bin/env coffee
 
 setInterval (-> console.log 'ok'), 500

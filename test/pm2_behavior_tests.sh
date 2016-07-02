@@ -82,6 +82,8 @@ bash ./test/bash/wrapped-fork.sh
 spec "wrapped fork"
 bash ./test/bash/app-configuration.sh
 spec "App configuration"
+bash ./test/bash/interpreter.sh
+spec "Javascript transpilers tests"
 bash ./test/bash/source_map.sh
 spec "Source map resolution on exception"
 bash ./test/bash/inside-pm2.sh
