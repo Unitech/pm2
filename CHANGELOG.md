@@ -39,7 +39,7 @@ pm2.interact(opts, cb)
 ```
 
 - Startup performance improvement (better performance on ARM)
-- New pm2-docker global command
+- New pm2-docker global command (auto-exit function, log features)
 - pm2-dev now runs in a different PM2 process
 - Keymetrics agents can now be attached to each different PM2 instance
 
