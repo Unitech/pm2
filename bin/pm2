@@ -10,9 +10,11 @@ var chalk     = require('chalk');
 var async     = require('async');
 
 var debug     = require('debug')('pm2:cli');
-var pm2       = require('..');
+var PM2       = require('../lib/CLI.js');
 var pkg       = require('../package.json');
 var tabtab    = require('../lib/completion.js');
+
+var pm2 = new PM2();
 
 commander.version(pkg.version)
   .option('-v --version', 'get version')
