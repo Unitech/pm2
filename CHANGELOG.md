@@ -45,6 +45,8 @@ pm2.interact(opts, cb)
 
 #### Changes notes
 
+- coffeescript dependency moved as devDependency
+- livescript suppor added in development mode #2248
 - pm2 update / pm2 resurrect is now faster on Node > 4.0
 - pm2 list processes are now sorted by name instead id
 - Display NPM loader when installing module
