@@ -2,6 +2,8 @@
 var PM2 = require('../..');
 var should = require('should');
 
+process.chdir(__dirname);
+
 describe('API checks', function() {
 
   describe('PM2 connect old style', function() {
@@ -23,7 +25,7 @@ describe('API checks', function() {
     });
 
     it('should be able to start a script', function(done) {
-      PM2.start('./test/fixtures/child.js', function(err) {
+      PM2.start('./../fixtures/child.js', function(err) {
         should(err).be.null();
         done();
       });
@@ -60,7 +62,7 @@ describe('API checks', function() {
     });
 
     it('should be able to start a script without connect', function(done) {
-      PM2.start('./test/fixtures/child.js', function(err) {
+      PM2.start('./../fixtures/child.js', function(err) {
         should(err).be.null();
         done();
       });
@@ -102,7 +104,7 @@ describe('API checks', function() {
     });
 
     it('should be able to start a script without connect', function(done) {
-      pm2.start('./test/fixtures/child.js', function(err) {
+      pm2.start('./../fixtures/child.js', function(err) {
         should(err).be.null();
         done();
       });

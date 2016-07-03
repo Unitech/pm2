@@ -55,8 +55,6 @@ mocha --opts ./mocha.opts  ./signals.js
 spec "SIGINT signal interception + delay customization"
 mocha --opts ./mocha.opts  ./send_data_process.mocha.js
 spec "Send data to a process"
-mocha --opts ./mocha.opts  ./return.mocha.js
-spec "Verify return messages"
 
 mocha --opts ./mocha.opts  ./json_validation.mocha.js
 spec "JSON validation test"
