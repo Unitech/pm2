@@ -2,6 +2,8 @@
 
 'use strict';
 
+require('cache-require-paths');
+
 var cst       = require('../constants.js');
 
 var commander = require('commander');
