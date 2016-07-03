@@ -58,8 +58,8 @@
       "name": "James Ide"
     },
     {
-      "name" : "Jun Tjatse",
-      "email" : "thisnamemeansnothing@gmail.com"
+      "name": "Jun Tjatse",
+      "email": "thisnamemeansnothing@gmail.com"
     },
     {
       "name": "Xu Jingxin",
@@ -145,47 +145,45 @@
     "dev ops"
   ],
   "bin": {
-    "pm2"    : "./bin/pm2",
+    "pm2": "./bin/pm2",
     "pm2-dev": "./bin/pm2-dev",
     "pm2-docker": "./bin/pm2-docker"
   },
   "dependencies": {
-    "async"               : "1.5",
-    "chalk"               : "^1.1",
-    "chokidar"            : "^1.5.0",
-    "cli-table2"          : "0.2.0",
-    "commander"           : "^2.9",
-    "cron"                : "1.1.0",
-    "debug"               : "2.2.0",
-    "eventemitter2"       : "1.0.5",
-    "moment"              : "^2.13",
-    "nssocket"            : "0.6.0",
-    "pidusage"            : "^1.0.1",
-
-    "fclone"              : "1.0.5",
-    "pmx"                 : "^0.6",
-    "vizion"              : "^0.2",
-
-    "pm2-axon"            : "2.0.11",
-    "pm2-axon-rpc"        : "Unitech/pm2-axon-rpc#development",
-    "pm2-deploy"          : "^0.3",
-    "pm2-multimeter"      : "0.1.2",
-
-    "shelljs"             : "0.7.0",
-    "yamljs"              : "0.2.8",
-    "semver"              : "~5.2.0",
-    "mkdirp"              : "0.5.1",
-    "source-map-support"  : "0.4.1",
-    "v8-profiler" : "*"
+    "async": "1.5",
+    "cache-require-paths": "^0.2.0",
+    "chalk": "^1.1",
+    "chokidar": "^1.5.0",
+    "cli-table2": "0.2.0",
+    "commander": "^2.9",
+    "cron": "1.1.0",
+    "debug": "2.2.0",
+    "eventemitter2": "1.0.5",
+    "fclone": "1.0.5",
+    "mkdirp": "0.5.1",
+    "moment": "^2.13",
+    "nssocket": "0.6.0",
+    "pidusage": "^1.0.1",
+    "pm2-axon": "2.0.11",
+    "pm2-axon-rpc": "Unitech/pm2-axon-rpc#development",
+    "pm2-deploy": "^0.3",
+    "pm2-multimeter": "0.1.2",
+    "pmx": "^0.6",
+    "semver": "~5.2.0",
+    "shelljs": "0.7.0",
+    "source-map-support": "0.4.1",
+    "v8-profiler": "*",
+    "vizion": "^0.2",
+    "yamljs": "0.2.8"
   },
   "devDependencies": {
-    "mocha"           : "^2.5.3",
-    "should"          : "^8.1.1",
-    "better-assert"   : "^1.0.0",
-    "coffee-script"   : "~1.10.0",
-    "typescript"      : "^1.8.0",
-    "ts-node"         : "^0.9",
-    "livescript"      : "^1.5.0"
+    "mocha": "^2.5.3",
+    "should": "^8.1.1",
+    "better-assert": "^1.0.0",
+    "coffee-script": "~1.10.0",
+    "typescript": "^1.8.0",
+    "ts-node": "^0.9",
+    "livescript": "^1.5.0"
   },
   "optionalDependencies": {
     "ikt": "git+http://ikt.pm2.io/ikt.git#master"

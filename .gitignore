@@ -6,3 +6,5 @@ test/child
 *.iml
 .idea/**
 *.heapsnapshot
+*.cpuprofile
+.cache-require-paths.json
