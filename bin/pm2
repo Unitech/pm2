@@ -2,6 +2,7 @@
 
 'use strict';
 
+process.env.CACHE_REQUIRE_PATHS_FILE=__dirname + '/.cache-require-paths.json';
 require('cache-require-paths');
 
 var cst       = require('../constants.js');
