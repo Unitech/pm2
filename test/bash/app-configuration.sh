@@ -65,7 +65,7 @@ exists 'probe Loop delay default value' "alert: {}"
 $pm2 set probe-test.probes.Loop\ delay.value 25
 sleep 1
 
-exists 'probe Loop delay alerted' "alert: { cmp: '>', value: 20, mode: 'threshold'"
+exists 'probe Loop delay alerted' "alert: { cmp: '>', value: 25, mode: 'threshold'"
 
 # Override value for test-probe
 $pm2 set probe-test.probes.test-probe.value 30
