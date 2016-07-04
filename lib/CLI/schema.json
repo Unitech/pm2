@@ -43,6 +43,9 @@
   "kill_timeout": {
     "type": "number"
   },
+  "listen_timeout": {
+    "type": "number"
+  },
   "port": {
     "type": "number"
   },

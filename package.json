@@ -164,7 +164,7 @@
     "moment": "^2.13",
     "nssocket": "0.6.0",
     "pidusage": "^1.0.1",
-    "pm2-axon": "2.0.11",
+    "pm2-axon": "Unitech/pm2-axon#master",
     "pm2-axon-rpc": "Unitech/pm2-axon-rpc#development",
     "pm2-deploy": "^0.3",
     "pm2-multimeter": "0.1.2",

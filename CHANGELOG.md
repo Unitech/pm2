@@ -46,6 +46,7 @@ pm2.interact(opts, cb)
 
 #### Changes notes
 
+- #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files
 - coffeescript dependency moved as devDependency
 - livescript suppor added in development mode #2248
