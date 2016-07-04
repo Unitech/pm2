@@ -172,7 +172,6 @@
     "semver": "~5.2.0",
     "shelljs": "0.7.0",
     "source-map-support": "0.4.1",
-    "v8-profiler": "*",
     "vizion": "^0.2",
     "yamljs": "0.2.8"
   },
