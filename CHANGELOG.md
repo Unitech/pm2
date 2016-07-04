@@ -39,12 +39,14 @@ pm2.interact(opts, cb)
 ```
 
 - Startup performance improvement (better performance on ARM)
+- Startup performance improvement via require path caching
 - New pm2-docker global command (auto-exit function, log features)
 - pm2-dev now runs in a different PM2 process
 - Keymetrics agents can now be attached to each different PM2 instance
 
 #### Changes notes
 
+- #2256 fix deploy command for yaml files
 - coffeescript dependency moved as devDependency
 - livescript suppor added in development mode #2248
 - pm2 update / pm2 resurrect is now faster on Node > 4.0
