@@ -15,7 +15,7 @@ describe('API checks', function() {
 
     it('should instanciate a new pm2 with old api', function() {
       should(PM2.pm2_home).exists;
-      should(PM2.daemon_mode).be.true;
+      should(PM2.daemon_mode).be.true();
       PM2.cwd.should.eql(process.cwd());
       should(PM2.Client).exists;
     });
@@ -56,7 +56,7 @@ describe('API checks', function() {
 
     it('should instanciate a new pm2 with old api', function() {
       should(PM2.pm2_home).exists;
-      should(PM2.daemon_mode).be.true;
+      should(PM2.daemon_mode).be.true();
       PM2.cwd.should.eql(process.cwd());
       should(PM2.Client).exists;
     });
@@ -98,7 +98,7 @@ describe('API checks', function() {
         daemon_mode : true
       });
       should(pm2.pm2_home).exists;
-      should(pm2.daemon_mode).be.true;
+      should(pm2.daemon_mode).be.true();
       pm2.cwd.should.eql(process.cwd());
       should(pm2.Client).exists;
     });
