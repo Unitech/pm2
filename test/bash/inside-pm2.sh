@@ -33,4 +33,14 @@ sleep 1
 grep "hello2" inside-out-1.log &> /dev/null
 spec "Child should have hello2 variable after restart"
 
-#$pm2 kill
+# Call bash script that restarts app
+$pm2 delete all
+
+$pm2 start echo.js
+sleep 1
+
+export PM2_PATH=$pm2
+$pm2 start inside/inner_restart.sh
+sleep 2
+should 'restarted status should be one' "restart_time: 0" 1
+should 'restarted status should be one' "restart_time: 1" 1
