@@ -699,10 +699,12 @@ commander.command('kill')
 commander.command('pull <name> [commit_id]')
   .description('updates repository for a given app')
   .action(function(pm2_name, commit_id) {
+
     if (commit_id !== undefined) {
-      pm2.pullCommitId(
-        {pm2_name: pm2_name,
-         commit_id: commit_id});
+      pm2._pullCommitId({
+        pm2_name: pm2_name,
+        commit_id: commit_id
+      });
     }
     else
       pm2.pullAndRestart(pm2_name);

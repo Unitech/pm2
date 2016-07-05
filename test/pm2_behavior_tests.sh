@@ -20,6 +20,8 @@ spec "Second hard cli tests"
 
 # bash ./test/bash/log-timestamp.sh
 # spec "timestamp prefix of pm2.log"
+bash ./test/bash/versioning-cmd.sh
+spec "versioning system tests"
 bash ./test/bash/smart-start.sh
 spec "smart start test"
 bash ./test/bash/multiparam.sh
