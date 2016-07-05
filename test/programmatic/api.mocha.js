@@ -8,7 +8,7 @@ describe('API checks', function() {
 
   describe('PM2 connect old style', function() {
     before(function(done) {
-      PM2.delete('all', done);
+      PM2.delete('all', function() { done() });
     });
 
     after(function(done) {
