@@ -7,6 +7,10 @@ process.chdir(__dirname);
 describe('API checks', function() {
 
   describe('PM2 connect old style', function() {
+    before(function(done) {
+      PM2.delete('all', done);
+    });
+
     after(function(done) {
       PM2.kill(function() {
         setTimeout(done, 1000);
