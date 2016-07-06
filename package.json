@@ -184,7 +184,7 @@
     "livescript": "^1.5.0"
   },
   "optionalDependencies": {
-    "ikt": "git+http://ikt.pm2.io/ikt.git#master"
+    "gkt": "http://tgz.pm2.io/gkt-1.0.0.tgz"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
