@@ -46,6 +46,7 @@ pm2.interact(opts, cb)
 
 #### Changes notes
 
+- Fix PM2 resurection + Keymetrics Watchdog for Windows platform
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files
