@@ -41,6 +41,7 @@ pm2.interact(opts, cb)
 - Startup performance improvement (better performance on ARM)
 - Startup performance improvement via require path caching
 - New pm2-docker global command (auto-exit function, log features)
+- $ pm2-docker run examples/child.js --timestamp --secret 123213 --public 123213 --machine-name "my-machine-1"
 - pm2-dev now runs in a different PM2 process
 - Keymetrics agents can now be attached to each different PM2 instance
 
