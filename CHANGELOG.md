@@ -18,11 +18,6 @@ var pm2 = new PM2.custom({
   machone_name: // Keymetrics instance name
 });
 
-// Connect to local instance for operations
-pm2.connect((err) => {
-  // Ready to interact
-})
-
 pm2.disconnect(cb) // Close connection with current pm2 instance
 pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 
