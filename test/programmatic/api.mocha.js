@@ -1,8 +1,8 @@
 
+process.chdir(__dirname);
+
 var PM2 = require('../..');
 var should = require('should');
-
-process.chdir(__dirname);
 
 describe('API checks', function() {
 
@@ -130,5 +130,23 @@ describe('API checks', function() {
     });
   });
 
+  describe('Should start pm2 in do daemon mode', function() {
+    var pm2;
+
+    after(function(done) {
+      pm2.destroy(done);
+    });
+
+    it('should create new custom PM2 instance', function() {
+      pm2 = new PM2.custom({
+        independent : true,
+        daemon_mode : false
+      });
+      should(pm2.pm2_home).exists;
+      should(pm2.daemon_mode).be.false();
+      pm2.cwd.should.eql(process.cwd());
+      should(pm2.Client).exists;
+    });
+  });
 
 });
