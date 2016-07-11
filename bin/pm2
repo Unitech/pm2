@@ -191,28 +191,11 @@ function failOnUnknown(fn) {
  *
  * Patch Commander.js Variadic feature
  */
-function removeElements(array, args){
-  var indices = [];
-  for(var i = 0; i < args.length; i++){
-    var arg = args[i];
-    var index = array.indexOf(arg);
-    while(index > -1){
-      indices.push(index);
-      index = array.indexOf(arg, index + 1);
-    }
-  }
-  indices.sort();
-  for(var i = 0; i < indices.length; i++){
-    var index = indices[i] - i;
-    array.splice(index, 1);
-  }
-}
-
 function patchCommanderArg(cmd) {
   var argsIndex;
   if ((argsIndex = commander.rawArgs.indexOf('--')) >= 0) {
     var optargs = commander.rawArgs.slice(argsIndex + 1);
-    removeElements(cmd, optargs);
+    cmd = cmd.slice(0, cmd.indexOf(optargs[0]));
   }
   return cmd;
 }
