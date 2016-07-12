@@ -25,18 +25,24 @@ var pm2 = new PM2.custom({
 
 pm2.start('myapp.js');
 
-pm2.disconnect(cb) // Close connection with current pm2 instance
-pm2.destroy(cb)    // Close and delete all pm2 related files of this session
-
 // Bus system to detect events
 pm2.launchBus((err, bus) => {
-  bus.on('*', (message) => {
+  bus.on('log:out', (message) => {
+    console.log(message);
+  });
+
+  bus.on('log:err', (message) => {
     console.log(message);
   });
 });
 
 // Connect to different keymetrics bucket
 pm2.interact(opts, cb)
+
+// PM2 auto closes connection if no processing is done but manually:
+
+pm2.disconnect(cb) // Close connection with current pm2 instance
+pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 ```
 
 - Better CLI/API code structure
@@ -56,11 +62,6 @@ pm2.interact(opts, cb)
 - #2248 livescript support added in development mode
 - The client/server file called Satan.js does not exists anymore. It has been replaced by the file combo ./lib/Client.js and ./lib/Daemon.js
 - PM2 --no-daemon is better now
-
-# Remaining todo
-
-- license
-- pm2.start(script) (should work without opts, if cb is not passed should not exit)
 
 ### 1.1.3
 
