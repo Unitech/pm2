@@ -38,6 +38,8 @@ spec "Programmatic test"
 
 mocha --opts ./mocha.opts  ./api.mocha.js
 spec "API tests"
+mocha --opts ./mocha.opts  ./lazy_api.mocha.js
+spec "API tests"
 
 mocha --opts ./mocha.opts  ./logs.js
 spec "Logs test"
