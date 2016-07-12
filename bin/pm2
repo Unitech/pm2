@@ -136,7 +136,7 @@ function checkCompletion(){
         return data._name;
       }), data);
   });
-};
+}
 
 if (process.argv.indexOf('--no-daemon') > -1) {
   //
