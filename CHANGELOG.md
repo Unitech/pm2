@@ -1,9 +1,14 @@
 
 ### 2.0.0
 
-- Major PM2 client-side code rewritte for a better code structure and integration
-- Multiple PM2 on the same host is now fully supported and seamless
-- Major API rewrite
+- Memory usage reduced by 40%
+- CPU usage in overall situations reduced by 60%
+- Faster process management with CONCURRENT_ACTIONs enabled
+- Better Windows support
+- New PM2 API, backward compatible with previous PM2 versions
+- pm2-docker command with his official [Docker image]()
+- pm2-dev command enhanced
+- Watch and Reload
 
 ```javascript
 var PM2 = require('pm2');
@@ -18,6 +23,8 @@ var pm2 = new PM2.custom({
   machone_name: // Keymetrics instance name
 });
 
+pm2.start('myapp.js');
+
 pm2.disconnect(cb) // Close connection with current pm2 instance
 pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 
@@ -30,47 +37,30 @@ pm2.launchBus((err, bus) => {
 
 // Connect to different keymetrics bucket
 pm2.interact(opts, cb)
-
 ```
 
-- Startup performance improvement (better performance on ARM)
-- Startup performance improvement via require path caching
-- New pm2-docker global command (auto-exit function, log features)
-- $ pm2-docker run examples/child.js --timestamp --secret 123213 --public 123213 --machine-name "my-machine-1"
-- pm2-dev now runs in a different PM2 process
-- Keymetrics agents can now be attached to each different PM2 instance
+- Better CLI/API code structure
+- PM2 isolation for multi PM2 instance management
 
-#### Changes notes
+
+## Bug fixes
 
 - #2093 #2092 #2059 #1906 #1758 #1696 replace optionnal git module with tgz one
-- Fix PM2 resurection + Keymetrics Watchdog for Windows platform
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files
-- coffeescript dependency moved as devDependency
-- livescript suppor added in development mode #2248
+- Yamljs + Chokidar Security fixes
 - pm2 update / pm2 resurrect is now faster on Node > 4.0
+- keymetrics linking after pm2 update is done once all apps are started
 - pm2 list processes are now sorted by name instead id
-- Display NPM loader when installing module
-- All tests have been adapted for the new API. No major test changes, just fix (like null -> null() with should)
-- Multiple, separated instances of PM2 can now be managed, allowing a better integration with softwares
-- The main file API is ./lib/CLI.js. It is now an object that can be instanciated
-- CPU usage divided by two (results caching + avoiding object transformations)
-- CLI methods have structured into multiple files in the ./lib/CLI/ folder
-- CONCURRENT_ACTIONS, decreasing test times from 20min to 47min and much better CLI reactivity when managing multiple applications + also better when doing a pm2 update. Some errors can happen on older versions (https://gist.github.com/Unitech/8fc88d701504866d8e2b2d7b23d91e20)
+- #2248 livescript support added in development mode
 - The client/server file called Satan.js does not exists anymore. It has been replaced by the file combo ./lib/Client.js and ./lib/Daemon.js
-- pm2-dev is now a great stuff for application developping, multi terminal would be great to integrate
-- Keymetrics WatchDog works great
-- pm2 --no-daemon works greatly
-- Keymetrics agents now check for online connectivity via DNS lookup instead of PING. Internal IP is now sent to KM. Multi tries on pm2 link command.
-- breaking change: remove .updatePM2() API method
-- Now Keymetrics link is done after applications has been updated (when doing pm2 update)
-- Startup tests under various conditions (hard reboot/sudo reboot) keymetrics links succesfully and process get resurected perfectly
-- Watch now reload applications instead of restart
+- PM2 --no-daemon is better now
 
-- @todo: find new license less restrictive. That disallow PM2 to be forked, modified, published for commercial or any business related purpose (at the private and public domain). That asks for any public/private companies to report any modifications in the PM2 source code via a pull request on the official repository github.com/Unitech/PM2.
+# Remaining todo
 
-- Optimization: The file ./lib/CLI.js is a big fat object, making the CLI experience some lags on startup. It may be because of require also that is called a number of time arround the CLI.
+- license
+- pm2.start(script) (should work without opts, if cb is not passed should not exit)
 
 ### 1.1.3
 
