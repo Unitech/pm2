@@ -7,6 +7,10 @@
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
 <br/><br/>
 
+ <a href="https://gitter.im/Unitech/pm2">
+ <img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Community">
+</a>
+
  <a href="https://www.bithound.io/github/Unitech/pm2">
  <img src="https://www.bithound.io/github/Unitech/pm2/badges/score.svg" alt="bitHound Score">
 </a>
