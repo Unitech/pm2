@@ -172,13 +172,13 @@
     "shelljs": "0.7.0",
     "source-map-support": "0.4.1",
     "vizion": "^0.2",
-    "yamljs": "0.2.8"
+    "yamljs": "0.2.8",
+    "coffee-script": "~1.10.0"
   },
   "devDependencies": {
     "mocha": "^2.5.3",
     "should": "^8.1.1",
     "better-assert": "^1.0.0",
-    "coffee-script": "~1.10.0",
     "typescript": "^1.8.0",
     "ts-node": "^0.9",
     "livescript": "^1.5.0"
