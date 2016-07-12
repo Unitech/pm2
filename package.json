@@ -152,7 +152,7 @@
   "dependencies": {
     "async": "1.5",
     "chalk": "^1.1",
-    "chokidar": "^1.5.0",
+    "chokidar": "^1.6.0",
     "cli-table2": "0.2.0",
     "commander": "^2.9",
     "cron": "1.1.0",
