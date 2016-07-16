@@ -79,12 +79,13 @@ $ pm2 update
 
 ```bash
 $ npm install pm2 -g            # Install PM2
-$ pm2 start app.js              # Start, Daemonize and auto restart application
+$ pm2 start app.js              # Start, Daemonize and auto-restart application
 $ pm2 start app.js -i 4         # Start 4 instances of application in cluster mode
                                 # it will load balance network queries to each app
 $ pm2 start app.js --name="api" # Start application and name it "api"
 $ pm2 start app.js --watch      # Restart application on file change
 $ pm2 start script.sh           # Start bash script
+$ pm2 start npm -- start        # Start, Daemonize and auto-restart Node application 
 
 $ pm2 list                      # List all processes started with PM2
 $ pm2 monit                     # Display memory and cpu usage of each app
