@@ -6,6 +6,7 @@
 - Faster process management with CONCURRENT_ACTIONs enabled
 - Faster installation (v1: ~30secs, v2: ~10secs)
 - Faster `pm2 update` with Keymetrics linking delayed at the end
+- Much better Module system with raw NPM feedback
 - Better Windows support
 - **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine)
 - **pm2-dev** command enhanced
