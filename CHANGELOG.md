@@ -4,6 +4,7 @@
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
 - Faster process management with CONCURRENT_ACTIONs enabled
+- Faster PM2 installation (v1: ~30secs, v2: ~10secs)
 - Better Windows support
 - **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine)
 - **pm2-dev** command enhanced
