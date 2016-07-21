@@ -1,17 +1,21 @@
 
-### 2.0.0 - Quantica Ultimatum
+## 2.0.0 - Quantica Ultimatum
 
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
 - Faster process management with CONCURRENT_ACTIONs enabled
 - Better Windows support
-- New PM2 API, backward compatible with previous PM2 versions
 - **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine)
 - **pm2-dev** command enhanced
 - Watch and Reload
+- New PM2 API, backward compatible with previous PM2 versions
+
+The new PM2 API is greatly tested and well designed:
 
 ```javascript
 var PM2 = require('pm2');
+
+// Or instanciate a custom PM2 instance
 
 var pm2 = new PM2.custom({
   pm2_home :    // Default is the legacy $USER/.pm2. Now you can override this value
@@ -23,7 +27,18 @@ var pm2 = new PM2.custom({
   machone_name: // Keymetrics instance name
 });
 
+// Start an app
 pm2.start('myapp.js');
+
+// Start an app with options
+pm2.start({
+  script   : 'api.js',
+  instances: 4
+}, function(err, processes) {
+});
+
+// Stop all apps
+pm2.stop('all');
 
 // Bus system to detect events
 pm2.launchBus((err, bus) => {
