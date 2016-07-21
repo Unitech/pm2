@@ -48,9 +48,14 @@ Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
 ```bash
 $ npm install pm2 -g
+
+# Or install the V2 release candidate
+$ npm install pm2@next -g
 ```
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
+
+*Read more about the [V2 - Quantica Ultimatum](https://github.com/Unitech/pm2/blob/development/CHANGELOG.md#200---quantica-ultimatum)*
 
 ## Start an application
 
