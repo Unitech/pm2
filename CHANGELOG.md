@@ -72,6 +72,7 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files
+- Extra module display http://pm2.keymetrics.io/docs/advanced/pm2-module-system/#extra-display
 - Yamljs + Chokidar Security fixes
 - pm2 update / pm2 resurrect is now faster on Node > 4.0
 - keymetrics linking after pm2 update is done once all apps are started
