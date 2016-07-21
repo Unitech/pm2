@@ -1,13 +1,13 @@
 
-### 2.0.0
+### 2.0.0 - Quantica Ultimatum
 
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
 - Faster process management with CONCURRENT_ACTIONs enabled
 - Better Windows support
 - New PM2 API, backward compatible with previous PM2 versions
-- pm2-docker command with his official [Docker image]()
-- pm2-dev command enhanced
+- **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine)
+- **pm2-dev** command enhanced
 - Watch and Reload
 
 ```javascript
