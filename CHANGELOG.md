@@ -4,11 +4,12 @@
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
 - Faster process management with CONCURRENT_ACTIONs enabled
-- Faster PM2 installation (v1: ~30secs, v2: ~10secs)
+- Faster installation (v1: ~30secs, v2: ~10secs)
+- Faster `pm2 update` with Keymetrics linking delayed at the end
 - Better Windows support
 - **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine)
 - **pm2-dev** command enhanced
-- Watch and Reload
+- Watch and Reload instead of Watch and Restart
 - New PM2 API, backward compatible with previous PM2 versions
 
 The new PM2 API is greatly tested and well designed:
@@ -63,7 +64,6 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 
 - Better CLI/API code structure
 - PM2 isolation for multi PM2 instance management
-
 
 ## Bug fixes
 
