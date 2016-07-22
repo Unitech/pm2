@@ -110,7 +110,7 @@ describe('REMOTE PM2 ACTIONS', function() {
   it('should act on PM2 but handle failure', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
       // Error is present telling process does not exists
-      pck.ret.err.should.not.be.null;
+      pck.ret.err.should.not.be.null();
       done();
     });
 
@@ -127,7 +127,7 @@ describe('REMOTE PM2 ACTIONS', function() {
        * Once remote command is finished...
        */
 
-      should(pck.ret.err).be.null;
+      should(pck.ret.err).be.null();
 
       pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
@@ -151,7 +151,7 @@ describe('REMOTE PM2 ACTIONS', function() {
        * Once remote command is finished...
        */
 
-      should(pck.ret.err).be.null;
+      should(pck.ret.err).be.null();
 
       pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
@@ -174,7 +174,7 @@ describe('REMOTE PM2 ACTIONS', function() {
       /**
        * Once remote command is finished...
        */
-      should(pck.ret.err).be.null;
+      should(pck.ret.err).be.null();
 
       pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
@@ -219,11 +219,10 @@ describe('REMOTE PM2 ACTIONS', function() {
     });
   });
 
-  it('should test .remote', function(done) {
+  it('should test .remote and handle failure', function(done) {
     pm2.remote('restart', {
       name : 'UNKNOWN_NAME'
     }, function(err, procs) {
-
       pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(1);
