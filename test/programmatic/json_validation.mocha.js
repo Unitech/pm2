@@ -1,7 +1,7 @@
 
 var should = require('should');
 var Config = require('../../lib/tools/Config');
-var Schema = require('../../lib/CLI/schema.json');
+var Schema = require('../../lib/API/schema.json');
 
 // Change to current folder
 process.chdir(__dirname);

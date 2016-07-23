@@ -27,7 +27,7 @@ var pm2 = new PM2.custom({
   independant : // Create new random instance available for current session
   secret_key  : // Keymetrics secret key
   public_key  : // Keymetrics public key
-  machone_name: // Keymetrics instance name
+  machine_name: // Keymetrics instance name
 });
 
 // Start an app
@@ -80,6 +80,10 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 - #2248 livescript support added in development mode
 - The client/server file called Satan.js does not exists anymore. It has been replaced by the file combo ./lib/Client.js and ./lib/Daemon.js
 - PM2 --no-daemon is better now
+
+## Breaking change
+
+- None
 
 ### 1.1.3
 

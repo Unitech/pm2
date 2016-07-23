@@ -6,8 +6,7 @@ var commander = require('commander');
 
 var debug     = require('debug')('pm2:cli');
 var PM2       = require('..');
-var CLI       = require('../lib/CLI');
-var Log       = require('../lib/CLI/Log');
+var Log       = require('../lib/API/Log');
 var cst       = require('../constants.js');
 var pkg       = require('../package.json');
 var platform  = require('os').platform();

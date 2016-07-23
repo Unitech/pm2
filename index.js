@@ -1,7 +1,7 @@
 
 process.env.PM2_PROGRAMMATIC = 'true';
 
-var CLI = require('./lib/CLI.js');
+var API = require('./lib/API.js');
 
-module.exports = new CLI;
-module.exports.custom = CLI;
+module.exports = new API;
+module.exports.custom = API;
