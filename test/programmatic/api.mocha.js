@@ -18,10 +18,10 @@ describe('API checks', function() {
     });
 
     it('should instanciate a new pm2 with old api', function() {
-      should(PM2.pm2_home).exists;
+      should.exists(PM2.pm2_home);
       should(PM2.daemon_mode).be.true();
       PM2.cwd.should.eql(process.cwd());
-      should(PM2.Client).exists;
+      should.exists(PM2.Client);
     });
 
     it('should connect to PM2', function(done) {
@@ -59,10 +59,10 @@ describe('API checks', function() {
     });
 
     it('should instanciate a new pm2 with old api', function() {
-      should(PM2.pm2_home).exists;
+      should.exists(PM2.pm2_home);
       should(PM2.daemon_mode).be.true();
       PM2.cwd.should.eql(process.cwd());
-      should(PM2.Client).exists;
+      should.exists(PM2.Client);
     });
 
     it('should be able to start a script without connect', function(done) {
@@ -101,10 +101,10 @@ describe('API checks', function() {
         independent : true,
         daemon_mode : true
       });
-      should(pm2.pm2_home).exists;
+      should.exists(pm2.pm2_home);
       should(pm2.daemon_mode).be.true();
       pm2.cwd.should.eql(process.cwd());
-      should(pm2.Client).exists;
+      should.exists(pm2.Client);
     });
 
     it('should be able to start a script without connect', function(done) {
@@ -142,10 +142,11 @@ describe('API checks', function() {
         independent : true,
         daemon_mode : false
       });
-      should(pm2.pm2_home).exists;
+
+      should.exists(pm2.pm2_home);
       should(pm2.daemon_mode).be.false();
       pm2.cwd.should.eql(process.cwd());
-      should(pm2.Client).exists;
+      should.exists(pm2.Client);
     });
   });
 

@@ -53,7 +53,7 @@ describe('PM2 programmatic calls', function() {
       script : './send-data-process/return-data.js'
     }, function(err, data) {
       proc1 = data[0];
-      should(err).be.null;
+      should(err).be.null();
       done();
     });
   });
@@ -74,7 +74,7 @@ describe('PM2 programmatic calls', function() {
         hello : true
       }
     }, function(err, res) {
-      should(err).be.null;
+      should(err).be.null();
     });
   });
 

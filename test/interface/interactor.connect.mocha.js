@@ -143,9 +143,9 @@ describe('Interactor testing', function() {
         procs.length.should.eql(1);
 
         var meta = dt.data.status;
-        dt.sent_at.should.exists;
-        meta.protected.should.be.false;
-        meta.rev_con.should.be.true;
+        should.exists(dt.sent_at);
+        meta.protected.should.be.false();
+        meta.rev_con.should.be.true();
         meta.server_name.should.eql('osef');
         done();
       });
@@ -164,11 +164,9 @@ describe('Interactor testing', function() {
 
           var meta = dt.data.status;
 
-          dt.sent_at.should.exists;
-
-          meta.protected.should.be.false;
-          // Indicator of a successful reverse connection
-          meta.rev_con.should.be.true;
+          should.exists(dt.sent_at);
+          meta.protected.should.be.false();
+          meta.rev_con.should.be.true();
           meta.server_name.should.eql('osef');
 
           done();
@@ -195,7 +193,7 @@ describe('Interactor testing', function() {
     describe('PM2 password checking', function() {
       it('should set a password', function(done) {
         pm2.set('pm2:passwd', 'testpass', function(err, data) {
-          should(err).not.exists;
+          should.not.exists(err);
           setTimeout(done, 1000);
         });
       });
@@ -204,7 +202,7 @@ describe('Interactor testing', function() {
         sock.once('message', function(data) {
           var dt = JSON.parse(data);
           // Has switched to true
-          dt.data.status.protected.should.be.true;
+          dt.data.status.protected.should.be.true();
           done();
         });
       });

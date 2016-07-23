@@ -43,7 +43,7 @@ describe('Signal kill (+delayed)', function() {
         name : 'delayed-sigint'
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });
@@ -84,7 +84,7 @@ describe('Signal kill (+delayed)', function() {
         name : 'delayed-sigint'
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });
@@ -126,7 +126,7 @@ describe('Signal kill (+delayed)', function() {
         exec_mode : 'cluster'
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });
@@ -199,7 +199,7 @@ describe('Signal kill (+delayed)', function() {
         kill_timeout : 4000
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });

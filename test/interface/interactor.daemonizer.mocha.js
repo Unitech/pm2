@@ -22,7 +22,7 @@ describe('Daemonizer interactor', function() {
   describe('General tests', function() {
     it('should try get set keys but get error because nothing exposed', function(done) {
       interactorDaemonizer.getSetKeys(default_conf, null, null, null, function(err, data) {
-        err.should.not.be.null;
+        err.should.not.be.null();
         done();
       });
     });
@@ -32,12 +32,12 @@ describe('Daemonizer interactor', function() {
       process.env.PM2_PUBLIC_KEY = 'XXXP';
 
       interactorDaemonizer.getSetKeys(default_conf, null, null, null, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS');
         data.public_key.should.eql('XXXP');
 
         should.exist(data.version_management.active);
-        should(data.version_management.password).be.null;
+        should(data.version_management.password).be.null();
         try {
           fs.statSync(default_conf.INTERACTION_CONF);
         } catch(e) {
@@ -52,7 +52,7 @@ describe('Daemonizer interactor', function() {
 
     it('should retrieve data from file without env variable', function(done) {
       interactorDaemonizer.getSetKeys(default_conf, null, null, null, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS');
         data.public_key.should.eql('XXXP');
         return done();
@@ -61,7 +61,7 @@ describe('Daemonizer interactor', function() {
 
     it('should set new keys and write in configuration file', function(done) {
       interactorDaemonizer.getSetKeys(default_conf, 'XXXS2', 'XXXP2', null, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS2');
         data.public_key.should.eql('XXXP2');
 
@@ -70,7 +70,7 @@ describe('Daemonizer interactor', function() {
         interaction_conf.public_key.should.eql('XXXP2');
 
         should.exist(interaction_conf.version_management.active);
-        should(interaction_conf.version_management.password).be.null;
+        should(interaction_conf.version_management.password).be.null();
 
         interaction_conf.machine_name.should.eql(os.hostname());
         return done();
@@ -82,7 +82,7 @@ describe('Daemonizer interactor', function() {
         secret_key : 'XXXS3',
         public_key : 'XXXP3'
       }, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS3');
         data.public_key.should.eql('XXXP3');
 
@@ -98,7 +98,7 @@ describe('Daemonizer interactor', function() {
   describe.skip('Recycle option', function() {
     it('should handle recycle option', function(done) {
       interactorDaemonizer.getSetKeys(default_conf, 'XXXS2', 'XXXP2', null, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS2');
         data.public_key.should.eql('XXXP2');
         data.recycle.should.be.true;
@@ -109,7 +109,7 @@ describe('Daemonizer interactor', function() {
         interaction_conf.recycle.should.be.true;
 
         should.exist(interaction_conf.version_management.active);
-        should(interaction_conf.version_management.password).be.null;
+        should(interaction_conf.version_management.password).be.null();
 
         interaction_conf.machine_name.should.eql(os.hostname());
         return done();
@@ -123,7 +123,7 @@ describe('Daemonizer interactor', function() {
         machine_name : null,
         recycle      : true
       }, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS2');
         data.public_key.should.eql('XXXP2');
         data.recycle.should.be.true;
@@ -134,7 +134,7 @@ describe('Daemonizer interactor', function() {
         interaction_conf.recycle.should.be.true;
 
         should.exist(interaction_conf.version_management.active);
-        should(interaction_conf.version_management.password).be.null;
+        should(interaction_conf.version_management.password).be.null();
 
         interaction_conf.machine_name.should.eql(os.hostname());
         return done();
@@ -143,7 +143,7 @@ describe('Daemonizer interactor', function() {
 
     it('should handle recycle option opts2', function(done) {
       interactorDaemonizer.getSetKeys(null, null, null, null, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS2');
         data.public_key.should.eql('XXXP2');
         data.recycle.should.be.true;
@@ -154,7 +154,7 @@ describe('Daemonizer interactor', function() {
         interaction_conf.recycle.should.be.true;
 
         should.exist(interaction_conf.version_management.active);
-        should(interaction_conf.version_management.password).be.null;
+        should(interaction_conf.version_management.password).be.null();
 
         interaction_conf.machine_name.should.eql(os.hostname());
         return done();
@@ -167,7 +167,7 @@ describe('Daemonizer interactor', function() {
         public_key   : 'XXXP2',
         machine_name : null
       }, function(err, data) {
-        should(err).be.null;
+        should(err).be.null();
         data.secret_key.should.eql('XXXS2');
         data.public_key.should.eql('XXXP2');
         data.recycle.should.be.false;
@@ -178,7 +178,7 @@ describe('Daemonizer interactor', function() {
         interaction_conf.recycle.should.be.false;
 
         should.exist(interaction_conf.version_management.active);
-        should(interaction_conf.version_management.password).be.null;
+        should(interaction_conf.version_management.password).be.null();
 
         interaction_conf.machine_name.should.eql(os.hostname());
         return done();

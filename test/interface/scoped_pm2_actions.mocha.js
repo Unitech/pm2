@@ -119,7 +119,7 @@ describe('SCOPED PM2 ACTIONS', function() {
   describe('Test non auth remote commands', function() {
     before(function(done) {
       Configuration.unset('pm2:passwd', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
@@ -160,7 +160,7 @@ describe('SCOPED PM2 ACTIONS', function() {
 
     before(function(done) {
       Configuration.unset('pm2:passwd', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
@@ -204,7 +204,7 @@ describe('SCOPED PM2 ACTIONS', function() {
 
     it('should set a password', function(done) {
       pm2.set('pm2:passwd', 'testpass', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });

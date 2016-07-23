@@ -95,12 +95,13 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should notice error if wrong file passed', function(done) {
-      pm2.start('./child.js', {
+      pm2.start('./UNKNOWN_SCRIPT.js', {
         force : true,
         name : 'tota',
         instances : 3
       }, function(err, data) {
-        should(err).exists;
+        console.log(err)
+        should.exists(err);
         done();
       });
     });
@@ -109,10 +110,10 @@ describe('PM2 programmatic calls', function() {
       pm2.start('./child.js', {
         force : true,
         name : 'tota',
-        instances : 3
+        instances : 6
       }, function(err, data) {
         should(err).be.null()
-        data.length.should.eql(3);
+        data.length.should.eql(6);
         done();
       });
     });
@@ -120,7 +121,7 @@ describe('PM2 programmatic calls', function() {
     it('should get pm2 version', function(done) {
       pm2.getVersion(function(err, data) {
         should(err).be.null()
-        data.should.exists;
+        should.exists(data);
         done();
       });
     });
@@ -375,7 +376,6 @@ describe('PM2 programmatic calls', function() {
         should(err).be.null()
         pm2.list(function(err, ret) {
           should(err).be.null()
-          should(ret[0].pm2_env['NODE_ENV']).not.exist;
 
           ret.forEach(function(app) {
             app.pm2_env.restart_time.should.eql(1);
