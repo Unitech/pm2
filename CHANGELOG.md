@@ -9,7 +9,7 @@
 - Much better Module system with raw NPM feedback
 - Better Windows support
 - **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine)
-- **pm2-dev** command enhanced
+- **pm2-dev -> pmd** command enhanced (better log output, post-exec cmd)
 - Watch and Reload instead of Watch and Restart
 - New PM2 API, backward compatible with previous PM2 versions
 
