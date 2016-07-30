@@ -470,9 +470,9 @@ commander.command('link [secret_key|command] [public_key] [machine_name]')
 // Web interface
 //
 commander.command('web')
-  .description('launch a health API on port ' + cst.WEB_INTERFACE)
+  .description('launch a health API on ' + cst.WEB_IPADDR + ':' + cst.WEB_PORT)
   .action(function() {
-    console.log('Launching web interface on port ' + cst.WEB_INTERFACE);
+    console.log('Launching web interface on ' + cst.WEB_IPADDR + ':' + cst.WEB_PORT);
     pm2.web();
   });
 
