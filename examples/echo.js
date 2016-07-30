@@ -2,6 +2,7 @@
 
 setInterval(function() {
   console.log('log message from echo.js');
+  console.warn({ json : true });
 }, 1500);
 
 setTimeout(function() {

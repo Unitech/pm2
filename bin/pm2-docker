@@ -15,13 +15,14 @@ var pm2;
 process.env.PM2_SILENT = 'true';
 
 commander.version(pkg.version)
-  .option('--raw', 'raw log output')
+  .option('--timestamp [format]', 'add timestamps to logs')
+  .option('--raw-logs', 'raw log output')
+  .option('--json-logs [format]', 'output logs in json format')
+  .option('--color-logs', 'output logs with color')
   .option('--secret [key]', 'keymetrics secret key')
   .option('--public [key]', 'keymetrics public key')
   .option('--machine-name [name]', 'keymetrics machine name')
   .option('--auto-exit', 'exit if all processes are errored/stopped or 0 apps launched')
-  .option('--timestamp [format]', 'add timestamps to logs')
-  .option('--color', 'colored output')
   .usage('start <app>');
 
 commander.command('*')
@@ -60,7 +61,7 @@ process.on('SIGINT', function() {
 });
 
 function run(cmd, opts) {
-  var needRaw = commander.raw;
+  var needRaw = commander.rawLogs;
   var timestamp = opts.parent.timestamp;
 
   if (timestamp === true)
@@ -69,8 +70,10 @@ function run(cmd, opts) {
   pm2.start(cmd, commander, function(err, obj) {
     if (err)
       throw new Error(err.message);
-    if (commander.color)
+    if (commander.colorLogs)
       Log.stream(pm2.Client, 'all', needRaw, timestamp, false);
+    else if (commander.jsonLogs)
+      Log.jsonStream(pm2.Client);
     else
       Log.rawStream(pm2.Client, 'all', needRaw, timestamp, false);
   });

@@ -634,11 +634,14 @@ commander.command('reloadLogs')
 commander.command('logs [id|name]')
   .option('--err', 'only shows error output')
   .option('--out', 'only shows standard output')
+  .option('--json', 'json log output')
   .option('--raw', 'logs without timestamps and other PM2 indicators')
   .option('--lines <n>', 'output the last N lines, instead of the last 20 by default')
   .option('--timestamp [format]', 'add timestamps (default format YYYY-MM-DD-HH:mm:ss)')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
+    var Logs = require('../lib/API/Log.js');
+
     var line = 20;
     var raw  = false;
     var exclusive = false;
@@ -660,7 +663,10 @@ commander.command('logs [id|name]')
     if (cmd.err === true)
       exclusive = 'err';
 
-    pm2.streamLogs(id, line, raw, timestamp, exclusive);
+    if (cmd.json == true)
+      Logs.jsonStream(pm2.Client, id);
+    else
+      pm2.streamLogs(id, line, raw, timestamp, exclusive);
   });
 
 

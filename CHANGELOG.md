@@ -8,10 +8,11 @@
 - Faster `pm2 update` with Keymetrics linking delayed at the end
 - Much better Module system with raw NPM feedback
 - Better Windows support
-- **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine)
+- **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine) + json output + auto exit
 - **pm2-dev -> pmd** command enhanced (better log output, post-exec cmd)
 - Watch and Reload instead of Watch and Restart
 - New PM2 API, backward compatible with previous PM2 versions
+- JSON log output option (pm2 logs --json)
 
 The new PM2 API is greatly tested and well designed:
 
