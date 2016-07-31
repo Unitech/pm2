@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.0.1",
+  "version": "2.0.2",
   "engines": {
     "node": ">=0.10"
   },
@@ -146,7 +146,7 @@
   ],
   "bin": {
     "pm2": "./bin/pm2",
-    "pmd": "./bin/pmd",
+    "rundev": "./bin/rundev",
     "pm2-dev": "./bin/pm2-dev",
     "pm2-docker": "./bin/pm2-docker"
   },
