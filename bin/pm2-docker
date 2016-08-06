@@ -12,7 +12,7 @@ var pkg       = require('../package.json');
 var path      = require('path');
 var pm2;
 
-process.env.PM2_SILENT = 'true';
+//process.env.PM2_SILENT = 'true';
 
 commander.version(pkg.version)
   .option('--timestamp [format]', 'add timestamps to logs')
