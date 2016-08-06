@@ -38,9 +38,9 @@ commander.command('start <file|json_file>')
 
     pm2 = new PM2.custom({
       pm2_home : path.join(process.env.HOME, '.pm2'),
-      secret_key : commander.secret,
-      public_key : commander.public,
-      machine_name : commander.machineName,
+      secret_key : process.env.KEYMETRICS_SECRET || commander.secret,
+      public_key : process.env.KEYMETRICS_PUBLIC || commander.public,
+      machine_name : process.env.INSTANCE_NAME || commander.machineName,
       daemon_mode : true
     });
 
