@@ -46,7 +46,10 @@ commander.command('start <file|json_file>')
 
     if (commander.autoExit)
       autoExit();
-    run(cmd, opts);
+
+    pm2.connect(function() {
+      run(cmd, opts);
+    });
   });
 
 if (process.argv.length == 2) {
