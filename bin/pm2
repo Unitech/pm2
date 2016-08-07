@@ -139,6 +139,12 @@ function checkCompletion(){
   });
 };
 
+var _arr = process.argv.indexOf('--') > -1 ? process.argv.slice(0, process.argv.indexOf('--')) : process.argv;
+
+if (_arr.indexOf('log') > -1) {
+  process.argv[_arr.indexOf('log')] = 'logs';
+}
+
 if (process.argv.indexOf('--no-daemon') > -1) {
   //
   // Start daemon if it does not exist
@@ -633,17 +639,20 @@ commander.command('reloadLogs')
 // Log streaming
 //
 commander.command('logs [id|name]')
+  .option('--json', 'json log output')
+  .option('--format', 'formated log output')
+  .option('--raw', 'raw output')
   .option('--err', 'only shows error output')
   .option('--out', 'only shows standard output')
-  .option('--json', 'json log output')
-  .option('--raw', 'logs without timestamps and other PM2 indicators')
-  .option('--lines <n>', 'output the last N lines, instead of the last 20 by default')
+  .option('--lines <n>', 'output the last N lines, instead of the last 5 by default')
   .option('--timestamp [format]', 'add timestamps (default format YYYY-MM-DD-HH:mm:ss)')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
     var Logs = require('../lib/API/Log.js');
 
-    var line = 20;
+    if (!id) id = 'all';
+
+    var line = 5;
     var raw  = false;
     var exclusive = false;
     var timestamp = false;
@@ -666,6 +675,8 @@ commander.command('logs [id|name]')
 
     if (cmd.json == true)
       Logs.jsonStream(pm2.Client, id);
+    else if (cmd.format == true)
+      Logs.formatStream(pm2.Client, id, false, 'YYYY-MM-DD-HH:mm:ssZZ');
     else
       pm2.streamLogs(id, line, raw, timestamp, exclusive);
   });

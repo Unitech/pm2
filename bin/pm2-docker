@@ -15,7 +15,6 @@ var pm2;
 //process.env.PM2_SILENT = 'true';
 
 commander.version(pkg.version)
-  .option('--timestamp [format]', 'add timestamps to logs')
   .option('--raw-logs', 'raw log output')
   .option('--json-logs [format]', 'output logs in json format')
   .option('--color-logs', 'output logs with color')
@@ -65,10 +64,8 @@ process.on('SIGINT', function() {
 
 function run(cmd, opts) {
   var needRaw = commander.rawLogs;
-  var timestamp = opts.parent.timestamp;
 
-  if (timestamp === true)
-    timestamp = 'YYYY-MM-DD-HH:mm:ss';
+  var timestamp = 'YYYY-MM-DD-HH:mm:ss';
 
   pm2.start(cmd, commander, function(err, obj) {
     if (err)
@@ -78,7 +75,7 @@ function run(cmd, opts) {
     else if (commander.jsonLogs)
       Log.jsonStream(pm2.Client);
     else
-      Log.rawStream(pm2.Client, 'all', needRaw, timestamp, false);
+      Log.formatStream(pm2.Client, 'all', needRaw, timestamp, false);
   });
 }
 

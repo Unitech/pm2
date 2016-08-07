@@ -3,6 +3,7 @@
 
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
+- Refined pm2 logs command with --json, --format and --raw options
 - Faster process management with CONCURRENT_ACTIONs enabled
 - Faster installation (v1: ~30secs, v2: ~10secs)
 - Faster `pm2 update` with Keymetrics linking delayed at the end
@@ -12,7 +13,6 @@
 - **pm2-dev -> pmd** command enhanced (better log output, post-exec cmd)
 - Watch and Reload instead of Watch and Restart
 - New PM2 API, backward compatible with previous PM2 versions
-- JSON log output option (pm2 logs --json)
 
 The new PM2 API is greatly tested and well designed:
 
@@ -73,6 +73,7 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files
+- #2105 alias pm2 logs with pm2 log
 - Extra module display http://pm2.keymetrics.io/docs/advanced/pm2-module-system/#extra-display
 - Yamljs + Chokidar Security fixes
 - pm2 update / pm2 resurrect is now faster on Node > 4.0
