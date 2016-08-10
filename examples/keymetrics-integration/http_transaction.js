@@ -15,12 +15,14 @@ var meter = probe.meter({
 http.createServer(function(req, res) {
   res.writeHead(200);
   meter.mark();
-  res.end('transaction');
+  setTimeout(function() {
+    res.end('transaction');
+  }, 1000);
 }).listen(9010);
 
 setInterval(function() {
   request(['/user', '/bla', '/user/lol/delete', '/POST/POST'][Math.floor((Math.random() * 4))]);
-}, 1000);
+}, 1500);
 
 function makeid()
 {

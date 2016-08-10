@@ -1,31 +1,39 @@
-var pmx = require('pmx');
-var fs  = require('fs');
-var path = require('path');
+var pmx     = require('pmx');
+var pm2     = require('../..');
+var fs      = require('fs');
+var path    = require('path');
 
+var conf = pmx.initModule({
+  comment          : 'This module monitors PM2',
+  errors           : true,
+  latency          : false,
+  versioning       : false,
+  show_module_meta : false,
+  module_type      : 'database',
+  pid              : pmx.getPID(path.join(process.env.HOME, '.pm2', 'pm2.pid')),
 
-// conf.js
-var conf = {
+  widget : {
+    theme            : ['#111111', '#1B2228', '#807C7C', '#807C7C'],
+    logo             : 'https://keymetrics.io/assets/images/pm2.20d3ef.png?v=0b71a506ce'
+  }
+});
 
-  keymetrics : {
-    errors           : false,
-    latency          : false,
-    versioning       : false,
-    show_module_meta : true,
-    module_type      : 'database'
-  },
+var probe = pmx.probe();
 
-  pid        : pmx.getPID(path.join(process.env.HOME, '.pm2', 'pm2.pid')),
-  pool_time  : 1000,
-  active_pro : true
+var pm2_procs = 0;
 
-};
+pm2.connect(function() {
 
-// + merge package.json data
+  setInterval(function() {
+    pm2.list(function(err, procs) {
+      pm2_procs = procs.length;
+    });
+  }, 2000);
 
-var conf = pmx.initModule();
-
-setInterval(function() {
-  // Do something at configurable interval
-}, conf.pool_time);
-
-var Probe = pmx.probe();
+  var metric = probe.metric({
+    name  : 'Processes',
+    value : function() {
+      return pm2_procs;
+    }
+  });
+});
