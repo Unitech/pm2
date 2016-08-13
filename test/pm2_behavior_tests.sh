@@ -18,6 +18,9 @@ spec "CLI basic test"
 bash ./test/bash/cli-actions-2.sh
 spec "Second hard cli tests"
 
+bash ./test/bash/pm2-dev.sh
+spec "pm2-dev"
+
 # bash ./test/bash/log-timestamp.sh
 # spec "timestamp prefix of pm2.log"
 bash ./test/bash/versioning-cmd.sh
@@ -92,8 +95,5 @@ bash ./test/bash/source_map.sh
 spec "Source map resolution on exception"
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
-
-bash ./test/bash/pm2-dev.sh
-spec "pm2-dev"
 
 $pm2 kill
