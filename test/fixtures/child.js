@@ -1,12 +1,14 @@
 
-
-
 var http = require('http');
 
-http.createServer(function(req, res) {
+var app = http.createServer(function(req, res) {
   res.writeHead(200);
   res.end('hey');
-}).listen(0);
+})
+
+var listener = app.listen(0, function() {
+  console.log('Listening on port ' + listener.address().port);
+});
 
 process.on('message', function(msg) {
   if (msg == 'shutdown') {

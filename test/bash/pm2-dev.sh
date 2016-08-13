@@ -6,9 +6,16 @@ source "${SRC}/include.sh"
 pm2dev="`type -P node` `pwd`/bin/pm2-dev"
 rundev="`type -P node` `pwd`/bin/rundev"
 
-$rundev test/fixtures/child.js &
-PM2_PID=$!
+export PM2_HOME=$HOME'/.pm2-dev'
 
-sleep 2
-kill $PM2_PID
-spec "should process been killed"
+$pm2 flush
+
+$rundev start test/fixtures/child.js --test-mode
+
+$pm2 ls
+should 'should have started 1 apps' 'online' 1
+echo "Change bomb" > test/fixtures/change
+rm test/fixtures/change
+sleep 1
+should 'should has restarted process' 'restart_time: 1' 1
+$pm2 kill
