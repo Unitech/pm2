@@ -33,6 +33,7 @@ commander.command('*')
 
 // @todo need to allow passing same option than pm2 start
 commander.command('start <file|json_file>')
+  .option('--watch', 'Watch and Restart')
   .description('start json_file or application')
   .action(function(cmd, opts) {
 
@@ -68,7 +69,7 @@ function run(cmd, opts) {
 
   var timestamp = 'YYYY-MM-DD-HH:mm:ss';
 
-  pm2.start(cmd, commander, function(err, obj) {
+  pm2.start(cmd, opts, function(err, obj) {
     if (err)
       throw new Error(err.message);
     if (commander.format)
