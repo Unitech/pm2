@@ -18,7 +18,6 @@ commander.version(pkg.version)
   .option('--raw', 'raw log output')
   .option('--json', 'output logs in json format')
   .option('--format', 'output logs formated like key=val')
-  .option('--env [name]', 'select env_[name] env variables in process config file')
   .option('--secret [key]', 'keymetrics secret key')
   .option('--public [key]', 'keymetrics public key')
   .option('--machine-name [name]', 'keymetrics machine name')
@@ -33,6 +32,7 @@ commander.command('*')
 
 // @todo need to allow passing same option than pm2 start
 commander.command('start <file|json_file>')
+  .option('--env [name]', 'select env_[name] env variables in process config file')
   .option('--watch', 'Watch and Restart')
   .description('start json_file or application')
   .action(function(cmd, opts) {

@@ -233,6 +233,26 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
     }
   });
 
+//
+// Docker mode
+//
+commander.command('docker:dev <file|config>')
+  .option('--fresh', 'Rebuild Dockerfile')
+  .option('--daemon', 'Run container in Daemon mode (debug purposes)')
+  .description('wrap application into Docker container')
+  .action(function(script, opts) {
+    pm2.dockerMode(script, opts, 'development');
+  });
+
+commander.command('docker:dist <file|config> <image_name>')
+  .option('--fresh', 'Rebuild Dockerfile')
+  .option('--daemon', 'Run container in Daemon mode (debug purposes)')
+  .description('wrap application into Docker container')
+  .action(function(script, image_name, opts) {
+    opts.imageName = image_name;
+    pm2.dockerMode(script, opts, 'distribution');
+  });
+
 commander.command('deploy <file|environment>')
   .description('deploy your json')
   .action(function(cmd) {

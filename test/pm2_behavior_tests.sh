@@ -20,6 +20,8 @@ spec "Second hard cli tests"
 
 bash ./test/bash/pm2-dev.sh
 spec "pm2-dev"
+bash ./test/bash/docker.sh
+spec "Docker tests"
 
 # bash ./test/bash/log-timestamp.sh
 # spec "timestamp prefix of pm2.log"

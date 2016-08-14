@@ -36,6 +36,10 @@ var csts = {
 
   LOGROTATE_SCRIPT        : 'logrotate.d/pm2',
 
+  DOCKERFILE_NODEJS       : 'Dockerfiles/Dockerfile-nodejs.tpl',
+  DOCKERFILE_JAVA         : 'Dockerfiles/Dockerfile-java.tpl',
+  DOCKERFILE_RUBY         : 'Dockerfiles/Dockerfile-ruby.tpl',
+
   SUCCESS_EXIT            : 0,
   ERROR_EXIT              : 1,
 

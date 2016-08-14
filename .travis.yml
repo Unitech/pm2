@@ -11,3 +11,5 @@ before_install:
   - sudo apt-get install python3
   - sudo apt-get install php5-cli
 sudo: required
+services:
+  - docker
