@@ -33,13 +33,13 @@ function spec {
 
 function ispec {
   RET=$?
-  sleep 0.1
+  sleep 0.2
   [ $RET -ne 0 ] || fail "$1"
   success "$1"
 }
 
 function should {
-    sleep 0.1
+    sleep 0.3
     $pm2 prettylist > /tmp/tmp_out.txt
     OUT=`cat /tmp/tmp_out.txt | grep -o "$2" | wc -l`
     [ $OUT -eq $3 ] || fail "$1"
@@ -47,7 +47,7 @@ function should {
 }
 
 function shouldnot {
-    sleep 0.1
+    sleep 0.3
     $pm2 prettylist > /tmp/tmp_out.txt
     OUT=`cat /tmp/tmp_out.txt | grep -o "$2" | wc -l`
     [ $OUT -ne $3 ] || fail "$1"
@@ -55,7 +55,7 @@ function shouldnot {
 }
 
 function exists {
-    sleep 0.1
+    sleep 0.3
     $pm2 prettylist > /tmp/tmp_out.txt
     OUT=`cat /tmp/tmp_out.txt | grep -o "$2" | wc -l`
     [ $OUT -ge 1 ] || fail "$1"
