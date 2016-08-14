@@ -23,6 +23,8 @@ spec "pm2-dev"
 
 # bash ./test/bash/log-timestamp.sh
 # spec "timestamp prefix of pm2.log"
+bash ./test/bash/watch.sh
+spec "watch system tests"
 bash ./test/bash/versioning-cmd.sh
 spec "versioning system tests"
 bash ./test/bash/args.sh
