@@ -21,6 +21,8 @@ OUT=`grep "SIGINT" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Signal not received by the process name"
 success "Processes sucessfully receives the SIGINT signal"
 
+$pm2 kill
+
 echo "################## RELOAD ###################"
 
 echo "Reloading"
