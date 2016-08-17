@@ -5,16 +5,15 @@ var PM2 = require('../..');
 var should = require('should');
 
 describe('API checks', function() {
+  this.timeout(1000);
 
-  describe('PM2 connect old style', function() {
+  describe('PM2 API case#1', function() {
     before(function(done) {
       PM2.delete('all', function() { done() });
     });
 
     after(function(done) {
-      PM2.kill(function() {
-        setTimeout(done, 1000);
-      });
+      PM2.kill(done);
     });
 
     it('should instanciate a new pm2 with old api', function() {
@@ -28,28 +27,148 @@ describe('API checks', function() {
       PM2.connect(done);
     });
 
-    it('should be able to start a script', function(done) {
+    it('should start a script', function(done) {
       PM2.start('./../fixtures/child.js', function(err) {
         should(err).be.null();
-        done();
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(1);
+          done();
+        });
       });
     });
 
-    it('should do random commands', function(done) {
-      PM2.list(function(err, list) {
-        should(err).be.null();
-        should(list.length).eql(1);
-        PM2.delete('all', function(err) {
+    it('should fail if starting same script again', function(done) {
+      PM2.start('./../fixtures/child.js', function(err) {
+        should(err).not.be.null();
+        PM2.list(function(err, list) {
           should(err).be.null();
-          PM2.list(function(err, list) {
-            should(err).be.null();
-            should(list.length).eql(0);
-            done();
-          });
+          should(list.length).eql(1);
+          done();
+        });
+      });
+    });
+
+    it('should FORCE starting same script again', function(done) {
+      PM2.start('./../fixtures/child.js', {force :true }, function(err) {
+        should(err).be.null();
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(2);
+          done();
+        });
+      });
+    });
+
+    it('should delete ALL', function(done) {
+      PM2.delete('all', function(err) {
+        should(err).be.null();
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(0);
+          done();
         });
       });
     });
   });
+
+  describe('PM2 API case#2 (JSON style)', function() {
+    before(function(done) {
+      PM2.delete('all', function() { done() });
+    });
+
+    after(function(done) {
+      PM2.kill(done);
+    });
+
+    it('should start script in cluster mode, 4 instances', function(done) {
+      PM2.start({
+        script : './../fixtures/child.js',
+        instances : 4,
+        name : 'http-test'
+      }, function(err) {
+        should(err).be.null();
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(4);
+          done();
+        });
+      });
+    });
+
+    it('should stop app', function(done) {
+      PM2.stop('http-test', function(err, procs) {
+        should(err).be.null();
+        procs.length.should.eql(4);
+        PM2.list(function(err, list) {
+          should(list.length).eql(4);
+          list.forEach(function(proc) {
+            proc.pm2_env.status.should.eql('stopped');
+          });
+          done();
+        });
+      });
+    });
+
+    it('should restart all apps', function(done) {
+      PM2.restart('http-test', function(err, procs) {
+        should(err).be.null();
+        PM2.list(function(err, list) {
+          should(list.length).eql(4);
+          list.forEach(function(proc) {
+            proc.pm2_env.status.should.eql('online');
+          });
+          done();
+        });
+      });
+    });
+  });
+
+  describe('Issue #2337', function() {
+    before(function(done) {
+      PM2.delete('all', function() { done() });
+    });
+
+    after(function(done) {
+      PM2.kill(done);
+    });
+
+    it('should start two app with same name', function(done) {
+      PM2.start({
+        script : './../fixtures/child.js',
+        instances : 2,
+        exec_mode : 'fork',
+        name : 'http-test'
+      }, function(err) {
+        should(err).be.null();
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          list.forEach(function(proc) {
+            proc.pm2_env.exec_mode.should.eql('fork_mode');
+          });
+          should(list.length).eql(2);
+          done();
+        });
+      });
+    });
+
+    it('should stop first app', function(done) {
+      PM2.stop(0, done);
+    });
+
+    it('should force start a 3rd script', function(done) {
+      PM2.start('./../fixtures/child.js', {
+        force : true,
+        name : 'toto'
+      }, function() {
+        PM2.list(function(err, list) {
+          list.length.should.eql(3);
+          done();
+        });
+      });
+    });
+  });
+
 
   describe('PM2 auto connect feature', function() {
     after(function(done) {
