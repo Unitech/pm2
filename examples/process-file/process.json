@@ -8,7 +8,6 @@
     "merge_logs"         : true,
     "name"               : "hapi_playground",
     "script"             : "child.js",
-    "cwd"                : "examples",
     "node_args"          : "--harmony",
     "ignore_watch"        : ["[\\/\\\\]\\./", "log"],
     "watch"              : true,
