@@ -1,5 +1,5 @@
 
-## 2.0.0 - Quantica Ultimatum
+## 2.0.0 Bradburry
 
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
