@@ -664,7 +664,7 @@ commander.command('logs [id|name]')
   .option('--raw', 'raw output')
   .option('--err', 'only shows error output')
   .option('--out', 'only shows standard output')
-  .option('--lines <n>', 'output the last N lines, instead of the last 5 by default')
+  .option('--lines <n>', 'output the last N lines, instead of the last 10 by default')
   .option('--timestamp [format]', 'add timestamps (default format YYYY-MM-DD-HH:mm:ss)')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
@@ -672,7 +672,7 @@ commander.command('logs [id|name]')
 
     if (!id) id = 'all';
 
-    var line = 5;
+    var line = 10;
     var raw  = false;
     var exclusive = false;
     var timestamp = false;
