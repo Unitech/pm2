@@ -24,8 +24,8 @@ $pm2 prettylist | grep "node_args: \[ '--harmony' \]"
 spec "Should application have one node argument"
 
 # Variation with pm2 start that restarts an app
-$pm2 start echo --node-args="--harmony --harmony-proxies"
-$pm2 prettylist | grep "node_args: \[ '--harmony', '--harmony-proxies' \]"
+$pm2 start echo --node-args="--harmony"
+$pm2 prettylist | grep "node_args: \[ '--harmony' \]"
 spec "Should application have one node argument"
 
 #
@@ -53,8 +53,8 @@ $pm2 reload app-config-update/echo.js --node-args="--harmony"
 $pm2 prettylist | grep "node_args: \[ '--harmony' \]"
 spec "Should application have one node argument"
 
-$pm2 gracefulReload app-config-update/echo.js --node-args="--harmony --harmony-proxies"
-$pm2 prettylist | grep "node_args: \[ '--harmony', '--harmony-proxies' \]"
+$pm2 gracefulReload app-config-update/echo.js --node-args="--harmony"
+$pm2 prettylist | grep "node_args: \[ '--harmony' \]"
 spec "Should application have two node arguments"
 
 $pm2 reload echo --name="new-name"
