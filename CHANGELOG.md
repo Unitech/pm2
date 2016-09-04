@@ -1,5 +1,5 @@
 
-## 2.0.0 Bradburry
+## 2.0.0 Bradbury
 
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
