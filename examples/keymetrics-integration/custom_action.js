@@ -1,33 +1,18 @@
 
 var axm = require('pmx');
 
+axm.action('getEnv', function(reply) {
+  reply(process.env);
+});
 
-
-
-
-axm.action('refresh:db2', {comment : 'Refresh main database'}, function(reply) {
-
-  axm.emit('user:register', {
-    user : 'Alex registered',
-    email : 'thorustor@gmail.com'
+axm.action('sayHello', function(reply) {
+  reply({
+    msg : 'Yes hello and so? Xie Xie'
   });
-
-  reply({success : true});
 });
 
-
-
-axm.action('hello', {comment : 'Refresh main database'}, function(reply) {
-  console.log('Refreshing');
-  reply({success : true});
-});
-
-axm.action('refresh:db3', {comment : 'Comment'}, function(reply) {
+axm.action('throwError', function(reply) {
+  //@todo : replying a error does not work
+  reply(new Error('Error thrown'));
   throw new Error('asdadsadsasd');
-  reply({success : false});
-});
-
-axm.action('refresh:db', {comment : 'Refresh main database'}, function(reply) {
-  console.log('Refreshing');
-  reply({success : true});
 });
