@@ -36,6 +36,9 @@ spec "God test"
 mocha --opts ./mocha.opts  ./programmatic.js
 spec "Programmatic test"
 
+mocha --opts ./mocha.opts  ./containerizer.mocha.js
+spec "Dockerfile parser test"
+
 mocha --opts ./mocha.opts  ./api.mocha.js
 spec "API tests"
 mocha --opts ./mocha.opts  ./lazy_api.mocha.js
