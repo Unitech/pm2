@@ -26,7 +26,7 @@ describe('Containerizer unit tests', function() {
     var has_meta = false;
 
     return Containerizer.generateDockerfile(Dockerfile, 'index.js', 'development')
-      .then((meta) => {
+      .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
 
@@ -46,7 +46,7 @@ describe('Containerizer unit tests', function() {
 
   it('should switch dockerfile to distribution', function() {
     return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'distribution')
-      .then((meta) => {
+      .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
 
@@ -64,7 +64,7 @@ describe('Containerizer unit tests', function() {
 
   it('should switch dockerfile to distribution (no touching it)', function() {
     return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'distribution')
-      .then((meta) => {
+      .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
         var lines = meta.Dockerfile.split('\n');
@@ -81,7 +81,7 @@ describe('Containerizer unit tests', function() {
 
   it('should switch dockerfile to development', function() {
     return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'development')
-      .then((meta) => {
+      .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
 
@@ -98,7 +98,7 @@ describe('Containerizer unit tests', function() {
 
   it('should switch dockerfile to development (no touching it)', function() {
     return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'development')
-      .then((meta) => {
+      .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
 
@@ -115,7 +115,7 @@ describe('Containerizer unit tests', function() {
 
   it('should switch dockerfile to distribution', function() {
     return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'distribution')
-      .then((meta) => {
+      .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
 
