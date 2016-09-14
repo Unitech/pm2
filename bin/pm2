@@ -236,6 +236,13 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
 //
 // Docker mode
 //
+commander.command('docker:gen <file|config>')
+  .description('generate Dockerfile in current folder')
+  .option('--force', 'Force regeneration of Dockerfile')
+  .action(function(script, opts) {
+    pm2.generateDockerfile(script, commander);
+  });
+
 commander.command('docker:dev <file|config>')
   .option('--fresh', 'Rebuild Dockerfile')
   .option('--daemon', 'Run container in Daemon mode (debug purposes)')
