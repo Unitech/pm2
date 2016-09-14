@@ -18,8 +18,19 @@ spec "CLI basic test"
 bash ./test/bash/cli-actions-2.sh
 spec "Second hard cli tests"
 
-bash ./test/bash/log-timestamp.sh
-spec "timestamp prefix of pm2.log"
+bash ./test/bash/pm2-dev.sh
+spec "pm2-dev"
+bash ./test/bash/docker.sh
+spec "Docker tests"
+
+# bash ./test/bash/log-timestamp.sh
+# spec "timestamp prefix of pm2.log"
+bash ./test/bash/watch.sh
+spec "watch system tests"
+bash ./test/bash/versioning-cmd.sh
+spec "versioning system tests"
+bash ./test/bash/args.sh
+spec "check arguments passing"
 bash ./test/bash/smart-start.sh
 spec "smart start test"
 bash ./test/bash/multiparam.sh
@@ -82,12 +93,14 @@ bash ./test/bash/wrapped-fork.sh
 spec "wrapped fork"
 bash ./test/bash/app-configuration.sh
 spec "App configuration"
+bash ./test/bash/interpreter.sh
+spec "Javascript transpilers tests"
 bash ./test/bash/source_map.sh
 spec "Source map resolution on exception"
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
 
-bash ./test/bash/pm2-dev.sh
-spec "pm2-dev"
+# Issues related
+bash ./test/bash/issues/2337.sh
 
 $pm2 kill

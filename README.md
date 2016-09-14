@@ -84,12 +84,13 @@ $ pm2 update
 
 ```bash
 $ npm install pm2 -g            # Install PM2
-$ pm2 start app.js              # Start, Daemonize and auto restart application
+$ pm2 start app.js              # Start, Daemonize and auto-restart application
 $ pm2 start app.js -i 4         # Start 4 instances of application in cluster mode
                                 # it will load balance network queries to each app
 $ pm2 start app.js --name="api" # Start application and name it "api"
 $ pm2 start app.js --watch      # Restart application on file change
 $ pm2 start script.sh           # Start bash script
+$ pm2 start npm -- start        # Start, Daemonize and auto-restart Node application
 
 $ pm2 list                      # List all processes started with PM2
 $ pm2 monit                     # Display memory and cpu usage of each app
@@ -287,6 +288,7 @@ Thanks in advance and we hope that you like PM2!
 ## License
 
 PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
-For other license [contact us](https://keymetrics.io/contact/).
+If you use the PM2 API contact us to get a LGPL license.
+[Contact us](https://keymetrics.io/contact/).
 
 [![GA](https://ga-beacon.appspot.com/UA-51734350-7/pm2/readme?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)

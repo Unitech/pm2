@@ -10,14 +10,11 @@ set -o verbose
 
 function fail {
   echo -e "######## \033[31m  ✘ $1\033[0m"
-  $pm2 kill
   exit 1
 }
 
 function success {
   echo -e "\033[32m------------> ✔ $1\033[0m"
-  $pm2 kill
-  sleep 0.5
 }
 
 function spec {
@@ -25,66 +22,78 @@ function spec {
   success "$1"
 }
 
-$pm2 kill
+
 
 # if [ $TRAVIS ]
 # then
 #   export DEBUG="pm2:*"
 # fi
+cd test/programmatic
 
-mocha ./test/programmatic/god.mocha.js
+mocha --opts ./mocha.opts  ./god.mocha.js
 spec "God test"
-mocha ./test/programmatic/satan.mocha.js
-spec "Satan test"
 
-mocha ./test/programmatic/programmatic.js
+mocha --opts ./mocha.opts  ./programmatic.js
 spec "Programmatic test"
-mocha ./test/programmatic/logs.js
-spec "Logs test"
-mocha ./test/programmatic/watcher.js
-spec "Watcher"
-mocha ./test/programmatic/modularizer.mocha.js
-spec "Module system"
-mocha ./test/programmatic/max_memory_limit.js
-spec "Max memory tests"
-mocha ./test/programmatic/cluster.js
-spec "Cluster tests"
-mocha ./test/programmatic/misc_commands.js
-spec "MISC tests"
-mocha ./test/programmatic/signals.js
-spec "SIGINT signal interception + delay customization"
-mocha ./test/programmatic/send_data_process.mocha.js
-spec "Send data to a process"
-mocha ./test/programmatic/return.mocha.js
-spec "Verify return messages"
 
-mocha ./test/programmatic/json_validation.mocha.js
+mocha --opts ./mocha.opts  ./containerizer.mocha.js
+spec "Dockerfile parser test"
+
+mocha --opts ./mocha.opts  ./api.mocha.js
+spec "API tests"
+mocha --opts ./mocha.opts  ./lazy_api.mocha.js
+spec "API tests"
+mocha --opts ./mocha.opts  ./api.backward.compatibility.mocha.js
+spec "API Backward compatibility tests"
+
+mocha --opts ./mocha.opts  ./logs.js
+spec "Logs test"
+mocha --opts ./mocha.opts  ./watcher.js
+spec "Watcher"
+# mocha --opts ./mocha.opts  ./modularizer.mocha.js
+# spec "Module system"
+mocha --opts ./mocha.opts  ./max_memory_limit.js
+spec "Max memory tests"
+mocha --opts ./mocha.opts  ./cluster.mocha.js
+spec "Cluster tests"
+mocha --opts ./mocha.opts  ./inside.mocha.js
+spec "Inside pm2 call tests"
+mocha --opts ./mocha.opts  ./misc_commands.js
+spec "MISC tests"
+mocha --opts ./mocha.opts  ./signals.js
+spec "SIGINT signal interception + delay customization"
+mocha --opts ./mocha.opts  ./send_data_process.mocha.js
+spec "Send data to a process"
+
+mocha --opts ./mocha.opts  ./json_validation.mocha.js
 spec "JSON validation test"
-mocha ./test/programmatic/env_switching.js
+mocha --opts ./mocha.opts  ./env_switching.js
 spec "JSON environment switching on JSON restart with --env"
-mocha ./test/programmatic/configuration.mocha.js
+mocha --opts ./mocha.opts  ./configuration.mocha.js
 spec "Configuration system working"
 
 #
 # Interface testing
 #
-mocha ./test/interface/interactor.connect.mocha.js
+cd ../interface
+
+echo $PM2_HOME
+
+mocha --opts ./mocha.opts  ./interactor.connect.mocha.js
 spec "Interactor test #1 with password setting"
-mocha ./test/interface/interactor.daemonizer.mocha.js
+mocha --opts ./mocha.opts  ./interactor.daemonizer.mocha.js
 spec "Remote interactor keys save verification"
-mocha ./test/interface/scoped_pm2_actions.mocha.js
+mocha --opts ./mocha.opts  ./scoped_pm2_actions.mocha.js
 spec "Scoped PM2 Remote interactions test"
-mocha ./test/interface/remote.mocha.js
+mocha --opts ./mocha.opts  ./remote.mocha.js
 spec "Remote interactions test"
-mocha ./test/interface/password.mocha.js
+mocha --opts ./mocha.opts  ./password.mocha.js
 spec "Password library checking"
-mocha ./test/interface/custom-actions.mocha.js
+mocha --opts ./mocha.opts  ./custom-actions.mocha.js
 spec "Custom actions test"
-mocha ./test/interface/bus.spec.mocha.js
+mocha --opts ./mocha.opts  ./bus.spec.mocha.js
 spec "Protocol communication test"
-mocha ./test/interface/bus.fork.spec.mocha.js
+mocha --opts ./mocha.opts  ./bus.fork.spec.mocha.js
 spec "Protocol communication test"
-mocha ./test/interface/request.mocha.js
+mocha --opts ./mocha.opts  ./request.mocha.js
 spec "Protocol communication test"
-mocha ./test/interface/push_interactor.mocha.js
-spec "Push Interactor + Reconnection communication test"

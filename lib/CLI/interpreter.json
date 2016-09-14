@@ -1,9 +1,0 @@
-{
-  ".sh": "bash",
-  ".py": "python",
-  ".rb": "ruby",
-  ".php": "php",
-  ".pl" : "perl",
-  ".js" : "node",
-  ".coffee" : "coffee"
-}

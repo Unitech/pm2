@@ -1,11 +1,7 @@
 
-var CLI = require('./lib/CLI.js');
-
 process.env.PM2_PROGRAMMATIC = 'true';
 
-/**
- * Ensure that PM2 has been inited when using it programmatically
- */
-CLI.pm2Init();
+var API = require('./lib/API.js');
 
-module.exports = CLI;
+module.exports = new API;
+module.exports.custom = API;

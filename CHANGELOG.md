@@ -1,4 +1,92 @@
 
+## 2.0.0 Bradbury
+
+- Memory usage reduced by 40%
+- CPU usage in overall situations reduced by 60%
+- Refined pm2 logs command with --json, --format and --raw options
+- Faster process management with CONCURRENT_ACTIONs enabled
+- Faster installation (v1: ~30secs, v2: ~10secs)
+- Faster `pm2 update` with Keymetrics linking delayed at the end
+- Much better Module system with raw NPM feedback
+- Better Windows support
+- **pm2-docker** command with his official [Docker image](https://github.com/keymetrics/pm2-docker-alpine) + json output + auto exit
+- **pm2-dev -> pmd** command enhanced (better log output, post-exec cmd)
+- Watch and Reload instead of Watch and Restart
+- New PM2 API, backward compatible with previous PM2 versions
+
+The new PM2 API is greatly tested and well designed:
+
+```javascript
+var PM2 = require('pm2');
+
+// Or instanciate a custom PM2 instance
+
+var pm2 = new PM2.custom({
+  pm2_home :    // Default is the legacy $USER/.pm2. Now you can override this value
+  cwd      :    // Move to CWD,
+  daemon_mode : // Should the process stay attached to this application,
+  independant : // Create new random instance available for current session
+  secret_key  : // Keymetrics secret key
+  public_key  : // Keymetrics public key
+  machine_name: // Keymetrics instance name
+});
+
+// Start an app
+pm2.start('myapp.js');
+
+// Start an app with options
+pm2.start({
+  script   : 'api.js',
+  instances: 4
+}, function(err, processes) {
+});
+
+// Stop all apps
+pm2.stop('all');
+
+// Bus system to detect events
+pm2.launchBus((err, bus) => {
+  bus.on('log:out', (message) => {
+    console.log(message);
+  });
+
+  bus.on('log:err', (message) => {
+    console.log(message);
+  });
+});
+
+// Connect to different keymetrics bucket
+pm2.interact(opts, cb)
+
+// PM2 auto closes connection if no processing is done but manually:
+
+pm2.disconnect(cb) // Close connection with current pm2 instance
+pm2.destroy(cb)    // Close and delete all pm2 related files of this session
+```
+
+- Better CLI/API code structure
+- PM2 isolation for multi PM2 instance management
+
+## Bug fixes
+
+- #2093 #2092 #2059 #1906 #1758 #1696 replace optionnal git module with tgz one
+- #2077 fix calling pm2.restart inside pm2
+- #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
+- #2256 fix deploy command for yaml files
+- #2105 alias pm2 logs with pm2 log
+- Extra module display http://pm2.keymetrics.io/docs/advanced/pm2-module-system/#extra-display
+- Yamljs + Chokidar Security fixes
+- pm2 update / pm2 resurrect is now faster on Node > 4.0
+- keymetrics linking after pm2 update is done once all apps are started
+- pm2 list processes are now sorted by name instead id
+- #2248 livescript support added in development mode
+- The client/server file called Satan.js does not exists anymore. It has been replaced by the file combo ./lib/Client.js and ./lib/Daemon.js
+- PM2 --no-daemon is better now
+
+## Breaking change
+
+- None
+
 ### 1.1.3
 
 - Node v6 compatibility

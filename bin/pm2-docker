@@ -1,0 +1,115 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var commander = require('commander');
+
+var debug     = require('debug')('pm2:cli');
+var PM2       = require('..');
+var Log       = require('../lib/API/Log');
+var cst       = require('../constants.js');
+var pkg       = require('../package.json');
+var path      = require('path');
+var pm2;
+
+//process.env.PM2_SILENT = 'true';
+
+commander.version(pkg.version)
+  .option('--raw', 'raw log output')
+  .option('--json', 'output logs in json format')
+  .option('--format', 'output logs formated like key=val')
+  .option('--secret [key]', 'keymetrics secret key')
+  .option('--public [key]', 'keymetrics public key')
+  .option('--machine-name [name]', 'keymetrics machine name')
+  .option('--auto-exit', 'exit if all processes are errored/stopped or 0 apps launched')
+  .usage('start <app>');
+
+commander.command('*')
+  .action(function(cmd, opts){
+    console.error('Unknown command argument');
+    commander.outputHelp();
+  });
+
+// @todo need to allow passing same option than pm2 start
+commander.command('start <file|json_file>')
+  .option('--env [name]', 'select env_[name] env variables in process config file')
+  .option('--watch', 'Watch and Restart')
+  .description('start json_file or application')
+  .action(function(cmd, opts) {
+
+    pm2 = new PM2.custom({
+      pm2_home : path.join(process.env.HOME, '.pm2'),
+      secret_key : process.env.KEYMETRICS_SECRET || commander.secret,
+      public_key : process.env.KEYMETRICS_PUBLIC || commander.public,
+      machine_name : process.env.INSTANCE_NAME || commander.machineName,
+      daemon_mode : true
+    });
+
+    if (commander.autoExit)
+      autoExit();
+
+    pm2.connect(function() {
+      run(cmd, opts);
+    });
+  });
+
+if (process.argv.length == 2) {
+  commander.outputHelp();
+  process.exit(1);
+}
+
+commander.parse(process.argv);
+
+process.on('SIGINT', function() {
+  exitPM2();
+});
+
+function run(cmd, opts) {
+  var needRaw = commander.raw;
+
+  var timestamp = 'YYYY-MM-DD-HH:mm:ss';
+
+  pm2.start(cmd, opts, function(err, obj) {
+    if (err)
+      throw new Error(err.message);
+    if (commander.format)
+      Log.formatStream(pm2.Client, 'all', needRaw, timestamp, false);
+    else if (commander.json)
+      Log.jsonStream(pm2.Client);
+    else
+      Log.stream(pm2.Client, 'all', needRaw, timestamp, false);
+  });
+}
+
+function exitPM2() {
+  console.log('Exiting PM2');
+  pm2.kill(function() {
+    process.exit(0);
+  });
+}
+
+/**
+ * Exit current PM2 instance if 0 app is online
+ * function activated via --auto-exit
+ */
+function autoExit() {
+  setTimeout(function() {
+    pm2.list(function(err, apps) {
+      if (err) console.error(err.stack || err);
+
+      var online_count = 0;
+
+      apps.forEach(function(app) {
+        if (app.pm2_env.status == cst.ONLINE_STATUS ||
+            app.pm2_env.status == cst.LAUNCHING_STATUS)
+          online_count++;
+      });
+
+      if (online_count == 0) {
+        console.log('0 application online, exiting');
+        exitPM2();
+      }
+      autoExit();
+    });
+  }, 3000);
+}

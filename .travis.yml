@@ -3,7 +3,6 @@ node_js:
    - "0.12"
    - "0.10"
    - "4"
-   - "5"
    - "6"
 os:
   - linux
@@ -12,3 +11,5 @@ before_install:
   - sudo apt-get install python3
   - sudo apt-get install php5-cli
 sudo: required
+services:
+  - docker

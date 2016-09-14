@@ -1,6 +1,6 @@
 
 
-var cmd_pm2  = require('../..');
+var PM2  = require('../..');
 var should   = require('should');
 var nssocket = require('nssocket');
 var events   = require('events');
@@ -21,36 +21,6 @@ var meta_connect = {
   public_key : 'osef',
   machine_name : 'osef'
 };
-
-/**
- * Description
- * @method forkPM2
- * @return pm2
- */
-function forkPM2(cb) {
-  var pm2 = require('child_process').fork('lib/Satan.js', [], {
-    detached   : true
-  });
-
-  pm2.unref();
-
-  pm2.on('message', function() {
-    cb(null, pm2);
-  });
-}
-
-/**
- * Description
- * @method forkInteractor
- * @return CallExpression
- */
-function forkInteractor(cb) {
-  console.log('Launching interactor');
-
-  Interactor.launchAndInteract(meta_connect, function(err, data) {
-    cb();
-  });
-}
 
 /**
  * Mock server receiving data
@@ -86,42 +56,33 @@ function createMockServer(cb) {
   server.listen(4322, '0.0.0.0');
 }
 
-function startSomeApps(cb) {
-  setTimeout(function() {
-    cmd_pm2.connect(function() {
-      cmd_pm2.start({
-        script : './test/fixtures/events/custom_action.js',
-        name : 'custom-action'
-      }, cb);
-    });
-  }, 1200);
+function startSomeApps(pm2, cb) {
+  pm2.start({
+    script : './events/custom_action.js',
+    name : 'custom-action'
+  }, cb);
 }
 
-function startBus(cb) {
-  cmd_pm2.launchBus(function(err, bus) {
-    pm2_bus = bus;
-    cb();
-  });
-};
-
-describe('CUSTOM ACTIONS', function() {
+describe('Custom actions', function() {
   var server;
   var interactor;
-  var pm2;
+  var pm2 = new PM2.custom({
+    independent : true,
+    cwd         : __dirname + '/../fixtures',
+    secret_key : 'osef',
+    public_key : 'osef',
+    machine_name : 'osef',
+    daemon_mode: true
+  });;
 
   before(function(done) {
     createMockServer(function(err, _server) {
       server = _server;
-      forkPM2(function(err, _pm2) {
-        pm2 = _pm2;
-        console.log('PM2 forked');
-        forkInteractor(function(err, _interactor) {
-          interactor = _interactor;
-          console.log('Interactor forked');
-          startSomeApps(function() {
-            startBus(function() {
-              setTimeout(done, 1000);
-            });
+      pm2.connect(function(err) {
+        startSomeApps(pm2, function() {
+          pm2.launchBus(function(err, bus) {
+            pm2_bus = bus;
+            setTimeout(done, 500);
           });
         });
       });
@@ -130,15 +91,7 @@ describe('CUSTOM ACTIONS', function() {
 
   after(function(done) {
     server.close();
-    Interactor.killDaemon(function() {
-      var fs = require('fs');
-
-      fs.unlinkSync(cst.INTERACTION_CONF);
-
-      pm2.kill();
-
-      pm2.on('exit', function() {done()});
-    });
+    pm2.destroy(done);
   });
 
   it('should send ask, receive ask:rep and identify agent', function(done) {
@@ -164,6 +117,7 @@ describe('CUSTOM ACTIONS', function() {
     };
 
     var failure = function(pck) {
+      console.log(pck);
       plan.ok(false);
     };
 

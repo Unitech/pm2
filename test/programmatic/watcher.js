@@ -3,30 +3,30 @@ var assert = require('better-assert');
 var p = require('path');
 var fs = require('fs')
 var EventEmitter = require('events').EventEmitter
-var pm2  = require('../..');
+var PM2  = require('../..');
 var extend = require('util')._extend
 
-var cwd = p.resolve(__dirname, '../fixtures/watcher')
-process.chdir(cwd)
+var cwd = __dirname + '/../fixtures/watcher';
 
 var paths = {
-  server: p.join(cwd, 'server-watch.js'),
-  bak: p.join(cwd, 'server-watch.bak.js'),
-  json: p.join(cwd, 'server-watch.json')
+  server : p.join(cwd, 'server-watch.js'),
+  bak    : p.join(cwd, 'server-watch.bak.js'),
+  json   : p.join(cwd, 'server-watch.json')
 };
+
 var ee = new EventEmitter()
 
 var json = {
-  name: 'server-watch',
-  script: paths.server,
-  cwd: cwd
+  name  : 'server-watch',
+  script: './server-watch.js',
+  cwd   : cwd
 }
 
 function testPM2Env(event) {
   return function(obj, cb) {
     ee.once(event, function(e) {
       if(typeof obj == 'function') {
-        return obj(e) 
+        return obj(e)
       }
 
       var value
@@ -43,20 +43,20 @@ function testPM2Env(event) {
 }
 
 function errShouldBeNull(err) {
-  should(err).be.null
+  should(err).be.null();
 }
 
 describe('Watcher', function() {
-
-  this.timeout(5000)
-
-  after(function(cb) {
-    fs.unlink(paths.server, cb) 
+  var pm2 = new PM2.custom({
+    independent : true,
+    cwd : __dirname + '/../fixtures/watcher'
   });
 
+  this.timeout(2500)
+
   after(function(cb) {
-    pm2.delete('all', function() {
-      pm2.disconnect(cb)
+    pm2.destroy(function() {
+      fs.unlink(paths.server, cb)
     });
   });
 
@@ -64,7 +64,7 @@ describe('Watcher', function() {
     //copy server-watch.bak, we'll add some lines in it
     fs.readFile(paths.bak, function(err, data) {
       if(err) {
-        return cb(err) 
+        return cb(err)
       }
 
       return fs.writeFile(paths.server, data, cb)
@@ -73,11 +73,7 @@ describe('Watcher', function() {
 
   before(function(done) {
     pm2.connect(function() {
-      pm2.kill(function() {
-        pm2.connect(function() {
-          return done();
-        });
-      });
+      done();
     });
   });
 
@@ -93,37 +89,38 @@ describe('Watcher', function() {
       })
 
       return done()
-    }) 
+    })
   })
 
   it('should be watching', function(cb) {
     testPM2Env('server-watch:online')({watch: true}, cb)
 
-    pm2.start(extend(json, {watch: true}), errShouldBeNull) 
+    var json_app = extend(json, {watch: true});
+    pm2.start(json_app, errShouldBeNull)
   })
 
   it('should be watching after restart', function(cb) {
     testPM2Env('server-watch:online')({watch: true}, cb)
-    pm2.restart('server-watch', errShouldBeNull) 
+    pm2.restart('server-watch', errShouldBeNull)
   })
 
   it('should restart because of file edit', function(cb) {
     testPM2Env('server-watch:online')({restart_time: 2}, cb)
-    fs.appendFileSync(paths.server, 'console.log("edit")') 
+    fs.appendFileSync(paths.server, 'console.log("edit")')
   })
 
   it('should stop watching', function(cb) {
     process.argv.push('--watch')
     testPM2Env('server-watch:stop')({watch: false}, function() {
-      process.argv.splice(process.argv.indexOf('--watch'), 1) 
+      process.argv.splice(process.argv.indexOf('--watch'), 1)
       cb()
     })
     pm2.stop('server-watch', errShouldBeNull)
 
-    // this would be better: 
+    // this would be better:
     // pm2.actionFromJson('stopProcessId', extend(json, {watch: false}), errShouldBeNull)
     // or :
-    // pm2.stop('server-watch', {watch: false}, errShouldBeNull) 
+    // pm2.stop('server-watch', {watch: false}, errShouldBeNull)
   })
 
   it('should not watch', function(cb) {
@@ -145,12 +142,13 @@ describe('Watcher', function() {
       cb()
     })
 
-    pm2.start(paths.json, errShouldBeNull)
+    var json_app = paths.json;
+    pm2.start(json_app, errShouldBeNull)
   })
 
   it('should restart json from file touch', function(cb) {
     testPM2Env('server-watch:online')({restart_time: 1}, cb)
-    
+
     var path = p.join(cwd, 'donotwatchme.dir', 'test')
 
     fs.writeFile(path, 'Test', {flag: 'a+'}, function(err) {
@@ -160,7 +158,7 @@ describe('Watcher', function() {
 
   it('should restart json from file deletion', function(cb) {
     testPM2Env('server-watch:online')({restart_time: 2}, cb)
-    
+
     var path = p.join(cwd, 'donotwatchme.dir', 'test')
 
     fs.unlink(path, function(err) {
@@ -180,7 +178,7 @@ describe('Watcher', function() {
         fs.unlink(path)
         return cb()
       })
-    }) 
+    })
   })
 
   /**
@@ -188,7 +186,7 @@ describe('Watcher', function() {
    */
   it('should delete from json', function(cb) {
     testPM2Env('server-watch:exit')(function() {
-      cb() 
+      cb()
     })
 
     pm2.delete(paths.json, errShouldBeNull)

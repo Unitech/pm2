@@ -1,15 +1,22 @@
 
-var pm2    = require('../..');
+var PM2    = require('../..');
 var should = require('should');
 var assert = require('better-assert');
 var path   = require('path');
 
 describe('Signal kill (+delayed)', function() {
+  this.timeout(10000);
+
   var proc1 = null;
+
+  var pm2 = new PM2.custom({
+    independent : true,
+    cwd : __dirname + '/../fixtures'
+  });
 
   after(function(done) {
     pm2.delete('all', function(err, ret) {
-      pm2.disconnect(done);
+      pm2.destroy(done);
     });
   });
 
@@ -32,11 +39,11 @@ describe('Signal kill (+delayed)', function() {
 
     it('should start a script', function(done) {
       pm2.start({
-        script : './test/fixtures/signals/delayed_sigint.js',
+        script : './signals/delayed_sigint.js',
         name : 'delayed-sigint'
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });
@@ -73,11 +80,11 @@ describe('Signal kill (+delayed)', function() {
 
     it('should start a script', function(done) {
       pm2.start({
-        script : './test/fixtures/signals/delayed_sigint.js',
+        script : './delayed_sigint.js',
         name : 'delayed-sigint'
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });
@@ -114,12 +121,12 @@ describe('Signal kill (+delayed)', function() {
 
     it('should start a script', function(done) {
       pm2.start({
-        script : './test/fixtures/signals/delayed_sigint.js',
+        script : './signals/delayed_sigint.js',
         name : 'delayed-sigint',
         exec_mode : 'cluster'
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });
@@ -186,13 +193,13 @@ describe('Signal kill (+delayed)', function() {
 
     it('should start a script with flag kill timeout to 4000ms', function(done) {
       pm2.start({
-        script : './test/fixtures/signals/delayed_sigint.js',
+        script : './signals/delayed_sigint.js',
         name : 'delayed-sigint',
         exec_mode : 'cluster',
         kill_timeout : 4000
       }, function(err, data) {
         proc1 = data[0];
-        should(err).be.null;
+        should(err).be.null();
         setTimeout(done, 1000);
       });
     });

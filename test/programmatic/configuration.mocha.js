@@ -6,14 +6,14 @@ var Configuration = require('../../lib/Configuration.js');
 describe('Configuration via SET / GET tests', function() {
   it('should set a value', function(done) {
     Configuration.set('key1', 'val1', function(err, data) {
-      should(err).not.exists;
+      should.not.exists(err);
       done();
     });
   });
 
   it('should get all values', function(done) {
     Configuration.getAll(function(err, data) {
-      should(err).not.exists;
+      should.not.exists(err);
       data.key1.should.eql('val1');
       done();
     });
@@ -21,14 +21,14 @@ describe('Configuration via SET / GET tests', function() {
 
   it('should set another value', function(done) {
     Configuration.set('key2', 'val2', function(err, data) {
-      should(err).not.exists;
+      should.not.exists(err);
       done();
     });
   });
 
   it('should get all values', function(done) {
     Configuration.getAll(function(err, data) {
-      should(err).not.exists;
+      should.not.exists(err);
       data.key1.should.eql('val1');
       data.key2.should.eql('val2');
       done();
@@ -37,15 +37,15 @@ describe('Configuration via SET / GET tests', function() {
 
   it('should unset first value', function(done) {
     Configuration.unset('key1', function(err, data) {
-      should(err).not.exists;
+      should.not.exists(err);
       done();
     });
   });
 
   it('should get all values', function(done) {
     Configuration.getAll(function(err, data) {
-      should(err).not.exists;
-      should(data.key1).not.exists;
+      should.not.exists(err);
+      should.not.exists(data.key1);
       data.key2.should.eql('val2');
       done();
     });
@@ -54,28 +54,28 @@ describe('Configuration via SET / GET tests', function() {
   it('should get all values SYNCHRONOUSLY', function() {
     var data = Configuration.getAllSync();
 
-    should(data.key1).not.exists;
+    should.not.exists(data.key1);
     data.key2.should.eql('val2');
   });
 
   describe('Sub value system', function() {
     it('should set a sub key', function(done) {
       Configuration.set('module-name.var1', 'val1', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
 
     it('should set a second sub key', function(done) {
       Configuration.set('module-name.var2', 'val2', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
 
     it('should get the val', function(done) {
       Configuration.getAll(function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         data['module-name']['var1'].should.eql('val1');
         data['module-name']['var2'].should.eql('val2');
         done();
@@ -84,7 +84,7 @@ describe('Configuration via SET / GET tests', function() {
 
     it('should get the val with .get', function(done) {
       Configuration.get('module-name.var1', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         data.should.eql('val1');
         done();
       });
@@ -92,7 +92,7 @@ describe('Configuration via SET / GET tests', function() {
 
     it('should get the val with .get', function(done) {
       Configuration.get('module-name.var2', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         data.should.eql('val2');
         done();
       });
@@ -100,16 +100,16 @@ describe('Configuration via SET / GET tests', function() {
 
     it('should NOT get the val with .get', function(done) {
       Configuration.get('moduleasd-name.var2', function(err, data) {
-        should(err).exists;
-        should(data).be.null;
+        should.exists(err);
+        should(data).be.null();
         done();
       });
     });
 
     it('should NOT get the val with .get', function(done) {
       Configuration.get('module-name.var3', function(err, data) {
-        should(err).exists;
-        should(data).be.null;
+        should.exists(err);
+        should(data).be.null();
         done();
       });
     });
@@ -119,21 +119,21 @@ describe('Configuration via SET / GET tests', function() {
   describe('Sub value system with :', function() {
     it('should set a sub key', function(done) {
       Configuration.set('module-name2:var1', 'val1', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
 
     it('should set a second sub key', function(done) {
       Configuration.set('module-name2:var2', 'val2', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
 
     it('should get the val', function(done) {
       Configuration.getAll(function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         data['module-name2']['var1'].should.eql('val1');
         data['module-name2']['var2'].should.eql('val2');
         done();
@@ -142,9 +142,9 @@ describe('Configuration via SET / GET tests', function() {
 
     it('should unset the val', function(done) {
       Configuration.unset('module-name2:var2', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         data['module-name2']['var1'].should.eql('val1');
-        should(data['module-name2']['var2']).not.exists;
+        should.not.exists(data['module-name2']['var2']);
         done();
       });
     });
@@ -159,7 +159,7 @@ describe('Configuration via SET / GET tests', function() {
     it('should have 0 modules listed', function(done) {
       var data = Configuration.getSync('module-name2');
 
-      should(data).be.null;
+      should(data).be.null();
       done();
     });
 
@@ -190,7 +190,7 @@ describe('Configuration via SET / GET tests', function() {
 
     it('should get null for unknown val', function() {
       var data = Configuration.getSync('module-name2:var23333');
-      should(data).be.null;
+      should(data).be.null();
     });
 
   });
@@ -198,7 +198,7 @@ describe('Configuration via SET / GET tests', function() {
   describe('Not split what is inside double quotes', function() {
     it('should do it', function(done) {
       Configuration.set('module-name2:"var2:toto"', 'val2', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
@@ -210,7 +210,7 @@ describe('Configuration via SET / GET tests', function() {
 
     it('should do it', function(done) {
       Configuration.set('module-name3."var45.toto"', 'val2', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
@@ -225,7 +225,7 @@ describe('Configuration via SET / GET tests', function() {
   describe('Multiset', function() {
     it('should mutliset configuration', function(done) {
       Configuration.multiset('module-name3."var45.toto" val2 k2 v2 k3 v3', function(err, data) {
-        should(err).not.exists;
+        should.not.exists(err);
         done();
       });
     });
@@ -240,16 +240,6 @@ describe('Configuration via SET / GET tests', function() {
       done();
     });
 
-  });
-
-  // Password encryption moved outside Configuration library
-  describe.skip('Password encryption', function() {
-    it('should encrypt password when setting pm2:passwd', function(done) {
-      Configuration.set('pm2:passwd', 'testpass', function(err, data) {
-        should(err).not.exists;
-        done();
-      });
-    });
   });
 
 });

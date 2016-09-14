@@ -3,13 +3,16 @@
  * PM2 programmatic API tests
  */
 
-var pm2    = require('../..');
+var PM2    = require('../..');
 var should = require('should');
 var assert = require('better-assert');
 var path   = require('path');
 
+// Change to current folder
+process.chdir(__dirname);
+
 var json_declaration_simple = {
-  script : './test/fixtures/env-switching/child.js',
+  script : './../fixtures/env-switching/child.js',
   name   : 'child',
   // Default environment
   env : {
@@ -26,7 +29,7 @@ var json_declaration_simple = {
 };
 
 var json_declaration = {
-  script : './test/fixtures/env-switching/child.js',
+  script : './../fixtures/env-switching/child.js',
   // Default environment
   env : {
     NODE_ENV : 'normal'
@@ -47,10 +50,10 @@ describe('PM2 programmatic calls', function() {
   var procs = [];
   var bus   = null;
 
+  var pm2 = new PM2.custom({ independent : true });
+
   after(function(done) {
-    pm2.delete('all', function(err, ret) {
-      pm2.disconnect(done);
-    });
+    pm2.destroy(done);
   });
 
   before(function(done) {

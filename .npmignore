@@ -7,3 +7,5 @@ pres
 examples
 *.pyc
 .github
+.cache-require-paths.json
+*.heapsnapshot

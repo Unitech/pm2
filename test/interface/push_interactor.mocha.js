@@ -56,11 +56,6 @@ describe('Programmatically test interactor', function() {
     });
   });
 
-  it('should change urls (forcing reconnection)', function(done) {
-    InterfaceD.changeUrls('app.km.io', 'app.km.io:4322');
-    setTimeout(done, 2000);
-  });
-
   it('should still receive messages', function(done) {
     sock.once('message', function(data) {
       done();

@@ -29,10 +29,10 @@ $pm2 start echo.js -o out-rel.log -e err-rel.log -x --merge-logs
 
 sleep 2
 
-grep "ok" out-rel.log
+grep "echo.js" out-rel.log
 spec "Should have written te right stuff in out log in fork mode"
 
-grep "thisnok" err-rel.log
+grep "echo.js-error" err-rel.log
 spec "Should have written te right stuff in err log in fork mode"
 
 rm out-rel.log
@@ -43,10 +43,10 @@ spec "Should have reloaded logs via CLI"
 
 sleep 1
 
-grep "ok" out-rel.log
+grep "echo.js" out-rel.log
 spec "(RELOADED) Should have written the right stuff in out log in fork mode"
 
-grep "thisnok" err-rel.log
+grep "echo.js-error" err-rel.log
 spec "(RELOADED) Should have written the right stuff in err log in fork mode"
 
 rm out-rel.log

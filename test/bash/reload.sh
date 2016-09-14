@@ -5,6 +5,24 @@ source "${SRC}/include.sh"
 
 cd $file_path
 
+echo "################## RELOAD SIGINT ###################"
+
+$pm2 start delayed_exit.js -i 2
+should 'should start processes' 'online' 2
+should 'should app be in cluster mode' "exec_mode: 'cluster_mode'" 2
+OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)',/\1/"`
+> $OUT_LOG
+
+$pm2 reload delayed_exit
+
+sleep 1
+
+OUT=`grep "SIGINT" "$OUT_LOG" | wc -l`
+[ $OUT -eq 1 ] || fail "Signal not received by the process name"
+success "Processes sucessfully receives the SIGINT signal"
+
+$pm2 kill
+
 echo "################## RELOAD ###################"
 
 echo "Reloading"

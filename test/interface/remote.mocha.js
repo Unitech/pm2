@@ -1,5 +1,7 @@
 
-var cmd_pm2  = require('../..');
+process.env.NODE_ENV = 'local_test';
+
+var PM2      = require('../..');
 var should   = require('should');
 var nssocket = require('nssocket');
 var events   = require('events');
@@ -7,59 +9,13 @@ var util     = require('util');
 var Cipher   = require('../../lib/Interactor/Cipher.js');
 var cst      = require('../../constants.js');
 
-var Interactor = require('../../lib/Interactor/InteractorDaemonizer.js');
-
 var send_cmd = new events.EventEmitter();
-
-process.env.NODE_ENV = 'local_test';
-
 var meta_connect = {
   secret_key : 'test-secret-key',
   public_key : 'test-public-key',
   machine_name : 'test-machine-name'
 };
 
-/**
- * Description
- * @method forkPM2
- * @return pm2
- */
-function forkPM2(cb) {
-  var opts = {
-    detached   : true,
-    silent     : true
-  };
-
-  if (process.env.DEBUG)
-    opts.silent = false;
-
-  var pm2 = require('child_process').fork('lib/Satan.js', [], opts);
-
-  pm2.unref();
-
-  pm2.on('message', function() {
-    cb(null, pm2);
-  });
-}
-
-/**
- * Description
- * @method forkInteractor
- * @return CallExpression
- */
-function forkInteractor(cb) {
-  console.log('Launching interactor');
-
-  Interactor.launchAndInteract(meta_connect, function(err, data) {
-    cb();
-  });
-}
-
-/**
- * Mock server receiving data
- * @method forkInteractor
- * @return CallExpression
- */
 function createMockServer(cb) {
   var server = nssocket.createServer(function(_socket) {
 
@@ -90,45 +46,34 @@ function createMockServer(cb) {
   server.listen(4322, '0.0.0.0');
 }
 
-function startSomeApps(cb) {
-  setTimeout(function() {
-    cmd_pm2.connect(function() {
-      cmd_pm2.start('./test/fixtures/child.js', {instances : 4, name : 'child'}, cb);
-    });
-  }, 500);
+function startSomeApps(pm2, cb) {
+  pm2.start('./child.js', {instances : 4, name : 'child'}, cb);
 }
 
 describe('REMOTE PM2 ACTIONS', function() {
   var server;
   var interactor;
-  var pm2;
+  var pm2 = new PM2.custom({
+    independent : true,
+    cwd         : __dirname + '/../fixtures',
+    secret_key : 'test-secret-key',
+    public_key : 'test-public-key',
+    machine_name : 'test-machine-name',
+    daemon_mode: true
+  });;
 
   after(function(done) {
     server.close();
-    Interactor.killDaemon(function() {
-      var fs = require('fs');
-
-      fs.unlinkSync(cst.INTERACTION_CONF);
-
-      pm2.kill();
-
-      pm2.on('exit', function() {done()});
-    });
+    pm2.destroy(done);
   });
 
   before(function(done) {
     createMockServer(function(err, _server) {
       console.log('Mock server created');
       server = _server;
-      forkPM2(function(err, _pm2) {
-        pm2 = _pm2;
-        console.log('PM2 forked');
-        forkInteractor(function(err, _interactor) {
-          interactor = _interactor;
-          console.log('Interactor forked');
-          startSomeApps(function() {
-            done();
-          });
+      pm2.connect(function(err, _pm2) {
+        startSomeApps(pm2, function() {
+          done();
         });
       });
     });
@@ -165,7 +110,7 @@ describe('REMOTE PM2 ACTIONS', function() {
   it('should act on PM2 but handle failure', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
       // Error is present telling process does not exists
-      pck.ret.err.should.not.be.null;
+      pck.ret.err.should.not.be.null();
       done();
     });
 
@@ -182,9 +127,9 @@ describe('REMOTE PM2 ACTIONS', function() {
        * Once remote command is finished...
        */
 
-      should(pck.ret.err).be.null;
+      should(pck.ret.err).be.null();
 
-      cmd_pm2.list(function(err, ret) {
+      pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(2);
         });
@@ -206,9 +151,9 @@ describe('REMOTE PM2 ACTIONS', function() {
        * Once remote command is finished...
        */
 
-      should(pck.ret.err).be.null;
+      should(pck.ret.err).be.null();
 
-      cmd_pm2.list(function(err, ret) {
+      pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(3);
         });
@@ -229,9 +174,9 @@ describe('REMOTE PM2 ACTIONS', function() {
       /**
        * Once remote command is finished...
        */
-      should(pck.ret.err).be.null;
+      should(pck.ret.err).be.null();
 
-      cmd_pm2.list(function(err, ret) {
+      pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(0);
         });
@@ -248,27 +193,24 @@ describe('REMOTE PM2 ACTIONS', function() {
   });
 
   it('should delete all processes', function(done) {
-  	//This timeout is requried otherwise the test halts and never progresses
-  	setTimeout(function(){
-      cmd_pm2.delete('all', {}, function() {
-        startSomeApps(function() {
-          cmd_pm2.list(function(err, ret) {
-            ret.forEach(function(proc) {
-              proc.pm2_env.restart_time.should.eql(0);
-            });
-            done();
+    pm2.delete('all', {}, function() {
+      startSomeApps(pm2, function() {
+        pm2.list(function(err, ret) {
+          ret.forEach(function(proc) {
+            proc.pm2_env.restart_time.should.eql(0);
           });
+          done();
         });
       });
-    }, 2000);
+    });
   });
 
   it('should test .remote', function(done) {
-    cmd_pm2.remote('restart', {
+    pm2.remote('restart', {
       name : 'child'
     }, function(err, procs) {
 
-      cmd_pm2.list(function(err, ret) {
+      pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(1);
         });
@@ -277,12 +219,11 @@ describe('REMOTE PM2 ACTIONS', function() {
     });
   });
 
-  it('should test .remote', function(done) {
-    cmd_pm2.remote('restart', {
+  it('should test .remote and handle failure', function(done) {
+    pm2.remote('restart', {
       name : 'UNKNOWN_NAME'
     }, function(err, procs) {
-
-      cmd_pm2.list(function(err, ret) {
+      pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(1);
         });
@@ -292,11 +233,11 @@ describe('REMOTE PM2 ACTIONS', function() {
   });
 
   it('should test .remote #2', function(done) {
-    cmd_pm2.remote('reload', {
+    pm2.remote('reload', {
       name : 'child'
     }, function(err, procs) {
 
-      cmd_pm2.list(function(err, ret) {
+      pm2.list(function(err, ret) {
         ret.forEach(function(proc) {
           proc.pm2_env.restart_time.should.eql(2);
         });
