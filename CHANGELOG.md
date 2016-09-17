@@ -1,4 +1,9 @@
 
+## 2.1.0
+
+- process.on('unhandledRejection'): allow to catch promise error that have not been catched
+- upgrade fclone and pidusage (faster windows CPU/Mem monitoring)
+
 ## 2.0.0 Bradbury
 
 - Memory usage reduced by 40%
