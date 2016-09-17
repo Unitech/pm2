@@ -14,7 +14,6 @@ var path_structure = require('./paths.js')(process.env.OVER_HOME);
  * Constants variables used by PM2
  */
 var csts = {
-  CODE_UNCAUGHTEXCEPTION  : 100,
   PREFIX_MSG              : chalk.green('[PM2] '),
   PREFIX_MSG_ERR          : chalk.red('[PM2][ERROR] '),
   PREFIX_MSG_MOD          : chalk.green('[PM2][Module] '),
@@ -42,6 +41,7 @@ var csts = {
 
   SUCCESS_EXIT            : 0,
   ERROR_EXIT              : 1,
+  CODE_UNCAUGHTEXCEPTION  : 1,
 
   IS_WINDOWS              : (process.platform === 'win32' || process.platform === 'win64'),
   ONLINE_STATUS           : 'online',
