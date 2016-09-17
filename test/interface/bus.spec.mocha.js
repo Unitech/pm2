@@ -145,6 +145,22 @@ describe('PM2 BUS / RPC', function() {
       });
     });
 
+    it('should (process:exception) with promise', function(done) {
+      var plan = new Plan(1, done);
+
+      pm2_bus.on('*', function(event, data) {
+        if (event == 'process:exception') {
+          data.should.have.properties(ERROR_EVENT);
+          data.process.should.have.properties(PROCESS_ARCH);
+          plan.ok('true');
+        }
+      });
+
+      pm2.start('./promise_rejection.js', {instances: 1}, function(err, data) {
+        should(err).be.null();
+      });
+    });
+
     it('should (human:event)', function(done) {
       pm2_bus.on('*', function(event, data) {
         if (event == 'human:event') {
