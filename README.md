@@ -103,6 +103,7 @@ $ pm2 flush
 $ pm2 stop all                  # Stop all apps
 $ pm2 stop 0                    # Stop process with id 0
 $ pm2 restart all               # Restart all apps
+$ pm2 restart 0                 # Restart process with id 0
 $ pm2 reload all                # Reload all apps in cluster mode
 $ pm2 gracefulReload all        # Graceful reload all apps in cluster mode
 $ pm2 delete all                # Kill and delete all apps
