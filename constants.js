@@ -82,7 +82,7 @@ var csts = {
 
   WORKER_INTERVAL         : process.env.PM2_WORKER_INTERVAL || 30000,
   KILL_TIMEOUT            : process.env.PM2_KILL_TIMEOUT || 1600,
-  PM2_PROGRAMMATIC        : process.env.pm_id || process.env.PM2_PROGRAMMATIC,
+  PM2_PROGRAMMATIC        : typeof(process.env.pm_id) !== 'undefined' || process.env.PM2_PROGRAMMATIC,
   PM2_LOG_DATE_FORMAT     : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DD HH:mm:ss'
 
 };

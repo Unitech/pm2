@@ -2,6 +2,8 @@
 
 'use strict';
 
+process.env.PM2_USAGE = 'CLI';
+
 var cst       = require('../constants.js');
 
 var commander = require('commander');
