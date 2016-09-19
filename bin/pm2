@@ -126,18 +126,21 @@ function checkCompletion(){
     }), data);
     // array containing commands after which process name should be listed
     var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
-    if(cmdProcess.indexOf(data.prev) > -1) {
-      pm2.connect(function() {
-        pm2.list(function(err, list){
-          tabtab.log(list.map(function(el){ return el.name}), data);
-          pm2.disconnect();
-        });
+
+    if (cmdProcess.indexOf(data.prev) > -1) {
+      pm2.list(function(err, list){
+        tabtab.log(list.map(function(el){ return el.name }), data);
+        pm2.disconnect();
       });
     }
-    else if (data.prev == 'pm2')
+    else if (data.prev == 'pm2') {
       tabtab.log(commander.commands.map(function (data) {
         return data._name;
       }), data);
+      pm2.disconnect();
+    }
+    else
+      pm2.disconnect();
   });
 };
 
@@ -172,7 +175,6 @@ else {
     debug('Now connected to daemon');
     if (process.argv.slice(2)[0] === 'completion') {
       checkCompletion();
-      pm2.disconnect();
     }
     else {
       beginCommandProcessing();
