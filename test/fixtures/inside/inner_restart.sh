@@ -1,4 +1,5 @@
 #!/bin/bash
 
 $PM2_PATH restart echo
-sleep 100
+$PM2_PATH restart echo
+$PM2_PATH restart echo
