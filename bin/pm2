@@ -175,6 +175,10 @@ else {
     debug('Now connected to daemon');
     if (process.argv.slice(2)[0] === 'completion') {
       checkCompletion();
+      //Close client if completion related installation
+      var third = process.argv.slice(3)[0];
+      if (third === 'install' || third === 'uninstall' || third === null)
+        pm2.disconnect();
     }
     else {
       beginCommandProcessing();
