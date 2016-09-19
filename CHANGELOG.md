@@ -1,5 +1,5 @@
 
-## 2.0.13
+## 2.0.13/14
 
 - process.on('unhandledRejection'): allow to catch promise error that have not been catched
 - upgrade fclone and pidusage (faster windows CPU/Mem monitoring)
