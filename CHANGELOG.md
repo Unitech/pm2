@@ -1,10 +1,13 @@
 
-## 2.1.0
+## 2.0.13
 
 - process.on('unhandledRejection'): allow to catch promise error that have not been catched
 - upgrade fclone and pidusage (faster windows CPU/Mem monitoring)
+- allow to call pm2 CLI from bash script managed by pm2
+- #2385 ts-node upgraded to latest
+- #2381 autocompletion fix
 
-## 2.0.0 Bradbury
+## 2.0.12 Bradbury
 
 - Memory usage reduced by 40%
 - CPU usage in overall situations reduced by 60%
