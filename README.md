@@ -192,9 +192,6 @@ Monitoring all processes launched:
 $ pm2 monit
 ```
 
-### Docker
-
-
 ### Log facilities
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
