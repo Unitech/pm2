@@ -60,7 +60,7 @@ $ pm2 start app.js
 
 Your app is now daemonized, monitored and kept alive forever.
 
-[More about Process Management](http://pm2.keymetrics.io/docs/usage/quick-start/#cheat-sheet)
+[More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
 ## Update PM2
 
@@ -137,7 +137,7 @@ $ pm2 publish                   # Increment version, git push and npm publish
 
 ### Process management
 
-Once apps are started you can list and manage them easily:
+Once applications are started you can list and manage them easily:
 
 ![Process listing](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
 
@@ -161,7 +161,7 @@ To have more details on a specific process:
 $ pm2 describe <id|app_name>
 ```
 
-[More about Process Management](http://pm2.keymetrics.io/docs/usage/quick-start/#cheat-sheet)
+[More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
 ### Load Balancing & Zero second Downtime Reload
 
