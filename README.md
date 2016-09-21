@@ -163,23 +163,22 @@ $ pm2 describe <id|app_name>
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/quick-start/#cheat-sheet)
 
-### Load balancing / 0s reload downtime
+### Load Balancing & Zero second Downtime Reload
 
-When an app is started with the -i <worker number> option, the **cluster** mode is enabled.
+When an application is started with the -i <instance_number> option, the **Cluster Mode** is enabled.
 
-Supported by all major Node.js frameworks and any Node.js applications
+The Cluster Mode start <instance_number> and automatically load balance HTTP/TCP/UDP between each instance. This allows to increase overall performance depending to the number of CPUs availabe.
+
+Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
 
 ![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
 
-**Warning**: If you want to use the embedded load balancer (cluster mode), we recommend the use of `node#0.12.0+` or `node#0.11.16+`. We do not support `node#0.10.*`'s cluster module anymore.
-
-With the cluster mode, PM2 enables load balancing between multiple application to use all CPUs available in a server.
-Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
+Main commands:
 
 ```bash
-$ pm2 start app.js -i max  # Enable load-balancer and start 'max' instances
+$ pm2 start app.js -i max  # Enable load-balancer and start 'max' instances (cpu nb)
 
-$ pm2 reload all           # Reload all apps in 0s manner
+$ pm2 reload all           # Zero second dowtime reload
 
 $ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
 ```
