@@ -48,14 +48,9 @@ Works on Linux (stable) & MacOSx (stable) & Windows (stable).
 
 ```bash
 $ npm install pm2 -g
-
-# Or install the V2 release candidate
-$ npm install pm2@next -g
 ```
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
-
-*Read more about the [V2 - Quantica Ultimatum](https://github.com/Unitech/pm2/blob/development/CHANGELOG.md#200---quantica-ultimatum)*
 
 ## Start an application
 
@@ -63,7 +58,7 @@ $ npm install pm2@next -g
 $ pm2 start app.js
 ```
 
-Your app is now put in background, monitored and kept alive forever.
+Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/quick-start/#cheat-sheet)
 
@@ -178,7 +173,7 @@ With the cluster mode, PM2 enables load balancing between multiple application t
 Each HTTP/TCP/UDP request will be forwarded to one specific process at a time.
 
 ```bash
-$ pm2 start app.js -i 0  # Enable load-balancer and cluster features
+$ pm2 start app.js -i max  # Enable load-balancer and start 'max' instances
 
 $ pm2 reload all           # Reload all apps in 0s manner
 
@@ -201,29 +196,28 @@ $ pm2 monit
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
-Displaying logs of a specified process or all processes, in real time:
+Displaying logs of a specified process or all processes, in real time. Standard, Raw, JSON and formated output are available.
 
-`pm2 logs ['all'|'PM2'|app_name|app_id] [--err|--out] [--lines <n>] [--raw] [--timestamp [format]]`
+```bash
+$ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]`
+```
 
 Examples:
 
 ```bash
-$ pm2 logs
-$ pm2 logs WEB-API --err
-$ pm2 logs all --raw
-$ pm2 logs --lines 5
-$ pm2 logs --timestamp "HH:mm:ss"
-$ pm2 logs WEB-API --lines 0 --timestamp "HH:mm" --out
-$ pm2 logs PM2 --timestamp
+$ pm2 logs APP-NAME       # Display APP-NAME logs
+$ pm2 logs --json         # JSON output
+$ pm2 logs --format       # Formated output
 
-$ pm2 flush          # Clear all the logs
+$ pm2 flush               # Flush all logs
+$ pm2 reloadLogs          # Reload all logs
 ```
 
 [More about log management](http://pm2.keymetrics.io/docs/usage/log-management/)
 
 ### Startup script generation
 
-PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.  Execute the startup command only as the user to be running the PM2 daemon.
+PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart. Execute the startup command only as the user to be running the PM2 daemon.
 
 ```bash
 $ pm2 startup
@@ -253,9 +247,9 @@ Here are some PM2 compatible modules (standalone Node.js applications managed by
 
 [**pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed<br/>
 [**pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers<br/>
-[**pm2-auto-pull**](https://github.com/pm2-hive/pm2-auto-pull) auto pull all applications managed by PM2<br/>
+[**pm2-server-monit**](https://github.com/pm2-hive/pm2-server-monit) monitor your server health<br/>
 
-[How to write a module](http://pm2.keymetrics.io/docs/advanced/pm2-module-system/)
+[Writing your own module](http://pm2.keymetrics.io/docs/advanced/pm2-module-system/)
 
 ## Keymetrics monitoring
 
@@ -270,12 +264,13 @@ Thanks in advance and we hope that you like PM2!
 
 ## More about PM2
 
-- [Watch & Restart](http://pm2.keymetrics.io/docs/usage/watch-and-restart/)
 - [Application Declaration via JS files](http://pm2.keymetrics.io/docs/usage/application-declaration/)
+- [Watch & Restart](http://pm2.keymetrics.io/docs/usage/watch-and-restart/)
 - [PM2 API](http://pm2.keymetrics.io/docs/usage/pm2-api/)
-- [Deploying workflow](http://pm2.keymetrics.io/docs/usage/deployment/)
-- [PM2 and Heroku/Azure/App Engine](http://pm2.keymetrics.io/docs/usage/use-pm2-with-cloud-providers/)
+- [Deployment workflow](http://pm2.keymetrics.io/docs/usage/deployment/)
+- [PM2 on Heroku/Azure/App Engine](http://pm2.keymetrics.io/docs/usage/use-pm2-with-cloud-providers/)
 - [PM2 auto completion](http://pm2.keymetrics.io/docs/usage/auto-completion/)
+- [Using PM2 in ElasticBeanStalk](http://pm2.keymetrics.io/docs/tutorials/use-pm2-with-aws-elastic-beanstalk/)
 
 ## CHANGELOG
 
@@ -288,7 +283,6 @@ Thanks in advance and we hope that you like PM2!
 ## License
 
 PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
-If you use the PM2 API contact us to get a LGPL license.
-[Contact us](https://keymetrics.io/contact/).
+In case you use the PM2 API, embed PM2 in your software or edit the PM2 source code, please contact us to find a licensing agreement: [Contact us](https://keymetrics.io/contact/).
 
 [![GA](https://ga-beacon.appspot.com/UA-51734350-7/pm2/readme?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)
