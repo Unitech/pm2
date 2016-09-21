@@ -135,14 +135,6 @@ $ pm2 uninstall pm2-logrotate   # Uninstall module
 $ pm2 publish                   # Increment version, git push and npm publish
 ```
 
-### Different ways of starting processes
-
-```bash
-$ pm2 start app.js --watch      # Restart application on file change
-
-$ pm2 start my-python-script.py --interpreter python
-```
-
 ### Process management
 
 Once apps are started you can list and manage them easily:
