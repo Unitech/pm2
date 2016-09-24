@@ -23,6 +23,9 @@ spec "pm2-dev"
 bash ./test/bash/docker.sh
 spec "Docker tests"
 
+bash ./test/bash/cron-system.sh
+spec "Cron system tests"
+
 # bash ./test/bash/log-timestamp.sh
 # spec "timestamp prefix of pm2.log"
 bash ./test/bash/watch.sh

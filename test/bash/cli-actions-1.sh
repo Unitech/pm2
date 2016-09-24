@@ -247,15 +247,6 @@ spec "Should delete all processes"
 sleep 0.5
 should 'should have deleted process' 'restart_time' 0
 
-#
-# Cron
-#
-$pm2 start cron.js -c "* * * asdasd"
-ispec "Cron should throw error when pattern invalid"
-
-$pm2 start cron.js -c "* * * * * *"
-spec "Should cron restart echo.js"
-
 $pm2 kill test
 ispec "Should not kill with extra args"
 
