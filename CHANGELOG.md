@@ -1,4 +1,9 @@
 
+## 2.0.16
+
+- #2400 Create log/pid default folder even if the root folder is already created
+- #2395 CRON feature now call PM2 for app to be killed (allow to use SIGINT)
+
 ## 2.0.15
 
 - process.on('unhandledRejection'): allow to catch promise error that have not been catched
