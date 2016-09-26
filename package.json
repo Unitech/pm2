@@ -176,7 +176,7 @@
     "yamljs": "0.2.8"
   },
   "devDependencies": {
-    "mocha": "^2.5.3",
+    "mocha": "^3",
     "should": "^10",
     "better-assert": "^1.0.0"
   },
