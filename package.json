@@ -163,7 +163,7 @@
     "mkdirp": "0.5.1",
     "moment": "^2.14",
     "nssocket": "0.6.0",
-    "pidusage": "^1.0.7",
+    "pidusage": "^1.0.8",
     "pm2-axon": "3.0.2",
     "pm2-axon-rpc": "0.4.5",
     "pm2-deploy": "^0.3",
