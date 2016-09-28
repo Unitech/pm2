@@ -1,8 +1,9 @@
 
-## 2.0.16
+## 2.0.16/17
 
 - #2400 Create log/pid default folder even if the root folder is already created
 - #2395 CRON feature now call PM2 for app to be killed (allow to use SIGINT)
+- #2405 #2406 drop unhandledRejection auto catch
 
 ## 2.0.15
 
