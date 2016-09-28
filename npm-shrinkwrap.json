@@ -1,6 +1,6 @@
 {
   "name": "pm2",
-  "version": "2.0.13",
+  "version": "2.0.15",
   "dependencies": {
     "amdefine": {
       "version": "1.0.0",
@@ -213,9 +213,9 @@
       "resolved": "http://tgz.pm2.io/gkt-1.0.0.tgz"
     },
     "glob": {
-      "version": "7.0.6",
+      "version": "7.1.0",
       "from": "glob@>=7.0.0 <8.0.0",
-      "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz"
+      "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.0.tgz"
     },
     "glob-base": {
       "version": "0.3.0",
@@ -228,9 +228,9 @@
       "resolved": "https://registry.npmjs.org/glob-parent/-/glob-parent-2.0.0.tgz"
     },
     "graceful-fs": {
-      "version": "4.1.6",
+      "version": "4.1.8",
       "from": "graceful-fs@>=4.1.2 <5.0.0",
-      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.6.tgz"
+      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.8.tgz"
     },
     "graceful-readlink": {
       "version": "1.0.1",
@@ -363,9 +363,9 @@
       "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz"
     },
     "moment": {
-      "version": "2.15.0",
+      "version": "2.15.1",
       "from": "moment@>=2.14.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/moment/-/moment-2.15.0.tgz"
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.15.1.tgz"
     },
     "moment-timezone": {
       "version": "0.3.1",
@@ -420,9 +420,9 @@
       "resolved": "https://registry.npmjs.org/path-is-absolute/-/path-is-absolute-1.0.0.tgz"
     },
     "pidusage": {
-      "version": "1.0.7",
+      "version": "1.0.8",
       "from": "pidusage@>=1.0.7 <2.0.0",
-      "resolved": "https://registry.npmjs.org/pidusage/-/pidusage-1.0.7.tgz"
+      "resolved": "https://registry.npmjs.org/pidusage/-/pidusage-1.0.8.tgz"
     },
     "pm2-axon": {
       "version": "3.0.2",
@@ -452,9 +452,9 @@
       "resolved": "https://registry.npmjs.org/pm2-multimeter/-/pm2-multimeter-0.1.2.tgz"
     },
     "pmx": {
-      "version": "0.6.5",
+      "version": "0.6.6",
       "from": "pmx@>=0.6.0 <0.7.0",
-      "resolved": "https://registry.npmjs.org/pmx/-/pmx-0.6.5.tgz"
+      "resolved": "https://registry.npmjs.org/pmx/-/pmx-0.6.6.tgz"
     },
     "preserve": {
       "version": "0.2.0",
