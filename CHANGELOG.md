@@ -3,7 +3,8 @@
 
 - #2400 Create log/pid default folder even if the root folder is already created
 - #2395 CRON feature now call PM2 for app to be killed (allow to use SIGINT)
-- #2405 #2406 drop unhandledRejection auto catch
+- #2413 #2405 #2406 do not exit on unhandledRejection auto catch
+- pidusage upgrade to 1.0.8 to avoid util exception on windows when wmic fail
 - Do no display error when pidusage try to monitor an unknow PID (modules)
 
 ## 2.0.15
