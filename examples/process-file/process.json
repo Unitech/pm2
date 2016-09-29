@@ -3,7 +3,7 @@
     name               : 'HTTP-API',
     script             : 'http.js',
     exec_mode          : 'cluster',
-    instances          : -1,
+    instances          : 'max',
     max_memory_restart : '260M',
 
     ignore_watch       : ['node_modules'],

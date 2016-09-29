@@ -24,6 +24,7 @@ commander.version(pkg.version)
   .option('--auto-exit', 'exit if all processes are errored/stopped or 0 apps launched')
   .option('--env [name]', 'select env_[name] env variables in process config file')
   .option('--watch', 'Watch and Restart')
+  .option('-i --instances <number>', 'launch [number] instances with load-balancer')
   .usage('start <app>');
 
 function start(cmd, opts) {
