@@ -25,6 +25,8 @@ spec "Docker tests"
 
 bash ./test/bash/cron-system.sh
 spec "Cron system tests"
+bash ./test/bash/promise.sh
+spec "Promise warning message tests"
 
 # bash ./test/bash/log-timestamp.sh
 # spec "timestamp prefix of pm2.log"

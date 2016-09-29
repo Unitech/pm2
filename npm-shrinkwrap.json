@@ -2,11 +2,6 @@
   "name": "pm2",
   "version": "2.0.17",
   "dependencies": {
-    "amdefine": {
-      "version": "1.0.0",
-      "from": "amdefine@>=0.0.4",
-      "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
-    },
     "amp": {
       "version": "0.3.1",
       "from": "amp@>=0.3.1 <0.4.0",
@@ -452,9 +447,9 @@
       "resolved": "https://registry.npmjs.org/pm2-multimeter/-/pm2-multimeter-0.1.2.tgz"
     },
     "pmx": {
-      "version": "0.6.7",
-      "from": "pmx@>=0.6.7 <0.7.0",
-      "resolved": "https://registry.npmjs.org/pmx/-/pmx-0.6.7.tgz"
+      "version": "0.6.8",
+      "from": "pmx@>=0.6.0 <0.7.0",
+      "resolved": "https://registry.npmjs.org/pmx/-/pmx-0.6.8.tgz"
     },
     "preserve": {
       "version": "0.2.0",
@@ -522,14 +517,14 @@
       "resolved": "https://registry.npmjs.org/shelljs/-/shelljs-0.7.3.tgz"
     },
     "source-map": {
-      "version": "0.1.32",
-      "from": "source-map@0.1.32",
-      "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.32.tgz"
+      "version": "0.5.6",
+      "from": "source-map@>=0.5.3 <0.6.0",
+      "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.5.6.tgz"
     },
     "source-map-support": {
-      "version": "0.4.2",
+      "version": "0.4.3",
       "from": "source-map-support@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.2.tgz"
+      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.3.tgz"
     },
     "sprintf-js": {
       "version": "1.0.3",
