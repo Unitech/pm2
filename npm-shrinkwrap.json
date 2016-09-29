@@ -1,6 +1,6 @@
 {
   "name": "pm2",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "dependencies": {
     "amdefine": {
       "version": "1.0.0",
@@ -228,9 +228,9 @@
       "resolved": "https://registry.npmjs.org/glob-parent/-/glob-parent-2.0.0.tgz"
     },
     "graceful-fs": {
-      "version": "4.1.8",
+      "version": "4.1.9",
       "from": "graceful-fs@>=4.1.2 <5.0.0",
-      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.8.tgz"
+      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.9.tgz"
     },
     "graceful-readlink": {
       "version": "1.0.1",
@@ -421,7 +421,7 @@
     },
     "pidusage": {
       "version": "1.0.8",
-      "from": "pidusage@>=1.0.7 <2.0.0",
+      "from": "pidusage@>=1.0.8 <2.0.0",
       "resolved": "https://registry.npmjs.org/pidusage/-/pidusage-1.0.8.tgz"
     },
     "pm2-axon": {
@@ -452,9 +452,9 @@
       "resolved": "https://registry.npmjs.org/pm2-multimeter/-/pm2-multimeter-0.1.2.tgz"
     },
     "pmx": {
-      "version": "0.6.6",
-      "from": "pmx@>=0.6.0 <0.7.0",
-      "resolved": "https://registry.npmjs.org/pmx/-/pmx-0.6.6.tgz"
+      "version": "0.6.7",
+      "from": "pmx@>=0.6.7 <0.7.0",
+      "resolved": "https://registry.npmjs.org/pmx/-/pmx-0.6.7.tgz"
     },
     "preserve": {
       "version": "0.2.0",
