@@ -8,7 +8,7 @@ echo -e "\033[1mRunning tests:\033[0m"
 cd $file_path
 
 function getInterpreter() {
-	echo `$pm2 prettylist | grep exec_interpreter | awk -F"'" '{print $2}'`
+	echo `$pm2 prettylist | grep "exec_interpreter:" | awk -F"'" '{print $2}'`
 }
 
 #
@@ -25,6 +25,8 @@ $pm2 kill
 $pm2 start binary-js-file
 
 OUT=$(getInterpreter)
+echo $OUT
+
 [ $OUT="node" ] || fail "$1"
 success "$1"
 
