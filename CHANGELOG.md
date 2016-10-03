@@ -1,6 +1,7 @@
 
 ## 2.0.19/20
 
+- #2425 allow to specify node.js version to be used or installed via interpreter 'node@VERSION'
 - Expose -i <instances> to pm2-docker
 - #2422 allow to pass none to exec_interpreter
 

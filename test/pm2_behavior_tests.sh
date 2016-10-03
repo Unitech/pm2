@@ -18,10 +18,13 @@ spec "CLI basic test"
 bash ./test/bash/cli-actions-2.sh
 spec "Second hard cli tests"
 
+# Power feature
 bash ./test/bash/pm2-dev.sh
 spec "pm2-dev"
 bash ./test/bash/docker.sh
 spec "Docker tests"
+bash ./test/bash/nvm-node-version.sh
+spec "NVM node version setting"
 
 bash ./test/bash/cron-system.sh
 spec "Cron system tests"
