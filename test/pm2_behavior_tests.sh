@@ -107,6 +107,8 @@ bash ./test/bash/source_map.sh
 spec "Source map resolution on exception"
 bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
+bash ./test/bash/js-configuration.sh
+spec "js configuration support"
 
 # Issues related
 bash ./test/bash/issues/2337.sh
