@@ -1,4 +1,9 @@
 
+## 2.0.19
+
+- #2466 skip cluster workaround / fix cluster mode for Node.js v7
+- Enable Node v7 in travis
+
 ## 2.0.16/17/18
 
 - #2400 Create log/pid default folder even if the root folder is already created
