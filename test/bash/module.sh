@@ -33,7 +33,7 @@ spec "Module should be installed"
 # Should configuration variable be present two times
 # one time in the raw env, and a second time prefixed with the module name
 #
-exists 'should have config variable' "config1xxx: 'true'" 4
+exists '1# should have config variable' "config1xxx: 'true'" 4
 
 #
 # Change variable value
@@ -43,7 +43,7 @@ $pm2 set 'pm2-probe:config1xxx' false
 
 sleep 1
 
-exists 'should have config variable' "config1xxx: 'false'" 4
+exists '2# should have config variable' "config1xxx: 'false'" 4
 
 $pm2 update
 spec "Should update successfully"

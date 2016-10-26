@@ -22,7 +22,7 @@ $pm2 start cron/mock-cron.js -o mock.log
 sleep 3
 should 'should app been restarted when cron in fork mode' 'restart_time: 0' 0
 cat mock-0.log | grep "SIGINT"
-spec "Should cron exit call SIGINT handler"
+spec "1# Should cron exit call SIGINT handler"
 
 $pm2 delete all
 
@@ -30,7 +30,7 @@ $pm2 start cron/mock-cron.js -o mock.log -i 1
 sleep 3
 should 'should app been restarted when cron in cluster mode' 'restart_time: 0' 0
 cat mock-0.log | grep "SIGINT"
-spec "Should cron exit call SIGINT handler"
+spec "2# Should cron exit call SIGINT handler"
 
 $pm2 delete all
 ## No exit
@@ -39,7 +39,7 @@ $pm2 start cron/mock-cron-no-exit.js -o mock.log
 sleep 3
 should 'should app been restarted' 'restart_time: 0' 0
 cat mock-0.log | grep "SIGINT"
-spec "Should cron exit call SIGINT handler"
+spec "3# Should cron exit call SIGINT handler"
 
 
 exit

@@ -28,7 +28,7 @@ should 'restarted status should be zero' "restart_time: 0" 2
 grep "hello1" inside-out-1.log &> /dev/null
 spec "Child should have hello1 variable"
 
-TEST_VARIABLE='hello2' $pm2 restart "insideProcess"
+TEST_VARIABLE='hello2' $pm2 restart "insideProcess" --update-env
 sleep 1
 grep "hello2" inside-out-1.log &> /dev/null
 spec "Child should have hello2 variable after restart"

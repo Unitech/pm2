@@ -2,6 +2,12 @@
   apps: [{
     script : 'http.js',
     name : 'http',
-    watch : false
+    watch : false,
+    env : {
+      SHOULDBETHERE : 'toto'
+    },
+    env_production : {
+      SHOULDBETHERE : 'TYPEENV PRODUCTION'
+    }
   }]
 }

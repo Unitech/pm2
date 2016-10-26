@@ -70,7 +70,7 @@ var csts = {
   CONCURRENT_ACTIONS      : (function() {
     var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
     if (semver.satisfies(process.versions.node, '>= 4.0.0'))
-      concurrent_actions = 4;
+      concurrent_actions = 2;
     debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
     return concurrent_actions;
   })(),

@@ -6,6 +6,8 @@ var app = http.createServer(function(req, res) {
   res.end('hey');
 })
 
+console.log(process.env.TOTO_ENV);
+
 var listener = app.listen(0, function() {
   console.log('Listening on port ' + listener.address().port);
 });

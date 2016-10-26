@@ -17,5 +17,5 @@ sleep 1
 
 OCC=$($pm2 prettylist | grep "exec_interpreter" | grep 'v4.6.0\|v6.7.0' | wc -l)
 
-[ $OCC -eq 4 ] || fail "Errors in setting interpreters"
+[ $OCC -eq 2 ] || fail "Errors in setting interpreters"
 success "Success"

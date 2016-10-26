@@ -16,14 +16,14 @@ sleep 0.5
 grep "hello1" out-env.log &> /dev/null
 spec "should contain env variable"
 
-TEST_VARIABLE='89hello89' $pm2 restart env
+TEST_VARIABLE='89hello89' $pm2 restart env --update-env
 
 sleep 1.0
 grep "89hello89" out-env.log &> /dev/null
 spec "should contain refreshed environment variable"
 
 >out-env.log
-TEST_VARIABLE="CLUNEWSTER" $pm2 restart env --skip-env
+TEST_VARIABLE="CLUNEWSTER" $pm2 restart env
 sleep 0.5
 grep "89hello89" out-env.log &> /dev/null
 spec "should not change environment (--skip-env)"
@@ -40,13 +40,13 @@ grep "undefined" out-env.log &> /dev/null
 spec "should contain nothing"
 
 >out-env.log
-TEST_VARIABLE="CLUSTER" $pm2 reload env
+TEST_VARIABLE="CLUSTER" $pm2 reload env --update-env
 sleep 0.5
 grep "CLUSTER" out-env.log &> /dev/null
 spec "should contain CLUSTER"
 
 >out-env.log
-TEST_VARIABLE="CLUNEWSTER" $pm2 reload env --skip-env
+TEST_VARIABLE="CLUNEWSTER" $pm2 reload env
 sleep 0.5
 grep "CLUSTER" out-env.log &> /dev/null
 spec "should contain not change environment (--skip-env)"
