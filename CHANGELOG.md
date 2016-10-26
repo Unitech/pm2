@@ -7,6 +7,7 @@ Acting on config files will keep the same previous behavior
 Action on a CLI started app will stay immutable you will need to pass the option `--update-env` to refresh
 
 - #2451 Config file can be javascript files
+- #2101 pm2 ecosystem now generates a javascript configuration file
 - #2425 allow to specify node.js version to be used or installed via interpreter 'node@VERSION'
 - Expose -i <instances> to pm2-docker
 - #2422 allow to pass none to exec_interpreter
