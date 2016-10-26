@@ -1,5 +1,5 @@
 
-## 2.0.19/20
+## 2.0.20/21
 
 - #2425 allow to specify node.js version to be used or installed via interpreter 'node@VERSION'
 - Expose -i <instances> to pm2-docker
@@ -7,6 +7,11 @@
 - Drop npm-shrinkwrap
 - Upgrade chokidar (fix symlink), cron, fclone, shelljs
 - Add yarn.lock
+
+## 2.0.19
+
+- #2466 skip cluster workaround / fix cluster mode for Node.js v7
+- Enable Node v7 in travis
 
 ## 2.0.16/17/18
 
