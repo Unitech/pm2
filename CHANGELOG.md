@@ -1,5 +1,5 @@
 
-## 2.0.20/21
+## 2.1.0
 
 - #2471 Make app environment immutable on application restart/reload by default for CLI actions
 
