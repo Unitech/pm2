@@ -1,17 +1,15 @@
 
 ## 2.1.0
 
+- #2353 --wait-ready will wait that the application sends 'ready' event process.send('ready')
+- #2425 allow to specify node.js version to be used or installed via interpreter 'node@VERSION'
 - #2471 Make app environment immutable on application restart/reload by default for CLI actions
-
-Acting on config files will keep the same previous behavior
-Action on a CLI started app will stay immutable you will need to pass the option `--update-env` to refresh
-
 - #2451 Config file can be javascript files
 - #2101 pm2 ecosystem now generates a javascript configuration file
-- #2425 allow to specify node.js version to be used or installed via interpreter 'node@VERSION'
+- #2422 allow to pass none to exec_interpreter
+
 - Fix deploy issue with Windows
 - Expose -i <instances> to pm2-docker
-- #2422 allow to pass none to exec_interpreter
 - Drop npm-shrinkwrap
 - Upgrade chokidar (fix symlink), cron, fclone, shelljs
 - Add yarn.lock
