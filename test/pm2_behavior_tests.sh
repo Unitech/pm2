@@ -109,6 +109,8 @@ bash ./test/bash/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
 bash ./test/bash/js-configuration.sh
 spec "js configuration support"
+bash ./test/bash/wait-ready-event.sh
+spec "Wait for application ready event"
 
 # Issues related
 bash ./test/bash/issues/2337.sh

@@ -34,6 +34,9 @@
   "source_map_support" : {
     "type": "boolean"
   },
+  "wait_ready" : {
+    "type": "boolean"
+  },
   "disable_source_map_support" : {
     "type": "boolean"
   },
