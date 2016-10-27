@@ -22,6 +22,17 @@ $pm2 delete http
 $pm2 start http.js
 should '5 should watch be false' 'watch: false' 1
 
+$pm2 stop http.js
+should '5 should watch be false' 'watch: false' 1
+
+$pm2 start http.js --watch
+should '7 should restart with watch and should be true' 'watch: true' 1
+
+$pm2 delete all
+
+$pm2 start http.js
+should '8 should watch be false' 'watch: false' 1
+
 $pm2 restart http.js
 should '6 should watch be false' 'watch: false' 1
 
