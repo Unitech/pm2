@@ -53,7 +53,7 @@ $pm2 start probes.js --name "probe-test"
 
 echo "Wait for init..."
 
-sleep 0.5
+sleep 1
 
 exists 'probe test-probe exist' "test-probe"
 exists 'probe Loop delay exist' "Loop delay"
