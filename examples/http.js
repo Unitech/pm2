@@ -17,9 +17,11 @@ var server = http.createServer(function(req, res) {
 // 2# Handle on Exit
 process.on('SIGINT', function() {
   console.log('Cleanup on exit');
-  server.close();
 
-  setTimeout(function() {
+  server.on('close', function() {
+    console.log('Connections closed');
     process.exit(0);
-  }, 500);
+  });
+
+  server.close();
 });
