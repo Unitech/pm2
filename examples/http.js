@@ -10,11 +10,11 @@ var server = http.createServer(function(req, res) {
   // 1# Notify application ready
   setTimeout(function() {
     process.send('ready');
-  }, 200);
+  }, 2000);
 
 });
 
-// 2# Handle on Exit
+// // 2# Handle on Exit
 process.on('SIGINT', function() {
   console.log('Cleanup on exit');
 
