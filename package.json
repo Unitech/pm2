@@ -154,7 +154,7 @@
     "async": "1.5",
     "chalk": "^1.1",
     "chokidar": "^1.6.1",
-    "cli-table2": "0.2.0",
+    "cli-table": "0.3.1",
     "commander": "^2.9",
     "cron": "1.1.1",
     "debug": "2.2.0",
