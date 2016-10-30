@@ -1,6 +1,7 @@
 
-## 2.1.0
+## 2.1.X
 
+- #2333 #2478 #1732 #1346 #1311 #1101 Fix GracefulShutdown SIGINT output + Better Stop process flow
 - #2353 --wait-ready will wait that the application sends 'ready' event process.send('ready')
 - #2425 allow to specify node.js version to be used or installed via interpreter 'node@VERSION'
 - #2471 Make app environment immutable on application restart/reload by default for CLI actions
@@ -8,6 +9,8 @@
 - #2101 pm2 ecosystem now generates a javascript configuration file
 - #2422 allow to pass none to exec_interpreter
 
+- Do not use disconnect() anymore on cluster processes
+- Better Stop process flow: Upgrade TreeKill system + Wait for check
 - Fix deploy issue with Windows
 - Expose -i <instances> to pm2-docker
 - Drop npm-shrinkwrap
