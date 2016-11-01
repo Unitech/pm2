@@ -6,6 +6,7 @@
 - #2425 allow to specify node.js version to be used or installed via interpreter 'node@VERSION'
 - #2471 Make app environment immutable on application restart/reload by default for CLI actions
 - #2451 Config file can be javascript files
+- #2484 fix pm2 kill on windows
 - #2101 pm2 ecosystem now generates a javascript configuration file
 - #2422 allow to pass none to exec_interpreter
 
