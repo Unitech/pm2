@@ -1,0 +1,10 @@
+{
+  "apps": [{
+    "name": "app",
+    "script": "app.js",
+    "instances": 2,
+    "exec_mode": "cluster",
+    "wait_ready": true,
+    "listen_timeout": 15000
+  }]
+}
