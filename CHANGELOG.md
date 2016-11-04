@@ -9,7 +9,6 @@
 - #2484 fix pm2 kill on windows
 - #2101 pm2 ecosystem now generates a javascript configuration file
 - #2422 allow to pass none to exec_interpreter
-
 - Faster CLI load time, reduce load time by 1/4 (downgrade cli-table2 -> cli-table)
 - Do not use disconnect() anymore on cluster processes
 - Better Stop process flow: Upgrade TreeKill system + Wait for check
