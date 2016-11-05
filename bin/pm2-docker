@@ -17,8 +17,10 @@ var pm2;
 commander.version(pkg.version)
   .option('--raw', 'raw log output')
   .option('--json', 'output logs in json format')
+  .option('--web [port]', 'launch process web api on [port] default to 9615')
   .option('--format', 'output logs formated like key=val')
   .option('--only <application-name>', 'only act on one application of configuration')
+  .option('--secret [key]', 'keymetrics secret key')
   .option('--secret [key]', 'keymetrics secret key')
   .option('--public [key]', 'keymetrics public key')
   .option('--machine-name [name]', 'keymetrics machine name')
@@ -41,6 +43,12 @@ function start(cmd, opts) {
     autoExit();
 
   pm2.connect(function() {
+
+    if (opts.web) {
+      var port = opts.web === true ? cst.WEB_PORT : opts.web;
+      pm2.web(port);
+    }
+
     run(cmd, opts);
   });
 }
