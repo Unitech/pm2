@@ -98,7 +98,7 @@
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "PM2_CONCURRENT_ACTIONS=1 NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
+    "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
   },
   "keywords": [
     "cli",
@@ -171,13 +171,13 @@
     "pmx": "^0.6",
     "semver": "^5.2",
     "shelljs": "0.7.5",
-    "source-map-support": "^0.4",
+    "source-map-support": "^0.4.6",
     "vizion": "^0.2",
     "yamljs": "0.2.8"
   },
   "devDependencies": {
     "mocha": "^3",
-    "should": "^10",
+    "should": "^11",
     "better-assert": "^1.0.0"
   },
   "optionalDependencies": {
