@@ -1,5 +1,5 @@
 
-## 2.1.X
+## 2.1.4
 
 - #2486 add --web option to pm2-docker command to expose web process api
 - #2333 #2478 #1732 #1346 #1311 #1101 Fix GracefulShutdown SIGINT output + Better Stop process flow
