@@ -14,3 +14,5 @@ before_install:
 sudo: required
 services:
   - docker
+notifications:
+  slack: pm2-nodejs:5Lolyw2LMnwy8fziqOGILQxG
