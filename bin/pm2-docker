@@ -76,6 +76,10 @@ process.on('SIGINT', function() {
   exitPM2();
 });
 
+process.on('SIGTERM', function() {
+  exitPM2();
+});
+
 function run(cmd, opts) {
   var needRaw = commander.raw;
 
