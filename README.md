@@ -108,7 +108,7 @@ $ pm2 start app.js -- -a 34     # Start app and pass option "-a 34" as argument
 $ pm2 start app.js --watch      # Restart application on file change
 $ pm2 start script.sh           # Start bash script
 $ pm2 start app.json            # Start all applications declared in app.json
-$ pm2 reset [app-name]          # Reset all counbters
+$ pm2 reset [app-name]          # Reset all counters
 $ pm2 stop all                  # Stop all apps
 $ pm2 stop 0                    # Stop process with id 0
 $ pm2 restart all               # Restart all apps
