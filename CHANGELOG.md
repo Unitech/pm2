@@ -1,4 +1,9 @@
 
+## 2.1.5
+
+- #2502 fix SIGTERM signal catch on pm2-docker
+- #2498 #2500 global log rotation
+
 ## 2.1.4
 
 - #2486 add --web option to pm2-docker command to expose web process api
