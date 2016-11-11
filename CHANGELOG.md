@@ -2,6 +2,7 @@
 ## 2.1.6
 
 - #2509 Trigger functions inside Node.js application from the PM2 CLI
+- Do not ask for pass for set/multiset from KM
 
 ## 2.1.5
 
