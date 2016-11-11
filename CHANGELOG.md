@@ -1,4 +1,8 @@
 
+## 2.1.6
+
+- #2509 Trigger functions inside Node.js application from the PM2 CLI
+
 ## 2.1.5
 
 - #2502 fix SIGTERM signal catch on pm2-docker
