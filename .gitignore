@@ -8,3 +8,6 @@ test/child
 *.heapsnapshot
 *.cpuprofile
 .cache-require-paths.json
+dist/
+*.deb
+*.rpm

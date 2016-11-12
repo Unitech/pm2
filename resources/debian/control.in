@@ -1,0 +1,11 @@
+Package: pm2
+Version: $VERSION-1
+Depends: nodejs
+Conflicts: nodejs (<< 0.12.0)
+Section: devel
+Priority: optional
+Architecture: all
+Installed-Size: $INSTALLED_SIZE
+Maintainer: Alexandre Strzelewicz <alexandre@keymetrics.io>
+Homepage: http://pm2.io/
+Description: PM2 process manager.

@@ -1,0 +1,14 @@
+# No changelog file at the moment
+pm2: debian-changelog-file-missing
+# node-gyp throws this
+pm2: python-script-but-no-python-dep
+# Some .js files in node_modules have 0777 permissions instead of 0666
+pm2: executable-not-elf-or-script
+# Some node_modules have node in shebang
+pm2: unusual-interpreter
+# Third-party licenses
+pm2: extra-license-file
+# lib/async.js in node_modules
+pm2: embedded-javascript-library
+# No manpage... yet!
+pm2: binary-without-manpage
