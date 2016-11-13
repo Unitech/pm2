@@ -1,0 +1,167 @@
+[{
+  "projectId": 0,
+  "traceId": "43fd648369374111b4ee56565c7cecb2",
+  "spans": [
+    {
+      "name": "/api/bucket",
+      "parentSpanId": "0",
+      "spanId": 36,
+      "kind": "RPC_SERVER",
+      "labels": {
+        "http/method": "OPTIONS",
+        "http/url": "http://cl1.km.io/api/bucket",
+        "http/source/ip": "::ffff:127.0.0.1",
+        "http/status_code": "204"
+      },
+      "startTime": "2016-11-13T16:55:51.677Z",
+      "endTime": "2016-11-13T16:55:51.680Z"
+    },
+    {
+      "name": "redis-set",
+      "parentSpanId": 36,
+      "spanId": 37,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "command": "set",
+        "arguments": "[\"sess:rYrMvzCAwhlXrIOp8swjKxvIYh1UN5EF\",\"{\\\"cookie\\\":{\\\"originalMaxAge\\\":null,\\\"expires\\\":null,\\\"secure\\\":false,\\\"httpOnly\\\":true,\\\"domain\\\":\\\".km.io\\\",\\\"path\\\":\\\"/\\\"},\\\"passport\\\":{}}\",\"EX\",120]",
+        "result": "OK"
+      },
+      "startTime": "2016-11-13T16:55:51.678Z",
+      "endTime": "2016-11-13T16:55:51.678Z"
+    }
+  ]
+},{
+  "projectId": 0,
+  "traceId": "43887a4ff20c44b990c8ec6540440690",
+  "spans": [
+    {
+      "name": "/api/bucket",
+      "parentSpanId": "0",
+      "spanId": 38,
+      "kind": "RPC_SERVER",
+      "labels": {
+        "http/method": "GET",
+        "http/url": "http://cl1.km.io/api/bucket",
+        "http/source/ip": "::ffff:127.0.0.1",
+        "express/request.route.path": "/",
+        "http/status_code": "304"
+      },
+      "startTime": "2016-11-13T16:55:51.779Z",
+      "endTime": "2016-11-13T16:55:51.829Z"
+    },
+    {
+      "name": "redis-get",
+      "parentSpanId": 38,
+      "spanId": 39,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "command": "get",
+        "arguments": "[\"sess:As-xHUEPTRSvi9lrK8j3gWO_mxnl7Llk\"]",
+        "result": "{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"secure\":false,\"httpOnly\":true,\"domain\":\".km.io\",\"path\":\"/\"},\"passport\":{}}"
+      },
+      "startTime": "2016-11-13T16:55:51.781Z",
+      "endTime": "2016-11-13T16:55:51.782Z"
+    },
+    {
+      "name": "mongo-cursor",
+      "parentSpanId": 38,
+      "spanId": 40,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "db": "devdb6.tokens",
+        "cmd": "{\"find\":\"devdb6.tokens\",\"limit\":-1,\"skip\":0,\"query\":{\"type\":\"access_token\",\"token\":\"u009vf00u9cdyf8yyzzhpkxrrhq07euhfd3p106mfgbbqq3icfd9katq7oz2oe6bwqxhuzhl9uzkquq8mgnz0k80oryr7i4ym2litx317uakb8dcm9y5irqi7l2f5e81\"},\"slaveOk\":false,\"batchSize\":1}",
+        "results": "{_id:{_bsontype:ObjectID,id:X(ÂÓð\f#\u0002í\\},token:u009vf00u9cdyf8yyzzhpkxrrhq07euhfd3p106mfgbbqq3icfd9katq7oz2oe6bwqxhuz..."
+      },
+      "startTime": "2016-11-13T16:55:51.783Z",
+      "endTime": "2016-11-13T16:55:51.786Z"
+    },
+    {
+      "name": "mongo-cursor",
+      "parentSpanId": 38,
+      "spanId": 41,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "db": "devdb6.users",
+        "cmd": "{\"find\":\"devdb6.users\",\"limit\":0,\"skip\":0,\"query\":{\"_id\":{\"$in\":[\"57f26987af49d57472b3d104\"]}},\"slaveOk\":false}",
+        "results": "{_id:{_bsontype:ObjectID,id:Wòi¯IÕtr³Ñ\u0004},short_id:k3l0x,auth_token:iuub9912b8ruh6h7dgoi,username:alexandre,email:alex..."
+      },
+      "startTime": "2016-11-13T16:55:51.787Z",
+      "endTime": "2016-11-13T16:55:51.789Z"
+    },
+    {
+      "name": "mongo-cursor",
+      "parentSpanId": 38,
+      "spanId": 42,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "db": "devdb6.clients",
+        "cmd": "{\"find\":\"devdb6.clients\",\"limit\":0,\"skip\":0,\"query\":{\"_id\":{\"$in\":[\"57fe6588ffc3dd335c78b7e0\"]}},\"slaveOk\":false}",
+        "results": "{_id:{_bsontype:ObjectID,id:WþeÿÃÝ3\\x·à},name:Keymetrics Dashboard,clientID:5413907556,clientSecret:2393878333,autho..."
+      },
+      "startTime": "2016-11-13T16:55:51.788Z",
+      "endTime": "2016-11-13T16:55:51.794Z"
+    },
+    {
+      "name": "mongo-cursor",
+      "parentSpanId": 38,
+      "spanId": 43,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "db": "devdb6.users",
+        "cmd": "{\"find\":\"devdb6.users\",\"limit\":0,\"skip\":0,\"query\":{\"_id\":{\"$in\":[\"57f26987af49d57472b3d104\"]}},\"slaveOk\":false}"
+      },
+      "startTime": "2016-11-13T16:55:51.789Z",
+      "endTime": "2016-11-13T16:55:51.790Z"
+    },
+    {
+      "name": "mongo-cursor",
+      "parentSpanId": 38,
+      "spanId": 44,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "db": "devdb6.buckets",
+        "cmd": "{\"find\":\"devdb6.buckets\",\"limit\":0,\"skip\":0,\"query\":{\"_id\":{\"$in\":[\"57f269abaf49d57472b3d109\",\"581e81e03f91d96e46eb0f65\",\"581e831316d4875e482dd174\",\"581e836716d4875e482dd175\",\"581e83f316d4875e482dd176\",\"581e840c4a4ade7c49389b1e\",\"581e843e8c08e8b9494604a3\",\"581e84a20f148e364b5331f3\",\"581e859e0b5bce564d4b246e\",\"581e86a7eb307d47504fe25f\",\"581e86f9eb307d47504fe260\"]}},\"slaveOk\":false}",
+        "results": "{_id:{_bsontype:ObjectID,id:Wòi«¯IÕtr³Ñ\t},secret_id:mcp6snmnon1asmt,public_id:mxfiwlvzracelhl,node_cache:{_id:{_bsonty..."
+      },
+      "startTime": "2016-11-13T16:55:51.792Z",
+      "endTime": "2016-11-13T16:55:51.794Z"
+    },
+    {
+      "name": "mongo-cursor",
+      "parentSpanId": 38,
+      "spanId": 45,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "db": "devdb6.buckets",
+        "cmd": "{\"find\":\"devdb6.buckets\",\"limit\":0,\"skip\":0,\"query\":{\"_id\":{\"$in\":[\"57f269abaf49d57472b3d109\",\"581e81e03f91d96e46eb0f65\",\"581e831316d4875e482dd174\",\"581e836716d4875e482dd175\",\"581e83f316d4875e482dd176\",\"581e840c4a4ade7c49389b1e\",\"581e843e8c08e8b9494604a3\",\"581e84a20f148e364b5331f3\",\"581e859e0b5bce564d4b246e\",\"581e86a7eb307d47504fe25f\",\"581e86f9eb307d47504fe260\"]}},\"slaveOk\":false}"
+      },
+      "startTime": "2016-11-13T16:55:51.794Z",
+      "endTime": "2016-11-13T16:55:51.794Z"
+    },
+    {
+      "name": "mongo-cursor",
+      "parentSpanId": 38,
+      "spanId": 46,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "db": "devdb6.clients",
+        "cmd": "{\"find\":\"devdb6.clients\",\"limit\":0,\"skip\":0,\"query\":{\"_id\":{\"$in\":[\"57fe6588ffc3dd335c78b7e0\"]}},\"slaveOk\":false}"
+      },
+      "startTime": "2016-11-13T16:55:51.794Z",
+      "endTime": "2016-11-13T16:55:51.795Z"
+    },
+    {
+      "name": "redis-expire",
+      "parentSpanId": 38,
+      "spanId": 47,
+      "kind": "RPC_CLIENT",
+      "labels": {
+        "command": "expire",
+        "arguments": "[\"sess:As-xHUEPTRSvi9lrK8j3gWO_mxnl7Llk\",120]",
+        "result": "1"
+      },
+      "startTime": "2016-11-13T16:55:51.827Z",
+      "endTime": "2016-11-13T16:55:51.829Z"
+    }
+  ]
+}]
