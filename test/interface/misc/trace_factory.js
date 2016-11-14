@@ -1,7 +1,7 @@
 
 var crypto = require('crypto');
 var moment = require('moment');
-var WEBSITE_ROOT = 'http://veolia.com/';
+var WEBSITE_ROOT = 'http://toto.com';
 var spanId = 0;
 
 var random_routes = [
@@ -11,6 +11,11 @@ var random_routes = [
   '/backo/testo'
 ];
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  return Math.floor(Math.random() * (Math.floor(max) - min)) + min;
+}
+
 /**
  * Generate Trace
  * @param {String}  route_path  route name, default to random route name
@@ -18,9 +23,9 @@ var random_routes = [
  */
 function generateTrace(route_path, db_query_nb) {
   if (!db_query_nb)
-    db_query_nb = Math.floor(Math.random() * 10);
+    db_query_nb = getRandomInt(2, 5);
   if (!route_path)
-    route_path = random_routes[Math.floor(Math.random() * random_routes.length)];
+    route_path = random_routes[getRandomInt(0, random_routes.length - 1)];
   var parentSpanId = ++spanId;
 
   var timeframe = [];
@@ -35,6 +40,7 @@ function generateTrace(route_path, db_query_nb) {
       "kind": "RPC_SERVER",
       "labels": {
         "http/method": "GET",
+        "http/path": route_path,
         "http/url": WEBSITE_ROOT + route_path,
         "http/source/ip": "::ffff:127.0.0.1",
         "http/status_code": "204"
