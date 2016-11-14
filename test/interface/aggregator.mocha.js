@@ -145,7 +145,7 @@ describe('Transactions Aggregator', function() {
       aggregator.computeSpanDuration(variance.spans)
       should.not.exist(variance.spans.endTime)
       should.not.exist(variance.spans.startTime)
-      duration.should.be.equal(variance.spans.duration);
+      duration.should.be.equal(variance.spans.mean);
     });
 
     it('should add a variance', function(done) {
