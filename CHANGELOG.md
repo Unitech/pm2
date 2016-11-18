@@ -2,6 +2,9 @@
 ## 2.1.6
 
 - #2509 Trigger functions inside Node.js application from the PM2 CLI
+- #2474 Resolve home path in configuration file
+- #2526 Expose .launchAll() method to API
+- Alias attributes error_file to err_file + err_log + err, alias out_file to out, out_log
 - Do not ask for pass for set/multiset from KM
 
 ## 2.1.5
