@@ -128,3 +128,14 @@ cat stdout-stderr.log | grep "errwrite"
 spec "stderr written"
 cat stdout-stderr.log | grep "errcb"
 spec "stderr cb written"
+
+## #2350 verify all script have been killed
+$pm2 start python-script.py
+$pm2 start echo.js
+should 'should app be online' 'online' 2
+
+kill `cat ~/.pm2/pm2.pid`
+spec "should have killed pm2"
+
+pgrep "python"
+ispec "should python script be killed"
