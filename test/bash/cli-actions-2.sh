@@ -129,6 +129,8 @@ spec "stderr written"
 cat stdout-stderr.log | grep "errcb"
 spec "stderr cb written"
 
+$pm2 delete all
+
 ## #2350 verify all script have been killed
 $pm2 start python-script.py
 $pm2 start echo.js
