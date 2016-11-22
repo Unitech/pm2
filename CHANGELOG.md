@@ -6,6 +6,7 @@
 - #2526 Expose .launchAll() method to API
 - #2351 inner pm2 actions - drop autorestart and node_args options
 - #2530 Make sure all processes are killed on system signal to PM2
+- #281 allow to combine PM2_SILENT + pm2 jlist to avoid extra data
 - Alias attributes error_file to err_file + err_log + err, alias out_file to out, out_log
 - Do not ask for pass for set/multiset from KM
 
