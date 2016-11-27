@@ -22,7 +22,7 @@ describe('Custom actions via CLI/API', function() {
   });
 
   it('should trigger message by id', function(done) {
-    pm2.triggerCustomAction(0, 'ping', function(err, ret) {
+    pm2.trigger(0, 'ping', function(err, ret) {
       should(err).be.null();
       should(ret.length).eql(1);
       should(ret[0].data.return.pong).eql('hehe');
@@ -31,7 +31,7 @@ describe('Custom actions via CLI/API', function() {
   });
 
   it('should trigger message by name', function(done) {
-    pm2.triggerCustomAction('index', 'ping', function(err, ret) {
+    pm2.trigger('index', 'ping', function(err, ret) {
       should(err).be.null();
       should(ret.length).eql(1);
       should(ret[0].data.return.pong).eql('hehe');
@@ -40,14 +40,14 @@ describe('Custom actions via CLI/API', function() {
   });
 
   it('should cannot trigger message if unknow id', function(done) {
-    pm2.triggerCustomAction(10, 'ping', function(err, ret) {
+    pm2.trigger(10, 'ping', function(err, ret) {
       should(err).not.be.null();
       done();
     });
   });
 
   it('should cannot trigger message if unknow action name', function(done) {
-    pm2.triggerCustomAction(0, 'XXXXXXXXXx', function(err, ret) {
+    pm2.trigger(0, 'XXXXXXXXXx', function(err, ret) {
       should(err).not.be.null();
       done();
     });
@@ -68,7 +68,7 @@ describe('Custom actions via CLI/API', function() {
 
 
   it('should trigger message by id', function(done) {
-    pm2.triggerCustomAction(0, 'ping', function(err, ret) {
+    pm2.trigger(0, 'ping', function(err, ret) {
       should(err).be.null();
       should(ret.length).eql(1);
       should(ret[0].data.return.pong).eql('hehe');
@@ -77,7 +77,7 @@ describe('Custom actions via CLI/API', function() {
   });
 
   it('should trigger message by name', function(done) {
-    pm2.triggerCustomAction('index', 'ping', function(err, ret) {
+    pm2.trigger('index', 'ping', function(err, ret) {
       should(err).be.null();
       should(ret.length).eql(4);
       should(ret[0].data.return.pong).eql('hehe');
@@ -86,7 +86,7 @@ describe('Custom actions via CLI/API', function() {
   });
 
   it('should trigger message with params by name', function(done) {
-    pm2.triggerCustomAction('index', 'param', 'shouldret', function(err, ret) {
+    pm2.trigger('index', 'param', 'shouldret', function(err, ret) {
       should(err).be.null();
       should(ret.length).eql(4);
       should(ret[0].data.return).eql('shouldret');
