@@ -1,4 +1,20 @@
 
+## 2.1.6
+
+- #2509 Trigger functions inside Node.js application from the PM2 CLI
+- #2474 Resolve home path in configuration file
+- #2526 Expose .launchAll() method to API
+- #2351 inner pm2 actions - drop autorestart and node_args options
+- #2530 Make sure all processes are killed on system signal to PM2
+- #281 allow to combine PM2_SILENT + pm2 jlist to avoid extra data
+- Alias attributes error_file to err_file + err_log + err, alias out_file to out, out_log
+- Do not ask for pass for set/multiset from KM
+
+## 2.1.5
+
+- #2502 fix SIGTERM signal catch on pm2-docker
+- #2498 #2500 global log rotation
+
 ## 2.1.4
 
 - #2486 add --web option to pm2-docker command to expose web process api

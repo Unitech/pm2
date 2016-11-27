@@ -61,11 +61,11 @@
   },
   "error_file": {
     "type": "string",
-    "alias": "error"
+    "alias": ["error", "err", "err_file", "err_log"]
   },
   "out_file": {
     "type": "string",
-    "alias": "output"
+    "alias": ["output", "out", "out_log"]
   },
   "pid_file": {
     "type": "string",

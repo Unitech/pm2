@@ -41,10 +41,14 @@ spec "Dockerfile parser test"
 
 mocha --opts ./mocha.opts  ./api.mocha.js
 spec "API tests"
+mocha --opts ./mocha.opts  ./path_resolution.mocha.js
+spec "API tests"
 mocha --opts ./mocha.opts  ./lazy_api.mocha.js
 spec "API tests"
 mocha --opts ./mocha.opts  ./api.backward.compatibility.mocha.js
 spec "API Backward compatibility tests"
+mocha --opts ./mocha.opts  ./custom_action.mocha.js
+spec "Custom Actions tests"
 
 mocha --opts ./mocha.opts  ./logs.js
 spec "Logs test"
