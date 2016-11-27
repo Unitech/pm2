@@ -272,7 +272,7 @@ commander.command('docker:dist <file|config> <image_name>')
 commander.command('trigger <proc_name> <action_name> [params]')
   .description('deploy your json')
   .action(function(pm_id, action_name, params) {
-    pm2.triggerCustomAction(pm_id, action_name, params);
+    pm2.trigger(pm_id, action_name, params);
   });
 
 commander.command('deploy <file|environment>')

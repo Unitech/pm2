@@ -1,4 +1,9 @@
 
+## 2.2.0
+
+- #2509 Trigger functions inside Node.js application from the PM2 CLI
+- Rename pm2.triggerCustomAction() par pm2.trigger(<app_id>, <action_name>, [params], [cb])
+
 ## 2.1.6
 
 - #2509 Trigger functions inside Node.js application from the PM2 CLI
