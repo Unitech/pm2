@@ -91,67 +91,21 @@ describe('Transactions Aggregator', function() {
     });
   });
 
-  describe('Transform spans lit to spans tree', function() {
-    it('should create spans tree with one child', function(done) {
-      aggregator.convertSpanListToTree(TraceFactory.generateTrace('/auth/signin', 1), function (tree) {
-        should.exist(tree);
-        tree.should.be.an.Object();
-        tree.name.should.equal('/auth/signin');
-        should.exist(tree.child);
-        tree.child.should.be.an.Array();
-        tree.child.length.should.be.exactly(1)
-        should.exist(tree.child[0].name)
-        tree.child[0].name.should.equal('mongo-cursor')
-        done();
-      })
-    });
-
-    it('should correctly create spans tree with multiple child', function(done) {
-      aggregator.convertSpanListToTree(TraceFactory.generateTrace('/auth/signin', 4), function (tree) {
-        should.exist(tree);
-        tree.should.be.an.Object();
-        tree.name.should.equal('/auth/signin');
-        should.exist(tree.child);
-        tree.child.should.be.an.Array();
-        tree.child.length.should.be.exactly(4)
-        should.exist(tree.child[0].name)
-        tree.child[0].name.should.equal('mongo-cursor')
-        done();
-      })
-    });
-
-    it('should return undefined tree on invalid input', function(done) {
-      aggregator.convertSpanListToTree({}, function (tree) {
-        should.not.exist(tree);
-        done();
-      })
-    });
-  });
-
   describe('merging two trace', function() {
     var variance = TraceFactory.generateTrace('/yoloswag/swag', 2), ROUTE = [];
-    
-    it('should convert spans list to spans tree', function (done) {
-      aggregator.convertSpanListToTree(variance, function (tree) {
-        should.exist(tree);
-        tree.should.be.an.Object();
-        variance.spans = tree;
-        done();
-      })
-    });
 
     it('should compute each span duration', function () {
-      var duration = new Date(variance.spans.endTime) - new Date(variance.spans.startTime);
+      var duration = new Date(variance.spans[0].endTime) - new Date(variance.spans[0].startTime);
       aggregator.computeSpanDuration(variance.spans)
-      should.not.exist(variance.spans.endTime)
-      should.not.exist(variance.spans.startTime)
-      duration.should.be.equal(variance.spans.mean);
+      should.not.exist(variance.spans[0].endTime)
+      should.not.exist(variance.spans[0].startTime)
+      duration.should.be.equal(variance.spans[0].mean);
     });
 
     it('should add a variance', function(done) {
       aggregator.mergeTrace(ROUTE, variance, function () {
         ROUTE[0].count.should.be.equal(1);
-        ROUTE[0].spans.child.length.should.be.equal(2);
+        ROUTE[0].spans.length.should.be.equal(3);
         done()
       })
     });
@@ -159,22 +113,19 @@ describe('Transactions Aggregator', function() {
     it('should merge with first variance', function(done) {
       aggregator.mergeTrace(ROUTE, variance, function () {
         ROUTE[0].count.should.be.equal(2);
-        ROUTE[0].spans.child.length.should.be.equal(2);
+        ROUTE[0].spans.length.should.be.equal(3);
         done()
       })
     });
 
     it('should create a new variance', function (done) {
       var variance2 = TraceFactory.generateTrace('/yoloswag/swag', 3)
-      aggregator.convertSpanListToTree(variance2, function (tree) {
-        variance2.spans = tree;
-        aggregator.computeSpanDuration(variance2.spans)
-        aggregator.mergeTrace(ROUTE, variance2, function () {
-          ROUTE.length.should.be.equal(2);
-          ROUTE[0].mean.should.be.below(ROUTE[1].mean)
-          ROUTE[1].spans.child.length.should.be.equal(3);
-          done()
-        })
+      aggregator.computeSpanDuration(variance2.spans)
+      aggregator.mergeTrace(ROUTE, variance2, function () {
+        ROUTE.length.should.be.equal(2);
+        ROUTE[0].mean.should.be.below(ROUTE[1].mean)
+        ROUTE[1].spans.length.should.be.equal(4);
+        done()
       })
     });
 
