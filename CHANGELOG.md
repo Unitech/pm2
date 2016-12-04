@@ -1,6 +1,8 @@
 
 ## 2.2.0
 
+- Responsive pm2 list (shortened list when < 90 columns)
+- If not TTY do not print ascii table
 - #2509 Trigger functions inside Node.js application from the PM2 CLI
 - Rename pm2.triggerCustomAction() par pm2.trigger(<app_id>, <action_name>, [params], [cb])
 
