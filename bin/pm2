@@ -548,11 +548,19 @@ commander.command('resurrect')
 //
 // Set pm2 to startup
 //
+commander.command('unstartup [platform]')
+  .description('auto resurrect process at startup. [platform] = ubuntu, centos, redhat, gentoo, systemd, darwin, amazon')
+  .action(function(platform) {
+    pm2.uninstallStartup(platform);
+  });
+
+//
+// Set pm2 to startup
+//
 commander.command('startup [platform]')
   .description('auto resurrect process at startup. [platform] = ubuntu, centos, redhat, gentoo, systemd, darwin, amazon')
-  .action(function(_platform, cmd) {
-    var platform = require('os').platform();
-    pm2.startup(_platform || platform, commander);
+  .action(function(platform) {
+    pm2.startup(platform, commander);
   });
 
 //
