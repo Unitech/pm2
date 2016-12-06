@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>io.keymetrics.PM2</string>
+	<string>com.PM2</string>
 	<key>UserName</key>
 	<string>%USER%</string>
 	<key>ProgramArguments</key>
@@ -26,8 +26,8 @@
     <string>%HOME_PATH%</string>
   </dict>
 	<key>StandardErrorPath</key>
-	<string>/tmp/io.keymetrics.PM2.err</string>
+	<string>/tmp/com.PM2.err</string>
 	<key>StandardOutPath</key>
-	<string>/tmp/io.keymetrics.PM2.out</string>
+	<string>/tmp/com.PM2.out</string>
 </dict>
 </plist>
