@@ -1,22 +1,22 @@
 [Unit]
 Description=PM2 process manager
 Documentation=https://pm2.keymetrics.io/
-After=network.target remote-fs.target
+After=network.target
 
 [Service]
 User=%USER%
 LimitNOFILE=infinity
 LimitNPROC=infinity
 LimitCORE=infinity
-TimeoutStartSec=0
-Environment="PATH=%NODE_PATH%"
-Environment="PM2_HOME=%HOME_PATH%"
+TimeoutStartSec=8
+Environment=PATH=%NODE_PATH%
+Environment=PM2_HOME=%HOME_PATH%
 Restart=always
+RestartSec=3
 
-ExecStart=%PM2_PATH% ls --no-daemon
+ExecStart=%PM2_PATH% resurrect --no-daemon
 ExecReload=%PM2_PATH% reload all
-ExecStop=%PM2_PATH% dump
-ExecStop=%PM2_PATH% kill
+ExecStopPre=%PM2_PATH% kill
 
 [Install]
 WantedBy=multi-user.target

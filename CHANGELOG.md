@@ -1,6 +1,13 @@
 
 ## 2.2.0
 
+- New startup system. Supported init system: systemd, upstart, launchd
+
+  $ pm2 startup   # Auto detect available init system + Setup init scripts
+  $ pm2 unstartup # Disable and Remove init scripts
+
+*SystemD and SystemV (upstart) scripts work like a charm*
+
 - Responsive pm2 list (shortened list when < 90 columns)
 - If not TTY do not print ascii table
 - #2509 Trigger functions inside Node.js application from the PM2 CLI

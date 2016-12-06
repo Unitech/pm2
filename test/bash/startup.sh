@@ -5,8 +5,8 @@ source "${SRC}/include.sh"
 
 cd $file_path
 
-$pm2 startup systemd -u $USER --hp $HOME
-sleep 2
+$pm2 startup upstart -u $USER --hp $HOME
+ll /etc/init.d/pm2
 $pm2 ls
 $pm2 kill
 
