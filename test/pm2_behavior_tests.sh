@@ -23,6 +23,8 @@ bash ./test/bash/pm2-dev.sh
 spec "pm2-dev"
 bash ./test/bash/startup.sh
 spec "upstart startup test"
+bash ./test/bash/resurrect.sh
+spec "resurrect test"
 # bash ./test/bash/docker.sh
 # spec "Docker tests"
 bash ./test/bash/nvm-node-version.sh
