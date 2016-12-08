@@ -9,7 +9,7 @@ LimitNOFILE=infinity
 LimitNPROC=infinity
 LimitCORE=infinity
 TimeoutStartSec=8
-Environment=PATH=%NODE_PATH%
+Environment=PATH=%NODE_PATH%:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 Environment=PM2_HOME=%HOME_PATH%
 Restart=always
 RestartSec=3
