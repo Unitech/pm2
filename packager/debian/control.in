@@ -1,0 +1,14 @@
+Package: pm2
+Version: $VERSION-1
+Depends: nodejs
+Conflicts: nodejs (<< 0.12.0)
+Section: devel
+Priority: optional
+Architecture: all
+Installed-Size: $INSTALLED_SIZE
+Maintainer: Alexandre Strzelewicz <alexandre@keymetrics.io>
+Homepage: http://pm2.io/
+Description: Production Process Manager.
+ PM2: Process Manager for Node.js.
+ .
+ PM2 is a Process Manager mainly for Node.js that allows to automatically increase performance and stability while enhancing the process management experience for developer and DevOps.
