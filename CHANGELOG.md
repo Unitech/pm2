@@ -1,7 +1,27 @@
 
+## 2.2.0
+
+- New startup system. Supported init system: systemd, upstart, launchd
+
+  $ pm2 startup   # Auto detect available init system + Setup init scripts
+  $ pm2 unstartup # Disable and Remove init scripts
+
+*SystemD and SystemV (upstart) scripts work like a charm*
+
+- Responsive pm2 list (shortened list when < 90 columns)
+- If not TTY do not print ascii table
+- #2509 Trigger functions inside Node.js application from the PM2 CLI
+- Rename pm2.triggerCustomAction() par pm2.trigger(<app_id>, <action_name>, [params], [cb])
+
 ## 2.1.6
 
 - #2509 Trigger functions inside Node.js application from the PM2 CLI
+- #2474 Resolve home path in configuration file
+- #2526 Expose .launchAll() method to API
+- #2351 inner pm2 actions - drop autorestart and node_args options
+- #2530 Make sure all processes are killed on system signal to PM2
+- #281 allow to combine PM2_SILENT + pm2 jlist to avoid extra data
+- Alias attributes error_file to err_file + err_log + err, alias out_file to out, out_log
 - Do not ask for pass for set/multiset from KM
 
 ## 2.1.5

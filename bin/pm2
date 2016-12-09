@@ -170,6 +170,11 @@ if (_arr.indexOf('--no-daemon') > -1) {
   });
 
 }
+else if (_arr.indexOf('startup') > -1 || _arr.indexOf('unstartup') > -1) {
+  setTimeout(function() {
+    commander.parse(process.argv);
+  }, 100);
+}
 else {
   // HERE we instanciate the Client object
   pm2.connect(function() {
@@ -272,7 +277,7 @@ commander.command('docker:dist <file|config> <image_name>')
 commander.command('trigger <proc_name> <action_name> [params]')
   .description('deploy your json')
   .action(function(pm_id, action_name, params) {
-    pm2.triggerCustomAction(pm_id, action_name, params);
+    pm2.trigger(pm_id, action_name, params);
   });
 
 commander.command('deploy <file|environment>')
@@ -548,11 +553,19 @@ commander.command('resurrect')
 //
 // Set pm2 to startup
 //
+commander.command('unstartup [platform]')
+  .description('disable and clear auto startup - [platform]=systemd,upstart,launchd,rcd')
+  .action(function(platform) {
+    pm2.uninstallStartup(platform);
+  });
+
+//
+// Set pm2 to startup
+//
 commander.command('startup [platform]')
-  .description('auto resurrect process at startup. [platform] = ubuntu, centos, redhat, gentoo, systemd, darwin, amazon')
-  .action(function(_platform, cmd) {
-    var platform = require('os').platform();
-    pm2.startup(_platform || platform, commander);
+  .description('setup script for pm2 at boot - [platform]=systemd,upstart,launchd,rcd')
+  .action(function(platform) {
+    pm2.startup(platform, commander);
   });
 
 //

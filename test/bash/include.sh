@@ -14,6 +14,7 @@ file_path="test/fixtures"
 #set -o verbose
 
 $pm2 kill
+$pm2 link delete
 
 function fail {
   echo -e "######## \033[31m  ✘ $1\033[0m"

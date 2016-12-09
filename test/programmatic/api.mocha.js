@@ -269,4 +269,37 @@ describe('API checks', function() {
     });
   });
 
+  describe('Launch modules', function() {
+    var Modularizer = require('../../lib/API/Modules/Modularizer');
+    var module = 'pm2-server-monit';
+
+    after(function(done) {
+      Modularizer.uninstall(PM2, module, done);
+    });
+
+    it('Should start up modules', function(done) {
+      this.timeout(5000);
+      PM2.connect(true, function(err) {
+        should(err).be.null();
+
+        Modularizer.install(PM2, module, function() {
+          PM2.stop(module, function() {
+            should(err).be.null();
+
+            PM2.launchModules(function(err) {
+              should(err).be.null();
+
+              PM2.list(function(err, list) {
+                should(err).be.null();
+                should(list[0].name).eql(module);
+                should(list[0].pm2_env.status).eql('online');
+                done();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+
 });

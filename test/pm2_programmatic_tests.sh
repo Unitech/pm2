@@ -36,18 +36,19 @@ spec "God test"
 mocha --opts ./mocha.opts  ./programmatic.js
 spec "Programmatic test"
 
-mocha --opts ./mocha.opts  ./custom_action.mocha.js
-spec "Programmatic test"
-
 mocha --opts ./mocha.opts  ./containerizer.mocha.js
 spec "Dockerfile parser test"
 
 mocha --opts ./mocha.opts  ./api.mocha.js
 spec "API tests"
+mocha --opts ./mocha.opts  ./path_resolution.mocha.js
+spec "API tests"
 mocha --opts ./mocha.opts  ./lazy_api.mocha.js
 spec "API tests"
 mocha --opts ./mocha.opts  ./api.backward.compatibility.mocha.js
 spec "API Backward compatibility tests"
+mocha --opts ./mocha.opts  ./custom_action.mocha.js
+spec "Custom Actions tests"
 
 mocha --opts ./mocha.opts  ./logs.js
 spec "Logs test"
@@ -82,6 +83,8 @@ cd ../interface
 
 echo $PM2_HOME
 
+mocha --opts ./mocha.opts  ./exception.e2e.mocha.js
+spec "E2E exception system checking"
 mocha --opts ./mocha.opts  ./interactor.connect.mocha.js
 spec "Interactor test #1 with password setting"
 mocha --opts ./mocha.opts  ./interactor.daemonizer.mocha.js

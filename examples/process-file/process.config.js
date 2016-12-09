@@ -16,7 +16,8 @@ module.exports = {
     }
   }, {
     name               : 'Worker',
-    script             : 'worker.js'
+    script             : 'worker.js',
+    err_file : 'toto-err.log'
   }, {
     name               : 'Checks',
     script             : 'connection_check.sh'

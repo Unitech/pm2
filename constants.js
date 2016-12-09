@@ -1,3 +1,8 @@
+/**
+ * Copyright 2013 the PM2 project authors. All rights reserved.
+ * Use of this source code is governed by a license that
+ * can be found in the LICENSE file.
+ */
 
 var debug  = require('debug')('pm2:conf');
 var p      = require('path');
@@ -16,7 +21,7 @@ var path_structure = require('./paths.js')(process.env.OVER_HOME);
 var csts = {
   PREFIX_MSG              : chalk.green('[PM2] '),
   PREFIX_MSG_ERR          : chalk.red('[PM2][ERROR] '),
-  PREFIX_MSG_MOD          : chalk.green('[PM2][Module] '),
+  PREFIX_MSG_MOD          : chalk.bold.green('[PM2][Module] '),
   PREFIX_MSG_MOD_ERR      : chalk.red('[PM2][Module][ERROR] '),
   PREFIX_MSG_WARNING      : chalk.yellow('[PM2][WARN] '),
   PREFIX_MSG_SUCCESS      : chalk.cyan('[PM2] '),
@@ -25,14 +30,6 @@ var csts = {
 
   APP_CONF_TPL            : 'ecosystem.tpl',
   SAMPLE_CONF_FILE        : 'sample-conf.js',
-  CENTOS_STARTUP_SCRIPT   : 'pm2-init-centos.sh',
-  UBUNTU_STARTUP_SCRIPT   : 'pm2-init.sh',
-  SYSTEMD_STARTUP_SCRIPT  : 'pm2.service',
-  AMAZON_STARTUP_SCRIPT   : 'pm2-init-amazon.sh',
-  GENTOO_STARTUP_SCRIPT   : 'pm2',
-  DARWIN_STARTUP_SCRIPT   : 'io.keymetrics.PM2.plist',
-  FREEBSD_STARTUP_SCRIPT  : 'pm2-freebsd.sh',
-
   LOGROTATE_SCRIPT        : 'logrotate.d/pm2',
 
   DOCKERFILE_NODEJS       : 'Dockerfiles/Dockerfile-nodejs.tpl',
