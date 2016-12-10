@@ -9,3 +9,4 @@ examples
 .github
 .cache-require-paths.json
 *.heapsnapshot
+packager

@@ -83,6 +83,8 @@ cd ../interface
 
 echo $PM2_HOME
 
+mocha --opts ./mocha.opts  ./exception.e2e.mocha.js
+spec "E2E exception system checking"
 mocha --opts ./mocha.opts  ./interactor.connect.mocha.js
 spec "Interactor test #1 with password setting"
 mocha --opts ./mocha.opts  ./interactor.daemonizer.mocha.js
