@@ -103,3 +103,5 @@ mocha --opts ./mocha.opts  ./bus.fork.spec.mocha.js
 spec "Protocol communication test"
 mocha --opts ./mocha.opts  ./request.mocha.js
 spec "Protocol communication test"
+mocha --opts ./mocha.opts  ./aggregator.mocha.js
+spec "Transaction trace aggregator test"
