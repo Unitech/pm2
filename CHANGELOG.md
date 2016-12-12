@@ -1,17 +1,31 @@
 
-## 2.2.0
+## 2.2.0@next
 
-- New startup system. Supported init system: systemd, upstart, launchd
+- #2559 New startup system. Supported init system: systemd, upstart, launchd
 
   $ pm2 startup   # Auto detect available init system + Setup init scripts
   $ pm2 unstartup # Disable and Remove init scripts
 
-*SystemD and SystemV (upstart) scripts work like a charm*
+*SystemD, Upstart and Launchd scripts work like a charm*
 
+- #2515 New way to install PM2 on Debian based system:
+
+```
+$ wget -O - http://apt.pm2.io/ubuntu/apt.pm2.io.gpg.key | sudo apt-key add -
+$ echo "deb http://apt.pm2.io/ubuntu xenial main" | sudo tee /etc/apt/sources.list.d/pm2.list
+$ sudo apt-get update
+$ sudo apt-get install pm2
+```
+
+- #1090 pm2 resurrect does not respawn the same processes
+- #2544 Attach logs to exception
+- #2545 Right exit code via pm2 api
+- #2543 Fix module pid/mem monitoring
+- #2537 Remove duplicated code in Configuration subsystem
 - Responsive pm2 list (shortened list when < 90 columns)
 - If not TTY do not print ascii table
 - #2509 Trigger functions inside Node.js application from the PM2 CLI
-- Rename pm2.triggerCustomAction() par pm2.trigger(<app_id>, <action_name>, [params], [cb])
+- Rename pm2.triggerCustomAction() by pm2.trigger(<app_id>, <action_name>, [params], [cb])
 
 ## 2.1.6
 
