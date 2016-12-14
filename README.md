@@ -117,9 +117,11 @@ $ pm2 delete all                # Kill and delete all apps
 $ pm2 delete 0                  # Delete app with id 0
 
 # Startup/Boot management
-$ pm2 startup                   # Generate a startup script to respawn PM2 on boot
+$ pm2 startup                   # Detect init system, generate and configure pm2 boot on startup
 $ pm2 save                      # Save current process list
 $ pm2 resurrect                 # Restore previously save processes
+$ pm2 unstartup                 # Disable and remove startup system
+
 $ pm2 update                    # Save processes, kill PM2 and restore processes
 $ pm2 generate                  # Generate a sample json configuration file
 
@@ -220,17 +222,23 @@ $ pm2 reloadLogs          # Reload all logs
 
 ### Startup script generation
 
-PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart. Execute the startup command only as the user to be running the PM2 daemon.
+PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
+
+Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD).
 
 ```bash
+# Auto detect init system + generate and setup PM2 boot at server startup
 $ pm2 startup
-# auto-detect platform
+
+# Manually specify the startup system
+# Can be: systemd, upstart, launchd, rcd
 $ pm2 startup [platform]
-# render startup-script for a specific platform, the [platform] could be one of:
-#   ubuntu|centos|redhat|gentoo|systemd|darwin|amazon
+
+# Disable and remove PM2 boot at server startup
+$ pm2 unstartup
 ```
 
-To save a process list just do:
+To save/freeze a process list on reboot:
 
 ```bash
 $ pm2 save
