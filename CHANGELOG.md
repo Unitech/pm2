@@ -1,4 +1,8 @@
 
+## 2.2.2
+
+- #2574 Support Amazon systemv
+
 ## 2.2.1 (rc: 2.2.0@next)
 
 - #2559 New startup system. Supported init system: systemd, upstart, launchd
