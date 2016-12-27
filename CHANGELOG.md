@@ -1,4 +1,8 @@
 
+## 2.2.3
+
+- Various startup refactor fixes (#2598, #2587, #2590)
+
 ## 2.2.2
 
 - #2574 Support Amazon systemv
