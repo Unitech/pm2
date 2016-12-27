@@ -274,6 +274,7 @@ Thanks in advance and we hope that you like PM2!
 - [PM2 on Heroku/Azure/App Engine](http://pm2.keymetrics.io/docs/usage/use-pm2-with-cloud-providers/)
 - [PM2 auto completion](http://pm2.keymetrics.io/docs/usage/auto-completion/)
 - [Using PM2 in ElasticBeanStalk](http://pm2.keymetrics.io/docs/tutorials/use-pm2-with-aws-elastic-beanstalk/)
+- [PM2 Tutorial Series](https://futurestud.io/tutorials/pm2-utility-overview-installation)
 
 ## CHANGELOG
 
