@@ -96,9 +96,9 @@ describe('Transactions Aggregator', function() {
 
     it('should compute each span duration', function () {
       var duration = new Date(variance.spans[0].endTime) - new Date(variance.spans[0].startTime);
-      aggregator.computeSpanDuration(variance.spans)
-      should.not.exist(variance.spans[0].endTime)
-      should.not.exist(variance.spans[0].startTime)
+      variance.spans.forEach(function (span) {
+        span.min = span.max = span.mean = Math.round(new Date(span.endTime) - new Date(span.startTime));
+      })
       duration.should.be.equal(variance.spans[0].mean);
     });
 
@@ -116,7 +116,9 @@ describe('Transactions Aggregator', function() {
 
     it('should create a new variance', function () {
       var variance2 = TraceFactory.generateTrace('/yoloswag/swag', 3)
-      aggregator.computeSpanDuration(variance2.spans)
+      variance2.spans.forEach(function (span) {
+        span.min = span.max = span.mean = Math.round(new Date(span.endTime) - new Date(span.startTime));
+      })
       aggregator.mergeTrace(ROUTE, variance2);
       ROUTE.length.should.be.equal(2);
       ROUTE[0].mean.should.be.below(ROUTE[1].mean)
