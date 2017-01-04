@@ -59,6 +59,7 @@ commander.version(pkg.version)
   .option('--no-treekill', 'Only kill the main process, not detached children')
   .option('--no-pmx', 'start an app without pmx')
   .option('--no-automation', 'start an app without pmx')
+  .option('--trace', 'enable transaction tracing with keymetrics')
   .usage('[cmd] app');
 
 commander.on('--help', function() {

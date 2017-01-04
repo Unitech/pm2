@@ -165,5 +165,8 @@
   },
   "post_update": {
     "type": "array"
+  },
+  "trace": {
+    "type": "boolean"
   }
 }
