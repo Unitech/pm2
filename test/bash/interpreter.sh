@@ -78,27 +78,27 @@ should 'process should be errored without coffee installed' "status: 'errored'" 
 
 ########### Install
 
-$pm2 install typescript
+# $pm2 install typescript
 
 ########### typescript fork test
-$pm2 delete all
+# $pm2 delete all
 
->typescript.log
+# >typescript.log
 
-$pm2 start echo.ts -o typescript.log --merge-logs
+# $pm2 start echo.ts -o typescript.log --merge-logs
 
-sleep 1.5
+# sleep 1.5
 
-grep "Hello Typescript!" typescript.log
-spec "Should work on Typescript files in fork mode"
+# grep "Hello Typescript!" typescript.log
+# spec "Should work on Typescript files in fork mode"
 
 ########### typescript cluster test
-$pm2 delete all
+# $pm2 delete all
 
->typescript.log
+# >typescript.log
 
-$pm2 start echo.ts -i 1 -o typescript.log --merge-logs
+# $pm2 start echo.ts -i 1 -o typescript.log --merge-logs
 
-sleep 1.5
-grep "Hello Typescript!" typescript.log
-spec "Should work on Typescript files in cluster mode"
+# sleep 1.5
+# grep "Hello Typescript!" typescript.log
+# spec "Should work on Typescript files in cluster mode"
