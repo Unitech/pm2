@@ -91,39 +91,33 @@ describe('Transactions Aggregator', function() {
     });
   });
 
-  describe('merging two trace', function() {
-    var variance = TraceFactory.generateTrace('/yoloswag/swag', 2), ROUTE = [];
+  describe('merging trace together', function() {
+    var trace = TraceFactory.generateTrace('/yoloswag/swag', 2), ROUTES = { '/yoloswag/swag': {} };
 
-    it('should compute each span duration', function () {
-      var duration = new Date(variance.spans[0].endTime) - new Date(variance.spans[0].startTime);
-      variance.spans.forEach(function (span) {
+    it('should add a trace', function() {
+      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace)
+      ROUTES['/yoloswag/swag'].meta.count.should.be.equal(1);
+      ROUTES['/yoloswag/swag'].variances.length.should.be.equal(1);
+      ROUTES['/yoloswag/swag'].variances[0].spans.length.should.be.equal(3);
+    });
+
+    it('should merge with the first variance', function() {
+      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace); 
+      ROUTES['/yoloswag/swag'].variances.length.should.be.equal(1);
+      ROUTES['/yoloswag/swag'].variances[0].count.should.be.equal(2);
+    });
+
+    it('should merge as a new variance with the same route', function () {
+      var trace2 = TraceFactory.generateTrace('/yoloswag/swag', 3)
+      trace2.spans.forEach(function (span) {
         span.min = span.max = span.mean = Math.round(new Date(span.endTime) - new Date(span.startTime));
       })
-      duration.should.be.equal(variance.spans[0].mean);
+      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace2);
+      ROUTES['/yoloswag/swag'].meta.count.should.be.equal(3);
+      ROUTES['/yoloswag/swag'].variances.length.should.be.equal(2);
+      ROUTES['/yoloswag/swag'].variances[0].count.should.be.equal(2);
+      ROUTES['/yoloswag/swag'].variances[1].count.should.be.equal(1);
+      ROUTES['/yoloswag/swag'].variances[1].spans.length.should.be.equal(4);
     });
-
-    it('should add a variance', function() {
-      aggregator.mergeTrace(ROUTE, variance) 
-      ROUTE[0].count.should.be.equal(1);
-      ROUTE[0].spans.length.should.be.equal(3);
-    });
-
-    it('should merge with first variance', function() {
-      aggregator.mergeTrace(ROUTE, variance); 
-      ROUTE[0].count.should.be.equal(2);
-      ROUTE[0].spans.length.should.be.equal(3);
-    });
-
-    it('should create a new variance', function () {
-      var variance2 = TraceFactory.generateTrace('/yoloswag/swag', 3)
-      variance2.spans.forEach(function (span) {
-        span.min = span.max = span.mean = Math.round(new Date(span.endTime) - new Date(span.startTime));
-      })
-      aggregator.mergeTrace(ROUTE, variance2);
-      ROUTE.length.should.be.equal(2);
-      ROUTE[0].mean.should.be.below(ROUTE[1].mean)
-      ROUTE[1].spans.length.should.be.equal(4);
-    });
-
   });
 });
