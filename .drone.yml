@@ -1,8 +1,14 @@
 pipeline:
   build:
-    image: node:alpine
+    image: node:${NODE_VERSION}-wheezy
     commands:
-      - sleep 10
       - npm install
       - export NODE_ENV=test
       - npm test
+matrix:
+  NODE_VERSION:
+    - 4
+    - 6
+    - 7
+    - 0.10
+    - 0.12
