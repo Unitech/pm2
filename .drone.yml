@@ -2,6 +2,9 @@ pipeline:
   build:
     image: node:${NODE_VERSION}-wheezy
     commands:
+      - apt-get -qq update
+      - apt-get install -y python3
+      - apt-get install -y php5-cli
       - npm install
       - export NODE_ENV=test
       - npm test
