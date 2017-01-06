@@ -166,7 +166,11 @@
   "post_update": {
     "type": "array"
   },
-  "trace": {
-    "type": "boolean"
+  "pmx_trace": {
+    "type": [
+      "number",
+      "boolean"
+    ],
+    "alias": "trace"
   }
 }
