@@ -1,0 +1,8 @@
+pipeline:
+  build:
+    image: node:alpine
+    commands:
+      - sleep 10
+      - npm install
+      - export NODE_ENV=test
+      - npm test
