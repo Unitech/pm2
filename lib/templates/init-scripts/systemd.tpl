@@ -16,7 +16,7 @@ RestartSec=3
 
 ExecStart=%PM2_PATH% resurrect --no-daemon
 ExecReload=%PM2_PATH% reload all
-ExecStopPre=%PM2_PATH% kill
+ExecStop=%PM2_PATH% kill
 
 [Install]
 WantedBy=multi-user.target
