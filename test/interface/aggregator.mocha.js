@@ -1,29 +1,34 @@
 
+process.env.DEBUG='pm2:aggregator';
 var should    = require('should');
 var Aggregator = require('../../lib/Interactor/TransactionAggregator.js');
 var Plan   = require('../helpers/plan.js');
 var TraceFactory = require('./misc/trace_factory.js');
+var TraceMock = require('./misc/trace.json');
 
 describe('Transactions Aggregator', function() {
   var aggregator;
 
-  describe('Basic testing', function() {
-    it('should instanciate aggregator', function() {
-      aggregator = new Aggregator();
+  it('should instanciate aggregator', function() {
+    aggregator = new Aggregator();
+  });
+
+  describe('.censorSpans', function() {
+    var trace = TraceFactory.generateTrace('/yoloswag/swag', 2);
+
+    it('should not fail', function() {
+      aggregator.censorSpans(null);
     });
 
-    it('should factory generate a trace', function() {
-      var trace = TraceFactory.generateTrace('/', 4);
-      trace.spans.length.should.eql(5);
-    });
-
-    it('should factory generate a random trace', function() {
-      var trace = TraceFactory.generateTrace();
-      trace.spans.length.should.not.eql(1);
+    it('should censor span', function() {
+      should.exist(trace.spans[1].labels.results);
+      aggregator.censorSpans(trace.spans);
+      should.not.exist(trace.spans[1].labels.results);
+      trace.spans[1].labels.cmd.should.containEql('?');
     });
   });
 
-  describe('identification of identifier', function() {
+  describe('.isIdentifier', function() {
     it('should be an identifier (api version)', function() {
       aggregator.isIdentifier('v1').should.equal(true);
     });
@@ -57,10 +62,10 @@ describe('Transactions Aggregator', function() {
     });
   });
 
-  describe('aggregate trace via path', function() {
+  describe('.matchPath - aggregate', function() {
     var routes = {
       '/bucket/6465577': { spans: true },
-      '/admin/bucket/8787': { spans: true },
+      '/admin/bucket/8787': { spans: true }
     };
 
     it('should match first route', function(done) {
@@ -92,7 +97,14 @@ describe('Transactions Aggregator', function() {
   });
 
   describe('merging trace together', function() {
-    var trace = TraceFactory.generateTrace('/yoloswag/swag', 2), ROUTES = { '/yoloswag/swag': {} };
+    var trace = TraceFactory.generateTrace('/yoloswag/swag', 2);
+    var ROUTES = {
+      '/yoloswag/swag': {}
+    };
+
+    it('should not fail', function() {
+      aggregator.mergeTrace(null, trace)
+    });
 
     it('should add a trace', function() {
       aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace)
@@ -102,7 +114,7 @@ describe('Transactions Aggregator', function() {
     });
 
     it('should merge with the first variance', function() {
-      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace); 
+      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace);
       ROUTES['/yoloswag/swag'].variances.length.should.be.equal(1);
       ROUTES['/yoloswag/swag'].variances[0].count.should.be.equal(2);
     });
@@ -120,4 +132,45 @@ describe('Transactions Aggregator', function() {
       ROUTES['/yoloswag/swag'].variances[1].spans.length.should.be.equal(4);
     });
   });
+
+  describe('.aggregate', function() {
+    it('should not fail', function() {
+      var dt = aggregator.aggregate(null);
+      should(dt).be.undefined();
+    });
+
+    it('should aggregate', function() {
+      // Simulate some data
+      var packet = TraceFactory.generatePacket('/yoloswag/swag', 'appname');
+      aggregator.aggregate(packet);
+      packet = TraceFactory.generatePacket('/yoloswag/swag', 'appname');
+      aggregator.aggregate(packet);
+      packet = TraceFactory.generatePacket('/yoloswag/swag', 'appname');
+      aggregator.aggregate(packet);
+      packet = TraceFactory.generatePacket('/sisi/aight', 'appname');
+      aggregator.aggregate(packet);
+      packet = TraceFactory.generatePacket('/sisi/aight', 'APP2');
+      var agg = aggregator.aggregate(packet);
+      should(agg).not.be.undefined();
+
+      // should get 2 apps in agg
+      should.exist(agg['appname']);
+      should.exist(agg['APP2']);
+
+      // should contain 2 routes for appname
+      Object.keys(agg['appname'].routes).length.should.eql(2);
+      should.exist(agg['appname'].process);
+      agg['appname'].meta.trace_count.should.eql(4);
+      should.exist(agg['appname'].meta.mean_latency);
+    });
+  });
+
+
+  describe('.normalizeAggregation', function() {
+    it('should get normalized aggregattion', function(done) {
+      aggregator.prepareAggregationforShipping();
+      done();
+    });
+  });
+
 });

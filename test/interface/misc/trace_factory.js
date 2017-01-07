@@ -71,6 +71,16 @@ function generateTrace(route_path, db_query_nb) {
 
 exports.generateTrace = generateTrace;
 
+// Generate the same kind of data sent by pm2
+exports.generatePacket = function(route, app_name) {
+  return {
+    data : generateTrace(route),
+    process : {
+      name : app_name
+    }
+  };
+};
+
 exports.staticTrace = {
   "spans": [
     {
