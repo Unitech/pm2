@@ -64,42 +64,34 @@ describe('Transactions Aggregator', function() {
 
   describe('.matchPath - aggregate', function() {
     var routes = {
-      '/bucket/6465577': { spans: true },
-      '/admin/bucket/8787': { spans: true }
+      'bucket/6465577': { spans: true }
     };
 
-    it('should match first route', function(done) {
-      aggregator.matchPath('/bucket/67754', routes, function (match) {
-        should.exist(match);
-        match.should.be.a.String();
-        match.should.equal('bucket/*');
-        should.exist(routes['bucket/*'])
-        done()
-      })
+    it('should match first route', function() {
+      var match = aggregator.matchPath('bucket/67754', routes);
+      should.exist(match);
+      match.should.be.a.String();
+      match.should.equal('bucket/*');
+      should.exist(routes['bucket/*'])
     });
 
-    it('should NOT match any route', function(done) {
-      aggregator.matchPath('/toto/67754', routes, function (match) {
-        should.not.exist(match);
-        done()
-      })
+    it('should NOT match any route', function() {
+      should.not.exist(aggregator.matchPath('toto/67754', routes));
     });
 
-    it('should match aggregated route with *', function(done) {
-      aggregator.matchPath('/bucket/87998', routes, function (match) {
-        should.exist(match);
-        match.should.be.a.String();
-        match.should.equal('bucket/*');
-        should.exist(routes['bucket/*'])
-        done()
-      })
+    it('should match aggregated route with *', function() {
+      var match = aggregator.matchPath('bucket/87998', routes);
+      should.exist(match);
+      match.should.be.a.String();
+      match.should.equal('bucket/*');
+      should.exist(routes['bucket/*'])
     });
   });
 
   describe('merging trace together', function() {
-    var trace = TraceFactory.generateTrace('/yoloswag/swag', 2);
+    var trace = TraceFactory.generateTrace('yoloswag/swag', 2);
     var ROUTES = {
-      '/yoloswag/swag': {}
+      'yoloswag/swag': {}
     };
 
     it('should not fail', function() {
@@ -107,29 +99,29 @@ describe('Transactions Aggregator', function() {
     });
 
     it('should add a trace', function() {
-      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace)
-      ROUTES['/yoloswag/swag'].meta.count.should.be.equal(1);
-      ROUTES['/yoloswag/swag'].variances.length.should.be.equal(1);
-      ROUTES['/yoloswag/swag'].variances[0].spans.length.should.be.equal(3);
+      aggregator.mergeTrace(ROUTES['yoloswag/swag'], trace)
+      ROUTES['yoloswag/swag'].meta.count.should.be.equal(1);
+      ROUTES['yoloswag/swag'].variances.length.should.be.equal(1);
+      ROUTES['yoloswag/swag'].variances[0].spans.length.should.be.equal(3);
     });
 
     it('should merge with the first variance', function() {
-      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace);
-      ROUTES['/yoloswag/swag'].variances.length.should.be.equal(1);
-      ROUTES['/yoloswag/swag'].variances[0].count.should.be.equal(2);
+      aggregator.mergeTrace(ROUTES['yoloswag/swag'], trace);
+      ROUTES['yoloswag/swag'].variances.length.should.be.equal(1);
+      ROUTES['yoloswag/swag'].variances[0].count.should.be.equal(2);
     });
 
     it('should merge as a new variance with the same route', function () {
-      var trace2 = TraceFactory.generateTrace('/yoloswag/swag', 3)
+      var trace2 = TraceFactory.generateTrace('yoloswag/swag', 3)
       trace2.spans.forEach(function (span) {
         span.min = span.max = span.mean = Math.round(new Date(span.endTime) - new Date(span.startTime));
       })
-      aggregator.mergeTrace(ROUTES['/yoloswag/swag'], trace2);
-      ROUTES['/yoloswag/swag'].meta.count.should.be.equal(3);
-      ROUTES['/yoloswag/swag'].variances.length.should.be.equal(2);
-      ROUTES['/yoloswag/swag'].variances[0].count.should.be.equal(2);
-      ROUTES['/yoloswag/swag'].variances[1].count.should.be.equal(1);
-      ROUTES['/yoloswag/swag'].variances[1].spans.length.should.be.equal(4);
+      aggregator.mergeTrace(ROUTES['yoloswag/swag'], trace2);
+      ROUTES['yoloswag/swag'].meta.count.should.be.equal(3);
+      ROUTES['yoloswag/swag'].variances.length.should.be.equal(2);
+      ROUTES['yoloswag/swag'].variances[0].count.should.be.equal(2);
+      ROUTES['yoloswag/swag'].variances[1].count.should.be.equal(1);
+      ROUTES['yoloswag/swag'].variances[1].spans.length.should.be.equal(4);
     });
   });
 
@@ -141,15 +133,15 @@ describe('Transactions Aggregator', function() {
 
     it('should aggregate', function() {
       // Simulate some data
-      var packet = TraceFactory.generatePacket('/yoloswag/swag', 'appname');
+      var packet = TraceFactory.generatePacket('yoloswag/swag', 'appname');
       aggregator.aggregate(packet);
-      packet = TraceFactory.generatePacket('/yoloswag/swag', 'appname');
+      packet = TraceFactory.generatePacket('yoloswag/swag', 'appname');
       aggregator.aggregate(packet);
-      packet = TraceFactory.generatePacket('/yoloswag/swag', 'appname');
+      packet = TraceFactory.generatePacket('yoloswag/swag', 'appname');
       aggregator.aggregate(packet);
-      packet = TraceFactory.generatePacket('/sisi/aight', 'appname');
+      packet = TraceFactory.generatePacket('sisi/aight', 'appname');
       aggregator.aggregate(packet);
-      packet = TraceFactory.generatePacket('/sisi/aight', 'APP2');
+      packet = TraceFactory.generatePacket('sisi/aight', 'APP2');
       var agg = aggregator.aggregate(packet);
       should(agg).not.be.undefined();
 
