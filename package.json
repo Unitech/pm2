@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.2.3",
+  "version": "2.3.0",
   "engines": {
     "node": ">=0.10"
   },
@@ -156,7 +156,7 @@
     "chokidar": "^1.6.1",
     "cli-table": "0.3.1",
     "commander": "^2.9",
-    "cron": "1.1.1",
+    "cron": "1.2.1",
     "debug": "^2.3.2",
     "eventemitter2": "1.0.5",
     "fclone": "1.0.10",
