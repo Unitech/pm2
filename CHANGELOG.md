@@ -1,4 +1,9 @@
 
+## 2.3.0
+
+- (CLI) remove immutability of CLI parameters on restart (critical for ux)
+- Keymetrics VXX beta
+
 ## 2.2.3
 
 - Various startup refactor fixes (#2598, #2587, #2590)
