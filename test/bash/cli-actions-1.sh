@@ -133,10 +133,14 @@ spec "Should start echo service"
 
 $pm2 list
 
+# Not consistent on travis :(
+# OUT=`$pm2 logs --nostream --lines 10 PM2 | wc -l`
+# [ $OUT -gt 10 ] || fail "Error : pm2 logs ouput showed $OUT lines but min is 10" 
+# success "should only print logs"
 
-# $pm2 logs &
-# spec "Should display logs"
-# TMPPID=$!
+# OUT=`$pm2 logs --nostream --lines 100 PM2 | wc -l`
+# [ $OUT -gt 100 ] || fail "Error : pm2 logs ouput showed $OUT  lines but min is 100" 
+# success "should only print logs: "
 
 # sleep 1
 

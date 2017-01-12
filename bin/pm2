@@ -702,6 +702,7 @@ commander.command('logs [id|name]')
   .option('--out', 'only shows standard output')
   .option('--lines <n>', 'output the last N lines, instead of the last 10 by default')
   .option('--timestamp [format]', 'add timestamps (default format YYYY-MM-DD-HH:mm:ss)')
+  .option('--nostream', 'print logs without lauching the log stream')
   .description('stream logs file. Default stream all logs')
   .action(function(id, cmd) {
     var Logs = require('../lib/API/Log.js');
@@ -728,10 +729,12 @@ commander.command('logs [id|name]')
 
     if (cmd.err === true)
       exclusive = 'err';
-
-    if (cmd.json == true)
+    
+    if (cmd.nostream === true)
+      pm2.printLogs(id, line, raw, timestamp, exclusive);
+    else if (cmd.json === true)
       Logs.jsonStream(pm2.Client, id);
-    else if (cmd.format == true)
+    else if (cmd.format === true)
       Logs.formatStream(pm2.Client, id, false, 'YYYY-MM-DD-HH:mm:ssZZ');
     else
       pm2.streamLogs(id, line, raw, timestamp, exclusive);
