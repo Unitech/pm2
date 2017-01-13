@@ -3,6 +3,9 @@
 
 - (CLI) remove immutability of CLI parameters on restart (critical for ux)
 - Keymetrics VXX beta
+- `pm2 logs --nostream` allow to print last logs of application without attaching to logs bus #2620
+- Allow script configuration to `none` #2611
+- Added startup script for gentoo v2.3 via PR #2625
 
 ## 2.2.3
 
