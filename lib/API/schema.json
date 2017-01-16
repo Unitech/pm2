@@ -1,7 +1,8 @@
 {
   "script": {
     "type": "string",
-    "require": true
+    "require": true,
+    "alias" : "exec"
   },
   "args": {
     "type": [
