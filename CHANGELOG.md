@@ -6,6 +6,8 @@
 - Alias "exec" to "script"
 - `pm2 logs --nostream` allow to print last logs of application without attaching to logs bus #2620
 - Added startup script for gentoo v2.3 via PR #2625
+- optionalDependencies from http to https
+- remove agent pid on exit
 
 ## 2.2.3
 
