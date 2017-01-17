@@ -7,7 +7,6 @@ module.exports = {
     max_memory_restart : '260M',
 
     ignore_watch       : ['node_modules'],
-    watch              : true,
     env : {
       NODE_ENV : 'normal'
     },
