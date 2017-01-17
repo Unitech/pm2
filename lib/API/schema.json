@@ -167,9 +167,13 @@
   "post_update": {
     "type": "array"
   },
+  "disable_trace": {
+    "type": [
+      "boolean"
+    ]
+  },
   "trace": {
     "type": [
-      "number",
       "boolean"
     ]
   }
