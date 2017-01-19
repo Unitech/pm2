@@ -1,0 +1,5 @@
+{
+  "critics": {
+    "lint": {"engine": "semistandard"}
+  }
+}
