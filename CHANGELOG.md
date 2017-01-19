@@ -1,6 +1,7 @@
 
 ## 2.3.0
 
+- Drop Node.js 0.10 support
 - (CLI) remove immutability of CLI parameters on restart (critical for ux)
 - Keymetrics VXX beta
 - Alias "exec" to "script"
