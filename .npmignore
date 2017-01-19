@@ -10,3 +10,7 @@ examples
 .cache-require-paths.json
 *.heapsnapshot
 packager
+artifacts
+.editorconfig
+.bithoundrc
+dist
