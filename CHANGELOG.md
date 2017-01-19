@@ -8,6 +8,7 @@
 - Added startup script for gentoo v2.3 via PR #2625
 - optionalDependencies from http to https
 - remove agent pid on exit
+- #2646 check ps.stdout on treekil
 
 ## 2.2.3
 
