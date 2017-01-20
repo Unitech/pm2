@@ -244,6 +244,8 @@ To save/freeze a process list on reboot:
 $ pm2 save
 ```
 
+When you update NodeJS, or switch to another version, you need to rerun `pm2 startup` for the daemon process to work correctly.
+
 [More about startup scripts](http://pm2.keymetrics.io/docs/usage/startup/)
 
 ## Module system
