@@ -164,6 +164,9 @@
   "force": {
     "type": "boolean"
   },
+  "envSpecificInstance": {
+      "type": "boolean"
+  },
   "post_update": {
     "type": "array"
   },
