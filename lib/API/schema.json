@@ -164,7 +164,7 @@
   "force": {
     "type": "boolean"
   },
-  "envSpecificInstance": {
+  "appendEnvToName": {
       "type": "boolean"
   },
   "post_update": {
