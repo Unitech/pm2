@@ -81,18 +81,6 @@ describe('Http requests', function() {
 
   });
 
-  describe('PING', function() {
-    it('should get', function(done) {
-      HttpRequest.ping({
-        port : PORT,
-        url  : '127.0.0.1'
-      }, function(err, data) {
-        assert(err);
-        done();
-      });
-    });
-  });
-
   // @todo: more behavioral tests (reverse interactor failcheck)
 
   // @todo: do more tests when doing changeUrls
