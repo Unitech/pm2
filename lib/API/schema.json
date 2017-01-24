@@ -164,7 +164,7 @@
   "force": {
     "type": "boolean"
   },
-  "appendEnvToName": {
+  "append_env_to_name": {
       "type": "boolean"
   },
   "post_update": {
