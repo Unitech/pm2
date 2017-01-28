@@ -813,10 +813,9 @@ commander.command('deepUpdate')
 commander.command('serve [path] [port]')
   .description('serve a directory over http via port')
   .action(function (path, port) {
-    pm2.serve(Object.assign({
-      path: path,
-      port: port
-    }, commander));
+    commander.path = path || commander.path;
+    commander.port = port || commander.port;
+    pm2.serve(commander);
   });
 
 //
