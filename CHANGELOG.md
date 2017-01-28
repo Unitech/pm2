@@ -1,5 +1,6 @@
 ## 2.3.1
 
+- aliasing: pm2-dev <script> <=> pm2-dev start <script>
 - New option to append env name to app name (used to allow the same app to be launched in different environement w/o name conflict) #2650
 
 ## 2.3.0
