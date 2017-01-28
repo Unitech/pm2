@@ -808,6 +808,18 @@ commander.command('deepUpdate')
   });
 
 //
+// Launch a http server that expose a given path on given port
+//
+commander.command('serve [path] [port]')
+  .description('serve a directory over http via port')
+  .action(function (path, port) {
+    pm2.serve(Object.assign({
+      path: path,
+      port: port
+    }, commander));
+  });
+
+//
 // Catch all
 //
 commander.command('*')
