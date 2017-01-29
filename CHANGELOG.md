@@ -6,6 +6,7 @@
 - #2671 allow to pass a delay to pm2-docker (`pm2-docker process.json --delay 10`)
 - `pm2 ecosystem simple` to generate a simple ecosystem file
 - aliasing: `pm2-dev <script>` <=> `pm2-dev start <script>`
+- fix git parsing when using cwd
 
 ## 2.3.0
 
