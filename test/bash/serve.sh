@@ -51,3 +51,20 @@ curl http://localhost:8000/yolo.html > /tmp/tmp_out.txt
 OUT=`cat /tmp/tmp_out.txt | grep -o "your file doesnt exist" | wc -l`
 [ $OUT -eq 1 ] || fail "should have served custom 404 file"
 success "should have served custom 404 file"
+
+$pm2 delete all
+
+$pm2 start ecosystem.json
+should 'should have started serving dir' 'online' 1
+
+curl http://localhost:8081/index.html > /tmp/tmp_out.txt
+OUT=`cat /tmp/tmp_out.txt | grep -o "good shit" | wc -l`
+[ $OUT -eq 1 ] || fail "should be listening on port 8081"
+success "should be listening on port 8081"
+
+$pm2 stop ecosystem.json
+
+curl http://localhost:8081/index.html > /tmp/tmp_out.txt
+OUT=`cat /tmp/tmp_out.txt | grep -o "good shit" | wc -l`
+[ $OUT -eq 0 ] || fail "should be offline"
+success "should be offline"

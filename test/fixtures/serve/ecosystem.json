@@ -1,0 +1,8 @@
+[{
+  "name"      : "frontend",
+  "script"    : "serve",
+  "env": {
+    "SERVE_PORT": 8081,
+    "SERVE_PATH": "."
+  }
+}]
