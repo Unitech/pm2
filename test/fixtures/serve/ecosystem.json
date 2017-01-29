@@ -2,7 +2,7 @@
   "name"      : "frontend",
   "script"    : "serve",
   "env": {
-    "SERVE_PORT": 8081,
-    "SERVE_PATH": "."
+    "PM2_SERVE_PORT": 8081,
+    "PM2_SERVE_PATH": "."
   }
 }]
