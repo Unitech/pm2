@@ -582,16 +582,12 @@ commander.command('logrotate')
 //
 // Sample generate
 //
-commander.command('generate')
-  .description('generate an ecosystem.json configuration file')
-  .action(function(name) {
-    pm2.generateSample(name);
-  });
 
-commander.command('ecosystem')
-  .description('generate an ecosystem.json configuration file')
-  .action(function(name) {
-    pm2.generateSample(name);
+commander.command('ecosystem [mode]')
+  .alias('generate')
+  .description('generate a process conf file. (mode = null or simple)')
+  .action(function(mode) {
+    pm2.generateSample(mode);
   });
 
 commander.command('reset <name|id|all>')

@@ -3,6 +3,7 @@
 - #2670 allow to expose a folder via `pm2 server <path> -p <port>`
 - #2617 fix startup script generation on macosx (launchd)
 - #2650 new option to append env name to app name (used to allow the same app to be launched in different environement w/o name conflict)
+- `pm2 ecosystem simple` to generate a simple ecosystem file
 - aliasing: `pm2-dev <script>` <=> `pm2-dev start <script>`
 - allow to pass a delay to pm2-docker (`pm2-docker process.json --delay 10`)
 
