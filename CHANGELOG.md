@@ -7,6 +7,7 @@
 - `pm2 ecosystem simple` to generate a simple ecosystem file
 - aliasing: `pm2-dev <script>` <=> `pm2-dev start <script>`
 - fix git parsing when using cwd
+- #2663 allow to directly output json when logging
 
 ## 2.3.0
 
