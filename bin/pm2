@@ -519,6 +519,7 @@ commander.command('unset <key>')
 
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .alias('interact')
+  .option('--info-node [url]', 'set url info node')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
   .action(pm2._pre_interact.bind(pm2));
 
@@ -582,16 +583,12 @@ commander.command('logrotate')
 //
 // Sample generate
 //
-commander.command('generate')
-  .description('generate an ecosystem.json configuration file')
-  .action(function(name) {
-    pm2.generateSample(name);
-  });
 
-commander.command('ecosystem')
-  .description('generate an ecosystem.json configuration file')
-  .action(function(name) {
-    pm2.generateSample(name);
+commander.command('ecosystem [mode]')
+  .alias('generate')
+  .description('generate a process conf file. (mode = null or simple)')
+  .action(function(mode) {
+    pm2.generateSample(mode);
   });
 
 commander.command('reset <name|id|all>')
@@ -805,6 +802,16 @@ commander.command('deepUpdate')
   .description('performs a deep update of PM2')
   .action(function() {
     pm2.deepUpdate();
+  });
+
+//
+// Launch a http server that expose a given path on given port
+//
+commander.command('serve [path] [port]')
+  .alias('expose')
+  .description('serve a directory over http via port')
+  .action(function (path, port) {
+    pm2.serve(path, port, commander);
   });
 
 //

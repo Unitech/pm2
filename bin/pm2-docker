@@ -17,6 +17,7 @@ var pm2;
 commander.version(pkg.version)
   .option('--raw', 'raw log output')
   .option('--json', 'output logs in json format')
+  .option('--delay <seconds>', 'delay start of configuration file by <seconds>', 0)
   .option('--web [port]', 'launch process web api on [port] default to 9615')
   .option('--format', 'output logs formated like key=val')
   .option('--only <application-name>', 'only act on one application of configuration')
@@ -84,16 +85,19 @@ function run(cmd, opts) {
 
   var timestamp = 'YYYY-MM-DD-HH:mm:ss';
 
-  pm2.start(cmd, opts, function(err, obj) {
-    if (err)
-      throw new Error(err.message);
-    if (commander.format)
-      Log.formatStream(pm2.Client, 'all', needRaw, timestamp, false);
-    else if (commander.json)
-      Log.jsonStream(pm2.Client);
-    else
-      Log.stream(pm2.Client, 'all', needRaw, timestamp, false);
-  });
+  function exec() {
+    pm2.start(cmd, opts, function(err, obj) {
+      if (err)
+        throw new Error(err.message);
+      if (commander.format)
+        Log.formatStream(pm2.Client, 'all', needRaw, timestamp, false);
+      else if (commander.json)
+        Log.jsonStream(pm2.Client);
+      else
+        Log.stream(pm2.Client, 'all', needRaw, timestamp, false);
+    });
+  }
+  setTimeout(exec.bind(this), opts.delay * 1000);
 }
 
 function exitPM2() {
