@@ -8,7 +8,7 @@ module.exports = {
     {
       name      : "API",
       script    : "http.js",
-      interpreter : "node@4.1.2"
+      interpreter : "node@6.9.0"
     }
   ]
 }
