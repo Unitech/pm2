@@ -12,7 +12,7 @@ TimeoutStartSec=8
 Environment=PATH=%NODE_PATH%:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 Environment=PM2_HOME=%HOME_PATH%
 Restart=always
-RestartSec=3
+RestartSec=8
 
 ExecStart=%PM2_PATH% resurrect --no-daemon
 ExecReload=%PM2_PATH% reload all

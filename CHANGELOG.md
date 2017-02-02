@@ -1,4 +1,4 @@
-## 2.3.1
+## 2.4.0
 
 - #2670 allow to expose a folder over http via `pm2 serve <path> <port>`
 - #2617 fix startup script generation on macosx (launchd)
@@ -8,6 +8,8 @@
 - aliasing: `pm2-dev <script>` <=> `pm2-dev start <script>`
 - fix git parsing when using cwd
 - #2663 allow to directly output json when logging
+- #2675 fix path when installing language module like typescript
+- #2674 increase restart timeout for systemd startup
 
 ## 2.3.0
 
