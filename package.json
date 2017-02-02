@@ -152,6 +152,7 @@
   },
   "dependencies": {
     "async": "1.5",
+    "blessed": "^0.1.81",
     "chalk": "^1.1",
     "chokidar": "^1.6.1",
     "cli-table": "0.3.1",

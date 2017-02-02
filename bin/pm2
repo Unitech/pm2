@@ -671,6 +671,16 @@ commander.command('monit')
     pm2.monit();
   });
 
+//
+// Dashboard command
+//
+commander.command('dashboard')
+  .alias('dash')
+  .description('launch dashboard with monitoring and logs')
+  .action(function() {
+    pm2.dashboard();
+  });
+
 
 //
 // Flushing command
