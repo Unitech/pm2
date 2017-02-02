@@ -7,7 +7,7 @@
 - `pm2 ecosystem simple` to generate a simple ecosystem file
 - aliasing: `pm2-dev <script>` <=> `pm2-dev start <script>`
 - fix git parsing when using cwd
-- #2663 allow to directly output json when logging
+- #2663 allow to directly output json when logging (via log_type for JSON and --log-type via CLI)
 - #2675 fix path when installing language module like typescript
 - #2674 increase restart timeout for systemd startup
 
