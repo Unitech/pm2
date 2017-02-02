@@ -662,18 +662,15 @@ commander.command('prettylist')
   }));
 
 //
-// Monitoring command
+// Dashboard command
 //
 commander.command('monit')
   .alias('m')
   .description('launch termcaps monitoring')
   .action(function() {
-    pm2.monit();
+    pm2.dashboard();
   });
 
-//
-// Dashboard command
-//
 commander.command('dashboard')
   .alias('dash')
   .description('launch dashboard with monitoring and logs')
