@@ -35,8 +35,6 @@ module.exports = function(PM2_HOME) {
     PM2_HOME                 : PM2_HOME,
     PM2_ROOT_PATH            : PM2_HOME,
 
-    PM2_INSTALL_PATH         : p.resolve('.'),
-
     PM2_CONF_FILE            : p.join(PM2_HOME, 'conf.js'),
     PM2_MODULE_CONF_FILE     : p.join(PM2_HOME, 'module_conf.json'),
 
@@ -63,6 +61,6 @@ module.exports = function(PM2_HOME) {
     pm2_file_stucture.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub.sock';
     pm2_file_stucture.INTERACTOR_RPC_PORT = '\\\\.\\pipe\\interactor.sock';
   }
-  
+
   return pm2_file_stucture;
 };
