@@ -41,6 +41,10 @@ describe('Daemonizer interactor', function() {
       }, function(err, data) {
         should(err).be.null();
         data.info_node.should.eql(default_conf.KEYMETRICS_ROOT_URL);
+
+        var interaction_conf     = json5.parse(fs.readFileSync(default_conf.INTERACTION_CONF));
+        interaction_conf.info_node.should.eql(default_conf.KEYMETRICS_ROOT_URL);
+
         return done();
       });
     });
@@ -51,6 +55,10 @@ describe('Daemonizer interactor', function() {
         data.secret_key.should.eql('xxx');
         data.public_key.should.eql('yyy');
         data.info_node.should.eql(default_conf.KEYMETRICS_ROOT_URL);
+
+        var interaction_conf     = json5.parse(fs.readFileSync(default_conf.INTERACTION_CONF));
+        interaction_conf.info_node.should.eql(default_conf.KEYMETRICS_ROOT_URL);
+
         return done();
       });
     });
