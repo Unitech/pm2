@@ -2,7 +2,6 @@
 
 var PM2    = require('../..');
 var should = require('should');
-var assert = require('better-assert');
 var path   = require('path');
 
 describe('Misc commands', function() {

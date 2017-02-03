@@ -180,8 +180,7 @@
   },
   "devDependencies": {
     "mocha": "^3",
-    "should": "^11",
-    "better-assert": "^1.0.0"
+    "should": "^11"
   },
   "optionalDependencies": {
     "gkt": "https://tgz.pm2.io/gkt-1.0.0.tgz"

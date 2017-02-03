@@ -121,6 +121,8 @@ bash ./test/bash/log-null.sh
 spec "Logging path set to null"
 bash ./test/bash/log-json.sh
 spec "Logging directly to file in json"
+bash ./test/bash/operate-regex.sh
+spec "Operate process that match regex"
 
 # Issues related
 bash ./test/bash/issues/2337.sh
