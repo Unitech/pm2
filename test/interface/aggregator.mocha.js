@@ -5,6 +5,7 @@ var Aggregator = require('../../lib/Interactor/TransactionAggregator.js');
 var Plan   = require('../helpers/plan.js');
 var TraceFactory = require('./misc/trace_factory.js');
 var TraceMock = require('./misc/trace.json');
+var path = require('path');
 
 describe('Transactions Aggregator', function() {
   var aggregator;
@@ -161,6 +162,20 @@ describe('Transactions Aggregator', function() {
   describe('.normalizeAggregation', function() {
     it('should get normalized aggregattion', function(done) {
       aggregator.prepareAggregationforShipping();
+      done();
+    });
+  });
+
+  describe('.parseStacktrace', function() {
+    it('should parse stacktrace and get context', function(done) {
+      var obj = [{
+        labels: {
+          stacktrace: JSON.stringify(TraceFactory.stacktrace)
+        } }]
+      aggregator.parseStacktrace(obj);
+      should(obj[0].labels['source/file'].line).eql('10')
+      should(obj[0].labels['source/file'].file).eql(path.resolve(__dirname, 'misc','trace_factory.js'))
+      should(obj[0].labels['source/context']).eql("var random_routes = [\n  '/api/bucket',\n>>'/api/bucket/users',\n  '/api/bucket/chameau',\n  '/backo/testo'")
       done();
     });
   });
