@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.4.0-beta4",
+  "version": "2.4.0-beta5",
   "engines": {
     "node": ">=0.10"
   },
@@ -173,10 +173,8 @@
     "shelljs": "0.7.5",
     "source-map-support": "^0.4.6",
     "vizion": "^0.2",
-    "yamljs": "0.2.8"
-  },
-  "peerDependencies" : {
-    "sprintf-js" : "*"
+    "yamljs": "0.2.8",
+    "sprintf-js" : "~1.0.2"
   },
   "devDependencies": {
     "mocha": "^3",
