@@ -5,7 +5,6 @@ process.env.NODE_ENV = 'test';
 var PM2    = require('../..');
 var should = require('should');
 var fs     = require('fs');
-var assert = require('better-assert');
 var path   = require('path');
 
 describe('Max memory restart programmatic', function() {

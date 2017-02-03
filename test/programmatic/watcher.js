@@ -1,5 +1,4 @@
-var should = require('should')
-var assert = require('better-assert');
+var should = require('should');
 var p = require('path');
 var fs = require('fs')
 var EventEmitter = require('events').EventEmitter

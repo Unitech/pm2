@@ -4,7 +4,6 @@ process.env.PM2_WORKER_INTERVAL = 1000;
 
 var PM2    = require('../..');
 var should = require('should');
-var assert = require('better-assert');
 var path   = require('path');
 
 // Change to current folder
