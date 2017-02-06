@@ -156,7 +156,7 @@ $ pm2 stop     <app_name|id|'all'|json_conf>
 $ pm2 restart  <app_name|id|'all'|json_conf>
 $ pm2 delete   <app_name|id|'all'|json_conf>
 ```
-To make sure it re-evaluates enviroment variables in your `json_conf` use 
+To make sure it re-evaluates enviroment variables in your `json_conf` use
 ```bash
 $ pm2 restart <json_conf>
 ```
@@ -193,7 +193,7 @@ $ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
 
 ### CPU / Memory Monitoring
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
+![Monit](https://github.com/Unitech/pm2/raw/master/pres/pm2-monit.png)
 
 Monitoring all processes launched:
 
