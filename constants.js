@@ -63,6 +63,8 @@ var csts = {
   SEND_INTERVAL           : 1000,
   GRACEFUL_TIMEOUT        : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
   GRACEFUL_LISTEN_TIMEOUT : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
+  LOGS_BUFFER             : 20,
+  CONTEXT_ON_ERROR        : 2,
 
   // Concurrent actions when doing start/restart/reload
   CONCURRENT_ACTIONS      : (function() {
