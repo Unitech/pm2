@@ -1,3 +1,10 @@
+
+## 2.4.1
+
+- #2703 allow custom timestamp with pm2-docker
+- #2698 fix unicode on pm2 monit
+- #2706 install pm2 modules via yarn if available
+
 ## 2.4.0
 
 - #2631 new pm2 monit command (blessed dashboard!)
