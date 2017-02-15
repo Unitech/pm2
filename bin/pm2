@@ -560,7 +560,7 @@ commander.command('resurrect')
 commander.command('unstartup [platform]')
   .description('disable and clear auto startup - [platform]=systemd,upstart,launchd,rcd')
   .action(function(platform) {
-    pm2.uninstallStartup(platform);
+    pm2.uninstallStartup(platform, commander);
   });
 
 //
