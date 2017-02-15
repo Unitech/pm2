@@ -197,7 +197,7 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 
 ### Bug fixes
 
-- #2093 #2092 #2059 #1906 #1758 #1696 replace optionnal git module with tgz one
+- #2093 #2092 #2059 #1906 #1758 #1696 replace optional git module with tgz one
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files
