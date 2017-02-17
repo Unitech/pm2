@@ -1,9 +1,14 @@
 
 ## 2.4.1
 
+- #2706 install pm2 modules via yarn if available
+- #2719 show 15 logs line bu default
 - #2703 allow custom timestamp with pm2-docker
 - #2698 fix unicode on pm2 monit
-- #2706 install pm2 modules via yarn if available
+- #2715 handle treekill edge case bug
+- Optimize CPU usage of pm2 monit command
+- [KM] Error reporting: add context (-B3 -A3 code lines)
+- [KM] Transaction Tracer: reset routes on app restart / wait some time before sending
 
 ## 2.4.0
 
