@@ -672,8 +672,8 @@ commander.command('monit')
     pm2.dashboard();
   });
 
-commander.command('oldmonit')
-  .description('launch termcaps monitoring')
+commander.command('imonit')
+  .description('launch legacy termcaps monitoring')
   .action(function() {
     pm2.monit();
   });

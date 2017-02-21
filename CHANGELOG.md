@@ -1,6 +1,9 @@
 
 ## 2.4.1
 
+- #2699 add back previous termcaps interface via `pm2 imonit`
+- #2681 fix log folder create
+- #2724 make sure process is stopped even if there is a restart_delay
 - #2706 install pm2 modules via yarn if available
 - #2719 show 15 logs line bu default
 - #2703 allow custom timestamp with pm2-docker
