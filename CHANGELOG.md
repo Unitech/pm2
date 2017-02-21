@@ -1,6 +1,8 @@
 
 ## 2.4.1
 
+- #2720 multi user startup script
+- #2266 start and tail logs via `pm2 start app.js --attach`
 - #2699 add back previous termcaps interface via `pm2 imonit`
 - #2681 fix log folder create
 - #2724 make sure process is stopped even if there is a restart_delay
