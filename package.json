@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.4.0",
+  "version": "2.4.1-beta1",
   "engines": {
     "node": ">=0.10"
   },
@@ -169,7 +169,7 @@
     "pm2-axon-rpc": "0.4.5",
     "pm2-deploy": "^0.3.5",
     "pm2-multimeter": "^0.1.2",
-    "pmx": "keymetrics/pmx#development",
+    "pmx": "^1.0.1",
     "semver": "^5.2",
     "shelljs": "0.7.6",
     "source-map-support": "^0.4.6",
