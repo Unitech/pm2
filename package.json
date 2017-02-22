@@ -169,7 +169,7 @@
     "pm2-axon-rpc": "0.4.5",
     "pm2-deploy": "^0.3.5",
     "pm2-multimeter": "^0.1.2",
-    "pmx": "^1.0.1",
+    "pmx": "^1.0.2",
     "semver": "^5.2",
     "shelljs": "0.7.6",
     "source-map-support": "^0.4.6",
