@@ -35,7 +35,7 @@ module.exports = {
       ref  : "origin/master",
       repo : "git@github.com:repo.git",
       path : "/var/www/production",
-      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.config.js --env production"
     },
     dev : {
       user : "node",
@@ -43,7 +43,7 @@ module.exports = {
       ref  : "origin/master",
       repo : "git@github.com:repo.git",
       path : "/var/www/development",
-      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env dev",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.config.js --env dev",
       env  : {
         NODE_ENV: "dev"
       }
