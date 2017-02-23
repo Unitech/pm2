@@ -12,6 +12,7 @@
 - #2698 fix unicode on pm2 monit
 - #2715 handle treekill edge case bug
 - Optimize CPU usage of pm2 monit command
+- [KM] URL web access dashboard
 - [KM] Error reporting: add context (-B3 -A3 code lines)
 - [KM] Transaction Tracer: reset routes on app restart / wait some time before sending
 
