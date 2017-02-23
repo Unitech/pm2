@@ -13,6 +13,7 @@
 - #2715 handle treekill edge case bug
 - Optimize CPU usage of pm2 monit command
 - [KM] URL web access dashboard
+- [KM] Auto install pm2-server-monit on keymetrics linking
 - [KM] Error reporting: add context (-B3 -A3 code lines)
 - [KM] Transaction Tracer: reset routes on app restart / wait some time before sending
 
