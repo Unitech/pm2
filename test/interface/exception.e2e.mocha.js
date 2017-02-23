@@ -72,7 +72,7 @@ describe('Programmatically test interactor', function() {
           var packet = JSON.parse(data);
 
           if (packet.data['process:exception']) {
-            packet.data['process:exception'][0].data.callsite.should.containEql('process_exception_with_logs.js:8');
+            packet.data['process:exception'][0].data.callsite.should.containEql('process_exception_with_logs.js:7');
             packet.data['process:exception'][0].data.context.should.containEql('console.log');
             packet.data['process:exception'][0].data.last_logs.length.should.eql(3);
             packet.data['process:exception'][0].data.last_logs[0].should.containEql('Im going to crash');
