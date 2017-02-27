@@ -147,7 +147,7 @@ describe('Transactions Aggregator', function() {
   describe('.aggregate', function() {
     it('should not fail', function() {
       var dt = aggregator.aggregate(null);
-      should(dt).be.undefined();
+      should(dt).be.false();
     });
 
     it('should aggregate', function() {
@@ -161,8 +161,8 @@ describe('Transactions Aggregator', function() {
       packet = TraceFactory.generatePacket('sisi/aight', 'appname');
       aggregator.aggregate(packet);
       packet = TraceFactory.generatePacket('sisi/aight', 'APP2');
+
       var agg = aggregator.aggregate(packet);
-      should(agg).not.be.undefined();
 
       // should get 2 apps in agg
       should.exist(agg['appname']);
@@ -173,13 +173,18 @@ describe('Transactions Aggregator', function() {
       should.exist(agg['appname'].process);
       agg['appname'].meta.trace_count.should.eql(4);
       should.exist(agg['appname'].meta.mean_latency);
+
+      // should pm_id not taken into account
+      should.not.exist(agg['appname'].process.pm_id);
     });
   });
 
 
   describe('.normalizeAggregation', function() {
     it('should get normalized aggregattion', function(done) {
-      aggregator.prepareAggregationforShipping();
+      var ret = aggregator.prepareAggregationforShipping();
+      should.exist(ret['appname'].process.server);
+      should.exist(ret['APP2'].process.server);
       done();
     });
   });
