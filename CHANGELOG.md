@@ -1,4 +1,8 @@
 
+## 2.4.2
+
+- [KM] Disable pm2-server-monit auto install
+
 ## 2.4.1
 
 - #2720 multi user startup script
