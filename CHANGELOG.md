@@ -1,4 +1,10 @@
 
+## 2.4.3
+
+- #2759 disable default require of vxx in pmx
+- #2651 always spawn pm2 daemon with `node` binary
+- #2745 new issue template
+
 ## 2.4.2
 
 - [KM] Disable pm2-server-monit auto install
