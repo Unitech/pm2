@@ -4,6 +4,8 @@
 - #2759 disable default require of vxx in pmx
 - #2651 always spawn pm2 daemon with `node` binary
 - #2745 new issue template
+- #2761 Make JSON log stream timestamp in consistent format
+- #2770 Fix trigger API never calling callback 
 
 ## 2.4.2
 
