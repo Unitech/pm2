@@ -1,3 +1,26 @@
+
+## 2.4.2
+
+- [KM] Disable pm2-server-monit auto install
+
+## 2.4.1
+
+- #2720 multi user startup script
+- #2266 start and tail logs via `pm2 start app.js --attach`
+- #2699 add back previous termcaps interface via `pm2 imonit`
+- #2681 fix log folder create
+- #2724 make sure process is stopped even if there is a restart_delay
+- #2706 install pm2 modules via yarn if available
+- #2719 show 15 logs line bu default
+- #2703 allow custom timestamp with pm2-docker
+- #2698 fix unicode on pm2 monit
+- #2715 handle treekill edge case bug
+- Optimize CPU usage of pm2 monit command
+- [KM] URL web access dashboard
+- [KM] Auto install pm2-server-monit on keymetrics linking
+- [KM] Error reporting: add context (-B3 -A3 code lines)
+- [KM] Transaction Tracer: reset routes on app restart / wait some time before sending
+
 ## 2.4.0
 
 - #2631 new pm2 monit command (blessed dashboard!)
@@ -190,7 +213,7 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 
 ### Bug fixes
 
-- #2093 #2092 #2059 #1906 #1758 #1696 replace optionnal git module with tgz one
+- #2093 #2092 #2059 #1906 #1758 #1696 replace optional git module with tgz one
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files

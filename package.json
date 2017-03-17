@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.4.0",
+  "version": "2.4.2",
   "engines": {
     "node": ">=0.10"
   },
@@ -160,7 +160,7 @@
     "cron": "1.2.1",
     "debug": "^2.3.2",
     "eventemitter2": "1.0.5",
-    "fclone": "1.0.10",
+    "fclone": "1.0.11",
     "mkdirp": "0.5.1",
     "moment": "^2.15",
     "nssocket": "0.6.0",
@@ -168,13 +168,14 @@
     "pm2-axon": "3.0.2",
     "pm2-axon-rpc": "0.4.5",
     "pm2-deploy": "^0.3.5",
-    "pmx": "^1.0.1",
+    "pm2-multimeter": "^0.1.2",
+    "pmx": "^1.0.2",
     "semver": "^5.2",
-    "shelljs": "0.7.5",
+    "shelljs": "0.7.6",
     "source-map-support": "^0.4.6",
+    "sprintf-js": "~1.0.2",
     "vizion": "^0.2",
-    "yamljs": "0.2.8",
-    "sprintf-js" : "~1.0.2"
+    "yamljs": "0.2.8"
   },
   "devDependencies": {
     "mocha": "^3",

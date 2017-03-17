@@ -17,6 +17,7 @@ var pm2;
 commander.version(pkg.version)
   .option('--raw', 'raw log output')
   .option('--json', 'output logs in json format')
+  .option('--log-date-format <momentjs format>', 'add custom prefix timestamp to logs')
   .option('--delay <seconds>', 'delay start of configuration file by <seconds>', 0)
   .option('--web [port]', 'launch process web api on [port] default to 9615')
   .option('--format', 'output logs formated like key=val')
@@ -83,7 +84,9 @@ process.on('SIGTERM', function() {
 function run(cmd, opts) {
   var needRaw = commander.raw;
 
-  var timestamp = 'YYYY-MM-DD-HH:mm:ss';
+  var timestamp = commander.logDateFormat;
+  if (timestamp)
+    timestamp = typeof cmd.timestamp === 'string' ? cmd.timestamp : 'YYYY-MM-DD-HH:mm:ss';
 
   function exec() {
     pm2.start(cmd, opts, function(err, obj) {

@@ -77,7 +77,10 @@ exports.generatePacket = function(route, app_name) {
   return {
     data : generateTrace(route),
     process : {
-      name : app_name
+      name : app_name,
+      pm_id : 4,
+      server : 'test',
+      rev : 'xxx'
     }
   };
 };

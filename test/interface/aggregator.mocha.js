@@ -2,16 +2,34 @@
 process.env.DEBUG='pm2:aggregator';
 var should    = require('should');
 var Aggregator = require('../../lib/Interactor/TransactionAggregator.js');
+var Utility = require('../../lib/Interactor/Utility.js');
 var Plan   = require('../helpers/plan.js');
 var TraceFactory = require('./misc/trace_factory.js');
 var TraceMock = require('./misc/trace.json');
 var path = require('path');
+var fs = require('fs');
 
 describe('Transactions Aggregator', function() {
   var aggregator;
+  var stackParser;
+
+  it('should instanciate context cache', function() {
+    var cache = new Utility.Cache({
+      miss: function (key) {
+        try {
+          var content = fs.readFileSync(path.resolve(key));
+          return content.toString().split(/\r?\n/);
+        } catch (err) {
+          return undefined;
+        }
+      }
+    })
+
+    stackParser = new Utility.StackTraceParser({ cache: cache, context: 2});
+  });
 
   it('should instanciate aggregator', function() {
-    aggregator = new Aggregator();
+    aggregator = new Aggregator({ stackParser: stackParser});
   });
 
   describe('.censorSpans', function() {
@@ -129,7 +147,7 @@ describe('Transactions Aggregator', function() {
   describe('.aggregate', function() {
     it('should not fail', function() {
       var dt = aggregator.aggregate(null);
-      should(dt).be.undefined();
+      should(dt).be.false();
     });
 
     it('should aggregate', function() {
@@ -143,8 +161,8 @@ describe('Transactions Aggregator', function() {
       packet = TraceFactory.generatePacket('sisi/aight', 'appname');
       aggregator.aggregate(packet);
       packet = TraceFactory.generatePacket('sisi/aight', 'APP2');
+
       var agg = aggregator.aggregate(packet);
-      should(agg).not.be.undefined();
 
       // should get 2 apps in agg
       should.exist(agg['appname']);
@@ -155,13 +173,18 @@ describe('Transactions Aggregator', function() {
       should.exist(agg['appname'].process);
       agg['appname'].meta.trace_count.should.eql(4);
       should.exist(agg['appname'].meta.mean_latency);
+
+      // should pm_id not taken into account
+      should.not.exist(agg['appname'].process.pm_id);
     });
   });
 
 
   describe('.normalizeAggregation', function() {
     it('should get normalized aggregattion', function(done) {
-      aggregator.prepareAggregationforShipping();
+      var ret = aggregator.prepareAggregationforShipping();
+      should.exist(ret['appname'].process.server);
+      should.exist(ret['APP2'].process.server);
       done();
     });
   });
@@ -173,8 +196,7 @@ describe('Transactions Aggregator', function() {
           stacktrace: JSON.stringify(TraceFactory.stacktrace)
         } }]
       aggregator.parseStacktrace(obj);
-      should(obj[0].labels['source/file'].line).eql('10')
-      should(obj[0].labels['source/file'].file).eql(path.resolve(__dirname, 'misc','trace_factory.js'))
+      obj[0].labels['source/file'].indexOf('test/interface/misc/trace_factory.js:10').should.be.above(0);
       should(obj[0].labels['source/context']).eql("var random_routes = [\n  '/api/bucket',\n>>'/api/bucket/users',\n  '/api/bucket/chameau',\n  '/backo/testo'")
       done();
     });
