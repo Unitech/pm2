@@ -119,7 +119,7 @@ describe('Transactions Aggregator', function() {
 
     it('should add a trace', function() {
       aggregator.mergeTrace(ROUTES['yoloswag/swag'], trace)
-      ROUTES['yoloswag/swag'].meta.count.should.be.equal(1);
+      ROUTES['yoloswag/swag'].meta.histogram.getCount().should.be.equal(1);
       ROUTES['yoloswag/swag'].variances.length.should.be.equal(1);
       ROUTES['yoloswag/swag'].variances[0].spans.length.should.be.equal(3);
     });
@@ -127,7 +127,7 @@ describe('Transactions Aggregator', function() {
     it('should merge with the first variance', function() {
       aggregator.mergeTrace(ROUTES['yoloswag/swag'], trace);
       ROUTES['yoloswag/swag'].variances.length.should.be.equal(1);
-      ROUTES['yoloswag/swag'].variances[0].count.should.be.equal(2);
+      ROUTES['yoloswag/swag'].variances[0].histogram.getCount().should.be.equal(2);
     });
 
     it('should merge as a new variance with the same route', function () {
@@ -136,10 +136,10 @@ describe('Transactions Aggregator', function() {
         span.min = span.max = span.mean = Math.round(new Date(span.endTime) - new Date(span.startTime));
       })
       aggregator.mergeTrace(ROUTES['yoloswag/swag'], trace2);
-      ROUTES['yoloswag/swag'].meta.count.should.be.equal(3);
+      ROUTES['yoloswag/swag'].meta.histogram.getCount().should.be.equal(3);
       ROUTES['yoloswag/swag'].variances.length.should.be.equal(2);
-      ROUTES['yoloswag/swag'].variances[0].count.should.be.equal(2);
-      ROUTES['yoloswag/swag'].variances[1].count.should.be.equal(1);
+      ROUTES['yoloswag/swag'].variances[0].histogram.getCount().should.be.equal(2);
+      ROUTES['yoloswag/swag'].variances[1].histogram.getCount().should.be.equal(1);
       ROUTES['yoloswag/swag'].variances[1].spans.length.should.be.equal(4);
     });
   });
@@ -172,7 +172,7 @@ describe('Transactions Aggregator', function() {
       Object.keys(agg['appname'].routes).length.should.eql(2);
       should.exist(agg['appname'].process);
       agg['appname'].meta.trace_count.should.eql(4);
-      should.exist(agg['appname'].meta.mean_latency);
+      should.exist(agg['appname'].meta.histogram.percentiles([0.5])[0.5]);
 
       // should pm_id not taken into account
       should.not.exist(agg['appname'].process.pm_id);
