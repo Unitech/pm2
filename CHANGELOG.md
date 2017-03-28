@@ -6,6 +6,7 @@
 - #2745 new issue template
 - #2761 Make JSON log stream timestamp in consistent format
 - #2770 Fix trigger API never calling callback
+- #2796 Fix absolute path on windows
 - [KM] profiler installation via `pm2 install v8-profiler` or `pm2 install profiler`
 
 ## 2.4.2
