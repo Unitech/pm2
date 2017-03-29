@@ -109,5 +109,7 @@ mocha --opts ./mocha.opts  ./stacktrace.mocha.js
 spec "Stacktrace Utility"
 mocha --opts ./mocha.opts  ./cache.mocha.js
 spec "Cache Utility"
+mocha --opts ./mocha.opts  ./filter.mocha.js
+spec "Filter Utility"
 mocha --opts ./mocha.opts  ./pm2.link.check.mocha.js
 spec "Transaction option enablement"
