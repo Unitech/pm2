@@ -105,5 +105,9 @@ mocha --opts ./mocha.opts  ./request.mocha.js
 spec "Protocol communication test"
 mocha --opts ./mocha.opts  ./aggregator.mocha.js
 spec "Transaction trace aggregator test"
+mocha --opts ./mocha.opts  ./stacktrace.mocha.js
+spec "Stacktrace Utility"
+mocha --opts ./mocha.opts  ./cache.mocha.js
+spec "Cache Utility"
 mocha --opts ./mocha.opts  ./pm2.link.check.mocha.js
 spec "Transaction option enablement"
