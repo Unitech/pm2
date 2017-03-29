@@ -189,17 +189,4 @@ describe('Transactions Aggregator', function() {
     });
   });
 
-  describe('.parseStacktrace', function() {
-    it('should parse stacktrace and get context', function(done) {
-      var obj = [{
-        labels: {
-          stacktrace: JSON.stringify(TraceFactory.stacktrace)
-        } }]
-      aggregator.parseStacktrace(obj);
-      obj[0].labels['source/file'].indexOf('test/interface/misc/trace_factory.js:10').should.be.above(0);
-      should(obj[0].labels['source/context']).eql("var random_routes = [\n  '/api/bucket',\n>>'/api/bucket/users',\n  '/api/bucket/chameau',\n  '/backo/testo'")
-      done();
-    });
-  });
-
 });

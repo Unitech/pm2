@@ -140,6 +140,7 @@ exports.stacktrace = {
   ]
 }
 
+
 if (require.main === module) {
   console.log(generateTrace());
 }
