@@ -62,22 +62,24 @@ describe('Transactions Aggregator', function() {
 
     it('should be an identifier (uuid)', function() {
       aggregator.isIdentifier('123e4567-e89b-12d3-a456-426655440000').should.equal(true);
+      aggregator.isIdentifier('123e4567e89b12d3a456426655440000').should.equal(true);
     });
 
-    it('should be an identifier (uuid w/o dash)', function() {
-      aggregator.isIdentifier('123e4567e89b12d3a456426655440000').should.equal(true);
+    it('should be an identifier', function() {
+      aggregator.isIdentifier('toto-toto-tooa').should.equal(true);
+      aggregator.isIdentifier('toto@toto.fr').should.equal(true);
+      aggregator.isIdentifier('toto@toto.fr').should.equal(true);
+      aggregator.isIdentifier('fontawesome-webfont.eot').should.equal(true);
+      aggregator.isIdentifier('life_is_just_fantasy').should.equal(true);
+      aggregator.isIdentifier('OR-IS_THIS-REAL_LIFE').should.equal(true);
     });
 
     it('should be NOT an identifier', function() {
       aggregator.isIdentifier('bucket').should.equal(false);
-    });
-
-    it('should be NOT an identifier', function() {
       aggregator.isIdentifier('admin').should.equal(false);
-    });
-
-    it('should be NOT an identifier', function() {
       aggregator.isIdentifier('auth').should.equal(false);
+      aggregator.isIdentifier('users').should.equal(false);
+      aggregator.isIdentifier('version').should.equal(false);
     });
   });
 
