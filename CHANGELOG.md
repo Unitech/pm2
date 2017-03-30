@@ -8,6 +8,7 @@
 - #2770 Fix trigger API never calling callback
 - #2796 Fix absolute path on windows
 - [KM] profiler installation via `pm2 install v8-profiler` or `pm2 install profiler`
+- [KM] Agent rescue system
 
 ## 2.4.2
 
