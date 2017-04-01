@@ -156,9 +156,9 @@ $ pm2 stop     <app_name|id|'all'|json_conf>
 $ pm2 restart  <app_name|id|'all'|json_conf>
 $ pm2 delete   <app_name|id|'all'|json_conf>
 ```
-To make sure it re-evaluates enviroment variables in your `json_conf` use
+To make sure it re-evaluates enviroment variables declared in your `json_conf` pass it as argument, and optionally your custom `env` name from your `json_conf` if any:
 ```bash
-$ pm2 restart <json_conf>
+$ pm2 restart <json_conf> [--env <env_name>]
 ```
 
 To have more details on a specific process:
