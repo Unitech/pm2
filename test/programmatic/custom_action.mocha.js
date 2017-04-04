@@ -12,12 +12,16 @@ describe('Custom actions via CLI/API', function() {
   });
 
   before(function(done) {
-    pm2.connect(done);
+    pm2.connect(function() {
+      pm2.kill(function() {
+        pm2.connect(done);
+      })
+    });
   });
 
   it('should start custom action script', function(done) {
     pm2.start('./../fixtures/custom_actions/index.js', function() {
-      setTimeout(done, 800);
+      setTimeout(done, 1200);
     });
   });
 
