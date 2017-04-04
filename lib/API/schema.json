@@ -44,6 +44,9 @@
   "instances": {
     "type": "number"
   },
+  "instance_var": {
+    "type": "string"
+  },
   "kill_timeout": {
     "type": "number"
   },

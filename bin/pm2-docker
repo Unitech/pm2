@@ -30,6 +30,7 @@ commander.version(pkg.version)
   .option('--env [name]', 'select env_[name] env variables in process config file')
   .option('--watch', 'Watch and Restart')
   .option('-i --instances <number>', 'launch [number] instances with load-balancer')
+  .option('--instance-var <name>', 'in clustered mode, assign the instance # to environment variable NAME')
   .usage('start <app>');
 
 function start(cmd, opts) {
