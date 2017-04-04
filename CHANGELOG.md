@@ -1,4 +1,8 @@
 
+## 2.4.4
+
+- #2806 fix reconnection to keymetrics
+
 ## 2.4.3
 
 - #2759 disable default require of vxx in pmx
