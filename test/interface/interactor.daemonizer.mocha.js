@@ -96,6 +96,22 @@ describe('Daemonizer interactor', function() {
         return done();
       });
     });
+
+    it('should retrieve the same data with null fields', function(done) {
+      interactorDaemonizer.getOrSetConf(default_conf, {
+        secret_key : null,
+        public_key : null,
+        machine_name : null,
+        info_node : null
+      }, function(err, data) {
+        should(err).be.null();
+        data.secret_key.should.eql('XXXS2');
+        data.public_key.should.eql('XXXP2');
+        data.info_node.should.eql('test2.url');
+        return done();
+      });
+    });
+
   });
 
   describe('Environment variable override', function() {
