@@ -176,7 +176,7 @@
     "source-map-support": "^0.4.6",
     "sprintf-js": "~1.0.2",
     "vizion": "^0.2",
-    "yamljs": "0.2.8"
+    "yamljs": "0.2.9"
   },
   "devDependencies": {
     "mocha": "^3",
