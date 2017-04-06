@@ -3,7 +3,7 @@
   "preferGlobal": true,
   "version": "2.4.5",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=0.12"
   },
   "directories": {
     "bin": "./bin",
@@ -23,6 +23,10 @@
     {
       "name": "soyuka",
       "email": "soyuka@gmail.com"
+    },
+    {
+      "name": "vmarchaud",
+      "email": "contact@vmarchaud.fr"
     },
     {
       "name": "rlidwka",
