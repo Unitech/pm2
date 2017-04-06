@@ -2,10 +2,12 @@
 ## 2.4.5
 
 - #2818 alias pm2-docker to pm2-runtime
+- #2815 polyfill for path.isAbsolute for node v0.11
 
 ### Breaking change
 
 - rundev command has been dropped because of too low adoption
+- dropped support for nodejs versions under 0.12
 
 ## 2.4.4
 
