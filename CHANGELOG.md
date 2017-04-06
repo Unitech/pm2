@@ -1,4 +1,12 @@
 
+## 2.4.5
+
+- #2818 alias pm2-docker to pm2-runtime
+
+### Breaking change
+
+- rundev command has been dropped because of too low adoption
+
 ## 2.4.4
 
 - #2806 fix reconnection to keymetrics
