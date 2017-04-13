@@ -182,5 +182,8 @@
     "type": [
       "boolean"
     ]
+  },
+  "increment": {
+    "type": "number"
   }
 }
