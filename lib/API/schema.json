@@ -184,6 +184,6 @@
     ]
   },
   "increment": {
-    "type": "number"
+    "type": "string"
   }
 }
