@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.4.4",
+  "version": "2.4.5",
   "engines": {
     "node": ">=0.10"
   },
@@ -181,9 +181,6 @@
   "devDependencies": {
     "mocha": "^3",
     "should": "^11"
-  },
-  "optionalDependencies": {
-    "gkt": "https://tgz.pm2.io/gkt-1.0.0.tgz"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
