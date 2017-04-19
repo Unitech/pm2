@@ -3,7 +3,7 @@ var assert = require('assert');
 var Utility = require('../../lib/Utility.js');
 
 describe('Utility', function() {
-  describe('.getCanonicModuleName', () => {
+  describe('.getCanonicModuleName', function () {
     it('should get null without invalid parameters', function() {
       assert(Utility.getCanonicModuleName() === null);
       assert(Utility.getCanonicModuleName(/aa/) === null);
