@@ -11,6 +11,8 @@ spec "Should unset all variables"
 ls ~/.pm2/module_conf.json
 spec "Should file exists"
 
+$pm2 get
+
 $pm2 set key1 val1
 cat ~/.pm2/module_conf.json | grep "key1"
 spec "Should key exists"
