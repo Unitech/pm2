@@ -57,9 +57,7 @@ describe('PM2 link variable checks', function() {
         daemon_mode: true
       });
 
-      pm2.connect(function(err, data) {
-        done();
-      });
+      pm2.connect(done);
     });
 
     after(function(done) {
@@ -70,9 +68,7 @@ describe('PM2 link variable checks', function() {
       pm2.start({
         script : 'http.js',
         trace : true
-      }, function(err) {
-        done();
-      })
+      }, done)
     });
 
     it('should have km_link to false', function(done) {
@@ -84,7 +80,7 @@ describe('PM2 link variable checks', function() {
           dt[0].pm2_env.axm_options.tracing_enabled.should.be.true();
           done();
         });
-      }, 500);
+      }, 1000);
     });
   });
 

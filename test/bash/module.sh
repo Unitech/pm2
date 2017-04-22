@@ -77,7 +77,7 @@ spec "Should uninstall a module"
 should 'should module not be online' 'online' 0
 
 ls ~/.pm2/node_modules/pm2-probe
-ispec "Module should be installed"
+ispec "Module should be deleted"
 
 $pm2 update
 should 'should module not be online' 'online' 0

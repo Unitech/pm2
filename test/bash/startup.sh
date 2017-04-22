@@ -13,9 +13,9 @@ cd $file_path
 
 $pm2 startup upstart -u $USER --hp $HOME
 spec "should startup command generation exited succesfully"
-test -e /etc/init.d/pm2
+test -e /etc/init.d/pm2-$USER
 spec "should have generated upstart file"
 $pm2 unstartup upstart
 spec "should have disabled startup"
-! test -e /etc/init.d/pm2
+! test -e /etc/init.d/pm2-$USER
 spec "should have deleted upstart file"

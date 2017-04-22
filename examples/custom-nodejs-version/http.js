@@ -1,6 +1,8 @@
 
 var http = require('http');
 
+console.log(process.version);
+
 var server = http.createServer(function(req, res) {
   res.writeHead(200);
   res.end('hey');

@@ -156,6 +156,10 @@ $ pm2 stop     <app_name|id|'all'|json_conf>
 $ pm2 restart  <app_name|id|'all'|json_conf>
 $ pm2 delete   <app_name|id|'all'|json_conf>
 ```
+To make sure it re-evaluates enviroment variables in your `json_conf` use
+```bash
+$ pm2 restart <json_conf>
+```
 
 To have more details on a specific process:
 
@@ -189,7 +193,7 @@ $ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
 
 ### CPU / Memory Monitoring
 
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-monit.png)
+![Monit](https://github.com/Unitech/pm2/raw/master/pres/pm2-monit.png)
 
 Monitoring all processes launched:
 
@@ -294,7 +298,6 @@ Thanks in advance and we hope that you like PM2!
 
 ## License
 
-PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
-In case you use the PM2 API, embed PM2 in your software or edit the PM2 source code, please contact us to find a licensing agreement: [Contact us](https://keymetrics.io/contact/).
+PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0). If you use the PM2 API [contact us](https://keymetrics.io/contact/) for a possible LGPL license.
 
 [![GA](https://ga-beacon.appspot.com/UA-51734350-7/pm2/readme?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)

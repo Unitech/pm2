@@ -35,23 +35,23 @@ module.exports = function(PM2_HOME) {
     PM2_HOME                 : PM2_HOME,
     PM2_ROOT_PATH            : PM2_HOME,
 
-    PM2_CONF_FILE            : p.join(PM2_HOME, 'conf.js'),
-    PM2_MODULE_CONF_FILE     : p.join(PM2_HOME, 'module_conf.json'),
+    PM2_CONF_FILE            : p.resolve(PM2_HOME, 'conf.js'),
+    PM2_MODULE_CONF_FILE     : p.resolve(PM2_HOME, 'module_conf.json'),
 
-    PM2_LOG_FILE_PATH        : p.join(PM2_HOME, 'pm2.log'),
-    PM2_PID_FILE_PATH        : p.join(PM2_HOME, 'pm2.pid'),
+    PM2_LOG_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.log'),
+    PM2_PID_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.pid'),
 
-    DEFAULT_PID_PATH         : p.join(PM2_HOME, 'pids'),
-    DEFAULT_LOG_PATH         : p.join(PM2_HOME, 'logs'),
-    DUMP_FILE_PATH           : p.join(PM2_HOME, 'dump.pm2'),
+    DEFAULT_PID_PATH         : p.resolve(PM2_HOME, 'pids'),
+    DEFAULT_LOG_PATH         : p.resolve(PM2_HOME, 'logs'),
+    DUMP_FILE_PATH           : p.resolve(PM2_HOME, 'dump.pm2'),
 
-    DAEMON_RPC_PORT          : p.join(PM2_HOME, 'rpc.sock'),
-    DAEMON_PUB_PORT          : p.join(PM2_HOME, 'pub.sock'),
-    INTERACTOR_RPC_PORT      : p.join(PM2_HOME, 'interactor.sock'),
+    DAEMON_RPC_PORT          : p.resolve(PM2_HOME, 'rpc.sock'),
+    DAEMON_PUB_PORT          : p.resolve(PM2_HOME, 'pub.sock'),
+    INTERACTOR_RPC_PORT      : p.resolve(PM2_HOME, 'interactor.sock'),
 
-    INTERACTOR_LOG_FILE_PATH : p.join(PM2_HOME, 'agent.log'),
-    INTERACTOR_PID_PATH      : p.join(PM2_HOME, 'agent.pid'),
-    INTERACTION_CONF         : p.join(PM2_HOME, 'agent.json5')
+    INTERACTOR_LOG_FILE_PATH : p.resolve(PM2_HOME, 'agent.log'),
+    INTERACTOR_PID_PATH      : p.resolve(PM2_HOME, 'agent.pid'),
+    INTERACTION_CONF         : p.resolve(PM2_HOME, 'agent.json5')
   };
 
   if (process.platform === 'win32' ||

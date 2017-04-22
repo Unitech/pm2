@@ -61,6 +61,7 @@ describe('Programmatically test interactor', function() {
         script : 'process_exception_with_logs.js',
         name   : 'API'
       }, function(err, data) {
+        if (err) done(err);
         //console.log(arguments);
       });
     });
@@ -71,9 +72,9 @@ describe('Programmatically test interactor', function() {
           var packet = JSON.parse(data);
 
           if (packet.data['process:exception']) {
-            //console.dir(packet.data['process:exception'][0].data.last_logs);
-            //packet.data['process:exception'][0].data.last_logs.length.should.eql(3);
-            packet.data['process:exception'][0].data.last_logs[0].should.containEql('Im going to crash');
+            packet.data['process:exception'][0].data.callsite.should.containEql('process_exception_with_logs.js:7');
+            packet.data['process:exception'][0].data.context.should.containEql('console.log');
+            should.exist(packet.data['process:exception'][0].data.last_logs);
             //console.log
             done();
           }

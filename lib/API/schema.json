@@ -64,6 +64,9 @@
     "type": "string",
     "alias": ["error", "err", "err_file", "err_log"]
   },
+  "log_type": {
+    "type": "string"
+  },
   "out_file": {
     "type": "string",
     "alias": ["output", "out", "out_log"]
@@ -164,7 +167,7 @@
   "force": {
     "type": "boolean"
   },
-  "appendEnvToName": {
+  "append_env_to_name": {
       "type": "boolean"
   },
   "post_update": {

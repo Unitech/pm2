@@ -54,9 +54,9 @@ mocha --opts ./mocha.opts  ./logs.js
 spec "Logs test"
 mocha --opts ./mocha.opts  ./watcher.js
 spec "Watcher"
-# mocha --opts ./mocha.opts  ./modularizer.mocha.js
-# spec "Module system"
 mocha --opts ./mocha.opts  ./max_memory_limit.js
+spec "Max memory tests"
+mocha --opts ./mocha.opts  ./module_configuration.mocha.js
 spec "Max memory tests"
 mocha --opts ./mocha.opts  ./cluster.mocha.js
 spec "Cluster tests"
@@ -105,5 +105,13 @@ mocha --opts ./mocha.opts  ./request.mocha.js
 spec "Protocol communication test"
 mocha --opts ./mocha.opts  ./aggregator.mocha.js
 spec "Transaction trace aggregator test"
+mocha --opts ./mocha.opts  ./stacktrace.mocha.js
+spec "Stacktrace Utility"
+mocha --opts ./mocha.opts  ./cache.mocha.js
+spec "Cache Utility"
+mocha --opts ./mocha.opts  ./filter.mocha.js
+spec "Filter Utility"
+mocha --opts ./mocha.opts  ./utility.mocha.js
+spec "PM2 Utility"
 mocha --opts ./mocha.opts  ./pm2.link.check.mocha.js
 spec "Transaction option enablement"

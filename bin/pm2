@@ -34,6 +34,7 @@ commander.version(pkg.version)
   .option('--max-memory-restart <memory>', 'specify max memory amount used to autorestart (in octet or use syntax like 100M)')
   .option('--restart-delay <delay>', 'specify a delay between restarts (in milliseconds)')
   .option('--env <environment_name>', 'specify environment to get specific env variables (for JSON declaration)')
+  .option('--log-type <type>', 'specify log output style (raw by default, json optional)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('--max-restarts [count]', 'only restart the script COUNT times')
   .option('-u --user <username>', 'define user when generating startup script')
@@ -61,6 +62,7 @@ commander.version(pkg.version)
   .option('--no-automation', 'start an app without pmx')
   .option('--trace', 'enable transaction tracing with km')
   .option('--disable-trace', 'disable transaction tracing with km')
+  .option('--attach', 'attach logging after your start/restart/stop/reload')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
@@ -481,7 +483,7 @@ commander.command('publish')
     pm2.publish();
   });
 
-commander.command('set <key> <value>')
+commander.command('set [key] [value]')
   .description('sets the specified config <key> <value>')
   .action(function(key, value) {
     pm2.set(key, value);
@@ -519,6 +521,7 @@ commander.command('unset <key>')
 
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .alias('interact')
+  .option('--info-node [url]', 'set url info node')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
   .action(pm2._pre_interact.bind(pm2));
 
@@ -558,7 +561,7 @@ commander.command('resurrect')
 commander.command('unstartup [platform]')
   .description('disable and clear auto startup - [platform]=systemd,upstart,launchd,rcd')
   .action(function(platform) {
-    pm2.uninstallStartup(platform);
+    pm2.uninstallStartup(platform, commander);
   });
 
 //
@@ -582,16 +585,12 @@ commander.command('logrotate')
 //
 // Sample generate
 //
-commander.command('generate')
-  .description('generate an ecosystem.json configuration file')
-  .action(function(name) {
-    pm2.generateSample(name);
-  });
 
-commander.command('ecosystem')
-  .description('generate an ecosystem.json configuration file')
-  .action(function(name) {
-    pm2.generateSample(name);
+commander.command('ecosystem [mode]')
+  .alias('generate')
+  .description('generate a process conf file. (mode = null or simple)')
+  .action(function(mode) {
+    pm2.generateSample(mode);
   });
 
 commander.command('reset <name|id|all>')
@@ -664,13 +663,26 @@ commander.command('prettylist')
   }));
 
 //
-// Monitoring command
+// Dashboard command
 //
 commander.command('monit')
   .alias('m')
   .description('launch termcaps monitoring')
   .action(function() {
+    pm2.dashboard();
+  });
+
+commander.command('imonit')
+  .description('launch legacy termcaps monitoring')
+  .action(function() {
     pm2.monit();
+  });
+
+commander.command('dashboard')
+  .alias('dash')
+  .description('launch dashboard with monitoring and logs')
+  .action(function() {
+    pm2.dashboard();
   });
 
 
@@ -701,7 +713,7 @@ commander.command('logs [id|name]')
   .option('--raw', 'raw output')
   .option('--err', 'only shows error output')
   .option('--out', 'only shows standard output')
-  .option('--lines <n>', 'output the last N lines, instead of the last 10 by default')
+  .option('--lines <n>', 'output the last N lines, instead of the last 15 by default')
   .option('--timestamp [format]', 'add timestamps (default format YYYY-MM-DD-HH:mm:ss)')
   .option('--nostream', 'print logs without lauching the log stream')
   .description('stream logs file. Default stream all logs')
@@ -710,7 +722,7 @@ commander.command('logs [id|name]')
 
     if (!id) id = 'all';
 
-    var line = 10;
+    var line = 15;
     var raw  = false;
     var exclusive = false;
     var timestamp = false;
@@ -805,6 +817,16 @@ commander.command('deepUpdate')
   .description('performs a deep update of PM2')
   .action(function() {
     pm2.deepUpdate();
+  });
+
+//
+// Launch a http server that expose a given path on given port
+//
+commander.command('serve [path] [port]')
+  .alias('expose')
+  .description('serve a directory over http via port')
+  .action(function (path, port) {
+    pm2.serve(path, port, commander);
   });
 
 //

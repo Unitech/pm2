@@ -29,6 +29,7 @@ var csts = {
   TEMPLATE_FOLDER         : p.join(__dirname, 'lib/templates'),
 
   APP_CONF_TPL            : 'ecosystem.tpl',
+  APP_CONF_TPL_SIMPLE     : 'ecosystem-simple.tpl',
   SAMPLE_CONF_FILE        : 'sample-conf.js',
   LOGROTATE_SCRIPT        : 'logrotate.d/pm2',
 
@@ -62,15 +63,19 @@ var csts = {
   SEND_INTERVAL           : 1000,
   GRACEFUL_TIMEOUT        : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
   GRACEFUL_LISTEN_TIMEOUT : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
+  LOGS_BUFFER             : 10,
+  CONTEXT_ON_ERROR        : 2,
+  AGGREGATION_DURATION    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development' ? 3000 : 5 * 60000,
+  TRACE_FLUSH_INTERVAL    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' ? 1000 : 60000,
 
   // Concurrent actions when doing start/restart/reload
-  CONCURRENT_ACTIONS      : (function() {
+  CONCURRENT_ACTIONS      : ((() => {
     var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
     if (semver.satisfies(process.versions.node, '>= 4.0.0'))
       concurrent_actions = 2;
     debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
     return concurrent_actions;
-  })(),
+  }))(),
 
   DEBUG                   : process.env.PM2_DEBUG || false,
   WEB_IPADDR              : process.env.PM2_API_IPADDR || '0.0.0.0',

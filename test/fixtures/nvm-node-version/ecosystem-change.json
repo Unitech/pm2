@@ -1,0 +1,24 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+
+    // First application
+    {
+      name      : "http-4.6",
+      script    : "http.js",
+      interpreter  : "node@4.5.0"
+    },
+    {
+      name      : "http-6.7",
+      script    : "http.js",
+      force     : true,
+      env : {
+        PORT : 8002
+      },
+      interpreter  : "node@6.7.0"
+    },
+  ]
+}

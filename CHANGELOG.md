@@ -1,6 +1,65 @@
-## 2.3.1
 
-- New option to append env name to app name (used to allow the same app to be launched in different environement w/o name conflict) #2650
+## 2.4.5
+
+- #2818 alias pm2-docker to pm2-runtime
+- #2815 polyfill for path.isAbsolute for node v0.11
+
+### Breaking change
+
+- rundev command has been dropped because of too low adoption
+- dropped support for nodejs versions under 0.12
+
+## 2.4.4
+
+- #2806 fix reconnection to keymetrics
+
+## 2.4.3
+
+- #2759 disable default require of vxx in pmx
+- #2651 always spawn pm2 daemon with `node` binary
+- #2745 new issue template
+- #2761 Make JSON log stream timestamp in consistent format
+- #2770 Fix trigger API never calling callback
+- #2796 Fix absolute path on windows
+- [KM] profiler installation via `pm2 install v8-profiler` or `pm2 install profiler`
+- [KM] Agent rescue system
+
+## 2.4.2
+
+- [KM] Disable pm2-server-monit auto install
+
+## 2.4.1
+
+- #2720 multi user startup script
+- #2266 start and tail logs via `pm2 start app.js --attach`
+- #2699 add back previous termcaps interface via `pm2 imonit`
+- #2681 fix log folder create
+- #2724 make sure process is stopped even if there is a restart_delay
+- #2706 install pm2 modules via yarn if available
+- #2719 show 15 logs line bu default
+- #2703 allow custom timestamp with pm2-docker
+- #2698 fix unicode on pm2 monit
+- #2715 handle treekill edge case bug
+- Optimize CPU usage of pm2 monit command
+- [KM] URL web access dashboard
+- [KM] Auto install pm2-server-monit on keymetrics linking
+- [KM] Error reporting: add context (-B3 -A3 code lines)
+- [KM] Transaction Tracer: reset routes on app restart / wait some time before sending
+
+## 2.4.0
+
+- #2631 new pm2 monit command (blessed dashboard!)
+- #2670 allow to expose a folder over http via `pm2 serve <path> <port>`
+- #2617 fix startup script generation on macosx (launchd)
+- #2650 new option to append env name to app name (used to allow the same app to be launched in different environement w/o name conflict)
+- #2671 allow to pass a delay to pm2-docker (`pm2-docker process.json --delay 10`)
+- `pm2 ecosystem simple` to generate a simple ecosystem file
+- aliasing: `pm2-dev <script>` <=> `pm2-dev start <script>`
+- fix git parsing when using cwd
+- #2663 allow to directly output json when logging (via log_type for JSON and --log-type via CLI)
+- #2675 fix path when installing language module like typescript
+- #2674 increase restart timeout for systemd startup
+- #2564 allow to operate process (restart/reload/stop/delete) with regex
 
 ## 2.3.0
 
@@ -179,7 +238,7 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 
 ### Bug fixes
 
-- #2093 #2092 #2059 #1906 #1758 #1696 replace optionnal git module with tgz one
+- #2093 #2092 #2059 #1906 #1758 #1696 replace optional git module with tgz one
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files

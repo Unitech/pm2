@@ -1,9 +1,9 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.3.0",
+  "version": "3.0.0",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=4"
   },
   "directories": {
     "bin": "./bin",
@@ -23,6 +23,10 @@
     {
       "name": "soyuka",
       "email": "soyuka@gmail.com"
+    },
+    {
+      "name": "vmarchaud",
+      "email": "contact@vmarchaud.fr"
     },
     {
       "name": "rlidwka",
@@ -98,7 +102,8 @@
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh"
+    "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh",
+    "bench-pmx" : "pm2 delete all; pm2 install pm2-probe; node examples/pmx/app.js; pm2 ls"
   },
   "keywords": [
     "cli",
@@ -146,12 +151,13 @@
   ],
   "bin": {
     "pm2": "./bin/pm2",
-    "rundev": "./bin/rundev",
     "pm2-dev": "./bin/pm2-dev",
-    "pm2-docker": "./bin/pm2-docker"
+    "pm2-docker": "./bin/pm2-docker",
+    "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
     "async": "1.5",
+    "blessed": "^0.1.81",
     "chalk": "^1.1",
     "chokidar": "^1.6.1",
     "cli-table": "0.3.1",
@@ -159,29 +165,26 @@
     "cron": "1.2.1",
     "debug": "^2.3.2",
     "eventemitter2": "1.0.5",
-    "fclone": "1.0.10",
+    "fclone": "1.0.11",
     "mkdirp": "0.5.1",
     "moment": "^2.15",
     "nssocket": "0.6.0",
     "pidusage": "^1.1.0",
     "pm2-axon": "3.0.2",
     "pm2-axon-rpc": "0.4.5",
-    "pm2-deploy": "^0.3.3",
-    "pm2-multimeter": "0.1.2",
-    "pmx": "^1.0.1",
+    "pm2-deploy": "^0.3.5",
+    "pm2-multimeter": "^0.1.2",
+    "pmx": "^1.1.0",
     "semver": "^5.2",
-    "shelljs": "0.7.5",
+    "shelljs": "0.7.7",
     "source-map-support": "^0.4.6",
+    "sprintf-js": "~1.0.2",
     "vizion": "^0.2",
-    "yamljs": "0.2.8"
+    "yamljs": "0.2.9"
   },
   "devDependencies": {
     "mocha": "^3",
-    "should": "^11",
-    "better-assert": "^1.0.0"
-  },
-  "optionalDependencies": {
-    "gkt": "https://tgz.pm2.io/gkt-1.0.0.tgz"
+    "should": "^11"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"

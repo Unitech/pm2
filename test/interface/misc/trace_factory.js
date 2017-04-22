@@ -1,6 +1,7 @@
 
 var crypto = require('crypto');
 var moment = require('moment');
+var path = require('path');
 var WEBSITE_ROOT = 'http://toto.com';
 var spanId = 0;
 
@@ -76,7 +77,10 @@ exports.generatePacket = function(route, app_name) {
   return {
     data : generateTrace(route),
     process : {
-      name : app_name
+      name : app_name,
+      pm_id : 4,
+      server : 'test',
+      rev : 'xxx'
     }
   };
 };
@@ -112,6 +116,30 @@ exports.staticTrace = {
     }
   ]
 };
+
+exports.stacktrace = {
+  stack_frame: [
+    {
+      file_name: 'events.js',
+      line_number: 10,
+      column_number: 10,
+      method_name: '<anonymous function>'
+    },
+    {
+      file_name: 'node_modules/express.js',
+      line_number: 10,
+      column_number: 10,
+      method_name: '<anonymous function>'
+    },
+    {
+      file_name: path.resolve(__dirname, 'trace_factory.js'),
+      line_number: 10,
+      column_number: 10,
+      method_name: '<anonymous function>'
+    }
+  ]
+}
+
 
 if (require.main === module) {
   console.log(generateTrace());

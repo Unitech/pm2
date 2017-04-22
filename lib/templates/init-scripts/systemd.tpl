@@ -4,17 +4,16 @@ Documentation=https://pm2.keymetrics.io/
 After=network.target
 
 [Service]
+Type=forking
 User=%USER%
 LimitNOFILE=infinity
 LimitNPROC=infinity
 LimitCORE=infinity
-TimeoutStartSec=8
 Environment=PATH=%NODE_PATH%:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 Environment=PM2_HOME=%HOME_PATH%
-Restart=always
-RestartSec=3
+PIDFile=%HOME_PATH%/pm2.pid
 
-ExecStart=%PM2_PATH% resurrect --no-daemon
+ExecStart=%PM2_PATH% resurrect
 ExecReload=%PM2_PATH% reload all
 ExecStop=%PM2_PATH% kill
 
