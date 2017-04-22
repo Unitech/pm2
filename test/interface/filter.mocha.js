@@ -4,8 +4,8 @@ var should = require('should');
 var os = require('os');
 
 describe('Filter Utility', function() {
-  it('should .status works as expected', function() {
-    var filtered = Filter.status([], {
+  it('should .machineSnapshot works as expected', function() {
+    var filtered = Filter.machineSnapshot([], {
       REVERSE_INTERACT : true,
       PM2_VERSION : '2.2.0'
     });
