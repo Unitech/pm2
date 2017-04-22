@@ -483,7 +483,7 @@ commander.command('publish')
     pm2.publish();
   });
 
-commander.command('set <key> <value>')
+commander.command('set [key] [value]')
   .description('sets the specified config <key> <value>')
   .action(function(key, value) {
     pm2.set(key, value);
