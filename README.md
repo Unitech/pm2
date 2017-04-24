@@ -173,7 +173,7 @@ $ pm2 describe <id|app_name>
 
 When an application is started with the -i <instance_number> option, the **Cluster Mode** is enabled.
 
-The Cluster Mode start <instance_number> and automatically load balance HTTP/TCP/UDP between each instance. This allows to increase overall performance depending to the number of CPUs availabe.
+The Cluster Mode start <instance_number> and automatically load balance HTTP/TCP/UDP between each instance. This allows to increase overall performance depending to the number of CPUs available.
 
 Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
 
