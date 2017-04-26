@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.4.5",
+  "version": "2.4.6",
   "engines": {
     "node": ">=0.10"
   },
@@ -94,7 +94,7 @@
       "email": "chris@chriswiggins.co.nz"
     }
   ],
-  "homepage": "http://pm2.keymetrics.io/",
+  "homepage": "http://pm2.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
   "scripts": {
@@ -181,6 +181,9 @@
   "devDependencies": {
     "mocha": "^3",
     "should": "^11"
+  },
+  "optionalDependencies": {
+    "gkt": "https://tgz.pm2.io/gkt-1.0.0.tgz"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
