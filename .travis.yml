@@ -1,8 +1,9 @@
 language: node_js
 node_js:
-   - "4"
-   - "6"
-   - "7"
+  - "0.12"
+  - "4"
+  - "6"
+  - "7"
 os:
   - linux
 before_install:

@@ -69,13 +69,13 @@ var csts = {
   TRACE_FLUSH_INTERVAL    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' ? 1000 : 60000,
 
   // Concurrent actions when doing start/restart/reload
-  CONCURRENT_ACTIONS      : ((() => {
+  CONCURRENT_ACTIONS      : (function() {
     var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
     if (semver.satisfies(process.versions.node, '>= 4.0.0'))
       concurrent_actions = 2;
     debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
     return concurrent_actions;
-  }))(),
+  })(),
 
   DEBUG                   : process.env.PM2_DEBUG || false,
   WEB_IPADDR              : process.env.PM2_API_IPADDR || '0.0.0.0',
