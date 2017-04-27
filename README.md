@@ -208,7 +208,7 @@ $ pm2 monit
 Displaying logs of a specified process or all processes, in real time. Standard, Raw, JSON and formated output are available.
 
 ```bash
-$ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]`
+$ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]
 ```
 
 Examples:
