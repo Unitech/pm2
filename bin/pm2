@@ -519,6 +519,9 @@ commander.command('unset <key>')
     pm2.unset(key);
   });
 
+//
+// Keymetrics CLI integratio
+//
 commander.command('link [secret_key|command] [public_key] [machine_name]')
   .alias('interact')
   .option('--info-node [url]', 'set url info node')
@@ -537,10 +540,22 @@ commander.command('monitor [name]')
     pm2.monitorState('monitor', name);
   });
 
+commander.command('open')
+  .description('open dashboard in browser')
+  .action(function(name) {
+    pm2.openDashboard();
+  });
+
 commander.command('register')
   .description('create an account on keymetrics')
   .action(function(name) {
     pm2.registerToKM();
+  });
+
+commander.command('login')
+  .description('login to keymetrics and link current PM2')
+  .action(function(name) {
+    pm2.loginToKM();
   });
 
 //
