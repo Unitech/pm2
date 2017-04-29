@@ -181,7 +181,8 @@
     "sprintf-js": "~1.0.2",
     "vizion": "^0.2",
     "yamljs": "0.2.9",
-    "needle" : "1.6.0"
+    "needle" : "1.6.0",
+    "promptly" : "2.2.0"
   },
   "devDependencies": {
     "mocha": "^3",
