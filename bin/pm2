@@ -540,7 +540,7 @@ commander.command('monitor [name]')
 commander.command('register')
   .description('create an account on keymetrics')
   .action(function(name) {
-
+    pm2.registerToKM();
   });
 
 //
