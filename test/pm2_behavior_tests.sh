@@ -119,6 +119,8 @@ bash ./test/bash/wait-ready-event.sh
 spec "Wait for application ready event"
 bash ./test/bash/serve.sh
 spec "pm2 serve CLI method"
+bash ./test/bash/monit.sh
+spec "km selective monitoring "
 bash ./test/bash/log-null.sh
 spec "Logging path set to null"
 bash ./test/bash/log-json.sh

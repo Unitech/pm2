@@ -525,6 +525,24 @@ commander.command('link [secret_key|command] [public_key] [machine_name]')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
   .action(pm2._pre_interact.bind(pm2));
 
+commander.command('unmonitor [name]')
+  .description('unmonitor target process')
+  .action(function(name) {
+    pm2.monitorState('unmonitor', name);
+  });
+
+commander.command('monitor [name]')
+  .description('monitor target process')
+  .action(function(name) {
+    pm2.monitorState('monitor', name);
+  });
+
+commander.command('register')
+  .description('create an account on keymetrics')
+  .action(function(name) {
+
+  });
+
 //
 // Web interface
 //
