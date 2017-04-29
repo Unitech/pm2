@@ -180,7 +180,8 @@
     "source-map-support": "^0.4.6",
     "sprintf-js": "~1.0.2",
     "vizion": "^0.2",
-    "yamljs": "0.2.9"
+    "yamljs": "0.2.9",
+    "needle" : "1.6.0"
   },
   "devDependencies": {
     "mocha": "^3",

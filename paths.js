@@ -43,6 +43,7 @@ module.exports = function(PM2_HOME) {
 
     DEFAULT_PID_PATH         : p.resolve(PM2_HOME, 'pids'),
     DEFAULT_LOG_PATH         : p.resolve(PM2_HOME, 'logs'),
+    KM_ACCESS_TOKEN          : p.resolve(PM2_HOME, 'km-access-token'),
     DUMP_FILE_PATH           : p.resolve(PM2_HOME, 'dump.pm2'),
 
     DAEMON_RPC_PORT          : p.resolve(PM2_HOME, 'rpc.sock'),
