@@ -1,7 +1,9 @@
 
 ## 2.4.7
 
-- pm2 monitor|unmonitor <pm_id|name|all> for selective keymetrics monitoring
+- `pm2 register|login` to create new account / login on Keymetrics + auto link
+- `pm2 open` to open dashboard on browser
+- `pm2 monitor|unmonitor <pm_id|name|all>` for selective monitoring
 
 ## 2.4.5/6
 
