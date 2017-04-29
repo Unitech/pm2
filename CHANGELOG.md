@@ -1,5 +1,9 @@
 
-## 2.4.5
+## 2.4.7
+
+- pm2 monitor|unmonitor <pm_id|name|all> for selective keymetrics monitoring
+
+## 2.4.5/6
 
 - #2818 alias pm2-docker to pm2-runtime
 - #2815 polyfill for path.isAbsolute for node v0.11
@@ -7,7 +11,6 @@
 ### Breaking change
 
 - rundev command has been dropped because of too low adoption
-- dropped support for nodejs versions under 0.12
 
 ## 2.4.4
 
