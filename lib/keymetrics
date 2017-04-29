@@ -1,8 +1,6 @@
 
                         -------------
 
-                      PM2 process manager
-
 __/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
  _\/\\\/////////\\\_\/\\\\\\________/\\\\\\__/\\\///////\\\___
   _\/\\\_______\/\\\_\/\\\//\\\____/\\\//\\\_\///______\//\\\__
@@ -14,18 +12,15 @@ __/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
         _\///______________\///______________\///__\///////////////__
 
 
-                       Getting started
+         Welcome to most Advanced Process Manager for Node.js
 
-                        Documentation
-                        http://pm2.io/
+                          Monitoring
+                        $ pm2 monitor
 
                       Start PM2 at boot
                         $ pm2 startup
 
-                     Daemonize Application
-                       $ pm2 start <app>
-
-                     Monitoring/APM solution
-                    https://app.keymetrics.io/
+                     Increase Performance
+                    $ pm2 start api.js -i 4
 
                         -------------
