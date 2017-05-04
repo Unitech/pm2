@@ -17,7 +17,9 @@ describe('Module default flush configuration', function() {
   });
 
   it('should install a module', function(done) {
-    PM2.install('pm2-logrotate', done);
+    PM2.install('pm2-logrotate', function() {
+      setTimeout(done, 1000);
+    });
   });
 
   it('should module configuration have module options', function(done) {
