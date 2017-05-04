@@ -135,11 +135,11 @@ $pm2 list
 
 # Not consistent on travis :(
 # OUT=`$pm2 logs --nostream --lines 10 PM2 | wc -l`
-# [ $OUT -gt 10 ] || fail "Error : pm2 logs ouput showed $OUT lines but min is 10" 
+# [ $OUT -gt 10 ] || fail "Error : pm2 logs ouput showed $OUT lines but min is 10"
 # success "should only print logs"
 
 # OUT=`$pm2 logs --nostream --lines 100 PM2 | wc -l`
-# [ $OUT -gt 100 ] || fail "Error : pm2 logs ouput showed $OUT  lines but min is 100" 
+# [ $OUT -gt 100 ] || fail "Error : pm2 logs ouput showed $OUT  lines but min is 100"
 # success "should only print logs: "
 
 # sleep 1
@@ -160,7 +160,7 @@ $pm2 list
 $pm2 web
 spec "Should start web interface"
 
-sleep 0.3
+sleep 1
 
 JSON_FILE='/tmp/web-json'
 
@@ -174,7 +174,7 @@ spec "Should clean logs"
 # cat ~/.pm2/logs/echo-out.log | wc -l
 # spec "File Log should be cleaned"
 
-sleep 0.3
+sleep 1
 $http_get -q http://localhost:9615/ -O $JSON_FILE
 cat $JSON_FILE | grep "restart_time\":0" > /dev/null
 spec "Should get the right JSON with HttpInterface file launched"
