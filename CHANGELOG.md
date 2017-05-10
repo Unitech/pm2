@@ -4,6 +4,7 @@
 - `pm2 register|login` to create new account / login on Keymetrics + auto link
 - `pm2 open` to open dashboard on browser
 - `pm2 monitor|unmonitor <pm_id|name|all>` for selective monitoring
+- #2818 alias pm2-docker to pm2-daemon
 
 ## 2.4.5/6
 
