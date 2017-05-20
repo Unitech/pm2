@@ -127,6 +127,8 @@ bash ./test/bash/log-json.sh
 spec "Logging directly to file in json"
 bash ./test/bash/operate-regex.sh
 spec "Operate process that match regex"
+bash ./test/bash/daemon-paths-override.sh
+spec "Override daemon configuration paths"
 
 # Issues related
 bash ./test/bash/issues/2337.sh

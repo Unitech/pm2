@@ -56,6 +56,15 @@ module.exports = function(PM2_HOME) {
     INTERACTION_CONF         : p.resolve(PM2_HOME, 'agent.json5')
   };
 
+  // allow overide of file paths via environnement
+  var paths = Object.keys(pm2_file_stucture);
+  paths.forEach(function (key) {
+    var envKey = key.indexOf('PM2_') > -1 ? key : 'PM2_' + key;
+    if (process.env[envKey] && key !== 'PM2_HOME' && key !== 'PM2_ROOT_PATH') {
+      pm2_file_stucture[key] = process.env[envKey];
+    }
+  });
+
   if (process.platform === 'win32' ||
       process.platform === 'win64') {
     //@todo instead of static unique rpc/pub file custom with PM2_HOME or UID
