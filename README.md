@@ -93,7 +93,7 @@ $ pm2 scale [app-name] 10       # Scale Cluster app to 10 process
 # Process Monitoring
 $ pm2 list                      # List all processes started with PM2
 $ pm2 monit                     # Display memory and cpu usage of each app
-$ pm2 show [app-name]           # Show all informations about application
+$ pm2 show [app-name]           # Show all information about application
 
 # Log management
 $ pm2 logs                      # Display logs of all apps
@@ -112,14 +112,14 @@ $ pm2 reset [app-name]          # Reset all counters
 $ pm2 stop all                  # Stop all apps
 $ pm2 stop 0                    # Stop process with id 0
 $ pm2 restart all               # Restart all apps
-$ pm2 gracefulReload all        # Graceful reload all apps in cluster mode
+$ pm2 gracefulReload all        # Gracefully reload all apps in cluster mode
 $ pm2 delete all                # Kill and delete all apps
 $ pm2 delete 0                  # Delete app with id 0
 
 # Startup/Boot management
 $ pm2 startup                   # Detect init system, generate and configure pm2 boot on startup
 $ pm2 save                      # Save current process list
-$ pm2 resurrect                 # Restore previously save processes
+$ pm2 resurrect                 # Restore previously saved processes
 $ pm2 unstartup                 # Disable and remove startup system
 
 $ pm2 update                    # Save processes, kill PM2 and restore processes
@@ -156,7 +156,7 @@ $ pm2 stop     <app_name|id|'all'|json_conf>
 $ pm2 restart  <app_name|id|'all'|json_conf>
 $ pm2 delete   <app_name|id|'all'|json_conf>
 ```
-To make sure it re-evaluates enviroment variables in your `json_conf` use
+To make sure it re-evaluates environment variables in your `json_conf` use
 ```bash
 $ pm2 restart <json_conf>
 ```
@@ -173,7 +173,7 @@ $ pm2 describe <id|app_name>
 
 When an application is started with the -i <instance_number> option, the **Cluster Mode** is enabled.
 
-The Cluster Mode start <instance_number> and automatically load balance HTTP/TCP/UDP between each instance. This allows to increase overall performance depending to the number of CPUs available.
+The Cluster Mode starts <instance_number> instances of your app and automatically load balance HTTP/TCP/UDP between each instance. This allows to increase overall performance depending on the number of CPUs available.
 
 Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
 
@@ -208,7 +208,7 @@ $ pm2 monit
 Displaying logs of a specified process or all processes, in real time. Standard, Raw, JSON and formated output are available.
 
 ```bash
-$ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]`
+$ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]
 ```
 
 Examples:
