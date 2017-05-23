@@ -80,7 +80,7 @@ var csts = {
   DEBUG                   : process.env.PM2_DEBUG || false,
   WEB_IPADDR              : process.env.PM2_API_IPADDR || '0.0.0.0',
   WEB_PORT                : parseInt(process.env.PM2_API_PORT)  || 9615,
-  WEB_STRIP_ENV_VARS      : process.env.PM2_WEB_STRIP_ENV_VARS || true,
+  WEB_STRIP_ENV_VARS      : process.env.PM2_WEB_STRIP_ENV_VARS || false,
   MODIFY_REQUIRE          : process.env.PM2_MODIFY_REQUIRE || false,
 
   WORKER_INTERVAL         : process.env.PM2_WORKER_INTERVAL || 30000,
