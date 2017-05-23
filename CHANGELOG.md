@@ -12,7 +12,8 @@
 - #438 allow to override daemon config paths via env (example: `PM2_PID_FILE_PATH` to override pid file of the daemon)
 - #2849 better gentoo template for pm2 startup
 - #2868 allow tailing log with `--raw` flag
-- 
+- #452 Add `PM2_WEB_STRIP_ENV_VARS` to remove environnement from `pm2 web` endpoint
+
 - more informations when failing to deploy on custom ecosystem file
 - fix missing callback when override console.log
 - allow to rename daemon process name via `PM2_DAEMON_NAME`
