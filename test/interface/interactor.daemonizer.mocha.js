@@ -82,7 +82,7 @@ describe('Daemonizer interactor', function() {
         should.exist(interaction_conf.version_management.active);
         should(interaction_conf.version_management.password).be.null();
 
-        interaction_conf.machine_name.should.eql(os.hostname());
+        interaction_conf.machine_name.should.startWith(os.hostname());
         return done();
       });
     });
