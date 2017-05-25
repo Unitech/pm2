@@ -41,6 +41,6 @@ should 'should have started 1 clustered app' 'online' 1
 $pm2 delete all
 
 ##### start without sending event and ask to wait (cluster mode)
-# timeout 1 $pm2 start http-wait-start_nocb.js -i 1 --wait-ready
-# should 'should be 1 clustered launching state app waiting for ready event' 'launching' 1
-# $pm2 delete all
+timeout 5 $pm2 start http-wait-start_nocb.js -i 1 --wait-ready
+should 'should be 1 clustered launching state app waiting for ready event' 'launching' 1
+$pm2 delete all
