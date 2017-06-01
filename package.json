@@ -103,7 +103,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh",
-    "bench-pmx" : "pm2 delete all; pm2 install pm2-probe; node examples/pmx/app.js; pm2 ls"
+    "bench-pmx": "pm2 delete all; pm2 install pm2-probe; node examples/pmx/app.js; pm2 ls"
   },
   "keywords": [
     "cli",
@@ -182,8 +182,8 @@
     "sprintf-js": "~1.0.2",
     "vizion": "^0.2",
     "yamljs": "0.2.9",
-    "needle" : "1.6.0",
-    "promptly" : "2.2.0"
+    "needle": "1.6.0",
+    "promptly": "2.2.0"
   },
   "devDependencies": {
     "mocha": "^3",
