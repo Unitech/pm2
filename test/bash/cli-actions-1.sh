@@ -22,7 +22,7 @@ $pm2 start echo.js
 $pm2 start echo.js -f
 $pm2 start echo.js -f
 
-sleep 2
+sleep 0.5
 
 should 'should have started 3 apps' 'online' 3
 
