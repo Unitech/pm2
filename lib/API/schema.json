@@ -188,6 +188,6 @@
   },
   "instance_var": {
     "type": "string",
-    "default" : "NODE_INSTANCE_APP"
+    "default" : "NODE_APP_INSTANCE"
   }
 }
