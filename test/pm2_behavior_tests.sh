@@ -129,6 +129,8 @@ bash ./test/bash/operate-regex.sh
 spec "Operate process that match regex"
 bash ./test/bash/daemon-paths-override.sh
 spec "Override daemon configuration paths"
+bash ./test/bash/increment-var.sh
+spec "Increment env variables"
 
 # Issues related
 bash ./test/bash/issues/2337.sh
