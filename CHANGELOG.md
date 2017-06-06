@@ -17,6 +17,7 @@
 - #2906 randomize machine name with default pm2 link
 
 - more informations when failing to deploy on custom ecosystem file
+- fix tests for node 8
 - fix missing callback when override console.log
 - allow to rename daemon process name via `PM2_DAEMON_NAME`
 - few typo in the readme
