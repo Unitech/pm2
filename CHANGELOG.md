@@ -15,6 +15,7 @@
 - #452 Add `PM2_WEB_STRIP_ENV_VARS` to remove environnement vars from `pm2 web` endpoint
 - #2890 Fix wait-ready for cluster mode
 - #2906 randomize machine name with default pm2 link
+- #2888 allow to use regex for pm2 logs
 
 - more informations when failing to deploy on custom ecosystem file
 - fix tests for node 8
