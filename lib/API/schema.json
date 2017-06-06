@@ -185,5 +185,9 @@
   },
   "increment_var": {
     "type": "string"
+  },
+  "instance_var": {
+    "type": "string",
+    "default" : "NODE_INSTANCE_APP"
   }
 }
