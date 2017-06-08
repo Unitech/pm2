@@ -1,5 +1,4 @@
-
-## 2.4.7
+## 2.5
 
 - `pm2 register|login` to create new account / login on Keymetrics + auto link
 - `pm2 open` to open dashboard on browser
@@ -16,12 +15,19 @@
 - #2890 Fix wait-ready for cluster mode
 - #2906 randomize machine name with default pm2 link
 - #2888 allow to use regex for pm2 logs
-
+- #2045 allow to rename NODE_APP_INSTANCE env variable
+- #2809 add `increment_var` options to ask for a environnement variable to be incremented for each application started
 - more informations when failing to deploy on custom ecosystem file
 - fix tests for node 8
-- fix missing callback when override console.log
+- fix missing callback when overriding console.log
 - allow to rename daemon process name via `PM2_DAEMON_NAME`
 - few typo in the readme
+
+### Breaking change
+
+- the NODE_APP_INSTANCE var behavior has been changed :
+    - old behavior : when starting multiples instances of an app each one get an unique number, but its not working anymore if you are using `pm2 scale` (simply put its possible to have two application with the same number)
+    - new behavior : the number are consistent, if you scale up/down it will take a number that isn't used by another application (so two application should never have the same number)
 
 ## 2.4.5/6
 
