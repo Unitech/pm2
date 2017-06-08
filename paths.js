@@ -38,8 +38,8 @@ module.exports = function(PM2_HOME) {
     PM2_CONF_FILE            : p.resolve(PM2_HOME, 'conf.js'),
     PM2_MODULE_CONF_FILE     : p.resolve(PM2_HOME, 'module_conf.json'),
 
-    PM2_LOG_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.log'),
-    PM2_PID_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.pid'),
+    PM2_LOG_FILE_PATH        : p.resolve(process.env.PM2_LOG_DIR || PM2_HOME, 'pm2.log'),
+    PM2_PID_FILE_PATH        : p.resolve(process.env.PM2_PID_DIR || PM2_HOME, 'pm2.pid'),
 
     DEFAULT_PID_PATH         : p.resolve(PM2_HOME, 'pids'),
     DEFAULT_LOG_PATH         : p.resolve(PM2_HOME, 'logs'),
