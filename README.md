@@ -36,11 +36,12 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 1000 tests](https://travis-ci.org/Unitech/pm2).
+PM2 is constantly assailed by [more than 1400 tests](https://travis-ci.org/Unitech/pm2).
 
 Official website: [http://pm2.keymetrics.io/](http://pm2.keymetrics.io/)
 
 Works on Linux (stable) & MacOSx (stable) & Windows (stable).
+All Node.js versions are supported starting Node.js 0.12.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
@@ -62,11 +63,21 @@ Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
+## Monitor PM2 and Applications
+
+To monitor your applications just type:
+
+```bash
+$ pm2 register
+```
+
+[More about PM2 Monitoring](http://docs.keymetrics.io/)
+
 ## Update PM2
 
 ```bash
 # Install latest pm2 version
-$ npm install pm2 -g
+$ npm install pm2@latest -g
 # Save process list, exit old PM2 & restore all processes
 $ pm2 update
 ```
