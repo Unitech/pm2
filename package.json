@@ -157,7 +157,7 @@
     "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
-    "async": "1.5",
+    "async": "^2.4.1",
     "blessed": "^0.1.81",
     "chalk": "^1.1",
     "chokidar": "^1.7",
