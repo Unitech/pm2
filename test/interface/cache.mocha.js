@@ -80,7 +80,7 @@ describe('Cache Utility', function() {
     setTimeout(function () {
       should(cache.get('toto')).be.null();
       done();
-    }, 1200);
+    }, 3000);
   });
 
 });
