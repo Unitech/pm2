@@ -131,6 +131,8 @@ bash ./test/bash/daemon-paths-override.sh
 spec "Override daemon configuration paths"
 bash ./test/bash/increment-var.sh
 spec "Increment env variables"
+bash ./test/bash/instance-number.sh
+spec "Negative instance number spawn one worker"
 
 # Issues related
 bash ./test/bash/issues/2337.sh
