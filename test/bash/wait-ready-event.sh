@@ -21,7 +21,7 @@ should 'should have started 1 forked app ' 'online' 1
 $pm2 delete all
 
 ##### start without sending event and ask to wait (fork mode)
-timeout 5 $pm2 start http-wait-start_nocb.js --wait-ready
+timeout 5 $pm2 start http-wait-start_nocb.js --wait-ready --listen-timeout=8000
 should 'should be 1 forked launching state app waiting for ready event' 'launching' 1
 $pm2 delete all
 
@@ -41,6 +41,6 @@ should 'should have started 1 clustered app' 'online' 1
 $pm2 delete all
 
 ##### start without sending event and ask to wait (cluster mode)
-timeout 5 $pm2 start http-wait-start_nocb.js -i 1 --wait-ready
+timeout 5 $pm2 start http-wait-start_nocb.js -i 1 --wait-ready --listen-timeout=8000
 should 'should be 1 clustered launching state app waiting for ready event' 'launching' 1
 $pm2 delete all

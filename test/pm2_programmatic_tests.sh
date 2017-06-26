@@ -60,6 +60,8 @@ mocha --opts ./mocha.opts  ./module_configuration.mocha.js
 spec "Max memory tests"
 mocha --opts ./mocha.opts  ./cluster.mocha.js
 spec "Cluster tests"
+mocha --opts ./mocha.opts  ./graceful.mocha.js
+spec "Graceful tests"
 mocha --opts ./mocha.opts  ./inside.mocha.js
 spec "Inside pm2 call tests"
 mocha --opts ./mocha.opts  ./misc_commands.js
