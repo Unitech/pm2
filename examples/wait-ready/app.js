@@ -11,6 +11,7 @@ console.log('Starting app...');
 
 process.on('SIGINT', (msg) => {
   console.log('Just got SIGINTed, but I dont care');
+  process.exit(0);
 });
 
 setTimeout(() => {
