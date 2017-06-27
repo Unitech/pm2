@@ -1,6 +1,8 @@
 ## 2.5.1
 
 - #2951 pm2 reload command locker via timestamped lock file
+- Allow to customize kill signal via PM2_KILL_SIGNAL
+- Support git+http in module installation
 - force reverse interaction reconnection on internet discovery
 - `--instances -1` when having a 1 cpu is no-longer spawning no processes #2953
 - refactor the context retrieving from error
