@@ -1,5 +1,6 @@
 ## 2.5.1
 
+- #2951 pm2 reload command locker via timestamped lock file
 - force reverse interaction reconnection on internet discovery
 - `--instances -1` when having a 1 cpu is no-longer spawning no processes #2953
 - refactor the context retrieving from error

@@ -61,6 +61,7 @@ var csts = {
   REMOTE_REVERSE_PORT     : isNaN(parseInt(process.env.KEYMETRICS_REVERSE_PORT)) ? 43554 : parseInt(process.env.KEYMETRICS_REVERSE_PORT),
   REMOTE_HOST             : 's1.keymetrics.io',
   SEND_INTERVAL           : 1000,
+  RELOAD_LOCK_TIMEOUT     : parseInt(process.env.PM2_RELOAD_LOCK_TIMEOUT) || 30000,
   GRACEFUL_TIMEOUT        : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
   GRACEFUL_LISTEN_TIMEOUT : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
   LOGS_BUFFER_SIZE        : 8,
