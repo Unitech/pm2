@@ -19,6 +19,8 @@ describe('Utility', function() {
       assert(Utility.getCanonicModuleName('ma-zal/pm2-slack#own-branch') === 'pm2-slack');
       assert(Utility.getCanonicModuleName('pm2-slack') === 'pm2-slack');
       assert(Utility.getCanonicModuleName('@org/pm2-slack') === 'pm2-slack');
+      assert(Utility.getCanonicModuleName('git+https://github.com/user/pm2-slack') === 'pm2-slack');
+      assert(Utility.getCanonicModuleName('git+https://github.com/user/pm2-slack.git') === 'pm2-slack');
     });
   });
   
