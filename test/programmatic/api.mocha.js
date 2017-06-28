@@ -38,6 +38,15 @@ describe('API checks', function() {
       });
     });
 
+    it('should stop app by id', function(done) {
+      PM2.stop(0, done);
+    });
+
+    it('should start app by id', function(done) {
+      PM2.restart(0, done);
+    });
+
+
     it('should fail if starting same script again', function(done) {
       PM2.start('./../fixtures/child.js', function(err) {
         should(err).not.be.null();
