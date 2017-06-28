@@ -1,6 +1,8 @@
 ## 2.5.1
 
 - #2951 pm2 reload command locker via timestamped lock file
+- #2977 pm2 reloadLogs protected
+- Alias pm2.link and pm2.unlink to pm2.interact and pm2._pre_interact
 - Allow to customize kill signal via PM2_KILL_SIGNAL
 - Support git+http in module installation
 - force reverse interaction reconnection on internet discovery
