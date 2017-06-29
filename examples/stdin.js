@@ -14,4 +14,5 @@ rl.on('line', (data) =>{
 });
 
 setInterval(() => {
-}, 100);
+  //console.log('Yes');
+}, 2000);
