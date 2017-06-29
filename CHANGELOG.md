@@ -1,5 +1,6 @@
 ## 2.5.1
 
+- #2968 pm2 attach <pm_id> allows to attach to process stdin / stdout
 - #2951 pm2 reload command locker via timestamped lock file
 - #2977 pm2 reloadLogs protected
 - Alias pm2.link and pm2.unlink to pm2.interact and pm2._pre_interact
