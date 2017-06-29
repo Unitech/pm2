@@ -133,6 +133,8 @@ bash ./test/bash/increment-var.sh
 spec "Increment env variables"
 bash ./test/bash/instance-number.sh
 spec "Negative instance number spawn one worker"
+bash ./test/bash/attach.sh
+spec "pm2 attach method"
 
 # Issues related
 bash ./test/bash/issues/2337.sh
