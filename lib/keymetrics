@@ -12,15 +12,19 @@ __/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
         _\///______________\///______________\///__\///////////////__
 
 
-         Welcome to most Advanced Process Manager for Node.js
+      Runtime and Process Manager specialized on Node.js applications
+             that integrates a built-in Load Balancer.
 
-                          Monitoring
+                Start and Daemonize any application
+                      $ pm2 start app.js
+
+                Load Balance 4 instances of api.js
+                    $ pm2 start api.js -i 4
+
+                           Monitor
                         $ pm2 monitor
 
-                      Start PM2 at boot
+              Make pm2 auto-boot at server restart
                         $ pm2 startup
-
-                     Increase Performance
-                    $ pm2 start api.js -i 4
 
                         -------------
