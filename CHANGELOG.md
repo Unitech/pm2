@@ -13,6 +13,10 @@
 - add a TTL for file cache entry
 - #2956 Fix listen_timeout in combination with wait_ready
 
+### Breaking
+
+- Drop pm2-daemon CLI
+
 ## 2.5
 
 - `pm2 register|login` to create new account / login on Keymetrics + auto link
