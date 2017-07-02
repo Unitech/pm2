@@ -3,6 +3,7 @@
 - #2968 pm2 attach <pm_id> + pm2-runtime allows to attach to process stdin / stdout
 - #2951 pm2 reload command locker via timestamped lock file
 - #2977 pm2 reloadLogs protected
+- #2958 Allow to delete attribute via --attribute null
 - multiple pm2-docker enhacements
 - Alias pm2.link and pm2.unlink to pm2.interact and pm2._pre_interact
 - Allow to customize kill signal via PM2_KILL_SIGNAL

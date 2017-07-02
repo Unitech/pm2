@@ -24,7 +24,7 @@ $pm2 start app-config-update/echo.js
 $pm2 prettylist | grep "node_args: \[\]"
 spec "3 Should application have empty node argument list"
 
-$pm2 restart app-config-update/echo.js --node-args="--harmony" --update-env
+$pm2 restart app-config-update/echo.js --node-args="--harmony"
 $pm2 prettylist | grep "node_args: \[ '--harmony' \]"
 spec "4 Should application have one node argument"
 
@@ -36,12 +36,12 @@ spec "5 Should application have one node argument"
 #
 # Rename
 #
-$pm2 restart 0 --name="new-name" --update-env
+$pm2 restart 0 --name="new-name"
 $pm2 reset all
 $pm2 restart new-name
 should '6 should restart processes with new name' 'restart_time: 1' 1
 
-$pm2 start 0 --name="new-name-2" --update-env
+$pm2 start 0 --name="new-name-2"
 $pm2 reset all
 $pm2 restart new-name-2
 should '7 should restart processes with new name' 'restart_time: 1' 1
@@ -52,22 +52,30 @@ $pm2 delete all
 
 $pm2 start app-config-update/echo.js -i 1
 $pm2 prettylist | grep "node_args: \[\]"
-spec "8 Should application have empty node argument list"
+spec "Should application have empty node argument list"
 
-$pm2 reload app-config-update/echo.js --node-args="--harmony" --update-env
+$pm2 reload app-config-update/echo.js --node-args="--harmony"
 $pm2 prettylist | grep "node_args: \[ '--harmony' \]"
-spec "9 Should application have one node argument"
+spec "Should application have one node argument"
 
-$pm2 gracefulReload app-config-update/echo.js --node-args="--harmony" --update-env
+$pm2 gracefulReload app-config-update/echo.js --node-args="--harmony"
 $pm2 prettylist | grep "node_args: \[ '--harmony' \]"
-spec "10 Should application have two node arguments"
+spec "Should application have two node arguments"
 
-$pm2 reload echo --name="new-name" --update-env
+$pm2 prettylist | grep "node_args"
+spec "Should have found parameter"
+# Now set node-args to null
+$pm2 gracefulReload app-config-update/echo.js --node-args=null
+# Should not find node_args anymore
+$pm2 prettylist | grep "node_args"
+ispec "Should have deleted cli parameter when passing null"
+
+$pm2 reload echo --name="new-name"
 $pm2 reset all
 $pm2 restart new-name
-should '11 should reload processes with new name' 'restart_time: 1' 1
+should 'should reload processes with new name' 'restart_time: 1' 1
 
-$pm2 gracefulReload new-name --name="new-name-2" --update-env
+$pm2 gracefulReload new-name --name="new-name-2"
 $pm2 reset all
 $pm2 restart new-name-2
-should '12 should graceful reload processes with new name' 'restart_time: 1' 1
+should 'should graceful reload processes with new name' 'restart_time: 1' 1
