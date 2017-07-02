@@ -7,6 +7,7 @@
 - #2951 pm2 reload command locker via timestamped lock file
 - #2977 pm2 reloadLogs protected
 - #2958 Allow to delete attribute via --attribute null
+- #2980 PM2_SILENT=true pm2 startup
 - expose cwd on CLI via --cwd
 - multiple pm2-docker enhacements
 - Alias pm2.link and pm2.unlink to pm2.interact and pm2._pre_interact
