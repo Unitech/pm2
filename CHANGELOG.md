@@ -8,6 +8,7 @@
 - #2977 pm2 reloadLogs protected
 - #2958 Allow to delete attribute via --attribute null
 - #2980 PM2_SILENT=true pm2 startup
+- #2690 --parallel <number> command allows to change the nb of concurrent actions (reload/restart)
 - expose cwd on CLI via --cwd
 - multiple pm2-docker enhacements
 - Alias pm2.link and pm2.unlink to pm2.interact and pm2._pre_interact
