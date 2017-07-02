@@ -6,6 +6,15 @@ cd $file_path
 
 echo -e "\033[1mRunning tests for json files :\033[0m"
 
+## alias "apps" to "pm2" = nicer for package.json
+$pm2 start pm2-ecosystem.json
+should 'should start processes' 'online' 6
+
+$pm2 delete all.json
+should 'should delete all processes' 'name' 0
+
+$pm2 kill
+
 PM2_WORKER_INTERVAL=90000 $pm2 start all.json
 should 'should start processes' 'online' 6
 
