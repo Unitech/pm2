@@ -5,6 +5,7 @@
 - #2997 --disable-logs option to suppress error
 - #2290 allow to declare apps under "pm2" attribute (eq "apps"). Nicer in package.json
 - pm2 install module-name --uid <uid> --gid <gid> possible
+- #2501 low memory environment pm2 setting via PM2_OPTIMIZE_MEMORY (beta)
 - #2968 pm2 attach <pm_id> to attach to process stdin / stdout
 - pm2-runtime -> drop in replacement for the node.js binary
 - #2951 pm2 reload command locker via timestamped lock file

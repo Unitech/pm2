@@ -52,6 +52,8 @@ var csts = {
   CLUSTER_MODE_ID         : 'cluster_mode',
   FORK_MODE_ID            : 'fork_mode',
 
+  LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
+
   KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
   KEYMETRICS_BANNER       : '../lib/keymetrics',
   DEFAULT_MODULE_JSON     : 'package.json',
