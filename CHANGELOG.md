@@ -1,6 +1,7 @@
 ## 2.6
 
 - #2144 #1060 #2957 #2033 #1872 #2938 #971 Select application uid/gid via --uid --gid (CLI+JSON) + display user via pm2 ls
+- #2997 --disable-logs option to suppress error
 - #2290 allow to declare apps under "pm2" attribute (eq "apps"). Nicer in package.json
 - pm2 install module-name --uid <uid> --gid <gid> possible
 - #2968 pm2 attach <pm_id> to attach to process stdin / stdout
@@ -20,6 +21,8 @@
 - refactor the context retrieving from error
 - add a TTL for file cache entry
 - #2956 Fix listen_timeout in combination with wait_ready
+
+|!| need to be documented when released
 
 ### Breaking
 

@@ -140,6 +140,9 @@
       "string"
     ]
   },
+  "disable_logs" : {
+    "type": "boolean"
+  },
   "log_date_format": {
     "type": "string"
   },
