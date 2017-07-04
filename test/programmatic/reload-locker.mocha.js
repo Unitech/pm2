@@ -25,38 +25,47 @@ describe('Reload locker system', function() {
 
   it('should start app', function(done) {
     pm2.start({
-      script    : './echo.js',
-      instances : 4
+      script    : './http.js',
+      instances : 2
     }, function(err, data) {
       should(err).be.null();
 
       pm2.list(function(err, ret) {
         should(err).be.null();
-        ret.length.should.eql(4);
+        ret.length.should.eql(2);
         done();
       });
     });
   });
 
   it('should trigger one reload and forbid the second', function(done) {
-
-    pm2.reload('all', function() {
-
-    })
+    pm2.reload('all');
 
     setTimeout(function() {
       fs.statSync(cst.PM2_RELOAD_LOCKFILE);
-      var dt = fs.readFileSync(cst.PM2_RELOAD_LOCKFILE);
-      console.log(dt.toString());
+      var dt = parseInt(fs.readFileSync(cst.PM2_RELOAD_LOCKFILE).toString());
+
+      should(dt).above(0);
+
       pm2.reload('all', function(err) {
-        console.log(arguments);
-        if (err) {
-          done(err)
-        }
+        should.exists(err);
+        if (err)
+          done()
+        else
+          done(new Error('should trigger error'));
       });
     }, 100);
   });
 
+  it('should re allow reload when reload finished', function(done) {
+    setTimeout(function() {
+      pm2.reload('all', done);
+    }, 1000);
+  });
 
+  it('should lock file be empty', function() {
+    var dt = fs.readFileSync(cst.PM2_RELOAD_LOCKFILE).toString();
+    should(dt).eql('');
+  });
 
 });
