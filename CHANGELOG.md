@@ -24,6 +24,7 @@
 - refactor the context retrieving from error
 - add a TTL for file cache entry
 - #2956 Fix listen_timeout in combination with wait_ready
+- #2996 respect signal order on pm2 reload (delegate ready function to reload fn)
 
 |!| need to be documented when released
 
