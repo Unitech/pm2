@@ -524,6 +524,12 @@ commander.command('unset <key>')
     pm2.unset(key);
   });
 
+commander.command('report')
+  .description('give a full pm2 report for https://github.com/Unitech/pm2/issues')
+  .action(function(key) {
+    pm2.report();
+  });
+
 //
 // Keymetrics CLI integratio
 //
