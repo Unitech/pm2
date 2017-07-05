@@ -3,6 +3,9 @@
 var PM2    = require('../..');
 var should = require('should');
 var path   = require('path');
+var fs     = require('fs');
+
+var cst = require('../../constants.js');
 
 describe('Misc commands', function() {
   var pm2 = new PM2.custom({
@@ -31,7 +34,7 @@ describe('Misc commands', function() {
       should(err).be.null();
       done();
     });
-  });
+  }); 
 
   it('should restart them', function(done) {
     pm2.restart('all', function(err, data) {
@@ -70,9 +73,34 @@ describe('Misc commands', function() {
     });
   });
 
-  it('should save process list', function(done) {
+  it('should save process list to dump', function(done) {
+    if (fs.existsSync(cst.DUMP_FILE_PATH)) {
+      fs.unlinkSync(cst.DUMP_FILE_PATH);
+    }
+
+    if (fs.existsSync(cst.DUMP_BACKUP_FILE_PATH)) {
+      fs.unlinkSync(cst.DUMP_BACKUP_FILE_PATH);
+    }
+
     pm2.dump(function(err, data) {
+      should(fs.existsSync(cst.DUMP_FILE_PATH)).be.true();
+      should(fs.existsSync(cst.DUMP_BACKUP_FILE_PATH)).be.false();
       should(err).be.null();
+      done();
+    });
+  });
+
+  it('should back up dump and re-save process list', function(done) {
+    var origDump = fs.readFileSync(cst.DUMP_FILE_PATH).toString();
+
+    pm2.dump(function(err, data) {
+      should(fs.existsSync(cst.DUMP_FILE_PATH)).be.true();
+      should(fs.existsSync(cst.DUMP_BACKUP_FILE_PATH)).be.true();
+      should(err).be.null();
+
+      var dumpBackup = fs.readFileSync(cst.DUMP_BACKUP_FILE_PATH).toString();
+
+      should(origDump).be.equal(dumpBackup);
       done();
     });
   });

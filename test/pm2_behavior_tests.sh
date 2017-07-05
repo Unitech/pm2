@@ -25,6 +25,8 @@ bash ./test/bash/pm2-runtime.sh
 spec "pm2-runtime"
 bash ./test/bash/startup.sh
 spec "upstart startup test"
+bash ./test/bash/dump.sh
+spec "dump test"
 bash ./test/bash/resurrect.sh
 spec "resurrect test"
 # bash ./test/bash/docker.sh
