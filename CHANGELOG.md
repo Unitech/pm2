@@ -1,4 +1,11 @@
-## 2.6
+## 3.0.0
+
+### Breaking
+
+Drop support for Node.js 0.12.
+User of Node.js 0.12 will have to use PM2 2.X version.
+
+### Changes
 
 - #2144 #1060 #2957 #2033 #1872 #2938 #971 Select application uid/gid via --uid --gid (CLI+JSON) + display user via pm2 ls
 - #2998 pm2 report command for automated system inspection
