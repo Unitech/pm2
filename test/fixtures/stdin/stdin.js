@@ -8,9 +8,9 @@ const rl = readline.createInterface({
 
 rl.prompt();
 
-rl.on('line', (line) =>{
+rl.on('line', function(line) {
   console.log('Line %s received', line);
 });
 
-setInterval(() => {
+setInterval(function() {
 }, 100);
