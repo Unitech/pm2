@@ -68,7 +68,7 @@ var csts = {
   GRACEFUL_LISTEN_TIMEOUT : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
   LOGS_BUFFER_SIZE        : 8,
   CONTEXT_ON_ERROR        : 2,
-  AGGREGATION_DURATION    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development' ? 3000 : 5 * 60000,
+  AGGREGATION_DURATION    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' || process.env.NODE_ENV === 'development' ? 3000 : 5 * 60000,
   TRACE_FLUSH_INTERVAL    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' ? 1000 : 60000,
 
   // Concurrent actions when doing start/restart/reload
