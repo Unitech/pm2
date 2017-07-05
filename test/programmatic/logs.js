@@ -1,41 +1,35 @@
 
 process.env.NODE_ENV = 'test';
-//process.env.DEBUG='pm2:*';
 
 var PM2    = require('../..');
 var should = require('should');
 var fs     = require('fs');
 var path   = require('path');
 
-describe('Max memory restart programmatic', function() {
+describe('Programmatic log feature test', function() {
 
   var proc1 = null;
   var procs = [];
 
   var pm2 = new PM2.custom({
-    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 
   before(function(done) {
     this.timeout(5000);
 
-    pm2.connect(function() {
-      console.log('connected');
-      pm2.delete('all', function() {
-        done();
-      });
+    pm2.delete('all', function() {
+      done();
     });
   });
 
   after(function(done) {
-    pm2.destroy(done);
+    pm2.disconnect(done);
   });
 
   afterEach(function(done) {
     pm2.delete('all', done);
   });
-
 
   describe('Log merging', function() {
     it('should process HAS post fixed logs with id (merge_logs: false)', function(done) {
@@ -141,8 +135,68 @@ describe('Max memory restart programmatic', function() {
         }, 500);
       });
     });
-
   });
+
+  describe('Disable logs', function() {
+    it('should start app with log disabled', function(done) {
+      try {
+        fs.writeFileSync(path.resolve('./test/fixtures/error-echo-disabled.log'), '');
+        fs.writeFileSync(path.resolve('./test/fixtures/out-echo-disabled.log'), '');
+        fs.writeFileSync(path.resolve('./test/fixtures/merged.log'), '');
+      } catch(e) {}
+
+      pm2.start({
+        script          : './echo.js',
+        error_file      : 'error-echo-disabled.log',
+        out_file        : 'out-echo-disabled.log',
+        log_file        : 'merged.log',
+        disable_logs    : true,
+        merge_logs      : true
+      }, function(err, procs) {
+        should(err).be.null();
+
+        var out_file = procs[0].pm2_env.pm_out_log_path;
+        var err_file = procs[0].pm2_env.pm_err_log_path;
+        var log_file = procs[0].pm2_env.pm_log_path;
+
+        setTimeout(function() {
+          fs.readFileSync(err_file).toString().should.eql('');
+          fs.readFileSync(out_file).toString().should.eql('');
+          done();
+        }, 500);
+      });
+    });
+
+    it('should start app with log disabled', function(done) {
+      try {
+        fs.writeFileSync(path.resolve('./test/fixtures/error-echo-disabled.log'), '');
+        fs.writeFileSync(path.resolve('./test/fixtures/out-echo-disabled.log'), '');
+        fs.writeFileSync(path.resolve('./test/fixtures/merged.log'), '');
+      } catch(e) {
+      }
+
+      pm2.start({
+        script          : './echo.js',
+        error_file      : '/dev/null',
+        out_file        : '/dev/null',
+        log_file        : '/dev/null',
+        disable_logs    : true,
+        merge_logs      : true
+      }, function(err, procs) {
+        should(err).be.null();
+
+        var out_file = procs[0].pm2_env.pm_out_log_path;
+        var err_file = procs[0].pm2_env.pm_err_log_path;
+
+        setTimeout(function() {
+          fs.readFileSync(err_file).toString().should.eql('');
+          fs.readFileSync(out_file).toString().should.eql('');
+          done();
+        }, 500);
+      });
+    });
+  });
+
 
 
 });
