@@ -729,7 +729,6 @@ commander.command('prettylist')
 // Dashboard command
 //
 commander.command('monit')
-  .alias('m')
   .description('launch termcaps monitoring')
   .action(function() {
     pm2.dashboard();
