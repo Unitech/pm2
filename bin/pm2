@@ -48,7 +48,7 @@ commander.version(pkg.version)
   .option('-w --write', 'write configuration in local folder')
   .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
   .option('--interpreter-args <arguments>', 'interpret options (alias of --node-args)')
-  .option('--log-date-format <momentjs format>', 'add custom prefix timestamp to logs')
+  .option('--log-date-format <date format>', 'add custom prefix timestamp to logs')
   .option('--no-daemon', 'run pm2 daemon in the foreground if it doesn\'t exist already')
   .option('-a --update-env', 'update environmnent on restart/reload (-a <=> apply)')
   .option('--source-map-support', 'force source map support')
@@ -533,7 +533,7 @@ commander.command('report')
 //
 // Keymetrics CLI integratio
 //
-commander.command('link [secret_key|command] [public_key] [machine_name]')
+commander.command('link [secret] [public] [name]')
   .alias('interact')
   .option('--info-node [url]', 'set url info node')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
