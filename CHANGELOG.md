@@ -1,15 +1,18 @@
+## 3.0.0
+
+- #2144 #1060 #2957 #2033 #1872 #2938 #971 Select application uid/gid via --uid --gid (CLI+JSON) + display user via pm2 ls
+- pm2 install module-name --uid <uid> --gid <gid> possible
+
 ## 2.6.0
 
 ### Changes
 
 |!| need to be documented when released
 
-- #2144 #1060 #2957 #2033 #1872 #2938 #971 Select application uid/gid via --uid --gid (CLI+JSON) + display user via pm2 ls
 - #2998 pm2 report command for automated system inspection
 - #2997 --disable-logs option to suppress error
 - #2290 allow to declare apps under "pm2" attribute (eq "apps"). Nicer in package.json
 - #2994 allow to specify typescript version to be installed
-- pm2 install module-name --uid <uid> --gid <gid> possible
 - #2501 low memory environment pm2 setting via PM2_OPTIMIZE_MEMORY (beta)
 - #2968 pm2 attach <pm_id> to attach to process stdin / stdout
 - pm2-runtime -> drop in replacement for the node.js binary
