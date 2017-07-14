@@ -2,6 +2,8 @@
 
 ### Changes
 
+|!| need to be documented when released
+
 - #2144 #1060 #2957 #2033 #1872 #2938 #971 Select application uid/gid via --uid --gid (CLI+JSON) + display user via pm2 ls
 - #2998 pm2 report command for automated system inspection
 - #2997 --disable-logs option to suppress error
@@ -27,8 +29,6 @@
 - add a TTL for file cache entry
 - #2956 Fix listen_timeout in combination with wait_ready
 - #2996 respect signal order on pm2 reload (delegate ready function to reload fn)
-
-|!| need to be documented when released
 
 ### Breaking
 
