@@ -161,7 +161,7 @@
     "chalk": "^1.1",
     "chokidar": "^1.7",
     "cli-table-redemption": "^1.0.0",
-    "commander": "^2.9",
+    "commander": "2.11.0",
     "cron": "1.2.1",
     "debug": "^2.6",
     "eventemitter2": "1.0.5",
