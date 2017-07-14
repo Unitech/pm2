@@ -1,9 +1,9 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "3.0.0",
+  "version": "2.6.0",
   "engines": {
-    "node": ">=4.0"
+    "node": ">=0.12"
   },
   "directories": {
     "bin": "./bin",
