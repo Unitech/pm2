@@ -1,9 +1,4 @@
-## 3.0.0
-
-### Breaking
-
-Drop support for Node.js 0.12.
-User of Node.js 0.12 will have to use PM2 2.X version.
+## 2.6.0
 
 ### Changes
 
@@ -37,7 +32,7 @@ User of Node.js 0.12 will have to use PM2 2.X version.
 
 ### Breaking
 
-- Drop pm2-daemon CLI
+- Drop pm2-daemon CLI (replaced by pm2-runtime)
 
 ## 2.5
 
