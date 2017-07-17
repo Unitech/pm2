@@ -9,7 +9,7 @@ var should = require('should');
 
 describe('Lazy API usage', function() {
   before(function(done) {
-    PM2.delete('all', function() { done() } );
+    PM2.kill(function() { done() });
   });
 
   it('should start a script without passing any args', function(done) {
