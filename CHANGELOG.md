@@ -7,8 +7,6 @@
 
 ### Changes
 
-|!| need to be documented when released
-
 - #2998 pm2 report command for automated system inspection
 - #2997 --disable-logs option to suppress error
 - #2290 allow to declare apps under "pm2" attribute (eq "apps"). Nicer in package.json
