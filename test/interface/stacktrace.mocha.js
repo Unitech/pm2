@@ -5,6 +5,7 @@ var Utility = require('../../lib/Interactor/Utility.js');
 var TraceFactory = require('./misc/trace_factory.js');
 var path = require('path');
 var fs = require('fs');
+var assert = require('assert');
 
 describe('StackTrace Utility', function() {
   var aggregator;
@@ -29,7 +30,7 @@ describe('StackTrace Utility', function() {
     aggregator = new Aggregator({ stackParser: stackParser});
   });
 
-  describe('.parseStacktrace', function() {
+  describe('.parse', function() {
     it('should parse stacktrace and get context', function(done) {
       var obj = [{
         labels: {
@@ -124,5 +125,33 @@ describe('StackTrace Utility', function() {
       aggregator.parseStacktrace();
     });
 
+  });
+
+  describe('.attachContext', function () {
+    it('should extract context from stackframes', function () {
+      var error = stackParser.attachContext({
+        stackframes: [
+          {
+            file_name: '/toto/tmp/lol',
+            line_number: 10
+          }
+        ]
+      });
+      assert(error !== undefined);
+      assert(error.stackframes === undefined);
+      assert(error.callsite !== undefined);
+      assert(error.callsite.indexOf('/toto/tmp/lol') >= 0);
+    });
+
+    it('should extract context from the stack string', function () {
+      var error = new Error();
+      // stack is lazy so we need to load it
+      error.stack = error.stack;
+      error = stackParser.attachContext(error);
+      assert(error !== undefined);
+      assert(error.stackframes === undefined);
+      assert(error.callsite.indexOf(__filename) >= 0);
+      assert(error.context.indexOf('var error = new Error()') >= 0);
+    });
   });
 });

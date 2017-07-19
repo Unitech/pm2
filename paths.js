@@ -41,6 +41,8 @@ module.exports = function(PM2_HOME) {
     PM2_LOG_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.log'),
     PM2_PID_FILE_PATH        : p.resolve(PM2_HOME, 'pm2.pid'),
 
+    PM2_RELOAD_LOCKFILE      : p.resolve(PM2_HOME, 'reload.lock'),
+
     DEFAULT_PID_PATH         : p.resolve(PM2_HOME, 'pids'),
     DEFAULT_LOG_PATH         : p.resolve(PM2_HOME, 'logs'),
     DEFAULT_MODULE_PATH      : p.resolve(PM2_HOME, 'node_modules'),

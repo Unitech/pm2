@@ -52,20 +52,22 @@ var csts = {
   CLUSTER_MODE_ID         : 'cluster_mode',
   FORK_MODE_ID            : 'fork_mode',
 
+  LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
+
   KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
   KEYMETRICS_BANNER       : '../lib/keymetrics',
   DEFAULT_MODULE_JSON     : 'package.json',
 
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
   REMOTE_PORT             : 41624,
-  REMOTE_REVERSE_PORT     : isNaN(parseInt(process.env.KEYMETRICS_REVERSE_PORT)) ? 43554 : parseInt(process.env.KEYMETRICS_REVERSE_PORT),
   REMOTE_HOST             : 's1.keymetrics.io',
   SEND_INTERVAL           : 1000,
+  RELOAD_LOCK_TIMEOUT     : parseInt(process.env.PM2_RELOAD_LOCK_TIMEOUT) || 30000,
   GRACEFUL_TIMEOUT        : parseInt(process.env.PM2_GRACEFUL_TIMEOUT) || 8000,
   GRACEFUL_LISTEN_TIMEOUT : parseInt(process.env.PM2_GRACEFUL_LISTEN_TIMEOUT) || 3000,
-  LOGS_BUFFER             : 10,
+  LOGS_BUFFER_SIZE        : 8,
   CONTEXT_ON_ERROR        : 2,
-  AGGREGATION_DURATION    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development' ? 3000 : 5 * 60000,
+  AGGREGATION_DURATION    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' || process.env.NODE_ENV === 'development' ? 3000 : 5 * 60000,
   TRACE_FLUSH_INTERVAL    : process.env.PM2_DEBUG || process.env.NODE_ENV === 'local_test' ? 1000 : 60000,
 
   // Concurrent actions when doing start/restart/reload
