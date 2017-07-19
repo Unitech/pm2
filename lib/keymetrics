@@ -12,19 +12,24 @@ __/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
         _\///______________\///______________\///__\///////////////__
 
 
-      Runtime and Process Manager specialized on Node.js applications
-             that integrates a built-in Load Balancer.
+               Production Process Manager for Node.js apps
+                     with a built-in Load Balancer.
 
-                Start and Daemonize any application
-                      $ pm2 start app.js
 
-                Load Balance 4 instances of api.js
-                    $ pm2 start api.js -i 4
+                Start and Daemonize any application:
+                $ pm2 start app.js
 
-                           Monitor
-                        $ pm2 monitor
+                Load Balance 4 instances of api.js:
+                $ pm2 start api.js -i 4
 
-              Make pm2 auto-boot at server restart
-                        $ pm2 startup
+                Monitor in production:
+                $ pm2 monitor
+
+                Make pm2 auto-boot at server restart:
+                $ pm2 startup
+
+                To go further checkout:
+                http://pm2.io
+
 
                         -------------
