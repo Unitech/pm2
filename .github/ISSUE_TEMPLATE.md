@@ -1,19 +1,14 @@
-<!--
-    Thank you for contributing to PM2!
+Your issue may already be reported!
+Please search on the [issue tracker](https://github.com/Unitech/pm2/search?type=Issues) before creating one.
 
-    About a new issue, please check that there is no duplicate:
-         https://github.com/Unitech/pm2/search?type=Issues
+## What's going wrong?
 
-    If not please fill out the following questions:
--->
-
-**What's going wrong?**
-**How could we reproduce this issue?**
+## How could we reproduce this issue?
 
 ## Supporting information
 
+Please run the following command (available on PM2 >= 2.6)
+
 ```
-PM2 version: `pm2 -v`
-Node version: `node -v`
-Windows? Mac? Linux?
+$ pm2 report
 ```

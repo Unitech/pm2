@@ -45,6 +45,9 @@ mocha --opts ./mocha.opts  ./path_resolution.mocha.js
 spec "API tests"
 mocha --opts ./mocha.opts  ./lazy_api.mocha.js
 spec "API tests"
+mocha --opts ./mocha.opts  ./reload-locker.mocha.js
+spec "Reload locker tests"
+
 mocha --opts ./mocha.opts  ./api.backward.compatibility.mocha.js
 spec "API Backward compatibility tests"
 mocha --opts ./mocha.opts  ./custom_action.mocha.js
@@ -60,6 +63,8 @@ mocha --opts ./mocha.opts  ./module_configuration.mocha.js
 spec "Max memory tests"
 mocha --opts ./mocha.opts  ./cluster.mocha.js
 spec "Cluster tests"
+mocha --opts ./mocha.opts  ./graceful.mocha.js
+spec "Graceful tests"
 mocha --opts ./mocha.opts  ./inside.mocha.js
 spec "Inside pm2 call tests"
 mocha --opts ./mocha.opts  ./misc_commands.js
@@ -68,6 +73,8 @@ mocha --opts ./mocha.opts  ./signals.js
 spec "SIGINT signal interception + delay customization"
 mocha --opts ./mocha.opts  ./send_data_process.mocha.js
 spec "Send data to a process"
+mocha --opts ./mocha.opts  ./modules.mocha.js
+spec "Module API testing"
 
 mocha --opts ./mocha.opts  ./json_validation.mocha.js
 spec "JSON validation test"

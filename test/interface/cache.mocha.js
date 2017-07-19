@@ -58,4 +58,29 @@ describe('Cache Utility', function() {
     should(cache.get('toto')).be.null();
   });
 
+  it('should instanciate context cache with ttl', function() {
+    cache = new Utility.Cache({
+      miss: function (key) {
+        try {
+          var content = fs.readFileSync(path.resolve(key));
+          return content.toString().split(/\r?\n/);
+        } catch (err) {
+          return null;
+        }
+      },
+      ttl: 1
+    });
+  });
+
+  it('should add a key', function () {
+    should(cache.set('toto', 'yeslife')).be.true();
+  });
+
+  it('should wait one second to see the key disapear', function (done) {
+    setTimeout(function () {
+      should(cache.get('toto')).be.null();
+      done();
+    }, 3000);
+  });
+
 });

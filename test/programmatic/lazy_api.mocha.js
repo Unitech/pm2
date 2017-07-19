@@ -1,19 +1,19 @@
 
 process.chdir(__dirname);
 
+process.env.PM2_RELOAD_LOCK_TIMEOUT = 1000;
+
 var PM2 = require('../..');
+
 var should = require('should');
 
 describe('Lazy API usage', function() {
   before(function(done) {
-    PM2.delete('all', function() { done() } );
+    PM2.kill(function() { done() });
   });
 
   it('should start a script without passing any args', function(done) {
-    PM2.start('./../fixtures/child.js');
-    setTimeout(function() {
-      done();
-    }, 300);
+    PM2.start('./../fixtures/child.js', done);
   });
 
   it('should list one process', function(done) {
@@ -24,10 +24,10 @@ describe('Lazy API usage', function() {
   });
 
   it('should fail to start script', function(done) {
-    PM2.start('./../fixtures/child.js');
-    setTimeout(function() {
+    PM2.start('./../fixtures/child.js', function(err) {
+      should.exists(err);
       done();
-    }, 300);
+    });
   });
 
   it('should list one process', function(done) {
@@ -39,10 +39,10 @@ describe('Lazy API usage', function() {
 
 
   it('should reload', function(done) {
-    PM2.reload('./../fixtures/child.js');
-    setTimeout(function() {
+    PM2.reload('child', function(err) {
+      should.not.exists(err);
       done();
-    }, 300);
+    });
   });
 
   it('should process been restarted', function(done) {

@@ -29,6 +29,12 @@
     "ext_type": "sbyte",
     "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
   },
+  "uid" : {
+    "type" : "string"
+  },
+  "gid" : {
+    "type" : "string"
+  },
   "restart_delay": {
     "type" : "number"
   },
@@ -133,6 +139,9 @@
       "object",
       "string"
     ]
+  },
+  "disable_logs" : {
+    "type": "boolean"
   },
   "log_date_format": {
     "type": "string"
