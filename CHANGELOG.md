@@ -1,8 +1,3 @@
-## 3.0.0
-
-- #2144 #1060 #2957 #2033 #1872 #2938 #971 Select application uid/gid via --uid --gid (CLI+JSON) + display user via pm2 ls
-- pm2 install module-name --uid <uid> --gid <gid> possible
-
 ## 2.6.0
 
 ### Changes
