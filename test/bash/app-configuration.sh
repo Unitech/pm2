@@ -56,24 +56,24 @@ echo "Wait for init..."
 sleep 1
 
 exists 'probe test-probe exist' "test-probe"
-exists 'probe Loop delay exist' "Loop delay"
+exists 'probe Event Loop Latency exist' "Event Loop Latency"
 
-exists 'probe Loop delay default value' "agg_type: 'avg'"
-exists 'probe Loop delay default value' "alert: {}"
+exists 'probe Event Loop Latency default value' "agg_type: 'avg'"
+exists 'probe Event Loop Latency default value' "alert: {}"
 
 # Set new value for alert probe
-$pm2 set probe-test.probes.Loop\ delay.value 25
-sleep 1
+# $pm2 set probe-test.probes.Event\ Loop\ Latency.value 25
+# sleep 1
 
-exists 'probe Loop delay alerted' "alert: { cmp: '>', value: 25, mode: 'threshold'"
+# exists 'probe Event Loop Latency alerted' "alert: { cmp: '>', value: 25, mode: 'threshold'"
 
 # Override value for test-probe
 $pm2 set probe-test.probes.test-probe.value 30
 sleep 2
 
-exists 'probe Loop delay alerted' "value: 30"
+exists 'probe Event Loop Latency alerted' "value: 30"
 
 $pm2 restart all
 sleep 1
 
-exists 'probe Loop delay alerted' "value: 30"
+exists 'probe Event Loop Latency alerted' "value: 30"
