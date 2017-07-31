@@ -174,7 +174,7 @@
     "pm2-axon-rpc": "0.4.5",
     "pm2-deploy": "^0.3.5",
     "pm2-multimeter": "^0.1.2",
-    "pmx": "keymetrics/pmx",
+    "pmx": "keymetrics/pmx#development",
     "semver": "^5.3",
     "shelljs": "0.7.8",
     "source-map-support": "^0.4.15",
