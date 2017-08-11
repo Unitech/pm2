@@ -133,6 +133,37 @@ describe('API checks', function() {
     });
   });
 
+  describe('Should keep environment variables', function() {
+    it('should start app with treekill', function(done) {
+      PM2.start({
+        script : './../fixtures/child.js',
+        instances : 1,
+        treekill : false,
+        name : 'http-test'
+      }, function(err) {
+        should(err).be.null();
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(1);
+          should(list[0].pm2_env.treekill).be.false;
+          done();
+        });
+      });
+    });
+
+    it('should restart app and treekill still at false', function(done) {
+      PM2.restart('http-test', function() {
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(1);
+          should(list[0].pm2_env.treekill).be.false;
+          done();
+        });
+      });
+    });
+
+  });
+
   describe('Issue #2337', function() {
     before(function(done) {
       PM2.delete('all', function() { done() });
