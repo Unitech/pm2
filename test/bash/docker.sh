@@ -34,7 +34,7 @@ rm -rf node_modules
 #
 # Wrap Application in Development mode
 #
-$pm2 docker:dev process.json --daemon
+$pm2 start process.json --dockerdaemon --container
 CID=`docker ps -lq`
 
 # Check Dockerfile generation
@@ -44,6 +44,7 @@ spec "Dockerfile have been generated"
 grep "process.json" Dockerfile
 spec "Right entry file"
 
+sleep 1
 # Check running processes inside container
 dshould 'should have started 2 apps' 'online' 2
 dshould 'should the 2 apps not being restarted' 'restart_time: 0' 2
@@ -53,13 +54,16 @@ docker kill $CID
 #
 # Edit Dockerfile (simulate user who needs a specific library)
 #
-sed -i '5i RUN pm2 install pm2-server-monit' Dockerfile
-$pm2 docker:dev process.json --daemon
+sed -i '' '5i\
+RUN pm2 install pm2-server-monit
+' Dockerfile
+
+$pm2 start process.json --dockerdaemon --container
 sleep 1
 grep "RUN pm2 install pm2-server-monit" Dockerfile
 spec "Custom line should still be present"
 dshould 'should have started 2 apps' 'online' 2
-dshould 'should the 2 apps not being restarted' 'restart_time: 0' 2
+dshould 'should the 2 apps be stable' 'restart_time: 0' 2
 
 docker kill `docker ps -lq`
 
@@ -67,7 +71,7 @@ docker kill `docker ps -lq`
 #
 # Wrap Application in Distribution mode
 #
-$pm2 docker:dist process.json pm2ns/test --daemon
+$pm2 start process.json --container --dist --image-name pm2ns/test --dockerdaemon
 sleep 2
 grep "RUN pm2 install pm2-server-monit" Dockerfile
 spec "Custom line should still be present"
@@ -78,7 +82,7 @@ docker kill `docker ps -lq`
 rm Dockerfile
 
 # Re wrap with new generated Dockerfile
-$pm2 docker:dist process.json pm2ns/test --daemon
+$pm2 start process.json  --container --dist --image-name pm2ns/test --dockerdaemon
 sleep 1
 PRODshould 'should have started 2 apps' 'online' 2
 PRODshould 'should the 2 apps not being restarted' 'restart_time: 0' 2
