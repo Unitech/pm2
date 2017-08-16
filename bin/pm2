@@ -235,8 +235,20 @@ function patchCommanderArg(cmd) {
 //
 commander.command('start <file|json|stdin|app_name|pm_id...>')
   .option('--watch', 'Watch folder for changes')
+  .option('--fresh', 'Rebuild Dockerfile')
+  .option('--daemon', 'Run container in Daemon mode (debug purposes)')
+  .option('--container', 'Start application in container mode')
+  .option('--dist', 'with --container; change local Dockerfile to containerize all files in current directory')
+  .option('--image-name [name]', 'with --dist; set the exported image name')
+  .option('--node-version [major]', 'with --container, set a specific major Node.js version')
+  .option('--dockerdaemon', 'for debugging purpose')
   .description('start and daemonize an app')
-  .action(function(cmd) {
+  .action(function(cmd, opts) {
+    if (opts.container == true && opts.dist == true)
+      return pm2.dockerMode(cmd, opts, 'distribution');
+    else if (opts.container == true)
+      return pm2.dockerMode(cmd, opts, 'development');
+
     if (cmd == "-") {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
@@ -254,33 +266,6 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
         pm2.speedList(err ? 1 : 0);
       });
     }
-  });
-
-//
-// Docker mode
-//
-commander.command('docker:gen <file|config>')
-  .description('generate Dockerfile in current folder')
-  .option('--force', 'Force regeneration of Dockerfile')
-  .action(function(script, opts) {
-    pm2.generateDockerfile(script, commander);
-  });
-
-commander.command('docker:dev <file|config>')
-  .option('--fresh', 'Rebuild Dockerfile')
-  .option('--daemon', 'Run container in Daemon mode (debug purposes)')
-  .description('wrap application into Docker container')
-  .action(function(script, opts) {
-    pm2.dockerMode(script, opts, 'development');
-  });
-
-commander.command('docker:dist <file|config> <image_name>')
-  .option('--fresh', 'Rebuild Dockerfile')
-  .option('--daemon', 'Run container in Daemon mode (debug purposes)')
-  .description('wrap application into Docker container')
-  .action(function(script, image_name, opts) {
-    opts.imageName = image_name;
-    pm2.dockerMode(script, opts, 'distribution');
   });
 
 commander.command('trigger <proc_name> <action_name> [params]')
