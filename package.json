@@ -176,6 +176,8 @@
     "pm2-multimeter": "^0.1.2",
     "pmx": "keymetrics/pmx#development",
     "semver": "^5.3",
+    "spiderlink": "latest",
+    "ws": "*",
     "shelljs": "0.7.8",
     "source-map-support": "^0.4.15",
     "sprintf-js": "1.1.1",

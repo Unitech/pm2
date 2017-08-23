@@ -17,6 +17,12 @@
     ],
     "alias": ["interpreterArgs", "interpreter_args"]
   },
+  "external_lb" : {
+    "type" : "boolean"
+  },
+  "lb_mode" : {
+    "type" : "string"
+  },
   "name": {
     "type": "string"
   },

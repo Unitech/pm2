@@ -16,6 +16,12 @@ var PM2       = require('../lib/API.js');
 var pkg       = require('../package.json');
 var tabtab    = require('../lib/completion.js');
 
+var spm2 = require('spiderlink')('pm2');
+
+spm2.longCall('connector', function(data) {
+  console.log(data);
+});
+
 var pm2 = new PM2();
 
 commander.version(pkg.version)
@@ -60,6 +66,8 @@ commander.version(pkg.version)
   .option('--ignore-watch <folders|files>', 'folder/files to be ignored watching, chould be a specific name or regex - e.g. --ignore-watch="test node_modules \"some scripts\""')
   .option('--node-args <node_args>', 'space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"')
   .option('--no-color', 'skip colors')
+  .option('-t --external-lb', 'configure external lb to listen on app port and lb to <instances> apps')
+  .option('--lb-mode <sticky|rr|least_conn>', 'load balancing mode')
   .option('--no-vizion', 'start an app without vizion feature (versioning control)')
   .option('--no-autorestart', 'start an app without automatic restart')
   .option('--no-treekill', 'Only kill the main process, not detached children')
@@ -122,6 +130,7 @@ function beginCommandProcessing() {
       console.log('');
     }
   });
+
   commander.parse(process.argv);
 }
 
