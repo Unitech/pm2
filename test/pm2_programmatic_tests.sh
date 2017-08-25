@@ -122,3 +122,5 @@ mocha --opts ./mocha.opts  ./utility.mocha.js
 spec "PM2 Utility"
 mocha --opts ./mocha.opts  ./pm2.link.check.mocha.js
 spec "Transaction option enablement"
+mocha --opts ./mocha.opts  ./monitor.mocha.js
+spec "Monitor / Unmonitor commands"
