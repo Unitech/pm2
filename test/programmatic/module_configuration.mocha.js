@@ -10,7 +10,7 @@ var fs = require('fs');
 process.chdir(__dirname);
 
 describe('Module default flush configuration', function() {
-  this.timeout(20000);
+  this.timeout(30000);
 
   before(function(done) {
     PM2.unset('pm2-logrotate', done);
