@@ -11,12 +11,12 @@ describe('Containerizer unit tests', function() {
 
   var res_lines_dev = ['## DEVELOPMENT MODE',
                        'ENV NODE_ENV=development',
-                       'CMD ["rundev", "start", "--auto-exit", "index.js", "--env", "development"]'];
+                       'CMD ["pm2-dev", "index.js", "--env", "development"]'];
 
   var res_lines_prod = ['## DISTRIBUTION MODE',
                         'ENV NODE_ENV=production',
                         'COPY . /var/app',
-                        'CMD ["pm2-docker", "start", "--auto-exit", "index.js", "--env", "production"]'];
+                        'CMD ["pm2-docker", "--auto-exit", "index.js", "--env", "production"]'];
 
   after(function(done) {
     fs.unlink(Dockerfile, done);
@@ -25,7 +25,9 @@ describe('Containerizer unit tests', function() {
   it('should generate a dockerfile', function() {
     var has_meta = false;
 
-    return Containerizer.generateDockerfile(Dockerfile, 'index.js', 'development')
+    return Containerizer.generateDockerfile(Dockerfile, 'index.js', {
+      mode : 'development'
+    })
       .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
@@ -45,7 +47,9 @@ describe('Containerizer unit tests', function() {
   });
 
   it('should switch dockerfile to distribution', function() {
-    return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'distribution')
+    return Containerizer.switchDockerFile(Dockerfile, 'index.js', {
+      mode : 'distribution'
+    })
       .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
@@ -63,7 +67,9 @@ describe('Containerizer unit tests', function() {
   });
 
   it('should switch dockerfile to distribution (no touching it)', function() {
-    return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'distribution')
+    return Containerizer.switchDockerFile(Dockerfile, 'index.js', {
+      mode : 'distribution'
+    })
       .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
@@ -80,7 +86,9 @@ describe('Containerizer unit tests', function() {
   });
 
   it('should switch dockerfile to development', function() {
-    return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'development')
+    return Containerizer.switchDockerFile(Dockerfile, 'index.js', {
+      mode : 'development'
+    })
       .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
@@ -97,7 +105,9 @@ describe('Containerizer unit tests', function() {
   });
 
   it('should switch dockerfile to development (no touching it)', function() {
-    return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'development')
+    return Containerizer.switchDockerFile(Dockerfile, 'index.js', {
+      mode : 'development'
+    })
       .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
@@ -114,7 +124,9 @@ describe('Containerizer unit tests', function() {
   });
 
   it('should switch dockerfile to distribution', function() {
-    return Containerizer.switchDockerFile(Dockerfile, 'index.js', 'distribution')
+    return Containerizer.switchDockerFile(Dockerfile, 'index.js', {
+      mode : 'distribution'
+    })
       .then(function(meta) {
         meta.Dockerfile_path.should.eql(Dockerfile);
         fs.statSync(Dockerfile);
