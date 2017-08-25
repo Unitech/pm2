@@ -59,6 +59,19 @@ Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
+## Official Docker Image
+
+Dockerfile:
+
+```
+FROM keymetrics/pm2:latest
+[...]
+CMD [ "pm2-docker", "start", "ecosystem.config.js" ]
+```
+
+[pm2 Docker support](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
+[pm2 Official Docker Image](https://hub.docker.com/r/keymetrics/pm2/)
+
 ## Monitor PM2 and Applications
 
 To monitor your applications just type:
@@ -69,10 +82,10 @@ $ pm2 register
 
 [More about PM2 Monitoring](http://docs.keymetrics.io/)
 
-## Update PM2
+## Updating PM2
 
 ```bash
-# Install latest pm2 version
+# Install latest PM2 version
 $ npm install pm2@latest -g
 # Save process list, exit old PM2 & restore all processes
 $ pm2 update
