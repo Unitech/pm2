@@ -48,6 +48,7 @@ module.exports = function(PM2_HOME) {
     DEFAULT_MODULE_PATH      : p.resolve(PM2_HOME, 'node_modules'),
     KM_ACCESS_TOKEN          : p.resolve(PM2_HOME, 'km-access-token'),
     DUMP_FILE_PATH           : p.resolve(PM2_HOME, 'dump.pm2'),
+    DUMP_BACKUP_FILE_PATH    : p.resolve(PM2_HOME, 'dump.pm2.bak'),
 
     DAEMON_RPC_PORT          : p.resolve(PM2_HOME, 'rpc.sock'),
     DAEMON_PUB_PORT          : p.resolve(PM2_HOME, 'pub.sock'),
