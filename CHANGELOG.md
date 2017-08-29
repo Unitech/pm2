@@ -1,3 +1,9 @@
+## 2.6.2
+
+- pm2 unmonitor fix
+- beta pm2 start app.js --container
+- upgrade modules
+
 ## 2.6.1
 
 - #3037 bug fix cb
