@@ -59,8 +59,8 @@ mocha --opts ./mocha.opts  ./watcher.js
 spec "Watcher"
 mocha --opts ./mocha.opts  ./max_memory_limit.js
 spec "Max memory tests"
-mocha --opts ./mocha.opts  ./module_configuration.mocha.js
-spec "Max memory tests"
+# mocha --opts ./mocha.opts  ./module_configuration.mocha.js
+# spec "Max memory tests"
 mocha --opts ./mocha.opts  ./cluster.mocha.js
 spec "Cluster tests"
 mocha --opts ./mocha.opts  ./graceful.mocha.js
