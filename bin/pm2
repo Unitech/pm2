@@ -152,7 +152,7 @@ function checkCompletion(){
     else
       pm2.disconnect();
   });
-};
+}
 
 var _arr = process.argv.indexOf('--') > -1 ? process.argv.slice(0, process.argv.indexOf('--')) : process.argv;
 
