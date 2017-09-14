@@ -1,8 +1,16 @@
-## 2.6.2
+## 2.7.0
 
-- pm2 unmonitor fix
-- beta pm2 start app.js --container
-- upgrade modules
+- #3150 fix watchdog on agent
+- #3001 dump-backup feature
+- #3096 fix module installation
+- #3085 honor every pm2 args on restart
+- #3046 better error message if PM2 is misconfigured
+- #3058 pm2-docker now does not write logs by default
+- #3045 continue to broadcast on the bus system even if logs are disabled
+- [Keymetrics] pm2 unmonitor fix
+- [Beta Container Support] beta pm2 start app.js --container
+- [Chore] upgrade modules
+- [Chore] enhance package.json
 
 ## 2.6.1
 
