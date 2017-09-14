@@ -7,6 +7,7 @@
 - #3046 better error message if PM2 is misconfigured
 - #3058 pm2-docker now does not write logs by default
 - #3045 continue to broadcast on the bus system even if logs are disabled
+- [Docker] Auto Exit when no application is running
 - [Keymetrics] pm2 unmonitor fix
 - [Beta Container Support] beta pm2 start app.js --container
 - [Chore] upgrade modules
