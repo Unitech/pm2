@@ -2,6 +2,7 @@
 
 - #3150 fix watchdog on agent
 - #3001 dump-backup feature
+- #3134 edge case error handling
 - #3096 fix module installation
 - #3085 honor every pm2 args on restart
 - #3046 better error message if PM2 is misconfigured
