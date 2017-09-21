@@ -13,7 +13,7 @@ should 'process should be errored without coffee installed' "status: 'errored'" 
 
 ########### Install
 
-$pm2 install coffeescript
+$pm2 install coffee-script
 
 ########### coffee fork test
 $pm2 delete all
