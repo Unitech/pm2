@@ -1,3 +1,8 @@
+## 2.7.1
+
+- #3117 Add required node env on cluster mode start instance (2m0nd)
+- make profiler compatible with Node.js 8
+
 ## 2.7.0
 
 - #3150 fix watchdog on agent
