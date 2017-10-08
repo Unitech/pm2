@@ -85,6 +85,7 @@
   "homepage": "http://pm2.keymetrics.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh",
     "bench-pmx": "pm2 delete all; pm2 install pm2-probe; node examples/pmx/app.js; pm2 ls"
