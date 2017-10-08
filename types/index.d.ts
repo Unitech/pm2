@@ -1,6 +1,8 @@
 // Type definitions for pm2 2.7.1
 // Definitions by: João Portela https://www.github.com/jportela
 
+// Exported Methods
+
 /**
  * Either connects to a running pm2 daemon (“God”) or launches and daemonizes one.
  * Once launched, the pm2 process will keep running after the script exits.
@@ -168,6 +170,7 @@ export function sendSignalToProcessName(signal:string|number, process: number|st
  */
 export function startup(platform: Platform, errback: ErrResultCallback): void;
 
+// Interfaces
 
 export interface Proc {
   name?: string;
@@ -386,6 +389,8 @@ export interface StartOptions {
   disableSourceMapSupport?: any;
 }
 
+// Types
+
 type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status';
 type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
 
@@ -395,20 +400,3 @@ type ErrProcDescCallback = (err: Error, processDescription: ProcessDescription) 
 type ErrProcDescsCallback = (err: Error, processDescriptionList: ProcessDescription[]) => void;
 type ErrResultCallback = (err: Error, result: any) => void;
 type ErrBusCallback = (err: Error, bus: any) => void;
-
-// /*~ You can declare properties of the module using const, let, or var */
-// export const myField: number;
-
-// /*~ If there are types, properties, or methods inside dotted names
-//  *~ of the module, declare them inside a 'namespace'.
-//  */
-// export namespace subProp {
-//     /*~ For example, given this definition, someone could write:
-//      *~   import { subProp } from 'yourModule';
-//      *~   subProp.foo();
-//      *~ or
-//      *~   import * as yourMod from 'yourModule';
-//      *~   yourMod.subProp.foo();
-//      */
-//     export function foo(): void;
-// }
