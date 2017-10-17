@@ -10,6 +10,14 @@ SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/include.sh"
 
 cd $file_path
+$pm2 startup upstart -u $USER --hp $HOME --service-name abcdef
+spec "should startup command generation exited succesfully with custom service-name"
+test -e /etc/init.d/abcdef
+spec "should have generated upstart file with custom service-name"
+$pm2 unstartup upstart --service-name abcdef
+spec "should have disabled startup with custom service-name"
+! test -e /etc/init.d/abcdef
+spec "should have deleted upstart file with custom service-name"
 
 $pm2 startup upstart -u $USER --hp $HOME
 spec "should startup command generation exited succesfully"
