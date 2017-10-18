@@ -1,22 +1,22 @@
 <div align="center">
   <br/>
-  <a href="http://pm2.keymetrics.io">
-    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v3.png">
+  <a href="http://pm2.keymetrics.io" title="PM2 Keymetrics link">
+    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v3.png" alt="pm2 logo">
   </a>
   <br/>
 <br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
 <br/><br/>
 
- <a href="https://www.bithound.io/github/Unitech/pm2">
+ <a href="https://www.bithound.io/github/Unitech/pm2" title="Bithound PM2 score">
  <img src="https://www.bithound.io/github/Unitech/pm2/badges/score.svg" alt="bitHound Score">
 </a>
 
-<a href="https://www.npmjs.com/package/pm2">
+<a href="https://www.npmjs.com/package/pm2" title="PM2 on NPM">
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/pm2.svg?style=flat-square"/>
 </a>
 
-<a href="https://travis-ci.org/Unitech/pm2">
+<a href="https://travis-ci.org/Unitech/pm2" title="PM2 Tests">
   <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
@@ -63,11 +63,11 @@ Your app is now daemonized, monitored and kept alive forever.
 
 ## Official Docker Image
 
-Dockerfile:
+Docker Hub PM2 image:
 
 [PM2 Official Docker Image](https://hub.docker.com/r/keymetrics/pm2/)
 
-Example:
+Using the pm2-docker CLI:
 
 ```
 FROM keymetrics/pm2:latest
