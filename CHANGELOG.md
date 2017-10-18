@@ -1,3 +1,12 @@
+## 2.7.2
+
+- #3200 Associate .tsx files with ts-node (@dguo)
+- #3202 Add first draft of typescript definitions (@jportela)
+- Allow to install http url via pm2 install (@unitech)
+- #3204 Given --uid add all its gids automatically (@jmeit)
+- #3184 bugfix: try/catch around userInfo to avoid crash (@vmarchaud)
+- #3181 force upgrade to latest pm2-deploy
+
 ## 2.7.1
 
 - #3117 Add required node env on cluster mode start instance (2m0nd)
