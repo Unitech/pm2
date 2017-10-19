@@ -66,7 +66,6 @@ describe('Http requests', function() {
     });
 
     it('should timeout after 7secs', function(done) {
-      this.timeout(10000);
       HttpRequest.post({
         port : PORT,
         url  : '127.0.0.1',

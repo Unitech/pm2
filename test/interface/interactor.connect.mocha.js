@@ -68,8 +68,6 @@ function createMockServer(cb) {
 }
 
 describe('Interactor testing', function() {
-  this.timeout(5000);
-
   var server;
   var interactor;
   var pm2_bus;

@@ -10,8 +10,6 @@ var semver = require('semver');
 process.chdir(__dirname);
 
 describe('Wait ready / Graceful start / restart', function() {
-  this.timeout(5000);
-
   if (!semver.satisfies(process.version, '>= 4.0.0'))
     process.exit(0);
 
