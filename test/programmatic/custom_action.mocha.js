@@ -41,6 +41,13 @@ describe('Custom actions via CLI/API', function() {
     });
   });
 
+  it('should handle unknown application', function(done) {
+    pm2.trigger('indexxo', 'ping', function(err, ret) {
+      should(err).not.be.null();
+      done();
+    });
+  });
+
   it('should cannot trigger message if unknow id', function(done) {
     pm2.trigger(10, 'ping', function(err, ret) {
       should(err).not.be.null();
