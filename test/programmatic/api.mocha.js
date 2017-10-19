@@ -5,7 +5,7 @@ var PM2 = require('../..');
 var should = require('should');
 
 describe('API checks', function() {
-  this.timeout(1000);
+  this.timeout(5000);
 
   describe('PM2 API case#1', function() {
     before(function(done) {
@@ -90,7 +90,7 @@ describe('API checks', function() {
       PM2.kill(done);
     });
 
-    it('should start script in cluster mode, 4 instances', function(done) {
+    it.only('should start script in cluster mode, 4 instances', function(done) {
       PM2.start({
         script : './../fixtures/child.js',
         instances : 4,
