@@ -7,7 +7,6 @@ var should        = require('should');
 
 describe('PM2 link variable checks', function() {
   var server;
-  this.timeout(5000);
 
   describe('km_link false', function() {
     var pm2 = new PM2.custom({

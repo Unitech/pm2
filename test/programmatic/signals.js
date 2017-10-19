@@ -4,8 +4,6 @@ var should = require('should');
 var path   = require('path');
 
 describe('Signal kill (+delayed)', function() {
-  this.timeout(10000);
-
   var proc1 = null;
 
   var pm2 = new PM2.custom({

@@ -9,19 +9,16 @@ var should = require('should');
 var path   = require('path');
 
 describe('PM2 programmatic calls', function() {
-  this.timeout(10000);
-
   var proc1 = null;
   var procs = [];
   var bus   = null;
 
   var pm2 = new PM2.custom({
-    cwd : __dirname + '/../fixtures',
-    independent : true
+    cwd : __dirname + '/../fixtures'
   });
 
   after(function(done) {
-    pm2.destroy(done);
+    pm2.kill(done);
   });
 
   before(function(done) {
@@ -152,7 +149,6 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should delete processes', function(done) {
-      this.timeout(5000);
       pm2.delete('all', function(err, ret) {
         should(err).be.null()
         pm2.list(function(err, ret) {

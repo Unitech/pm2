@@ -7,7 +7,6 @@ var fs     = require('fs');
 var path   = require('path');
 
 describe('Programmatic log feature test', function() {
-
   var proc1 = null;
   var procs = [];
 
@@ -16,8 +15,6 @@ describe('Programmatic log feature test', function() {
   });
 
   before(function(done) {
-    this.timeout(5000);
-
     pm2.delete('all', function() {
       done();
     });

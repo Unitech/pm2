@@ -5,8 +5,6 @@ var PM2 = require('../..');
 var should = require('should');
 
 describe('API checks', function() {
-  this.timeout(5000);
-
   describe('PM2 API case#1', function() {
     before(function(done) {
       PM2.delete('all', function() { done() });
@@ -318,7 +316,6 @@ describe('API checks', function() {
     });
 
     it('Should start up modules', function(done) {
-      this.timeout(5000);
       PM2.connect(true, function(err) {
         should(err).be.null();
 

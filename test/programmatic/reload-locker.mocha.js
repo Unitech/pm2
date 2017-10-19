@@ -13,8 +13,6 @@ var cst = require('../../constants.js');
 process.chdir(__dirname);
 
 describe('Reload locker system', function() {
-  this.timeout(5000);
-
   var pm2 = new PM2.custom({
     cwd : '../fixtures'
   });

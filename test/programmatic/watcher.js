@@ -51,8 +51,6 @@ describe('Watcher', function() {
     cwd : __dirname + '/../fixtures/watcher'
   });
 
-  this.timeout(2500)
-
   after(function(cb) {
     pm2.destroy(function() {
       fs.unlink(paths.server, cb)

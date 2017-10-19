@@ -83,7 +83,7 @@ var pm2 = new PM2.custom({
 describe('SCOPED PM2 ACTIONS', function() {
   var server;
   var interactor;
-  this.timeout(5000);
+
   after(function(done) {
     server.close();
     pm2.destroy(done);
