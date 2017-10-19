@@ -8,10 +8,6 @@ var PM2 = require('../..');
 var should = require('should');
 
 describe('Lazy API usage', function() {
-  before(function(done) {
-    PM2.kill(function() { done() });
-  });
-
   it('should start a script without passing any args', function(done) {
     PM2.start('./../fixtures/child.js', done);
   });
