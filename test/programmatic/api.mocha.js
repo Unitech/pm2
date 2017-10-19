@@ -88,7 +88,7 @@ describe('API checks', function() {
       PM2.kill(done);
     });
 
-    it.only('should start script in cluster mode, 4 instances', function(done) {
+    it('should start script in cluster mode, 4 instances', function(done) {
       PM2.start({
         script : './../fixtures/child.js',
         instances : 4,
