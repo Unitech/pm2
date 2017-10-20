@@ -21,7 +21,10 @@ describe('Utility', function() {
       assert(Utility.getCanonicModuleName('@org/pm2-slack') === 'pm2-slack');
       assert(Utility.getCanonicModuleName('git+https://github.com/user/pm2-slack') === 'pm2-slack');
       assert(Utility.getCanonicModuleName('git+https://github.com/user/pm2-slack.git') === 'pm2-slack');
+      assert(Utility.getCanonicModuleName('file:///home/user/pm2-slack') === 'pm2-slack');
+      assert(Utility.getCanonicModuleName('file://./pm2-slack') === 'pm2-slack');
+      assert(Utility.getCanonicModuleName('file:///home/user/pm2-slack/') === 'pm2-slack');
     });
   });
-  
+
 });
