@@ -72,9 +72,10 @@ var csts = {
 
   // Concurrent actions when doing start/restart/reload
   CONCURRENT_ACTIONS      : (function() {
-    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
+    var default_concurrent_actions = 1;
     if (semver.satisfies(process.versions.node, '>= 4.0.0'))
-      concurrent_actions = 2;
+      default_concurrent_actions = 2;
+    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || default_concurrent_actions;
     debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
     return concurrent_actions;
   })(),
