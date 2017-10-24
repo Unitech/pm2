@@ -11,4 +11,4 @@ RUN npm install
 
 ## DEVELOPMENT MODE
 ENV NODE_ENV=development
-CMD ["pm2-docker", "start", "--auto-exit", "index.js"]
+CMD ["pm2-docker", "start", "index.js"]
