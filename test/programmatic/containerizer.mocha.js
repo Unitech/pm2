@@ -16,7 +16,7 @@ describe('Containerizer unit tests', function() {
   var res_lines_prod = ['## DISTRIBUTION MODE',
                         'ENV NODE_ENV=production',
                         'COPY . /var/app',
-                        'CMD ["pm2-docker", "--auto-exit", "index.js", "--env", "production"]'];
+                        'CMD ["pm2-docker", "index.js", "--env", "production"]'];
 
   after(function(done) {
     fs.unlink(Dockerfile, done);
