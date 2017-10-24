@@ -12,4 +12,4 @@ RUN npm install
 ## PRODUCTION MODE
 ENV NODE_ENV=production
 COPY . /var/app/
-CMD ["pm2-docker", "start", "--auto-exit", "index.js"]
+CMD ["pm2-docker", "start", "index.js"]
