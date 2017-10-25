@@ -24,6 +24,9 @@ describe('Utility', function() {
       assert(Utility.getCanonicModuleName('file:///home/user/pm2-slack') === 'pm2-slack');
       assert(Utility.getCanonicModuleName('file://./pm2-slack') === 'pm2-slack');
       assert(Utility.getCanonicModuleName('file:///home/user/pm2-slack/') === 'pm2-slack');
+      assert(Utility.getCanonicModuleName('http-server') === 'http-server');
+      assert(Utility.getCanonicModuleName('http://registry.com:12/modules/my-module?test=true') === 'my-module');
+      assert(Utility.getCanonicModuleName('http://registry.com:12/modules/http-my-module?test=true') === 'http-my-module');
     });
   });
 
