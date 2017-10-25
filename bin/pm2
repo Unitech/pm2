@@ -775,7 +775,7 @@ commander.command('logs [id|name]')
     var exclusive = false;
     var timestamp = false;
 
-    if(!isNaN(cmd.lines)){
+    if(!isNaN(parseInt(cmd.lines))) {
       line = parseInt(cmd.lines);
     }
 
