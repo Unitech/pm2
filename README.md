@@ -38,7 +38,7 @@ PM2 is constantly assailed by [more than 1400 tests](https://travis-ci.org/Unite
 
 Official website: [http://pm2.keymetrics.io/](http://pm2.keymetrics.io/)
 
-Works on Linux (stable) & MacOSx (stable) & Windows (stable).
+Works on Linux (stable) & macOS (stable) & Windows (stable).
 All Node.js versions are supported starting Node.js 0.12.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
