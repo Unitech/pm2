@@ -33,6 +33,8 @@ spec "resurrect test"
 # spec "Docker tests"
 bash ./test/bash/nvm-node-version.sh
 spec "NVM node version setting"
+bash ./test/bash/mjs.sh
+spec "Test import syntax"
 
 bash ./test/bash/cron-system.sh
 spec "Cron system tests"
