@@ -1,0 +1,18 @@
+{
+  "name": "test-es6-pm2",
+  "version": "1.0.0",
+  "description": "A simple project to test pm2 es6-modules pm2 support",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules index.mjs"
+  },
+  "keywords": [
+    "es6-modules",
+    "import",
+    "export",
+    "pm2"
+  ],
+  "author": "vpotseluyko",
+  "license": "ISC"
+}
