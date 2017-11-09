@@ -324,6 +324,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## License
 
-PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0). If you use the PM2 API [contact us](https://keymetrics.io/contact/) for a possible LGPL license.
+PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
+We can deliver other licenses, for more informations [contact sales](mailto:sales@keymetrics.io).
 
 [![GA](https://ga-beacon.appspot.com/UA-51734350-7/pm2/readme?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)
