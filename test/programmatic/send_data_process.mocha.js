@@ -77,4 +77,25 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
+  it('should receive data packet (other input)', function(done) {
+    pm2_bus.on('process:msg', function(packet) {
+      packet.raw.data.success.should.eql(true);
+      packet.raw.topic.should.eql('process:msg');
+      packet.process.pm_id.should.eql(proc1.pm2_env.pm_id);
+      packet.process.name.should.eql(proc1.pm2_env.name);
+      done();
+    });
+
+    pm2.sendDataToProcessId({
+      id: proc1.pm2_env.pm_id,
+      topic : 'process:msg',
+      data : {
+        some : 'data',
+        hello : true
+      }
+    }, function(err, res) {
+      should(err).be.null();
+    });
+  });
+
 });
