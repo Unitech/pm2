@@ -1,3 +1,17 @@
+## 2.8.0
+
+- #2070 Fix sendDataToProcessId not working (@h091237557)
+- #2182 Add windowHide options in cluster mode (@soyuka)
+- #3206 By default in docker, pm2 will auto exist when no process are online (@dguo)
+- #3225 fix --lines accepting invalid values (@vmarchaud)
+- #3036 fix when PM2_CONCURRENT_ACTIONS was overriden everytime on node > 4 (@danez)
+- Add node 9 tests on CI (@Unitech)
+- Fix interactor to support custom endpoints (@vmarchaud)
+- Allow custom PM2_HOME for docker (@lucidNTR)
+- Support MJS module (@vpotseluyko)
+- Allow custom service name for startup (@danez)
+- Update PMX to 1.5 (@unitech)
+
 ## 2.7.2
 
 - #3200 Associate .tsx files with ts-node (@dguo)
