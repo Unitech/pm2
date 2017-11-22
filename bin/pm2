@@ -7,7 +7,6 @@ process.env.PM2_USAGE = 'CLI';
 var cst       = require('../constants.js');
 
 var commander = require('commander');
-var fs        = require('fs');
 var chalk     = require('chalk');
 var async     = require('async');
 
@@ -524,6 +523,12 @@ commander.command('link [secret] [public] [name]')
   .option('--info-node [url]', 'set url info node')
   .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
   .action(pm2._pre_interact.bind(pm2));
+
+commander.command('unlink')
+  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .action(function() {
+    pm2.unlink();
+  });
 
 commander.command('unmonitor [name]')
   .description('unmonitor target process')
