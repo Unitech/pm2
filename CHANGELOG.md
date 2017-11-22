@@ -2,7 +2,7 @@
 
 - #2070 Fix sendDataToProcessId not working (@h091237557)
 - #2182 Add windowHide options in cluster mode (@soyuka)
-- #3206 By default in docker, pm2 will auto exist when no process are online (@dguo)
+- #3206 By default in docker, pm2 will auto exit when no process are online (@dguo)
 - #3225 fix --lines accepting invalid values (@vmarchaud)
 - #3036 fix when PM2_CONCURRENT_ACTIONS was overriden everytime on node > 4 (@danez)
 - Add node 9 tests on CI (@Unitech)
