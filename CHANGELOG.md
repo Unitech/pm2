@@ -6,6 +6,7 @@
 - #3225 fix --lines accepting invalid values (@vmarchaud)
 - #3036 fix when PM2_CONCURRENT_ACTIONS was overriden everytime on node > 4 (@danez)
 - Add node 9 tests on CI (@Unitech)
+- Add pm2 unlink command (eq to pm2 link delete)
 - Fix interactor to support custom endpoints (@vmarchaud)
 - Allow custom PM2_HOME for docker (@lucidNTR)
 - Support MJS module (@vpotseluyko)
