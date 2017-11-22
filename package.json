@@ -176,7 +176,7 @@
     "pmx": "^1.5",
     "semver": "^5.3",
     "shelljs": "0.7.8",
-    "source-map-support": "^0.4.18",
+    "source-map-support": "^0.5",
     "sprintf-js": "1.1.1",
     "vizion": "^0.2",
     "yamljs": "0.3.0",
