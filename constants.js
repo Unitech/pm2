@@ -55,7 +55,8 @@ var csts = {
   LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
 
   KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
-  KEYMETRICS_BANNER       : '../lib/keymetrics',
+  KEYMETRICS_BANNER       : '../lib/motd',
+  KEYMETRICS_UPDATE       : '../lib/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
 
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),

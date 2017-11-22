@@ -12,7 +12,9 @@ __/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
         _\///______________\///______________\///__\///////////////__
 
 
-               Production Process Manager for Node.js apps
+                          Community Edition
+
+            Production Process Manager for Node.js applications
                      with a built-in Load Balancer.
 
 
@@ -29,7 +31,7 @@ __/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
                 $ pm2 startup
 
                 To go further checkout:
-                http://pm2.io
+                http://pm2.io/
 
 
                         -------------
