@@ -19,6 +19,7 @@ function success {
 
 function spec {
     [ $? -eq 0 ] || fail "$1"
+    $pm2 uninstall all
     $pm2 link delete
     $pm2 kill
     success "$1"
