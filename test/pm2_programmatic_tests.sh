@@ -24,7 +24,7 @@ function spec {
     success "$1"
 }
 
-
+$pm2 uninstall all
 
 # if [ $TRAVIS ]
 # then
@@ -77,6 +77,8 @@ mocha --opts ./mocha.opts  ./send_data_process.mocha.js
 spec "Send data to a process"
 mocha --opts ./mocha.opts  ./modules.mocha.js
 spec "Module API testing"
+mocha --opts ./mocha.opts  ./module_retrocompat.mocha.js
+spec "Module retrocompatibility system"
 
 mocha --opts ./mocha.opts  ./json_validation.mocha.js
 spec "JSON validation test"
