@@ -441,10 +441,13 @@ commander.command('update')
 commander.command('install <module|git:// url>')
   .alias('module:install')
   .option('--v1', 'install module in v1 manner (do not use it)')
+  .option('--safe [time]', 'keep module backup, if new module fail = restore with previous')
   .description('install or update a module and run it forever')
   .action(function(plugin_name, opts) {
     if (opts.v1)
       commander.v1 = true;
+    if (opts.safe)
+      commander.safe = opts.safe;
     pm2.install(plugin_name, commander);
   });
 

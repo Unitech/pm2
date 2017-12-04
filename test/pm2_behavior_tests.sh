@@ -105,6 +105,8 @@ bash ./test/bash/log-entire.sh
 spec "merge stdout && stderr"
 bash ./test/bash/module.sh
 spec "module system"
+bash ./test/bash/module-safeguard.sh
+spec "module safeguard system (--safe)"
 bash ./test/bash/vizion.sh
 spec "vizion features (versioning control)"
 bash ./test/bash/wrapped-fork.sh
