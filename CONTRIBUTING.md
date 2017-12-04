@@ -31,7 +31,8 @@ $ pm2 ls
 ├── examples // examples files
 ├── lib      // source files
 ├── pres     // presentation files
-└── test     // test files
+├── test     // test files
+└── types    // TypeScript definition files
 ```
 
 ## Modifying the Daemon
