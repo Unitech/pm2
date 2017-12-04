@@ -11,7 +11,6 @@ var path   = require('path');
 describe('PM2 programmatic calls', function() {
 
   var pm2 = new PM2.custom({
-    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 
@@ -21,7 +20,7 @@ describe('PM2 programmatic calls', function() {
 
   after(function(done) {
     pm2.delete('all', function(err, ret) {
-      pm2.destroy(done);
+      pm2.kill(done);
     });
   });
 
@@ -59,6 +58,7 @@ describe('PM2 programmatic calls', function() {
 
   it('should receive data packet', function(done) {
     pm2_bus.on('process:msg', function(packet) {
+      pm2_bus.off('process:msg');
       packet.raw.data.success.should.eql(true);
       packet.raw.topic.should.eql('process:msg');
       packet.process.pm_id.should.eql(proc1.pm2_env.pm_id);
@@ -79,6 +79,7 @@ describe('PM2 programmatic calls', function() {
 
   it('should receive data packet (other input)', function(done) {
     pm2_bus.on('process:msg', function(packet) {
+      pm2_bus.off('process:msg');
       packet.raw.data.success.should.eql(true);
       packet.raw.topic.should.eql('process:msg');
       packet.process.pm_id.should.eql(proc1.pm2_env.pm_id);
