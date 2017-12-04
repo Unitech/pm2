@@ -114,7 +114,7 @@ export function killDaemon(errback: ErrProcDescCallback): void;
  * a process id, or the string “all” to indicate that all scripts should be restarted.
  * @param errback
  */
-export function describe(process: string|number, errback: ErrProcDescCallback): void;
+export function describe(process: string|number, errback: ErrProcDescsCallback): void;
 
 /**
  * Gets the list of running processes being managed by pm2.
