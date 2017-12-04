@@ -40,6 +40,3 @@ should 'should module be on the right version' "module_version: '2.1.0'" 1
 # Test edge cases
 #
 $pm2 uninstall all
-spec "Should have uninstalled all modules"
-
-$pm2 install pm2-sample-module@2.2.0 --safe
