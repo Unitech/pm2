@@ -187,7 +187,6 @@ describe('God', function() {
   });
 
   describe('Multi launching', function() {
-
     before(function(done) {
       deleteAll({}, function(err, dt) {
         done();
@@ -195,15 +194,12 @@ describe('God', function() {
     });
 
     afterEach(function(done) {
-      this.timeout(5000);
       deleteAll({}, function(err, dt) {
         done();
       });
     });
 
     it('should launch multiple processes depending on CPUs available', function(done) {
-      this.timeout(5000);
-
       God.prepare(Common.prepareAppConf({cwd : process.cwd() }, {
         script : '../fixtures/echo.js',
         name : 'child',

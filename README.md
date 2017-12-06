@@ -1,25 +1,27 @@
 <div align="center">
-  <a href="http://pm2.keymetrics.io">
-    <img width=710px src="https://github.com/unitech/pm2/raw/master/pres/pm2.20d3ef.png">
+  <br/>
+  <a href="http://pm2.keymetrics.io" title="PM2 Keymetrics link">
+    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" alt="pm2 logo">
   </a>
-
+  <br/>
 <br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
 <br/><br/>
 
- <a href="https://www.bithound.io/github/Unitech/pm2">
+ <a href="https://www.bithound.io/github/Unitech/pm2" title="Bithound PM2 score">
  <img src="https://www.bithound.io/github/Unitech/pm2/badges/score.svg" alt="bitHound Score">
 </a>
 
-<a href="https://www.npmjs.com/package/pm2">
+<a href="https://www.npmjs.com/package/pm2" title="PM2 on NPM">
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/pm2.svg?style=flat-square"/>
 </a>
 
-<a href="https://travis-ci.org/Unitech/pm2">
+<a href="https://travis-ci.org/Unitech/pm2" title="PM2 Tests">
   <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
 
+<br/>
 <br/>
 <br/>
 </div>
@@ -36,7 +38,7 @@ PM2 is constantly assailed by [more than 1400 tests](https://travis-ci.org/Unite
 
 Official website: [http://pm2.keymetrics.io/](http://pm2.keymetrics.io/)
 
-Works on Linux (stable) & MacOSx (stable) & Windows (stable).
+Works on Linux (stable) & macOS (stable) & Windows (stable).
 All Node.js versions are supported starting Node.js 0.12.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
@@ -61,7 +63,11 @@ Your app is now daemonized, monitored and kept alive forever.
 
 ## Official Docker Image
 
-Dockerfile:
+Docker Hub PM2 image:
+
+[PM2 Official Docker Image](https://hub.docker.com/r/keymetrics/pm2/)
+
+Using the pm2-docker CLI:
 
 ```
 FROM keymetrics/pm2:latest
@@ -69,8 +75,8 @@ FROM keymetrics/pm2:latest
 CMD [ "pm2-docker", "start", "ecosystem.config.js" ]
 ```
 
+More about Docker/PM2 integration:
 [pm2 Docker support](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
-[pm2 Official Docker Image](https://hub.docker.com/r/keymetrics/pm2/)
 
 ## Monitor PM2 and Applications
 
@@ -318,6 +324,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## License
 
-PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0). If you use the PM2 API [contact us](https://keymetrics.io/contact/) for a possible LGPL license.
+PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
+We can deliver other licenses, for more informations [contact sales](mailto:sales@keymetrics.io).
 
 [![GA](https://ga-beacon.appspot.com/UA-51734350-7/pm2/readme?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)

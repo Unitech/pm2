@@ -55,7 +55,8 @@ var csts = {
   LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
 
   KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
-  KEYMETRICS_BANNER       : '../lib/keymetrics',
+  KEYMETRICS_BANNER       : '../lib/motd',
+  KEYMETRICS_UPDATE       : '../lib/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
 
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
@@ -72,9 +73,10 @@ var csts = {
 
   // Concurrent actions when doing start/restart/reload
   CONCURRENT_ACTIONS      : (function() {
-    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 1;
+    var default_concurrent_actions = 1;
     if (semver.satisfies(process.versions.node, '>= 4.0.0'))
-      concurrent_actions = 2;
+      default_concurrent_actions = 2;
+    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || default_concurrent_actions;
     debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
     return concurrent_actions;
   })(),

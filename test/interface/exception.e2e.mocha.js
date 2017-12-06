@@ -23,7 +23,6 @@ function listenRev(cb) {
 }
 
 describe('Programmatically test interactor', function() {
-  this.timeout(8000);
   var pm2;
 
   before(function(done) {

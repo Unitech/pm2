@@ -1,8 +1,47 @@
-## 2.6.2
+## 2.8.0
 
-- pm2 unmonitor fix
-- beta pm2 start app.js --container
-- upgrade modules
+- #2070 Fix sendDataToProcessId not working (@h091237557)
+- #2182 Add windowHide options in cluster mode (@soyuka)
+- #3206 By default in docker, pm2 will auto exit when no process are online (@dguo)
+- #3225 fix --lines accepting invalid values (@vmarchaud)
+- #3036 fix when PM2_CONCURRENT_ACTIONS was overriden everytime on node > 4 (@danez)
+- Add node 9 tests on CI (@Unitech)
+- Add pm2 unlink command (eq to pm2 link delete) (@Unitech)
+- Fix interactor to support custom endpoints (@vmarchaud)
+- Allow custom PM2_HOME for docker (@lucidNTR)
+- Support MJS module (@vpotseluyko)
+- Allow custom service name for startup (@danez)
+- Update PMX to 1.5 (@unitech)
+
+## 2.7.2
+
+- #3200 Associate .tsx files with ts-node (@dguo)
+- #3202 Add first draft of typescript definitions (@jportela)
+- Allow to install http url via pm2 install (@unitech)
+- #3204 Given --uid add all its gids automatically (@jmeit)
+- #3184 bugfix: try/catch around userInfo to avoid crash (@vmarchaud)
+- #3181 force upgrade to latest pm2-deploy
+
+## 2.7.1
+
+- #3117 Add required node env on cluster mode start instance (2m0nd)
+- make profiler compatible with Node.js 8
+
+## 2.7.0
+
+- #3150 fix watchdog on agent
+- #3001 dump-backup feature
+- #3134 edge case error handling
+- #3096 fix module installation
+- #3085 honor every pm2 args on restart
+- #3046 better error message if PM2 is misconfigured
+- #3058 pm2-docker now does not write logs by default
+- #3045 continue to broadcast on the bus system even if logs are disabled
+- [Docker] Auto Exit when no application is running
+- [Keymetrics] pm2 unmonitor fix
+- [Beta Container Support] beta pm2 start app.js --container
+- [Chore] upgrade modules
+- [Chore] enhance package.json
 
 ## 2.6.1
 

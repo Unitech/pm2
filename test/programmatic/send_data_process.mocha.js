@@ -11,7 +11,6 @@ var path   = require('path');
 describe('PM2 programmatic calls', function() {
 
   var pm2 = new PM2.custom({
-    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 
@@ -21,7 +20,7 @@ describe('PM2 programmatic calls', function() {
 
   after(function(done) {
     pm2.delete('all', function(err, ret) {
-      pm2.destroy(done);
+      pm2.kill(done);
     });
   });
 
@@ -59,6 +58,7 @@ describe('PM2 programmatic calls', function() {
 
   it('should receive data packet', function(done) {
     pm2_bus.on('process:msg', function(packet) {
+      pm2_bus.off('process:msg');
       packet.raw.data.success.should.eql(true);
       packet.raw.topic.should.eql('process:msg');
       packet.process.pm_id.should.eql(proc1.pm2_env.pm_id);
@@ -67,6 +67,28 @@ describe('PM2 programmatic calls', function() {
     });
 
     pm2.sendDataToProcessId(proc1.pm2_env.pm_id, {
+      topic : 'process:msg',
+      data : {
+        some : 'data',
+        hello : true
+      }
+    }, function(err, res) {
+      should(err).be.null();
+    });
+  });
+
+  it('should receive data packet (other input)', function(done) {
+    pm2_bus.on('process:msg', function(packet) {
+      pm2_bus.off('process:msg');
+      packet.raw.data.success.should.eql(true);
+      packet.raw.topic.should.eql('process:msg');
+      packet.process.pm_id.should.eql(proc1.pm2_env.pm_id);
+      packet.process.name.should.eql(proc1.pm2_env.name);
+      done();
+    });
+
+    pm2.sendDataToProcessId({
+      id: proc1.pm2_env.pm_id,
       topic : 'process:msg',
       data : {
         some : 'data',

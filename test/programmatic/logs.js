@@ -7,7 +7,6 @@ var fs     = require('fs');
 var path   = require('path');
 
 describe('Programmatic log feature test', function() {
-
   var proc1 = null;
   var procs = [];
 
@@ -16,8 +15,6 @@ describe('Programmatic log feature test', function() {
   });
 
   before(function(done) {
-    this.timeout(5000);
-
     pm2.delete('all', function() {
       done();
     });
@@ -104,7 +101,6 @@ describe('Programmatic log feature test', function() {
         }, 500);
       });
     });
-
   });
 
   describe('Log timestamp', function() {
@@ -197,6 +193,84 @@ describe('Programmatic log feature test', function() {
     });
   });
 
+  describe('Logs set to /dev/null', function() {
+    it('should not write to logs', function(done) {
+      pm2.start({
+        script: './echo.js',
+        error_file : '/dev/null',
+        out_file   : '/dev/null'
+      }, function(err, procs) {
+        should(err).be.null();
 
+        var out_file = procs[0].pm2_env.pm_out_log_path;
+        var err_file = procs[0].pm2_env.pm_err_log_path;
+
+        out_file.should.containEql('/dev/null');
+        err_file.should.containEql('/dev/null');
+
+        setTimeout(function() {
+          fs.readFileSync(out_file).toString().should.containEql('');
+          fs.readFileSync(err_file).toString().should.containEql('');
+          done();
+        }, 500);
+      });
+    });
+
+    it('should write to log_file and not error_file or out_file', function(done) {
+      pm2.start({
+        script: './echo.js',
+        error_file : '/dev/null',
+        out_file   : '/dev/null',
+        log_file   : 'merged.log',
+        merge_logs : true
+      }, function(err, procs) {
+        should(err).be.null();
+
+        var out_file = procs[0].pm2_env.pm_out_log_path;
+        var err_file = procs[0].pm2_env.pm_err_log_path;
+        var log_file = procs[0].pm2_env.pm_log_path;
+
+        out_file.should.containEql('/dev/null');
+        err_file.should.containEql('/dev/null');
+        log_file.should.containEql('merged.log');
+
+        setTimeout(function() {
+          fs.readFileSync(out_file).toString().should.containEql('');
+          fs.readFileSync(err_file).toString().should.containEql('');
+          fs.readFileSync(log_file).toString().should.containEql('echo.js-error');
+          fs.readFileSync(log_file).toString().should.containEql('echo.js');
+          done();
+        }, 500);
+      });
+    });
+
+    it('should write to log_file and error_file but not out_file', function(done) {
+      pm2.start({
+        script: './echo.js',
+        error_file : 'error-echo.log',
+        out_file   : '/dev/null',
+        log_file   : 'merged.log',
+        merge_logs : true
+      }, function(err, procs) {
+        should(err).be.null();
+
+        var out_file = procs[0].pm2_env.pm_out_log_path;
+        var err_file = procs[0].pm2_env.pm_err_log_path;
+        var log_file = procs[0].pm2_env.pm_log_path;
+
+        out_file.should.containEql('/dev/null');
+        err_file.should.containEql('error-echo.log');
+        log_file.should.containEql('merged.log');
+
+        setTimeout(function() {
+          fs.readFileSync(out_file).toString().should.containEql('');
+          fs.readFileSync(err_file).toString().should.containEql('echo.js-error');
+          fs.readFileSync(log_file).toString().should.containEql('echo.js-error');
+          fs.readFileSync(log_file).toString().should.containEql('echo.js');
+          done();
+        }, 500);
+      });
+    });
+  });
 
 });

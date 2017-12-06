@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.6.1",
+  "version": "2.8.0",
   "engines": {
     "node": ">=0.12"
   },
@@ -82,9 +82,10 @@
       "email": "chris@chriswiggins.co.nz"
     }
   ],
-  "homepage": "http://pm2.io/",
+  "homepage": "http://pm2.keymetrics.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh",
     "bench-pmx": "pm2 delete all; pm2 install pm2-probe; node examples/pmx/app.js; pm2 ls"
@@ -159,31 +160,31 @@
     "chalk": "^1.1",
     "chokidar": "^1.7",
     "cli-table-redemption": "^1.0.0",
-    "commander": "2.11.0",
-    "cron": "1.2.1",
+    "commander": "2.12.2",
+    "cron": "^1.3",
     "debug": "^3.0",
     "eventemitter2": "1.0.5",
     "fclone": "1.0.11",
     "mkdirp": "0.5.1",
     "moment": "^2.18",
     "nssocket": "0.6.0",
-    "pidusage": "^1.1.0",
-    "pm2-axon": "3.0.3",
-    "pm2-axon-rpc": "0.4.6",
-    "pm2-deploy": "^0.3.5",
+    "pidusage": "^1.2.0",
+    "pm2-axon": "3.1.0",
+    "pm2-axon-rpc": "0.5.0",
+    "pm2-deploy": "^0.3.9",
     "pm2-multimeter": "^0.1.2",
-    "pmx": "keymetrics/pmx#development",
+    "pmx": "^1.5",
     "semver": "^5.3",
     "shelljs": "0.7.8",
-    "source-map-support": "^0.4.15",
+    "source-map-support": "^0.5",
     "sprintf-js": "1.1.1",
     "vizion": "^0.2",
-    "yamljs": "0.3.0",
+    "yamljs": "^0.3.0",
     "needle": "1.6.0",
     "promptly": "2.2.0"
   },
   "devDependencies": {
-    "mocha": "^3",
+    "mocha": "^3.5",
     "should": "^11"
   },
   "optionalDependencies": {

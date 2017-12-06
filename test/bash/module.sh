@@ -26,7 +26,7 @@ $pm2 install pm2-probe
 spec "Should update a module"
 should 'should app be online' 'online' 1
 
-ls ~/.pm2/node_modules/pm2-probe
+ls ~/.pm2/modules/pm2-probe
 spec "Module should be installed"
 
 #
@@ -76,7 +76,7 @@ $pm2 uninstall pm2-probe
 spec "Should uninstall a module"
 should 'should module not be online' 'online' 0
 
-ls ~/.pm2/node_modules/pm2-probe
+ls ~/.pm2/modules/pm2-probe
 ispec "Module should be deleted"
 
 $pm2 update

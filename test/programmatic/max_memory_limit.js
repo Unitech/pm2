@@ -9,8 +9,6 @@ var path   = require('path');
 // Change to current folder
 
 describe('Max memory restart programmatic', function() {
-  this.timeout(10000);
-
   var proc1 = null;
   var procs = [];
   var pm2 = new PM2.custom({

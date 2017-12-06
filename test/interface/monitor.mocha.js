@@ -1,5 +1,7 @@
 /* eslint-env mocha */
 
+process.env.NODE_ENV='test';
+
 'use strict';
 
 var pm2 = require('../../index.js');

@@ -1,4 +1,3 @@
-
 process.env.NODE_ENV = 'local_test';
 process.env.TRAVIS = true;
 
@@ -11,8 +10,7 @@ describe('PM2 link variable checks', function() {
 
   describe('km_link false', function() {
     var pm2 = new PM2.custom({
-      cwd         : __dirname + '/../fixtures',
-      daemon_mode: true
+      cwd         : __dirname + '/../fixtures'
     });
 
     before(function(done) {
@@ -38,7 +36,8 @@ describe('PM2 link variable checks', function() {
       // Wait for process initialization
       setTimeout(function() {
         pm2.list(function(err, dt) {
-          console.log(dt[0].pm2_env.axm_options);
+          dt[0].pm2_env.km_link.should.be.false();
+          dt[0].pm2_env.axm_options.transactions.should.be.false();
           done();
         });
       }, 500);
@@ -76,7 +75,7 @@ describe('PM2 link variable checks', function() {
       setTimeout(function() {
         pm2.list(function(err, dt) {
           dt[0].pm2_env.km_link.should.be.true();
-          dt[0].pm2_env.axm_options.transactions.should.be.true();
+          //dt[0].pm2_env.axm_options.transactions.should.be.true();
           dt[0].pm2_env.axm_options.tracing_enabled.should.be.true();
           done();
         });

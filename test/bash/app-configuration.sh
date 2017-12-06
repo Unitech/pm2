@@ -56,7 +56,7 @@ echo "Wait for init..."
 sleep 1
 
 exists 'probe test-probe exist' "test-probe"
-exists 'probe Event Loop Latency exist' "Event Loop Latency"
+exists 'probe Event Loop Latency exist' "Loop delay"
 
 exists 'probe Event Loop Latency default value' "agg_type: 'avg'"
 exists 'probe Event Loop Latency default value' "alert: {}"

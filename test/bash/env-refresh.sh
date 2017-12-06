@@ -35,19 +35,19 @@ $pm2 delete all
 #
 >out-env.log
 $pm2 start env.js -o out-env.log --merge-logs
-sleep 0.5
+sleep 1
 grep "undefined" out-env.log &> /dev/null
 spec "should contain nothing"
 
 >out-env.log
 TEST_VARIABLE="CLUSTER" $pm2 reload env --update-env
-sleep 0.5
+sleep 1
 grep "CLUSTER" out-env.log &> /dev/null
 spec "should contain CLUSTER"
 
 >out-env.log
 TEST_VARIABLE="CLUNEWSTER" $pm2 reload env
-sleep 0.5
+sleep 1
 grep "CLUSTER" out-env.log &> /dev/null
 spec "should contain not change environment (--skip-env)"
 
