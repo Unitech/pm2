@@ -1,5 +1,5 @@
 Package: pm2
-Version: $VERSION-1
+Version: $VERSION
 Depends: nodejs
 Conflicts: nodejs (<< 0.12.0)
 Section: devel

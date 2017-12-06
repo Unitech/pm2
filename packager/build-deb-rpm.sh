@@ -13,9 +13,9 @@ ensureAvailable lintian
 ensureAvailable rpmbuild
 
 PACKAGE_TMPDIR=tmp/debian_pkg
-VERSION=`node dist/bin/pm2 --version`
-TARBALL_NAME=dist/pm2-v$VERSION.tar.gz
-DEB_PACKAGE_NAME=pm2_$VERSION'_all.deb'
+PM2_VERSION=`node dist/bin/pm2 --version`
+VERSION=$PM2_VERSION"."$DRONE_BUILD_NUMBER
+TARBALL_NAME=dist/pm2-v$PM2_VERSION.tar.gz
 OUTPUT_DIR=artifacts
 
 if [ ! -e $TARBALL_NAME ]; then
@@ -40,7 +40,6 @@ mv $PACKAGE_TMPDIR/dist/lib $PACKAGE_TMPDIR/usr/share/pm2/
 mv $PACKAGE_TMPDIR/dist/constants.js $PACKAGE_TMPDIR/usr/share/pm2/
 mv $PACKAGE_TMPDIR/dist/paths.js $PACKAGE_TMPDIR/usr/share/pm2/
 mv $PACKAGE_TMPDIR/dist/index.js $PACKAGE_TMPDIR/usr/share/pm2/
-#mv $PACKAGE_TMPDIR/dist/lib-legacy $PACKAGE_TMPDIR/usr/share/pm2/
 mv $PACKAGE_TMPDIR/dist/node_modules $PACKAGE_TMPDIR/usr/share/pm2/
 mv $PACKAGE_TMPDIR/dist/package.json $PACKAGE_TMPDIR/usr/share/pm2/
 cp packager/debian/copyright $PACKAGE_TMPDIR/usr/share/doc/pm2/copyright
@@ -60,14 +59,15 @@ ln -s ../share/pm2/bin/pm2 $PACKAGE_TMPDIR/usr/bin/pm2
 
 # Common FPM parameters for all packages we'll build using FPM
 FPM="fpm --input-type dir --chdir $PACKAGE_TMPDIR --name pm2 --version $VERSION "`
-  `"--vendor 'Keymetrics <contact@keymetrics.io>' --maintainer 'Alexandre Strzelewicz <alexandre@keymetrics.io>' "`
+  `"--vendor 'Keymetrics <tech@keymetrics.io>' --maintainer 'Alexandre Strzelewicz <tech@keymetrics.io>' "`
   `"--url https://pm2.io/ --license AGPLv3 --description '$(cat packager/debian/description)'"
 
-##### Build RPM (CentOS, Fedora) package
-eval "$FPM --output-type rpm  --architecture noarch --depends nodejs --category 'Development/Languages' ."
-mv *.rpm $OUTPUT_DIR
+FPM_COMMON_OPTS="--architecture noarch --depends nodejs --category 'Development/Languages' ."
 
-##### Build DEB (Debian, Ubuntu) package
+##### Build RPM (CentOS, Fedora) package
+eval "$FPM --output-type rpm $FPM_COMMON_OPTS"
+
+##### Adapt files for Debian-like distro
 mkdir -p $PACKAGE_TMPDIR/DEBIAN
 mkdir -p $PACKAGE_TMPDIR/usr/share/lintian/overrides/
 cp packager/debian/lintian-overrides $PACKAGE_TMPDIR/usr/share/lintian/overrides/pm2
@@ -78,10 +78,6 @@ sed -i 's/env node/env nodejs/' $PACKAGE_TMPDIR/usr/share/pm2/bin/pm2
 # Replace variables in Debian package control file
 INSTALLED_SIZE=`du -sk $PACKAGE_TMPDIR | cut -f 1`
 sed -e "s/\$VERSION/$VERSION/;s/\$INSTALLED_SIZE/$INSTALLED_SIZE/" < packager/debian/control.in > $PACKAGE_TMPDIR/DEBIAN/control
-fakeroot dpkg-deb -b $PACKAGE_TMPDIR $DEB_PACKAGE_NAME
-mv $DEB_PACKAGE_NAME $OUTPUT_DIR
 
-rm -rf $PACKAGE_TMPDIR
-
-# Lint the Debian package to ensure we're not doing something silly
-lintian $OUTPUT_DIR/$DEB_PACKAGE_NAME
+##### Build DEB (Debian, Ubuntu) package
+eval "$FPM --output-type deb $FPM_COMMON_OPTS"
