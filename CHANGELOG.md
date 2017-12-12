@@ -13,6 +13,7 @@
 - #3036 Fix applying env PM2_CONCURRENT_ACTIONS correctly
 - #3346 do not chmod systemd script (was failing systemd script on orange pi)
 - #3347 Add --wait-ip option to override systemd initialization to wait for internet full connectivity
+- #3348 alias pm2-docker to pm2-runtime
 
 ## 2.8.0
 
