@@ -14,6 +14,8 @@
 - #3346 do not chmod systemd script (was failing systemd script on orange pi)
 - #3347 Add --wait-ip option to override systemd initialization to wait for internet full connectivity
 - #3348 alias pm2-docker to pm2-runtime
+- #3350 Override HOME and USER when setting --uid to start module or application
+- #3351 alias pm2 ps to pm2 ls (docker style)
 
 ## 2.8.0
 
