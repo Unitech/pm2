@@ -112,6 +112,12 @@ if (process.argv.indexOf('-s') > -1) {
   }
 }
 
+// Override -v behavior (do not spawn daemon)
+if (process.argv.indexOf('-v') > -1) {
+  console.log(pkg.version);
+  return process.exit(0);
+}
+
 function beginCommandProcessing() {
   pm2.getVersion(function(err, remote_version) {
     if (!err && (pkg.version != remote_version)) {
