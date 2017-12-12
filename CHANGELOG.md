@@ -11,6 +11,8 @@
 - #3273 pm2 --mini-list now print the right pid file
 - #3206 add flag to auto turn off auto exit with pm2-docker
 - #3036 Fix applying env PM2_CONCURRENT_ACTIONS correctly
+- #3346 do not chmod systemd script (was failing systemd script on orange pi)
+- #3347 Add --wait-ip option to override systemd initialization to wait for internet full connectivity
 
 ## 2.8.0
 
