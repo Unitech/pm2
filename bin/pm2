@@ -713,6 +713,12 @@ commander.command('l')
     pm2.list()
   });
 
+commander.command('ps')
+  .description('(alias) list all processes')
+  .action(function() {
+    pm2.list()
+  });
+
 commander.command('status')
   .description('(alias) list all processes')
   .action(function() {
