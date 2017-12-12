@@ -1,3 +1,17 @@
+
+## 2.8.1
+
+- #3278 --silent -s now does not print welcome message
+- #3345 #2871 #3233 pm2 -v will not spawn daemon anymore
+- #3341 update moment dependency
+- #3314 pm2 install <MODULE> --safe will now monitor new installation of module and will
+  fallback to previous version if the module is failing (restart, fail on npm install)
+- #3314 module folder structure refactoring to keep independent dependencies for each modules
+- #3324 remove yarn installation of modules
+- #3273 pm2 --mini-list now print the right pid file
+- #3206 add flag to auto turn off auto exit with pm2-docker
+- #3036 Fix applying env PM2_CONCURRENT_ACTIONS correctly
+
 ## 2.8.0
 
 - #2070 Fix sendDataToProcessId not working (@h091237557)
