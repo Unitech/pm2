@@ -17,9 +17,13 @@ var tabtab    = require('../lib/completion.js');
 
 // Early detection of silent to avoid printing motd
 if (process.argv.indexOf('--silent') > -1 ||
-    process.argv.indexOf('-s') > -1 ||
-    process.argv.indexOf('-v') > -1) {
+    process.argv.indexOf('-s') > -1) {
   process.env.PM2_DISCRETE_MODE = true;
+}
+
+if (process.argv.indexOf('-v') > -1) {
+  console.log(pkg.version);
+  process.exit(0);
 }
 
 var pm2 = new PM2();
