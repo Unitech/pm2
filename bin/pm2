@@ -15,6 +15,13 @@ var PM2       = require('../lib/API.js');
 var pkg       = require('../package.json');
 var tabtab    = require('../lib/completion.js');
 
+// Early detection of silent to avoid printing motd
+if (process.argv.indexOf('--silent') > -1 ||
+    process.argv.indexOf('-s') > -1 ||
+    process.argv.indexOf('-v') > -1) {
+  process.env.PM2_DISCRETE_MODE = true;
+}
+
 var pm2 = new PM2();
 
 commander.version(pkg.version)
@@ -110,12 +117,6 @@ if (process.argv.indexOf('-s') > -1) {
       console[key] = function(){};
     }
   }
-}
-
-// Override -v behavior (do not spawn daemon)
-if (process.argv.indexOf('-v') > -1) {
-  console.log(pkg.version);
-  return process.exit(0);
 }
 
 function beginCommandProcessing() {
