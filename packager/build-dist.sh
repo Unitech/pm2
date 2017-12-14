@@ -11,6 +11,7 @@ mv pm2-*.tgz dist/pack.tgz
 cd dist
 tar -xzf pack.tgz --strip 1
 rm -rf pack.tgz
+npm install npm --save
 npm install --production
 cd ..
 
