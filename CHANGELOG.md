@@ -1,4 +1,9 @@
 
+## 2.9.1
+
+- bundle npm in pm2 apt install (fix case when nodejs installed as dependency and no npm available)
+- default to /etc/pm2 when installing via apt instead of HOME
+
 ## 2.9.0
 
 - #3278 --silent -s now does not print welcome message
