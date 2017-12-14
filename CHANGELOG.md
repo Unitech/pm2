@@ -1,4 +1,8 @@
 
+## 2.9.1
+
+- #3356 hot fix on startup system
+
 ## 2.9.0
 
 - #3278 --silent -s now does not print welcome message
