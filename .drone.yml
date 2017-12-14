@@ -9,8 +9,8 @@ pipeline:
       - gem install --no-ri --no-rdoc fpm
       - gem install --no-ri --no-rdoc package_cloud
       - ./packager/build-dist.sh
-      - ./packager/build-deb-rpm.sh
       - echo $${PACKAGECLOUD_TOKEN} > /root/.packagecloud
+      - ./packager/build-deb-rpm.sh
       - ./packager/publish_deb_rpm.sh
     secrets: ['packagecloud_token']
     when:
