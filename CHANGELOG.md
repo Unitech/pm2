@@ -1,5 +1,5 @@
 
-## 2.8.1
+## 2.9.0
 
 - #3278 --silent -s now does not print welcome message
 - #3345 #2871 #3233 pm2 -v will not spawn daemon anymore
