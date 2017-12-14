@@ -13,6 +13,7 @@ tar -xzf pack.tgz --strip 1
 rm -rf pack.tgz
 npm install npm --save
 npm install --production
+sed -i '1iconst PKG_INSTALL=true;' paths.js
 cd ..
 
 # First run that print a banner
