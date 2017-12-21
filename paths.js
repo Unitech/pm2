@@ -1,5 +1,3 @@
-const PKG_INSTALL=false;
-
 /**
  * Copyright 2013 the PM2 project authors. All rights reserved.
  * Use of this source code is governed by a license that
@@ -12,9 +10,7 @@ var p     = require('path');
 function getDefaultPM2Home() {
   var PM2_ROOT_PATH;
 
-  if (PKG_INSTALL === true && !process.env.PM2_HOME)
-    PM2_ROOT_PATH = p.resolve('/etc', 'pm2');
-  else if (process.env.PM2_HOME)
+  if (process.env.PM2_HOME)
     PM2_ROOT_PATH = process.env.PM2_HOME;
   else if (process.env.HOME && !process.env.HOMEPATH)
     PM2_ROOT_PATH = p.resolve(process.env.HOME, '.pm2');
