@@ -61,22 +61,19 @@ Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
-## Official Docker Image
+## Container Support
 
-Docker Hub PM2 image:
+Using Containers? We got your back with pm2-runtime, a dedicated command for running Node.js in containers and our [officialy suported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
 
-[PM2 Official Docker Image](https://hub.docker.com/r/keymetrics/pm2/)
-
-Using the pm2-docker CLI:
+Using it:
 
 ```
-FROM keymetrics/pm2:latest
+FROM keymetrics/pm2:latest-alpine
 [...]
-CMD [ "pm2-docker", "start", "ecosystem.config.js" ]
+CMD [ "pm2-runtime", "ecosystem.config.js" ]
 ```
 
-More about Docker/PM2 integration:
-[pm2 Docker support](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
+[Read More about the dedicated integration](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
 ## Monitor PM2 and Applications
 
