@@ -5,7 +5,8 @@
   </a>
   <br/>
 <br/>
-<b>P</b>(rocess) <b>M</b>(anager) <b>2</b>
+<b>P</b>(rocess) <b>M</b>(anager) <b>2</b><br/>
+  <i>Runtime Edition</i>
 <br/><br/>
 
  <a href="https://www.bithound.io/github/Unitech/pm2" title="Bithound PM2 score">
