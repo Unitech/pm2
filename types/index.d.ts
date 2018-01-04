@@ -387,6 +387,10 @@ export interface StartOptions {
   write?: any;
   sourceMapSupport?: any;
   disableSourceMapSupport?: any;
+  /**
+   * The environment variables to pass on to the process.
+   */
+  env?: { [key: string]: string; };
 }
 
 // Types
