@@ -84,6 +84,7 @@ commander.version(pkg.version)
   .option('--trace', 'enable transaction tracing with km')
   .option('--disable-trace', 'disable transaction tracing with km')
   .option('--attach', 'attach logging after your start/restart/stop/reload')
+  .option('--sort', 'sort process according to field\'s name')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
@@ -706,7 +707,6 @@ commander
   .command('list')
   .alias('ls')
   .description('list all processes')
-  .option('--watch', 'constant refresh of process listing')
   .action(function() {
     pm2.list(commander)
   });
