@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.9.2-next",
+  "version": "2.9.3",
   "engines": {
     "node": ">=0.12"
   },
@@ -23,6 +23,10 @@
     {
       "name": "soyuka",
       "email": "soyuka@gmail.com"
+    },
+    {
+      "name" : "wallet77",
+      "email" : "wallet77@gmail.com"
     },
     {
       "name": "vmarchaud",
