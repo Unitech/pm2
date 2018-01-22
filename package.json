@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.9.3",
+  "version": "2.9.2",
   "engines": {
     "node": ">=0.12"
   },
@@ -25,8 +25,8 @@
       "email": "soyuka@gmail.com"
     },
     {
-      "name" : "wallet77",
-      "email" : "wallet77@gmail.com"
+      "name": "wallet77",
+      "email": "wallet77@gmail.com"
     },
     {
       "name": "vmarchaud",
@@ -177,7 +177,7 @@
     "pm2-axon-rpc": "0.5.0",
     "pm2-deploy": "^0.3.9",
     "pm2-multimeter": "^0.1.2",
-    "pmx": "1.5.*",
+    "pmx": "~1.5.*",
     "semver": "^5.3",
     "shelljs": "0.7.8",
     "source-map-support": "^0.5",
