@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "2.9.2-next",
+  "version": "2.9.3",
   "engines": {
     "node": ">=0.12"
   },
@@ -23,6 +23,10 @@
     {
       "name": "soyuka",
       "email": "soyuka@gmail.com"
+    },
+    {
+      "name" : "wallet77",
+      "email" : "wallet77@gmail.com"
     },
     {
       "name": "vmarchaud",
@@ -87,7 +91,7 @@
   "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh",
+    "test": "NODE_ENV=test bash test/pm2_check_dependencies.sh && NODE_ENV=test bash test/pm2_programmatic_tests.sh && NODE_ENV=test bash test/pm2_behavior_tests.sh",
     "bench-pmx": "pm2 delete all; pm2 install pm2-probe; node examples/pmx/app.js; pm2 ls"
   },
   "keywords": [
@@ -173,7 +177,7 @@
     "pm2-axon-rpc": "0.5.0",
     "pm2-deploy": "^0.3.9",
     "pm2-multimeter": "^0.1.2",
-    "pmx": "^1.5",
+    "pmx": "keymetrics/pmx#development",
     "semver": "^5.3",
     "shelljs": "0.7.8",
     "source-map-support": "^0.5",
