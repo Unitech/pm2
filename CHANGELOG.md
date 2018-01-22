@@ -1,4 +1,25 @@
 
+## 2.9.2
+
+- #3364 30% faster CLI via v8-compile-cache
+
+- add process._getActiveRequests() and process._getActiveHandles() custom metrics
+- #3402 #3360 fix bad username
+- #3413 check dependencies before launching tests
+- #3295 add sorting feature for process list (pm2 ls --sort <field_name:order>)
+- #3404 if no gid specified - set gid to uid
+- #3287 add typing for env
+- #3374 separate stdout and stderr for pm2-docker/pm2-runtime
+- #3366 improve building of rpm and deb packages
+- #3375 sendLineToStdin/sendDataToProcessId fix
+- #3365 fix report command for windows
+- #3367 Display an error if the process is not found when running 'pm2 logs <process-name>'
+- #3256 TypeError: Cannot read property 'destroy' of undefined
+- User: append SUDO_USER if no uid has been set and SUDO_USER present
+- User: check permission of agent
+- KM: send outliers
+- KM: infinite retry for km connection
+
 ## 2.9.1
 
 - #3356 hot fix on startup system
