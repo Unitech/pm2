@@ -5,6 +5,9 @@ source "${SRC}/include.sh"
 
 cd $file_path/interpreter
 
+rm -rf ../../../node_modules/coffee-script/
+rm -rf ../../../node_modules/livescript/
+
 ########### coffee
 
 $pm2 start echo.coffee
@@ -41,7 +44,7 @@ should 'process should be online' "status: 'online'" 1
 $pm2 delete all
 $pm2 start echo.ls
 sleep 1
-should 'process should be errored without coffee installed' "status: 'errored'" 1
+should 'process should be errored without livescript installed' "status: 'errored'" 1
 
 ########### Install
 

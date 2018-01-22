@@ -116,6 +116,7 @@ $ pm2 scale [app-name] 10       # Scale Cluster app to 10 process
 
 # Process Monitoring
 $ pm2 list                      # List all processes started with PM2
+$ pm2 list --sort=<field>       # Sort all processes started with PM2
 $ pm2 monit                     # Display memory and cpu usage of each app
 $ pm2 show [app-name]           # Show all information about application
 
