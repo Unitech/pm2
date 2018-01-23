@@ -1,6 +1,5 @@
 /node_modules
 *.log
-*.log
 *.pid
 test/child
 *.iml
@@ -15,3 +14,4 @@ package-lock.json
 .DS_Store
 *.swp
 *.swo
+currentTagChangelog.md
