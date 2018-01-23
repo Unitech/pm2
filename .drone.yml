@@ -20,7 +20,6 @@ pipeline:
     image: keymetrics/alpine-pm2-builder:latest
     environment:
       - AWS_REPO_BUCKET=alpine-apk.pm2.io
-      - PM2_TARGET_VERSION=2.7.2
     secrets: ['apk_rsa_priv_key', 'apk_rsa_pub_key', 'aws_access_key_id', 'aws_secret_access_key']
     when:
       event: tag          
