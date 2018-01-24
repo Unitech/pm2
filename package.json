@@ -171,6 +171,7 @@
     "fclone": "1.0.11",
     "mkdirp": "0.5.1",
     "moment": "^2.19",
+    "needle": "1.6.0",
     "nssocket": "0.6.0",
     "pidusage": "^1.2.0",
     "pm2-axon": "3.1.0",
@@ -178,15 +179,15 @@
     "pm2-deploy": "^0.3.9",
     "pm2-multimeter": "^0.1.2",
     "pmx": "~1.5.*",
+    "promptly": "2.2.0",
     "semver": "^5.3",
     "shelljs": "0.7.8",
     "source-map-support": "^0.5",
     "sprintf-js": "1.1.1",
+    "v8-compile-cache": "^1.1.0",
+    "v8-profiler-node8": "^5.7.6",
     "vizion": "^0.2",
-    "yamljs": "^0.3.0",
-    "needle": "1.6.0",
-    "promptly": "2.2.0",
-    "v8-compile-cache": "^1.1.0"
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "mocha": "^3.5",
