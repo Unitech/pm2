@@ -170,6 +170,14 @@ export function sendSignalToProcessName(signal:string|number, process: number|st
  */
 export function startup(platform: Platform, errback: ErrResultCallback): void;
 
+/**
+ * - Send an set of data as object to a specific process
+ * @param proc_id
+ * @param packet
+ * @param cb
+ */
+export function sendDataToProcessId(proc_id: number, packet: object, cb: ErrResultCallback): void;
+
 // Interfaces
 
 export interface Proc {
