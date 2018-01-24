@@ -1,3 +1,0 @@
-apps:
-  - script : './ls'
-    exec_interpreter : 'none'
