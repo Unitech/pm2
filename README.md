@@ -27,7 +27,8 @@
 <br/>
 </div>
 
-PM2 is a Production Runtime and Process Manager for Node.js applications with a built-in Load Balancer. It allows you to keep applications alive forever, to reload them without downtime and facilitate common Devops tasks.
+PM2 is a Production Runtime and Process Manager for Node.js applications with a built-in Load Balancer.
+It allows you to keep applications alive forever, to reload them without downtime and facilitate common Devops tasks.
 
 Starting an application in production mode is as easy as:
 
@@ -64,8 +65,8 @@ Your app is now daemonized, monitored and kept alive forever.
 
 ## Container Support
 
-Using Containers? With the dropin replacement command for `node`, called `pm2-runtime`, run your Node.js application in the best production environment.
-We also offer an [officialy suported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
+Using Containers? With the dropin replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
+We also offer an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
 
 Using it is seamless:
 
@@ -79,7 +80,8 @@ CMD [ "pm2-runtime", "ecosystem.config.js" ]
 
 ## Monitor PM2 and Applications with our SaaS
 
-Once you deploy your application in production, monitor, debug and profile it externally with our [SaaS Monitoring](https://keymetrics.io):
+Once you deploy your application in production you can monitor, debug and profile it externally with our [SaaS Monitoring](https://keymetrics.io).
+
 To start monitoring applications from the terminal:
 
 ```bash
@@ -196,9 +198,9 @@ $ pm2 describe <id|app_name>
 
 ### Load Balancing & Zero second Downtime Reload
 
-When an application is started with the -i <instance_number> parameter, the **Cluster Mode** is activated.
+When an application is started with the `-i <instance_number>` parameter, the **Cluster Mode** is activated.
 
-The Cluster Mode starts <instance_number> instances of your app and automatically load balance HTTP/TCP/UDP between each instances. This allows to increase overall performance and reliability depending on the number of CPUs available.
+The Cluster Mode starts `<instance_number>` instances of your app and automatically load balance HTTP/TCP/UDP between each instances. This allows to increase overall performance and reliability depending on the number of CPUs available.
 
 Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
 
