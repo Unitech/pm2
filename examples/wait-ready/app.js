@@ -1,17 +1,15 @@
 const http = require('http');
 
+process.on('SIGINT', (msg) => {
+  console.log('Just got SIGINTed, but I dont care');
+  process.exit(0);
+});
+
 const port = 3000;
 
 const app = http.createServer((_, res) => {
   res.writeHead(200);
   res.end('Hello!');
-});
-
-console.log('Starting app...');
-
-process.on('SIGINT', (msg) => {
-  console.log('Just got SIGINTed, but I dont care');
-  process.exit(0);
 });
 
 setTimeout(() => {
