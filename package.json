@@ -185,7 +185,6 @@
     "source-map-support": "^0.5",
     "sprintf-js": "1.1.1",
     "v8-compile-cache": "^1.1.0",
-    "v8-profiler-node8": "^5.7.6",
     "vizion": "^0.2",
     "yamljs": "^0.3.0"
   },
