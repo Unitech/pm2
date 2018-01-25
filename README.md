@@ -27,7 +27,13 @@
 <br/>
 </div>
 
-PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
+PM2 is a General Purpose Process Manager and a Production Runtime for Node.js apps with a built-in Load Balancer.
+
+Key features:
+- Simple and efficient process management (start/stop/restart/delete/monitoring)
+- Keep your application always ONLINE with auto restart and init system script generation
+- Automatically clusterize Node.js applications to increase performance and reliability
+- Allowing 0 seconds downtime reload for Node.js application without extra configuration
 
 Starting an application in production mode is as easy as:
 
@@ -35,7 +41,7 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 1400 tests](https://travis-ci.org/Unitech/pm2).
+PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unitech/pm2).
 
 Official website: [http://pm2.keymetrics.io/](http://pm2.keymetrics.io/)
 
@@ -64,9 +70,10 @@ Your app is now daemonized, monitored and kept alive forever.
 
 ## Container Support
 
-Using Containers? We got your back with pm2-runtime, a dedicated command for running Node.js in containers and our [officialy suported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
+Using Containers? With the dropin replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
+We also offer an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
 
-Using it:
+Using it is seamless:
 
 ```
 FROM keymetrics/pm2:latest-alpine
@@ -76,9 +83,11 @@ CMD [ "pm2-runtime", "ecosystem.config.js" ]
 
 [Read More about the dedicated integration](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
-## Monitor PM2 and Applications
+## Monitor PM2 and Applications with our SaaS
 
-To monitor your applications just type:
+Once you deploy your application in production you can monitor, debug and profile it externally with our [SaaS Monitoring](https://keymetrics.io).
+
+To start monitoring applications from the terminal:
 
 ```bash
 $ pm2 register
@@ -162,6 +171,8 @@ $ pm2 uninstall pm2-logrotate   # Uninstall module
 $ pm2 publish                   # Increment version, git push and npm publish
 ```
 
+Also check out the [example folder](https://github.com/Unitech/pm2/tree/master/examples) to discover all features.
+
 ### Process management
 
 Once applications are started you can list and manage them easily:
@@ -174,16 +185,12 @@ Listing all running processes:
 $ pm2 list
 ```
 
-Managing your processes is straightforward:
+Managing processes is straightforward:
 
 ```bash
 $ pm2 stop     <app_name|id|'all'|json_conf>
 $ pm2 restart  <app_name|id|'all'|json_conf>
 $ pm2 delete   <app_name|id|'all'|json_conf>
-```
-To make sure it re-evaluates enviroment variables declared in your `json_conf` pass it as argument, and optionally your custom `env` name from your `json_conf` if any:
-```bash
-$ pm2 restart <json_conf> [--env <env_name>]
 ```
 
 To have more details on a specific process:
@@ -196,9 +203,9 @@ $ pm2 describe <id|app_name>
 
 ### Load Balancing & Zero second Downtime Reload
 
-When an application is started with the -i <instance_number> option, the **Cluster Mode** is enabled.
+When an application is started with the `-i <instance_number>` parameter, the **Cluster Mode** is activated.
 
-The Cluster Mode starts <instance_number> instances of your app and automatically load balance HTTP/TCP/UDP between each instance. This allows to increase overall performance depending on the number of CPUs available.
+The Cluster Mode starts `<instance_number>` instances of your app and automatically load balance HTTP/TCP/UDP between each instances. This allows to increase overall performance and reliability depending on the number of CPUs available.
 
 Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
 
@@ -207,16 +214,19 @@ Seamlessly supported by all major Node.js frameworks and any Node.js application
 Main commands:
 
 ```bash
-$ pm2 start app.js -i max  # Enable load-balancer and start 'max' instances (cpu nb)
+# Enable load-balancer and start 'max' instances (Depending on CPU number)
+$ pm2 start app.js -i max
 
-$ pm2 reload all           # Zero second dowtime reload
+# Update your application with Zero Downtime Reload (requests are not lost)
+$ pm2 reload all
 
-$ pm2 scale <app_name> <instance_number> # Increase / Decrease process number
+# Increase / Decrease process number
+$ pm2 scale <app_name> <instance_number>
 ```
 
 [More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
 
-### CPU / Memory Monitoring
+### Terminal Based Monitoring
 
 ![Monit](https://github.com/Unitech/pm2/raw/master/pres/pm2-monit.png)
 
@@ -226,15 +236,48 @@ Monitoring all processes launched:
 $ pm2 monit
 ```
 
+### Expose Custom Metrics
+
+To get more insights on how your application behave, plug custom metrics inside your code and monitor them with the `pm2 monit` command:
+
+In your project install [pmx](https://github.com/keymetrics/pmx):
+
+```bash
+$ npm install pmx --save
+```
+
+Then plug a custom metric:
+
+```javascript
+var Probe = require('pmx').probe();
+
+var counter = 1;
+
+var metric = Probe.metric({
+  name    : 'Counter',
+  value   : function() {
+    return counter;
+  }
+});
+
+setInterval(function() {
+  counter++;
+}, 1000);
+```
+
+Metric, Counter, Histogram and Meters are available *[documentation](http://pm2.keymetrics.io/docs/usage/process-metrics/)*
+
 ### Log facilities
 
 ![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
 
-Displaying logs of a specified process or all processes, in real time. Standard, Raw, JSON and formated output are available.
+Displaying logs of a specified process or all processes, in real time is easy:
 
 ```bash
 $ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]
 ```
+
+Standard, Raw, JSON and formated output are available.
 
 Examples:
 
@@ -251,7 +294,7 @@ $ pm2 reloadLogs          # Reload all logs
 
 ### Startup script generation
 
-PM2 can generate and configure a startup script to keep PM2 and your processes alive at every server restart.
+PM2 can generates and configure a startup script to keep PM2 and your processes alive at every server restart.
 
 Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD).
 

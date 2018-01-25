@@ -1,4 +1,9 @@
 {
+  "ignore": [
+    "**/node_modules/**",
+    "**/test/**",
+    "**/examples/**"
+  ],
   "critics": {
     "lint": {"engine": "semistandard"}
   }

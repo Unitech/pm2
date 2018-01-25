@@ -1,0 +1,9 @@
+apps:
+  - script : './bashscript.sh'
+    name : 'bash-script'
+  - script : './echo.php'
+    name : 'php-script'
+  - script : './echo.rb'
+    name : 'ruby-script'
+  - script : './echo.py'
+    name : 'python-script'
