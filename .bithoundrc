@@ -5,6 +5,6 @@
     "**/examples/**"
   ],
   "critics": {
-    "lint": {"engine": "jshint"}
+    "lint": {"engine": "semistandard"}
   }
 }
