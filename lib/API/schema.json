@@ -44,6 +44,9 @@
   "wait_ready" : {
     "type": "boolean"
   },
+  "reload_after_ready" : {
+    "type": "boolean"
+  },
   "disable_source_map_support" : {
     "type": "boolean"
   },
