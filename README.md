@@ -30,10 +30,10 @@
 PM2 is a General Purpose Process Manager and a Production Runtime for Node.js apps with a built-in Load Balancer.
 
 Key features:
-- Simple and efficient process management (start/stop/restart/delete/monitoring)
-- Keep your application always ONLINE with auto restart and init system script generation
-- Automatically clusterize Node.js applications to increase performance and reliability
-- Allowing 0 seconds downtime reload for Node.js application without extra configuration
+- Simple and efficient process management (start/stop/restart/delete/show/monit)
+- Keep your application ALWAYS ONLINE with auto restarts and init system script generation
+- Clustering of Node.js Applications to increases performance and reliability
+- Hot Reload Node.js Applications without extra configuration
 
 Starting an application in production mode is as easy as:
 
@@ -60,6 +60,8 @@ $ npm install pm2 -g
 
 ## Start an application
 
+You can start any application (Node.js, Python, Ruby, binaries in $PATH...) like that:
+
 ```bash
 $ pm2 start app.js
 ```
@@ -68,9 +70,69 @@ Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
+### Process management
+
+Once applications are started you can list and manage them easily:
+
+![Process listing](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
+
+Listing all running processes:
+
+```bash
+$ pm2 list
+```
+
+Managing processes is straightforward:
+
+```bash
+$ pm2 stop     <app_name|id|'all'|json_conf>
+$ pm2 restart  <app_name|id|'all'|json_conf>
+$ pm2 delete   <app_name|id|'all'|json_conf>
+```
+
+To have more details on a specific process:
+
+```bash
+$ pm2 describe <id|app_name>
+```
+
+To monitor logs, custom metrics, process information:
+
+```bash
+$ pm2 monit
+```
+
+[More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
+
+### Cluster Mode: Node.js Load Balancing & Hot Reload
+
+The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
+
+Starting a Node.js application in cluster mode that will leverage all CPUs available:
+
+```bash
+$ pm2 start api.js -i max
+```
+
+`-i <instances>` <instance> can be 'max', -1 (all cpu minus 1) or a specified number of instances to start.
+
+*Hot Reload*
+
+Hot Reload allows to update an application without any downtime:
+
+```bash
+$ pm2 reload all
+```
+
+Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
+
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
+
+[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
+
 ## Container Support
 
-Using Containers? With the dropin replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
+With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
 We also offer an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
 
 Using it is seamless:
@@ -78,14 +140,24 @@ Using it is seamless:
 ```
 FROM keymetrics/pm2:latest-alpine
 [...]
-CMD [ "pm2-runtime", "ecosystem.config.js" ]
+CMD [ "pm2-runtime", "npm", "--", "start" ]
 ```
 
 [Read More about the dedicated integration](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
+### Terminal Based Monitoring
+
+![Monit](https://github.com/Unitech/pm2/raw/master/pres/pm2-monit.png)
+
+Monitor all processes launched straight from the command line:
+
+```bash
+$ pm2 monit
+```
+
 ## Monitor PM2 and Applications with our SaaS
 
-Once you deploy your application in production you can monitor, debug and profile it externally with our [SaaS Monitoring](https://keymetrics.io).
+Once you deploy your application in production, you can monitor, debug and profile it externally with our [SaaS Monitoring](https://keymetrics.io).
 
 To start monitoring applications from the terminal:
 
@@ -95,20 +167,95 @@ $ pm2 register
 
 [More about PM2 Monitoring](http://docs.keymetrics.io/)
 
-## Updating PM2
+### Expose Custom Metrics
+
+To get more insights on how your application behave, plug custom metrics inside your code and monitor them with the `pm2 monit` command:
+
+In your project install [pmx](https://github.com/keymetrics/pmx):
 
 ```bash
-# Install latest PM2 version
-$ npm install pm2@latest -g
-# Save process list, exit old PM2 & restore all processes
-$ pm2 update
+$ npm install pmx --save
 ```
 
-*PM2 updates are seamless*
+Then plug a custom metric:
 
-## Main features
+```javascript
+var Probe = require('pmx').probe();
 
-### Commands overview
+var counter = 1;
+
+var metric = Probe.metric({
+  name    : 'Counter',
+  value   : function() {
+    return counter;
+  }
+});
+
+setInterval(function() {
+  counter++;
+}, 1000);
+```
+
+Then, to see the metrics, type from you terminal:
+
+```bash
+$ pm2 monitor
+```
+
+Metric, Counter, Histogram and Meters are [available](http://pm2.keymetrics.io/docs/usage/process-metrics/)
+
+### Log facilities
+
+![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
+
+Displaying logs of a specified process or all processes, in real time is easy:
+
+```bash
+$ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]
+```
+
+Standard, Raw, JSON and formated output are available.
+
+Examples:
+
+```bash
+$ pm2 logs APP-NAME       # Display APP-NAME logs
+$ pm2 logs --json         # JSON output
+$ pm2 logs --format       # Formated output
+
+$ pm2 flush               # Flush all logs
+$ pm2 reloadLogs          # Reload all logs
+```
+
+[More about log management](http://pm2.keymetrics.io/docs/usage/log-management/)
+
+### Startup script generation
+
+PM2 can generates and configure a startup script to keep PM2 and your processes alive at every server restart.
+
+Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD).
+
+```bash
+# Auto detect init system + generate and setup PM2 boot at server startup
+$ pm2 startup
+
+# Manually specify the startup system
+# Can be: systemd, upstart, launchd, rcd
+$ pm2 startup [platform]
+
+# Disable and remove PM2 boot at server startup
+$ pm2 unstartup
+```
+
+To save/freeze a process list on reboot:
+
+```bash
+$ pm2 save
+```
+
+[More about startup scripts](http://pm2.keymetrics.io/docs/usage/startup/)
+
+### Commands Cheatsheet
 
 ```bash
 # General
@@ -173,150 +320,16 @@ $ pm2 publish                   # Increment version, git push and npm publish
 
 Also check out the [example folder](https://github.com/Unitech/pm2/tree/master/examples) to discover all features.
 
-### Process management
-
-Once applications are started you can list and manage them easily:
-
-![Process listing](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
-
-Listing all running processes:
+## Updating PM2
 
 ```bash
-$ pm2 list
+# Install latest PM2 version
+$ npm install pm2@latest -g
+# Save process list, exit old PM2 & restore all processes
+$ pm2 update
 ```
 
-Managing processes is straightforward:
-
-```bash
-$ pm2 stop     <app_name|id|'all'|json_conf>
-$ pm2 restart  <app_name|id|'all'|json_conf>
-$ pm2 delete   <app_name|id|'all'|json_conf>
-```
-
-To have more details on a specific process:
-
-```bash
-$ pm2 describe <id|app_name>
-```
-
-[More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
-
-### Load Balancing & Zero second Downtime Reload
-
-When an application is started with the `-i <instance_number>` parameter, the **Cluster Mode** is activated.
-
-The Cluster Mode starts `<instance_number>` instances of your app and automatically load balance HTTP/TCP/UDP between each instances. This allows to increase overall performance and reliability depending on the number of CPUs available.
-
-Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
-
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
-
-Main commands:
-
-```bash
-# Enable load-balancer and start 'max' instances (Depending on CPU number)
-$ pm2 start app.js -i max
-
-# Update your application with Zero Downtime Reload (requests are not lost)
-$ pm2 reload all
-
-# Increase / Decrease process number
-$ pm2 scale <app_name> <instance_number>
-```
-
-[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
-
-### Terminal Based Monitoring
-
-![Monit](https://github.com/Unitech/pm2/raw/master/pres/pm2-monit.png)
-
-Monitoring all processes launched:
-
-```bash
-$ pm2 monit
-```
-
-### Expose Custom Metrics
-
-To get more insights on how your application behave, plug custom metrics inside your code and monitor them with the `pm2 monit` command:
-
-In your project install [pmx](https://github.com/keymetrics/pmx):
-
-```bash
-$ npm install pmx --save
-```
-
-Then plug a custom metric:
-
-```javascript
-var Probe = require('pmx').probe();
-
-var counter = 1;
-
-var metric = Probe.metric({
-  name    : 'Counter',
-  value   : function() {
-    return counter;
-  }
-});
-
-setInterval(function() {
-  counter++;
-}, 1000);
-```
-
-Metric, Counter, Histogram and Meters are available *[documentation](http://pm2.keymetrics.io/docs/usage/process-metrics/)*
-
-### Log facilities
-
-![Monit](https://github.com/unitech/pm2/raw/master/pres/pm2-logs.png)
-
-Displaying logs of a specified process or all processes, in real time is easy:
-
-```bash
-$ pm2 logs ['all'|app_name|app_id] [--json] [--format] [--raw]
-```
-
-Standard, Raw, JSON and formated output are available.
-
-Examples:
-
-```bash
-$ pm2 logs APP-NAME       # Display APP-NAME logs
-$ pm2 logs --json         # JSON output
-$ pm2 logs --format       # Formated output
-
-$ pm2 flush               # Flush all logs
-$ pm2 reloadLogs          # Reload all logs
-```
-
-[More about log management](http://pm2.keymetrics.io/docs/usage/log-management/)
-
-### Startup script generation
-
-PM2 can generates and configure a startup script to keep PM2 and your processes alive at every server restart.
-
-Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD).
-
-```bash
-# Auto detect init system + generate and setup PM2 boot at server startup
-$ pm2 startup
-
-# Manually specify the startup system
-# Can be: systemd, upstart, launchd, rcd
-$ pm2 startup [platform]
-
-# Disable and remove PM2 boot at server startup
-$ pm2 unstartup
-```
-
-To save/freeze a process list on reboot:
-
-```bash
-$ pm2 save
-```
-
-[More about startup scripts](http://pm2.keymetrics.io/docs/usage/startup/)
+*PM2 updates are seamless*
 
 ## Module system
 
