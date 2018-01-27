@@ -32,7 +32,7 @@ PM2 is a General Purpose Process Manager and a Production Runtime for Node.js ap
 Key features:
 - Simple and efficient process management (start/stop/restart/delete/show/monit)
 - Keep your application ALWAYS ONLINE with auto restarts and init system script generation
-- Clustering of Node.js Applications to increases performance and reliability
+- Clusterize Node.js Applications without code change to increase performance and reliability
 - Hot Reload Node.js Applications without extra configuration
 
 Starting an application in production mode is as easy as:
