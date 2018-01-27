@@ -9,10 +9,6 @@
   <i>Runtime Edition</i>
 <br/><br/>
 
- <a href="https://www.bithound.io/github/Unitech/pm2" title="Bithound PM2 score">
- <img src="https://www.bithound.io/github/Unitech/pm2/badges/score.svg" alt="bitHound Score">
-</a>
-
 <a href="https://www.npmjs.com/package/pm2" title="PM2 on NPM">
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/pm2.svg?style=flat-square"/>
 </a>
