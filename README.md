@@ -50,7 +50,7 @@ All Node.js versions are supported starting Node.js 0.12.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
-## Install PM2
+### Install PM2
 
 ```bash
 $ npm install pm2 -g
@@ -58,7 +58,7 @@ $ npm install pm2 -g
 
 *npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
 
-## Start an application
+### Start an application
 
 You can start any application (Node.js, Python, Ruby, binaries in $PATH...) like that:
 
@@ -70,7 +70,7 @@ Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
-### Process management
+### Process Management
 
 Once applications are started you can list and manage them easily:
 
@@ -116,7 +116,7 @@ $ pm2 start api.js -i max
 
 `-i <instances>` <instance> can be 'max', -1 (all cpu minus 1) or a specified number of instances to start.
 
-*Hot Reload*
+**Hot Reload**
 
 Hot Reload allows to update an application without any downtime:
 
@@ -130,7 +130,7 @@ Seamlessly supported by all major Node.js frameworks and any Node.js application
 
 [More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
 
-## Container Support
+### Container Support
 
 With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
 We also offer an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
@@ -155,7 +155,7 @@ Monitor all processes launched straight from the command line:
 $ pm2 monit
 ```
 
-## Monitor PM2 and Applications with our SaaS
+### Monitor PM2 and Applications with our SaaS
 
 Once you deploy your application in production, you can monitor, debug and profile it externally with our [SaaS Monitoring](https://keymetrics.io).
 
