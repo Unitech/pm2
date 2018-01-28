@@ -50,7 +50,7 @@ All Node.js versions are supported starting Node.js 0.12.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
-### Install PM2
+### Installing PM2
 
 ```bash
 $ npm install pm2 -g
@@ -70,13 +70,13 @@ Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
 
-### Process Management
+### Managing a Process
 
-Once applications are started you can list and manage them easily:
+Once applications are started you can manage them easily:
 
 ![Process listing](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
 
-Listing all running processes:
+To list all running processes:
 
 ```bash
 $ pm2 list
@@ -111,10 +111,10 @@ The Cluster mode is a special mode when starting a Node.js application, it start
 Starting a Node.js application in cluster mode that will leverage all CPUs available:
 
 ```bash
-$ pm2 start api.js -i max
+$ pm2 start api.js -i <processes>
 ```
 
-`-i <instances>` <instance> can be 'max', -1 (all cpu minus 1) or a specified number of instances to start.
+`<processes>` can be `'max'`, `-1` (all cpu minus 1) or a specified number of instances to start.
 
 **Hot Reload**
 
@@ -196,7 +196,7 @@ setInterval(function() {
 }, 1000);
 ```
 
-Then, to see the metrics, type from you terminal:
+Then to see the metric type from in the terminal:
 
 ```bash
 $ pm2 monitor
