@@ -192,6 +192,11 @@
       "boolean"
     ]
   },
+  "v8": {
+    "type": [
+      "boolean"
+    ]
+  },
   "increment_var": {
     "type": "string"
   },

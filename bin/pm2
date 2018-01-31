@@ -85,6 +85,7 @@ commander.version(pkg.version)
   .option('--disable-trace', 'disable transaction tracing with km')
   .option('--attach', 'attach logging after your start/restart/stop/reload')
   .option('--sort <field_name:sort>', 'sort process according to field\'s name')
+  .option('--v8', 'enable v8 data collecting')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
