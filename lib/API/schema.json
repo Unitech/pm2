@@ -197,6 +197,11 @@
       "boolean"
     ]
   },
+  "event-loop-inspector": {
+    "type": [
+      "boolean"
+    ]
+  },
   "increment_var": {
     "type": "string"
   },
