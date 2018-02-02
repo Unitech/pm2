@@ -310,6 +310,12 @@ commander.command('startOrReload <json>')
     pm2._startJson(file, commander, 'reloadProcessId');
   });
 
+commander.command('pid [app_name]')
+  .description('return pid of [app_name] or all')
+  .action(function(app) {
+    pm2.getPID(app);
+  });
+
 commander.command('startOrGracefulReload <json>')
   .description('start or gracefully reload JSON file')
   .action(function(file) {
