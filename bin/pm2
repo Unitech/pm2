@@ -86,6 +86,7 @@ commander.version(pkg.version)
   .option('--attach', 'attach logging after your start/restart/stop/reload')
   .option('--sort <field_name:sort>', 'sort process according to field\'s name')
   .option('--v8', 'enable v8 data collecting')
+  .option('--event-loop-inspector', 'enable event-loop-inspector dump in pmx')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
