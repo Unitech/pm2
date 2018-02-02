@@ -13,6 +13,7 @@ cd $file_path/pm2-dev
 # Simple start with 4 apps
 #
 $pm2 kill
+pkill -f PM2
 
 $pm2_runtime app.js -i 4
 should 'should have started 4 apps' 'online' 4
