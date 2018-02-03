@@ -197,7 +197,7 @@
       "boolean"
     ]
   },
-  "event-loop-inspector": {
+  "event_loop_inspector": {
     "type": [
       "boolean"
     ]
