@@ -202,6 +202,11 @@
       "boolean"
     ]
   },
+  "deep_monitoring": {
+    "type": [
+      "boolean"
+    ]
+  },
   "increment_var": {
     "type": "string"
   },
