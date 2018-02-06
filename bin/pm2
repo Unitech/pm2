@@ -87,7 +87,7 @@ commander.version(pkg.version)
   .option('--sort <field_name:sort>', 'sort process according to field\'s name')
   .option('--v8', 'enable v8 data collecting')
   .option('--event-loop-inspector', 'enable event-loop-inspector dump in pmx')
-  .option('--deep-monitoring', 'enable all monitoring tools (equivalent to --v8 --event-loop-inspector --trace')
+  .option('--deep-monitoring', 'enable all monitoring tools (equivalent to --v8 --event-loop-inspector --trace)')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
