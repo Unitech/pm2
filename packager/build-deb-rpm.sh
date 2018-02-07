@@ -17,7 +17,7 @@ echo "Cleaning PACKAGE_TMPDIR..."
 rm -rf $PACKAGE_TMPDIR
 
 PM2_VERSION=`node dist/bin/pm2 --version`
-VERSION=$PM2_VERSION"-"$DRONE_BUILD_NUMBER
+VERSION=$PM2_VERSION
 TARBALL_NAME=dist/pm2-v$PM2_VERSION.tar.gz
 OUTPUT_DIR=artifacts
 
@@ -121,7 +121,7 @@ fpm --input-type dir --chdir $PACKAGE_TMPDIR \
     --description '$(cat packager/debian/description)' \
     --vendor 'Keymetrics <tech@keymetrics.io>' \
     --maintainer 'Alexandre Strzelewicz <tech@keymetrics.io>' \
-    --version $PM2_VERSION --iteration $DRONE_BUILD_NUMBER \
+    --version $PM2_VERSION \
     --after-install packager/rhel/postinst \
     --before-remove packager/rhel/prerm \
     --after-remove packager/rhel/postrm \

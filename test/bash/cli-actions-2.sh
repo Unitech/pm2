@@ -30,6 +30,13 @@ should 'should app be online once restart called' 'online' 1
 
 $pm2 delete all
 
+############## PID
+$pm2 start 001-test.js --name "test"
+should 'should app be online' 'online' 1
+$pm2 pid > /tmp/pid-tmp
+$pm2 pid test
+$pm2 delete all
+
 ###############
 
 echo "Start application with filename starting with a numeric"

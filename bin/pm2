@@ -85,6 +85,9 @@ commander.version(pkg.version)
   .option('--disable-trace', 'disable transaction tracing with km')
   .option('--attach', 'attach logging after your start/restart/stop/reload')
   .option('--sort <field_name:sort>', 'sort process according to field\'s name')
+  .option('--v8', 'enable v8 data collecting')
+  .option('--event-loop-inspector', 'enable event-loop-inspector dump in pmx')
+  .option('--deep-monitoring', 'enable all monitoring tools (equivalent to --v8 --event-loop-inspector --trace)')
   .usage('[cmd] app');
 
 commander.on('--help', function() {
@@ -307,6 +310,12 @@ commander.command('startOrReload <json>')
   .description('start or gracefully reload JSON file')
   .action(function(file) {
     pm2._startJson(file, commander, 'reloadProcessId');
+  });
+
+commander.command('pid [app_name]')
+  .description('return pid of [app_name] or all')
+  .action(function(app) {
+    pm2.getPID(app);
   });
 
 commander.command('startOrGracefulReload <json>')
