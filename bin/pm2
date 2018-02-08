@@ -464,7 +464,7 @@ commander.command('update')
 /**
  * Module specifics
  */
-commander.command('install <module|git:// url>')
+commander.command('install [module|git:// url]')
   .alias('module:install')
   .option('--v1', 'install module in v1 manner (do not use it)')
   .option('--safe [time]', 'keep module backup, if new module fail = restore with previous')
