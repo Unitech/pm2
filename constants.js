@@ -28,6 +28,7 @@ var csts = {
 
   TEMPLATE_FOLDER         : p.join(__dirname, 'lib/templates'),
 
+  APP_CONF_DEFAULT_FILE   : 'ecosystem.json',
   APP_CONF_TPL            : 'ecosystem.tpl',
   APP_CONF_TPL_SIMPLE     : 'ecosystem-simple.tpl',
   SAMPLE_CONF_FILE        : 'sample-conf.js',
