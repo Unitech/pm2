@@ -304,7 +304,7 @@ $ pm2 resurrect                 # Restore previously saved processes
 $ pm2 unstartup                 # Disable and remove startup system
 
 $ pm2 update                    # Save processes, kill PM2 and restore processes
-$ pm2 generate                  # Generate a sample json configuration file
+$ pm2 init                      # Generate a sample js configuration file
 
 # Deployment
 $ pm2 deploy app.json prod setup    # Setup "prod" remote server

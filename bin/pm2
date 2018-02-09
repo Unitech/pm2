@@ -664,7 +664,7 @@ commander.command('logrotate')
 //
 
 commander.command('ecosystem [mode]')
-  .alias('generate')
+  .alias('init')
   .description('generate a process conf file. (mode = null or simple)')
   .action(function(mode) {
     pm2.generateSample(mode);
