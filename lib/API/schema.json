@@ -213,5 +213,9 @@
   "instance_var": {
     "type": "string",
     "default" : "NODE_APP_INSTANCE"
+},
+  "windowsHide": {
+    "type": "boolean",
+    "default" : true
   }
 }
