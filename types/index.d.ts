@@ -383,7 +383,7 @@ export interface StartOptions {
   /**
    * If set to true, the application will be restarted on change of the script file.
    */
-  watch?: boolean;
+  watch?: boolean|string[];
   /**
    * (Default: false) By default, pm2 will only start a script if that script isn’t
    * already running (a script is a path to an application, not the name of an application
