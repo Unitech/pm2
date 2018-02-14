@@ -125,8 +125,8 @@ spec "Should list processes successfully"
 $pm2 start multi-echo.json
 spec "Should start multiple applications"
 
-$pm2 generate echo
-spec "Should generate echo sample json"
+$pm2 init echo
+spec "Should init echo sample json"
 
 $pm2 start echo-pm2.json -f
 spec "Should start echo service"
