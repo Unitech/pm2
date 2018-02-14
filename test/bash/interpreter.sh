@@ -77,7 +77,7 @@ spec "Should work on Livescript files in cluster mode"
 $pm2 delete all
 $pm2 start echo.ts
 sleep 1
-should 'process should be errored without coffee installed' "status: 'errored'" 1
+should 'process should be errored without typescript installed' "status: 'errored'" 1
 
 ########### Install
 
