@@ -23,6 +23,8 @@ bash ./test/bash/pm2-dev.sh
 spec "pm2-dev"
 bash ./test/bash/pm2-runtime.sh
 spec "pm2-runtime"
+bash ./test/bash/options-via-env.sh
+spec "set option via environment"
 bash ./test/bash/startup.sh
 spec "upstart startup test"
 bash ./test/bash/dump.sh
