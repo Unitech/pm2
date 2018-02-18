@@ -14,3 +14,4 @@ artifacts
 .editorconfig
 .bithoundrc
 dist
+.idea
