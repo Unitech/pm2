@@ -2,10 +2,10 @@
     "app_name": "",
     "logo": "",
     "intro": "",
-    "branch" : "master",
+    "branch" : "development",
     "repo_url": "https://github.com/Unitech/pm2",
-    "version_name" : "v2.9.2",
-    "tag": "2.9.1",
+    "version_name" : "v2.10.0",
+    "tag": "2.9.2",
     "file": "currentTagChangelog.md",
     "template": "changelogTemplate.md",
     "sections": [
