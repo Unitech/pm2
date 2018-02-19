@@ -1,3 +1,154 @@
+## v2.10.0 ( Mon Feb 19 2018 14:51:19 GMT+0100 (CET) )
+
+
+### Bug Fixes
+  - add livescript in default modules
+  ([a315eeb6](https://github.com/Unitech/pm2/commit/a315eeb65f04b22643a903f0cb1c0f416615ad8b))
+  - replace dash with underscore
+  ([203df768](https://github.com/Unitech/pm2/commit/203df7688ca348967c00bc45289ae70fd2c4aaaa))
+  - make sure not pm2 is running
+  ([bd798fd7](https://github.com/Unitech/pm2/commit/bd798fd748665e935db4bb91f9d1d66952d9842a))
+  - auto-exit edge case fix + pm2 no daemon mode + log in raw by default + less logs
+  ([704ae518](https://github.com/Unitech/pm2/commit/704ae518f5d7df0a631349e518d81cef51249a58))
+  - impact v8 flag in fork mode also
+  ([41bf6ef7](https://github.com/Unitech/pm2/commit/41bf6ef7d3633180b4c1e90f36eb206d82fab2b1))
+  - fixup! #2182 Get rid of annoying popups in Windows 10
+  ([3a85b59d](https://github.com/Unitech/pm2/commit/3a85b59de4a76796ad0880368d8d085a7ba55d36))
+
+
+
+
+### Hot Fixes
+  - \#3420 ([673acf36](https://github.com/Unitech/pm2/commit/673acf36b4ca1fd65c5135a92d56081f76237a8b))
+
+
+
+
+### Features
+  - add dependencies section into ecosystem.json file.
+  ([828a30d0](https://github.com/Unitech/pm2/commit/828a30d0ccc88b3f6e2b66d517ccf5f2394bd08b))
+  - --deep-monitoring available from pm2-runtime
+  ([99e62e3b](https://github.com/Unitech/pm2/commit/99e62e3bb808f071d6e4850c234b34f7de65b1c2))
+  - add deep_metrics to deep_monitoring flag
+  ([4d1bea5e](https://github.com/Unitech/pm2/commit/4d1bea5e0bbaab1f16f75d012bca25702cdff88e))
+  - add flag to enable deep-monitoring
+  ([c5418688](https://github.com/Unitech/pm2/commit/c541868837a1c4421394de5dd1029d2619b5ac82))
+  - allow pm2 to install a set of module as one single command and add deep-monitoring.
+  ([9dddc80d](https://github.com/Unitech/pm2/commit/9dddc80db5e496def44d4d36716b7de54e5171cf))
+  - pm2 pid <app_name> command
+  ([6687d499](https://github.com/Unitech/pm2/commit/6687d499415151bd62489fed5331f414576ec354))
+  - allow pm2 to install and enable event-loop-inspector data collecting
+  ([e6b0c474](https://github.com/Unitech/pm2/commit/e6b0c47443d3e6a839bf29057ef0a80ef135c47e))
+  - ignore signal when running in --no-daemon
+  ([b9c01c99](https://github.com/Unitech/pm2/commit/b9c01c99d54aba98ab790b8888500ac0f0af05c9))
+  - upgrade pmx to git development branch
+  ([21be05a0](https://github.com/Unitech/pm2/commit/21be05a07bd93eacaddedde3b647c16468937473))
+  - allow pm2 to enable v8 data collecting from pmx
+  ([aa180fa8](https://github.com/Unitech/pm2/commit/aa180fa8ab47f0c687d7c21854d005ad0ebf8475))
+  - allow pm2 to install gc-stats
+  ([15634168](https://github.com/Unitech/pm2/commit/15634168582e4c7b3c5f47a3f58a0fcf8b732a76))
+  - feat add changelog generation support
+  ([14f53fc0](https://github.com/Unitech/pm2/commit/14f53fc0c28be4084778785aeace3763ed0d827f))
+
+  - **pm2**
+    - add pm2 init option to generate an ecosystem file
+  ([5d56fac7](https://github.com/Unitech/pm2/commit/5d56fac7cc12590af29ee46c68ba32a82a2b813b))
+    - add pm2 init option to generate an ecosystem file
+  ([a38fd199](https://github.com/Unitech/pm2/commit/a38fd199b90d27a2405f8cabab0e4f6e45c69b08))
+
+
+
+
+### Documentation
+  - add documentation on new pm2 install command
+  ([c90c453f](https://github.com/Unitech/pm2/commit/c90c453f85b07adb346bc55c2b685d689a2e96f7))
+  - add sendDataToProcessId into typescript definitions
+  ([4a2e8d2d](https://github.com/Unitech/pm2/commit/4a2e8d2d2c4b38fe0ff2377dfe32fce9a43c8044))
+
+
+
+
+### Refactor
+  - delete all "if" condition when installing new module, create an object with all modules and a generic installation process
+  ([1b92a9c4](https://github.com/Unitech/pm2/commit/1b92a9c4000734367e68d8dbd60d0901009f4c56))
+  - deep pm2-runtime refactor #3408 #3257 #3266
+  ([c13b2364](https://github.com/Unitech/pm2/commit/c13b23648269529a1f998d816be10f895665861e))
+  - no more interactive spinner for connection to KM + change pm2 log format + remove some logs
+  ([d1916f40](https://github.com/Unitech/pm2/commit/d1916f40962b2cc8a1866172eab7d5d89db093be))
+
+
+
+
+### Chore
+  - pmx to 1.6.3-rc2
+  ([41815e0b](https://github.com/Unitech/pm2/commit/41815e0ba0298979f936b3d4badb196f8d9783d8))
+  - switch pmx to development
+  ([748019d1](https://github.com/Unitech/pm2/commit/748019d1ef0cf760b5e8de9d5b6af6fee300db02))
+  - 2.10.0-beta
+  ([0d2b7172](https://github.com/Unitech/pm2/commit/0d2b7172a093d0638deabb5f23383cc9eec5dda9))
+  - upgrade pmx to 1.6.3-next
+  ([5a1b4343](https://github.com/Unitech/pm2/commit/5a1b4343cc1e1f5018e21451a111340351706213))
+  - upgrade pmx dep
+  ([4bbeec3d](https://github.com/Unitech/pm2/commit/4bbeec3d170ba63af0c0ae0e2d07beec2ab49772))
+  - switch to published pmx(@next)
+  ([859d18fb](https://github.com/Unitech/pm2/commit/859d18fbc79e2a2760fe90e9c17e71209f8177ce))
+  - remove --exit from mocha.opts
+  ([36bf03e1](https://github.com/Unitech/pm2/commit/36bf03e1eed69a27e518151e2f7aa958b15db2fb))
+  - remove unused files
+  ([65d233e5](https://github.com/Unitech/pm2/commit/65d233e5b5290f65796b7cf3daa20706e0f3bee6))
+
+
+
+
+### Branchs merged
+  - Merge branch 'development' of ssh://github.com/deltasource/pm2 into hotfix/scoped-package-support
+  ([94ea9d9e](https://github.com/Unitech/pm2/commit/94ea9d9eeff40faca8aa9f7edfc81aa29c08e740))
+  - Merge branch 'master' into development
+  ([46606903](https://github.com/Unitech/pm2/commit/46606903f25d0f4d0eee226da863e20e4b396dc9))
+  - Merge branch 'development' of github.com:Unitech/pm2 into v8_option
+  ([757562f7](https://github.com/Unitech/pm2/commit/757562f755b09124bbd006209ae38a096d692529))
+  - Merge branch 'development' of github.com:Unitech/pm2 into gc-stats
+  ([3ed1a747](https://github.com/Unitech/pm2/commit/3ed1a7471aec7d79f7d604447ac7445720bdaced))
+  - Merge branch 'master' into development
+  ([ee7651e4](https://github.com/Unitech/pm2/commit/ee7651e47e944c3c829933494c6cc765deb4bb29))
+
+
+
+
+### Pull requests merged
+  - Merge pull request #3466 from natcl/development
+  ([c6d7ace8](https://github.com/Unitech/pm2/commit/c6d7ace802e667def75bc68344effa4856830fb4))
+  - Merge pull request #3464 from andyfleming/patch-1
+  ([dd9ebb60](https://github.com/Unitech/pm2/commit/dd9ebb6051708ee5a13cc68dbcb8238e41860bb9))
+  - Merge pull request #3459 from rmonnier/master
+  ([46948a98](https://github.com/Unitech/pm2/commit/46948a98e90c7864f7b8100db5c519fe9d37f11a))
+  - Merge pull request #3458 from Unitech/pm2_install_command
+  ([f3b35726](https://github.com/Unitech/pm2/commit/f3b35726895bd82b92813f308b787d68e9df1fa4))
+  - Merge pull request #3453 from deltasource/hotfix/scoped-package-support
+  ([974f9bf0](https://github.com/Unitech/pm2/commit/974f9bf0dc7a7aa7ff6860f8640da3593b802296))
+  - Merge pull request #3448 from Unitech/deep_monitoring_flag
+  ([331bc741](https://github.com/Unitech/pm2/commit/331bc741d7285094738a91cd816bc9755cc76605))
+  - Merge pull request #3447 from Unitech/deep-monitoring
+  ([719d328e](https://github.com/Unitech/pm2/commit/719d328e8d14871b34fd33df54fd80f4f8e7825f))
+  - Merge pull request #3443 from Unitech/event-loop-inspector
+  ([77a35274](https://github.com/Unitech/pm2/commit/77a3527407f3d090c7a5fa0bedaf943a7536b5eb))
+  - Merge pull request #3442 from Unitech/event-loop-inspector
+  ([dad98e6e](https://github.com/Unitech/pm2/commit/dad98e6e0738983717fee155ff0f6519955ffc1b))
+  - Merge pull request #3424 from Unitech/sendDataToProcessId_def
+  ([95e85eef](https://github.com/Unitech/pm2/commit/95e85eef84510dddfb0c6b13f0ada38a7dd66cae))
+  - Merge pull request #3438 from Unitech/v8_option
+  ([e46b15dc](https://github.com/Unitech/pm2/commit/e46b15dc32c18e8b24f66da0c79cc06f91cf11b5))
+  - Merge pull request #3437 from Unitech/gc-stats
+  ([1a6771aa](https://github.com/Unitech/pm2/commit/1a6771aa361bb5718bafd6e33e616725f9c0d328))
+  - Merge pull request #3400 from toddwong/windowsHide2
+  ([f65e8794](https://github.com/Unitech/pm2/commit/f65e8794df6e67f4ff60dfbec7c05a37721cb6f9))
+  - Merge pull request #3421 from Unitech/generate_changelog
+  ([b0690618](https://github.com/Unitech/pm2/commit/b0690618d940c11e28eeb5115c060bf363c7b62b))
+  - Merge pull request #3419 from Rohja/fix-build-number-deb-rpm
+  ([b4343de2](https://github.com/Unitech/pm2/commit/b4343de2703fce03f3cf48cc303b12bc6b69b743))
+
+
+
 
 ## 2.9.2
 
