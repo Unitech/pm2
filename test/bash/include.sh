@@ -7,11 +7,30 @@
 
 node="`type -P node`"
 
-pm2="`type -P node` `pwd`/bin/pm2"
+pm2_path=`pwd`/bin/pm2
 
-file_path="test/fixtures"
+if [ ! -f $pm2_path ];
+then
+    pm2_path=`pwd`/../bin/pm2
+    if [ ! -f $pm2_path ];
+    then
+        pm2_path=`pwd`/../../bin/pm2
+    fi
+fi
 
-#set -o verbose
+pm2="$node $pm2_path"
+
+SRC=$(cd $(dirname "$0"); pwd)
+file_path="${SRC}/../fixtures"
+
+if [ ! -d $file_path ];
+then
+    file_path="${SRC}/../../fixtures"
+    if [ ! -d $file_path ];
+    then
+        file_path="${SRC}/../../../fixtures"
+    fi
+fi
 
 $pm2 kill
 $pm2 link delete
