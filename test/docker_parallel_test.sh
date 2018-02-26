@@ -3,18 +3,21 @@ set -e
 docker build -t pm2-test -f test/Dockerfile .
 
 JOBS=20
-OPTS="--jobs $JOBS --no-notice --joblog joblog-X docker run -v `pwd`:/var/pm2 pm2-test"
-# cli ok
-ls test/bash/cli/* | parallel $OPTS bash
+OPTS="--jobs $JOBS --joblog joblog-X docker run -v `pwd`:/var/pm2 pm2-test"
+
 # process-file ok
-ls test/bash/process-file/* | parallel --jobs $JOBS --no-notice --halt now,success=0 --joblog joblog-X docker run -v `pwd`:/var/pm2 pm2-test bash
+ls test/e2e/process-file/* | parallel $OPTS bash
+# cli ok
+ls test/e2e/cli/* | parallel $OPTS bash
 # logs ok
-# misc
+ls test/e2e/logs/* | parallel $OPTS bash
 # reload ok
-ls test/bash/reload/* | parallel --jobs $JOBS --no-notice --halt now,success=0 --joblog joblog-X docker run -v `pwd`:/var/pm2 pm2-test bash
+ls test/e2e/reload/* | parallel $OPTS bash
 # internals ok
-ls test/bash/internal/* | parallel --jobs $JOBS --no-notice --halt now,success=0 --joblog joblog-X docker run -v `pwd`:/var/pm2 pm2-test bash
+ls test/e2e/internal/* | parallel $OPTS bash
 # modules ok
-ls test/bash/modules/* | parallel --jobs $JOBS --no-notice --halt now,success=0 --joblog joblog-X docker run -v `pwd`:/var/pm2 pm2-test bash
+ls test/e2e/modules/* | parallel $OPTS bash
 # binaries ok
-ls test/bash/binaries/* | parallel --jobs $JOBS --no-notice --halt now,success=0 --joblog joblog-X docker run -v `pwd`:/var/pm2 pm2-test bash
+ls test/e2e/binaries/* | parallel $OPTS bash
+
+# misc
