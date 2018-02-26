@@ -179,7 +179,7 @@
     "pm2-deploy": "^0.3.9",
     "pm2-multimeter": "^0.1.2",
     "pmx": "^1.6",
-    "promptly": "3.0.3",
+    "promptly": "2.2.0",
     "semver": "^5.3",
     "shelljs": "0.8.1",
     "source-map-support": "^0.5",
