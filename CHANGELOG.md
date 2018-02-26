@@ -1,3 +1,11 @@
+## v2.10.1 ( Mon Feb 26 2018 11:38:18 GMT+0100 (CET) )
+
+
+## Bug Fixes
+  - restore --raw option #3476
+  ([340011ca](https://github.com/Unitech/pm2/commit/340011cace2b90c2a1ead8d86baba517f5570e15))
+
+
 ## v2.10.0 ( Mon Feb 19 2018 14:51:19 GMT+0100 (CET) )
 
 
