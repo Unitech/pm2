@@ -1,19 +1,18 @@
 {
   "script": {
     "type": "string",
-    "default": "Required",
     "require": true,
     "alias" : "exec",
-    "description": "Path of the script to launch"
+    "description": "Path of the script to launch, required field"
   },
   "name": {
     "type": "string",
-    "default": "Script filename without extension (app for app.js)",
+    "default": "Script filename without the extension (app for app.js)",
     "description": "Process name in the process list"
   },
   "cwd": {
     "type": "string",
-    "default": "CWD of the current environment (ie from your shell)",
+    "default": "CWD of the current environment (from your shell)",
     "description": "Current working directory to start the process with"
   },
   "args": {
@@ -56,7 +55,7 @@
     ],
     "default": "/dev/null",
     "alias": "log_file",
-    "description": "File path for combined stdout and stderr"
+    "description": "File path for combined stdout and stderr (each line is appended to this file)"
   },
   "disable_logs": {
     "type": "boolean",
@@ -76,7 +75,7 @@
       "object",
       "string"
     ],
-    "description": "Specify environment variables to be injected in your app"
+    "description": "Specify environment variables to be injected"
   },
   "^env_\\S*$": {
     "type": [
@@ -93,7 +92,7 @@
     "regex": "^\\d+(G|M|K)?$",
     "ext_type": "sbyte",
     "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)",
-    "description": "Restart the app if an amount of memory,is exceeded. Uses human-friendly format: 'K' for kilobytes, 'M' for megabytes, 'G' for gigabytes', etc. Eg 150M"
+    "description": "Restart the app if an amount of memory is exceeded (format: 'K|G|' for KB, 'M' for MB, 'G' for GB, default to byte)"
   },
   "pid_file": {
     "type": "string",
@@ -119,7 +118,7 @@
   "wait_ready": {
     "type": "boolean",
     "default": false,
-    "description": "Make the process wait for process.send('ready')"
+    "description": "Make the process wait for a process.send('ready')"
   },
   "instances": {
     "type": "number",
@@ -149,12 +148,12 @@
   "vizion": {
     "type": "boolean",
     "default" : true,
-    "description": "Enable or disable the versioning control metadatas (vizion library)"
+    "description": "Enable or disable the versioning metadatas (vizion library)"
   },
   "autorestart": {
     "type": "boolean",
     "default" : true,
-    "description": "pm2 will not attempt to restart it following successful completion or process failure"
+    "description": "Enable or disable auto restart after process failure"
   },
   "watch": {
     "type": [
@@ -170,7 +169,7 @@
       "array",
       "string"
     ],
-    "description": "List of path to ignore (regex)"
+    "description": "List of paths to ignore (regex)"
   },
   "watch_options": {
     "type": "object",
@@ -205,7 +204,7 @@
   "force": {
     "type": "boolean",
     "default": false,
-    "description": "pm2 will start a script even if it is already running (the script path is considered, not the name)"
+    "description": "Start a script even if it is already running (only the script path is considered)"
   },
   "append_env_to_name": {
     "type": "boolean",
@@ -242,17 +241,17 @@
   "pmx": {
     "type": "boolean",
     "default" : true,
-    "description": "Enable or disable the pmx injection"
+    "description": "Enable or disable pmx wrapping"
   },
   "automation": {
     "type": "boolean",
     "default" : true,
-    "description": "See --no-automation flag"
+    "description": "Enable or disable pmx wrapping"
   },
   "treekill": {
     "type": "boolean",
     "default" : true,
-    "description": "See --no-treekill flag"  
+    "description": "Only kill the main process, not detached children"  
   },
   "port": {
     "type": "number",
