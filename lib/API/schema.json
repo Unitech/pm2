@@ -229,6 +229,21 @@
     "default": true,
     "description": "Enable or disable the transaction tracing"
   },
+  "v8": {
+    "type": [
+      "boolean"
+    ]
+  },
+  "event_loop_inspector": {
+    "type": [
+      "boolean"
+    ]
+  },
+  "deep_monitoring": {
+    "type": [
+      "boolean"
+    ]
+  },
   "increment_var": {
     "type": "string",
     "description": "Specify the name of an environnement variable to inject which increments for each cluster"
@@ -266,5 +281,9 @@
     "type" : "string",
     "default": "Current user gid",
     "description": "Set group id"  
+  },
+  "windowsHide": {
+    "type": "boolean",
+    "default" : true
   }
 }
