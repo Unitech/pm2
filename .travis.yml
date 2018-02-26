@@ -8,7 +8,6 @@ os:
   - linux
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install php5-cli
   - sudo apt-get install parallel
 services:
   - docker
