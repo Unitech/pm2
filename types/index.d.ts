@@ -170,6 +170,14 @@ export function sendSignalToProcessName(signal:string|number, process: number|st
  */
 export function startup(platform: Platform, errback: ErrResultCallback): void;
 
+/**
+ * - Send an set of data as object to a specific process
+ * @param proc_id
+ * @param packet
+ * @param cb
+ */
+export function sendDataToProcessId(proc_id: number, packet: object, cb: ErrResultCallback): void;
+
 // Interfaces
 
 export interface Proc {
@@ -375,7 +383,7 @@ export interface StartOptions {
   /**
    * If set to true, the application will be restarted on change of the script file.
    */
-  watch?: boolean;
+  watch?: boolean|string[];
   /**
    * (Default: false) By default, pm2 will only start a script if that script isn’t
    * already running (a script is a path to an application, not the name of an application
