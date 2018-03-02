@@ -2,23 +2,87 @@
   "script": {
     "type": "string",
     "require": true,
-    "alias" : "exec"
+    "alias" : "exec",
+    "description": "Path of the script to launch, required field"
+  },
+  "name": {
+    "type": "string",
+    "default": "Script filename without the extension (app for app.js)",
+    "description": "Process name in the process list"
+  },
+  "cwd": {
+    "type": "string",
+    "default": "CWD of the current environment (from your shell)",
+    "description": "Current working directory to start the process with"
   },
   "args": {
     "type": [
       "array",
       "string"
-    ]
+    ],
+    "description": "Arguments to pass to the script"
+  },
+  "interpreter": {
+    "type": "string",
+    "alias": "exec_interpreter",
+    "default": "node",
+    "description": "Interpreter absolute path"
   },
   "node_args": {
     "type": [
       "array",
       "string"
     ],
-    "alias": ["interpreterArgs", "interpreter_args"]
+    "alias": ["interpreter_args"],
+    "description": "Arguments to pass to the interpreter"
   },
-  "name": {
-    "type": "string"
+  "output": {
+    "type": "string",
+    "alias": ["out", "out_file", "out_log"],
+    "default": "~/.pm2/logs/<app_name>-out.log",
+    "description": "File path for stdout (each line is appended to this file)"
+  },
+  "error": {
+    "type": "string",
+    "alias": ["error_file", "err", "err_file", "err_log"],
+    "default": "~/.pm2/logs/<app_name>-error.err",
+    "description": "File path for stderr (each line is appended to this file)"
+  },
+  "log": {
+    "type": [
+      "boolean",
+      "string"
+    ],
+    "default": "/dev/null",
+    "alias": "log_file",
+    "description": "File path for combined stdout and stderr (each line is appended to this file)"
+  },
+  "disable_logs": {
+    "type": "boolean",
+    "default": false,
+    "description": "Disable all logs storage"
+  },
+  "log_type": {
+    "type": "string",
+    "description": "Define a specific log output type, possible values: json|"
+  },
+  "log_date_format": {
+    "type": "string",
+    "description": "Format for log timestamps (eg YYYY-MM-DD HH:mm Z) in moment.js format"
+  },
+  "env": {
+    "type": [
+      "object",
+      "string"
+    ],
+    "description": "Specify environment variables to be injected"
+  },
+  "^env_\\S*$": {
+    "type": [
+      "object",
+      "string"
+    ],
+    "description": "Specify environment variables to be injected when using --env <env_name>"
   },
   "max_memory_restart": {
     "type": [
@@ -27,124 +91,89 @@
     ],
     "regex": "^\\d+(G|M|K)?$",
     "ext_type": "sbyte",
-    "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)"
-  },
-  "uid" : {
-    "type" : "string"
-  },
-  "gid" : {
-    "type" : "string"
-  },
-  "restart_delay": {
-    "type" : "number"
-  },
-  "source_map_support" : {
-    "type": "boolean"
-  },
-  "wait_ready" : {
-    "type": "boolean"
-  },
-  "disable_source_map_support" : {
-    "type": "boolean"
-  },
-  "instances": {
-    "type": "number"
-  },
-  "kill_timeout": {
-    "type": "number"
-  },
-  "listen_timeout": {
-    "type": "number"
-  },
-  "port": {
-    "type": "number"
-  },
-  "log_file": {
-    "type": [
-      "boolean",
-      "string"
-    ],
-    "alias": "log"
-  },
-  "error_file": {
-    "type": "string",
-    "alias": ["error", "err", "err_file", "err_log"]
-  },
-  "log_type": {
-    "type": "string"
-  },
-  "out_file": {
-    "type": "string",
-    "alias": ["output", "out", "out_log"]
+    "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)",
+    "description": "Restart the app if an amount of memory is exceeded (format: 'K|G|' for KB, 'M' for MB, 'G' for GB, default to byte)"
   },
   "pid_file": {
     "type": "string",
-    "alias": "pid"
+    "alias": "pid",
+    "default": "~/.pm2/pids/app_name-id.pid",
+    "description": "File path where the pid of the started process is written by pm2"
+  },
+  "restart_delay": {
+    "type" : "number",
+    "default": 0,
+    "description": "Time in ms to wait before restarting a crashing app"
+  },
+  "source_map_support": {
+    "type": "boolean",
+    "default": true,
+    "description": "Enable or disable the source map support"
+  },
+  "disable_source_map_support": {
+    "type": "boolean",
+    "default": false,
+    "description": "Enable or disable the source map support"
+  },
+  "wait_ready": {
+    "type": "boolean",
+    "default": false,
+    "description": "Make the process wait for a process.send('ready')"
+  },
+  "instances": {
+    "type": "number",
+    "default": 1,
+    "description": "Number of instances to be started in cluster mode"
+  },
+  "kill_timeout": {
+    "type": "number",
+    "default": 1600,
+    "description": "Time in ms before sending the final SIGKILL signal after SIGINT"
+  },
+  "listen_timeout": {
+    "type": "number",
+    "description": "Time in ms before forcing a reload if app is still not listening/has still note sent ready"
   },
   "cron_restart": {
     "type": "string",
-    "alias": "cron"
-  },
-  "cwd": {
-    "type": "string"
+    "alias": "cron",
+    "description": "A cron pattern to restart your app"
   },
   "merge_logs": {
     "type": "boolean",
-    "alias" : "combine_logs"
+    "alias" : "combine_logs",
+    "default": false,
+    "description": "In cluster mode, merge each type of logs into a single file (instead of having one for each cluster)"
   },
-  "vizion" : {
+  "vizion": {
     "type": "boolean",
-    "default" : true
+    "default" : true,
+    "description": "Enable or disable the versioning metadatas (vizion library)"
   },
-  "pmx" : {
+  "autorestart": {
     "type": "boolean",
-    "default" : true
-  },
-  "automation" : {
-    "type": "boolean",
-    "default" : true
-  },
-  "autorestart" : {
-    "type": "boolean",
-    "default" : true
-  },
-  "treekill" : {
-    "type": "boolean",
-    "default" : true
+    "default" : true,
+    "description": "Enable or disable auto restart after process failure"
   },
   "watch": {
     "type": [
       "boolean",
       "array",
       "string"
-    ]
+    ],
+    "default": false,
+    "description": "Enable or disable the watch mode"
   },
   "ignore_watch": {
     "type": [
       "array",
       "string"
-    ]
+    ],
+    "description": "List of paths to ignore (regex)"
   },
   "watch_options": {
-    "type": "object"
-  },
-  "env": {
-    "type": [
-      "object",
-      "string"
-    ]
-  },
-  "^env_\\S*$": {
-    "type": [
-      "object",
-      "string"
-    ]
-  },
-  "disable_logs" : {
-    "type": "boolean"
-  },
-  "log_date_format": {
-    "type": "string"
+    "type": "object",
+    "description": "Object that will be used as an options with chokidar (refer to chokidar documentation)"
   },
   "min_uptime": {
     "type": [
@@ -154,43 +183,51 @@
     "regex": "^\\d+(h|m|s)?$",
     "desc": "it should be a NUMBER - milliseconds, \"[NUMBER]h\"(hours), \"[NUMBER]m\"(minutes) or \"[NUMBER]s\"(seconds)",
     "min": 100,
-    "ext_type": "stime"
+    "ext_type": "stime",
+    "default": 1000,
+    "description": "Minimum uptime of the app to be considered started (format is [0-9]+(h|m|s)?, for hours, minutes, seconds, default to ms)"
   },
   "max_restarts": {
     "type": "number",
-    "min": 0
+    "min": 0,
+    "default": 16,
+    "description": "Number of times a script is restarted when it exits in less than min_uptime"
   },
   "exec_mode": {
     "type": "string",
     "regex": "^(cluster|fork)(_mode)?$",
     "alias": "executeCommand",
-    "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only"
-  },
-  "exec_interpreter": {
-    "type": "string",
-    "alias": "interpreter"
-  },
-  "write": {
-    "type": "boolean"
+    "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only",
+    "default": "fork",
+    "description": "Set the execution mode, possible values: fork|cluster"
   },
   "force": {
-    "type": "boolean"
+    "type": "boolean",
+    "default": false,
+    "description": "Start a script even if it is already running (only the script path is considered)"
   },
   "append_env_to_name": {
-      "type": "boolean"
+    "type": "boolean",
+    "default": false,
+    "description": "Append the environment name to the app name"
   },
   "post_update": {
-    "type": "array"
-  },
-  "disable_trace": {
-    "type": [
-      "boolean"
-    ]
+    "type": "array",
+    "description": "List of commands executed after a pull/upgrade operation performed from Keymetrics dashboard"
   },
   "trace": {
     "type": [
       "boolean"
-    ]
+    ],
+    "default": false,
+    "description": "Enable or disable the transaction tracing"
+  },
+  "disable_trace": {
+    "type": [
+      "boolean"
+    ],
+    "default": true,
+    "description": "Enable or disable the transaction tracing"
   },
   "v8": {
     "type": [
@@ -208,12 +245,43 @@
     ]
   },
   "increment_var": {
-    "type": "string"
+    "type": "string",
+    "description": "Specify the name of an environnement variable to inject which increments for each cluster"
   },
   "instance_var": {
     "type": "string",
-    "default" : "NODE_APP_INSTANCE"
-},
+    "default" : "NODE_APP_INSTANCE",
+    "description": "Rename the NODE_APP_INSTANCE environment variable"
+  },
+  "pmx": {
+    "type": "boolean",
+    "default" : true,
+    "description": "Enable or disable pmx wrapping"
+  },
+  "automation": {
+    "type": "boolean",
+    "default" : true,
+    "description": "Enable or disable pmx wrapping"
+  },
+  "treekill": {
+    "type": "boolean",
+    "default" : true,
+    "description": "Only kill the main process, not detached children"  
+  },
+  "port": {
+    "type": "number",
+    "description": "Shortcut to inject a PORT environment variable"
+  },
+  "uid": {
+    "type" : "string",
+    "default": "Current user uid",
+    "description": "Set user id"  
+  },
+  "gid": {
+    "type" : "string",
+    "default": "Current user gid",
+    "description": "Set group id"  
+  },
   "windowsHide": {
     "type": "boolean",
     "default" : true
