@@ -293,7 +293,6 @@ $ pm2 reset [app-name]          # Reset all counters
 $ pm2 stop all                  # Stop all apps
 $ pm2 stop 0                    # Stop process with id 0
 $ pm2 restart all               # Restart all apps
-$ pm2 gracefulReload all        # Gracefully reload all apps in cluster mode
 $ pm2 delete all                # Kill and delete all apps
 $ pm2 delete 0                  # Delete app with id 0
 
