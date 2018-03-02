@@ -2,7 +2,7 @@
 /*
  * Example of graceful exit
  *
- * $ pm2 gracefulReload all
+ * $ pm2 reload all
  */
 
 process.on('message', function(msg) {

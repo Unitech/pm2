@@ -155,7 +155,7 @@ function checkCompletion(){
       return data.short;
     }), data);
     // array containing commands after which process name should be listed
-    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
+    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
 
     if (cmdProcess.indexOf(data.prev) > -1) {
       pm2.list(function(err, list){
@@ -388,15 +388,6 @@ commander.command('reload <name|all>')
   .description('reload processes (note that its for app using HTTP/HTTPS)')
   .action(function(pm2_id) {
     pm2.reload(pm2_id, commander);
-  });
-
-//
-// Reload process(es)
-//
-commander.command('gracefulReload <name|all>')
-  .description('gracefully reload a process. Send a "shutdown" message to close all connections.')
-  .action(function(pm2_id) {
-    pm2.gracefulReload(pm2_id, commander);
   });
 
 commander.command('id <name>')
