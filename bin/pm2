@@ -613,6 +613,15 @@ commander.command('dump')
   }));
 
 //
+// Delete dump file
+//
+commander.command('cleardump')
+  .description('Create empty dump file')
+  .action(failOnUnknown(function() {
+    pm2.clearDump();
+  }));
+
+//
 // Save processes to file
 //
 commander.command('send <pm_id> <line>')
