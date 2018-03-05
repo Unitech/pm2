@@ -604,6 +604,15 @@ commander.command('dump')
   }));
 
 //
+// Delete dump file
+//
+commander.command('cleardump')
+  .description('Create empty dump file')
+  .action(failOnUnknown(function() {
+    pm2.clearDump();
+  }));
+
+//
 // Save processes to file
 //
 commander.command('send <pm_id> <line>')
@@ -880,15 +889,6 @@ commander.command('backward <name>')
   .description('downgrades repository to the previous commit for a given app')
   .action(function(pm2_name) {
     pm2.backward(pm2_name);
-  });
-
-//
-// Force PM2 to trigger garbage collection
-//
-commander.command('gc')
-  .description('force PM2 to trigger garbage collection')
-  .action(function() {
-    pm2.forceGc();
   });
 
 //
