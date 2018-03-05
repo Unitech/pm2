@@ -883,15 +883,6 @@ commander.command('backward <name>')
   });
 
 //
-// Force PM2 to trigger garbage collection
-//
-commander.command('gc')
-  .description('force PM2 to trigger garbage collection')
-  .action(function() {
-    pm2.forceGc();
-  });
-
-//
 // Perform a deep update of PM2
 //
 commander.command('deepUpdate')
