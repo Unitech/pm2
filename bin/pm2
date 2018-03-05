@@ -33,24 +33,29 @@ if (process.argv.indexOf('-v') > -1) {
 var pm2 = new PM2();
 
 commander.version(pkg.version)
-  .option('-v --version', 'get version')
+  .option('-v --version', 'print pm2 version')
   .option('-s --silent', 'hide all messages', false)
+  .option('-n --name <name>', 'set a name for the process in the process list')
   .option('-m --mini-list', 'display a compacted list without formatting')
+  .option('--interpreter <interpreter>', 'set a specific interpreter to use for executing app, default: node')
+  .option('--interpreter-args <arguments>', 'set arguments to pass to the interpreter (alias of --node-args)')
+  .option('--node-args <node_args>', 'space delimited arguments to pass to node')
+  .option('-o --output <path>', 'specify log file for stdout')
+  .option('-e --error <path>', 'specify log file for stderr')
+  .option('-l --log [path]', 'specify log file which gathers both stdout and stderr')
+  .option('--log-type <type>', 'specify log output style (raw by default, json optional)')
+  .option('--log-date-format <date format>', 'add custom prefix timestamp to logs')
+  .option('--disable-logs', 'disable all logs storage')
+  .option('--env <environment_name>', 'specify which set of environment variables from ecosystem file must be injected')
+  .option('-a --update-env', 'force an update of the environment with restart/reload (-a <=> apply)')
   .option('-f --force', 'force actions')
-  .option('--disable-logs', 'do not write logs')
-  .option('-n --name <name>', 'set a <name> for script')
   .option('-i --instances <number>', 'launch [number] instances (for networked app)(load balanced)')
   .option('--parallel <number>', 'number of parallel actions (for restart/reload)')
-  .option('-l --log [path]', 'specify entire log file (error and out are both included)')
-  .option('-o --output <path>', 'specify out log file')
-  .option('-e --error <path>', 'specify error log file')
   .option('-p --pid <pid>', 'specify pid file')
   .option('-k --kill-timeout <delay>', 'delay before sending final SIGKILL signal to process')
   .option('--listen-timeout <delay>', 'listen timeout on application reload')
-  .option('--max-memory-restart <memory>', 'specify max memory amount used to autorestart (in octet or use syntax like 100M)')
+  .option('--max-memory-restart <memory>', 'Restart the app if an amount of memory is exceeded (in bytes)')
   .option('--restart-delay <delay>', 'specify a delay between restarts (in milliseconds)')
-  .option('--env <environment_name>', 'specify environment to get specific env variables (for JSON declaration)')
-  .option('--log-type <type>', 'specify log output style (raw by default, json optional)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('--max-restarts [count]', 'only restart the script COUNT times')
   .option('-u --user <username>', 'define user when generating startup script')
@@ -62,19 +67,14 @@ commander.version(pkg.version)
   .option('--service-name <name>', 'define service name when generating startup script')
   .option('-c --cron <cron_pattern>', 'restart a running process based on a cron pattern')
   .option('-w --write', 'write configuration in local folder')
-  .option('--interpreter <interpreter>', 'the interpreter pm2 should use for executing app (bash, python...)')
-  .option('--interpreter-args <arguments>', 'interpret options (alias of --node-args)')
-  .option('--log-date-format <date format>', 'add custom prefix timestamp to logs')
   .option('--no-daemon', 'run pm2 daemon in the foreground if it doesn\'t exist already')
-  .option('-a --update-env', 'update environment on restart/reload (-a <=> apply)')
   .option('--source-map-support', 'force source map support')
   .option('--only <application-name>', 'with json declaration, allow to only act on one application')
   .option('--disable-source-map-support', 'force source map support')
   .option('--wait-ready', 'ask pm2 to wait for ready event from your app')
   .option('--merge-logs', 'merge logs from different instances but keep error and out separated')
   .option('--watch [paths]', 'watch application folder for changes', function(v, m) { m.push(v); return m;}, [])
-  .option('--ignore-watch <folders|files>', 'folder/files to be ignored watching, should be a specific name or regex - e.g. --ignore-watch="test node_modules \"some scripts\""')
-  .option('--node-args <node_args>', 'space delimited arguments to pass to node in cluster mode - e.g. --node-args="--debug=7001 --trace-deprecation"')
+  .option('--ignore-watch <folders|files>', 'List of paths to ignore (name or regex)')
   .option('--no-color', 'skip colors')
   .option('--no-vizion', 'start an app without vizion feature (versioning control)')
   .option('--no-autorestart', 'start an app without automatic restart')
@@ -85,43 +85,46 @@ commander.version(pkg.version)
   .option('--disable-trace', 'disable transaction tracing with km')
   .option('--attach', 'attach logging after your start/restart/stop/reload')
   .option('--sort <field_name:sort>', 'sort process according to field\'s name')
-  .option('--v8', 'enable v8 data collecting')
-  .option('--event-loop-inspector', 'enable event-loop-inspector dump in pmx')
-  .option('--deep-monitoring', 'enable all monitoring tools (equivalent to --v8 --event-loop-inspector --trace)')
   .usage('[cmd] app');
 
-commander.on('--help', function() {
-  console.log('  Basic Examples:');
-  console.log('');
-  console.log('    Start an app using all CPUs available + set a name :');
-  console.log('    $ pm2 start app.js -i 0 --name "api"');
-  console.log('');
-  console.log('    Restart the previous app launched, by name :');
-  console.log('    $ pm2 restart api');
-  console.log('');
-  console.log('    Stop the app :');
-  console.log('    $ pm2 stop api');
-  console.log('');
-  console.log('    Restart the app that is stopped :');
-  console.log('    $ pm2 restart api');
-  console.log('');
-  console.log('    Remove the app from the process list :');
-  console.log('    $ pm2 delete api');
-  console.log('');
-  console.log('    Kill daemon pm2 :');
-  console.log('    $ pm2 kill');
-  console.log('');
-  console.log('    Update pm2 :');
-  console.log('    $ npm install pm2@latest -g ; pm2 update');
-  console.log('');
-  console.log('    More examples in https://github.com/Unitech/pm2#usagefeatures');
-  console.log('');
-  console.log('  Deployment help:');
-  console.log('');
-  console.log('    $ pm2 deploy help');
-  console.log('');
-  console.log('');
-});
+  function displayUsage() {
+    console.log('Usage: pm2 <command>')
+    console.log('       pm2 [option(s)]');
+    console.log('');
+    console.log('pm2 -h, --help             all commands and options available');
+    console.log('pm2 quickStart             display pm2 usage examples');
+    console.log('pm2 <command> -h           help on <command>');
+    console.log('');
+    console.log('Access pm2 files in ~/.pm2');
+  }
+
+  function displayQuickStart() {
+    console.log('Install pm2 auto completion:')
+    console.log('$> pm2 completion install')
+    console.log('');
+    console.log('Start and add a process to the pm2 process list:')
+    console.log('$> pm2 start app.js --name app');
+    console.log('');
+    console.log('Stop and delete a process from the pm2 process list:');
+    console.log('$> pm2 delete app');
+    console.log('');
+    console.log('Show the process list:');
+    console.log('$> pm2 ls');
+    console.log('');
+    console.log('Stop, start and restart a process from the process list:');
+    console.log('$> pm2 stop app');
+    console.log('$> pm2 start app');
+    console.log('$> pm2 restart app');
+    console.log('');
+    console.log('Clusterize an app to all CPU cores available:');
+    console.log('$> pm2 start -i max');
+    console.log('');
+    console.log('Update pm2 :');
+    console.log('$> npm install pm2 -g && pm2 update');
+    console.log('');
+    console.log('Check the full documentation on https://docs.pm2.io');
+    console.log('');
+  }
 
 if (process.argv.indexOf('-s') > -1) {
   for(var key in console){
@@ -312,12 +315,6 @@ commander.command('startOrReload <json>')
     pm2._startJson(file, commander, 'reloadProcessId');
   });
 
-commander.command('pid [app_name]')
-  .description('return pid of [app_name] or all')
-  .action(function(app) {
-    pm2.getPID(app);
-  });
-
 commander.command('startOrGracefulReload <json>')
   .description('start or gracefully reload JSON file')
   .action(function(file) {
@@ -464,11 +461,11 @@ commander.command('update')
 /**
  * Module specifics
  */
-commander.command('install [module|git:// url|json]')
+commander.command('install <module|git:// url>')
   .alias('module:install')
   .option('--v1', 'install module in v1 manner (do not use it)')
   .option('--safe [time]', 'keep module backup, if new module fail = restore with previous')
-  .description('install or update a module (or a set of modules) and run it forever')
+  .description('install or update a module and run it forever')
   .action(function(plugin_name, opts) {
     if (opts.v1)
       commander.v1 = true;
@@ -919,13 +916,21 @@ commander.command('serve [path] [port]')
     pm2.serve(path, port, commander);
   });
 
+commander.command('quickStart')
+  .description('display pm2 usage examples')
+  .action(() => {
+    console.log(cst.PREFIX_MSG + '\nQuick Start:\n');
+    displayQuickStart();
+    process.exit(cst.SUCCESS_EXIT);
+  })
+
 //
 // Catch all
 //
 commander.command('*')
   .action(function() {
-    console.log(cst.PREFIX_MSG + '\nCommand not found');
-    commander.outputHelp();
+    console.log(cst.PREFIX_MSG + '\nCommand not found\n');
+    displayUsage();
     // Check if it does not forget to close fds from RPC
     process.exit(cst.ERROR_EXIT);
   });
@@ -935,7 +940,7 @@ commander.command('*')
 //
 if (process.argv.length == 2) {
   commander.parse(process.argv);
-  commander.outputHelp();
+  displayUsage();
   // Check if it does not forget to close fds from RPC
   process.exit(cst.ERROR_EXIT);
 }
