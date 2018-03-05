@@ -18,7 +18,12 @@ describe('PM2 programmatic calls', function() {
   });
 
   after(function(done) {
-    pm2.kill(done);
+    pm2.delete('all', function(err, ret) {
+      // clean dump file
+      pm2.clearDump(function(err) {
+        pm2.kill(done);
+      });
+    });
   });
 
   before(function(done) {
