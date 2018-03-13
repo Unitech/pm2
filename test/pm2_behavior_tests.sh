@@ -81,12 +81,6 @@ bash ./test/bash/right-exit-code.sh
 spec "Verification exit code"
 bash ./test/bash/log-reload.sh
 spec "Log reload"
-bash ./test/bash/gracefulReload.sh
-spec "gracefulReload system 1"
-bash ./test/bash/gracefulReload2.sh
-spec "gracefulReload system 2"
-bash ./test/bash/gracefulReload3.sh
-spec "gracefulReload system 3"
 bash ./test/bash/misc.sh
 spec "MISC features"
 bash ./test/bash/fork.sh
