@@ -90,7 +90,7 @@ commander.version(pkg.version)
   function displayUsage() {
     console.log('usage: pm2 [options] <command>')
     console.log('');
-    console.log('pm2 -h, --help             all commands and options available');
+    console.log('pm2 -h, --help             all available commands and options');
     console.log('pm2 examples               display pm2 usage examples');
     console.log('pm2 <command> -h           help on a specific command');
     console.log('');
