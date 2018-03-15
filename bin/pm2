@@ -155,7 +155,7 @@ function checkCompletion(){
       return data.short;
     }), data);
     // array containing commands after which process name should be listed
-    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'gracefulReload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
+    var cmdProcess = ['stop', 'restart', 'scale', 'reload', 'delete', 'reset', 'pull', 'forward', 'backward', 'logs', 'describe', 'desc', 'show'];
 
     if (cmdProcess.indexOf(data.prev) > -1) {
       pm2.list(function(err, list){
@@ -390,19 +390,17 @@ commander.command('reload <name|all>')
     pm2.reload(pm2_id, commander);
   });
 
-//
-// Reload process(es)
-//
-commander.command('gracefulReload <name|all>')
-  .description('gracefully reload a process. Send a "shutdown" message to close all connections.')
-  .action(function(pm2_id) {
-    pm2.gracefulReload(pm2_id, commander);
-  });
-
 commander.command('id <name>')
   .description('get process id by name')
   .action(function(name) {
     pm2.getProcessIdByName(name);
+  });
+
+// Inspect a process
+commander.command('inspect <name>')
+  .description('inspect a process')
+  .action(function(cmd) {
+    pm2.inspect(cmd, commander);
   });
 
 //
@@ -610,6 +608,15 @@ commander.command('dump')
   .description('dump all processes for resurrecting them later')
   .action(failOnUnknown(function() {
     pm2.dump();
+  }));
+
+//
+// Delete dump file
+//
+commander.command('cleardump')
+  .description('Create empty dump file')
+  .action(failOnUnknown(function() {
+    pm2.clearDump();
   }));
 
 //
@@ -889,15 +896,6 @@ commander.command('backward <name>')
   .description('downgrades repository to the previous commit for a given app')
   .action(function(pm2_name) {
     pm2.backward(pm2_name);
-  });
-
-//
-// Force PM2 to trigger garbage collection
-//
-commander.command('gc')
-  .description('force PM2 to trigger garbage collection')
-  .action(function() {
-    pm2.forceGc();
   });
 
 //

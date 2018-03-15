@@ -246,21 +246,6 @@
       "boolean"
     ]
   },
-  "v8": {
-    "type": [
-      "boolean"
-    ]
-  },
-  "event_loop_inspector": {
-    "type": [
-      "boolean"
-    ]
-  },
-  "deep_monitoring": {
-    "type": [
-      "boolean"
-    ]
-  },
   "increment_var": {
     "type": "string",
     "docDescription": "Specify the name of an environment variable to inject which increments for each cluster"

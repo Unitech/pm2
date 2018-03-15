@@ -50,8 +50,6 @@ $pm2 restart delayed_exit.js
 should 'should restart processes' 'restart_time: 1' 2
 $pm2 reload delayed_exit.js
 should 'should restart processes' 'restart_time: 2' 2
-$pm2 gracefulReload delayed_exit.js
-should 'should restart processes' 'restart_time: 3' 2
 $pm2 kill
 
 $pm2 start child.js -i 4

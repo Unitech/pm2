@@ -162,21 +162,6 @@ describe('Signal kill (+delayed)', function() {
       });
 
     });
-
-    it('should graceful reload script', function(done) {
-      setTimeout(function() {
-        pm2.list(function(err, list) {
-          list[0].pm2_env.status.should.eql('online');
-          list[0].pm2_env.restart_time.should.eql(2);
-          done();
-        });
-      }, 1500);
-
-      pm2.gracefulReload('delayed-sigint', function(err, app) {
-        //done(err);
-      });
-
-    });
   });
 
   describe('with 4000ms via kill_timeout (json/cli option)', function() {
