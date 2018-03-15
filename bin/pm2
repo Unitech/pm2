@@ -88,41 +88,45 @@ commander.version(pkg.version)
   .usage('[cmd] app');
 
   function displayUsage() {
-    console.log('Usage: pm2 <command>')
-    console.log('       pm2 [option(s)]');
+    console.log('usage: pm2 [options] <command>')
     console.log('');
     console.log('pm2 -h, --help             all commands and options available');
-    console.log('pm2 quickStart             display pm2 usage examples');
-    console.log('pm2 <command> -h           help on <command>');
+    console.log('pm2 examples               display pm2 usage examples');
+    console.log('pm2 <command> -h           help on a specific command');
     console.log('');
     console.log('Access pm2 files in ~/.pm2');
   }
 
-  function displayQuickStart() {
-    console.log('Install pm2 auto completion:')
-    console.log('$> pm2 completion install')
+  function displayExamples() {
+    console.log('- Start and add a process to the pm2 process list:')
     console.log('');
-    console.log('Start and add a process to the pm2 process list:')
-    console.log('$> pm2 start app.js --name app');
+    console.log(chalk.cyan('  $ pm2 start app.js --name app'));
     console.log('');
-    console.log('Stop and delete a process from the pm2 process list:');
-    console.log('$> pm2 delete app');
+    console.log('- Show the process list:');
     console.log('');
-    console.log('Show the process list:');
-    console.log('$> pm2 ls');
+    console.log(chalk.cyan('  $ pm2 ls'));
     console.log('');
-    console.log('Stop, start and restart a process from the process list:');
-    console.log('$> pm2 stop app');
-    console.log('$> pm2 start app');
-    console.log('$> pm2 restart app');
+    console.log('- Stop and delete a process from the pm2 process list:');
     console.log('');
-    console.log('Clusterize an app to all CPU cores available:');
-    console.log('$> pm2 start -i max');
+    console.log(chalk.cyan('  $ pm2 delete app'));
     console.log('');
-    console.log('Update pm2 :');
-    console.log('$> npm install pm2 -g && pm2 update');
+    console.log('- Stop, start and restart a process from the process list:');
     console.log('');
-    console.log('Check the full documentation on https://docs.pm2.io');
+    console.log(chalk.cyan('  $ pm2 stop app'));
+    console.log(chalk.cyan('  $ pm2 start app'));
+    console.log(chalk.cyan('  $ pm2 restart app'));
+    console.log('');
+    console.log('- Clusterize an app to all CPU cores available:');
+    console.log(chalk.cyan('  $ pm2 start -i max'));
+    console.log('');
+    console.log('- Update pm2 :');
+    console.log(chalk.cyan('  $ npm install pm2 -g && pm2 update'));
+    console.log('');
+    console.log('- Install pm2 auto completion:')
+    console.log('');
+    console.log(chalk.cyan('  $ pm2 completion install'))
+    console.log('');
+    console.log('Check the full documentation on https://pm2.io/doc');
     console.log('');
   }
 
@@ -256,7 +260,7 @@ function patchCommanderArg(cmd) {
 //
 // Start command
 //
-commander.command('start <file|json|stdin|app_name|pm_id...>')
+commander.command('start <name|file|ecosystem|id...>')
   .option('--watch', 'Watch folder for changes')
   .option('--fresh', 'Rebuild Dockerfile')
   .option('--daemon', 'Run container in Daemon mode (debug purposes)')
@@ -326,7 +330,7 @@ commander.command('startOrGracefulReload <json>')
 //
 commander.command('stop <id|name|all|json|stdin...>')
   .option('--watch', 'Stop watching folder for changes')
-  .description('stop a process (to start it again, do pm2 restart <app>)')
+  .description('stop a process')
   .action(function(param) {
     async.forEachLimit(param, 1, function(script, next) {
       pm2.stop(script, next);
@@ -550,19 +554,13 @@ commander.command('report')
 commander.command('link [secret] [public] [name]')
   .alias('interact')
   .option('--info-node [url]', 'set url info node')
-  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .description('link with the pm2 monitoring dashboard')
   .action(pm2._pre_interact.bind(pm2));
 
 commander.command('unlink')
-  .description('linking action to keymetrics.io - command can be stop|info|delete|restart')
+  .description('unlink with the pm2 monitoring dashboard')
   .action(function() {
     pm2.unlink();
-  });
-
-commander.command('unmonitor [name]')
-  .description('unmonitor target process')
-  .action(function(name) {
-    pm2.monitorState('unmonitor', name);
   });
 
 commander.command('monitor [name]')
@@ -571,20 +569,26 @@ commander.command('monitor [name]')
     pm2.monitorState('monitor', name);
   });
 
+commander.command('unmonitor [name]')
+  .description('unmonitor target process')
+  .action(function(name) {
+    pm2.monitorState('unmonitor', name);
+  });
+
 commander.command('open')
-  .description('open dashboard in browser')
+  .description('open the pm2 monitoring dashboard')
   .action(function(name) {
     pm2.openDashboard();
   });
 
 commander.command('register')
-  .description('create an account on keymetrics')
+  .description('register on pm2 monitoring')
   .action(function(name) {
     pm2.registerToKM();
   });
 
 commander.command('login')
-  .description('login to keymetrics and link current PM2')
+  .description('use login to link with the pm2 monitoring dashboard')
   .action(function(name) {
     pm2.loginToKM();
   });
@@ -642,7 +646,7 @@ commander.command('resurrect')
 // Set pm2 to startup
 //
 commander.command('unstartup [platform]')
-  .description('disable and clear auto startup - [platform]=systemd,upstart,launchd,rcd')
+  .description('disable the pm2 startup hook')
   .action(function(platform) {
     pm2.uninstallStartup(platform, commander);
   });
@@ -651,7 +655,7 @@ commander.command('unstartup [platform]')
 // Set pm2 to startup
 //
 commander.command('startup [platform]')
-  .description('setup script for pm2 at boot - [platform]=systemd,upstart,launchd,rcd')
+  .description('enable the pm2 startup hook')
   .action(function(platform) {
     pm2.startup(platform, commander);
   });
@@ -916,11 +920,11 @@ commander.command('serve [path] [port]')
     pm2.serve(path, port, commander);
   });
 
-commander.command('quickStart')
+commander.command('examples')
   .description('display pm2 usage examples')
   .action(() => {
-    console.log(cst.PREFIX_MSG + '\nQuick Start:\n');
-    displayQuickStart();
+    console.log(cst.PREFIX_MSG + chalk.grey('pm2 usage examples:\n'));
+    displayExamples();
     process.exit(cst.SUCCESS_EXIT);
   })
 
@@ -929,7 +933,7 @@ commander.command('quickStart')
 //
 commander.command('*')
   .action(function() {
-    console.log(cst.PREFIX_MSG + '\nCommand not found\n');
+    console.log(cst.PREFIX_MSG + 'Command not found\n');
     displayUsage();
     // Check if it does not forget to close fds from RPC
     process.exit(cst.ERROR_EXIT);
