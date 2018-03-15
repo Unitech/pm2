@@ -217,5 +217,9 @@
   "windowsHide": {
     "type": "boolean",
     "default" : true
+  },
+  "kill_retry_time": {
+    "type": "number",
+    "default" : 100
   }
 }
