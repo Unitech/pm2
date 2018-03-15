@@ -120,9 +120,11 @@ commander.version(pkg.version)
     console.log(chalk.cyan('  $ pm2 restart app'));
     console.log('');
     console.log('- Clusterize an app to all CPU cores available:');
+    console.log('');
     console.log(chalk.cyan('  $ pm2 start -i max'));
     console.log('');
     console.log('- Update pm2 :');
+    console.log('');
     console.log(chalk.cyan('  $ npm install pm2 -g && pm2 update'));
     console.log('');
     console.log('- Install pm2 auto completion:')
