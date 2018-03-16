@@ -13,7 +13,7 @@
    <img src="https://badge.fury.io/js/pm2.svg" alt="npm version" height="18">
 </a>
 
-<a href="https://www.npmjs.com/package/pm2" title="PM2 on NPM">
+<a href="https://npmcharts.com/compare/pm2?minimal=true" title="PM2 on NPM">
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/pm2.svg?style=flat-square"/>
 </a>
 
@@ -69,6 +69,21 @@ $ pm2 start app.js
 Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
+
+### Container Support
+
+With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
+We also offer an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
+
+Using it is seamless:
+
+```
+FROM keymetrics/pm2:latest-alpine
+[...]
+CMD [ "pm2-runtime", "npm", "--", "start" ]
+```
+
+[Read More about the dedicated integration](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
 ### Managing a Process
 
@@ -129,21 +144,6 @@ Seamlessly supported by all major Node.js frameworks and any Node.js application
 ![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
 
 [More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
-
-### Container Support
-
-With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
-We also offer an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
-
-Using it is seamless:
-
-```
-FROM keymetrics/pm2:latest-alpine
-[...]
-CMD [ "pm2-runtime", "npm", "--", "start" ]
-```
-
-[Read More about the dedicated integration](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
 ### Terminal Based Monitoring
 
@@ -293,7 +293,6 @@ $ pm2 reset [app-name]          # Reset all counters
 $ pm2 stop all                  # Stop all apps
 $ pm2 stop 0                    # Stop process with id 0
 $ pm2 restart all               # Restart all apps
-$ pm2 gracefulReload all        # Gracefully reload all apps in cluster mode
 $ pm2 delete all                # Kill and delete all apps
 $ pm2 delete 0                  # Delete app with id 0
 
