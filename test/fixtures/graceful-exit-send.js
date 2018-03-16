@@ -2,7 +2,7 @@
 /*
  * Example of graceful exit that does not listen but sends 'online'
  *
- * $ pm2 gracefulReload all
+ * $ pm2 reload all
  */
 
 process.on('message', function(msg) {
