@@ -32,7 +32,7 @@
 - [Without Keymetrics](#without-keymetrics)
 - [With Keymetrics](#with-keymetrics)
 
-### Deployment - ecosystem.json
+### Deployment - ecosystem.config.js
 
 - [Getting started with deployment](#deployment)
 - [Deployment options](#deployment-help)
