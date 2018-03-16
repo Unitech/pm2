@@ -253,7 +253,7 @@ function patchCommanderArg(cmd) {
 //
 // Start command
 //
-commander.command('start <file|json|stdin|app_name|pm_id...>')
+commander.command('start [file|json|stdin|app_name|pm_id...]')
   .option('--watch', 'Watch folder for changes')
   .option('--fresh', 'Rebuild Dockerfile')
   .option('--daemon', 'Run container in Daemon mode (debug purposes)')
@@ -280,6 +280,9 @@ commander.command('start <file|json|stdin|app_name|pm_id...>')
     else {
       // Commander.js patch
       cmd = patchCommanderArg(cmd);
+      if (cmd.length === 0) {
+        cmd = [cst.APP_CONF_DEFAULT_FILE];
+      }
       async.forEachLimit(cmd, 1, function(script, next) {
         pm2.start(script, commander, next);
       }, function(err) {
