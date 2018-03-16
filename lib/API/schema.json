@@ -33,7 +33,7 @@
       "array",
       "string"
     ],
-    "alias": ["interpreter_args"],
+    "alias": ["interpreterArgs", "interpreter_args"],
     "docDescription": "Arguments to pass to the interpreter"
   },
   "out_file": {
