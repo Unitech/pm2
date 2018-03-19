@@ -95,37 +95,11 @@ cd ../interface
 
 echo $PM2_HOME
 
-mocha --opts ./mocha.opts  ./exception.e2e.mocha.js
-spec "E2E exception system checking"
-mocha --opts ./mocha.opts  ./interactor.connect.mocha.js
-spec "Interactor test #1 with password setting"
-mocha --opts ./mocha.opts  ./interactor.daemonizer.mocha.js
-spec "Remote interactor keys save verification"
-mocha --opts ./mocha.opts  ./scoped_pm2_actions.mocha.js
-spec "Scoped PM2 Remote interactions test"
-mocha --opts ./mocha.opts  ./remote.mocha.js
-spec "Remote interactions test"
-mocha --opts ./mocha.opts  ./password.mocha.js
-spec "Password library checking"
-mocha --opts ./mocha.opts  ./custom-actions.mocha.js
-spec "Custom actions test"
 mocha --opts ./mocha.opts  ./bus.spec.mocha.js
 spec "Protocol communication test"
 mocha --opts ./mocha.opts  ./bus.fork.spec.mocha.js
 spec "Protocol communication test"
-mocha --opts ./mocha.opts  ./request.mocha.js
-spec "Protocol communication test"
-mocha --opts ./mocha.opts  ./aggregator.mocha.js
-spec "Transaction trace aggregator test"
-mocha --opts ./mocha.opts  ./stacktrace.mocha.js
-spec "Stacktrace Utility"
-mocha --opts ./mocha.opts  ./cache.mocha.js
-spec "Cache Utility"
-mocha --opts ./mocha.opts  ./filter.mocha.js
-spec "Filter Utility"
 mocha --opts ./mocha.opts  ./utility.mocha.js
 spec "PM2 Utility"
 mocha --opts ./mocha.opts  ./pm2.link.check.mocha.js
 spec "Transaction option enablement"
-mocha --opts ./mocha.opts  ./monitor.mocha.js
-spec "Monitor / Unmonitor commands"
