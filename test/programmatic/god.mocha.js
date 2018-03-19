@@ -256,4 +256,52 @@ describe('God', function() {
     });
   });
 
+  it('should get monitor data', function(done) {
+    var f = require('child_process').fork('../fixtures/echo.js')
+
+    var processes = [
+      // stopped status
+      {
+        pm2_env: {status: cst.STOPPED_STATUS}
+      },
+      // axm pid
+      {
+        pm2_env: {
+          status: cst.ONLINE_STATUS, axm_options: {pid: process.pid}
+        }
+      },
+      // axm pid is NaN
+      {
+        pm2_env: {
+          status: cst.ONLINE_STATUS, axm_options: {pid: 'notanumber'}
+        }
+      },
+      {
+        pm2_env: {
+          status: cst.ONLINE_STATUS
+        },
+        pid: f.pid
+      }
+    ]
+
+    // mock
+    var g = {
+      getFormatedProcesses: function() {
+        return processes
+      }
+    }
+
+    require('../../lib/God/ActionMethods.js')(g)
+
+    g.getMonitorData({}, function(err, procs) {
+      should(err).be.null();
+      procs.length.should.be.equal(processes.length);
+      procs[0].monit.should.be.deepEqual({memory: 0, cpu: 0});
+      procs[1].monit.memory.should.be.greaterThan(0);
+      procs[2].monit.should.be.deepEqual({memory: 0, cpu: 0});
+      procs[3].monit.memory.should.be.greaterThan(0);
+      f.kill()
+      done()
+    })
+  });
 });
