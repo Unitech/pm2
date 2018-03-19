@@ -58,14 +58,10 @@ $pm2 reload app-config-update/echo.js --node-args="--harmony"
 $pm2 prettylist | grep "node_args: \[ '--harmony' \]"
 spec "Should application have one node argument"
 
-$pm2 gracefulReload app-config-update/echo.js --node-args="--harmony"
-$pm2 prettylist | grep "node_args: \[ '--harmony' \]"
-spec "Should application have two node arguments"
-
 $pm2 prettylist | grep "node_args"
 spec "Should have found parameter"
 # Now set node-args to null
-$pm2 gracefulReload app-config-update/echo.js --node-args=null
+$pm2 reload app-config-update/echo.js --node-args=null
 # Should not find node_args anymore
 $pm2 prettylist | grep "node_args"
 ispec "Should have deleted cli parameter when passing null"
@@ -74,8 +70,3 @@ $pm2 reload echo --name="new-name"
 $pm2 reset all
 $pm2 restart new-name
 should 'should reload processes with new name' 'restart_time: 1' 1
-
-$pm2 gracefulReload new-name --name="new-name-2"
-$pm2 reset all
-$pm2 restart new-name-2
-should 'should graceful reload processes with new name' 'restart_time: 1' 1
