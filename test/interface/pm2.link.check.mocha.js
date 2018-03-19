@@ -37,7 +37,7 @@ describe('PM2 link variable checks', function() {
       setTimeout(function() {
         pm2.list(function(err, dt) {
           dt[0].pm2_env.km_link.should.be.false();
-          dt[0].pm2_env.axm_options.transactions.should.be.false();
+          dt[0].pm2_env.axm_options.transactions.should.be.true();
           done();
         });
       }, 500);
