@@ -265,7 +265,7 @@ function patchCommanderArg(cmd) {
 //
 // Start command
 //
-commander.command('start <name|file|ecosystem|id...>')
+commander.command('start [name|file|ecosystem|id...]')
   .option('--watch', 'Watch folder for changes')
   .option('--fresh', 'Rebuild Dockerfile')
   .option('--daemon', 'Run container in Daemon mode (debug purposes)')
