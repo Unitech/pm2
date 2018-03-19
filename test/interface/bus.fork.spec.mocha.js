@@ -89,7 +89,6 @@ describe('PM2 BUS / RPC', function() {
       var plan = new Plan(2, done);
 
       pm2_bus.on('*', function(event, data) {
-        console.log(event);
         if (event == 'process:event') {
           event.should.eql('process:event');
           data.should.have.properties(PROCESS_EVENT);
