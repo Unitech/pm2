@@ -145,30 +145,6 @@ describe('REMOTE PM2 ACTIONS', function() {
     });
   });
 
-  it('should gracefulRELOAD', function(done) {
-    send_cmd.once('trigger:pm2:result', function(pck) {
-      /**
-       * Once remote command is finished...
-       */
-
-      should(pck.ret.err).be.null();
-
-      pm2.list(function(err, ret) {
-        ret.forEach(function(proc) {
-          proc.pm2_env.restart_time.should.eql(3);
-        });
-      });
-
-      done();
-    });
-
-    send_cmd.emit('cmd', {
-      _type : 'trigger:pm2:action',
-      method_name : 'gracefulReload',
-      parameters : {name : 'child' }
-    });
-  });
-
   it('should RESET metadata', function(done) {
     send_cmd.once('trigger:pm2:result', function(pck) {
       /**
