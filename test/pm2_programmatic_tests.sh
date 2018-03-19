@@ -101,5 +101,3 @@ mocha --opts ./mocha.opts  ./bus.fork.spec.mocha.js
 spec "Protocol communication test"
 mocha --opts ./mocha.opts  ./utility.mocha.js
 spec "PM2 Utility"
-mocha --opts ./mocha.opts  ./pm2.link.check.mocha.js
-spec "Transaction option enablement"
