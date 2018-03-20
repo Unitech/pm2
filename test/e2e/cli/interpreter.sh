@@ -7,6 +7,7 @@ cd $file_path/interpreter
 
 rm -rf ../../../node_modules/coffee-script/
 rm -rf ../../../node_modules/livescript/
+rm -rf ../../../node_modules/ts-node/
 
 ########### coffee
 
@@ -73,11 +74,6 @@ should 'process should be online' "status: 'online'" 1
 # spec "Should work on Livescript files in cluster mode"
 
 ########### TYPESCRIPT
-
-$pm2 delete all
-$pm2 start echo.ts
-sleep 1
-should 'process should be errored without typescript installed' "status: 'errored'" 1
 
 ########### Install
 

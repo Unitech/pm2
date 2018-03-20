@@ -7,7 +7,7 @@ then
 fi
 
 SRC=$(cd $(dirname "$0"); pwd)
-source "${SRC}/include.sh"
+source "${SRC}/../include.sh"
 
 cd $file_path
 $pm2 startup upstart -u $USER --hp $HOME --service-name abcdef

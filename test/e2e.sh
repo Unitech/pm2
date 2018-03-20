@@ -70,14 +70,14 @@ bash ./test/e2e/cli/harmony.sh
 spec "Harmony test"
 bash ./test/e2e/cli/fork.sh
 spec "Fork system working"
+bash ./test/e2e/cli/piped-config.sh
+spec "Piped JSON file test"
 
 # PROCESS FILES
 bash ./test/e2e/process-file/json-file.sh
 spec "JSON file test"
 bash ./test/e2e/process-file/yaml-configuration.sh
 spec "YAML configuration support"
-bash ./test/e2e/process-file/piped-config.sh
-spec "Piped JSON file test"
 bash ./test/e2e/process-file/json-reload.sh
 spec "JSON reload test"
 bash ./test/e2e/process-file/homogen-json-action.sh
@@ -104,7 +104,7 @@ bash ./test/e2e/internals/wrapped-fork.sh
 spec "wrapped fork"
 bash ./test/e2e/internals/infinite-loop.sh
 spec "Infinite loop stop"
-bash ./test/e2e/internals/internals/options-via-env.sh
+bash ./test/e2e/internals/options-via-env.sh
 spec "set option via environment"
 bash ./test/e2e/internals/promise.sh
 spec "Promise warning message tests"
@@ -114,21 +114,21 @@ bash ./test/e2e/internals/start-consistency.sh
 spec "Consistency between a JSON an CLI start"
 
 # MISC
-bash ./test/misc/inside-pm2.sh
+bash ./test/e2e/misc/inside-pm2.sh
 spec "Starting a process inside a PM2 process"
-bash ./test/misc/vizion.sh
+bash ./test/e2e/misc/vizion.sh
 spec "vizion features (versioning control)"
-bash ./test/misc/misc.sh
+bash ./test/e2e/misc/misc.sh
 spec "MISC features"
-bash ./test/misc/versioning-cmd.sh
+bash ./test/e2e/misc/versioning-cmd.sh
 spec "versioning system tests"
-bash ./test/misc/instance-number.sh
+bash ./test/e2e/misc/instance-number.sh
 spec "Negative instance number spawn one worker"
-bash ./test/misc/startup.sh
+bash ./test/e2e/misc/startup.sh
 spec "upstart startup test"
-bash ./test/misc/nvm-node-version.sh
+bash ./test/e2e/misc/nvm-node-version.sh
 spec "NVM node version setting"
-bash ./test/misc/cron-system.sh
+bash ./test/e2e/misc/cron-system.sh
 spec "Cron system tests"
 
 # LOGS
