@@ -16,3 +16,4 @@ package-lock.json
 *.swo
 currentTagChangelog.md
 joblog-X
+test/fixtures/path-check*.txt

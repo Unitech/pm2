@@ -91,8 +91,7 @@
   "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "bash test/docker_parallel_test.sh",
-    "bench-pmx": "pm2 delete all; pm2 install pm2-probe; node examples/pmx/app.js; pm2 ls"
+    "test": "bash test/e2e.sh; bash test/unit.sh"
   },
   "keywords": [
     "cli",

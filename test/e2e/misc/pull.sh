@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SRC=$(cd $(dirname "$0"); pwd)
-source "${SRC}/include.sh"
+source "${SRC}/../include.sh"
 
 echo -e "\033[1mRunning tests:\033[0m"
 

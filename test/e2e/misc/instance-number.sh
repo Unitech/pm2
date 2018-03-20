@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SRC=$(cd $(dirname "$0"); pwd)
-source "${SRC}/include.sh"
+source "${SRC}/../include.sh"
 cd $file_path
 
 $pm2 start server.js -i -100
