@@ -400,33 +400,6 @@ API.prototype.update = function(cb) {
 };
 
 /**
- * Graceful Reload an application
- *
- * @param {String} process_name Application Name or All
- * @param {Object} opts         Options
- * @param {Function} cb         Callback
- */
-API.prototype.gracefulReload = function(process_name, opts, cb) {
-  var that = this;
-
-  if (typeof(opts) == "function") {
-    cb = opts;
-    opts = {};
-  }
-
-  //Common.printOut(conf.PREFIX_MSG_WARNING + chalk.bold.yellow('Warning gracefulReload will be soon deprecated'));
-  //Common.printOut(conf.PREFIX_MSG_WARNING + chalk.bold.yellow('Use http://pm2.keymetrics.io/docs/usage/signals-clean-restart/ instead'));
-
-  if (Common.isConfigFile(process_name))
-    that._startJson(process_name, commander, 'softReloadProcessId');
-  else {
-    if (opts && !opts.updateEnv)
-      Common.printOut(IMMUTABLE_MSG);
-    that._operate('softReloadProcessId', process_name, opts, cb);
-  }
-};
-
-/**
  * Reload an application
  *
  * @param {String} process_name Application Name or All
