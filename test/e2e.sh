@@ -16,12 +16,6 @@ bash ./test/e2e/modules/module-safeguard.sh
 spec "module safeguard system (--safe)"
 
 # CLI
-bash ./test/e2e/cli/gracefulReload.sh
-spec "gracefulReload system 1"
-bash ./test/e2e/cli/gracefulReload2.sh
-spec "gracefulReload system 2"
-bash ./test/e2e/cli/gracefulReload3.sh
-spec "gracefulReload system 3"
 bash ./test/e2e/cli/reload.sh
 spec "Reload"
 bash ./test/e2e/cli/operate-regex.sh
