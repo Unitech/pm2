@@ -77,27 +77,28 @@ should 'process should be online' "status: 'online'" 1
 
 ########### Install
 
-$pm2 install typescript
 
-########### typescript fork test
-$pm2 delete all
+# $pm2 install typescript
 
->typescript.log
+# ########### typescript fork test
+# $pm2 delete all
 
-$pm2 start echo.ts -o typescript.log --merge-logs
+# >typescript.log
 
-sleep 1.5
+# $pm2 start echo.ts -o typescript.log --merge-logs
 
-grep "Hello Typescript!" typescript.log
-spec "Should work on Typescript files in fork mode"
+# sleep 1.5
 
-########### typescript cluster test
-$pm2 delete all
+# grep "Hello Typescript!" typescript.log
+# spec "Should work on Typescript files in fork mode"
 
->typescript.log
+# ########### typescript cluster test
+# $pm2 delete all
 
-$pm2 start echo.ts -i 1 -o typescript.log --merge-logs
+# >typescript.log
 
-sleep 1.5
-grep "Hello Typescript!" typescript.log
-spec "Should work on Typescript files in cluster mode"
+# $pm2 start echo.ts -i 1 -o typescript.log --merge-logs
+
+# sleep 1.5
+# grep "Hello Typescript!" typescript.log
+# spec "Should work on Typescript files in cluster mode"
