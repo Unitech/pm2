@@ -95,10 +95,10 @@ buildContainer(function(err) {
     var table = new Table({
       head: ['Test', 'Duration'],
       style : {'padding-left' : 1, head : ['cyan', 'bold'], compact : true}
-    });
+    })
 
     Object.keys(timings).forEach(function(test) {
-      table.push(test, timings[test])
+      table.push([test, timings[test]])
     })
 
     console.log(table.toString());
