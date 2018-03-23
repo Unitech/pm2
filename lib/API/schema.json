@@ -294,6 +294,10 @@
     "docDescription": "Enable or disable the Windows popup when starting an app",
     "default": true
   },
+  "kill_retry_time": {
+    "type": "number",
+    "default" : 100
+  },
   "write": {
     "type": "boolean"
   }
