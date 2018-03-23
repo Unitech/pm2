@@ -91,7 +91,7 @@
   "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "bash test/e2e.sh; bash test/unit.sh"
+    "test": "node test/parallel.js"
   },
   "keywords": [
     "cli",
@@ -173,7 +173,7 @@
     "moment": "^2.19",
     "needle": "^2.2.0",
     "nssocket": "0.6.0",
-    "pidusage": "^2.0.5",
+    "pidusage": "^2.0.6",
     "pm2-axon": "3.1.0",
     "pm2-axon-rpc": "0.5.0",
     "pm2-deploy": "^0.3.9",

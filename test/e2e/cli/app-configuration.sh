@@ -69,7 +69,7 @@ exists 'probe Event Loop Latency default value' "alert: {}"
 
 # Override value for test-probe
 $pm2 set probe-test.probes.test-probe.value 30
-sleep 2
+sleep 1
 
 exists 'probe Event Loop Latency alerted' "value: 30"
 
