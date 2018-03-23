@@ -5,6 +5,8 @@ source "${SRC}/../include.sh"
 
 cd $file_path
 
+rm -rf app-playground
+
 git clone https://github.com/keymetrics/app-playground.git
 
 cd app-playground

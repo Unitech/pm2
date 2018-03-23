@@ -5,7 +5,7 @@ source "${SRC}/../include.sh"
 
 cd $file_path
 
-############# TEST
+############# Start / Stop / Restart
 
 echo -e "\033[1mRunning tests:\033[0m"
 
@@ -17,7 +17,8 @@ spec "Should stop an app by script.js"
 $pm2 restart echo.js
 spec "Should restart an app by script.js (TRANSITIONAL STATE)"
 
-###############
+############### Start edge case
+
 $pm2 delete all
 
 echo "Start application with filename starting with a numeric"
@@ -28,27 +29,28 @@ should 'should app be stopped' 'stopped' 1
 $pm2 restart 001-test
 should 'should app be online once restart called' 'online' 1
 
-$pm2 delete all
 
 ############## PID
+
+$pm2 delete all
 $pm2 start 001-test.js --name "test"
 should 'should app be online' 'online' 1
 $pm2 pid > /tmp/pid-tmp
 $pm2 pid test
-$pm2 delete all
 
 ###############
 
+$pm2 delete all
 echo "Start application with filename starting with a numeric"
 $pm2 start throw-string.js -l err-string.log --merge-logs --no-automation
 >err-string.log
-sleep 2
+sleep 1
 grep 'throw-string.js' err-string.log
 spec "Should have written raw stack when throwing a string"
 
-$pm2 delete all
-
 ####
+
+$pm2 delete all
 
 $pm2 start echo.js --name gege
 should 'should app be online' 'online' 1
@@ -78,7 +80,7 @@ $pm2 start echo.js
 ispec "Should not re start app"
 
 ########### DELETED STUFF BY ID
-$pm2 kill
+$pm2 delete all
 
 $pm2 start echo.js
 $pm2 delete 0
@@ -100,7 +102,7 @@ $pm2 list
 should 'should has been deleted process by script' "name: 'echo'" 0
 
 ######## Actions on app name as number (#1937)
-$pm2 kill
+$pm2 delete all
 $pm2 start echo.js --name "455"
 should 'should restart processes' 'restart_time: 0' 1
 $pm2 restart 455
@@ -113,9 +115,9 @@ $pm2 delete 455
 should 'should has been deleted process by id' "name: '455'" 0
 
 ########### OPTIONS OUTPUT FILES
-$pm2 kill
+$pm2 delete all
 
-$pm2 start echo.js -o outech.log -e errech.log --name gmail -i 10
+$pm2 start echo.js -o outech.log -e errech.log --name gmail -i 1
 sleep 1
 cat outech-0.log > /dev/null
 spec "file outech-0.log exist"
