@@ -8,7 +8,7 @@ const Table = require('cli-table-redemption');
 
 const testFolder = './test/e2e/'
 
-const CONCURRENT_TEST = 6
+const CONCURRENT_TEST = 3
 const DOCKER_IMAGE_NAME = 'pm2-test'
 
 var timings = {};
