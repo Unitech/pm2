@@ -207,6 +207,13 @@ export interface Proc {
   command?: Command;
   versioning?: any;
   exit_code?: number;
+  script?: string;
+  pmx?: boolean;
+  automation?: boolean;
+  max_restarts?: number;
+  min_uptime?: string;
+  max_memory_restart?: string;
+  env?: { [key: string]: string | number };
 }
 
 export interface Command {
