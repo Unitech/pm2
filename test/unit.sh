@@ -95,13 +95,9 @@ cd ../interface
 
 # echo $PM2_HOME
 
-mocha --opts ./mocha.opts  ./interactor.daemonizer.mocha.js
-spec "Remote interactor keys save verification"
 mocha --opts ./mocha.opts  ./bus.spec.mocha.js
 spec "Protocol communication test"
 mocha --opts ./mocha.opts  ./bus.fork.spec.mocha.js
 spec "Protocol communication test"
 mocha --opts ./mocha.opts  ./utility.mocha.js
 spec "PM2 Utility"
-mocha --opts ./mocha.opts  ./pm2.link.check.mocha.js
-spec "Transaction option enablement"
