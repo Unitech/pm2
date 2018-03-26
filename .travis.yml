@@ -8,9 +8,8 @@ os:
   - linux
 before_install:
   - sudo apt-get -qq update
+  - sudo apt-get install parallel
   - sudo apt-get install python3
   - sudo apt-get install php5-cli
 services:
   - docker
-notifications:
-  slack: pm2-nodejs:5Lolyw2LMnwy8fziqOGILQxG

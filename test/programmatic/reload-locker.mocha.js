@@ -17,6 +17,10 @@ describe('Reload locker system', function() {
     cwd : '../fixtures'
   });
 
+  before(function(done) {
+    pm2.list(done);
+  });
+
   after(function(done) {
     pm2.kill(done)
   });
