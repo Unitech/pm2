@@ -1,6 +1,5 @@
 
 var should = require('should');
-var Ipm2   = require('../../lib/Interactor/pm2-interface');
 var PM2    = require('../..');
 var Plan   = require('../helpers/plan.js');
 
@@ -57,8 +56,6 @@ process.on('uncaughtException', function(e) {
 });
 
 describe('PM2 BUS / RPC', function() {
-  this.timeout(5000);
-
   var pm2 = new PM2.custom({
     independent : true,
     cwd         : __dirname + '/../fixtures/interface'
@@ -91,7 +88,6 @@ describe('PM2 BUS / RPC', function() {
       var plan = new Plan(2, done);
 
       pm2_bus.on('*', function(event, data) {
-        console.log(event);
         if (event == 'process:event') {
           event.should.eql('process:event');
           data.should.have.properties(PROCESS_EVENT);

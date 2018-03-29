@@ -4,8 +4,6 @@ var should = require('should');
 var path   = require('path');
 
 describe('Signal kill (+delayed)', function() {
-  this.timeout(10000);
-
   var proc1 = null;
 
   var pm2 = new PM2.custom({
@@ -160,21 +158,6 @@ describe('Signal kill (+delayed)', function() {
       }, 1500);
 
       pm2.reload('delayed-sigint', function(err, app) {
-        //done(err);
-      });
-
-    });
-
-    it('should graceful reload script', function(done) {
-      setTimeout(function() {
-        pm2.list(function(err, list) {
-          list[0].pm2_env.status.should.eql('online');
-          list[0].pm2_env.restart_time.should.eql(2);
-          done();
-        });
-      }, 1500);
-
-      pm2.gracefulReload('delayed-sigint', function(err, app) {
         //done(err);
       });
 

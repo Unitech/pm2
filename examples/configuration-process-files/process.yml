@@ -1,0 +1,15 @@
+apps:
+  - name : 'HTTP-API'
+    script: 'apps/http.js'
+    instances: 'max'
+    max_memory_restart: '260M'
+    watch : true
+    ignore_watch : ['node_modules']
+    env:
+      NODE_ENV : 'development'
+    env_production:
+      NODE_ENV : 'production'
+  - name : 'Worker'
+    script: 'apps/worker.js'
+  - name : 'Checks'
+    script : 'apps/connection_check.sh'

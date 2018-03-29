@@ -1,9 +1,14 @@
 
-var should        = require('should');
+var should = require('should');
+var PM2 = require('../..');
 
 var Configuration = require('../../lib/Configuration.js');
 
 describe('Configuration via SET / GET tests', function() {
+  before(function(done) {
+    PM2.list(done);
+  });
+
   it('should set a value', function(done) {
     Configuration.set('key1', 'val1', function(err, data) {
       should.not.exists(err);

@@ -5,6 +5,7 @@
     "instances": 2,
     "exec_mode": "cluster",
     "wait_ready": true,
-    "listen_timeout": 15000
+    "kill_timeout" : 2000,
+    "listen_timeout": 1000
   }]
 }

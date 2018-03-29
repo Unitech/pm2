@@ -1,6 +1,5 @@
 /node_modules
 *.log
-*.log
 *.pid
 test/child
 *.iml
@@ -11,3 +10,10 @@ test/child
 dist/
 *.deb
 *.rpm
+package-lock.json
+.DS_Store
+*.swp
+*.swo
+currentTagChangelog.md
+joblog-X
+test/fixtures/path-check*.txt

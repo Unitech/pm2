@@ -5,12 +5,6 @@
 ### Quick start
 
 - [Installation](#a1)
-- [Folder structure](#pm2-folder-structure)
-- [Usage](#a2)
-- [Examples](#a3)
-- [Different ways to launch a process](#raw-examples)
-- [Options](#a987)
-  - [Schema](#schema)
 - [How to update PM2?](#update-pm2)
 - [PM2 tab-completion](#tab-completion)
 - [Allow PM2 to bind apps on port 80/443 without root](#authbind-pm2)
@@ -38,7 +32,7 @@
 - [Without Keymetrics](#without-keymetrics)
 - [With Keymetrics](#with-keymetrics)
 
-### Deployment - ecosystem.json
+### Deployment - ecosystem.config.js
 
 - [Getting started with deployment](#deployment)
 - [Deployment options](#deployment-help)

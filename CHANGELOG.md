@@ -1,9 +1,363 @@
+## v2.10.1 ( Mon Feb 26 2018 11:38:18 GMT+0100 (CET) )
+
+
+## Bug Fixes
+  - restore --raw option #3476
+  ([340011ca](https://github.com/Unitech/pm2/commit/340011cace2b90c2a1ead8d86baba517f5570e15))
+
+
+## v2.10.0 ( Mon Feb 19 2018 14:51:19 GMT+0100 (CET) )
+
+
+### Bug Fixes
+  - add livescript in default modules
+  ([a315eeb6](https://github.com/Unitech/pm2/commit/a315eeb65f04b22643a903f0cb1c0f416615ad8b))
+  - replace dash with underscore
+  ([203df768](https://github.com/Unitech/pm2/commit/203df7688ca348967c00bc45289ae70fd2c4aaaa))
+  - make sure not pm2 is running
+  ([bd798fd7](https://github.com/Unitech/pm2/commit/bd798fd748665e935db4bb91f9d1d66952d9842a))
+  - auto-exit edge case fix + pm2 no daemon mode + log in raw by default + less logs
+  ([704ae518](https://github.com/Unitech/pm2/commit/704ae518f5d7df0a631349e518d81cef51249a58))
+  - impact v8 flag in fork mode also
+  ([41bf6ef7](https://github.com/Unitech/pm2/commit/41bf6ef7d3633180b4c1e90f36eb206d82fab2b1))
+  - fixup! #2182 Get rid of annoying popups in Windows 10
+  ([3a85b59d](https://github.com/Unitech/pm2/commit/3a85b59de4a76796ad0880368d8d085a7ba55d36))
+
+
+
+
+### Hot Fixes
+  - \#3420 ([673acf36](https://github.com/Unitech/pm2/commit/673acf36b4ca1fd65c5135a92d56081f76237a8b))
+
+
+
+
+### Features
+  - add dependencies section into ecosystem.json file.
+  ([828a30d0](https://github.com/Unitech/pm2/commit/828a30d0ccc88b3f6e2b66d517ccf5f2394bd08b))
+  - --deep-monitoring available from pm2-runtime
+  ([99e62e3b](https://github.com/Unitech/pm2/commit/99e62e3bb808f071d6e4850c234b34f7de65b1c2))
+  - add deep_metrics to deep_monitoring flag
+  ([4d1bea5e](https://github.com/Unitech/pm2/commit/4d1bea5e0bbaab1f16f75d012bca25702cdff88e))
+  - add flag to enable deep-monitoring
+  ([c5418688](https://github.com/Unitech/pm2/commit/c541868837a1c4421394de5dd1029d2619b5ac82))
+  - allow pm2 to install a set of module as one single command and add deep-monitoring.
+  ([9dddc80d](https://github.com/Unitech/pm2/commit/9dddc80db5e496def44d4d36716b7de54e5171cf))
+  - pm2 pid <app_name> command
+  ([6687d499](https://github.com/Unitech/pm2/commit/6687d499415151bd62489fed5331f414576ec354))
+  - allow pm2 to install and enable event-loop-inspector data collecting
+  ([e6b0c474](https://github.com/Unitech/pm2/commit/e6b0c47443d3e6a839bf29057ef0a80ef135c47e))
+  - ignore signal when running in --no-daemon
+  ([b9c01c99](https://github.com/Unitech/pm2/commit/b9c01c99d54aba98ab790b8888500ac0f0af05c9))
+  - upgrade pmx to git development branch
+  ([21be05a0](https://github.com/Unitech/pm2/commit/21be05a07bd93eacaddedde3b647c16468937473))
+  - allow pm2 to enable v8 data collecting from pmx
+  ([aa180fa8](https://github.com/Unitech/pm2/commit/aa180fa8ab47f0c687d7c21854d005ad0ebf8475))
+  - allow pm2 to install gc-stats
+  ([15634168](https://github.com/Unitech/pm2/commit/15634168582e4c7b3c5f47a3f58a0fcf8b732a76))
+  - feat add changelog generation support
+  ([14f53fc0](https://github.com/Unitech/pm2/commit/14f53fc0c28be4084778785aeace3763ed0d827f))
+
+  - **pm2**
+    - add pm2 init option to generate an ecosystem file
+  ([5d56fac7](https://github.com/Unitech/pm2/commit/5d56fac7cc12590af29ee46c68ba32a82a2b813b))
+    - add pm2 init option to generate an ecosystem file
+  ([a38fd199](https://github.com/Unitech/pm2/commit/a38fd199b90d27a2405f8cabab0e4f6e45c69b08))
+
+
+
+
+### Documentation
+  - add documentation on new pm2 install command
+  ([c90c453f](https://github.com/Unitech/pm2/commit/c90c453f85b07adb346bc55c2b685d689a2e96f7))
+  - add sendDataToProcessId into typescript definitions
+  ([4a2e8d2d](https://github.com/Unitech/pm2/commit/4a2e8d2d2c4b38fe0ff2377dfe32fce9a43c8044))
+
+
+
+
+### Refactor
+  - delete all "if" condition when installing new module, create an object with all modules and a generic installation process
+  ([1b92a9c4](https://github.com/Unitech/pm2/commit/1b92a9c4000734367e68d8dbd60d0901009f4c56))
+  - deep pm2-runtime refactor #3408 #3257 #3266
+  ([c13b2364](https://github.com/Unitech/pm2/commit/c13b23648269529a1f998d816be10f895665861e))
+  - no more interactive spinner for connection to KM + change pm2 log format + remove some logs
+  ([d1916f40](https://github.com/Unitech/pm2/commit/d1916f40962b2cc8a1866172eab7d5d89db093be))
+
+
+
+
+### Chore
+  - pmx to 1.6.3-rc2
+  ([41815e0b](https://github.com/Unitech/pm2/commit/41815e0ba0298979f936b3d4badb196f8d9783d8))
+  - switch pmx to development
+  ([748019d1](https://github.com/Unitech/pm2/commit/748019d1ef0cf760b5e8de9d5b6af6fee300db02))
+  - 2.10.0-beta
+  ([0d2b7172](https://github.com/Unitech/pm2/commit/0d2b7172a093d0638deabb5f23383cc9eec5dda9))
+  - upgrade pmx to 1.6.3-next
+  ([5a1b4343](https://github.com/Unitech/pm2/commit/5a1b4343cc1e1f5018e21451a111340351706213))
+  - upgrade pmx dep
+  ([4bbeec3d](https://github.com/Unitech/pm2/commit/4bbeec3d170ba63af0c0ae0e2d07beec2ab49772))
+  - switch to published pmx(@next)
+  ([859d18fb](https://github.com/Unitech/pm2/commit/859d18fbc79e2a2760fe90e9c17e71209f8177ce))
+  - remove --exit from mocha.opts
+  ([36bf03e1](https://github.com/Unitech/pm2/commit/36bf03e1eed69a27e518151e2f7aa958b15db2fb))
+  - remove unused files
+  ([65d233e5](https://github.com/Unitech/pm2/commit/65d233e5b5290f65796b7cf3daa20706e0f3bee6))
+
+
+
+
+### Branchs merged
+  - Merge branch 'development' of ssh://github.com/deltasource/pm2 into hotfix/scoped-package-support
+  ([94ea9d9e](https://github.com/Unitech/pm2/commit/94ea9d9eeff40faca8aa9f7edfc81aa29c08e740))
+  - Merge branch 'master' into development
+  ([46606903](https://github.com/Unitech/pm2/commit/46606903f25d0f4d0eee226da863e20e4b396dc9))
+  - Merge branch 'development' of github.com:Unitech/pm2 into v8_option
+  ([757562f7](https://github.com/Unitech/pm2/commit/757562f755b09124bbd006209ae38a096d692529))
+  - Merge branch 'development' of github.com:Unitech/pm2 into gc-stats
+  ([3ed1a747](https://github.com/Unitech/pm2/commit/3ed1a7471aec7d79f7d604447ac7445720bdaced))
+  - Merge branch 'master' into development
+  ([ee7651e4](https://github.com/Unitech/pm2/commit/ee7651e47e944c3c829933494c6cc765deb4bb29))
+
+
+
+
+### Pull requests merged
+  - Merge pull request #3466 from natcl/development
+  ([c6d7ace8](https://github.com/Unitech/pm2/commit/c6d7ace802e667def75bc68344effa4856830fb4))
+  - Merge pull request #3464 from andyfleming/patch-1
+  ([dd9ebb60](https://github.com/Unitech/pm2/commit/dd9ebb6051708ee5a13cc68dbcb8238e41860bb9))
+  - Merge pull request #3459 from rmonnier/master
+  ([46948a98](https://github.com/Unitech/pm2/commit/46948a98e90c7864f7b8100db5c519fe9d37f11a))
+  - Merge pull request #3458 from Unitech/pm2_install_command
+  ([f3b35726](https://github.com/Unitech/pm2/commit/f3b35726895bd82b92813f308b787d68e9df1fa4))
+  - Merge pull request #3453 from deltasource/hotfix/scoped-package-support
+  ([974f9bf0](https://github.com/Unitech/pm2/commit/974f9bf0dc7a7aa7ff6860f8640da3593b802296))
+  - Merge pull request #3448 from Unitech/deep_monitoring_flag
+  ([331bc741](https://github.com/Unitech/pm2/commit/331bc741d7285094738a91cd816bc9755cc76605))
+  - Merge pull request #3447 from Unitech/deep-monitoring
+  ([719d328e](https://github.com/Unitech/pm2/commit/719d328e8d14871b34fd33df54fd80f4f8e7825f))
+  - Merge pull request #3443 from Unitech/event-loop-inspector
+  ([77a35274](https://github.com/Unitech/pm2/commit/77a3527407f3d090c7a5fa0bedaf943a7536b5eb))
+  - Merge pull request #3442 from Unitech/event-loop-inspector
+  ([dad98e6e](https://github.com/Unitech/pm2/commit/dad98e6e0738983717fee155ff0f6519955ffc1b))
+  - Merge pull request #3424 from Unitech/sendDataToProcessId_def
+  ([95e85eef](https://github.com/Unitech/pm2/commit/95e85eef84510dddfb0c6b13f0ada38a7dd66cae))
+  - Merge pull request #3438 from Unitech/v8_option
+  ([e46b15dc](https://github.com/Unitech/pm2/commit/e46b15dc32c18e8b24f66da0c79cc06f91cf11b5))
+  - Merge pull request #3437 from Unitech/gc-stats
+  ([1a6771aa](https://github.com/Unitech/pm2/commit/1a6771aa361bb5718bafd6e33e616725f9c0d328))
+  - Merge pull request #3400 from toddwong/windowsHide2
+  ([f65e8794](https://github.com/Unitech/pm2/commit/f65e8794df6e67f4ff60dfbec7c05a37721cb6f9))
+  - Merge pull request #3421 from Unitech/generate_changelog
+  ([b0690618](https://github.com/Unitech/pm2/commit/b0690618d940c11e28eeb5115c060bf363c7b62b))
+  - Merge pull request #3419 from Rohja/fix-build-number-deb-rpm
+  ([b4343de2](https://github.com/Unitech/pm2/commit/b4343de2703fce03f3cf48cc303b12bc6b69b743))
+
+
+
+
+## 2.9.2
+
+- #3364 30% faster CLI via v8-compile-cache
+
+- add process._getActiveRequests() and process._getActiveHandles() custom metrics
+- #3402 #3360 fix bad username
+- #3413 check dependencies before launching tests
+- #3295 add sorting feature for process list (pm2 ls --sort <field_name:order>)
+- #3404 if no gid specified - set gid to uid
+- #3287 add typing for env
+- #3374 separate stdout and stderr for pm2-docker/pm2-runtime
+- #3366 improve building of rpm and deb packages
+- #3375 sendLineToStdin/sendDataToProcessId fix
+- #3365 fix report command for windows
+- #3367 Display an error if the process is not found when running 'pm2 logs <process-name>'
+- #3256 TypeError: Cannot read property 'destroy' of undefined
+- User: append SUDO_USER if no uid has been set and SUDO_USER present
+- User: check permission of agent
+- KM: send outliers
+- KM: infinite retry for km connection
+
+## 2.9.1
+
+- #3356 hot fix on startup system
+
+## 2.9.0
+
+- #3278 --silent -s now does not print welcome message
+- #3345 #2871 #3233 pm2 -v will not spawn daemon anymore
+- #3341 update moment dependency
+- #3314 pm2 install <MODULE> --safe will now monitor new installation of module and will
+  fallback to previous version if the module is failing (restart, fail on npm install)
+- #3314 module folder structure refactoring to keep independent dependencies for each modules
+- #3324 remove yarn installation of modules
+- #3273 pm2 --mini-list now print the right pid file
+- #3206 add flag to auto turn off auto exit with pm2-docker
+- #3036 Fix applying env PM2_CONCURRENT_ACTIONS correctly
+- #3346 do not chmod systemd script (was failing systemd script on orange pi)
+- #3347 Add --wait-ip option to override systemd initialization to wait for internet full connectivity
+- #3348 alias pm2-docker to pm2-runtime
+- #3350 Override HOME and USER when setting --uid to start module or application
+- #3351 alias pm2 ps to pm2 ls (docker style)
+
+## 2.8.0
+
+- #2070 Fix sendDataToProcessId not working (@h091237557)
+- #2182 Add windowHide options in cluster mode (@soyuka)
+- #3206 By default in docker, pm2 will auto exit when no process are online (@dguo)
+- #3225 fix --lines accepting invalid values (@vmarchaud)
+- #3036 fix when PM2_CONCURRENT_ACTIONS was overriden everytime on node > 4 (@danez)
+- Add node 9 tests on CI (@Unitech)
+- Add pm2 unlink command (eq to pm2 link delete) (@Unitech)
+- Fix interactor to support custom endpoints (@vmarchaud)
+- Allow custom PM2_HOME for docker (@lucidNTR)
+- Support MJS module (@vpotseluyko)
+- Allow custom service name for startup (@danez)
+- Update PMX to 1.5 (@unitech)
+
+## 2.7.2
+
+- #3200 Associate .tsx files with ts-node (@dguo)
+- #3202 Add first draft of typescript definitions (@jportela)
+- Allow to install http url via pm2 install (@unitech)
+- #3204 Given --uid add all its gids automatically (@jmeit)
+- #3184 bugfix: try/catch around userInfo to avoid crash (@vmarchaud)
+- #3181 force upgrade to latest pm2-deploy
+
+## 2.7.1
+
+- #3117 Add required node env on cluster mode start instance (2m0nd)
+- make profiler compatible with Node.js 8
+
+## 2.7.0
+
+- #3150 fix watchdog on agent
+- #3001 dump-backup feature
+- #3134 edge case error handling
+- #3096 fix module installation
+- #3085 honor every pm2 args on restart
+- #3046 better error message if PM2 is misconfigured
+- #3058 pm2-docker now does not write logs by default
+- #3045 continue to broadcast on the bus system even if logs are disabled
+- [Docker] Auto Exit when no application is running
+- [Keymetrics] pm2 unmonitor fix
+- [Beta Container Support] beta pm2 start app.js --container
+- [Chore] upgrade modules
+- [Chore] enhance package.json
+
+## 2.6.1
+
+- #3037 bug fix cb
+
+## 2.6.0
+
+### Changes
+
+- #2998 pm2 report command for automated system inspection
+- #2997 --disable-logs option to suppress error
+- #2290 allow to declare apps under "pm2" attribute (eq "apps"). Nicer in package.json
+- #2994 allow to specify typescript version to be installed
+- #2501 low memory environment pm2 setting via PM2_OPTIMIZE_MEMORY (beta)
+- #2968 pm2 attach <pm_id> to attach to process stdin / stdout
+- pm2-runtime -> drop in replacement for the node.js binary
+- #2951 pm2 reload command locker via timestamped lock file
+- #2977 pm2 reloadLogs protected
+- #2958 Allow to delete attribute via --attribute null
+- #2980 PM2_SILENT=true pm2 startup
+- #2690 --parallel <number> command allows to change the nb of concurrent actions (reload/restart)
+- expose cwd on CLI via --cwd
+- multiple pm2-docker enhacements
+- Alias pm2.link and pm2.unlink to pm2.interact and pm2._pre_interact
+- Allow to customize kill signal via PM2_KILL_SIGNAL
+- Support git+http in module installation
+- force reverse interaction reconnection on internet discovery
+- `--instances -1` when having a 1 cpu is no-longer spawning no processes #2953
+- refactor the context retrieving from error
+- add a TTL for file cache entry
+- #2956 Fix listen_timeout in combination with wait_ready
+- #2996 respect signal order on pm2 reload (delegate ready function to reload fn)
+
+### Breaking
+
+- Drop pm2-daemon CLI (replaced by pm2-runtime)
+
+## 2.5
+
+- `pm2 register|login` to create new account / login on Keymetrics + auto link
+- `pm2 open` to open dashboard on browser
+- `pm2 monitor|unmonitor <pm_id|name|all>` for selective monitoring
+- #2818 alias pm2-docker to pm2-daemon
+- #2809 correctly resolve git/npm repo when running pm2 install
+- #2861 better auto exit check for docker
+- #2870 avoid null error when preparing app config
+- #2872 avoid showing useless warning
+- #438 allow to override daemon config paths via env (example: `PM2_PID_FILE_PATH` to override pid file of the daemon)
+- #2849 better gentoo template for pm2 startup
+- #2868 allow tailing log with `--raw` flag
+- #452 Add `PM2_WEB_STRIP_ENV_VARS` to remove environnement vars from `pm2 web` endpoint
+- #2890 Fix wait-ready for cluster mode
+- #2906 randomize machine name with default pm2 link
+- #2888 allow to use regex for pm2 logs
+- #2045 allow to rename NODE_APP_INSTANCE env variable
+- #2809 add `increment_var` options to ask for a environnement variable to be incremented for each application started
+- more informations when failing to deploy on custom ecosystem file
+- fix tests for node 8
+- fix missing callback when overriding console.log
+- allow to rename daemon process name via `PM2_DAEMON_NAME`
+- few typo in the readme
+
+### Breaking change
+
+- the NODE_APP_INSTANCE var behavior has been changed :
+    - old behavior : when starting multiples instances of an app each one get an unique number, but its not working anymore if you are using `pm2 scale` (simply put its possible to have two application with the same number)
+    - new behavior : the number are consistent, if you scale up/down it will take a number that isn't used by another application (so two application should never have the same number)
+
+## 2.4.5/6
+
+- #2818 alias pm2-docker to pm2-runtime
+- #2815 polyfill for path.isAbsolute for node v0.11
+
+### Breaking change
+
+- rundev command has been dropped because of too low adoption
+
+## 2.4.4
+
+- #2806 fix reconnection to keymetrics
+
+## 2.4.3
+
+- #2759 disable default require of vxx in pmx
+- #2651 always spawn pm2 daemon with `node` binary
+- #2745 new issue template
+- #2761 Make JSON log stream timestamp in consistent format
+- #2770 Fix trigger API never calling callback
+- #2796 Fix absolute path on windows
+- [KM] profiler installation via `pm2 install v8-profiler` or `pm2 install profiler`
+- [KM] Agent rescue system
+
+## 2.4.2
+
+- [KM] Disable pm2-server-monit auto install
 
 ## 2.4.1
 
+- #2720 multi user startup script
+- #2266 start and tail logs via `pm2 start app.js --attach`
+- #2699 add back previous termcaps interface via `pm2 imonit`
+- #2681 fix log folder create
+- #2724 make sure process is stopped even if there is a restart_delay
+- #2706 install pm2 modules via yarn if available
+- #2719 show 15 logs line bu default
 - #2703 allow custom timestamp with pm2-docker
 - #2698 fix unicode on pm2 monit
-- #2706 install pm2 modules via yarn if available
+- #2715 handle treekill edge case bug
+- Optimize CPU usage of pm2 monit command
+- [KM] URL web access dashboard
+- [KM] Auto install pm2-server-monit on keymetrics linking
+- [KM] Error reporting: add context (-B3 -A3 code lines)
+- [KM] Transaction Tracer: reset routes on app restart / wait some time before sending
 
 ## 2.4.0
 
@@ -197,7 +551,7 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 
 ### Bug fixes
 
-- #2093 #2092 #2059 #1906 #1758 #1696 replace optionnal git module with tgz one
+- #2093 #2092 #2059 #1906 #1758 #1696 replace optional git module with tgz one
 - #2077 fix calling pm2.restart inside pm2
 - #2261 GRACEFUL_LISTEN_TIMEOUT for app reload configurable via --listen-timeout
 - #2256 fix deploy command for yaml files

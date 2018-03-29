@@ -1,31 +1,14 @@
-If reporting a bug, please use the following template.
+Your issue may already be reported!
+Please search on the [issue tracker](https://github.com/Unitech/pm2/search?type=Issues) before creating one.
 
-#### Expected behaviour
+## What's going wrong?
 
-...
+## How could we reproduce this issue?
 
-#### Actual behaviour
+## Supporting information
 
-...
-
-#### Steps to reproduce
-
-...
-
-#### Software versions used
+Please run the following command (available on PM2 >= 2.6)
 
 ```
-OS         :
-node.js    :
-PM2        :
+$ pm2 report
 ```
-
-#### PM2 Log output
-
-Use the command: `tail --lines 50 ~/.pm2/pm2.log`
-
-```
-...
-```
-
-cf CONTRIBUTING.md for more informations

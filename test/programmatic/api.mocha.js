@@ -5,8 +5,6 @@ var PM2 = require('../..');
 var should = require('should');
 
 describe('API checks', function() {
-  this.timeout(1000);
-
   describe('PM2 API case#1', function() {
     before(function(done) {
       PM2.delete('all', function() { done() });
@@ -37,6 +35,15 @@ describe('API checks', function() {
         });
       });
     });
+
+    it('should stop app by id', function(done) {
+      PM2.stop(0, done);
+    });
+
+    it('should start app by id', function(done) {
+      PM2.restart(0, done);
+    });
+
 
     it('should fail if starting same script again', function(done) {
       PM2.start('./../fixtures/child.js', function(err) {
@@ -122,6 +129,37 @@ describe('API checks', function() {
         });
       });
     });
+  });
+
+  describe('Should keep environment variables', function() {
+    it('should start app with treekill', function(done) {
+      PM2.start({
+        script : './../fixtures/child.js',
+        instances : 1,
+        treekill : false,
+        name : 'http-test'
+      }, function(err) {
+        should(err).be.null();
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(1);
+          should(list[0].pm2_env.treekill).be.false;
+          done();
+        });
+      });
+    });
+
+    it('should restart app and treekill still at false', function(done) {
+      PM2.restart('http-test', function() {
+        PM2.list(function(err, list) {
+          should(err).be.null();
+          should(list.length).eql(1);
+          should(list[0].pm2_env.treekill).be.false;
+          done();
+        });
+      });
+    });
+
   });
 
   describe('Issue #2337', function() {
@@ -278,7 +316,6 @@ describe('API checks', function() {
     });
 
     it('Should start up modules', function(done) {
-      this.timeout(5000);
       PM2.connect(true, function(err) {
         should(err).be.null();
 

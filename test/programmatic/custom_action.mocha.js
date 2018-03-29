@@ -5,19 +5,21 @@ var pm2 = require('../..');
 var should = require('should');
 
 describe('Custom actions via CLI/API', function() {
-  this.timeout(10000);
-
   after(function(done) {
     pm2.kill(done);
   });
 
   before(function(done) {
-    pm2.connect(done);
+    pm2.connect(function() {
+      pm2.kill(function() {
+        pm2.connect(done);
+      })
+    });
   });
 
   it('should start custom action script', function(done) {
     pm2.start('./../fixtures/custom_actions/index.js', function() {
-      setTimeout(done, 800);
+      setTimeout(done, 1200);
     });
   });
 
@@ -35,6 +37,13 @@ describe('Custom actions via CLI/API', function() {
       should(err).be.null();
       should(ret.length).eql(1);
       should(ret[0].data.return.pong).eql('hehe');
+      done();
+    });
+  });
+
+  it('should handle unknown application', function(done) {
+    pm2.trigger('indexxo', 'ping', function(err, ret) {
+      should(err).not.be.null();
       done();
     });
   });

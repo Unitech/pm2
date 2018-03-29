@@ -1,0 +1,60 @@
+# Contributor: Paul LESELLIER <paul@keymetrics.io>
+# Maintainer: Paul LESELLIER <paul@keymetrics.io>
+pkgname=pm2
+pkgver=master
+pkgrel=0
+pkgdesc="PM2 CE: Production Process Manager for Node.js apps with a built-in Load Balancer."
+url="http://pm2.io"
+arch="noarch"
+license="GNU-AGPL-3.0"
+depends="nodejs"
+makedepends="make nodejs-npm"
+install="" # "$pkgname.pre-install $pkgname.post-install"
+subpackages="" # "$pkgname-dev $pkgname-doc"
+source="
+	https://github.com/Unitech/pm2/archive/$pkgver.zip
+	"
+builddir="$srcdir/"
+
+build() {
+	cd "$builddir"
+	cd pm2-$pkgver
+	npm install --production
+}
+
+package() {
+	cd "$builddir"
+
+	echo $pkgdir
+
+	cd pm2-$pkgver
+
+	for filename in constants.js paths.js index.js package.json
+	do
+		echo "  [+] Installing: $filename to /usr/share/pm2/$filename"
+		install -m 644 -D $filename $pkgdir/usr/share/pm2/$filename
+	done
+
+	for dirname in bin lib node_modules
+	do
+		echo "[~] Processing directory $dirname"
+
+		CHMOD_VAL=644
+		if [ "$dirname" == "bin" ]; then
+		   CHMOD_VAL=755
+		fi
+
+		for filename in $(find $dirname -type f)
+		do
+			echo "  [+] Installing: $filename to /usr/share/pm2/$filename"
+			install -m $CHMOD_VAL -D $filename $pkgdir/usr/share/pm2/$filename
+		done
+	done
+
+	echo "[!] Linking pm2 binary as /usr/bin/pm2"
+	mkdir $pkgdir/usr/bin/
+	cd $pkgdir/usr/bin/
+	ln -s ../share/pm2/bin/pm2 pm2
+}
+
+sha512sums="f38040c3df19d610292fa9c28cab818e2d00360332e8bce627f6886e03601d52070084e57b4a4bbee52ca9bf960693a44eea28d28448767bc51d92fbee75757c  2.7.2.zip"
