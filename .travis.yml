@@ -13,3 +13,5 @@ before_install:
   - sudo apt-get install php5-cli
 services:
   - docker
+install:
+  - npm install
