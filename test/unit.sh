@@ -87,6 +87,8 @@ mocha --opts ./mocha.opts  ./env_switching.js
 spec "JSON environment switching on JSON restart with --env"
 mocha --opts ./mocha.opts  ./configuration.mocha.js
 spec "Configuration system working"
+mocha --opts ./mocha.opts  ./id.mocha.js
+spec "Uniqueness id for each process"
 
 #
 # Interface testing
