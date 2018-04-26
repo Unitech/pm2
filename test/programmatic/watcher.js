@@ -172,7 +172,7 @@ describe('Watcher', function() {
 
       pm2.describe('server-watch', function(err, d) {
         should(d[0].pm2_env.restart_time).eql(2)
-        fs.unlink(path)
+        fs.unlinkSync(path)
         return cb()
       })
     })
