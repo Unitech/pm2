@@ -1,3 +1,23 @@
+## v2.10.2 ( Thu Mar 29 2018 13:06:11 GMT+0200 (CEST) )
+
+
+## Bug Fixes
+  - reinforce pm2-runtime auto exit strategy #3567 #3206
+  ([e09cdbab](https://github.com/Unitech/pm2/commit/e09cdbabd0b479acda3cb24154bbaa071aa35407))
+
+
+
+
+## Pull requests merged
+  - Merge pull request #3569 from Unitech/pm2-runtime-hot-fix
+  ([473a2d6d](https://github.com/Unitech/pm2/commit/473a2d6d3867c617e4a41571d1780618c5025b87))
+  - Merge pull request #3547 from Unitech/revert-3532-logs-smart-app-name-cutting
+  ([438e3030](https://github.com/Unitech/pm2/commit/438e303013e82ecc199cb68d018144cde8a0b2e6))
+  - Merge pull request #3532 from N-Nagorny/logs-smart-app-name-cutting
+  ([067c18e6](https://github.com/Unitech/pm2/commit/067c18e601aca4fac10101a7c23cc4c3525ad776))
+  
+
+
 ## v2.10.1 ( Mon Feb 26 2018 11:38:18 GMT+0100 (CET) )
 
 
