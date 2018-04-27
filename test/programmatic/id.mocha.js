@@ -13,10 +13,6 @@ describe('Unique ID verification', function() {
       PM2.kill(done);
     });
 
-    before(function(done) {
-      PM2.delete('all', function() { done() });
-    });
-
     it('should connect to PM2', function(done) {
       PM2.connect(done);
     });
