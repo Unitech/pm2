@@ -1,3 +1,10 @@
+## v2.10.3 ( Fri Apr 27 2018 11:42:16 GMT+0200 (CEST) )
+
+
+### Chore
+  - upgrade for node 10
+  ([cf7630e](https://github.com/Unitech/pm2/commit/cf7630e259742bdff8257cff4dbed2732bf24f9c))
+
 ## v2.10.2 ( Thu Mar 29 2018 13:06:11 GMT+0200 (CEST) )
 
 
