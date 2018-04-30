@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@keymetrics/pmx@^2.0.0-alpha9":
+  version "2.0.0-alpha9"
+  resolved "https://registry.yarnpkg.com/@keymetrics/pmx/-/pmx-2.0.0-alpha9.tgz#1d29eaae08a6cdfc4ea4c2ac0501c50370f0c12b"
+  dependencies:
+    async "^2.6.0"
+    debug "^3.1.0"
+    deep-metrics "0.0.2"
+    deepmerge "^2.1.0"
+    json-stringify-safe "^5.0.1"
+    semver "^5.5.0"
+    signal-exit "^3.0.2"
+    tslib "^1.6.0"
+    vxx "^1.2.2"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -375,7 +389,7 @@ debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.3:
   dependencies:
     ms "2.0.0"
 
-debug@^3, debug@^3.0:
+debug@^3, debug@^3.0, debug@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
@@ -395,11 +409,21 @@ deep-extend@~0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
 
+deep-metrics@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/deep-metrics/-/deep-metrics-0.0.2.tgz#180900dea82a2c4b976be2b7684914748f5a0931"
+  dependencies:
+    semver "^5.3.0"
+
 deep-metrics@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/deep-metrics/-/deep-metrics-0.0.1.tgz#8ac3333195cc5eca059b224eb1ca61fc4cda50fd"
   dependencies:
     semver "^5.3.0"
+
+deepmerge@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.1.0.tgz#511a54fff405fc346f0240bb270a3e9533a31102"
 
 define-property@^0.2.5:
   version "0.2.5"
@@ -909,7 +933,7 @@ json-stable-stringify@^1.0.1:
   dependencies:
     jsonify "~0.0.0"
 
-json-stringify-safe@^5.0, json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0, json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -1487,7 +1511,7 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-semver@5.*, semver@^5.0.1, semver@^5.3, semver@^5.3.0:
+semver@5.*, semver@^5.0.1, semver@^5.3, semver@^5.3.0, semver@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
@@ -1567,7 +1591,7 @@ should@^13:
     should-type-adaptors "^1.0.1"
     should-util "^1.0.0"
 
-signal-exit@^3.0.0:
+signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
@@ -1760,6 +1784,10 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
+tslib@^1.6.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
+
 tunnel-agent@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.6.0.tgz#27a5dea06b36b04a0a9966774b290868f0fc40fd"
@@ -1838,7 +1866,7 @@ vizion@^0.2:
   dependencies:
     async "1.5"
 
-vxx@^1.2.0:
+vxx@^1.2.0, vxx@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/vxx/-/vxx-1.2.2.tgz#741fb51c6f11d3383da6f9b92018a5d7ba807611"
   dependencies:
