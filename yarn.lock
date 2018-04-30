@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@keymetrics/pmx@^2.0.0-alpha9":
-  version "2.0.0-alpha9"
-  resolved "https://registry.yarnpkg.com/@keymetrics/pmx/-/pmx-2.0.0-alpha9.tgz#1d29eaae08a6cdfc4ea4c2ac0501c50370f0c12b"
+"@keymetrics/pmx@^2.0.0-alpha11":
+  version "2.0.0-alpha11"
+  resolved "https://registry.yarnpkg.com/@keymetrics/pmx/-/pmx-2.0.0-alpha11.tgz#6429672ee942dc30c200acaac1e305ec30a9cb32"
   dependencies:
     async "^2.6.0"
     debug "^3.1.0"
@@ -122,7 +122,11 @@ async-listener@^0.6.0:
     semver "^5.3.0"
     shimmer "^1.1.0"
 
-async@1.5, async@^1.5:
+async@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.9.0.tgz#ac3613b1da9bed1b47510bb4651b8931e47146c7"
+
+async@^1.5:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
@@ -389,7 +393,7 @@ debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.3:
   dependencies:
     ms "2.0.0"
 
-debug@^3, debug@^3.0, debug@^3.1.0:
+debug@^3.0, debug@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
@@ -412,12 +416,6 @@ deep-extend@~0.4.0:
 deep-metrics@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/deep-metrics/-/deep-metrics-0.0.2.tgz#180900dea82a2c4b976be2b7684914748f5a0931"
-  dependencies:
-    semver "^5.3.0"
-
-deep-metrics@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/deep-metrics/-/deep-metrics-0.0.1.tgz#8ac3333195cc5eca059b224eb1ca61fc4cda50fd"
   dependencies:
     semver "^5.3.0"
 
@@ -933,7 +931,7 @@ json-stable-stringify@^1.0.1:
   dependencies:
     jsonify "~0.0.0"
 
-json-stringify-safe@^5.0, json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -960,9 +958,9 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-keymetrics-agent@^0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/keymetrics-agent/-/keymetrics-agent-0.3.5.tgz#183ad8313a620e10eed6c98ce18e6af0e386efeb"
+keymetrics-agent@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/keymetrics-agent/-/keymetrics-agent-0.4.0.tgz#9c23bb33427faaea6ed4dfdbd8316de4f3a229c9"
   dependencies:
     async "^2.6.0"
     eventemitter2 "^5.0.1"
@@ -1357,16 +1355,6 @@ pm2-multimeter@^0.1.2:
   dependencies:
     charm "~0.1.1"
 
-pmx@^1.6:
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/pmx/-/pmx-1.6.4.tgz#45a0ebbf3c302e51b7514815f09817db79afd593"
-  dependencies:
-    debug "^3"
-    deep-metrics "^0.0.1"
-    json-stringify-safe "^5.0"
-    semver "5.*"
-    vxx "^1.2.0"
-
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -1511,7 +1499,7 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-semver@5.*, semver@^5.0.1, semver@^5.3, semver@^5.3.0, semver@^5.5.0:
+semver@^5.0.1, semver@^5.3, semver@^5.3.0, semver@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
@@ -1860,13 +1848,13 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vizion@^0.2:
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/vizion/-/vizion-0.2.13.tgz#1314cdee2b34116f9f5b1248536f95dbfcd6ef5f"
+vizion@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vizion/-/vizion-0.2.0.tgz#9cfb9e710e06e7b3d0e67474d38ab6b9f6a0c55b"
   dependencies:
-    async "1.5"
+    async "0.9.0"
 
-vxx@^1.2.0, vxx@^1.2.2:
+vxx@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/vxx/-/vxx-1.2.2.tgz#741fb51c6f11d3383da6f9b92018a5d7ba807611"
   dependencies:
