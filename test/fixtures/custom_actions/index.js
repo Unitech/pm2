@@ -1,5 +1,5 @@
 
-var pmx = require('pmx');
+var pmx = require('pm2.io');
 
 pmx.action('ping', function(reply) {
   return reply({ 'pong' : 'hehe' })
