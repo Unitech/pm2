@@ -55,7 +55,12 @@ var csts = {
 
   LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
 
-  KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
+  MACHINE_NAME            : process.env.INSTANCE_NAME || process.env.MACHINE_NAME,
+  SECRET_KEY              : process.env.KEYMETRICS_SECRET || process.env.PM2_SECRET_KEY || process.env.SECRET_KEY,
+  PUBLIC_KEY              : process.env.KEYMETRICS_PUBLIC || process.env.PM2_PUBLIC_KEY || process.env.PUBLIC_KEY,
+  KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || process.env.ROOT_URL || process.env.INFO_NODE || 'root.keymetrics.io',
+
+
   KEYMETRICS_BANNER       : '../lib/motd',
   KEYMETRICS_UPDATE       : '../lib/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
