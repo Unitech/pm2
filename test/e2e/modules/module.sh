@@ -16,6 +16,8 @@ $pm2 kill
 #
 #
 
+$pm2 unset pm2-probe
+
 $pm2 set 'pm2-probe:config1xxx' true
 
 $pm2 install pm2-probe
@@ -29,11 +31,15 @@ should 'should app be online' 'online' 1
 ls ~/.pm2/modules/pm2-probe
 spec "Module should be installed"
 
+
+# Default configuration variable in package.json (under "config" attribute)
+should 'should have default config variable via package.json' "var2: false" 4
+
 #
 # Should configuration variable be present two times
 # one time in the raw env, and a second time prefixed with the module name
 #
-exists '1# should have config variable' "config1xxx: 'true'" 4
+exists '1# should have config variable' "config1xxx: 'true'" 6
 
 #
 # Change variable value
@@ -98,21 +104,18 @@ $pm2 install .
 sleep 0.5
 spec 'Should have installed module'
 
-# Default configuration variable in package.json (under "config" attribute)
-# Only 2 occurences because this is the first start
-should 'should have config variable' "var2: false" 2
 
-# Override environment variable
-$pm2 set example-module:var2 true
-sleep 0.5
-should 'should module been restarted after setting variable' 'restart_time: 1' 1
+# # Override environment variable
+# $pm2 set example-module:var2 true
+# sleep 0.5
+# should 'should module been restarted after setting variable' 'restart_time: 1' 1
 
-# 4 occurences because of a restart
-should 'should have config variable modified' "var2: 'true'" 4
+# # 4 occurences because of a restart
+# should 'should have config variable modified' "var2: 'true'" 4
 
-$pm2 set example-module:newvar true
-sleep 0.5
-should 'should module been restarted after setting variable' 'restart_time: 2' 1
+# $pm2 set example-module:newvar true
+# sleep 0.5
+# should 'should module been restarted after setting variable' 'restart_time: 2' 1
 
-# 4 occurences because of a restart
-should 'should have config variable modified' "newvar: 'true'" 4
+# # 4 occurences because of a restart
+# should 'should have config variable modified' "newvar: 'true'" 4
