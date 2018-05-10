@@ -158,7 +158,7 @@
     "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
-    "@keymetrics/pmx": "^2.0.0-alpha11",
+    "@keymetrics/pmx": "latest",
     "async": "^2.5",
     "blessed": "^0.1.81",
     "chalk": "^2.3.1",
