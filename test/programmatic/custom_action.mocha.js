@@ -5,16 +5,12 @@ var pm2 = require('../..');
 var should = require('should');
 
 describe('Custom actions via CLI/API', function() {
-  after(function(done) {
-    pm2.kill(done);
+  before(function(done) {
+    pm2.delete('all', function() { done() });
   });
 
-  before(function(done) {
-    pm2.connect(function() {
-      pm2.kill(function() {
-        pm2.connect(done);
-      })
-    });
+  after(function(done) {
+    pm2.delete('all', function() { done() });
   });
 
   it('should start custom action script', function(done) {

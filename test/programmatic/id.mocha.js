@@ -10,11 +10,11 @@ describe('Unique ID verification', function() {
     var _id = null
 
     before(function(done) {
-      PM2.kill(done);
+      PM2.delete('all', function() { done() });
     });
 
-    it('should connect to PM2', function(done) {
-      PM2.connect(done);
+    after(function(done) {
+      PM2.delete('all', function() { done() });
     });
 
     it('should start a script', function(done) {
@@ -77,14 +77,6 @@ describe('Unique ID verification', function() {
           done();
         });
       });
-    });
-
-    after(function(done) {
-      PM2.delete('all', done);
-    });
-
-    after(function(done) {
-      PM2.kill(done);
     });
   });
 });
