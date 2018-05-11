@@ -57,13 +57,12 @@ process.on('uncaughtException', function(e) {
 
 describe('PM2 BUS / RPC', function() {
   var pm2 = new PM2.custom({
-    independent : true,
     cwd         : __dirname + '/../fixtures/interface'
   });
   var pm2_bus;
 
   after(function(done) {
-    pm2.destroy(done);
+    pm2.delete('all', () => done());
   });
 
   before(function(done) {
