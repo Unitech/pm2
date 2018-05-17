@@ -1,3 +1,4 @@
+
 {
   "name": "pm2",
   "preferGlobal": true,
@@ -12,25 +13,25 @@
   },
   "author": {
     "name": "Strzelewicz Alexandre",
-    "email": "alexandre@keymetrics.io",
-    "url": "https://keymetrics.io"
+    "email": "alexandre@pm2.io",
+    "url": "https://pm2.io"
   },
   "maintainers": [
     {
-      "name": "tknew",
-      "email": "strzelewicz.alexandre@gmail.com"
+      "name": "Alexandre Strzelewicz",
+      "email": "alexandre@pm2.io"
     },
     {
-      "name": "soyuka",
-      "email": "soyuka@gmail.com"
+      "name": "Antoine Bluchet",
+      "email": "antoine@pm2.io"
     },
     {
-      "name": "wallet77",
-      "email": "wallet77@gmail.com"
+      "name": "Vincent Vallet",
+      "email": "vincent@pm2.io"
     },
     {
-      "name": "vmarchaud",
-      "email": "contact@vmarchaud.fr"
+      "name": "Valentin Marchaud",
+      "email": "valentin@pm2.io"
     }
   ],
   "contributors": [
