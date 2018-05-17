@@ -1,6 +1,6 @@
 
 
-var pmx = require('pm2.io');
+var pmx = require('@pm2/io');
 var conf = pmx.init();
 
 var http = require('http');

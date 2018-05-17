@@ -1,5 +1,5 @@
 
-var axm = require('pm2.io');
+var axm = require('@pm2/io');
 
 axm.action('refresh:db', { comment : 'Refresh the database' }, function(reply) {
   console.log('Refreshing');
