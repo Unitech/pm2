@@ -100,3 +100,25 @@ This test files are located in test/bash/*
 - `$HOME/.pm2/pm2.pid` PM2 pid
 - `$HOME/.pm2/rpc.sock` Socket file for remote commands
 - `$HOME/.pm2/pub.sock` Socket file for publishable events
+
+## Generate changelog
+
+### requirements
+
+```
+npm install git-changelog -g
+```
+
+### usage
+
+Edit .changelogrc  
+Change "version_name" to the next version to release (example 1.1.2).  
+Change "tag" to the latest existing tag (example 1.1.1).
+
+Run the following command into pm2 directory
+```
+git-changelog
+```
+
+It will generate currentTagChangelog.md file.
+Just copy/paste the result into changelog.md
