@@ -159,7 +159,7 @@
     "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
-    "pm2.io": "latest",
+    "@pm2/io": "latest",
     "async": "^2.5",
     "blessed": "^0.1.81",
     "chalk": "^2.3.1",

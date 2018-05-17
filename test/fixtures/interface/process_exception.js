@@ -1,5 +1,5 @@
 
-var axm = require('pm2.io');
+var axm = require('@pm2/io');
 
 axm.catchAll();
 

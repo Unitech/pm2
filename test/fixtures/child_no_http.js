@@ -1,4 +1,4 @@
-var pmx  = require('pm2.io').init({
+var pmx  = require('@pm2/io').init({
   http: false
 });
 
