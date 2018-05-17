@@ -20,11 +20,11 @@ $pm2 unset pm2-probe
 
 $pm2 set 'pm2-probe:config1xxx' true
 
-$pm2 install pm2-probe
+$pm2 install pm2-probe@latest
 spec "Should install a module"
 should 'should app be online' 'online' 1
 
-$pm2 install pm2-probe
+$pm2 install pm2-probe@latest
 spec "Should update a module"
 should 'should app be online' 'online' 1
 
