@@ -1,7 +1,7 @@
 
 
-var pmx = require('pmx').init({ http : true });
-var probe = pmx.probe();
+var io = require('@pm2/io').init({ http : true });
+var probe = io.probe();
 
 var http  = require('http');
 

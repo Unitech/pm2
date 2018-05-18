@@ -1,6 +1,6 @@
 
 
-var axm = require('pmx');
+var axm = require('@pm2/io');
 
 var probe = axm.probe();
 
@@ -17,7 +17,7 @@ http.createServer(function(req, res) {
   setTimeout(function() {
     res.end('transaction');
   }, 1000);
-}).listen(9010);
+}).listen(10010);
 
 setInterval(function() {
   request(['/user', '/bla', '/user/lol/delete', '/POST/POST'][Math.floor((Math.random() * 4))]);

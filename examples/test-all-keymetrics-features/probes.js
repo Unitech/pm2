@@ -1,6 +1,6 @@
 
 
-var axm = require('pmx');
+var axm = require('@pm2/io');
 
 var probe = axm.probe();
 
@@ -84,7 +84,7 @@ setInterval(function() {
 }, 1500);
 
 
-axm.catchAll();
+//axm.catchAll();
 
 axm.action('throw error', function(reply) {
   setTimeout(function() {
