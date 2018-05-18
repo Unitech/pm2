@@ -27,13 +27,8 @@
 <br/>
 </div>
 
-PM2 is a General Purpose Process Manager and a Production Runtime for Node.js apps with a built-in Load Balancer.
-
-Key features:
-- Simple and efficient process management (start/stop/restart/delete/show/monit)
-- Keep your application ALWAYS ONLINE with auto restarts and init system script generation
-- Clusterize Node.js Applications without code change to increase performance and reliability
-- Hot Reload Node.js Applications without extra configuration
+PM2 is a Production Runtime and Process Manager for Node.js applications with a built-in Load Balancer.
+It allows you to keep applications alive forever, to reload them without downtime and facilitate common Devops tasks.
 
 Starting an application in production mode is as easy as:
 
