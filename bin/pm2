@@ -566,6 +566,7 @@ commander.command('report')
 commander.command('link [secret] [public] [name]')
   .alias('interact')
   .option('--info-node [url]', 'set url info node')
+  .option('--ws', 'websocket mode')
   .description('link with the pm2 monitoring dashboard')
   .action(pm2._pre_interact.bind(pm2));
 
