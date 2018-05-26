@@ -68,7 +68,7 @@ Your app is now daemonized, monitored and kept alive forever.
 ### Container Support
 
 With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a proper production environment.
-We also offer an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
+There is also an [officialy supported Docker image](https://hub.docker.com/r/keymetrics/pm2/).
 
 Using it is seamless:
 

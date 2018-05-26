@@ -1,3 +1,32 @@
+## 2.10.4 ( Thu May 17 2018 14:32:40 GMT+0200 (CEST) )
+
+
+## Bug Fixes
+  - #3645 throttle startup
+  ([d529f675](https://github.com/Unitech/pm2/commit/d529f675d0240777cba95442ba35205c370cdb43))
+
+
+
+
+## Chore
+  - update issue and PR templates to use comments to hide instructions in the frontend
+  ([9e0180ed](https://github.com/Unitech/pm2/commit/9e0180eddab071916144ad7008817bd6aef1c8ce))
+
+
+
+
+## Pull requests merged
+  - Merge pull request #3664 from DanielRuf/chore/update-issue-pr-templates
+  ([067446f2](https://github.com/Unitech/pm2/commit/067446f2133ba7f761b0ad3c9f3692b167affd8b))
+
+
+## v2.10.3 ( Fri Apr 27 2018 11:42:16 GMT+0200 (CEST) )
+
+
+### Chore
+  - upgrade for node 10
+  ([cf7630e](https://github.com/Unitech/pm2/commit/cf7630e259742bdff8257cff4dbed2732bf24f9c))
+
 ## v2.10.2 ( Thu Mar 29 2018 13:06:11 GMT+0200 (CEST) )
 
 
@@ -15,7 +44,7 @@
   ([438e3030](https://github.com/Unitech/pm2/commit/438e303013e82ecc199cb68d018144cde8a0b2e6))
   - Merge pull request #3532 from N-Nagorny/logs-smart-app-name-cutting
   ([067c18e6](https://github.com/Unitech/pm2/commit/067c18e601aca4fac10101a7c23cc4c3525ad776))
-  
+
 
 
 ## v2.10.1 ( Mon Feb 26 2018 11:38:18 GMT+0100 (CET) )
