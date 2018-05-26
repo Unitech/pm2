@@ -158,7 +158,7 @@
     "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "keymetrics/pm2-io-agent#development",
+    "@pm2/agent": "latest",
     "@pm2/io": "latest",
     "async": "^2.6",
     "blessed": "^0.1.81",
