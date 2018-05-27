@@ -16,12 +16,12 @@ spec "Should cron restart echo.js"
 
 $pm2 delete all
 
-> mock-0.log
+> mock.log
 
 $pm2 start cron/mock-cron.js -o mock.log
 sleep 3
 should 'should app been restarted when cron in fork mode' 'restart_time: 0' 0
-cat mock-0.log | grep "SIGINT"
+cat mock.log | grep "SIGINT"
 spec "1# Should cron exit call SIGINT handler"
 
 $pm2 delete all
@@ -29,7 +29,7 @@ $pm2 delete all
 $pm2 start cron/mock-cron.js -o mock.log -i 1
 sleep 3
 should 'should app been restarted when cron in cluster mode' 'restart_time: 0' 0
-cat mock-0.log | grep "SIGINT"
+cat mock.log | grep "SIGINT"
 spec "2# Should cron exit call SIGINT handler"
 
 $pm2 delete all
@@ -38,7 +38,7 @@ $pm2 delete all
 $pm2 start cron/mock-cron-no-exit.js -o mock.log
 sleep 3
 should 'should app been restarted' 'restart_time: 0' 0
-cat mock-0.log | grep "SIGINT"
+cat mock.log | grep "SIGINT"
 spec "3# Should cron exit call SIGINT handler"
 
 
@@ -52,7 +52,7 @@ spec "Should cron restart delayed sigint"
 
 sleep 100
 
-cat cron-0.log | grep "SIGINT cb called"
+cat cron.log | grep "SIGINT cb called"
 spec "Should cron exit call SIGINT handler"
 
 should 'should app been restarted' 'restart_time: 1' 1

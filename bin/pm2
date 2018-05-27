@@ -929,9 +929,10 @@ commander.command('deepUpdate')
 //
 commander.command('serve [path] [port]')
   .alias('expose')
+  .option('--port [port]', 'specify port to listen to')
   .description('serve a directory over http via port')
-  .action(function (path, port) {
-    pm2.serve(path, port, commander);
+  .action(function (path, port, cmd) {
+    pm2.serve(path, port || cmd.port, commander);
   });
 
 commander.command('examples')

@@ -12,7 +12,7 @@ echo -e "\033[1mRunning tests:\033[0m"
 ####################################################################
 
 TEST_VARIABLE='hello1' $pm2 start startProcessInsidePm2.json
->inside-out-1.log
+>inside-out.log
 
 sleep 1
 
@@ -25,12 +25,12 @@ $pm2 list
 should 'child process should be started' 'pm_id: 1' 2
 should 'restarted status should be zero' "restart_time: 0" 2
 
-grep "hello1" inside-out-1.log &> /dev/null
+grep "hello1" inside-out.log &> /dev/null
 spec "Child should have hello1 variable"
 
 TEST_VARIABLE='hello2' $pm2 restart "insideProcess" --update-env
 sleep 1
-grep "hello2" inside-out-1.log &> /dev/null
+grep "hello2" inside-out.log &> /dev/null
 spec "Child should have hello2 variable after restart"
 
 # Call bash script that restarts app
