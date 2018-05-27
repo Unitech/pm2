@@ -18,6 +18,8 @@ spec "module safeguard system (--safe)"
 # CLI
 bash ./test/e2e/cli/reload.sh
 spec "Reload"
+bash ./test/e2e/cli/start-app.sh
+spec "Command line passing"
 bash ./test/e2e/cli/operate-regex.sh
 spec "Operate process that match regex"
 bash ./test/e2e/cli/interpreter.sh
