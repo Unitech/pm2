@@ -12,11 +12,10 @@ __/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
         _\///______________\///______________\///__\///////////////__
 
 
-                          Community Edition
+                          Runtime Edition
 
-            Production Process Manager for Node.js applications
+        PM2 is a Production Process Manager for Node.js applications
                      with a built-in Load Balancer.
-
 
                 Start and Daemonize any application:
                 $ pm2 start app.js
