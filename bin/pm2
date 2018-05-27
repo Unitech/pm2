@@ -422,6 +422,7 @@ commander.command('inspect <name>')
 // Stop and delete a process by name from database
 //
 commander.command('delete <name|id|script|all|json|stdin...>')
+  .alias('del')
   .description('stop and delete a process from pm2 process list')
   .action(function(name) {
     if (name == "-") {
