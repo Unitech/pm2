@@ -607,6 +607,12 @@ commander.command('login')
     pm2.loginToKM();
   });
 
+commander.command('logout')
+  .description('use logout from the pm2 monitoring dashboard')
+  .action(function(name) {
+    pm2.logoutToKM();
+  });
+
 //
 // Web interface
 //
