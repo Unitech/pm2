@@ -160,6 +160,7 @@
   "dependencies": {
     "@pm2/agent": "latest",
     "@pm2/io": "latest",
+    "@pm2/js-api": "latest",
     "async": "^2.6",
     "blessed": "^0.1.81",
     "chalk": "^2.4.1",
