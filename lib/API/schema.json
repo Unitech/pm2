@@ -272,21 +272,25 @@
     "type": "boolean",
     "default": true,
     "docDefault": "True",
-    "docDescription": "Only kill the main process, not detached children"  
+    "docDescription": "Only kill the main process, not detached children"
   },
   "port": {
     "type": "number",
     "docDescription": "Shortcut to inject a PORT environment variable"
   },
+  "username" : {
+    "type": "string",
+    "docDescription": "Current user that started the process"
+  },
   "uid": {
     "type" : "string",
     "docDefault": "Current user uid",
-    "docDescription": "Set user id"  
+    "docDescription": "Set user id"
   },
   "gid": {
     "type" : "string",
     "docDefault": "Current user gid",
-    "docDescription": "Set group id"  
+    "docDescription": "Set group id"
   },
   "windowsHide": {
     "type": "boolean",
