@@ -228,14 +228,14 @@ $ pm2 reloadLogs          # Reload all logs
 
 PM2 can generates and configure a startup script to keep PM2 and your processes alive at every server restart.
 
-Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD).
+Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD, OpenBSD).
 
 ```bash
 # Auto detect init system + generate and setup PM2 boot at server startup
 $ pm2 startup
 
 # Manually specify the startup system
-# Can be: systemd, upstart, launchd, rcd
+# Can be: systemd, upstart, launchd, rcd, rcd-openbsd
 $ pm2 startup [platform]
 
 # Disable and remove PM2 boot at server startup
