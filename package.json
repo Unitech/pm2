@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "3.0.0-alpha1",
+  "version": "3.0.0",
   "engines": {
     "node": ">=4.0.0"
   },
@@ -158,9 +158,9 @@
     "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "latest",
-    "@pm2/io": "latest",
-    "@pm2/js-api": "latest",
+    "@pm2/agent": "^0.5.1",
+    "@pm2/io": "^2.0.0",
+    "@pm2/js-api": "^0.5.15",
     "async": "^2.6",
     "blessed": "^0.1.81",
     "chalk": "^2.4.1",
