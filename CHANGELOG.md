@@ -4,8 +4,10 @@
 ## Breaking changes
   - merge_logs is now activated by default if not in cluster mode. Logs will not be suffixed by the pm_id if only one app is started
   ([ae02adf6](https://github.com/Unitech/pm2/commit/ae02adf63f70ceb3bf101be968996ca68d9ce277))
-
-
+  - Drop support for node 0.12
+  - Drop gracefulReload command
+  - Remove Interactor from PM2 source code
+  - Replace pmx with [pm2-io-apm](https://github.com/keymetrics/pm2-io-apm)
 
 
 ## Bug Fixes
