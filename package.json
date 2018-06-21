@@ -158,7 +158,7 @@
     "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "^0.5.1",
+    "@pm2/agent": "^0.5.2",
     "@pm2/io": "^2.0.0",
     "@pm2/js-api": "^0.5.15",
     "async": "^2.6",
