@@ -191,7 +191,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "mocha": "^3.5",
+    "mocha": "^5.2.0",
     "should": "^13"
   },
   "optionalDependencies": {
