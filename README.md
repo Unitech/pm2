@@ -9,8 +9,12 @@
   <i>Runtime Edition</i>
 <br/><br/>
 
-<a href="https://badge.fury.io/js/pm2">
+<a href="https://badge.fury.io/js/pm2" title="NPM Version Badge">
    <img src="https://badge.fury.io/js/pm2.svg" alt="npm version" height="18">
+</a>
+
+<a href="https://img.shields.io/badge/node-%3E%3D4-brightgreen.svg" title="Node Limitation">
+   <img src="https://img.shields.io/badge/node-%3E%3D4-brightgreen.svg" alt="npm version" height="18">
 </a>
 
 <a href="https://www.npmjs.com/package/pm2" title="PM2 on NPM">
