@@ -1,6 +1,6 @@
 <div align="center">
   <br/>
-  <a href="http://pm2.keymetrics.io" title="PM2 Keymetrics link">
+  <a href="http://pm2.io/doc/?utm_source=github" title="PM2 Keymetrics link">
     <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" alt="pm2 logo">
   </a>
   <br/>
@@ -38,12 +38,14 @@ $ pm2 start app.js
 
 PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unitech/pm2).
 
-Official website: [http://pm2.keymetrics.io/](http://pm2.keymetrics.io/)
+Official website: [https://pm2.io/doc/](https://pm2.io/doc/)
 
 Works on Linux (stable) & macOS (stable) & Windows (stable).
 All Node.js versions are supported starting Node.js 0.12.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
+
+[Master PM2 with the step by step Guide](https://pm2.io/doc/en/runtime/guide/)
 
 ### Installing PM2
 
@@ -63,7 +65,7 @@ $ pm2 start app.js
 
 Your app is now daemonized, monitored and kept alive forever.
 
-[More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
+[More about Process Management](https://pm2.io/doc/en/runtime/guide/process-management/?utm_source=github)
 
 ### Container Support
 
@@ -78,7 +80,7 @@ FROM keymetrics/pm2:latest-alpine
 CMD [ "pm2-runtime", "npm", "--", "start" ]
 ```
 
-[Read More about the dedicated integration](http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
+[Read More about the dedicated integration](https://pm2.io/doc/en/runtime/integration/docker/?utm_source=github)
 
 ### Managing a Process
 
@@ -112,7 +114,7 @@ To monitor logs, custom metrics, process information:
 $ pm2 monit
 ```
 
-[More about Process Management](http://pm2.keymetrics.io/docs/usage/process-management/)
+[More about Process Management](https://pm2.io/doc/en/runtime/guide/process-management/?utm_source=github)
 
 ### Cluster Mode: Node.js Load Balancing & Hot Reload
 
@@ -222,20 +224,20 @@ $ pm2 flush               # Flush all logs
 $ pm2 reloadLogs          # Reload all logs
 ```
 
-[More about log management](http://pm2.keymetrics.io/docs/usage/log-management/)
+[More about log management](https://pm2.io/doc/en/runtime/guide/log-management/?utm_source=github)
 
-### Startup script generation
+### Startup Hooks Generation
 
 PM2 can generates and configure a startup script to keep PM2 and your processes alive at every server restart.
 
-Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD).
+Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD, OpenBSD).
 
 ```bash
 # Auto detect init system + generate and setup PM2 boot at server startup
 $ pm2 startup
 
 # Manually specify the startup system
-# Can be: systemd, upstart, launchd, rcd
+# Can be: systemd, upstart, launchd, rcd, rcd-openbsd
 $ pm2 startup [platform]
 
 # Disable and remove PM2 boot at server startup
@@ -248,7 +250,7 @@ To save/freeze a process list on reboot:
 $ pm2 save
 ```
 
-[More about startup scripts](http://pm2.keymetrics.io/docs/usage/startup/)
+[More about Startup Hooks](https://pm2.io/doc/en/runtime/guide/startup-hook/?utm_source=github)
 
 ### Commands Cheatsheet
 
@@ -336,10 +338,6 @@ $ pm2 install <module_name>
 Here are some PM2 compatible modules (standalone Node.js applications managed by PM2):
 
 [**pm2-logrotate**](https://github.com/pm2-hive/pm2-logrotate) auto rotate logs of PM2 and applications managed<br/>
-[**pm2-webshell**](https://github.com/pm2-hive/pm2-webshell) expose a fully capable terminal in browsers<br/>
-[**pm2-server-monit**](https://github.com/pm2-hive/pm2-server-monit) monitor your server health<br/>
-
-[Writing your own module](http://pm2.keymetrics.io/docs/advanced/pm2-module-system/)
 
 ## Keymetrics monitoring
 
@@ -351,17 +349,6 @@ Feel free to try it:
 [Discover the monitoring dashboard for PM2](https://app.keymetrics.io/#/register)
 
 Thanks in advance and we hope that you like PM2!
-
-## More about PM2
-
-- [Application Declaration via JS files](http://pm2.keymetrics.io/docs/usage/application-declaration/)
-- [Watch & Restart](http://pm2.keymetrics.io/docs/usage/watch-and-restart/)
-- [PM2 API](http://pm2.keymetrics.io/docs/usage/pm2-api/)
-- [Deployment workflow](http://pm2.keymetrics.io/docs/usage/deployment/)
-- [PM2 on Heroku/Azure/App Engine](http://pm2.keymetrics.io/docs/usage/use-pm2-with-cloud-providers/)
-- [PM2 auto completion](http://pm2.keymetrics.io/docs/usage/auto-completion/)
-- [Using PM2 in ElasticBeanStalk](http://pm2.keymetrics.io/docs/tutorials/use-pm2-with-aws-elastic-beanstalk/)
-- [PM2 Tutorial Series](https://futurestud.io/tutorials/pm2-utility-overview-installation)
 
 ## CHANGELOG
 
