@@ -111,8 +111,8 @@ npm install git-changelog -g
 
 ### usage
 
-Edit .changelogrc  
-Change "version_name" to the next version to release (example 1.1.2).  
+Edit .changelogrc
+Change "version_name" to the next version to release (example 1.1.2).
 Change "tag" to the latest existing tag (example 1.1.1).
 
 Run the following command into pm2 directory
