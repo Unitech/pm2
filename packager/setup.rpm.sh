@@ -4,7 +4,7 @@ REPOSITORY_OWNER="Keymetrics"
 
 show_banner ()
 {
-    echo 
+    echo
     echo "__/\\\\\\\\\\\\\\\\\\\\\\\\\\____/\\\\\\\\____________/\\\\\\\\____/\\\\\\\\\\\\\\\\\\_____"
     echo " _\\/\\\\\\/////////\\\\\\_\\/\\\\\\\\\\\\________/\\\\\\\\\\\\__/\\\\\\///////\\\\\\___"
     echo "  _\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\//\\\\\\____/\\\\\\//\\\\\\_\\///______\\//\\\\\\__"
@@ -158,7 +158,7 @@ install_pm2 ()
     if [ "$CURR_USER" == "" ]; then
 	CURR_USER=$USER
     fi
-    
+
     if [ "$CURR_USER" == "root" ] || [ "$CURR_USER" == "" ]; then
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	echo "WARNING: You are either running this script as root or the"
@@ -171,7 +171,7 @@ install_pm2 ()
 	echo -n "Adding $CURR_USER to group pm2..."
 	usermod -aG pm2 $CURR_USER
 	echo "done."
-    fi    
+    fi
 }
 
 main ()
@@ -188,7 +188,7 @@ main ()
 	yum_repo_path=/etc/yum.repos.d/Keymetrics_pm2.repo
 	install_node
     fi
-    
+
     echo "Downloading repository file: ${yum_repo_config_url}"
 
     curl -sSf "${yum_repo_config_url}" > $yum_repo_path
