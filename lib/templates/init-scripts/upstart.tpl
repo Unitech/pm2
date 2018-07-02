@@ -24,7 +24,7 @@ MAX_OPEN_FILES=
 
 # overwrite settings from default file
 if [ -f "$DEFAULT" ]; then
-	  . "$DEFAULT"
+    . "$DEFAULT"
 fi
 
 # set maximum open files if set
@@ -33,7 +33,8 @@ if [ -n "$MAX_OPEN_FILES" ]; then
 fi
 
 get_user_shell() {
-    local shell=$(getent passwd ${1:-`whoami`} | cut -d: -f7 | sed -e 's/[[:space:]]*$//')
+    local shell
+    shell=$(getent passwd "${1:-$(whoami)}" | cut -d: -f7 | sed -e 's/[[:space:]]*$//')
 
     if [[ $shell == *"/sbin/nologin" ]] || [[ $shell == "/bin/false" ]] || [[ -z "$shell" ]];
     then
@@ -44,8 +45,9 @@ get_user_shell() {
 }
 
 super() {
-    local shell=$(get_user_shell $USER)
-    su - $USER -s $shell -c "PATH=$PATH; PM2_HOME=$PM2_HOME $*"
+    local shell
+    shell=$(get_user_shell $USER)
+    su - "$USER" -s "$shell" -c "PATH=$PATH; PM2_HOME=$PM2_HOME $*"
 }
 
 start() {
