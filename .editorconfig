@@ -18,7 +18,7 @@ indent_size = 2
 # YAML
 [*.yml]
 indent_style = space
-indent_size = 3
+indent_size = 2
 
 # JSON
 [*.json]
