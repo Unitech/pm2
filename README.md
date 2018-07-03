@@ -201,7 +201,7 @@ setInterval(() => {
 Then to see the metric type from in the terminal:
 
 ```bash
-$ pm2 monitor
+$ pm2 monit
 ```
 
 Metric, Counter, Histogram and Meters are [available](http://pm2.keymetrics.io/docs/usage/process-metrics/)
