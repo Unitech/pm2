@@ -172,29 +172,30 @@ $ pm2 register
 
 To get more insights on how your application behave, plug custom metrics inside your code and monitor them with the `pm2 monit` command:
 
-In your project install [pmx](https://github.com/keymetrics/pmx):
+In your project install [pm2-io-pm](https://github.com/keymetrics/pm2-io-apm):
 
 ```bash
-$ npm install pmx --save
+$ npm install @pm2/io --save
 ```
 
 Then plug a custom metric:
 
 ```javascript
-var Probe = require('pmx').probe();
+const io = require('@pm2/io');
 
-var counter = 1;
+let counter = 1;
 
-var metric = Probe.metric({
-  name    : 'Counter',
-  value   : function() {
-    return counter;
-  }
+const latency = io.metric({
+   name    : 'Counter',
+   value   : function() {
+     return counter;
+   }
 });
 
-setInterval(function() {
+setInterval(() => {
   counter++;
 }, 1000);
+
 ```
 
 Then to see the metric type from in the terminal:
