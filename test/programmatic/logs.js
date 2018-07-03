@@ -33,7 +33,8 @@ describe('Programmatic log feature test', function() {
       pm2.start({
         script: './echo.js',
         error_file : 'error-echo.log',
-        out_file   : 'out-echo.log'
+        out_file   : 'out-echo.log',
+        merge_logs: false
       }, function(err, procs) {
         should(err).be.null();
 

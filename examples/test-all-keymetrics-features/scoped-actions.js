@@ -1,7 +1,7 @@
 
-var pmx = require('pmx');
+var io = require('@pm2/io');
 
-pmx.scopedAction('simple test', function(data, emitter) {
+io.scopedAction('simple test', function(data, emitter) {
   var i = setInterval(function() {
     emitter.send('output-stream');
   }, 100);
@@ -13,7 +13,7 @@ pmx.scopedAction('simple test', function(data, emitter) {
   }, 3000);
 });
 
-pmx.scopedAction('throwing error', function(data, emitter) {
+io.scopedAction('throwing error', function(data, emitter) {
   var i = setInterval(function() {
     emitter.send('output-stream');
   }, 100);

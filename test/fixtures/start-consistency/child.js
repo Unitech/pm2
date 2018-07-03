@@ -1,5 +1,5 @@
 
-require('pmx').init({
+require('@pm2/io').init({
   http : true
 });
 

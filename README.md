@@ -17,7 +17,7 @@
    <img src="https://img.shields.io/badge/node-%3E%3D4-brightgreen.svg" alt="npm version" height="18">
 </a>
 
-<a href="https://www.npmjs.com/package/pm2" title="PM2 on NPM">
+<a href="https://npmcharts.com/compare/pm2?minimal=true" title="PM2 on NPM">
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/pm2.svg?style=flat-square"/>
 </a>
 
@@ -234,14 +234,14 @@ $ pm2 reloadLogs          # Reload all logs
 
 PM2 can generates and configure a startup script to keep PM2 and your processes alive at every server restart.
 
-Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD).
+Supports init systems like: **systemd** (Ubuntu 16, CentOS, Arch), **upstart** (Ubuntu 14/12), **launchd** (MacOSx, Darwin), **rc.d** (FreeBSD, OpenBSD).
 
 ```bash
 # Auto detect init system + generate and setup PM2 boot at server startup
 $ pm2 startup
 
 # Manually specify the startup system
-# Can be: systemd, upstart, launchd, rcd
+# Can be: systemd, upstart, launchd, rcd, rcd-openbsd
 $ pm2 startup [platform]
 
 # Disable and remove PM2 boot at server startup
@@ -294,7 +294,6 @@ $ pm2 reset [app-name]          # Reset all counters
 $ pm2 stop all                  # Stop all apps
 $ pm2 stop 0                    # Stop process with id 0
 $ pm2 restart all               # Restart all apps
-$ pm2 gracefulReload all        # Gracefully reload all apps in cluster mode
 $ pm2 delete all                # Kill and delete all apps
 $ pm2 delete 0                  # Delete app with id 0
 

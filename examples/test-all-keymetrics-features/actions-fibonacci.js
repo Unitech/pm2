@@ -47,7 +47,7 @@ function fib(n) {
 }
 
 
-var axm = require('pmx');
+var axm = require('@pm2/io');
 
 axm.action('load:start', function(reply) {
   fib(50000);

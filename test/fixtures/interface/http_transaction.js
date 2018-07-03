@@ -1,6 +1,9 @@
 
-var axm = require('pmx');
-axm.http();
+var axm = require('@pm2/io');
+
+axm.init({
+  http: true
+})
 
 var http = require('http');
 

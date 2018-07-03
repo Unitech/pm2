@@ -1,7 +1,5 @@
 
-var axm = require('pmx');
-
-axm.catchAll();
+var axm = require('@pm2/io');
 
 setTimeout(function() {
   console.log('log message from echo auto kill');

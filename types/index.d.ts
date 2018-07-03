@@ -311,7 +311,7 @@ export interface StartOptions {
    * Eg “–harmony” or [”–harmony”,”–debug”]. Only applies if interpreter is something other
    * than “none” (its “node” by default).
    */
-  interpreterArgs?: string | string[];
+  interpreter_args?: string | string[];
   /**
    * The working directory to start the process with.
    */
@@ -328,7 +328,7 @@ export interface StartOptions {
   /**
    * The display format for log timestamps (eg “YYYY-MM-DD HH:mm Z”). The format is a moment display format.
    */
-  logDateFormat?: string;
+  log_date_format?: string;
   /**
    * Default: “~/.pm2/logs/~/.pm2/pids/app_name-id.pid”)
    * The path to a file to write the pid of the started process. The file will be overwritten.
@@ -339,26 +339,26 @@ export interface StartOptions {
   /**
    * The minimum uptime of the script before it’s considered successfully started.
    */
-  minUptime?: number;
+  min_uptime?: number;
   /**
    * The maximum number of times in a row a script will be restarted if it exits in less than min_uptime.
    */
-  maxRestarts?: number;
+  max_restarts?: number;
   /**
    * If sets and script’s memory usage goes about the configured number, pm2 restarts the script.
    * Uses human-friendly suffixes: ‘K’ for kilobytes, ‘M’ for megabytes, ‘G’ for gigabytes’, etc. Eg “150M”.
    */
-  maxMemoryRestart?: number;
+  max_memory_restart?: number;
   /**
    * (Default: 1600)
    * The number of milliseconds to wait after a stop or restart command issues a SIGINT signal to kill the
    * script forceably with a SIGKILL signal.
    */
-  killTimeout?: number;
+  kill_timeout?: number;
   /**
    * (Default: 0) Number of millseconds to wait before restarting a script that has exited.
    */
-  restartDelay?: number;
+  restart_delay?: number;
   /**
    * (Default: “node”) The interpreter for your script (eg “python”, “ruby”, “bash”, etc).
    * The value “none” will execute the ‘script’ as a binary executable.
@@ -368,7 +368,7 @@ export interface StartOptions {
    * (Default: ‘fork’) If sets to ‘cluster’, will enable clustering
    * (running multiple instances of the script).
    */
-  execMode?: string;
+  exec_mode?: string;
   /**
    * (Default: 1) How many instances of script to create. Only relevant in exec_mode ‘cluster’.
    */
@@ -379,7 +379,7 @@ export interface StartOptions {
    * ‘test.js’ started via pm2, normally you would have 4 stdout log files and 4 stderr log files,
    * but with this option set to true you would only have one stdout file and one stderr file.
    */
-  mergeLogs?: boolean;
+  merge_logs?: boolean;
   /**
    * If set to true, the application will be restarted on change of the script file.
    */
@@ -391,10 +391,10 @@ export interface StartOptions {
    */
   force?: boolean;
   cron?: any;
-  executeCommand?: any;
+  execute_command?: any;
   write?: any;
-  sourceMapSupport?: any;
-  disableSourceMapSupport?: any;
+  source_map_support?: any;
+  disable_source_map_support?: any;
   /**
    * The environment variables to pass on to the process.
    */
