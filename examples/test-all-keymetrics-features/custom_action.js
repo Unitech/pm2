@@ -1,5 +1,5 @@
 
-var axm = require('pmx');
+var axm = require('@pm2/io');
 
 axm.action('getEnv', function(reply) {
   reply(process.env);

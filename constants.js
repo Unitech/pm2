@@ -8,7 +8,6 @@ var debug  = require('debug')('pm2:conf');
 var p      = require('path');
 var util   = require('util');
 var chalk  = require('chalk');
-var semver = require('semver');
 
 /**
  * Get PM2 path structure
@@ -28,7 +27,7 @@ var csts = {
 
   TEMPLATE_FOLDER         : p.join(__dirname, 'lib/templates'),
 
-  APP_CONF_DEFAULT_FILE   : 'ecosystem.json',
+  APP_CONF_DEFAULT_FILE   : 'ecosystem.config.js',
   APP_CONF_TPL            : 'ecosystem.tpl',
   APP_CONF_TPL_SIMPLE     : 'ecosystem-simple.tpl',
   SAMPLE_CONF_FILE        : 'sample-conf.js',
@@ -55,7 +54,12 @@ var csts = {
 
   LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
 
-  KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || 'root.keymetrics.io',
+  MACHINE_NAME            : process.env.INSTANCE_NAME || process.env.MACHINE_NAME,
+  SECRET_KEY              : process.env.KEYMETRICS_SECRET || process.env.PM2_SECRET_KEY || process.env.SECRET_KEY,
+  PUBLIC_KEY              : process.env.KEYMETRICS_PUBLIC || process.env.PM2_PUBLIC_KEY || process.env.PUBLIC_KEY,
+  KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || process.env.ROOT_URL || process.env.INFO_NODE || 'root.keymetrics.io',
+
+
   KEYMETRICS_BANNER       : '../lib/motd',
   KEYMETRICS_UPDATE       : '../lib/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
@@ -74,10 +78,7 @@ var csts = {
 
   // Concurrent actions when doing start/restart/reload
   CONCURRENT_ACTIONS      : (function() {
-    var default_concurrent_actions = 1;
-    if (semver.satisfies(process.versions.node, '>= 4.0.0'))
-      default_concurrent_actions = 2;
-    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || default_concurrent_actions;
+    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 2;
     debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
     return concurrent_actions;
   })(),
@@ -91,7 +92,7 @@ var csts = {
   WORKER_INTERVAL         : process.env.PM2_WORKER_INTERVAL || 30000,
   KILL_TIMEOUT            : process.env.PM2_KILL_TIMEOUT || 1600,
   PM2_PROGRAMMATIC        : typeof(process.env.pm_id) !== 'undefined' || process.env.PM2_PROGRAMMATIC,
-  PM2_LOG_DATE_FORMAT     : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DD HH:mm:ss'
+  PM2_LOG_DATE_FORMAT     : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]'
 
 };
 

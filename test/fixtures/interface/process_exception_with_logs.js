@@ -1,5 +1,5 @@
 
-var pmx = require('pmx');
+var pmx = require('@pm2/io');
 
 pmx.action('exception', function(reply) {
   console.log('Im going to crash');

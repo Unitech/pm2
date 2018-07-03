@@ -1,6 +1,5 @@
 
 var should = require('should');
-var Ipm2   = require('../../lib/Interactor/pm2-interface');
 var PM2    = require('../..');
 var Plan   = require('../helpers/plan.js');
 
@@ -60,13 +59,12 @@ process.on('uncaughtException', function(e) {
 
 describe('PM2 BUS / RPC', function() {
   var pm2 = new PM2.custom({
-    independent : true,
     cwd         : __dirname + '/../fixtures/interface'
   });
   var pm2_bus;
 
   after(function(done) {
-    pm2.destroy(done);
+    pm2.delete('all', () => done());
   });
 
   before(function(done) {
@@ -169,20 +167,6 @@ describe('PM2 BUS / RPC', function() {
       });
 
       pm2.start('./human_event.js', {instances : 1}, function(err, data) {
-        should(err).be.null();
-      });
-    });
-
-    it('should (transaction:http)', function(done) {
-      pm2_bus.on('*', function(event, data) {
-        if (event == 'http:transaction') {
-          data.should.have.properties(TRANSACTION_HTTP_EVENT);
-          data.process.should.have.properties(PROCESS_ARCH);
-          done();
-        }
-      });
-
-      pm2.start('./http_transaction.js', {instances : 1}, function(err, data) {
         should(err).be.null();
       });
     });
