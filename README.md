@@ -252,7 +252,7 @@ Or go to the application and create an account:
 ![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png)
 
 <div align="center">
-    <a title="PM2 Plus Application" href="https://app.pm2.io/">To discover PM2 Plus Register Here</a>
+    <a title="PM2 Plus Application" href="https://app.pm2.io/"><img src="https://raw.githubusercontent.com/Unitech/pm2/development/pres/bttn.png"/></a>
 </div>
 
 ### PM2 Plus: Expose Custom Metrics
