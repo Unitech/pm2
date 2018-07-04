@@ -6,7 +6,7 @@ var assert = require('assert');
  * @method Plan
  * @param {} count
  * @param {} done
- * @return 
+ * @return
  */
 function Plan(count, done) {
   this.done = done;
@@ -17,7 +17,7 @@ function Plan(count, done) {
  * Description
  * @method ok
  * @param {} expression
- * @return 
+ * @return
  */
 Plan.prototype.ok = function(expression) {
   assert(expression);

@@ -14,7 +14,7 @@ pipeline:
       - ./packager/publish_deb_rpm.sh
     secrets: ['packagecloud_token']
     when:
-      event: tag          
+      event: tag
   build_apk:
     group: build
     image: keymetrics/alpine-pm2-builder:latest
@@ -22,4 +22,4 @@ pipeline:
       - AWS_REPO_BUCKET=alpine-apk.pm2.io
     secrets: ['apk_rsa_priv_key', 'apk_rsa_pub_key', 'aws_access_key_id', 'aws_secret_access_key']
     when:
-      event: tag          
+      event: tag
