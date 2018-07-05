@@ -2,7 +2,7 @@
 ## Coffee Script
 
 ```
-$ pm2 install coffee-script
+$ pm2 install coffeescript
 $ pm2 start echo.coffee
 ```
 

@@ -5,7 +5,7 @@ source "${SRC}/../include.sh"
 
 cd $file_path/interpreter
 
-rm -rf ../../../node_modules/coffee-script/
+rm -rf ../../../node_modules/coffeescript/
 rm -rf ../../../node_modules/livescript/
 rm -rf ../../../node_modules/ts-node/
 
@@ -17,7 +17,7 @@ should 'process should be errored without coffee installed' "status: 'errored'" 
 
 ########### Install
 
-$pm2 install coffee-script
+$pm2 install coffeescript
 
 ########### coffee fork test
 $pm2 delete all
