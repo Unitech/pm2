@@ -562,7 +562,7 @@ commander.command('report')
   });
 
 //
-// Keymetrics CLI integratio
+// PM2 I/O
 //
 commander.command('link [secret] [public] [name]')
   .alias('interact')
