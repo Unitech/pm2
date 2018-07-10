@@ -596,6 +596,7 @@ commander.command('open')
   });
 
 commander.command('register')
+  .alias('plus')
   .description('register on pm2 monitoring')
   .action(function(name) {
     pm2.registerToKM();
