@@ -565,7 +565,6 @@ commander.command('report')
 // PM2 I/O
 //
 commander.command('link [secret] [public] [name]')
-  .alias('interact')
   .option('--info-node [url]', 'set url info node')
   .option('--ws', 'websocket mode')
   .description('link with the pm2 monitoring dashboard')
@@ -595,15 +594,47 @@ commander.command('open')
     pm2.openDashboard();
   });
 
-commander.command('register')
-  .alias('plus')
-  .description('register on pm2 monitoring')
-  .action(function(name) {
-    pm2.registerToKM();
+commander.command('plus [secret] [public] [name]')
+  .alias('register')
+  .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
+  .option('-d --discrete', 'silent mode')
+  .option('-a --install-all', 'install all modules (force yes)')
+  .description('enable pm2 plus')
+  .action(function(sec, pub, name, _opts) {
+    var opts = {
+      infoNode: _opts.infoNode,
+      discrete: _opts.discrete,
+      installAll: _opts.installAll,
+      public: pub,
+      secret: sec,
+      name: name,
+      ws: true
+    }
+
+    if (sec == 'delete') {
+      return pm2._pre_interact('delete', null, null, opts, function(err, dt) {
+        pm2.clearSetup(opts, function() {
+          console.log(chalk.green('[PM2.IO]') + ' Agent disabled, modules removed, monitoring disabled');
+          setTimeout(function() {
+            pm2.speedList()
+          }, 1000)
+        })
+      })
+    }
+
+    if (opts.public && opts.secret)
+      pm2._pre_interact(opts.secret, opts.public, opts.name, opts, function(err, dt) {
+        pm2.minimumSetup(opts, function() {
+          console.log(chalk.green('[PM2.IO]') + ' Remote dashboard: https://app.pm2.io/#/r/' + dt.public_key);
+          pm2.speedList()
+        })
+      })
+    else
+      pm2.registerToKM(opts);
   });
 
 commander.command('login')
-  .description('use login to link with the pm2 monitoring dashboard')
+  .description('[DEPRECATED] use plus command instead')
   .action(function(name) {
     pm2.loginToKM();
   });
