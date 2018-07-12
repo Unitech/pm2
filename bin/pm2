@@ -611,13 +611,19 @@ commander.command('plus [secret] [public] [name]')
       ws: true
     }
 
+    if (sec == null && pub == null) {
+      return pm2._pre_interact(null, null, null, opts, function(err, dt) {
+        pm2.speedList()
+      })
+    }
+
     if (sec == 'delete') {
       return pm2._pre_interact('delete', null, null, opts, function(err, dt) {
         pm2.clearSetup(opts, function() {
           console.log(chalk.green('[PM2.IO]') + ' Agent disabled, modules removed, monitoring disabled');
           setTimeout(function() {
             pm2.speedList()
-          }, 1000)
+          }, 300)
         })
       })
     }
