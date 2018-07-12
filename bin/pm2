@@ -611,7 +611,7 @@ commander.command('plus [secret] [public] [name]')
       ws: true
     }
 
-    if (sec == null && pub == null) {
+    if (sec == 'link' || sec == 'relink') {
       return pm2._pre_interact(null, null, null, opts, function(err, dt) {
         pm2.speedList()
       })
