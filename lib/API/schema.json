@@ -304,5 +304,9 @@
   },
   "write": {
     "type": "boolean"
+  },
+  "priority": {
+    "type": "number",
+    "docDescription": "Start/restart script priority"
   }
 }
