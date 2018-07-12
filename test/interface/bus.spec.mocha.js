@@ -171,20 +171,6 @@ describe('PM2 BUS / RPC', function() {
       });
     });
 
-    it('should (transaction:http)', function(done) {
-      pm2_bus.on('*', function(event, data) {
-        if (event == 'http:transaction') {
-          data.should.have.properties(TRANSACTION_HTTP_EVENT);
-          data.process.should.have.properties(PROCESS_ARCH);
-          done();
-        }
-      });
-
-      pm2.start('./http_transaction.js', {instances : 1}, function(err, data) {
-        should(err).be.null();
-      });
-    });
-
   });
 
 });

@@ -308,5 +308,9 @@
   "priority": {
     "type": "number",
     "docDescription": "Start/restart script priority"
+  },
+  "io": {
+    "type": "object",
+    "docDescription": "Specify apm values and configuration"
   }
 }
