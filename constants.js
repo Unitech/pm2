@@ -63,8 +63,8 @@ var csts = {
   KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || process.env.ROOT_URL || process.env.INFO_NODE || 'root.keymetrics.io',
 
 
-  PM2_BANNER       : './lib/motd',
-  PM2_UPDATE       : './lib/API/pm2-plus/pres/motd.update',
+  PM2_BANNER       : '../lib/motd',
+  PM2_UPDATE       : '../lib/API/pm2-plus/pres/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
 
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
