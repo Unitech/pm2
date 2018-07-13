@@ -615,7 +615,7 @@ commander.command('plus [secret] [public] [name]')
     if (!name)
       opts.name = require('os').hostname() + '-' + require('crypto').randomBytes(2).toString('hex')
 
-    if (sec == null && pub == null) {
+    if (sec == 'link' || sec == 'relink') {
       return pm2._pre_interact(null, null, null, opts, function(err, dt) {
         pm2.speedList()
       })
