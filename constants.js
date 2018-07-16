@@ -25,6 +25,9 @@ var csts = {
   PREFIX_MSG_WARNING      : chalk.yellow('[PM2][WARN] '),
   PREFIX_MSG_SUCCESS      : chalk.cyan('[PM2] '),
 
+  PM2_IO_MSG : chalk.cyan('[PM2 I/O] '),
+  PM2_IO_MSG_ERR : chalk.red('[PM2 I/O] '),
+
   TEMPLATE_FOLDER         : p.join(__dirname, 'lib/templates'),
 
   APP_CONF_DEFAULT_FILE   : 'ecosystem.config.js',
@@ -60,8 +63,8 @@ var csts = {
   KEYMETRICS_ROOT_URL     : process.env.KEYMETRICS_NODE || process.env.ROOT_URL || process.env.INFO_NODE || 'root.keymetrics.io',
 
 
-  KEYMETRICS_BANNER       : '../lib/motd',
-  KEYMETRICS_UPDATE       : '../lib/motd.update',
+  PM2_BANNER       : '../lib/motd',
+  PM2_UPDATE       : '../lib/API/pm2-plus/pres/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
 
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
