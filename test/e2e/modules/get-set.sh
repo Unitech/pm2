@@ -19,6 +19,6 @@ spec "Should key exists"
 
 $pm2 unset key1
 cat ~/.pm2/module_conf.json | grep "key1"
-ispec "Should key not exists"
+ispec "Should key does not exist"
 
 rm -rf ~/.pm2

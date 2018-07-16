@@ -66,7 +66,7 @@ $pm2 start throw-later.js -i 1 -o out.log -e err.log -l entire.log
 
 test
 
-head ">> START CLUSTERMODE (ENTIRE DO NOT EXISTS)"
+head ">> START CLUSTERMODE (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -i 1 -o out.log -e err.log
 
@@ -78,7 +78,7 @@ $pm2 start throw-later.js -i 1 -o out.log -e err.log -l entire.log --merge-logs
 
 test
 
-head ">> START CLUSTERMODE WITH --merge-logs (ENTIRE DO NOT EXISTS)"
+head ">> START CLUSTERMODE WITH --merge-logs (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -i 1 -o out.log -e err.log --merge-logs
 
@@ -91,7 +91,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log
 
 test
 
-head ">> START FORKMODE (ENTIRE DO NOT EXISTS)"
+head ">> START FORKMODE (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log
 
@@ -103,7 +103,7 @@ $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 
 test
 
-head ">> START FORKMODE WITH --merge-logs (ENTIRE DO NOT EXISTS)"
+head ">> START FORKMODE WITH --merge-logs (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
@@ -117,7 +117,7 @@ $pm2 reloadLogs
 
 test
 
-head ">> RELOAD LOGS (ENTIRE DO NOT EXISTS)"
+head ">> RELOAD LOGS (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
@@ -133,7 +133,7 @@ $pm2 restart all
 
 test
 
-head ">> RESTART (ENTIRE DO NOT EXISTS)"
+head ">> RESTART (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
@@ -149,7 +149,7 @@ $pm2 reload all
 
 test
 
-head ">> RELOAD (ENTIRE DO NOT EXISTS)"
+head ">> RELOAD (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
@@ -166,12 +166,12 @@ spec "\"entire log path\" should exists."
 
 test
 
-head ">> DESCRIBE (ENTIRE DO NOT EXISTS)"
+head ">> DESCRIBE (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
 $pm2 desc "throw-later" | grep -w "entire log path"
-ispec "\"entire log path\" should not exists."
+ispec "\"entire log path\" should not exist."
 
 test "NE"
 
@@ -183,7 +183,7 @@ $pm2 flush
 
 test
 
-head ">> FLUSH (ENTIRE DO NOT EXISTS)"
+head ">> FLUSH (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
@@ -200,12 +200,12 @@ spec "\"entire log path\" should exists."
 
 test
 
-head ">> JLIST (ENTIRE DO NOT EXISTS)"
+head ">> JLIST (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
 $pm2 jlist | grep -w "pm_log_path"
-ispec "\"entire log path\" should not exists."
+ispec "\"entire log path\" should not exist."
 
 test "NE"
 
@@ -215,7 +215,7 @@ $pm2 start throw-later.json
 
 test
 
-head ">> START JSON (ENTIRE DO NOT EXISTS)"
+head ">> START JSON (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later1.json
 
