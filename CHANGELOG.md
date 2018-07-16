@@ -920,7 +920,7 @@ pm2.destroy(cb)    // Close and delete all pm2 related files of this session
 - keymetrics linking after pm2 update is done once all apps are started
 - pm2 list processes are now sorted by name instead id
 - #2248 livescript support added in development mode
-- The client/server file called Satan.js does not exists anymore. It has been replaced by the file combo ./lib/Client.js and ./lib/Daemon.js
+- The client/server file called Satan.js does not exist anymore. It has been replaced by the file combo ./lib/Client.js and ./lib/Daemon.js
 - PM2 --no-daemon is better now
 
 ### Breaking change
