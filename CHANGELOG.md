@@ -1,3 +1,129 @@
+## 3.0.1 ( Fri Jul 20 2018 14:13:39 GMT+0200 (CEST) )
+
+
+## Bug Fixes
+  - disable network monitoring as long as ampq not supported
+  ([ae1547bf](https://github.com/Unitech/pm2/commit/ae1547bfa9505b2d13e30df39ce614eee29463b0))
+  - display error message from pm2-deploy
+  ([9171b810](https://github.com/Unitech/pm2/commit/9171b81024641c3e104f3eeb2e2c6eb852dbe7f4))
+  - protect geteuid/getegid from being called on windows #3793
+  ([0495bd8e](https://github.com/Unitech/pm2/commit/0495bd8e4ffaeb1db729b35fa569696145d79c5f))
+  - put message module at the right level
+  ([56f5e047](https://github.com/Unitech/pm2/commit/56f5e04787da29e8b582bf4fa8325f72404a2fbe))
+  - do not ignore child pres folder
+  ([10ee9987](https://github.com/Unitech/pm2/commit/10ee99876d75679723e1e8522da07413a618e48c))
+  - let->var
+  ([89e2a125](https://github.com/Unitech/pm2/commit/89e2a125c22aee27014c279c86d1d9e0a0df0235))
+  - method renaming
+  ([f3faa3d8](https://github.com/Unitech/pm2/commit/f3faa3d846d1e895232743dd619f5ecb15fdf7ad))
+  - path
+  ([4f980550](https://github.com/Unitech/pm2/commit/4f9805508d2c1c575aabc4abbab25728f1c6a28a))
+  - #3791 mitigate pidusage errores
+  ([88551b8c](https://github.com/Unitech/pm2/commit/88551b8cfe8bf8dd330d582e71b808faadfaf161))
+  - pm2 plus
+  ([9bc34e56](https://github.com/Unitech/pm2/commit/9bc34e56b7ad66cbc6efbd26d4017f1e1813a720))
+  - #3764
+  ([3a582b42](https://github.com/Unitech/pm2/commit/3a582b42f9cca57779b99964c95a2cd0516efa11))
+  - drop coffee-script (installed via pm2 install coffeescript)
+  ([76ceb2fd](https://github.com/Unitech/pm2/commit/76ceb2fd52a2e5acbf03deacc3fa8a120a197023))
+  - restore no_interaction for pm2-dev
+  ([902e5a5a](https://github.com/Unitech/pm2/commit/902e5a5a1225d2072ab6337aa067caf9c6a7cca4))
+  - option -w doesn't work
+  ([165a05c8](https://github.com/Unitech/pm2/commit/165a05c854f9b3dd1418b988c954d333f81ba88f))
+  - retab shell script to use space for indent consistency
+  ([e3b4327d](https://github.com/Unitech/pm2/commit/e3b4327d9a6120c5ad589734ca926d3b49a8b706))
+  - set Makefile indent to tab instead of common space
+  ([4db0ae01](https://github.com/Unitech/pm2/commit/4db0ae011c161cbfca9e250da40deff9fdc36069))
+  - set yaml file indent to 2 spaces instead of 3
+  ([e4ecb0b2](https://github.com/Unitech/pm2/commit/e4ecb0b29dbcc4c6ca2d67b6bdc7da4c0a5d17a5))
+  - remove trailing spaces
+  ([5c115983](https://github.com/Unitech/pm2/commit/5c1159832680231bff5da79f1c91caf32ce3b5e0))
+  - fixes #3735
+  ([0548cb82](https://github.com/Unitech/pm2/commit/0548cb82aa1193a5725ca22e1babfc38db2e3b77))
+
+
+
+
+## Hot Fixes
+  - fix #3767, do not consider as a command if space and slash are found
+  ([d15a12ce](https://github.com/Unitech/pm2/commit/d15a12ceae8b0c9c27625180ae002178b0bfe5d0))
+  - fix #3767, do not consider as a command if space and slash are found
+  ([f8ec1503](https://github.com/Unitech/pm2/commit/f8ec1503c3e92bc0dec10d395ac682b116e2914e))
+
+
+
+
+## Test
+  - test with development packages
+  ([d361c840](https://github.com/Unitech/pm2/commit/d361c8405db47969bd68c7b1058a54f38e8e0e52))
+
+
+
+
+## Chore
+  - bump to 3.0.1
+  ([fb8357e3](https://github.com/Unitech/pm2/commit/fb8357e32f9f015e5b6e7ed8ef150f59de382c6d))
+  - new ascii logo + refactor pm2 plus command
+  ([8692a1da](https://github.com/Unitech/pm2/commit/8692a1daf7b4b7dfb8a4d6ec3363ac0cc62203a8))
+  - change motd.update + alias register to pm2 plus
+  ([cdc4a767](https://github.com/Unitech/pm2/commit/cdc4a767d5f1ff5873d0466b471daa3006608604))
+  - btn
+  ([319fa0dc](https://github.com/Unitech/pm2/commit/319fa0dcbea331a88a9888c207368e52665309ce))
+  - README button
+  ([1c6fb68c](https://github.com/Unitech/pm2/commit/1c6fb68c758d76cf81e53c43c2423ecd742265e5))
+  - remove duplicate configs in .editorconfig
+  ([86ad52b8](https://github.com/Unitech/pm2/commit/86ad52b837e23a7ec92705d21a152394c244571f))
+
+
+
+
+## Branchs merged
+  - Merge branch 'development' into uid-gen
+  ([5324c878](https://github.com/Unitech/pm2/commit/5324c878fd0d37e068bc25c8e37f19f73bfebf30))
+  - Merge branch 'master' into development
+  ([7d04f638](https://github.com/Unitech/pm2/commit/7d04f63835845e92d32d6ad7ffab166a2954302f))
+
+
+
+
+## Pull requests merged
+  - Merge pull request #3801 from vkotovv/grammar-fixes
+  ([9bb37a66](https://github.com/Unitech/pm2/commit/9bb37a662a91369caaa5a1a43751541e41970a51))
+  - Merge pull request #3799 from Unitech/refactor-agent
+  ([bcc4fea8](https://github.com/Unitech/pm2/commit/bcc4fea80885ce941e11b17936aab6582660fc7f))
+  - Merge pull request #3787 from Unitech/multi-only
+  ([ea5d74a8](https://github.com/Unitech/pm2/commit/ea5d74a87f6911b238634419665c716bc877be10))
+  - Merge pull request #3788 from Unitech/uid-gen
+  ([f70444f3](https://github.com/Unitech/pm2/commit/f70444f39b7cc8fe05faf57dac1b46fc15a2053c))
+  - Merge pull request #3784 from Unitech/pm2-plus-cli
+  ([e8c13c37](https://github.com/Unitech/pm2/commit/e8c13c374dfeabf42f75af50b838adb7ac4a50aa))
+  - Merge pull request #3780 from Unitech/plus_modules
+  ([466d2701](https://github.com/Unitech/pm2/commit/466d2701ca48d0c4b8466d6867135e43b22deeb5))
+  - Merge pull request #3768 from Unitech/spaces
+  ([0477354b](https://github.com/Unitech/pm2/commit/0477354b502aef612012e833bd47ce1940da1a0b))
+  - Merge pull request #3771 from chinesedfan/patch-2
+  ([8de987a6](https://github.com/Unitech/pm2/commit/8de987a604679774ec39e7d5a1a905556524c53d))
+  - Merge pull request #3762 from shaharmor/issue-3441
+  ([429e455d](https://github.com/Unitech/pm2/commit/429e455db96d2a56448a11b7602333324c9bf433))
+  - Merge pull request #3761 from PeterDaveHello/fix-sh-indent-style
+  ([24cddc25](https://github.com/Unitech/pm2/commit/24cddc257734beebb33ee5abac5a4107a5d86093))
+  - Merge pull request #3737 from morugu/add-node-env-output
+  ([6628f163](https://github.com/Unitech/pm2/commit/6628f1637497771bbc5c4f0ba0e9423c63660e0e))
+  - Merge pull request #3743 from vivex/master
+  ([06872c25](https://github.com/Unitech/pm2/commit/06872c2520f73bcabb6198a96c4dafb46706c9e9))
+  - Merge pull request #3748 from JimiC/support_nvm4win
+  ([2dac235b](https://github.com/Unitech/pm2/commit/2dac235bc8956d170fee2341517739d3781048d7))
+  - Merge pull request #3752 from PeterDaveHello/upstart.tpl
+  ([d4e66e3a](https://github.com/Unitech/pm2/commit/d4e66e3a9d954ab5c15d5bc35910cdfb71ba8321))
+  - Merge pull request #3753 from PeterDaveHello/fix-editorconfig
+  ([d1478680](https://github.com/Unitech/pm2/commit/d1478680325822c206afbcb197a9a732318f6d64))
+  - Merge pull request #3754 from PeterDaveHello/remove-trailing-space
+  ([b660f03e](https://github.com/Unitech/pm2/commit/b660f03eba71bb80a1a3d313be4525160727921f))
+
+
+
+
+
 ## 3.0.0 ( Wed Jun 20 2018 11:06:21 GMT+0200 (CEST) )
 
 
