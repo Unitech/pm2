@@ -307,7 +307,11 @@
   },
   "priority": {
     "type": "number",
-    "docDescription": "Start/restart script priority"
+    "docDescription": "Start/restart process priority"
+  },
+  "stop_priority": {
+    "type": "number",
+    "docDescription": "Stop process priority"
   },
   "io": {
     "type": "object",
