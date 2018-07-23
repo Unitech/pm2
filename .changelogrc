@@ -19,7 +19,7 @@
         },
         {
             "title": "Features",
-            "grep": "^feat"
+            "grep": "^feature"
         },
         {
             "title": "Documentation",

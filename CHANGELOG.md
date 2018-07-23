@@ -1,7 +1,9 @@
-## 3.0.1 ( Fri Jul 20 2018 14:13:39 GMT+0200 (CEST) )
+## 3.0.1 ( Mon Jul 23 2018 14:13:35 GMT+0200 (CEST) )
 
 
 ## Bug Fixes
+  - allow to set a name via pm2 link
+  ([ebffb609](https://github.com/Unitech/pm2/commit/ebffb609cf4da195c72ee67d8341c63b78f0654e))
   - disable network monitoring as long as ampq not supported
   ([ae1547bf](https://github.com/Unitech/pm2/commit/ae1547bfa9505b2d13e30df39ce614eee29463b0))
   - display error message from pm2-deploy
@@ -53,6 +55,25 @@
 
 
 
+## Features
+  - add inspector for node 10 and heap snapshot
+  ([dc61bca6](https://github.com/Unitech/pm2/commit/dc61bca66828c16cf6fd04a6f749f127da697cec))
+  - pm2 plus xx yy now generates a name with hostname-UID
+  ([fcf75e2c](https://github.com/Unitech/pm2/commit/fcf75e2cc321791273f6afe86c07fd147c6e8414))
+  - #3757 --only='app1,app2'
+  ([bea98330](https://github.com/Unitech/pm2/commit/bea983306c4736d3a2b1090f2708b7b29c44ed03))
+  - pm2 plus cli
+  ([1da6edde](https://github.com/Unitech/pm2/commit/1da6edde80e3029d99084992ec1a4ada7b2cc279))
+  - reload all apps after connection to pm2 plus
+  ([35a1ed2a](https://github.com/Unitech/pm2/commit/35a1ed2a1328a859a7797ec8e22024d171599d86))
+  - ask to install module after connection with KM
+  ([68e87b39](https://github.com/Unitech/pm2/commit/68e87b39ae2b57e9fbb0b0abde68112c839f05ee))
+  - with pm2 plus command ask to install modules
+  ([28c61716](https://github.com/Unitech/pm2/commit/28c61716ee5e8f2402205e4b06ed7ee0a942a3cc))
+
+
+
+
 ## Test
   - test with development packages
   ([d361c840](https://github.com/Unitech/pm2/commit/d361c8405db47969bd68c7b1058a54f38e8e0e52))
@@ -61,6 +82,10 @@
 
 
 ## Chore
+  - clean old snapshot method
+  ([d064750b](https://github.com/Unitech/pm2/commit/d064750be0d437945efdcd6a5ce4e56547b1bce6))
+  - update version to 3.0.1
+  ([efbcb021](https://github.com/Unitech/pm2/commit/efbcb02180ae38dd930e43282113dbcb24288eab))
   - bump to 3.0.1
   ([fb8357e3](https://github.com/Unitech/pm2/commit/fb8357e32f9f015e5b6e7ed8ef150f59de382c6d))
   - new ascii logo + refactor pm2 plus command
@@ -87,6 +112,8 @@
 
 
 ## Pull requests merged
+  - Merge pull request #3811 from Unitech/memory_inspector
+  ([62018044](https://github.com/Unitech/pm2/commit/62018044d7a1ef7fd0b37fe3082da4bf05989de0))
   - Merge pull request #3801 from vkotovv/grammar-fixes
   ([9bb37a66](https://github.com/Unitech/pm2/commit/9bb37a662a91369caaa5a1a43751541e41970a51))
   - Merge pull request #3799 from Unitech/refactor-agent
@@ -119,6 +146,7 @@
   ([d1478680](https://github.com/Unitech/pm2/commit/d1478680325822c206afbcb197a9a732318f6d64))
   - Merge pull request #3754 from PeterDaveHello/remove-trailing-space
   ([b660f03e](https://github.com/Unitech/pm2/commit/b660f03eba71bb80a1a3d313be4525160727921f))
+
 
 
 
