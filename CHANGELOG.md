@@ -1,6 +1,5 @@
 ## 3.0.1 ( Mon Jul 23 2018 14:13:35 GMT+0200 (CEST) )
 
-
 ## Bug Fixes
   - allow to set a name via pm2 link
   ([ebffb609](https://github.com/Unitech/pm2/commit/ebffb609cf4da195c72ee67d8341c63b78f0654e))
