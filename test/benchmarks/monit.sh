@@ -6,7 +6,7 @@ export RESULT_FILE=$RESULT_FILE
 
 launch() {
     echo "========= `date`" >> $RESULT_FILE
-    nohup ./monit-daemon.sh &> monit.log &    
+    nohup ./monit-daemon.sh &> monit.log &
 }
 
 ppkill() {

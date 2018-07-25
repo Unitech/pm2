@@ -311,7 +311,7 @@ check_vendor_prefix()
 check_output_file()
 {
     # if the file exists, check if it is writeable
-    # if it does not exists, check if we are allowed to write on the directory
+    # if it does not exist, check if we are allowed to write on the directory
     if [ -e "$1" ]; then
         if [ ! -w "$1" ]; then
             exit_failure_file_permission_write "no permission to write to file '$1'"
@@ -415,7 +415,7 @@ detectDE()
            DE=gnome;
            ;;
          LXDE|Lubuntu)
-           DE=lxde; 
+           DE=lxde;
            ;;
          MATE)
            DE=mate;
@@ -428,7 +428,7 @@ detectDE()
 
     if [ x"$DE" = x"" ]; then
       # fallback to uname output for other platforms
-      case "$(uname 2>/dev/null)" in 
+      case "$(uname 2>/dev/null)" in
         Darwin)
           DE=darwin;
           ;;
