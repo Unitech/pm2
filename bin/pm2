@@ -197,7 +197,7 @@ if (_arr.indexOf('--no-daemon') > -1) {
   // Start daemon if it does not exist
   //
   // Function checks if --no-daemon option is present,
-  // and starts daemon in the same process if it does not exists
+  // and starts daemon in the same process if it does not exist
   //
   console.log('pm2 launched in no-daemon mode (you can add DEBUG="*" env variable to get more messages)');
 
@@ -562,14 +562,13 @@ commander.command('report')
   });
 
 //
-// Keymetrics CLI integratio
+// PM2 I/O
 //
 commander.command('link [secret] [public] [name]')
-  .alias('interact')
   .option('--info-node [url]', 'set url info node')
   .option('--ws', 'websocket mode')
   .description('link with the pm2 monitoring dashboard')
-  .action(pm2._pre_interact.bind(pm2));
+  .action(pm2.linkManagement.bind(pm2));
 
 commander.command('unlink')
   .description('unlink with the pm2 monitoring dashboard')
@@ -595,16 +594,75 @@ commander.command('open')
     pm2.openDashboard();
   });
 
-commander.command('register')
-  .description('register on pm2 monitoring')
-  .action(function(name) {
-    pm2.registerToKM();
+function connect(type, sec, pub, name, _opts) {
+  var opts = {
+    infoNode: _opts.infoNode,
+    discrete: _opts.discrete,
+    installAll: _opts.installAll,
+    public: pub,
+    secret: sec,
+    name: name,
+    type: type,
+    ws: true
+  }
+
+  if (sec == 'link' || sec == 'relink' || (sec == null && pub == null && pm2.gl_is_km_linked)) {
+    return pm2.linkManagement(null, null, null, opts, function(err, dt) {
+      pm2.speedList()
+    })
+  }
+
+  if (sec == 'delete') {
+    return pm2.linkManagement('delete', null, null, opts, function(err, dt) {
+      pm2.clearSetup(opts, function() {
+        console.log(cst.PM2_IO_MSG + 'Agent disabled, modules removed, monitoring disabled');
+        setTimeout(function() {
+          pm2.speedList()
+        }, 300)
+      })
+    })
+  }
+
+  if (opts.public && opts.secret)
+    return pm2.linkManagement(opts.secret, opts.public, opts.name, opts, function(err, dt) {
+      pm2.minimumSetup(opts, function() {
+        console.log(cst.PM2_IO_MSG + 'Remote dashboard: https://app.pm2.io/#/r/' + dt.public_key);
+        pm2.speedList()
+      })
+    })
+
+  pm2.register(opts);
+}
+
+commander.command('enterprise [secret] [public] [name]')
+  .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
+  .option('-d --discrete', 'silent mode')
+  .option('-a --install-all', 'install all modules (force yes)')
+  .description('enable pm2 enterprise')
+  .action(function(sec, pub, name, _opts) {
+    connect('enterprise', sec, pub, name, _opts)
+  })
+
+commander.command('plus [secret] [public] [name]')
+  .alias('register')
+  .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
+  .option('-d --discrete', 'silent mode')
+  .option('-a --install-all', 'install all modules (force yes)')
+  .description('enable pm2 plus')
+  .action(function(sec, pub, name, _opts) {
+    connect('plus', sec, pub, name, _opts)
   });
 
 commander.command('login')
-  .description('use login to link with the pm2 monitoring dashboard')
+  .description('Login to pm2 plus')
   .action(function(name) {
-    pm2.loginToKM();
+    connect('plus', null, null, null, {})
+  });
+
+commander.command('logout')
+  .description('Logout from pm2 plus')
+  .action(function(name) {
+    connect('plus', 'delete', null, null, {})
   });
 
 //
