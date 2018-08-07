@@ -1,3 +1,30 @@
+## 3.0.3 ( Tue Aug 07 2018 23:35:05 GMT+0200 (CEST) )
+
+
+## Bug Fixes
+  - pm2 plus + register
+  ([277ec6ba](https://github.com/Unitech/pm2/commit/277ec6ba8d1cdda7f8fdf11eb9d9d33c2c095d65))
+  
+
+
+
+## 3.0.2 ( Tue Aug 07 2018 23:35:05 GMT+0200 (CEST) )
+
+
+## Bug Fixes
+  - allow tracing activation
+  ([f297ef1e](https://github.com/Unitech/pm2/commit/f297ef1ebbec292aedcfa48c27e3f31b8f206633))
+
+
+
+
+## Branchs merged
+  - Merge branch 'development'
+  ([80c94dd3](https://github.com/Unitech/pm2/commit/80c94dd3261544f627612ce4b541356e4adbc51f))
+
+
+
+
 ## 3.0.1 ( Mon Jul 23 2018 14:13:35 GMT+0200 (CEST) )
 
 ## Bug Fixes
