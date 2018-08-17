@@ -178,6 +178,16 @@ describe('Watcher', function() {
     })
   })
 
+  it('should work with watch_delay', function(cb) {
+    testPM2Env('server-watch:online')({watch: true, watch_delay: 4000}, cb);
+    pm2.start(extend(json, {watch: true, watch_delay: 4000}), errShouldBeNull);
+  })
+
+  it('should not crash with watch_delay without watch', function(cb) {
+    testPM2Env('server-watch:online')({watch_delay: 4000}, cb);
+    pm2.start(extend(json, {watch_delay: 4000}), errShouldBeNull);
+  })
+
   /**
    * Test #1668
    */
