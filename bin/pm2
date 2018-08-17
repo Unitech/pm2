@@ -8,16 +8,16 @@ if (semver.satisfies(process.versions.node, '>= 6.0.0'))
 
 process.env.PM2_USAGE = 'CLI';
 
-var cst       = require('../constants.js');
+var cst          = require('../constants.js');
 
-var commander = require('commander');
-var chalk     = require('chalk');
-var async     = require('async');
+var commander    = require('commander');
+var chalk        = require('chalk');
+var forEachLimit = require('async/forEachLimit');
 
-var debug     = require('debug')('pm2:cli');
-var PM2       = require('../lib/API.js');
-var pkg       = require('../package.json');
-var tabtab    = require('../lib/completion.js');
+var debug        = require('debug')('pm2:cli');
+var PM2          = require('../lib/API.js');
+var pkg          = require('../package.json');
+var tabtab       = require('../lib/completion.js');
 
 // Early detection of silent to avoid printing motd
 if (process.argv.indexOf('--silent') > -1 ||
@@ -197,7 +197,7 @@ if (_arr.indexOf('--no-daemon') > -1) {
   // Start daemon if it does not exist
   //
   // Function checks if --no-daemon option is present,
-  // and starts daemon in the same process if it does not exists
+  // and starts daemon in the same process if it does not exist
   //
   console.log('pm2 launched in no-daemon mode (you can add DEBUG="*" env variable to get more messages)');
 
@@ -295,7 +295,7 @@ commander.command('start [name|file|ecosystem|id...]')
       if (cmd.length === 0) {
         cmd = [cst.APP_CONF_DEFAULT_FILE];
       }
-      async.forEachLimit(cmd, 1, function(script, next) {
+      forEachLimit(cmd, 1, function(script, next) {
         pm2.start(script, commander, next);
       }, function(err) {
         pm2.speedList(err ? 1 : 0);
@@ -346,7 +346,7 @@ commander.command('stop <id|name|all|json|stdin...>')
   .option('--watch', 'Stop watching folder for changes')
   .description('stop a process')
   .action(function(param) {
-    async.forEachLimit(param, 1, function(script, next) {
+    forEachLimit(param, 1, function(script, next) {
       pm2.stop(script, next);
     }, function(err) {
       pm2.speedList(err ? 1 : 0);
@@ -362,7 +362,7 @@ commander.command('restart <id|name|all|json|stdin...>')
   .action(function(param) {
     // Commander.js patch
     param = patchCommanderArg(param);
-    async.forEachLimit(param, 1, function(script, next) {
+    forEachLimit(param, 1, function(script, next) {
       pm2.restart(script, commander, next);
     }, function(err) {
       pm2.speedList(err ? 1 : 0);
@@ -433,7 +433,7 @@ commander.command('delete <name|id|script|all|json|stdin...>')
         pm2.delete(param, 'pipe');
       });
     } else
-      async.forEachLimit(name, 1, function(script, next) {
+      forEachLimit(name, 1, function(script, next) {
         pm2.delete(script,'', next);
       }, function(err) {
         pm2.speedList(err ? 1 : 0);
@@ -568,7 +568,7 @@ commander.command('link [secret] [public] [name]')
   .option('--info-node [url]', 'set url info node')
   .option('--ws', 'websocket mode')
   .description('link with the pm2 monitoring dashboard')
-  .action(pm2._pre_interact.bind(pm2));
+  .action(pm2.linkManagement.bind(pm2));
 
 commander.command('unlink')
   .description('unlink with the pm2 monitoring dashboard')
@@ -594,6 +594,55 @@ commander.command('open')
     pm2.openDashboard();
   });
 
+function connect(type, sec, pub, name, _opts) {
+  var opts = {
+    infoNode: _opts.infoNode,
+    discrete: _opts.discrete,
+    installAll: _opts.installAll,
+    public: pub,
+    secret: sec,
+    name: name,
+    type: type,
+    ws: true
+  }
+
+  if (sec == 'link' || sec == 'relink' || (sec == null && pub == null && pm2.gl_is_km_linked)) {
+    return pm2.linkManagement(null, null, null, opts, function(err, dt) {
+      pm2.speedList()
+    })
+  }
+
+  if (sec == 'delete') {
+    return pm2.linkManagement('delete', null, null, opts, function(err, dt) {
+      pm2.clearSetup(opts, function() {
+        console.log(cst.PM2_IO_MSG + 'Agent disabled, modules removed, monitoring disabled');
+        setTimeout(function() {
+          pm2.speedList()
+        }, 300)
+      })
+    })
+  }
+
+  if (opts.public && opts.secret)
+    return pm2.linkManagement(opts.secret, opts.public, opts.name, opts, function(err, dt) {
+      pm2.minimumSetup(opts, function() {
+        console.log(cst.PM2_IO_MSG + 'Remote dashboard: https://app.pm2.io/#/r/' + dt.public_key);
+        pm2.speedList()
+      })
+    })
+
+  pm2.register(opts);
+}
+
+commander.command('enterprise [secret] [public] [name]')
+  .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
+  .option('-d --discrete', 'silent mode')
+  .option('-a --install-all', 'install all modules (force yes)')
+  .description('enable pm2 enterprise')
+  .action(function(sec, pub, name, _opts) {
+    connect('enterprise', sec, pub, name, _opts)
+  })
+
 commander.command('plus [secret] [public] [name]')
   .alias('register')
   .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
@@ -601,48 +650,19 @@ commander.command('plus [secret] [public] [name]')
   .option('-a --install-all', 'install all modules (force yes)')
   .description('enable pm2 plus')
   .action(function(sec, pub, name, _opts) {
-    var opts = {
-      infoNode: _opts.infoNode,
-      discrete: _opts.discrete,
-      installAll: _opts.installAll,
-      public: pub,
-      secret: sec,
-      name: name,
-      ws: true
-    }
-
-    if (sec == null && pub == null) {
-      return pm2._pre_interact(null, null, null, opts, function(err, dt) {
-        pm2.speedList()
-      })
-    }
-
-    if (sec == 'delete') {
-      return pm2._pre_interact('delete', null, null, opts, function(err, dt) {
-        pm2.clearSetup(opts, function() {
-          console.log(chalk.green('[PM2.IO]') + ' Agent disabled, modules removed, monitoring disabled');
-          setTimeout(function() {
-            pm2.speedList()
-          }, 300)
-        })
-      })
-    }
-
-    if (opts.public && opts.secret)
-      pm2._pre_interact(opts.secret, opts.public, opts.name, opts, function(err, dt) {
-        pm2.minimumSetup(opts, function() {
-          console.log(chalk.green('[PM2.IO]') + ' Remote dashboard: https://app.pm2.io/#/r/' + dt.public_key);
-          pm2.speedList()
-        })
-      })
-    else
-      pm2.registerToKM(opts);
+    connect('plus', sec, pub, name, _opts)
   });
 
 commander.command('login')
-  .description('[DEPRECATED] use plus command instead')
+  .description('Login to pm2 plus')
   .action(function(name) {
-    pm2.loginToKM();
+    connect('plus', null, null, null, {})
+  });
+
+commander.command('logout')
+  .description('Logout from pm2 plus')
+  .action(function(name) {
+    connect('plus', 'delete', null, null, {})
   });
 
 //
@@ -841,12 +861,20 @@ commander.command('dashboard')
 //
 // Flushing command
 //
+
+commander.command('flush [api]')
+.description('flush logs')
+.action(function(api) {
+  pm2.flush(api);
+});
+
+/* old version
 commander.command('flush')
   .description('flush logs')
   .action(failOnUnknown(function() {
     pm2.flush();
   }));
-
+*/
 //
 // Reload all logs
 //

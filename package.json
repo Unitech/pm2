@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "3.0.0",
+  "version": "3.0.1",
   "engines": {
     "node": ">=4.0.0"
   },
@@ -158,8 +158,8 @@
     "pm2-runtime": "./bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "^0.5.4",
-    "@pm2/io": "^2.0.2",
+    "@pm2/agent": "^0.5.11",
+    "@pm2/io": "~2.1.0",
     "@pm2/js-api": "^0.5.15",
     "async": "^2.6.1",
     "blessed": "^0.1.81",
@@ -175,7 +175,7 @@
     "moment": "^2.22.2",
     "needle": "^2.2.1",
     "nssocket": "0.6.0",
-    "pidusage": "^2.0.6",
+    "pidusage": "^2.0.14",
     "pm2-axon": "3.3.0",
     "pm2-axon-rpc": "^0.5.1",
     "pm2-deploy": "^0.3.9",
@@ -186,7 +186,7 @@
     "source-map-support": "^0.5.6",
     "sprintf-js": "1.1.1",
     "v8-compile-cache": "^2.0.0",
-    "vizion": "~0.2.0",
+    "vizion": "2.0.2",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
