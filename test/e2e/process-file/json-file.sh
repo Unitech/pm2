@@ -108,4 +108,9 @@ should 'should start processes' 'online' 4
 $pm2 reload all.json --only child
 should 'should all script been restarted one time' 'restart_time: 2' 4
 
+######## multu only
+
+$pm2 start all.json --only "echo,child"
+should 'should start processes' 'online' 5
+
 $pm2 kill

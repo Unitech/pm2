@@ -1,7 +1,7 @@
 test
 apps
 doc
-pres
+/pres
 *.log
 *.pid
 examples
