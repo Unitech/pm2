@@ -861,12 +861,20 @@ commander.command('dashboard')
 //
 // Flushing command
 //
+
+commander.command('flush [api]')
+.description('flush logs')
+.action(function(api) {
+  pm2.flush(api);
+});
+
+/* old version
 commander.command('flush')
   .description('flush logs')
   .action(failOnUnknown(function() {
     pm2.flush();
   }));
-
+*/
 //
 // Reload all logs
 //
