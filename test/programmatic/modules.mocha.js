@@ -26,6 +26,21 @@ describe('Modules programmatic testing', function() {
     });
   });
 
+  it('should run post install command', function(done)
+  {
+    var fs = require('fs');
+    var ec = {};
+    ec.dependencies = new Array();
+    ec.dependencies.push('pm2-server-monit');
+    ec.post_install = {};
+    ec.post_install['pm2-server-monit'] = 'echo "test passed!"';
+    fs.appendFileSync('test.json', JSON.stringify(ec));
+    pm2.install('test.json', function() {
+      fs.unlinkSync('test.json');
+      done();
+    });
+  });
+
   it('should list one module', function(done) {
     pm2.list(function(err, apps) {
       should(err).eql(null);
