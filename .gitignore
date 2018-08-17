@@ -17,3 +17,4 @@ package-lock.json
 currentTagChangelog.md
 joblog-X
 test/fixtures/path-check*.txt
+yarn.lock

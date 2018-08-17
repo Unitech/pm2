@@ -1,5 +1,5 @@
 
-const async = require('async')
+const forEachLimit = require('async/forEachLimit')
 const fs = require('fs')
 const exec = require('child_process').exec
 const path = require('path')
@@ -34,7 +34,7 @@ function listAllTest(cb) {
   var test_suite = []
 
   fs.readdir(testFolder, (err, folders) => {
-    async.forEachLimit(folders, 4, (folder, next) => {
+    forEachLimit(folders, 4, (folder, next) => {
       var fold = path.join(testFolder, folder)
       fs.readdir(fold, (err, files) => {
         if (err) return next()
@@ -50,7 +50,7 @@ function listAllTest(cb) {
 }
 
 function launchTestSuite(files, cb) {
-  async.forEachLimit(files, CONCURRENT_TEST, function(file, next) {
+  forEachLimit(files, CONCURRENT_TEST, function(file, next) {
     var cmd = `docker run -v ${path.resolve(__dirname, '..')}:/var/pm2 ${DOCKER_IMAGE_NAME} bash ${file}`
 
     console.log(chalk.bold(`Running test ${file}`))
