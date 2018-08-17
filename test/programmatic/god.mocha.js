@@ -6,6 +6,7 @@ var fs = require('fs');
 var path = require('path');
 var should = require('should');
 var Common = require('../../lib/Common');
+var eachLimit = require('async/eachLimit');
 
 var cst = require('../../constants.js');
 
@@ -55,12 +56,10 @@ function getConf4() {
   });
 }
 
-var async = require('async');
-
 function deleteAll(data, cb) {
   var processes = God.getFormatedProcesses();
 
-  async.eachLimit(processes, cst.CONCURRENT_ACTIONS, function(proc, next) {
+  eachLimit(processes, cst.CONCURRENT_ACTIONS, function(proc, next) {
     console.log('Deleting process %s', proc.pm2_env.pm_id);
     God.deleteProcessId(proc.pm2_env.pm_id, function() {
       return next();
