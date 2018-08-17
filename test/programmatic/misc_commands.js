@@ -34,7 +34,7 @@ describe('Misc commands', function() {
       should(err).be.null();
       done();
     });
-  }); 
+  });
 
   it('should restart them', function(done) {
     pm2.restart('all', function(err, data) {

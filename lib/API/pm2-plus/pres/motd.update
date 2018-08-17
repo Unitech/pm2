@@ -1,0 +1,26 @@
+
+                  -------------
+
+
+  ██████╗ ███╗   ███╗██████╗     ██╗    ██╗ ██████╗
+  ██╔══██╗████╗ ████║╚════██╗    ██║   ██╔╝██╔═══██╗
+  ██████╔╝██╔████╔██║ █████╔╝    ██║  ██╔╝ ██║   ██║
+  ██╔═══╝ ██║╚██╔╝██║██╔═══╝     ██║ ██╔╝  ██║   ██║
+  ██║     ██║ ╚═╝ ██║███████╗    ██║██╔╝   ╚██████╔╝
+  ╚═╝     ╚═╝     ╚═╝╚══════╝    ╚═╝╚═╝     ╚═════╝
+
+                  https://pm2.io/
+
+     Harden your Node.js Production Environment
+
+      - Real-time Monitoring Web Interface
+      - Pro Active Alerting System
+      - Production Profiling for Memory and CPU
+      - PM2 Runtime High Availability Fallback
+
+
+             Start using it by typing:
+
+                    $ pm2 plus
+
+                  -------------

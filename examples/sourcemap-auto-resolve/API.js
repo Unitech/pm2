@@ -7,7 +7,8 @@
 var commander   = require('commander');
 var fs          = require('fs');
 var path        = require('path');
-var async       = require('async');
+var eachLimit       = require('async/eachLimit');
+var series       = require('async/series');
 var debug       = require('debug')('pm2:cli');
 var util        = require('util');
 var chalk       = require('chalk');
@@ -317,7 +318,7 @@ API.prototype.reset = function(process_name, cb) {
   var that = this;
 
   function processIds(ids, cb) {
-    async.eachLimit(ids, conf.CONCURRENT_ACTIONS, function(id, next) {
+    eachLimit(ids, conf.CONCURRENT_ACTIONS, function(id, next) {
       that.Client.executeRemote('resetMetaProcessId', id, function(err, res) {
         if (err) console.error(err);
         Common.printOut(conf.PREFIX_MSG + 'Resetting meta for process id %d', id);
@@ -777,7 +778,7 @@ API.prototype._startScript = function(script, opts, cb) {
     });
   }
 
-  async.series([
+  series([
     restartExistingProcessName,
     restartExistingProcessId,
     restartExistingProcessPath
@@ -916,7 +917,7 @@ API.prototype._startJson = function(file, opts, action, pipe, cb) {
      * Auto detect application already started
      * and act on them depending on action
      */
-    async.eachLimit(Object.keys(proc_list), conf.CONCURRENT_ACTIONS, function(proc_name, next) {
+    eachLimit(Object.keys(proc_list), conf.CONCURRENT_ACTIONS, function(proc_name, next) {
       // Skip app name (--only option)
       if (apps_name.indexOf(proc_name) == -1)
         return next();
@@ -981,7 +982,7 @@ API.prototype._startJson = function(file, opts, action, pipe, cb) {
       }
     });
 
-    async.eachLimit(apps_to_start, conf.CONCURRENT_ACTIONS, function(app, next) {
+    eachLimit(apps_to_start, conf.CONCURRENT_ACTIONS, function(app, next) {
       if (opts.cwd)
         app.cwd = opts.cwd;
       if (opts.force_name)
@@ -1096,7 +1097,7 @@ API.prototype.actionFromJson = function(action, file, opts, jsonVia, cb) {
   if ((appConf = Common.verifyConfs(appConf)) instanceof Error)
     return cb ? cb(appConf) : that.exitCli(conf.ERROR_EXIT);
 
-  async.eachLimit(appConf, conf.CONCURRENT_ACTIONS, function(proc, next1) {
+  eachLimit(appConf, conf.CONCURRENT_ACTIONS, function(proc, next1) {
     var name = '';
     var new_env;
 
@@ -1120,7 +1121,7 @@ API.prototype.actionFromJson = function(action, file, opts, jsonVia, cb) {
       }
       if (!ids) return next1();
 
-      async.eachLimit(ids, conf.CONCURRENT_ACTIONS, function(id, next2) {
+      eachLimit(ids, conf.CONCURRENT_ACTIONS, function(id, next2) {
         var opts = {};
 
         //stopProcessId could accept options to?
@@ -1212,7 +1213,7 @@ API.prototype._operate = function(action_name, process_name, envs, cb) {
     if (action_name == 'deleteProcessId')
       concurrent_actions = 10;
 
-    async.eachLimit(ids, concurrent_actions, function(id, next) {
+    eachLimit(ids, concurrent_actions, function(id, next) {
       var opts;
 
       // These functions need extra param to be passed
