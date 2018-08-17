@@ -1,8 +1,8 @@
 <% if(logo) { %><img width="710px" src="<%= logo %>" alt="pm2 logo" /> <% } %>
 <% if(logo) { %># <%= title %> <% } %>
-<% if(intro) { %><%= '\n' %><%= intro %><%= '\n' %><% } %> 
+<% if(intro) { %><%= '\n' %><%= intro %><%= '\n' %><% } %>
 <% if(version && (version.name || version.number)) { %>##<% if(version.name){%> <%= version.name %><% } %> <% if(version.date){ %>( <%= version.date %> )<% } %><%= '\n' %><% } %>
-<% _.forEach(sections, function(section){ 
+<% _.forEach(sections, function(section){
   if(section.commitsCount > 0) { %>
 ## <%= section.title %>
 <% _.forEach(section.commits, function(commit){ %>  - <%= printCommit(commit, true) %><% }) %>

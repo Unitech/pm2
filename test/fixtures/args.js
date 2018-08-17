@@ -5,5 +5,5 @@ if (process.argv.indexOf('-d') == -1 || process.argv.indexOf('-a') == -1) {
 } else {
   setInterval(function() {
     console.log('ok');
-  }, 500);  
+  }, 500);
 }

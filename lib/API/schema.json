@@ -304,5 +304,9 @@
   },
   "write": {
     "type": "boolean"
+  },
+  "io": {
+    "type": "object",
+    "docDescription": "Specify apm values and configuration"
   }
 }
