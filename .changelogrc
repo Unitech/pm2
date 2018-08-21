@@ -4,8 +4,8 @@
     "intro": "",
     "branch" : "development",
     "repo_url": "https://github.com/Unitech/pm2",
-    "version_name" : "3.0.1",
-    "tag": "3.0.0",
+    "version_name" : "3.0.3",
+    "tag": "3.0.2",
     "file": "currentTagChangelog.md",
     "template": "changelogTemplate.md",
     "sections": [
