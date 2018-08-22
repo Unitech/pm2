@@ -215,10 +215,6 @@ $ pm2 update
 <br/><br/>
 </div>
 
-```bash
-$ pm2 plus
-```
-
 Once you scale you need to make sure that your application is running properly, without bugs, performance issues and without downtimes.
 
 That's why we created PM2 Plus. It's a set of advanced features for both hardening the PM2 Runtime and monitoring applications in production.
@@ -231,7 +227,15 @@ With PM2 Plus you get:
 
 And much more like realtime logs, custom metrics, remote actions...
 
-You can also create account via the app: [here](https://app.pm2.io/)
+To start using PM2 Plus via CLI:
+
+```bash
+$ pm2 plus
+```
+
+Or go to the application and create an account:
+
+[To discover PM2 Plus Register Here](https://app.pm2.io/)
 
 ### PM2 Plus Features
 
@@ -248,7 +252,7 @@ You can also create account via the app: [here](https://app.pm2.io/)
 ![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png)
 
 <div align="center">
-    <a title="PM2 Plus Application" href="https://app.pm2.io/"><img src="https://raw.githubusercontent.com/Unitech/pm2/development/pres/bttn.png"/></a>
+    <a title="PM2 Plus Application" href="https://app.pm2.io/">To discover PM2 Plus Register Here</a>
 </div>
 
 ### PM2 Plus: Expose Custom Metrics
