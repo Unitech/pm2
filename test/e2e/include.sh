@@ -32,8 +32,8 @@ then
     fi
 fi
 
-$pm2 kill
 $pm2 link delete
+$pm2 kill
 
 function fail {
   echo -e "######## \033[31m  ✘ $1\033[0m"
