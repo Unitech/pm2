@@ -627,10 +627,10 @@ function connect(type, sec, pub, name, _opts) {
 
   if (opts.public && opts.secret)
     return pm2.linkManagement(opts.secret, opts.public, opts.name, opts, function(err, dt) {
-      pm2.minimumSetup(opts, function() {
+      //pm2.minimumSetup(opts, function() {
         console.log(cst.PM2_IO_MSG + 'Remote dashboard: https://app.pm2.io/#/r/' + dt.public_key);
         pm2.speedList()
-      })
+      //})
     })
 
   pm2.register(opts);
