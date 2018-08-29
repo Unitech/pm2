@@ -348,7 +348,12 @@ export interface StartOptions {
    * If sets and script’s memory usage goes about the configured number, pm2 restarts the script.
    * Uses human-friendly suffixes: ‘K’ for kilobytes, ‘M’ for megabytes, ‘G’ for gigabytes’, etc. Eg “150M”.
    */
-  max_memory_restart?: number;
+  max_memory_restart?: number | string;
+  /**
+   * This will make PM2 listen for that event. In your application you will need to add process.send('ready');
+   * when you want your application to be considered as ready.
+   */
+  wait_ready?: boolean;
   /**
    * (Default: 1600)
    * The number of milliseconds to wait after a stop or restart command issues a SIGINT signal to kill the
