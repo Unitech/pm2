@@ -1,3 +1,118 @@
+## 3.1.0 ( Thu Aug 30 2018 10:43:06 GMT+0200 (CEST) )
+
+
+## Bug Fixes
+  - #3883 fix typings for max_memory_restart and add wait_ready
+  ([b35ea237](https://github.com/Unitech/pm2/commit/b35ea237e3b448088112b2f3a771a9c5286417a7))
+  - restore monitored indicator
+  ([34966432](https://github.com/Unitech/pm2/commit/349664329eb56232321694be9e08f16a3cda6fbd))
+  - remove install of modules on pm2 plus command
+  ([6a8bb269](https://github.com/Unitech/pm2/commit/6a8bb26952a7dcf109d28af7224b89faf0977a71))
+  - invert kill/link
+  ([3c37b528](https://github.com/Unitech/pm2/commit/3c37b5283bf0dea130fd375a5563974bd84543a9))
+  - #3877 #3831
+  ([16f4f2bc](https://github.com/Unitech/pm2/commit/16f4f2bc6589e8f0666f46d37c3f7f7739de7261))
+  - #3865 ensure pm2 never run simultaneous gracefullExit, prevent dump file corruption
+  ([79679db1](https://github.com/Unitech/pm2/commit/79679db1b321bbcc7296dbc41d005500cf61d273))
+  - #3786 fix issue when triggering an action that does not exist
+  ([1ff7fd3d](https://github.com/Unitech/pm2/commit/1ff7fd3d49ccaf3f65540774426b62fdc811e4f1))
+  - fixed unstartup when launchd
+  ([3d0461c3](https://github.com/Unitech/pm2/commit/3d0461c3e0a2362aef009e6f158b6f16b3d6510c))
+  - access gl_retry as class property
+  ([bbcb2b6b](https://github.com/Unitech/pm2/commit/bbcb2b6b5c5fa0ef872b64a648461c266350423a))
+  - #3831 switch registerToKM() to register()
+  ([8df2451e](https://github.com/Unitech/pm2/commit/8df2451e05bf5494b11f0546965718efe1f351b9))
+
+
+
+
+## Features
+  - add id column in stacked mode (80 char mode)
+  ([83033d4c](https://github.com/Unitech/pm2/commit/83033d4cdeb899bc4c1d1fe7a8c6391e64e9d0d0))
+
+
+
+
+## Refactor
+  - only enable deep monitoring if explicitly stated
+  ([f67e14f0](https://github.com/Unitech/pm2/commit/f67e14f0bd6d65bff6ef8f7e27e3f0aa93c60e40))
+  - #3786 clean code
+  ([6cbca8bc](https://github.com/Unitech/pm2/commit/6cbca8bccc0126f1557bf8326c81facc62100704))
+  - removes unused imports.
+  ([b8b48e83](https://github.com/Unitech/pm2/commit/b8b48e83f7f041508e39815e22501509259d4f26))
+  - only import the necessary methods from async.
+  ([6466ee44](https://github.com/Unitech/pm2/commit/6466ee44c1b85858f9b7e56b01aa6f2a08bde508))
+  - removes unused async imports.
+  ([679b14ff](https://github.com/Unitech/pm2/commit/679b14ff4b24519b5479c9e5f4ce0d9c32e39e55))
+
+
+
+
+## Chore
+  - update apm version
+  ([cc27de4a](https://github.com/Unitech/pm2/commit/cc27de4a8b400f1c20ba2e4b12dadcef1dd34fae))
+  - README update
+  ([c505dcc1](https://github.com/Unitech/pm2/commit/c505dcc1685380728b23f8757aa80fa4387d7fd3))
+  - remove unused console.log
+  ([61e32a43](https://github.com/Unitech/pm2/commit/61e32a4305490cc64c0a40cd83e2ad48c133b272))
+  - upgrade vizion to 2.0.2
+  ([c231e286](https://github.com/Unitech/pm2/commit/c231e28604aa4628d8f8ba10ea1f9f82e73269e6))
+  - #3415 try to update vizion to 2.0.1
+  ([9b80d8c1](https://github.com/Unitech/pm2/commit/9b80d8c1b69c07d21e63441c266b7acafffe0673))
+  - #3415 try to update vizion to 2.0.0
+  ([2c3df093](https://github.com/Unitech/pm2/commit/2c3df09378a92bac9de2d3b3b83103e02bd1bb82))
+  - update readme with 3.0.3 commits
+  ([476542fb](https://github.com/Unitech/pm2/commit/476542fbad038b951b6cfe6d6903d7b6bc8540a5))
+
+
+
+
+## Branchs merged
+  - Merge branch 'master' into development
+  ([95321c6d](https://github.com/Unitech/pm2/commit/95321c6dd2602e9ef71028731fd7a2e7b40a0d3c))
+  - Merge branch 'master' into development
+  ([c3c0e423](https://github.com/Unitech/pm2/commit/c3c0e423f9beeab25f53c0267d5f8a9e79d5c2e3))
+  - Merge branch 'master' into development
+  ([8e6481bc](https://github.com/Unitech/pm2/commit/8e6481bc9a6d23283895bf9cd3c7831c49a811ae))
+  - Merge branch 'development' into development
+  ([83294afe](https://github.com/Unitech/pm2/commit/83294afee7cf0204208e9cc7f4cf687469556492))
+  - Merge branch 'development' into flag--ext
+  ([79ab9242](https://github.com/Unitech/pm2/commit/79ab92425fef22cdf679fa77840d86a6e7cfc755))
+  - Merge branch 'development' into post_install
+  ([d5604300](https://github.com/Unitech/pm2/commit/d5604300685ace1c7dbd18776fd3df79da96f638))
+
+
+
+
+## Pull requests merged
+  - Merge pull request #3885 from Unitech/typings
+  ([19a35e9b](https://github.com/Unitech/pm2/commit/19a35e9b23716df8f7d1301acf7b0f0b601f93dd))
+  - Merge pull request #3878 from cuspymd/fix-command-help
+  ([2d3d2044](https://github.com/Unitech/pm2/commit/2d3d204427ce02617aa134ca0831a844de1a697d))
+  - Merge pull request #3876 from Unitech/lost_apps_sigterm
+  ([4fa247a3](https://github.com/Unitech/pm2/commit/4fa247a3e370607cf4198743de41dfa0a94bfbb5))
+  - Merge pull request #3874 from Unitech/trigger_no_action
+  ([e868f003](https://github.com/Unitech/pm2/commit/e868f003e3063a57236cb8d0ead33af808e0df70))
+  - Merge pull request #3872 from Unitech/column_id_stacked
+  ([55b6ccc3](https://github.com/Unitech/pm2/commit/55b6ccc32ae02e574ec1f80a36b4531761b94777))
+  - Merge pull request #3723 from livankrekh/development
+  ([98f49dc3](https://github.com/Unitech/pm2/commit/98f49dc393efd1fed03a1ef8a5752c0e490dd4b8))
+  - Merge pull request #3821 from imarakho/post_install
+  ([4217b150](https://github.com/Unitech/pm2/commit/4217b1505419904252d0ae7640a51128a2459d98))
+  - Merge pull request #3823 from imarakho/flag--ext
+  ([cc68dc1f](https://github.com/Unitech/pm2/commit/cc68dc1f9faf010af0648992193230af609413c5))
+  - Merge pull request #3822 from imarakho/flush_parameter
+  ([bbcc85a4](https://github.com/Unitech/pm2/commit/bbcc85a41683f5fa573bf504894f8e817c89784a))
+  - Merge pull request #3807 from medanat/minimize-async-lib-footprint
+  ([7e92855f](https://github.com/Unitech/pm2/commit/7e92855ff5c394b5452db526d21262e343b89ef8))
+  - Merge pull request #3829 from soyuka/patch-pidusage
+  ([a668f576](https://github.com/Unitech/pm2/commit/a668f5762190061dd05de5c5d888b53f35fa386e))
+
+
+
+
+
+
 ## 3.0.3 ( Tue Aug 07 2018 23:35:05 GMT+0200 (CEST) )
 
 
