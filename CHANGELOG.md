@@ -1,3 +1,15 @@
+## 3.1.1 ( Mon Sep 10 2018 16:18:25 GMT+0200 (CEST) )
+
+
+## Hot Fixes
+  - #3901 fix error when installing module
+  ([7b43fea5](https://github.com/Unitech/pm2/commit/7b43fea55d7c2853a3032b3bddd12201cd6a29e9))
+
+
+
+
+
+
 ## 3.1.0 ( Mon Sep 10 2018 10:25:13 GMT+0200 (CEST) )
 
 
