@@ -1,7 +1,11 @@
-## 3.1.0 ( Thu Aug 30 2018 10:43:06 GMT+0200 (CEST) )
+## 3.1.0 ( Mon Sep 10 2018 10:25:13 GMT+0200 (CEST) )
 
 
 ## Bug Fixes
+  - tmp fix io@beta + rename metric
+  ([04ab7ac4](https://github.com/Unitech/pm2/commit/04ab7ac4e1312c5a5332f37cbb81b0d98686936d))
+  - remove ending \n on git version comment
+  ([9a36bfeb](https://github.com/Unitech/pm2/commit/9a36bfeb7e9f5ab1719ca3858510da08bb0cad6b))
   - #3883 fix typings for max_memory_restart and add wait_ready
   ([b35ea237](https://github.com/Unitech/pm2/commit/b35ea237e3b448088112b2f3a771a9c5286417a7))
   - restore monitored indicator
@@ -49,6 +53,8 @@
 
 
 ## Chore
+  - upgrade to 3.1.0
+  ([0285d12d](https://github.com/Unitech/pm2/commit/0285d12df335667e9e0311a7abe175796bb517f4))
   - update apm version
   ([cc27de4a](https://github.com/Unitech/pm2/commit/cc27de4a8b400f1c20ba2e4b12dadcef1dd34fae))
   - README update
@@ -107,6 +113,7 @@
   ([7e92855f](https://github.com/Unitech/pm2/commit/7e92855ff5c394b5452db526d21262e343b89ef8))
   - Merge pull request #3829 from soyuka/patch-pidusage
   ([a668f576](https://github.com/Unitech/pm2/commit/a668f5762190061dd05de5c5d888b53f35fa386e))
+
 
 
 

@@ -2,7 +2,7 @@
     "app_name": "",
     "logo": "",
     "intro": "",
-    "branch" : "development",
+    "branch" : "master",
     "repo_url": "https://github.com/Unitech/pm2",
     "version_name" : "3.1.0",
     "tag": "3.0.3",
