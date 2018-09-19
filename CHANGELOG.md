@@ -1,4 +1,4 @@
-## 3.1.2 (19/09/18)
+## 3.1.2 (20/09/18)
 
 ### Features
 - allow non-node application to run multiple instances without auto switch to cluster mode
@@ -16,10 +16,6 @@
 ## Hot Fixes
   - #3901 fix error when installing module
   ([7b43fea5](https://github.com/Unitech/pm2/commit/7b43fea55d7c2853a3032b3bddd12201cd6a29e9))
-
-
-
-
 
 
 ## 3.1.0 ( Mon Sep 10 2018 10:25:13 GMT+0200 (CEST) )
