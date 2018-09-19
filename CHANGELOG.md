@@ -1,3 +1,15 @@
+## 3.1.2 (19/09/18)
+
+### Features
+- allow non-node application to run multiple instances without auto switch to cluster mode
+- allow to call `pm2 logs` even without application (#3820)
+- switch `pm2 link` and `pm2 plus` protocol to websocket by default instead of axon
+- enhance the `pm2 init` template that generates ecosystem files by adding some extra fields
+
+### Fix
+- remove deprecation message for node 0.10
+- pm2 login/register/monitor now hit the new oauth pm2 plus system
+
 ## 3.1.1 ( Mon Sep 10 2018 16:18:25 GMT+0200 (CEST) )
 
 
@@ -138,7 +150,7 @@
 ## Bug Fixes
   - pm2 plus + register
   ([277ec6ba](https://github.com/Unitech/pm2/commit/277ec6ba8d1cdda7f8fdf11eb9d9d33c2c095d65))
-  
+
 
 
 
