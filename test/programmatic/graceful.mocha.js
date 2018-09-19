@@ -48,7 +48,7 @@ describe('Wait ready / Graceful start / restart', function() {
           should(apps[0].pm2_env.status).eql('online');
           done();
         })
-      }, 1500);
+      }, 3000);
     });
 
     it('should have listen timeout updated', function(done) {
