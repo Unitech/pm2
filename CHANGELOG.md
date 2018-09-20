@@ -1,4 +1,4 @@
-## 3.1.2 (20/09/18)
+## 3.1.3 (20/09/18)
 
 ### Features
 - allow non-node application to run multiple instances without auto switch to cluster mode
@@ -9,6 +9,10 @@
 ### Fix
 - remove deprecation message for node 0.10
 - pm2 login/register/monitor now hit the new oauth pm2 plus system
+
+## 3.1.2 (10/09/18)
+
+- version bump on @pm2/io
 
 ## 3.1.1 ( Mon Sep 10 2018 16:18:25 GMT+0200 (CEST) )
 
