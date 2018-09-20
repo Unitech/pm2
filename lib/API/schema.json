@@ -195,10 +195,12 @@
     "docDefault": 16,
     "docDescription": "Number of times a script is restarted when it exits in less than min_uptime"
   },
+  "execute_command": {
+    "type": "boolean"
+  },
   "exec_mode": {
     "type": "string",
     "regex": "^(cluster|fork)(_mode)?$",
-    "alias": "executeCommand",
     "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only",
     "docDefault": "fork",
     "docDescription": "Set the execution mode, possible values: fork&#124;cluster"
