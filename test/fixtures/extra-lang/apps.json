@@ -3,7 +3,6 @@
     "interpreter"      : "/usr/bin/python3",
     "name"             : "echo-python",
     "script"           : "echo.py",
-    "interpreter_args" : "-u",
     "log"              : "python-app.log",
     "combine_logs"     : true,
     "env" : {
