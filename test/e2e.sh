@@ -36,6 +36,8 @@ bash ./test/e2e/cli/env-refresh.sh
 spec "Environment refresh on restart"
 bash ./test/e2e/cli/extra-lang.sh
 spec "Various programming languages checks (Python, PHP)"
+bash ./test/e2e/cli/python-support.sh
+spec "Python support checks"
 bash ./test/e2e/cli/multiparam.sh
 spec "Multiparam process management"
 bash ./test/e2e/cli/smart-start.sh
@@ -62,8 +64,6 @@ bash ./test/e2e/cli/watch.sh
 spec "watch system tests"
 bash ./test/e2e/cli/right-exit-code.sh
 spec "Verification exit code"
-bash ./test/e2e/cli/harmony.sh
-spec "Harmony test"
 bash ./test/e2e/cli/fork.sh
 spec "Fork system working"
 bash ./test/e2e/cli/piped-config.sh
