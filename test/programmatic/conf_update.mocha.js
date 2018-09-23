@@ -8,12 +8,11 @@ describe('Modules programmatic testing', function() {
   var pm2;
 
   after(function(done) {
-    pm2.destroy(done);
+    pm2.kill(done);
   });
 
   it('should instanciate PM2', function() {
     pm2 = new PM2.custom({
-      independent : true,
       cwd : '../fixtures'
     });
   });

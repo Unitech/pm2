@@ -18,7 +18,6 @@ describe('Modules programmatic testing', function() {
 
   it('should instanciate PM2', function() {
     pm2 = new PM2.custom({
-      //independent : true,
       //daemon_mode : true
     });
 

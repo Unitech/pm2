@@ -9,12 +9,11 @@ var cst = require('../../constants.js');
 
 describe('Misc commands', function() {
   var pm2 = new PM2.custom({
-    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 
   after(function(done) {
-    pm2.destroy(done);
+    pm2.kill(done);
   });
 
   before(function(done) {

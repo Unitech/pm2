@@ -7,14 +7,6 @@ source "${SRC}/e2e/include.sh"
 set -e
 set -o verbose
 
-# MODULES
-bash ./test/e2e/modules/get-set.sh
-spec "Configuration system working"
-bash ./test/e2e/modules/module.sh
-spec "module system"
-bash ./test/e2e/modules/module-safeguard.sh
-spec "module safeguard system (--safe)"
-
 # CLI
 bash ./test/e2e/cli/reload.sh
 spec "Reload"
@@ -140,5 +132,13 @@ bash ./test/e2e/logs/log-null.sh
 spec "Logging path set to null"
 bash ./test/e2e/logs/log-json.sh
 spec "Logging directly to file in json"
+
+# MODULES
+bash ./test/e2e/modules/get-set.sh
+spec "Configuration system working"
+bash ./test/e2e/modules/module.sh
+spec "module system"
+bash ./test/e2e/modules/module-safeguard.sh
+spec "module safeguard system (--safe)"
 
 $pm2 kill

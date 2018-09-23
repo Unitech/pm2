@@ -91,7 +91,7 @@
   "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "bash test/e2e.sh && bash test/unit.sh"
+    "test": "bash test/unit.sh && bash test/e2e.sh"
   },
   "keywords": [
     "cli",

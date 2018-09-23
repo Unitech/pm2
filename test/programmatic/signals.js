@@ -7,13 +7,12 @@ describe('Signal kill (+delayed)', function() {
   var proc1 = null;
 
   var pm2 = new PM2.custom({
-    independent : true,
     cwd : __dirname + '/../fixtures'
   });
 
   after(function(done) {
     pm2.delete('all', function(err, ret) {
-      pm2.destroy(done);
+      pm2.kill(done);
     });
   });
 

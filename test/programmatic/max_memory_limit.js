@@ -12,12 +12,11 @@ describe('Max memory restart programmatic', function() {
   var proc1 = null;
   var procs = [];
   var pm2 = new PM2.custom({
-    cwd : __dirname + '/../fixtures/json-reload/',
-    independent : true
+    cwd : __dirname + '/../fixtures/json-reload/'
   });
 
   after(function(done) {
-    pm2.destroy(done)
+    pm2.kill(done)
   });
 
   afterEach(function(done) {
