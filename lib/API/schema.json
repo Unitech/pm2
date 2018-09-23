@@ -285,12 +285,13 @@
     "docDescription": "Current user that started the process"
   },
   "uid": {
-    "type" : "string",
+    "type" : "number",
+    "alias": "user",
     "docDefault": "Current user uid",
     "docDescription": "Set user id"
   },
   "gid": {
-    "type" : "string",
+    "type" : "number",
     "docDefault": "Current user gid",
     "docDescription": "Set group id"
   },
