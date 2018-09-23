@@ -100,6 +100,11 @@
     "docDefault": "~/.pm2/pids/app_name-id.pid",
     "docDescription": "File path where the pid of the started process is written by pm2"
   },
+  "cpu_limit": {
+    "type": "number",
+    "docDefault": 0,
+    "docDescription": "Max percentage of a CPU core to allow this app to use"
+  },
   "restart_delay": {
     "type" : "number",
     "docDefault": 0,
