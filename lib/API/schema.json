@@ -157,6 +157,12 @@
     "docDefault": "True",
     "docDescription": "Enable or disable auto restart after process failure"
   },
+  "no_autorestart_on_clean_exit": {
+    "type": "boolean",
+    "default" : false,
+    "docDefault": "False",
+    "docDescription": "Disable auto restart when process exits with exit code 0"
+  },
   "watch": {
     "type": [
       "boolean",
