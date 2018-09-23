@@ -49,10 +49,10 @@ describe('PM2 programmatic calls', function() {
   var procs = [];
   var bus   = null;
 
-  var pm2 = new PM2.custom({ independent : true });
+  var pm2 = new PM2.custom({ });
 
   after(function(done) {
-    pm2.destroy(done);
+    pm2.kill(done);
   });
 
   before(function(done) {

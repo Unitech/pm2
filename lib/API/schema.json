@@ -157,6 +157,11 @@
     "docDefault": "True",
     "docDescription": "Enable or disable auto restart after process failure"
   },
+  "watch_delay": {
+    "type": "number",
+    "docDefault": "True",
+    "docDescription": "Restart delay on file change detected"
+  },
   "watch": {
     "type": [
       "boolean",

@@ -33,9 +33,6 @@ $pm2 uninstall all
 # fi
 cd test/programmatic
 
-mocha --exit --opts ./mocha.opts  ./god.mocha.js
-spec "God test"
-
 mocha --exit --opts ./mocha.opts  ./programmatic.js
 spec "Programmatic test"
 
@@ -89,6 +86,10 @@ mocha --exit --opts ./mocha.opts  ./configuration.mocha.js
 spec "Configuration system working"
 mocha --exit --opts ./mocha.opts  ./id.mocha.js
 spec "Uniqueness id for each process"
+
+mocha --exit --opts ./mocha.opts  ./god.mocha.js
+spec "God test"
+
 
 #
 # Interface testing
