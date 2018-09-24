@@ -63,20 +63,14 @@ spec "Should resurrect pm2"
 should 'and module still online' 'online' 1
 
 
-$pm2 stop pm2-probe
-should 'should module status not be modified' 'online' 1
-
 $pm2 delete all
-should 'should module status not be modified' 'online' 1
-
-$pm2 delete pm2-probe
 should 'should module status not be modified' 'online' 1
 
 $pm2 stop all
 should 'should module status not be modified' 'online' 1
 
 $pm2 stop pm2-probe
-should 'should module status not be modified' 'online' 1
+should 'should module be possible to stop' 'stopped' 1
 
 $pm2 uninstall pm2-probe
 spec "Should uninstall a module"
