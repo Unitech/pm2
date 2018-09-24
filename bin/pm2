@@ -482,14 +482,14 @@ commander.command('update')
  */
 commander.command('install <module|git:// url>')
   .alias('module:install')
+  .option('--tarball', 'is local tarball')
+  .option('--http', 'is remote tarball')
+  .option('--docker', 'is docker container')
   .option('--v1', 'install module in v1 manner (do not use it)')
   .option('--safe [time]', 'keep module backup, if new module fail = restore with previous')
   .description('install or update a module and run it forever')
   .action(function(plugin_name, opts) {
-    if (opts.v1)
-      commander.v1 = true;
-    if (opts.safe)
-      commander.safe = opts.safe;
+    require('util')._extend(commander, opts)
     pm2.install(plugin_name, commander);
   });
 
