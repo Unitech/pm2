@@ -67,6 +67,10 @@ var csts = {
   PM2_UPDATE       : '../lib/API/pm2-plus/pres/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
 
+  MODULE_BASEFOLDER: 'module',
+  MODULE_CONF_PREFIX: 'module-db-v2',
+  MODULE_CONF_PREFIX_TAR: 'tar-modules',
+
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
   REMOTE_PORT             : 41624,
   REMOTE_HOST             : 's1.keymetrics.io',
