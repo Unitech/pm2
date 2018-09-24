@@ -316,6 +316,14 @@
   "write": {
     "type": "boolean"
   },
+  "priority": {
+    "type": "number",
+    "docDescription": "Start/restart process priority"
+  },
+  "stop_priority": {
+    "type": "number",
+    "docDescription": "Stop process priority"
+  },
   "io": {
     "type": "object",
     "docDescription": "Specify apm values and configuration"
