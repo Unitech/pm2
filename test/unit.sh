@@ -75,9 +75,6 @@ mocha --exit --opts ./mocha.opts  ./send_data_process.mocha.js
 spec "Send data to a process"
 mocha --exit --opts ./mocha.opts  ./modules.mocha.js
 spec "Module API testing"
-# mocha --exit --opts ./mocha.opts  ./module_retrocompat.mocha.js
-# spec "Module retrocompatibility system"
-
 mocha --exit --opts ./mocha.opts  ./json_validation.mocha.js
 spec "JSON validation test"
 mocha --exit --opts ./mocha.opts  ./env_switching.js

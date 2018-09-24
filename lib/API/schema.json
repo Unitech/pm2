@@ -10,6 +10,9 @@
     "docDefault": "Script filename without the extension (app for app.js)",
     "docDescription": "Process name in the process list"
   },
+  "name_prefix": {
+    "type": "string"
+  },
   "cwd": {
     "type": "string",
     "docDefault": "CWD of the current environment (from your shell)",
