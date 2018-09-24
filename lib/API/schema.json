@@ -73,6 +73,9 @@
     "type": "string",
     "docDescription": "Format for log timestamps in moment.js format (eg YYYY-MM-DD HH:mm Z)"
   },
+  "time": {
+    "type": "boolean"
+  },
   "env": {
     "type": [
       "object",
