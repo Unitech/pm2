@@ -58,6 +58,27 @@ describe('Modules programmatic testing', function() {
     })
   })
 
+  describe('Reinstall', () => {
+    it('should install module', function(done) {
+      pm2.install('http.tar.gz', {
+        tarball: true
+      }, function(err, apps) {
+        should(err).eql(null);
+        done();
+      });
+    });
+
+    it('should have only 2 apps', function(done) {
+      pm2.list(function(err, list) {
+        should(err).be.null();
+        should(list.length).eql(2)
+        should(list[0].pm2_env.status).eql('online')
+        should(list[1].pm2_env.status).eql('online')
+        done()
+      })
+    })
+  })
+
   describe('Re spawn PM2', () => {
     it('should kill/resurect pm2', (done) => {
       pm2.update(function(err) {
@@ -92,7 +113,7 @@ describe('Modules programmatic testing', function() {
     })
   })
 
-  describe.skip('Uninstall', () => {
+  describe('Uninstall', () => {
     it('should uninstall multi app module', (done) => {
       pm2.uninstall('http-module', (err, data) => {
         should(err).be.null();
