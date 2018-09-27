@@ -36,10 +36,10 @@ describe('Exponential backoff feature', function() {
   it('should have set the prev_restart delay', (done) => {
     setTimeout(() => {
       pm2.list((err, procs) => {
-        should(procs[0].pm2_env.prev_restart_delay).eql(100)
+        should(procs[0].pm2_env.prev_restart_delay).be.aboveOrEqual(100)
         done()
       })
-    }, 100)
+    }, 200)
   })
 
   it('should have incremented the prev_restart delay', (done) => {
@@ -48,6 +48,6 @@ describe('Exponential backoff feature', function() {
         should(procs[0].pm2_env.prev_restart_delay).be.above(100)
         done()
       })
-    }, 300)
+    }, 500)
   })
 })
