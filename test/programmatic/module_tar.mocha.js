@@ -11,8 +11,8 @@ describe('Modules programmatic testing', function() {
   var MODULE_FOLDER_MONO = path.join(__dirname, './fixtures/tar-module/mono-app-module')
   var MODULE_FOLDER_MULTI = path.join(__dirname, './fixtures/tar-module/multi-app-module')
 
-  var PACKAGE_MONO = path.join(process.cwd(), 'mono-app-module-0.23.0.tar.gz')
-  var PACKAGE_MULTI = path.join(process.cwd(), 'multi-app-module-0.1.tar.gz')
+  var PACKAGE_MONO = path.join(process.cwd(), 'mono-app-module-v0-23-0.tar.gz')
+  var PACKAGE_MULTI = path.join(process.cwd(), 'multi-app-module-v0-1.tar.gz')
 
   after(function(done) {
     pm2.kill(done);
