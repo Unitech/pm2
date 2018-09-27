@@ -111,6 +111,11 @@
     "docDefault": 0,
     "docDescription": "Time in ms to wait before restarting a crashing app"
   },
+  "exp_backoff_restart_delay": {
+    "type": "number",
+    "docDefault": 0,
+    "docDescription": "Restart Time in ms to wait before restarting a crashing app"
+  },
   "source_map_support": {
     "type": "boolean",
     "docDefault": true,
