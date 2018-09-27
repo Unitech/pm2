@@ -514,6 +514,11 @@ commander.command('uninstall <module>')
     pm2.uninstall(plugin_name);
   });
 
+commander.command('package [target]')
+  .description('Check & Package TAR type module')
+  .action(function(target) {
+    pm2.package(target);
+  });
 
 commander.command('publish')
   .option('--tarball', 'is local tarball')
