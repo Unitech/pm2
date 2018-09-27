@@ -48,6 +48,7 @@ var csts = {
   ONLINE_STATUS           : 'online',
   STOPPED_STATUS          : 'stopped',
   STOPPING_STATUS         : 'stopping',
+  WAITING_RESTART         : 'waiting restart',
   LAUNCHING_STATUS        : 'launching',
   ERRORED_STATUS          : 'errored',
   ONE_LAUNCH_STATUS       : 'one-launch-status',
