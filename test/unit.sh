@@ -48,6 +48,9 @@ spec "API tests"
 mocha --exit --opts ./mocha.opts  ./reload-locker.mocha.js
 spec "Reload locker tests"
 
+mocha --exit --opts ./mocha.opts  ./version.mocha.js
+spec "Package json version retriever"
+
 mocha --exit --opts ./mocha.opts  ./api.backward.compatibility.mocha.js
 spec "API Backward compatibility tests"
 mocha --exit --opts ./mocha.opts  ./custom_action.mocha.js

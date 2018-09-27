@@ -8,10 +8,10 @@ const fs = require('fs')
 describe('Modules programmatic testing', function() {
   var pm2;
 
-  var MODULE_FOLDER_MONO = path.join(__dirname, '../fixtures/tar-module/mono-app-module')
-  var MODULE_FOLDER_MULTI = path.join(__dirname, '../fixtures/tar-module/multi-app-module')
+  var MODULE_FOLDER_MONO = path.join(__dirname, './fixtures/tar-module/mono-app-module')
+  var MODULE_FOLDER_MULTI = path.join(__dirname, './fixtures/tar-module/multi-app-module')
 
-  var PACKAGE_MONO = path.join(process.cwd(), 'mono-app-module-0.1.tar.gz')
+  var PACKAGE_MONO = path.join(process.cwd(), 'mono-app-module-0.23.0.tar.gz')
   var PACKAGE_MULTI = path.join(process.cwd(), 'multi-app-module-0.1.tar.gz')
 
   after(function(done) {
@@ -20,7 +20,7 @@ describe('Modules programmatic testing', function() {
 
   before(function(done) {
     pm2 = new PM2.custom({
-      cwd : '../fixtures'
+      cwd : './fixtures'
     });
 
     pm2.uninstall('all', () => done())
@@ -77,8 +77,10 @@ describe('Modules programmatic testing', function() {
       pm2.list(function(err, list) {
         should(err).be.null();
         should(list.length).eql(2)
+        should(list[0].pm2_env.version).eql('0.1')
         should(list[0].name).eql('multi-app-module:first_app')
         should(list[1].name).eql('multi-app-module:second_app')
+        should(list[1].pm2_env.version).eql('0.1')
         should(list[0].pm2_env.status).eql('online')
         should(list[1].pm2_env.status).eql('online')
         done()
@@ -126,6 +128,8 @@ describe('Modules programmatic testing', function() {
         should(err).be.null();
         should(list.length).eql(2)
         should(list[0].pm2_env.status).eql('online')
+        should(list[0].pm2_env.version).eql('0.1')
+        should(list[1].pm2_env.version).eql('0.1')
         should(list[1].pm2_env.status).eql('online')
         done()
       })
@@ -191,6 +195,7 @@ describe('Modules programmatic testing', function() {
         should(err).be.null();
         should(list.length).eql(1)
         should(list[0].name).eql('mono_app')
+        should(list[0].pm2_env.version).eql('0.23.0')
         should(list[0].pm2_env.status).eql('online')
         done()
       })
