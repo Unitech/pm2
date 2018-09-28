@@ -521,12 +521,12 @@ commander.command('package [target]')
     pm2.package(target);
   });
 
-commander.command('publish')
-  .option('--tarball', 'is local tarball')
+commander.command('publish [folder]')
+  .option('--npm', 'publish on npm')
   .alias('module:publish')
   .description('Publish the module you are currently on')
-  .action(function(opts) {
-    pm2.publish(opts);
+  .action(function(folder, opts) {
+    pm2.publish(folder, opts);
   });
 
 commander.command('set [key] [value]')
