@@ -796,6 +796,12 @@ commander.command('info <id>')
     pm2.describe(proc_id);
   });
 
+commander.command('env <id>')
+  .description('(alias) describe all parameters of a process id')
+  .action(function(proc_id) {
+    pm2.env(proc_id);
+  });
+
 commander.command('show <id>')
   .description('(alias) describe all parameters of a process id')
   .action(function(proc_id) {
