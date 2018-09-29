@@ -13,6 +13,9 @@
   "name_prefix": {
     "type": "string"
   },
+  "install_url": {
+    "type": "string"
+  },
   "cwd": {
     "type": "string",
     "docDefault": "CWD of the current environment (from your shell)",
