@@ -48,6 +48,8 @@ spec "API tests"
 mocha --exit --opts ./mocha.opts  ./reload-locker.mocha.js
 spec "Reload locker tests"
 
+mocha --exit --opts ./mocha.opts  ./auto_restart.mocha.js
+spec "Auto restart feature when uncaughtException"
 mocha --exit --opts ./mocha.opts  ./version.mocha.js
 spec "Package json version retriever"
 mocha --exit --opts ./mocha.opts  ./exp_backoff_restart_delay.mocha.js
