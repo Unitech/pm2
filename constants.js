@@ -72,6 +72,7 @@ var csts = {
   MODULE_CONF_PREFIX: 'module-db-v2',
   MODULE_CONF_PREFIX_TAR: 'tar-modules',
 
+  EXP_BACKOFF_RESET_TIMER : parseInt(process.env.EXP_BACKOFF_RESET_TIMER) || 30000,
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
   REMOTE_PORT             : 41624,
   REMOTE_HOST             : 's1.keymetrics.io',
