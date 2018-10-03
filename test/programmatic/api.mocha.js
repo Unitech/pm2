@@ -250,12 +250,11 @@ describe('API checks', function() {
     var pm2;
 
     after(function(done) {
-      pm2.destroy(done);
+      pm2.kill(done);
     });
 
     it('should create new custom PM2 instance', function() {
       pm2 = new PM2.custom({
-        independent : true,
         daemon_mode : true
       });
       should.exists(pm2.pm2_home);
@@ -291,12 +290,11 @@ describe('API checks', function() {
     var pm2;
 
     after(function(done) {
-      pm2.destroy(done);
+      pm2.kill(done);
     });
 
     it('should create new custom PM2 instance', function() {
       pm2 = new PM2.custom({
-        independent : true,
         daemon_mode : false
       });
 
