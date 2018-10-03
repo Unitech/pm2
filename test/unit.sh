@@ -110,3 +110,6 @@ mocha --exit --opts ./mocha.opts  ./bus.fork.spec.mocha.js
 spec "Protocol communication test"
 mocha --exit --opts ./mocha.opts  ./utility.mocha.js
 spec "PM2 Utility"
+
+cat ~/.pm2/pm2.log | grep "PM2 global error caught"
+spec "PM2 Daemon should not have thrown any global error"
