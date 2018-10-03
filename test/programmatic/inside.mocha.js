@@ -4,12 +4,11 @@ var should = require('should');
 
 describe('Call PM2 inside PM2', function() {
   var pm2 = new PM2.custom({
-    independent : true,
     cwd : __dirname + '/../fixtures/inside'
   });
 
   after(function(done) {
-    pm2.destroy(function(){
+    pm2.kill(function(){
       done();
     });
   });

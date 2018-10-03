@@ -46,6 +46,7 @@ commander.version(pkg.version)
   .option('-l --log [path]', 'specify log file which gathers both stdout and stderr')
   .option('--log-type <type>', 'specify log output style (raw by default, json optional)')
   .option('--log-date-format <date format>', 'add custom prefix timestamp to logs')
+  .option('--time', 'enable time logging')
   .option('--disable-logs', 'disable all logs storage')
   .option('--env <environment_name>', 'specify which set of environment variables from ecosystem file must be injected')
   .option('-a --update-env', 'force an update of the environment with restart/reload (-a <=> apply)')
@@ -57,6 +58,7 @@ commander.version(pkg.version)
   .option('--listen-timeout <delay>', 'listen timeout on application reload')
   .option('--max-memory-restart <memory>', 'Restart the app if an amount of memory is exceeded (in bytes)')
   .option('--restart-delay <delay>', 'specify a delay between restarts (in milliseconds)')
+  .option('--exp-backoff-restart-delay <delay>', 'specify a delay between restarts (in milliseconds)')
   .option('-x --execute-command', 'execute a program using fork system')
   .option('--max-restarts [count]', 'only restart the script COUNT times')
   .option('-u --user <username>', 'define user when generating startup script')
@@ -482,14 +484,14 @@ commander.command('update')
  */
 commander.command('install <module|git:// url>')
   .alias('module:install')
+  .option('--tarball', 'is local tarball')
+  .option('--http', 'is remote tarball')
+  .option('--docker', 'is docker container')
   .option('--v1', 'install module in v1 manner (do not use it)')
   .option('--safe [time]', 'keep module backup, if new module fail = restore with previous')
   .description('install or update a module and run it forever')
   .action(function(plugin_name, opts) {
-    if (opts.v1)
-      commander.v1 = true;
-    if (opts.safe)
-      commander.safe = opts.safe;
+    require('util')._extend(commander, opts)
     pm2.install(plugin_name, commander);
   });
 
@@ -513,12 +515,18 @@ commander.command('uninstall <module>')
     pm2.uninstall(plugin_name);
   });
 
+commander.command('package [target]')
+  .description('Check & Package TAR type module')
+  .action(function(target) {
+    pm2.package(target);
+  });
 
-commander.command('publish')
+commander.command('publish [folder]')
+  .option('--npm', 'publish on npm')
   .alias('module:publish')
   .description('Publish the module you are currently on')
-  .action(function() {
-    pm2.publish();
+  .action(function(folder, opts) {
+    pm2.publish(folder, opts);
   });
 
 commander.command('set [key] [value]')
@@ -786,6 +794,12 @@ commander.command('info <id>')
   .description('(alias) describe all parameters of a process id')
   .action(function(proc_id) {
     pm2.describe(proc_id);
+  });
+
+commander.command('env <id>')
+  .description('(alias) describe all parameters of a process id')
+  .action(function(proc_id) {
+    pm2.env(proc_id);
   });
 
 commander.command('show <id>')

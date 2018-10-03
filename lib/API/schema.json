@@ -10,6 +10,12 @@
     "docDefault": "Script filename without the extension (app for app.js)",
     "docDescription": "Process name in the process list"
   },
+  "name_prefix": {
+    "type": "string"
+  },
+  "install_url": {
+    "type": "string"
+  },
   "cwd": {
     "type": "string",
     "docDefault": "CWD of the current environment (from your shell)",
@@ -70,6 +76,9 @@
     "type": "string",
     "docDescription": "Format for log timestamps in moment.js format (eg YYYY-MM-DD HH:mm Z)"
   },
+  "time": {
+    "type": "boolean"
+  },
   "env": {
     "type": [
       "object",
@@ -104,6 +113,11 @@
     "type" : "number",
     "docDefault": 0,
     "docDescription": "Time in ms to wait before restarting a crashing app"
+  },
+  "exp_backoff_restart_delay": {
+    "type": "number",
+    "docDefault": 0,
+    "docDescription": "Restart Time in ms to wait before restarting a crashing app"
   },
   "source_map_support": {
     "type": "boolean",
@@ -157,6 +171,11 @@
     "docDefault": "True",
     "docDescription": "Enable or disable auto restart after process failure"
   },
+  "watch_delay": {
+    "type": "number",
+    "docDefault": "True",
+    "docDescription": "Restart delay on file change detected"
+  },
   "watch": {
     "type": [
       "boolean",
@@ -195,10 +214,12 @@
     "docDefault": 16,
     "docDescription": "Number of times a script is restarted when it exits in less than min_uptime"
   },
+  "execute_command": {
+    "type": "boolean"
+  },
   "exec_mode": {
     "type": "string",
     "regex": "^(cluster|fork)(_mode)?$",
-    "alias": "executeCommand",
     "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only",
     "docDefault": "fork",
     "docDescription": "Set the execution mode, possible values: fork&#124;cluster"
@@ -283,12 +304,13 @@
     "docDescription": "Current user that started the process"
   },
   "uid": {
-    "type" : "string",
+    "type" : "number",
+    "alias": "user",
     "docDefault": "Current user uid",
     "docDescription": "Set user id"
   },
   "gid": {
-    "type" : "string",
+    "type" : "number",
     "docDefault": "Current user gid",
     "docDescription": "Set group id"
   },

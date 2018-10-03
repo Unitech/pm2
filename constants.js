@@ -48,6 +48,7 @@ var csts = {
   ONLINE_STATUS           : 'online',
   STOPPED_STATUS          : 'stopped',
   STOPPING_STATUS         : 'stopping',
+  WAITING_RESTART         : 'waiting restart',
   LAUNCHING_STATUS        : 'launching',
   ERRORED_STATUS          : 'errored',
   ONE_LAUNCH_STATUS       : 'one-launch-status',
@@ -67,6 +68,11 @@ var csts = {
   PM2_UPDATE       : '../lib/API/pm2-plus/pres/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
 
+  MODULE_BASEFOLDER: 'module',
+  MODULE_CONF_PREFIX: 'module-db-v2',
+  MODULE_CONF_PREFIX_TAR: 'tar-modules',
+
+  EXP_BACKOFF_RESET_TIMER : parseInt(process.env.EXP_BACKOFF_RESET_TIMER) || 30000,
   REMOTE_PORT_TCP         : isNaN(parseInt(process.env.KEYMETRICS_PUSH_PORT)) ? 80 : parseInt(process.env.KEYMETRICS_PUSH_PORT),
   REMOTE_PORT             : 41624,
   REMOTE_HOST             : 's1.keymetrics.io',
@@ -95,7 +101,7 @@ var csts = {
   WORKER_INTERVAL         : process.env.PM2_WORKER_INTERVAL || 30000,
   KILL_TIMEOUT            : process.env.PM2_KILL_TIMEOUT || 1600,
   PM2_PROGRAMMATIC        : typeof(process.env.pm_id) !== 'undefined' || process.env.PM2_PROGRAMMATIC,
-  PM2_LOG_DATE_FORMAT     : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]'
+  PM2_LOG_DATE_FORMAT     : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DDTHH:mm:ss'
 
 };
 

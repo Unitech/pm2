@@ -101,7 +101,6 @@ describe('PM2 programmatic calls', function() {
         name : 'tota',
         instances : 3
       }, function(err, data) {
-        console.log(err)
         should.exists(err);
         done();
       });

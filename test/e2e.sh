@@ -7,14 +7,6 @@ source "${SRC}/e2e/include.sh"
 set -e
 set -o verbose
 
-# MODULES
-bash ./test/e2e/modules/get-set.sh
-spec "Configuration system working"
-bash ./test/e2e/modules/module.sh
-spec "module system"
-bash ./test/e2e/modules/module-safeguard.sh
-spec "module safeguard system (--safe)"
-
 # CLI
 bash ./test/e2e/cli/reload.sh
 spec "Reload"
@@ -36,6 +28,8 @@ bash ./test/e2e/cli/env-refresh.sh
 spec "Environment refresh on restart"
 bash ./test/e2e/cli/extra-lang.sh
 spec "Various programming languages checks (Python, PHP)"
+bash ./test/e2e/cli/python-support.sh
+spec "Python support checks"
 bash ./test/e2e/cli/multiparam.sh
 spec "Multiparam process management"
 bash ./test/e2e/cli/smart-start.sh
@@ -62,8 +56,6 @@ bash ./test/e2e/cli/watch.sh
 spec "watch system tests"
 bash ./test/e2e/cli/right-exit-code.sh
 spec "Verification exit code"
-bash ./test/e2e/cli/harmony.sh
-spec "Harmony test"
 bash ./test/e2e/cli/fork.sh
 spec "Fork system working"
 bash ./test/e2e/cli/piped-config.sh
@@ -141,4 +133,15 @@ spec "Logging path set to null"
 bash ./test/e2e/logs/log-json.sh
 spec "Logging directly to file in json"
 
+# MODULES
+bash ./test/e2e/modules/get-set.sh
+spec "Configuration system working"
+bash ./test/e2e/modules/module.sh
+spec "module system"
+bash ./test/e2e/modules/module-safeguard.sh
+spec "module safeguard system (--safe)"
+
 $pm2 kill
+
+# cat ~/.pm2/pm2.log | grep "PM2 global error caught"
+# spec "PM2 Daemon should not have thrown any global error"
