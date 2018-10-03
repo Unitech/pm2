@@ -114,11 +114,12 @@ should 'should app be stopped' 'stopped' 1
 $pm2 delete 455
 should 'should has been deleted process by id' "name: '455'" 0
 
+$pm2 kill
 ########### OPTIONS OUTPUT FILES
 $pm2 delete all
 
-$pm2 start echo.js -o outech.log -e errech.log --name gmail -i 1
-sleep 1
+$pm2 start echo.js -o outech.log -e errech.log --name gmail -i 2
+sleep 2
 cat outech-0.log > /dev/null
 spec "file outech-0.log exist"
 cat errech-0.log > /dev/null

@@ -1,3 +1,28 @@
+
+## 3.2.0 (3/10/18)
+
+### Features
+
+- package.json version field retrieval and display in pm2 ls, pm2 show, pm2 monit
+- pm2 internal configuration system via `pm2 set pm2:key value`, attached to pm2.user_conf
+- add the .user field (CLI + Config) to set the user to start the application with
+- add the .time field (CLI + Config) to enable default logs date prefix
+- max_memory_restart now triggers a reload
+- pm2 env <pm_id> command to display the environment the application is running with
+- exponential backoff restart delay via `--exp-backoff-restart-delay <ms>` with reset mechanism
+- new timing library on PM2 daemon (increase log througput, reduce CPU usage and memory usage)
+- better user management system with username resolution to uid
+- websocket default switch for pm2 plus
+- new module management system (`pm2 package <folder>`, `pm2 publish <folder>`, `pm2 install <tarball>`)
+
+### Fix
+
+- @pm2/io 2.4 (restart > 10.0)
+- restart behavior tested
+- fix module version parsing
+- module system refactoring (TAR + NPM)
+- fix watch_delay in config file
+
 ## 3.1.3 (20/09/18)
 
 ### Features

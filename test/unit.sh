@@ -33,9 +33,6 @@ $pm2 uninstall all
 # fi
 cd test/programmatic
 
-mocha --exit --opts ./mocha.opts  ./god.mocha.js
-spec "God test"
-
 mocha --exit --opts ./mocha.opts  ./programmatic.js
 spec "Programmatic test"
 
@@ -50,6 +47,16 @@ mocha --exit --opts ./mocha.opts  ./lazy_api.mocha.js
 spec "API tests"
 mocha --exit --opts ./mocha.opts  ./reload-locker.mocha.js
 spec "Reload locker tests"
+
+mocha --exit --opts ./mocha.opts  ./auto_restart.mocha.js
+spec "Auto restart feature when uncaughtException"
+mocha --exit --opts ./mocha.opts  ./version.mocha.js
+spec "Package json version retriever"
+$pm2 kill
+mocha --exit --opts ./mocha.opts  ./exp_backoff_restart_delay.mocha.js
+spec "Exponential backoff restart delay tests"
+mocha --exit --opts ./mocha.opts  ./internal_config.mocha.js
+spec "PM2 local configuration working"
 
 mocha --exit --opts ./mocha.opts  ./api.backward.compatibility.mocha.js
 spec "API Backward compatibility tests"
@@ -78,9 +85,6 @@ mocha --exit --opts ./mocha.opts  ./send_data_process.mocha.js
 spec "Send data to a process"
 mocha --exit --opts ./mocha.opts  ./modules.mocha.js
 spec "Module API testing"
-# mocha --exit --opts ./mocha.opts  ./module_retrocompat.mocha.js
-# spec "Module retrocompatibility system"
-
 mocha --exit --opts ./mocha.opts  ./json_validation.mocha.js
 spec "JSON validation test"
 mocha --exit --opts ./mocha.opts  ./env_switching.js
@@ -89,6 +93,10 @@ mocha --exit --opts ./mocha.opts  ./configuration.mocha.js
 spec "Configuration system working"
 mocha --exit --opts ./mocha.opts  ./id.mocha.js
 spec "Uniqueness id for each process"
+
+mocha --exit --opts ./mocha.opts  ./god.mocha.js
+spec "God test"
+
 
 #
 # Interface testing

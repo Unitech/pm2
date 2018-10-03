@@ -14,12 +14,11 @@ describe('Wait ready / Graceful start / restart', function() {
     process.exit(0);
 
   var pm2 = new PM2.custom({
-    cwd : '../fixtures/listen-timeout/',
-    independent : true
+    cwd : '../fixtures/listen-timeout/'
   });
 
   after(function(done) {
-    pm2.destroy(done)
+    pm2.kill(done)
   });
 
   describe('(FORK) Listen timeout feature', function() {
