@@ -18,13 +18,11 @@ describe('Exponential backoff feature', function() {
   });
 
   before(function(done) {
-    PM2.kill(function() {
-      pm2 = new PM2.custom({
-        cwd : test_path
-      });
+    pm2 = new PM2.custom({
+      cwd : test_path
+    });
 
-      pm2.delete('all', () => done())
-    })
+    pm2.delete('all', () => done())
   })
 
   it('should set exponential backoff restart', (done) => {

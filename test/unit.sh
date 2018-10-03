@@ -52,6 +52,7 @@ mocha --exit --opts ./mocha.opts  ./auto_restart.mocha.js
 spec "Auto restart feature when uncaughtException"
 mocha --exit --opts ./mocha.opts  ./version.mocha.js
 spec "Package json version retriever"
+$pm2 kill
 mocha --exit --opts ./mocha.opts  ./exp_backoff_restart_delay.mocha.js
 spec "Exponential backoff restart delay tests"
 mocha --exit --opts ./mocha.opts  ./internal_config.mocha.js
