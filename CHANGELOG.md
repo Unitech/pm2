@@ -1,4 +1,10 @@
 
+## 3.2.1 (3/10/18)
+
+### Fix
+
+- minor bug: get internal pm2 config after creation on new pm2 boots
+
 ## 3.2.0 (3/10/18)
 
 ### Features
