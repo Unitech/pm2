@@ -1,4 +1,10 @@
 
+## 3.2.1 (5/10/18)
+
+### Fix
+
+- minor bug: fix bug when passing -i 'max' or -i 0
+
 ## 3.2.1 (3/10/18)
 
 ### Fix
