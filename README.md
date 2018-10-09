@@ -257,7 +257,7 @@ Or go to the application and create an account:
 
 ### PM2 Plus: Expose Custom Metrics
 
-To get more insights on how your application behave, plug custom metrics inside your code and monitor them with the `pm2 monit` command:
+To get more insights on how your application behaves, plug custom metrics inside your code and monitor them with the `pm2 monit` command:
 
 In your project install [pm2-io-pm](https://github.com/keymetrics/pm2-io-apm):
 
