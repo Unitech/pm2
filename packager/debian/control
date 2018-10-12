@@ -1,6 +1,6 @@
 Package: pm2
 Version: __VERSION__
-Depends: nodejs (>= 6.12.2)
+Depends: nodejs (>= 6.3.0)
 Conflicts: nodejs (<< 0.12.0)
 Section: devel
 Priority: optional
