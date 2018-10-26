@@ -36,6 +36,9 @@ cd test/programmatic
 mocha --exit --opts ./mocha.opts  ./programmatic.js
 spec "Programmatic test"
 
+mocha --exit --opts ./mocha.opts  ./instances.mocha.js
+spec "Instances max bound tests"
+
 mocha --exit --opts ./mocha.opts  ./containerizer.mocha.js
 spec "Dockerfile parser test"
 
