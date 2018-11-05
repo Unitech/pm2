@@ -345,6 +345,10 @@ export interface StartOptions {
    */
   max_restarts?: number;
   /**
+   *
+   */
+  check_unstable_after_online?: boolean;
+  /**
    * If sets and script’s memory usage goes about the configured number, pm2 restarts the script.
    * Uses human-friendly suffixes: ‘K’ for kilobytes, ‘M’ for megabytes, ‘G’ for gigabytes’, etc. Eg “150M”.
    */

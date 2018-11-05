@@ -1,0 +1,18 @@
+apps:
+  - name: "test"
+    script: "test.php"
+    instances: 1
+    exec_mode: "fork"
+    cwd: "examples/check-repeating-reset/"
+    merge_logs: true
+
+    #Control flow
+    min_uptime: 1000 # 2сек
+    #listen_timeout: 100000 # (number) time in ms before forcing a reload if app not listening
+    #kill_timeout: '10000' # (number) time in milliseconds before sending a final SIGKILL
+    #wait_ready: false # (boolean) Instead of reload waiting for listen event wait for process.send(‘ready’)
+    max_restarts: '5' # number of consecutive unstable restarts (less than 1sec interval or custom time via min_uptime)
+    #restart_delay: '1000' # (number) time to wait before restarting a crashed app (in milliseconds). defaults to 0.
+    autorestart: true # (boolean) true by default. if false PM2 will not restart your app if it crashes or ends peacefully
+    force: false #(boolean) defaults to false. if true you can start the same script several times which is usually not allowed by PM2
+    check_unstable_after_online: true
