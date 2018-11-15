@@ -1,4 +1,4 @@
-// Type definitions for pm2 2.7.1
+// Type definitions for pm2 3.2.2
 // Definitions by: João Portela https://www.github.com/jportela
 
 // Exported Methods
@@ -364,6 +364,11 @@ export interface StartOptions {
    * (Default: 0) Number of millseconds to wait before restarting a script that has exited.
    */
   restart_delay?: number;
+  /**
+   * Minimum number of milliseconds to wait before restarting a script that has exited. After the first restart, this
+   * delay will grow exponentially until it hits the maximum of fifteen seconds.
+   */
+  exp_backoff_restart_delay?: number;
   /**
    * (Default: “node”) The interpreter for your script (eg “python”, “ruby”, “bash”, etc).
    * The value “none” will execute the ‘script’ as a binary executable.
