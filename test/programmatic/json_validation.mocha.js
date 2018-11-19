@@ -68,7 +68,7 @@ describe('JSON validation tests', function() {
     });
 
     // Returned array should contain also default values
-    Object.keys(ret.config).should.containDeep(default_values);;
+    Object.keys(ret.config).should.containDeep(default_values);
     done();
   });
 
