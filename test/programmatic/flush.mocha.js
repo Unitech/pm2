@@ -50,6 +50,7 @@ describe('Programmatic flush feature test', function() {
     });
     it('flush only echo logs', function(done) {
       pm2.start({
+        name: 'echo',
         script: './echo.js',
         error_file : 'error-echo.log',
         out_file   : 'out-echo.log',
