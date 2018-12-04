@@ -1,4 +1,12 @@
 
+## 3.2.3 (4/12/18)
+
+### Fix
+
+- medium rare bug: fix issue when acting on process file (#3987 + #3192)
+- concurrent action to 1 if acting on only 2 processes
+- fix cluster syntax
+
 ## 3.2.1 (5/10/18)
 
 ### Fix
