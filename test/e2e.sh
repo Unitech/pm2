@@ -50,8 +50,8 @@ bash ./test/e2e/cli/dump.sh
 spec "dump test"
 bash ./test/e2e/cli/resurrect.sh
 spec "resurrect test"
-bash ./test/e2e/cli/mjs.sh
-spec "Test import syntax"
+# bash ./test/e2e/cli/mjs.sh
+# spec "Test import syntax"
 bash ./test/e2e/cli/watch.sh
 spec "watch system tests"
 bash ./test/e2e/cli/right-exit-code.sh
