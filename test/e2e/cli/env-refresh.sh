@@ -16,40 +16,40 @@ sleep 0.5
 grep "hello1" out-env.log &> /dev/null
 spec "should contain env variable"
 
-TEST_VARIABLE='89hello89' $pm2 restart env --update-env
+TEST_VARIABLE='89hello89' $pm2 restart env
 
 sleep 1.0
 grep "89hello89" out-env.log &> /dev/null
 spec "should contain refreshed environment variable"
 
+TEST_VARIABLE="CLUNEWSTER" $pm2 restart env --preserve-env
 >out-env.log
-TEST_VARIABLE="CLUNEWSTER" $pm2 restart env
 sleep 0.5
 grep "89hello89" out-env.log &> /dev/null
-spec "should not change environment (--skip-env)"
+spec "should environment changed"
 
 $pm2 delete all
 
 #
 # Cluster mode
 #
->out-env.log
 $pm2 start env.js -o out-env.log --merge-logs
+>out-env.log
 sleep 1
 grep "undefined" out-env.log &> /dev/null
 spec "should contain nothing"
 
+TEST_VARIABLE="CLUSTER" $pm2 reload env
 >out-env.log
-TEST_VARIABLE="CLUSTER" $pm2 reload env --update-env
 sleep 1
 grep "CLUSTER" out-env.log &> /dev/null
 spec "should contain CLUSTER"
 
+TEST_VARIABLE="CLUNEWSTER" $pm2 reload env --preserve-env
 >out-env.log
-TEST_VARIABLE="CLUNEWSTER" $pm2 reload env
 sleep 1
 grep "CLUSTER" out-env.log &> /dev/null
-spec "should contain not change environment (--skip-env)"
+spec "should contain not change environment (--preserve-env)"
 
 #
 # REFRESH with Restart via JSON
@@ -62,7 +62,6 @@ sleep 0.5
 grep "YES" out-env.log &> /dev/null
 spec "should contain env variable"
 
-
 $pm2 restart env-refreshed.json
 >out-env.log
 
@@ -70,14 +69,12 @@ sleep 0.5
 grep '{"HEYYYY":true}' out-env.log &> /dev/null
 spec "should contain refreshed env variable via json"
 
-
 $pm2 start env-ecosystem.json --env production
 >out-env.log
 
 sleep 0.5
 grep "No worries!" out-env.log &> /dev/null
 spec "should use deploy.production.env.TEST_VARIABLE"
-
 
 $pm2 kill
 $pm2 l
