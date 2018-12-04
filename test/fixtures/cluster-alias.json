@@ -1,0 +1,12 @@
+{
+    "apps": [{
+        "name" : "serv-clust",
+        "script" : "server.js",
+        "instances" : "4",
+        "exec_mode" : "cluster",
+        "env_test" : {
+            "NODE_ENV" : "TEST"
+        }
+    }]
+}
+  
