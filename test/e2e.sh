@@ -116,6 +116,8 @@ bash ./test/e2e/misc/startup.sh
 spec "upstart startup test"
 bash ./test/e2e/misc/nvm-node-version.sh
 spec "NVM node version setting"
+bash ./test/e2e/misc/port-release.sh
+spec "Reload in cluster with port released"
 bash ./test/e2e/misc/cron-system.sh
 spec "Cron system tests"
 
