@@ -18,20 +18,10 @@ var debug        = require('debug')('pm2:cli');
 var PM2          = require('../lib/API.js');
 var pkg          = require('../package.json');
 var tabtab       = require('../lib/completion.js');
+var Common       = require('../lib/Common.js');
 
-// pm2 should ignore -s --silent -v if they are after '--'
-var variadicArgsDashesPos = process.argv.indexOf('--');
-
-// Early detection of silent to avoid printing motd
-if (process.argv.indexOf('--silent') > -1 && process.argv.indexOf('--silent') < variadicArgsDashesPos ||
-    process.argv.indexOf('-s') > -1 && process.argv.indexOf('-s') < variadicArgsDashesPos) {
-  process.env.PM2_DISCRETE_MODE = true;
-}
-
-if (process.argv.indexOf('-v') > -1 && process.argv.indexOf('-v') < variadicArgsDashesPos) {
-  console.log(pkg.version);
-  process.exit(0);
-}
+Common.determineSilentCLI();
+Common.printVersion();
 
 var pm2 = new PM2();
 
@@ -97,58 +87,49 @@ commander.version(pkg.version)
   .option('--deep-monitoring', 'enable all monitoring tools (equivalent to --v8 --event-loop-inspector --trace)')
   .usage('[cmd] app');
 
-  function displayUsage() {
-    console.log('usage: pm2 [options] <command>')
-    console.log('');
-    console.log('pm2 -h, --help             all available commands and options');
-    console.log('pm2 examples               display pm2 usage examples');
-    console.log('pm2 <command> -h           help on a specific command');
-    console.log('');
-    console.log('Access pm2 files in ~/.pm2');
-  }
+function displayUsage() {
+  console.log('usage: pm2 [options] <command>')
+  console.log('');
+  console.log('pm2 -h, --help             all available commands and options');
+  console.log('pm2 examples               display pm2 usage examples');
+  console.log('pm2 <command> -h           help on a specific command');
+  console.log('');
+  console.log('Access pm2 files in ~/.pm2');
+}
 
-  function displayExamples() {
-    console.log('- Start and add a process to the pm2 process list:')
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 start app.js --name app'));
-    console.log('');
-    console.log('- Show the process list:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 ls'));
-    console.log('');
-    console.log('- Stop and delete a process from the pm2 process list:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 delete app'));
-    console.log('');
-    console.log('- Stop, start and restart a process from the process list:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 stop app'));
-    console.log(chalk.cyan('  $ pm2 start app'));
-    console.log(chalk.cyan('  $ pm2 restart app'));
-    console.log('');
-    console.log('- Clusterize an app to all CPU cores available:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 start -i max'));
-    console.log('');
-    console.log('- Update pm2 :');
-    console.log('');
-    console.log(chalk.cyan('  $ npm install pm2 -g && pm2 update'));
-    console.log('');
-    console.log('- Install pm2 auto completion:')
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 completion install'))
-    console.log('');
-    console.log('Check the full documentation on https://pm2.io/doc');
-    console.log('');
-  }
-
-if (process.argv.indexOf('-s') > -1) {
-  for(var key in console){
-    var code = key.charCodeAt(0);
-    if(code >= 97 && code <= 122){
-      console[key] = function(){};
-    }
-  }
+function displayExamples() {
+  console.log('- Start and add a process to the pm2 process list:')
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 start app.js --name app'));
+  console.log('');
+  console.log('- Show the process list:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 ls'));
+  console.log('');
+  console.log('- Stop and delete a process from the pm2 process list:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 delete app'));
+  console.log('');
+  console.log('- Stop, start and restart a process from the process list:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 stop app'));
+  console.log(chalk.cyan('  $ pm2 start app'));
+  console.log(chalk.cyan('  $ pm2 restart app'));
+  console.log('');
+  console.log('- Clusterize an app to all CPU cores available:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 start -i max'));
+  console.log('');
+  console.log('- Update pm2 :');
+  console.log('');
+  console.log(chalk.cyan('  $ npm install pm2 -g && pm2 update'));
+  console.log('');
+  console.log('- Install pm2 auto completion:')
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 completion install'))
+  console.log('');
+  console.log('Check the full documentation on https://pm2.io/doc');
+  console.log('');
 }
 
 function beginCommandProcessing() {
