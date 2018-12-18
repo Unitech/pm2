@@ -13,6 +13,8 @@ describe('Wait ready / Graceful start / restart', function() {
   if (!semver.satisfies(process.version, '>= 4.0.0'))
     process.exit(0);
 
+  this.retries(2)
+
   var pm2 = new PM2.custom({
     cwd : '../fixtures/listen-timeout/'
   });

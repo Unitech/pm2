@@ -51,6 +51,29 @@ function spec {
   success "$1"
 }
 
+function runTest {
+    START=$(date +%s.%N)
+    bash $1
+    RET=$?
+
+    if [ $RET -ne 0 ];
+    then
+        bash $1
+        RET=$?
+
+        if [ $RET -ne 0 ];
+        then
+           fail $1
+        fi
+    fi
+
+    END=$(date +%s.%N)
+    DIFF=$(echo "$END - $START" | bc)
+    STR="[V] $1 succeeded and took $DIFF seconds"
+    echo $STR
+    echo $STR >> e2e_time
+}
+
 function ispec {
   RET=$?
   sleep 0.2
