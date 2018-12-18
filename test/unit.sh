@@ -3,114 +3,86 @@
 alias mocha='../node_modules/mocha/bin/mocha'
 pm2="`type -P node` `pwd`/bin/pm2"
 
+function reset {
+    $pm2 uninstall all -s
+    $pm2 link delete -s
+    $pm2 kill -s
+}
+
+function runUnitTest {
+    START=$(date +%s)
+    mocha --exit --opts ./mocha.opts $1
+    RET=$?
+
+    if [ $RET -ne 0 ];
+    then
+        reset
+        mocha --exit --opts ./mocha.opts $1
+        RET=$?
+
+        if [ $RET -ne 0 ];
+        then
+            echo -e "######## \033[31m  ✘ $1\033[0m"
+            exit 1
+        fi
+    fi
+
+    reset
+
+    END=$(date +%s)
+    DIFF=$(echo "$END - $START" | bc)
+    STR="[V] $1 succeeded and took $DIFF seconds"
+    echo $STR
+    echo $STR >> unit_time
+}
+
+reset
+
+touch unit_time
+> unit_time
+
+cd test/programmatic
+
+
 # Abort script at first error
 set -e
 # Display all commands executed
 set -o verbose
 
-function fail {
-  echo -e "######## \033[31m  ✘ $1\033[0m"
-  exit 1
-}
+runUnitTest ./programmatic.js
+runUnitTest ./instances.mocha.js
+runUnitTest ./containerizer.mocha.js
+runUnitTest ./api.mocha.js
+runUnitTest ./path_resolution.mocha.js
+runUnitTest ./lazy_api.mocha.js
+runUnitTest ./reload-locker.mocha.js
+runUnitTest ./auto_restart.mocha.js
+runUnitTest ./version.mocha.js
+runUnitTest ./exp_backoff_restart_delay.mocha.js
+runUnitTest ./internal_config.mocha.js
+runUnitTest ./api.backward.compatibility.mocha.js
+runUnitTest ./custom_action.mocha.js
+runUnitTest ./logs.js
+runUnitTest ./watcher.js
+runUnitTest ./max_memory_limit.js
+runUnitTest ./cluster.mocha.js
+runUnitTest ./graceful.mocha.js
+runUnitTest ./inside.mocha.js
+runUnitTest ./misc_commands.js
+runUnitTest ./signals.js
+runUnitTest ./send_data_process.mocha.js
+runUnitTest ./modules.mocha.js
+runUnitTest ./json_validation.mocha.js
+runUnitTest ./env_switching.js
+runUnitTest ./configuration.mocha.js
+runUnitTest ./id.mocha.js
+runUnitTest ./god.mocha.js
 
-function success {
-  echo -e "\033[32m------------> ✔ $1\033[0m"
-}
-
-function spec {
-    [ $? -eq 0 ] || fail "$1"
-    $pm2 uninstall all
-    $pm2 link delete
-    $pm2 kill
-    success "$1"
-}
-
-$pm2 uninstall all
-
-# if [ $TRAVIS ]
-# then
-#   export DEBUG="pm2:*"
-# fi
-cd test/programmatic
-
-mocha --exit --opts ./mocha.opts  ./programmatic.js
-spec "Programmatic test"
-
-mocha --exit --opts ./mocha.opts  ./instances.mocha.js
-spec "Instances max bound tests"
-
-mocha --exit --opts ./mocha.opts  ./containerizer.mocha.js
-spec "Dockerfile parser test"
-
-mocha --exit --opts ./mocha.opts  ./api.mocha.js
-spec "API tests"
-mocha --exit --opts ./mocha.opts  ./path_resolution.mocha.js
-spec "API tests"
-mocha --exit --opts ./mocha.opts  ./lazy_api.mocha.js
-spec "API tests"
-mocha --exit --opts ./mocha.opts  ./reload-locker.mocha.js
-spec "Reload locker tests"
-
-mocha --exit --opts ./mocha.opts  ./auto_restart.mocha.js
-spec "Auto restart feature when uncaughtException"
-mocha --exit --opts ./mocha.opts  ./version.mocha.js
-spec "Package json version retriever"
-$pm2 kill
-mocha --exit --opts ./mocha.opts  ./exp_backoff_restart_delay.mocha.js
-spec "Exponential backoff restart delay tests"
-mocha --exit --opts ./mocha.opts  ./internal_config.mocha.js
-spec "PM2 local configuration working"
-
-mocha --exit --opts ./mocha.opts  ./api.backward.compatibility.mocha.js
-spec "API Backward compatibility tests"
-mocha --exit --opts ./mocha.opts  ./custom_action.mocha.js
-spec "Custom Actions tests"
-
-mocha --exit --opts ./mocha.opts  ./logs.js
-spec "Logs test"
-mocha --exit --opts ./mocha.opts  ./watcher.js
-spec "Watcher"
-mocha --exit --opts ./mocha.opts  ./max_memory_limit.js
-spec "Max memory tests"
-# mocha --exit --opts ./mocha.opts  ./module_configuration.mocha.js
-# spec "Max memory tests"
-mocha --exit --opts ./mocha.opts  ./cluster.mocha.js
-spec "Cluster tests"
-mocha --exit --opts ./mocha.opts  ./graceful.mocha.js
-spec "Graceful tests"
-mocha --exit --opts ./mocha.opts  ./inside.mocha.js
-spec "Inside pm2 call tests"
-mocha --exit --opts ./mocha.opts  ./misc_commands.js
-spec "MISC tests"
-mocha --exit --opts ./mocha.opts  ./signals.js
-spec "SIGINT signal interception + delay customization"
-mocha --exit --opts ./mocha.opts  ./send_data_process.mocha.js
-spec "Send data to a process"
-mocha --exit --opts ./mocha.opts  ./modules.mocha.js
-spec "Module API testing"
-mocha --exit --opts ./mocha.opts  ./json_validation.mocha.js
-spec "JSON validation test"
-mocha --exit --opts ./mocha.opts  ./env_switching.js
-spec "JSON environment switching on JSON restart with --env"
-mocha --exit --opts ./mocha.opts  ./configuration.mocha.js
-spec "Configuration system working"
-mocha --exit --opts ./mocha.opts  ./id.mocha.js
-spec "Uniqueness id for each process"
-
-mocha --exit --opts ./mocha.opts  ./god.mocha.js
-spec "God test"
-
-
-#
-# Interface testing
-#
 cd ../interface
 
-# echo $PM2_HOME
+runUnitTest ./bus.spec.mocha.js
+runUnitTest ./bus.fork.spec.mocha.js
+runUnitTest ./utility.mocha.js
 
-mocha --exit --opts ./mocha.opts  ./bus.spec.mocha.js
-spec "Protocol communication test"
-mocha --exit --opts ./mocha.opts  ./bus.fork.spec.mocha.js
-spec "Protocol communication test"
-mocha --exit --opts ./mocha.opts  ./utility.mocha.js
-spec "PM2 Utility"
+echo "============== unit test finished =============="
+cat unit_time
