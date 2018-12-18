@@ -75,7 +75,7 @@ describe('Max memory restart programmatic', function() {
 
         setTimeout(function() {
           pm2.list(function(err, ret) {
-            should(err).be.null();;
+            should(err).be.null();
             ret[0].pm2_env.restart_time.should.not.eql(0);
             done();
           });
