@@ -52,7 +52,7 @@ function spec {
 }
 
 function runTest {
-    START=$(date +%s.%N)
+    START=$(date +%s)
     bash $1
     RET=$?
 
@@ -67,7 +67,7 @@ function runTest {
         fi
     fi
 
-    END=$(date +%s.%N)
+    END=$(date +%s)
     DIFF=$(echo "$END - $START" | bc)
     STR="[V] $1 succeeded and took $DIFF seconds"
     echo $STR
