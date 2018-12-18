@@ -427,7 +427,7 @@ API.prototype.reload = function(process_name, opts, cb) {
       Common.unlockReload();
       if (err)
         return cb ? cb(err) : that.exitCli(conf.ERROR_EXIT);
-      return cb ? cb(null, apps) : that.exitCli(conf.SUCCESS_EXIT);;
+      return cb ? cb(null, apps) : that.exitCli(conf.SUCCESS_EXIT);
     });
   else {
     if (opts && !opts.updateEnv)
@@ -438,7 +438,7 @@ API.prototype.reload = function(process_name, opts, cb) {
 
       if (err)
         return cb ? cb(err) : that.exitCli(conf.ERROR_EXIT);
-      return cb ? cb(null, apps) : that.exitCli(conf.SUCCESS_EXIT);;
+      return cb ? cb(null, apps) : that.exitCli(conf.SUCCESS_EXIT);
     });
   }
 };
