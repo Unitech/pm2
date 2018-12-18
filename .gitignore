@@ -19,3 +19,4 @@ joblog-X
 test/fixtures/path-check*.txt
 yarn.lock
 *.tar.gz
+e2e_time
