@@ -36,12 +36,12 @@ $pm2 link delete
 $pm2 kill
 
 function fail {
-  echo -e "######## \033[31m  ✘ $1\033[0m"
+  echo -e "######## ✘ $1"
   exit 1
 }
 
 function success {
-  echo -e "\033[32m------------> ✔ $1\033[0m"
+  echo -e "------------> ✔ $1"
 }
 
 function spec {
@@ -52,12 +52,15 @@ function spec {
 }
 
 function runTest {
+    echo "[~] Starting test $1"
     START=$(date +%s)
     bash $1
     RET=$?
-
     if [ $RET -ne 0 ];
     then
+        STR="[RETRY] $1 failed and NOW is getting retried"
+        echo $STR
+        echo $STR >> e2e_time
         bash $1
         RET=$?
 

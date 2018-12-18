@@ -6,9 +6,6 @@ source "${SRC}/../include.sh"
 cd $file_path
 
 ############# Start / Stop / Restart
-
-echo -e "\033[1mRunning tests:\033[0m"
-
 echo "---- Start an app, stop it, if state stopped and started, restart stopped app"
 $pm2 start echo.js
 spec "Should start an app by script.js"
