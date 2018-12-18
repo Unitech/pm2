@@ -19,13 +19,16 @@ var PM2          = require('../lib/API.js');
 var pkg          = require('../package.json');
 var tabtab       = require('../lib/completion.js');
 
+// pm2 should ignore -s --silent -v if they are after '--'
+var variadicArgsDashesPos = process.argv.indexOf('--');
+
 // Early detection of silent to avoid printing motd
-if (process.argv.indexOf('--silent') > -1 ||
-    process.argv.indexOf('-s') > -1) {
+if (process.argv.indexOf('--silent') > -1 && process.argv.indexOf('--silent') < variadicArgsDashesPos ||
+    process.argv.indexOf('-s') > -1 && process.argv.indexOf('-s') < variadicArgsDashesPos) {
   process.env.PM2_DISCRETE_MODE = true;
 }
 
-if (process.argv.indexOf('-v') > -1) {
+if (process.argv.indexOf('-v') > -1 && process.argv.indexOf('-v') < variadicArgsDashesPos) {
   console.log(pkg.version);
   process.exit(0);
 }
