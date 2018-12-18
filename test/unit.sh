@@ -16,6 +16,10 @@ function runUnitTest {
 
     if [ $RET -ne 0 ];
     then
+        STR="[RETRY] $1 failed and NOW is getting retried"
+        echo $STR
+        echo $STR >> unit_time
+
         reset
         mocha --exit --opts ./mocha.opts $1
         RET=$?
@@ -46,8 +50,6 @@ cd test/programmatic
 
 # Abort script at first error
 set -e
-# Display all commands executed
-set -o verbose
 
 runUnitTest ./programmatic.js
 runUnitTest ./instances.mocha.js

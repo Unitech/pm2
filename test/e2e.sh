@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
+export PM2_SILENT="true"
+
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/e2e/include.sh"
 
 # Abort script at first error
 set -e
-set -o verbose
 
 touch e2e_time
 > e2e_time
 
 # CLI
-runTest ./test/e2e/cli/operate-regex.sh
+runTest ./test/e2e/cli/reload.sh
 runTest ./test/e2e/cli/start-app.sh
 runTest ./test/e2e/cli/operate-regex.sh
 runTest ./test/e2e/cli/interpreter.sh
@@ -72,7 +73,6 @@ runTest ./test/e2e/misc/port-release.sh
 runTest ./test/e2e/misc/cron-system.sh
 
 # LOGS
-runTest ./test/e2e/logs/log-timestamp.sh
 runTest ./test/e2e/logs/log-custom.sh
 runTest ./test/e2e/logs/log-reload.sh
 runTest ./test/e2e/logs/log-entire.sh

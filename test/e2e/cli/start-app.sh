@@ -3,8 +3,6 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/../include.sh"
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 cd $file_path/start-app
 
 #
@@ -16,11 +14,11 @@ $pm2 start "node -e 'setTimeout(function() { }, 100000); console.log(process.env
 should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 0' 1
 
-cat test.log | grep "undefined"
+cat test.log | grep "undefined" &> /dev/null
 spec "should have printed undefined env var"
 
 TEST='ok' $pm2 restart 0 --update-env
-cat test.log | grep "ok"
+cat test.log | grep "ok" &> /dev/null
 
 should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 1' 1
@@ -34,5 +32,5 @@ $pm2 delete all
 $pm2 start ecosystem.config.js
 should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 0' 1
-cat test-conf.log | grep "test_val"
+cat test-conf.log | grep "test_val" 2> /dev/null
 spec "should have printed the test_val"

@@ -4,9 +4,6 @@ SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/../include.sh"
 
 cd $file_path
-
-echo "################## RELOAD SIGINT ###################"
-
 $pm2 start delayed_exit.js -i 2
 should 'should start processes' 'online' 2
 should 'should app be in cluster mode' "exec_mode: 'cluster_mode'" 2
@@ -22,10 +19,6 @@ OUT=`grep "SIGINT" "$OUT_LOG" | wc -l`
 success "Processes sucessfully receives the SIGINT signal"
 
 $pm2 kill
-
-echo "################## RELOAD ###################"
-
-echo "Reloading"
 
 $pm2 start delayed_exit.js
 should 'should start processes' 'online' 1
@@ -72,7 +65,7 @@ should 'should RELOAD a fourth time' 'restart_time: 4' 4
 ############### CLUSTER STUFF
 $pm2 kill
 
-echo "Reloading"
+
 $pm2 start child.js -i 4
 should 'should start processes' 'online' 4
 
