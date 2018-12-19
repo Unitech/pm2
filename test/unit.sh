@@ -10,8 +10,9 @@ function reset {
 }
 
 function runUnitTest {
+    echo "[~] Starting test $1"
     START=$(date +%s)
-    mocha --exit --opts ./mocha.opts $1
+    mocha --exit --bail --opts ./mocha.opts $1
     RET=$?
 
     if [ $RET -ne 0 ];
@@ -21,12 +22,12 @@ function runUnitTest {
         echo $STR >> unit_time
 
         reset
-        mocha --exit --opts ./mocha.opts $1
+        mocha --bail --exit --opts ./mocha.opts $1
         RET=$?
 
         if [ $RET -ne 0 ];
         then
-            echo -e "######## \033[31m  ✘ $1\033[0m"
+            echo -e "######## TEST ✘ $1 FAILED TWICE!!"
             exit 1
         fi
     fi
@@ -49,7 +50,7 @@ cd test/programmatic
 
 
 # Abort script at first error
-set -e
+# set -e
 
 runUnitTest ./programmatic.js
 runUnitTest ./instances.mocha.js
@@ -79,6 +80,8 @@ runUnitTest ./env_switching.js
 runUnitTest ./configuration.mocha.js
 runUnitTest ./id.mocha.js
 runUnitTest ./god.mocha.js
+
+runUnitTest ./issues/json_env_passing_4080.mocha.js
 
 cd ../interface
 
