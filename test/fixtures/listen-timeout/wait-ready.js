@@ -10,7 +10,7 @@ var server = http.createServer(function(req, res) {
   // 1# Notify application ready
   setTimeout(function() {
     process.send('ready');
-  }, 2000);
+  }, 1000);
 
 });
 

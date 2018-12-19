@@ -19,8 +19,10 @@ describe('Wait ready / Graceful start / restart', function() {
     cwd : '../fixtures/listen-timeout/'
   });
 
-  after(function(done) {
-    pm2.kill(done)
+  before(function(done) {
+    pm2.delete('all', function() {
+      done()
+    });
   });
 
   describe('(FORK) Listen timeout feature', function() {
@@ -49,7 +51,7 @@ describe('Wait ready / Graceful start / restart', function() {
           should(apps[0].pm2_env.status).eql('online');
           done();
         })
-      }, 3000);
+      }, 1500);
     });
 
     it('should have listen timeout updated', function(done) {
@@ -61,7 +63,7 @@ describe('Wait ready / Graceful start / restart', function() {
 
     it('should take listen timeout into account', function(done) {
       var called = false;
-      var plan = new Plan(3, done);
+      var plan = new Plan(4, done);
 
       setTimeout(function() {
         should(called).be.false();
@@ -71,6 +73,11 @@ describe('Wait ready / Graceful start / restart', function() {
       setTimeout(function() {
         should(called).be.true();
         plan.ok(true);
+
+        pm2.list((err, apps) => {
+          should(apps[0].pm2_env.wait_ready).eql(true)
+          plan.ok(true)
+        })
       }, 1500);
 
       pm2.reload('all', function(err, data) {
@@ -123,15 +130,16 @@ describe('Wait ready / Graceful start / restart', function() {
         script         : './wait-ready.js',
         listen_timeout : 1000,
         wait_ready     : true,
-        instances      : 2,
-        name           : 'echo'
+        instances      : 1,
+        exec_mode: 'cluster',
+        name           : 'http'
       });
 
       setTimeout(function() {
         pm2.list(function(err, apps) {
           should(apps[0].pm2_env.status).eql('launching');
         });
-      }, 800);
+      }, 500);
 
       setTimeout(function() {
         pm2.list(function(err, apps) {
@@ -140,6 +148,32 @@ describe('Wait ready / Graceful start / restart', function() {
         })
       }, 1500);
     });
+
+    it('should take listen timeout into account', function(done) {
+      var called = false;
+      var plan = new Plan(4, done);
+
+      setTimeout(function() {
+        should(called).be.false();
+        plan.ok(true);
+      }, 500);
+
+      setTimeout(function() {
+        should(called).be.true();
+        plan.ok(true);
+
+        pm2.list((err, apps) => {
+          should(apps[0].pm2_env.wait_ready).eql(true)
+          plan.ok(true)
+        })
+      }, 1500);
+
+      pm2.reload('all', function(err, data) {
+        called = true;
+        plan.ok(true);
+      });
+    });
+
   });
 
 });
