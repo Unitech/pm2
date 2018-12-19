@@ -1,4 +1,19 @@
 
+## 3.2.4 (19/12/18)
+
+### Feat
+
+- display cron configuration when doing `pm2 desc <id>`
+- refactor test suite (benchmark/simplification)
+
+### Fix
+
+- pm2 flush <app> flush only one app
+- resolve uid properly on pm2 ls / pm2 desc
+- keep wait_ready option on process reload
+- keep stringification of environment variable behavior
+- return an error when using pm2 api on starting json configuration if one app is errored
+
 ## 3.2.3 (4/12/18)
 
 ### Fix
@@ -8,7 +23,7 @@
 - fix cluster syntax
 - add more test on port release
 
-## 3.2.1 (5/10/18)
+## 3.2.2 (5/10/18)
 
 ### Fix
 
