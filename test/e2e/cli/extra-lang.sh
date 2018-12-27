@@ -6,7 +6,9 @@ source "${SRC}/../include.sh"
 cd $file_path/extra-lang
 
 which php
+spec "should php cli be installed"
 which python
+spec "should python cli be installed"
 
 #
 # JSON
