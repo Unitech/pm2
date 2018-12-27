@@ -83,7 +83,6 @@ LimitNOFILE=infinity
 LimitNPROC=infinity
 LimitCORE=infinity
 PIDFile=/etc/pm2/pm2.pid
-Restart=on-failure
 
 ExecStart=/usr/bin/pm2 resurrect
 ExecReload=/usr/bin/pm2 reload all
