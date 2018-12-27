@@ -1,4 +1,15 @@
 
+## 3.2.5 (27/12/18)
+
+- feat: systemd auto restart on failure
+- feat: enhance pm2 report
+- fix: consolidate spawn function on unhealthy systems to avoid pm2 crash
+- fix: error message if extra lang interpreter are not installed when runing tests
+- fix: (pm2 deploy) command line bug when passing env variables to post-deploy hook
+- fix: (pm2 deploy) always deploy to default branch problem
+- fix: (pm2 deploy) pm2 deploy <env> exec now accept multiple commands
+- fix: print full env + skip extra internal fields when using programmatic pm2
+
 ## 3.2.4 (19/12/18)
 
 ### Feat
