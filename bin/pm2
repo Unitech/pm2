@@ -19,11 +19,15 @@ var PM2          = require('../lib/API.js');
 var pkg          = require('../package.json');
 var tabtab       = require('../lib/completion.js');
 var Common       = require('../lib/Common.js');
+var PM2ioHandler = require('../lib/API/pm2-plus/PM2IO')
+
 
 Common.determineSilentCLI();
 Common.printVersion();
 
 var pm2 = new PM2();
+
+PM2ioHandler.usePM2Client(pm2)
 
 commander.version(pkg.version)
   .option('-v --version', 'print pm2 version')
@@ -574,6 +578,9 @@ commander.command('unlink')
 commander.command('monitor [name]')
   .description('monitor target process')
   .action(function(name) {
+    if (name === undefined) {
+      return plusHandler()
+    }
     pm2.monitorState('monitor', name);
   });
 
@@ -589,75 +596,33 @@ commander.command('open')
     pm2.openDashboard();
   });
 
-function connect(type, sec, pub, name, _opts) {
-  var opts = {
-    infoNode: _opts.infoNode,
-    discrete: _opts.discrete,
-    installAll: _opts.installAll,
-    public: pub,
-    secret: sec,
-    name: name,
-    type: type,
-    ws: true
+function plusHandler (command, opts) {
+  if (opts && opts.infoNode) {
+    process.env.KEYMETRICS_NODE = opts.infoNode
   }
 
-  if (sec == 'link' || sec == 'relink' || (sec == null && pub == null && pm2.gl_is_km_linked)) {
-    return pm2.linkManagement(null, null, null, opts, function(err, dt) {
-      pm2.speedList()
-    })
-  }
-
-  if (sec == 'delete') {
-    return pm2.linkManagement('delete', null, null, opts, function(err, dt) {
-      pm2.clearSetup(opts, function() {
-        console.log(cst.PM2_IO_MSG + 'Agent disabled, modules removed, monitoring disabled');
-        setTimeout(function() {
-          pm2.speedList()
-        }, 300)
-      })
-    })
-  }
-
-  if (opts.public && opts.secret)
-    return pm2.linkManagement(opts.secret, opts.public, opts.name, opts, function(err, dt) {
-      //pm2.minimumSetup(opts, function() {
-        console.log(cst.PM2_IO_MSG + 'Remote dashboard: https://app.pm2.io/#/r/' + dt.public_key);
-        pm2.speedList()
-      //})
-    })
-
-  pm2.register(opts);
+  return PM2ioHandler.launch(command, opts)
 }
 
-commander.command('enterprise [secret] [public] [name]')
-  .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
-  .option('-d --discrete', 'silent mode')
-  .option('-a --install-all', 'install all modules (force yes)')
-  .description('enable pm2 enterprise')
-  .action(function(sec, pub, name, _opts) {
-    connect('enterprise', sec, pub, name, _opts)
-  })
-
-commander.command('plus [secret] [public] [name]')
+commander.command('plus [command] [option]')
   .alias('register')
+  .alias('enterprise')
   .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
   .option('-d --discrete', 'silent mode')
   .option('-a --install-all', 'install all modules (force yes)')
   .description('enable pm2 plus')
-  .action(function(sec, pub, name, _opts) {
-    connect('plus', sec, pub, name, _opts)
-  });
+  .action(plusHandler);
 
 commander.command('login')
   .description('Login to pm2 plus')
-  .action(function(name) {
-    connect('plus', null, null, null, {})
+  .action(function() {
+    return plusHandler('login')
   });
 
 commander.command('logout')
   .description('Logout from pm2 plus')
-  .action(function(name) {
-    connect('plus', 'delete', null, null, {})
+  .action(function() {
+    return plusHandler('logout')
   });
 
 //
