@@ -2,7 +2,6 @@
 Description=PM2 process manager
 Documentation=https://pm2.keymetrics.io/
 After=network.target
-Restart=on-failure
 
 [Service]
 Type=forking
