@@ -606,7 +606,6 @@ function plusHandler (command, opts) {
 
 commander.command('plus [command] [option]')
   .alias('register')
-  .alias('enterprise')
   .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
   .option('-d --discrete', 'silent mode')
   .option('-a --install-all', 'install all modules (force yes)')
