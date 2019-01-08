@@ -12,7 +12,7 @@ rm -rf ../../../node_modules/ts-node/
 ########### coffee
 
 $pm2 start echo.coffee
-sleep 1
+sleep 2
 should 'process should be errored without coffee installed' "status: 'errored'" 1
 
 ########### Install
