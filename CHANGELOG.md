@@ -1,8 +1,9 @@
 
-## 3.2.5 (27/12/18)
+## 3.2.5 (09/01/19)
 
-- feat: systemd auto restart on failure
 - feat: enhance pm2 report
+- feat: support snap Ubuntu system
+- fix: pm2 register/monitor command
 - fix: consolidate spawn function on unhealthy systems to avoid pm2 crash
 - fix: error message if extra lang interpreter are not installed when runing tests
 - fix: (pm2 deploy) command line bug when passing env variables to post-deploy hook
