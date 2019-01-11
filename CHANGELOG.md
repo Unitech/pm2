@@ -1,4 +1,8 @@
 
+## 3.2.6-8 (11/01/19)
+
+- rollback: node bin path handling adaptation
+
 ## 3.2.5 (09/01/19)
 
 - feat: enhance pm2 report
