@@ -18,19 +18,16 @@ var debug        = require('debug')('pm2:cli');
 var PM2          = require('../lib/API.js');
 var pkg          = require('../package.json');
 var tabtab       = require('../lib/completion.js');
+var Common       = require('../lib/Common.js');
+var PM2ioHandler = require('../lib/API/pm2-plus/PM2IO')
 
-// Early detection of silent to avoid printing motd
-if (process.argv.indexOf('--silent') > -1 ||
-    process.argv.indexOf('-s') > -1) {
-  process.env.PM2_DISCRETE_MODE = true;
-}
 
-if (process.argv.indexOf('-v') > -1) {
-  console.log(pkg.version);
-  process.exit(0);
-}
+Common.determineSilentCLI();
+Common.printVersion();
 
 var pm2 = new PM2();
+
+PM2ioHandler.usePM2Client(pm2)
 
 commander.version(pkg.version)
   .option('-v --version', 'print pm2 version')
@@ -94,58 +91,49 @@ commander.version(pkg.version)
   .option('--deep-monitoring', 'enable all monitoring tools (equivalent to --v8 --event-loop-inspector --trace)')
   .usage('[cmd] app');
 
-  function displayUsage() {
-    console.log('usage: pm2 [options] <command>')
-    console.log('');
-    console.log('pm2 -h, --help             all available commands and options');
-    console.log('pm2 examples               display pm2 usage examples');
-    console.log('pm2 <command> -h           help on a specific command');
-    console.log('');
-    console.log('Access pm2 files in ~/.pm2');
-  }
+function displayUsage() {
+  console.log('usage: pm2 [options] <command>')
+  console.log('');
+  console.log('pm2 -h, --help             all available commands and options');
+  console.log('pm2 examples               display pm2 usage examples');
+  console.log('pm2 <command> -h           help on a specific command');
+  console.log('');
+  console.log('Access pm2 files in ~/.pm2');
+}
 
-  function displayExamples() {
-    console.log('- Start and add a process to the pm2 process list:')
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 start app.js --name app'));
-    console.log('');
-    console.log('- Show the process list:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 ls'));
-    console.log('');
-    console.log('- Stop and delete a process from the pm2 process list:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 delete app'));
-    console.log('');
-    console.log('- Stop, start and restart a process from the process list:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 stop app'));
-    console.log(chalk.cyan('  $ pm2 start app'));
-    console.log(chalk.cyan('  $ pm2 restart app'));
-    console.log('');
-    console.log('- Clusterize an app to all CPU cores available:');
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 start -i max'));
-    console.log('');
-    console.log('- Update pm2 :');
-    console.log('');
-    console.log(chalk.cyan('  $ npm install pm2 -g && pm2 update'));
-    console.log('');
-    console.log('- Install pm2 auto completion:')
-    console.log('');
-    console.log(chalk.cyan('  $ pm2 completion install'))
-    console.log('');
-    console.log('Check the full documentation on https://pm2.io/doc');
-    console.log('');
-  }
-
-if (process.argv.indexOf('-s') > -1) {
-  for(var key in console){
-    var code = key.charCodeAt(0);
-    if(code >= 97 && code <= 122){
-      console[key] = function(){};
-    }
-  }
+function displayExamples() {
+  console.log('- Start and add a process to the pm2 process list:')
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 start app.js --name app'));
+  console.log('');
+  console.log('- Show the process list:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 ls'));
+  console.log('');
+  console.log('- Stop and delete a process from the pm2 process list:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 delete app'));
+  console.log('');
+  console.log('- Stop, start and restart a process from the process list:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 stop app'));
+  console.log(chalk.cyan('  $ pm2 start app'));
+  console.log(chalk.cyan('  $ pm2 restart app'));
+  console.log('');
+  console.log('- Clusterize an app to all CPU cores available:');
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 start -i max'));
+  console.log('');
+  console.log('- Update pm2 :');
+  console.log('');
+  console.log(chalk.cyan('  $ npm install pm2 -g && pm2 update'));
+  console.log('');
+  console.log('- Install pm2 auto completion:')
+  console.log('');
+  console.log(chalk.cyan('  $ pm2 completion install'))
+  console.log('');
+  console.log('Check the full documentation on https://pm2.io/doc');
+  console.log('');
 }
 
 function beginCommandProcessing() {
@@ -590,6 +578,9 @@ commander.command('unlink')
 commander.command('monitor [name]')
   .description('monitor target process')
   .action(function(name) {
+    if (name === undefined) {
+      return plusHandler()
+    }
     pm2.monitorState('monitor', name);
   });
 
@@ -605,75 +596,32 @@ commander.command('open')
     pm2.openDashboard();
   });
 
-function connect(type, sec, pub, name, _opts) {
-  var opts = {
-    infoNode: _opts.infoNode,
-    discrete: _opts.discrete,
-    installAll: _opts.installAll,
-    public: pub,
-    secret: sec,
-    name: name,
-    type: type,
-    ws: true
+function plusHandler (command, opts) {
+  if (opts && opts.infoNode) {
+    process.env.KEYMETRICS_NODE = opts.infoNode
   }
 
-  if (sec == 'link' || sec == 'relink' || (sec == null && pub == null && pm2.gl_is_km_linked)) {
-    return pm2.linkManagement(null, null, null, opts, function(err, dt) {
-      pm2.speedList()
-    })
-  }
-
-  if (sec == 'delete') {
-    return pm2.linkManagement('delete', null, null, opts, function(err, dt) {
-      pm2.clearSetup(opts, function() {
-        console.log(cst.PM2_IO_MSG + 'Agent disabled, modules removed, monitoring disabled');
-        setTimeout(function() {
-          pm2.speedList()
-        }, 300)
-      })
-    })
-  }
-
-  if (opts.public && opts.secret)
-    return pm2.linkManagement(opts.secret, opts.public, opts.name, opts, function(err, dt) {
-      //pm2.minimumSetup(opts, function() {
-        console.log(cst.PM2_IO_MSG + 'Remote dashboard: https://app.pm2.io/#/r/' + dt.public_key);
-        pm2.speedList()
-      //})
-    })
-
-  pm2.register(opts);
+  return PM2ioHandler.launch(command, opts)
 }
 
-commander.command('enterprise [secret] [public] [name]')
-  .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
-  .option('-d --discrete', 'silent mode')
-  .option('-a --install-all', 'install all modules (force yes)')
-  .description('enable pm2 enterprise')
-  .action(function(sec, pub, name, _opts) {
-    connect('enterprise', sec, pub, name, _opts)
-  })
-
-commander.command('plus [secret] [public] [name]')
+commander.command('plus [command] [option]')
   .alias('register')
   .option('--info-node [url]', 'set url info node for on-premise pm2 plus')
   .option('-d --discrete', 'silent mode')
   .option('-a --install-all', 'install all modules (force yes)')
   .description('enable pm2 plus')
-  .action(function(sec, pub, name, _opts) {
-    connect('plus', sec, pub, name, _opts)
-  });
+  .action(plusHandler);
 
 commander.command('login')
   .description('Login to pm2 plus')
-  .action(function(name) {
-    connect('plus', null, null, null, {})
+  .action(function() {
+    return plusHandler('login')
   });
 
 commander.command('logout')
   .description('Logout from pm2 plus')
-  .action(function(name) {
-    connect('plus', 'delete', null, null, {})
+  .action(function() {
+    return plusHandler('logout')
   });
 
 //

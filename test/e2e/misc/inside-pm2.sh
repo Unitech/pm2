@@ -5,8 +5,6 @@ source "${SRC}/../include.sh"
 
 cd $file_path
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 ####################################################################
 # Check that we can start a process from inside a PM2 watched app. #
 ####################################################################

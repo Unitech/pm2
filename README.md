@@ -27,8 +27,8 @@
 <br/>
 </div>
 
-PM2 is a Production Runtime and Process Manager for Node.js applications with a built-in Load Balancer.
-It allows you to keep applications alive forever, to reload them without downtime and facilitate common Devops tasks.
+
+PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 Starting an application in production mode is as easy as:
 
@@ -40,8 +40,7 @@ PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unite
 
 Official website: [https://pm2.io/doc/](https://pm2.io/doc/)
 
-Works on Linux (stable) & macOS (stable) & Windows (stable).
-All Node.js versions are supported starting Node.js 4.X.
+Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 4.X.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
@@ -51,7 +50,7 @@ All Node.js versions are supported starting Node.js 4.X.
 $ npm install pm2 -g
 ```
 
-*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://keymetrics.io/2015/02/03/installing-node-js-and-io-js-with-nvm/)*
+*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://blog.pm2.io/install-node-js-with-nvm/)*
 
 ### Start an application
 
@@ -189,103 +188,7 @@ $ pm2 unstartup
 
 [More about Startup Hooks](https://pm2.io/doc/en/runtime/guide/startup-hook/?utm_source=github)
 
-### Updating PM2
-
-```bash
-# Install latest PM2 version
-$ npm install pm2@latest -g
-# Save process list, exit old PM2 & restore all processes
-$ pm2 update
-```
-
-*PM2 updates are seamless*
-
-## Ready to Scale? Go further with PM2 Plus!
-
-<br/>
-<div align="center">
-  <br/>
-  <a href="http://pm2.io/?utm_source=github" title="PM2 Keymetrics link">
-    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-plus_black.png" alt="PM2 plus logo">
-  </a>
-  <br/>
-<br/>
-<b>PM2</b><br/>
-  <i>Plus Edition</i>
-<br/><br/>
-</div>
-
-Once you scale you need to make sure that your application is running properly, without bugs, performance issues and without downtimes.
-
-That's why we created PM2 Plus. It's a set of advanced features for both hardening the PM2 Runtime and monitoring applications in production.
-
-With PM2 Plus you get:
-- A Real-time Monitoring Web Interface
-- Smart Exception Reporting
-- Production Profiling for Memory and CPU
-- PM2 Runtime High Availability Fallback
-
-And much more like realtime logs, custom metrics, remote actions...
-
-To start using PM2 Plus via CLI:
-
-```bash
-$ pm2 plus
-```
-
-Or go to the application and create an account:
-
-[To discover PM2 Plus Register Here](https://app.pm2.io/)
-
-### PM2 Plus Features
-
-**Visual Memory Snapshots**:
-
-![https://raw.githubusercontent.com/Unitech/pm2/master/pres/memory-profiling.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/memory-profiling.png)
-
-**CPU FlameGraphs**:
-
-![https://raw.githubusercontent.com/Unitech/pm2/master/pres/flamegraph.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/flamegraph.png)
-
-**Multi Server Overview**:
-
-![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png)
-
-<div align="center">
-    <a title="PM2 Plus Application" href="https://app.pm2.io/">To discover PM2 Plus Register Here</a>
-</div>
-
-### PM2 Plus: Expose Custom Metrics
-
-To get more insights on how your application behave, plug custom metrics inside your code and monitor them with the `pm2 monit` command:
-
-In your project install [pm2-io-pm](https://github.com/keymetrics/pm2-io-apm):
-
-```bash
-$ npm install @pm2/io --save
-```
-
-Then plug a custom metric:
-
-```javascript
-const io = require('@pm2/io');
-
-let counter = 1;
-
-const latency = io.metric({
-   name    : 'Counter',
-   value   : function() {
-     return counter;
-   }
-});
-
-setInterval(() => {
-  counter++;
-}, 1000);
-
-```
-
-### PM2 Plus: Module system
+### PM2 Modules
 
 PM2 embeds a simple and powerful module system. Installing a module is straightforward:
 
@@ -297,6 +200,38 @@ Here are some PM2 compatible modules (standalone Node.js applications managed by
 
 [**pm2-logrotate**](https://www.npmjs.com/package/pm2-logrotate) automatically rotate logs and limit logs size<br/>
 [**pm2-server-monit**](https://www.npmjs.com/package/pm2-server-monit) monitor the current server with more than 20+ metrics and 8 actions<br/>
+
+### Updating PM2
+
+```bash
+# Install latest PM2 version
+$ npm install pm2@latest -g
+# Save process list, exit old PM2 & restore all processes
+$ pm2 update
+```
+
+*PM2 updates are seamless*
+
+## PM2+ Monitoring
+
+![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png)
+
+If you manage your NodeJS app with PM2, PM2+ makes it easy to monitor and manage apps across servers. Feel free to try it:
+
+[Discover the monitoring dashboard for PM2](https://app.pm2.io/)
+
+Thanks in advance and we hope that you like PM2!
+
+## More about PM2
+
+- [Zero Downtime Reload](https://pm2.io/doc/en/runtime/guide/load-balancing/)
+- [Watch File & Restart](https://pm2.io/doc/en/runtime/features/watch-restart/)
+- [Restart Strategies](https://pm2.io/doc/en/runtime/features/restart-strategies/)
+- [Startup Script Generation](https://pm2.io/doc/en/runtime/guide/startup-hook/)
+- [Memory Limit Auto Reload](https://pm2.io/doc/en/runtime/features/memory-limit/)
+- [Source Map Support](https://pm2.io/doc/en/runtime/features/javascript-source-maps/)
+- [Using PM2 API](https://pm2.io/doc/en/runtime/reference/pm2-programmatic/)
+- [Graceful Shutdown](https://pm2.io/doc/en/runtime/best-practices/graceful-shutdown/)
 
 ## CHANGELOG
 

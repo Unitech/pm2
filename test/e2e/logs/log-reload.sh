@@ -1,24 +1,8 @@
 #!/usr/bin/env bash
-
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/../include.sh"
 
 cd $file_path
-
-echo -e "\033[1mRunning tests:\033[0m"
-
-# >out-rel.log
-
-# $pm2 start echo.js -o out-rel.log --merge-logs -i 1
-
-# $pm2 reloadLogs
-
-# sleep 2
-
-# grep "Reloading log..." ~/.pm2/pm2.log
-# spec "Should have started the reloading action"
-
-# rm out-rel.log
 
 ## FORK MODE
 

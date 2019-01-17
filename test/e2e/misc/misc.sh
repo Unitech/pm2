@@ -5,8 +5,6 @@ source "${SRC}/../include.sh"
 
 cd $file_path
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 ## Try to launch an app with `push` as name
 $pm2 kill
 

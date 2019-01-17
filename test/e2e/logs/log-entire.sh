@@ -161,7 +161,7 @@ head ">> DESCRIBE (ENTIRE EXISTS)"
 
 $pm2 start throw-later.js -o out.log -e err.log -l entire.log --merge-logs
 
-$pm2 desc "throw-later" | grep -w "entire log path"
+$pm2 jlist | grep -w "entire.log" 2> /dev/null
 spec "\"entire log path\" should exists."
 
 test
@@ -170,7 +170,7 @@ head ">> DESCRIBE (ENTIRE DOES NOT EXIST)"
 
 $pm2 start throw-later.js -o out.log -e err.log --merge-logs
 
-$pm2 desc "throw-later" | grep -w "entire log path"
+$pm2 jlist | grep -w "pm_log_path" 2> /dev/null
 ispec "\"entire log path\" should not exist."
 
 test "NE"

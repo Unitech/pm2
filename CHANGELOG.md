@@ -1,5 +1,45 @@
 
-## 3.2.1 (5/10/18)
+## 3.2.6-8 (11/01/19)
+
+- rollback: node bin path handling adaptation
+
+## 3.2.5 (09/01/19)
+
+- feat: enhance pm2 report
+- feat: support snap Ubuntu system
+- fix: pm2 register/monitor command
+- fix: consolidate spawn function on unhealthy systems to avoid pm2 crash
+- fix: error message if extra lang interpreter are not installed when runing tests
+- fix: (pm2 deploy) command line bug when passing env variables to post-deploy hook
+- fix: (pm2 deploy) always deploy to default branch problem
+- fix: (pm2 deploy) pm2 deploy <env> exec now accept multiple commands
+- fix: print full env + skip extra internal fields when using programmatic pm2
+
+## 3.2.4 (19/12/18)
+
+### Feat
+
+- display cron configuration when doing `pm2 desc <id>`
+- refactor test suite (benchmark/simplification)
+
+### Fix
+
+- pm2 flush <app> flush only one app
+- resolve uid properly on pm2 ls / pm2 desc
+- keep wait_ready option on process reload
+- keep stringification of environment variable behavior
+- return an error when using pm2 api on starting json configuration if one app is errored
+
+## 3.2.3 (4/12/18)
+
+### Fix
+
+- medium rare bug: fix issue when acting on process file (#3987 + #3192)
+- concurrent action to 1 if acting on only 2 processes
+- fix cluster syntax
+- add more test on port release
+
+## 3.2.2 (5/10/18)
 
 ### Fix
 
