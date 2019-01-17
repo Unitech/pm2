@@ -1,4 +1,8 @@
 
+## 3.2.9 (17/01/19)
+
+- #4128 fix: force detached process
+
 ## 3.2.6-8 (11/01/19)
 
 - rollback: node bin path handling adaptation
