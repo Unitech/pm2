@@ -57,7 +57,7 @@ runTest ./test/e2e/internals/source_map.sh
 runTest ./test/e2e/internals/wrapped-fork.sh
 runTest ./test/e2e/internals/infinite-loop.sh
 runTest ./test/e2e/internals/options-via-env.sh
-runTest ./test/e2e/internals/promise.sh
+#runTest ./test/e2e/internals/promise.sh
 runTest ./test/e2e/internals/increment-var.sh
 runTest ./test/e2e/internals/start-consistency.sh
 
