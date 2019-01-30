@@ -15,7 +15,7 @@ echo "###### Cluster mode"
 $pm2 start rejection.js -i 1 -l rejection.log --merge-logs
 sleep 1
 should 'should has not restarted process' 'restart_time: 0' 1
-cat rejection.log | grep "You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection"
+cat rejection.log | grep "Errorla"
 spec "should have logged promise error"
 
 $pm2 delete all
