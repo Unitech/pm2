@@ -51,12 +51,10 @@ $pm2 start probes.js --name "probe-test"
 
 echo "Wait for init..."
 
-sleep 1
+sleep 3
 
 exists 'probe test-probe exist' "test-probe"
-exists 'probe Event Loop Latency exist' "Event Loop Latency"
-
-exists 'probe Event Loop Latency default value' "agg_type: 'avg'"
+exists 'probe Event Loop Latency exist' "Event Loop Latency p95"
 
 # Set new value for alert probe
 # $pm2 set probe-test.probes.Event\ Loop\ Latency.value 25
