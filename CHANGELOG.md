@@ -1,4 +1,8 @@
 
+## 3.2.10 (14/02/19)
+
+- Upgrade pmx to ^3
+
 ## 3.2.9 (17/01/19)
 
 - #4128 fix: force detached process
