@@ -1,5 +1,10 @@
 
-## 3.2.10 (14/02/19)
+## 3.3.1 (18/02/19)
+
+- add pm2 profile:cpu [timeout]
+- add pm2 profile:mem [timeout]
+
+## 3.3.0 (14/02/19)
 
 - Upgrade pmx to ^3
 
