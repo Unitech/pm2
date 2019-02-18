@@ -50,7 +50,7 @@ Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js version
 $ npm install pm2 -g
 ```
 
-*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://blog.pm2.io/install-node-js-with-nvm/)*
+*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://blog.pm2.io/2018-02-19/Installing-Node-js-with-NVM/)*
 
 ### Start an application
 
