@@ -373,19 +373,19 @@ commander.command('scale <app_name> <number>')
 //
 // snapshot PM2
 //
-commander.command('snapshot')
-  .description('snapshot PM2 memory')
-  .action(function() {
-    pm2.snapshotPM2();
+commander.command('profile:mem [time]')
+  .description('Sample PM2 heap memory')
+  .action(function(time) {
+    pm2.profile('mem', time);
   });
 
 //
 // snapshot PM2
 //
-commander.command('profile <command>')
-  .description('profile CPU')
-  .action(function(command) {
-    pm2.profilePM2(command);
+commander.command('profile:cpu [time]')
+  .description('Profile PM2 cpu')
+  .action(function(time) {
+    pm2.profile('cpu', time);
   });
 
 //

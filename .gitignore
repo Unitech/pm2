@@ -21,3 +21,4 @@ yarn.lock
 *.tar.gz
 e2e_time
 unit_time
+*.heapprofile
