@@ -159,7 +159,7 @@
   },
   "dependencies": {
     "@pm2/agent": "^0.5.22",
-    "@pm2/io": "^3",
+    "@pm2/io": "4",
     "@pm2/js-api": "^0.5.43",
     "async": "^2.6.1",
     "blessed": "^0.1.81",
