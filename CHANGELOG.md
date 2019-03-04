@@ -1,4 +1,9 @@
 
+## 3.4.0
+
+- drop Node.js 4 and 5 support
+- use @pm2/io version 4
+
 ## 3.3.1 (18/02/19)
 
 - add pm2 profile:cpu [timeout]
