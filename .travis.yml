@@ -4,6 +4,7 @@ node_js:
   - "10"
   - "6"
   - "8"
+  - "4"
 git:
   depth: 5
 os:
