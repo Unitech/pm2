@@ -127,9 +127,12 @@ describe('PM2 BUS / RPC', function() {
 
     it('should (process:exception)', function(done) {
       var plan = new Plan(1, done);
+      let called = false
 
       pm2_bus.on('*', function(event, data) {
         if (event == 'process:exception') {
+          if (called) return
+          called = true
           data.should.have.properties(ERROR_EVENT);
           data.process.should.have.properties(PROCESS_ARCH);
           plan.ok(true);
@@ -142,13 +145,14 @@ describe('PM2 BUS / RPC', function() {
     });
 
     it('should (process:exception) with promise', function(done) {
-      var plan = new Plan(1, done);
-
+      let called = false
       pm2_bus.on('*', function(event, data) {
         if (event == 'process:exception') {
+          if (called) return
+          called = true
           data.should.have.properties(ERROR_EVENT);
           data.process.should.have.properties(PROCESS_ARCH);
-          plan.ok('true');
+          return done()
         }
       });
 
@@ -158,8 +162,11 @@ describe('PM2 BUS / RPC', function() {
     });
 
     it('should (human:event)', function(done) {
+      let called = false
       pm2_bus.on('*', function(event, data) {
         if (event == 'human:event') {
+          if (called) return
+          called = true
           data.should.have.properties(HUMAN_EVENT);
           data.process.should.have.properties(PROCESS_ARCH);
           return done();
