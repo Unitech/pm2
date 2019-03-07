@@ -96,7 +96,7 @@ $pm2 kill
 rm outmerge*
 
 $pm2 start echo.js -i 4 -o outmerge.log --merge-logs
-
+sleep 0.2
 cat outmerge.log > /dev/null
 spec 'file outmerge.log should exist'
 

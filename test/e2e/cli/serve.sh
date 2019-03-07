@@ -37,6 +37,9 @@ OUT=`cat /tmp/tmp_out.txt | grep -o "good shit" | wc -l`
 [ $OUT -eq 1 ] || fail "should be listening on port $PORT_2"
 success "should be listening on port $PORT_2"
 
+node -e "require('semver').lt(process.versions.node, '6.0.0') ? process.exit(0) : process.exit(1)"
+[ $? -eq 1 ] || exit 0
+
 $pm2 delete all
 
 $pm2 serve . $PORT_2 --name frontend

@@ -28,6 +28,13 @@ runTest ./test/e2e/cli/smart-start.sh
 runTest ./test/e2e/cli/args.sh
 runTest ./test/e2e/cli/attach.sh
 runTest ./test/e2e/cli/serve.sh
+
+SUPV=`node -e "require('semver').lt(process.versions.node, '6.0.0') ? console.log('<6') : console.log('>6')"`
+
+if [ $SUPV = '<6' ]; then
+    exit
+fi
+
 runTest ./test/e2e/cli/monit.sh
 runTest ./test/e2e/cli/cli-actions-1.sh
 runTest ./test/e2e/cli/cli-actions-2.sh

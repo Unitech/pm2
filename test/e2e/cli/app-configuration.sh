@@ -3,6 +3,9 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/../include.sh"
 
+node -e "require('semver').lt(process.versions.node, '6.0.0') ? process.exit(0) : process.exit(1)"
+[ $? -eq 1 ] || exit 0
+
 cd $file_path
 
 $pm2 unset echo
