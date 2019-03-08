@@ -1,8 +1,22 @@
 
 ## 3.4.0
 
-- drop Node.js 4 and 5 support
 - use @pm2/io version 4
+- disable @pm2/io for node.js v4 and v5
+
+/!\ Warning, built-in custom metrics are not supported anymore on Node 4 and 5
+
+New builtin metrics when starting a Node.js application:
+- Heap Size
+- Heap Usage
+- Used Heap Size
+- Active Requests
+- Active handles
+- Event loop latency
+- Event loop latency p95
+- HTTP queries per minutes
+- HTTP Mean Latency
+- HTTP P95 Latency
 
 ## 3.3.1 (18/02/19)
 
