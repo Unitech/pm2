@@ -1,4 +1,9 @@
 
+## 3.4.1
+
+- fix: allow pm2 register / pm2 monitor
+- fix: restore trace indicator
+
 ## 3.4.0
 
 - use @pm2/io version 4
