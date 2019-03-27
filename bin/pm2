@@ -961,9 +961,12 @@ commander.command('deepUpdate')
 commander.command('serve [path] [port]')
   .alias('expose')
   .option('--port [port]', 'specify port to listen to')
+  .option('--spa', 'always serving index.html on inexistant sub path')
+  .option('--basic-auth-username [username]', 'set basic auth username')
+  .option('--basic-auth-password [password]', 'set basic auth password')
   .description('serve a directory over http via port')
   .action(function (path, port, cmd) {
-    pm2.serve(path, port || cmd.port, commander);
+    pm2.serve(path, port || cmd.port, cmd, commander);
   });
 
 commander.command('examples')
