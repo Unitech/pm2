@@ -25,8 +25,8 @@ var csts = {
   PREFIX_MSG_WARNING      : chalk.yellow('[PM2][WARN] '),
   PREFIX_MSG_SUCCESS      : chalk.cyan('[PM2] '),
 
-  PM2_IO_MSG : chalk.cyan('[PM2 I/O] '),
-  PM2_IO_MSG_ERR : chalk.red('[PM2 I/O] '),
+  PM2_IO_MSG : chalk.cyan('[PM2 I/O]'),
+  PM2_IO_MSG_ERR : chalk.red('[PM2 I/O]'),
 
   TEMPLATE_FOLDER         : p.join(__dirname, 'lib/templates'),
 

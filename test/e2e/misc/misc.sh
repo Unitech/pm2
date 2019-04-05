@@ -5,8 +5,6 @@ source "${SRC}/../include.sh"
 
 cd $file_path
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 ## Try to launch an app with `push` as name
 $pm2 kill
 
@@ -98,7 +96,7 @@ $pm2 kill
 rm outmerge*
 
 $pm2 start echo.js -i 4 -o outmerge.log --merge-logs
-
+sleep 0.2
 cat outmerge.log > /dev/null
 spec 'file outmerge.log should exist'
 

@@ -253,8 +253,5 @@ spec "Should delete all processes"
 sleep 0.5
 should 'should have deleted process' 'restart_time' 0
 
-$pm2 kill test
-ispec "Should not kill with extra args"
-
 $pm2 kill
 spec "Should kill daemon"

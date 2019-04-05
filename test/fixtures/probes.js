@@ -10,14 +10,13 @@ http.createServer(function(req, res) {
   res.end('hey');
 }).listen(8000);
 
-var Probe = pmx.probe();
 
 var value_to_inspect = 0;
 
 /**
  * .metric, .counter, .meter, .histogram are also available (cf doc)
  */
-var val = Probe.metric({
+var val = pmx.metric({
   name : 'test-probe',
   value : function() {
     return value_to_inspect;

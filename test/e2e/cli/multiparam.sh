@@ -5,10 +5,6 @@ source "${SRC}/../include.sh"
 
 cd $file_path
 
-############# TEST
-
-echo -e "\033[1mRunning tests:\033[0m"
-
 ## Start
 $pm2 start child.js echo.js server.js
 should 'should app be online' 'online' 3
