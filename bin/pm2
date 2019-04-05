@@ -538,7 +538,12 @@ commander.command('get [key]')
 commander.command('conf [key] [value]')
   .description('get / set module config values')
   .action(function(key, value) {
-    pm2.conf(key, value);
+    console.log('Set pm2 configuration:')
+    console.log('$ pm2 set [key] [value]')
+    console.log('Get pm2 configuration:')
+    console.log('$ pm2 get [key]')
+    console.log()
+    pm2.get();
   });
 
 commander.command('config <key> [value]')
