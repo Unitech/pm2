@@ -7,8 +7,6 @@ cd $file_path
 
 ############# TEST
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 cd start-consistency;
 
 $pm2 start child.js

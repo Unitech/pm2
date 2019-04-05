@@ -62,7 +62,7 @@ describe('Reload locker system', function() {
   it('should re allow reload when reload finished', function(done) {
     setTimeout(function() {
       pm2.reload('all', done);
-    }, 1000);
+    }, 2000);
   });
 
   it('should lock file be empty', function() {

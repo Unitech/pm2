@@ -8,8 +8,6 @@ cd $file_path
 
 ############# TEST
 
-echo -e "\033[1mRunning tests:\033[0m"
-
 cat all.json | $pm2 start -
 should 'should start processes' 'online' 6
 

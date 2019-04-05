@@ -3,7 +3,8 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/../include.sh"
 
-echo -e "\033[1mRunning tests:\033[0m"
+node -e "require('semver').lt(process.versions.node, '6.0.0') ? process.exit(0) : process.exit(1)"
+[ $? -eq 1 ] || exit 0
 
 cd $file_path
 
@@ -29,17 +30,17 @@ $pm2 multiset "echo.conf false"
 exists 'should NOW have config variable' "conf: 'false'"
 should 'should have start 3 apps' 'restart_time: 3' 1
 
-$pm2 get echo.config_var | grep "false"
-spec "Should get method work"
+# $pm2 get echo.config_var | grep "false"
+# spec "Should get method work"
 
-$pm2 get echo | grep "false\|true"
-spec "Should get method work"
+# $pm2 get echo | grep "false\|true"
+# spec "Should get method work"
 
-$pm2 conf echo.config_var | grep "false"
-spec "Should conf method work"
+# $pm2 conf echo.config_var | grep "false"
+# spec "Should conf method work"
 
-$pm2 conf echo | grep "false\|true"
-spec "Should get method work"
+# $pm2 conf echo | grep "false\|true"
+# spec "Should get method work"
 
 $pm2 delete all
 
@@ -53,12 +54,10 @@ $pm2 start probes.js --name "probe-test"
 
 echo "Wait for init..."
 
-sleep 1
+sleep 3
 
 exists 'probe test-probe exist' "test-probe"
-exists 'probe Event Loop Latency exist' "Event Loop Latency"
-
-exists 'probe Event Loop Latency default value' "agg_type: 'avg'"
+exists 'probe Event Loop Latency exist' "Event Loop Latency p95"
 
 # Set new value for alert probe
 # $pm2 set probe-test.probes.Event\ Loop\ Latency.value 25

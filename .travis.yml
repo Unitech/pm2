@@ -1,9 +1,10 @@
 language: node_js
 node_js:
+  - "11"
   - "10"
-  - "4"
   - "6"
   - "8"
+  - "4"
 git:
   depth: 5
 os:

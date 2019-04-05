@@ -42,7 +42,7 @@ describe('Exponential backoff feature', function() {
         should(procs[0].pm2_env.prev_restart_delay).be.aboveOrEqual(100)
         done()
       })
-    }, 200)
+    }, 800)
   })
 
   it('should have incremented the prev_restart delay', (done) => {
