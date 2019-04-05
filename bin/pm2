@@ -726,34 +726,34 @@ commander.command('reset <name|id|all>')
     pm2.reset(proc_id);
   });
 
-commander.command('describe <id>')
-  .description('describe all parameters of a process id')
+commander.command('describe <name|id>')
+  .description('describe all parameters of a process')
   .action(function(proc_id) {
     pm2.describe(proc_id);
   });
 
-commander.command('desc <id>')
-  .description('(alias) describe all parameters of a process id')
+commander.command('desc <name|id>')
+  .description('(alias) describe all parameters of a process')
   .action(function(proc_id) {
     pm2.describe(proc_id);
   });
 
-commander.command('info <id>')
-  .description('(alias) describe all parameters of a process id')
+commander.command('info <name|id>')
+  .description('(alias) describe all parameters of a process')
+  .action(function(proc_id) {
+    pm2.describe(proc_id);
+  });
+
+commander.command('show <name|id>')
+  .description('(alias) describe all parameters of a process')
   .action(function(proc_id) {
     pm2.describe(proc_id);
   });
 
 commander.command('env <id>')
-  .description('(alias) describe all parameters of a process id')
+  .description('list all environment variables of a process id')
   .action(function(proc_id) {
     pm2.env(proc_id);
-  });
-
-commander.command('show <id>')
-  .description('(alias) describe all parameters of a process id')
-  .action(function(proc_id) {
-    pm2.describe(proc_id);
   });
 
 //
