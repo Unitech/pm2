@@ -175,7 +175,6 @@
     "mkdirp": "0.5.1",
     "moment": "^2.22.2",
     "needle": "^2.2.1",
-    "nssocket": "0.6.0",
     "pidusage": "^2.0.14",
     "pm2-axon": "3.3.0",
     "pm2-axon-rpc": "^0.5.1",
