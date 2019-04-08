@@ -1,4 +1,17 @@
 
+## 3.5.0
+
+- feat: #4220 #2941 #4196 improve pm2 serve for SPA - autoredirect requests to index.html if --spa
+- feat: on pm2 show <app>, display metric unit and divergent environment variables
+- feat: #4157 tweak systemd script to auto restart PM2 in case of crash failure
+- fix: #4212 on pm2 show, avoid crash when versioning comment is not present
+- fix: #4171 fix pm2 list when small screen
+- fix: #4197 fix pm2 unstartup for macOS
+- fix: #2764 in pm2 monit, only display log of selected application
+- fix: #2793 pm2 monit, rolling log buffer, avoid crash and performance issues
+- fix: #4060 do not emit online when application is errored
+- chore: remove nssocket in dependencies
+
 ## 3.4.1
 
 - fix: allow pm2 register / pm2 monitor
