@@ -644,9 +644,10 @@ commander.command('web')
 //
 commander.command('dump')
   .alias('save')
+  .option('--force', 'force deletion of dump file, even if empty')
   .description('dump all processes for resurrecting them later')
-  .action(failOnUnknown(function() {
-    pm2.dump();
+  .action(failOnUnknown(function(opts) {
+    pm2.dump(commander.force)
   }));
 
 //
