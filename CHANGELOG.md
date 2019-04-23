@@ -2,6 +2,7 @@
 ## 3.5.1
 
 - feat: #4224 --ignore-watch now accepts globs (@vaskevich)
+- feat: pm2 save --force allow to force save of empty process list
 
 ## 3.5.0
 
