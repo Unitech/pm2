@@ -10,11 +10,11 @@
 <br/><br/>
 
 <a href="https://badge.fury.io/js/pm2" title="NPM Version Badge">
-   <img src="https://badge.fury.io/js/pm2.svg" alt="npm version" height="18">
+   <img src="https://badge.fury.io/js/pm2.svg" alt="npm version">
 </a>
 
-<a href="https://img.shields.io/badge/node-%3E%3D6-brightgreen.svg" title="Node Limitation">
-   <img src="https://img.shields.io/badge/node-%3E%3D6-brightgreen.svg" alt="npm version" height="18">
+<a href="https://img.shields.io/node/v/pm2.svg" title="Node Limitation">
+   <img src="https://img.shields.io/node/v/pm2.svg" alt="node version">
 </a>
 
 <a href="https://travis-ci.org/Unitech/pm2" title="PM2 Tests">
