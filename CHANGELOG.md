@@ -1,4 +1,8 @@
 
+## 3.5.1
+
+- feat: #4224 --ignore-watch now accepts globs (@vaskevich)
+
 ## 3.5.0
 
 - feat: #4220 #2941 #4196 improve pm2 serve for SPA - autoredirect requests to index.html if --spa
