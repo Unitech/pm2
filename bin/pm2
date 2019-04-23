@@ -538,7 +538,12 @@ commander.command('get [key]')
 commander.command('conf [key] [value]')
   .description('get / set module config values')
   .action(function(key, value) {
-    pm2.conf(key, value);
+    console.log('Set pm2 configuration:')
+    console.log('$ pm2 set [key] [value]')
+    console.log('Get pm2 configuration:')
+    console.log('$ pm2 get [key]')
+    console.log()
+    pm2.get();
   });
 
 commander.command('config <key> [value]')
@@ -726,34 +731,34 @@ commander.command('reset <name|id|all>')
     pm2.reset(proc_id);
   });
 
-commander.command('describe <id>')
-  .description('describe all parameters of a process id')
+commander.command('describe <name|id>')
+  .description('describe all parameters of a process')
   .action(function(proc_id) {
     pm2.describe(proc_id);
   });
 
-commander.command('desc <id>')
-  .description('(alias) describe all parameters of a process id')
+commander.command('desc <name|id>')
+  .description('(alias) describe all parameters of a process')
   .action(function(proc_id) {
     pm2.describe(proc_id);
   });
 
-commander.command('info <id>')
-  .description('(alias) describe all parameters of a process id')
+commander.command('info <name|id>')
+  .description('(alias) describe all parameters of a process')
+  .action(function(proc_id) {
+    pm2.describe(proc_id);
+  });
+
+commander.command('show <name|id>')
+  .description('(alias) describe all parameters of a process')
   .action(function(proc_id) {
     pm2.describe(proc_id);
   });
 
 commander.command('env <id>')
-  .description('(alias) describe all parameters of a process id')
+  .description('list all environment variables of a process id')
   .action(function(proc_id) {
     pm2.env(proc_id);
-  });
-
-commander.command('show <id>')
-  .description('(alias) describe all parameters of a process id')
-  .action(function(proc_id) {
-    pm2.describe(proc_id);
   });
 
 //
@@ -961,9 +966,13 @@ commander.command('deepUpdate')
 commander.command('serve [path] [port]')
   .alias('expose')
   .option('--port [port]', 'specify port to listen to')
+  .option('--spa', 'always serving index.html on inexistant sub path')
+  .option('--basic-auth-username [username]', 'set basic auth username')
+  .option('--basic-auth-password [password]', 'set basic auth password')
+  .option('--monitor [frontend-app]', 'frontend app monitoring (auto integrate snippet on html files)')
   .description('serve a directory over http via port')
   .action(function (path, port, cmd) {
-    pm2.serve(path, port || cmd.port, commander);
+    pm2.serve(path, port || cmd.port, cmd, commander);
   });
 
 commander.command('examples')

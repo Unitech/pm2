@@ -1,0 +1,13 @@
+{
+  "static": [
+    {
+      "path": ".",
+      "spa": true,
+      "basic_auth": {
+        "username": "user",
+        "password": "pass"
+      },
+      "port": 8081
+    }
+  ]
+}

@@ -12,6 +12,7 @@ LimitCORE=infinity
 Environment=PATH=%NODE_PATH%:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 Environment=PM2_HOME=%HOME_PATH%
 PIDFile=%HOME_PATH%/pm2.pid
+Restart=on-failure
 
 ExecStart=%PM2_PATH% resurrect
 ExecReload=%PM2_PATH% reload all
