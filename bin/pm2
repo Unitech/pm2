@@ -290,7 +290,13 @@ commander.command('start [name|file|ecosystem|id...]')
       forEachLimit(cmd, 1, function(script, next) {
         pm2.start(script, commander, next);
       }, function(err) {
-        pm2.speedList(err ? 1 : 0);
+        if (err && err.message &&
+            (err.message.includes('Script not found') === true ||
+             err.message.includes('NOT AVAILABLE IN PATH') === true)) {
+          pm2.exitCli(1)
+        }
+        else
+          pm2.speedList(err ? 1 : 0);
       });
     }
   });

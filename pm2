@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./node/bin/node ./bin/pm2 $@
