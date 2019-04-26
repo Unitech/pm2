@@ -6,6 +6,7 @@
 
 var debug = require('debug')('pm2:paths');
 var p     = require('path');
+var fs    = require('fs')
 
 function getDefaultPM2Home() {
   var PM2_ROOT_PATH;
@@ -55,8 +56,16 @@ module.exports = function(PM2_HOME) {
 
     INTERACTOR_LOG_FILE_PATH : p.resolve(PM2_HOME, 'agent.log'),
     INTERACTOR_PID_PATH      : p.resolve(PM2_HOME, 'agent.pid'),
-    INTERACTION_CONF         : p.resolve(PM2_HOME, 'agent.json5')
+    INTERACTION_CONF         : p.resolve(PM2_HOME, 'agent.json5'),
+    BUILTIN_NODE_PATH        : null,
+    BUILTIN_NPM_PATH         : null
   };
+
+  // Builtin Node and NPM Detection
+  if (fs.existsSync(p.resolve('./node')) == true) {
+    pm2_file_stucture.BUILTIN_NODE_PATH = p.resolve('./node/bin/node')
+    pm2_file_stucture.BUILTIN_NPM_PATH = p.resolve('./node/bin/npm')
+  }
 
   // allow overide of file paths via environnement
   var paths = Object.keys(pm2_file_stucture);
