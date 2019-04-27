@@ -28,8 +28,15 @@ function getDefaultPM2Home() {
 }
 
 module.exports = function(PM2_HOME) {
-  if (!PM2_HOME)
+  var has_node_embedded = false
+
+  if (fs.existsSync(p.resolve(__dirname, './node')) === true) {
+    has_node_embedded = true
+  }
+
+  if (!PM2_HOME) {
     PM2_HOME = getDefaultPM2Home()
+  }
 
   var pm2_file_stucture = {
     PM2_HOME                 : PM2_HOME,
@@ -57,15 +64,11 @@ module.exports = function(PM2_HOME) {
     INTERACTOR_LOG_FILE_PATH : p.resolve(PM2_HOME, 'agent.log'),
     INTERACTOR_PID_PATH      : p.resolve(PM2_HOME, 'agent.pid'),
     INTERACTION_CONF         : p.resolve(PM2_HOME, 'agent.json5'),
-    BUILTIN_NODE_PATH        : null,
-    BUILTIN_NPM_PATH         : null
-  };
 
-  // Builtin Node and NPM Detection
-  if (fs.existsSync(p.resolve('./node')) == true) {
-    pm2_file_stucture.BUILTIN_NODE_PATH = p.resolve('./node/bin/node')
-    pm2_file_stucture.BUILTIN_NPM_PATH = p.resolve('./node/bin/npm')
-  }
+    HAS_NODE_EMBEDDED        : has_node_embedded,
+    BUILTIN_NODE_PATH        : has_node_embedded === true ? p.resolve('./node/bin/node') : null,
+    BUILTIN_NPM_PATH         : has_node_embedded === true ? p.resolve('./node/bin/npm') : null,
+  };
 
   // allow overide of file paths via environnement
   var paths = Object.keys(pm2_file_stucture);
