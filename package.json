@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "3.5.0",
+  "version": "4.0.0",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -176,6 +176,7 @@
     "moment": "^2.22.2",
     "needle": "^2.2.1",
     "pidusage": "^2.0.14",
+    "systeminformation": "^4",
     "pm2-axon": "3.3.0",
     "pm2-axon-rpc": "^0.5.1",
     "pm2-deploy": "^0.4.0",
