@@ -635,16 +635,6 @@ commander.command('logout')
   });
 
 //
-// Web interface
-//
-commander.command('web')
-  .description('launch a health API on ' + cst.WEB_IPADDR + ':' + cst.WEB_PORT)
-  .action(function() {
-    console.log('Launching web interface on ' + cst.WEB_IPADDR + ':' + cst.WEB_PORT);
-    pm2.web();
-  });
-
-//
 // Save processes to file
 //
 commander.command('dump')
@@ -803,6 +793,12 @@ commander.command('jlist')
   .action(function() {
     pm2.jlist()
   });
+
+commander.command('slist')
+  .description('list system infos in JSON')
+  .action(function() {
+    pm2.slist()
+  })
 
 // List in prettified Json
 commander.command('prettylist')
