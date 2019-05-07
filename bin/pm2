@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-var semver = require('semver');
-
-if (semver.satisfies(process.versions.node, '>= 6.0.0'))
-  require('v8-compile-cache');
-
 process.env.PM2_USAGE = 'CLI';
 
 var cst          = require('../constants.js');
