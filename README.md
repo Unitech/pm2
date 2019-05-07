@@ -40,7 +40,7 @@ PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unite
 
 Official website: [https://pm2.io/doc/](https://pm2.io/doc/)
 
-Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 4.X.
+Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 8.X.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
