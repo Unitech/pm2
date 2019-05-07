@@ -990,7 +990,7 @@ commander.command('examples')
 //
 commander.command('*')
   .action(function() {
-    console.log(cst.PREFIX_MSG + 'Command not found\n');
+    console.log(cst.PREFIX_MSG_ERR + chalk.bold('Command not found\n'));
     displayUsage();
     // Check if it does not forget to close fds from RPC
     process.exit(cst.ERROR_EXIT);
