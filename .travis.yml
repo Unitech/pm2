@@ -2,7 +2,6 @@ language: node_js
 node_js:
   - "12"
   - "10"
-  - "6"
   - "8"
 git:
   depth: 5
