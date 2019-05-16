@@ -166,6 +166,7 @@
     "chalk": "^2.4.1",
     "chokidar": "^2.0.4",
     "cli-table-redemption": "^1.0.0",
+    "coffee-script": "^1.12.7",
     "commander": "2.15.1",
     "cron": "^1.3",
     "date-fns": "^1.29.0",
