@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "4.0.0",
+  "version": "4.0.0-beta-1",
   "engines": {
     "node": ">=8.0.0"
   },
@@ -181,6 +181,7 @@
     "pm2-deploy": "^0.4.0",
     "pm2-multimeter": "^0.1.2",
     "promptly": "^2",
+    "lodash": "*",
     "ps-list": "^6.3.0",
     "semver": "^5.5",
     "shelljs": "~0.8.2",
