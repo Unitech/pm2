@@ -1,3 +1,4 @@
 #!/bin/bash
 
-./node/bin/node ./bin/pm2 $@
+DIR="$(dirname "$(readlink -f "$0")")"
+$DIR/node/bin/node $DIR/bin/pm2 $@
