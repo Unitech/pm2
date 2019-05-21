@@ -66,8 +66,8 @@ module.exports = function(PM2_HOME) {
     INTERACTION_CONF         : p.resolve(PM2_HOME, 'agent.json5'),
 
     HAS_NODE_EMBEDDED        : has_node_embedded,
-    BUILTIN_NODE_PATH        : has_node_embedded === true ? p.resolve('./node/bin/node') : null,
-    BUILTIN_NPM_PATH         : has_node_embedded === true ? p.resolve('./node/bin/npm') : null,
+    BUILTIN_NODE_PATH        : has_node_embedded === true ? p.resolve(__dirname, './node/bin/node') : null,
+    BUILTIN_NPM_PATH         : has_node_embedded === true ? p.resolve(__dirname, './node/bin/npm') : null,
   };
 
   // allow overide of file paths via environnement
