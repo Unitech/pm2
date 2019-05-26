@@ -3,6 +3,7 @@
   "preferGlobal": true,
   "version": "4.0.0-beta-4",
   "engines": {
+    "embed": "12.3.1",
     "node": ">=8.0.0"
   },
   "directories": {
