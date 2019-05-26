@@ -195,9 +195,6 @@
     "mocha": "^5.2.0",
     "should": "^13"
   },
-  "optionalDependencies": {
-    "gkt": "https://tgz.pm2.io/gkt-1.0.0.tgz"
-  },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
   },
