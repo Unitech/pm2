@@ -21,6 +21,7 @@
         </method_context>
 
         <exec_method type="method" name="start" exec="%PM2_PATH% resurrect" timeout_seconds="60"/>
+        <exec_method type="method" name="refresh" exec="%PM2_PATH% reload all" timeout_seconds="60"/>
         <exec_method type="method" name="stop" exec="%PM2_PATH% kill" timeout_seconds="60"/>
         
         <property_group name="startd" type="framework">
