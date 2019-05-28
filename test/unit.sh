@@ -52,6 +52,7 @@ cd test/programmatic
 # Abort script at first error
 # set -e
 
+runUnitTest ./resurect_state.mocha.js
 runUnitTest ./programmatic.js
 runUnitTest ./instances.mocha.js
 runUnitTest ./containerizer.mocha.js
