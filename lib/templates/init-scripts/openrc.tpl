@@ -39,7 +39,6 @@ start_post() {
 stop() {
 	ebegin "Stopping PM2 process manager..."
 	run_pm2_as_user dump
-	run_pm2_as_user delete all
 	run_pm2_as_user kill
 	eend $?
 }

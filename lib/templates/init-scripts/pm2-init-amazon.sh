@@ -41,8 +41,6 @@ start() {
 
 stop() {
     echo "Stopping $NAME"
-    #super $PM2 dump
-    super $PM2 delete all
     super $PM2 kill
     rm -f $lockfile
 }
