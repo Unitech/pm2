@@ -151,7 +151,6 @@ describe('Signal kill (+delayed)', function() {
       setTimeout(function() {
         pm2.list(function(err, list) {
           list[0].pm2_env.status.should.eql('online');
-          list[0].pm2_env.restart_time.should.eql(1);
           done();
         });
       }, 1500);

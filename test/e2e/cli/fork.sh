@@ -7,16 +7,16 @@ cd $file_path
 
 ########### Fork mode
 $pm2 start echo.js -x
-should 'should has forked app' 'fork_mode' 1
+should 'should start app in fork mode' 'fork_mode' 1
 
 $pm2 restart echo.js
-should 'should has forked app' 'restart_time: 1' 1
+should 'should has restarted app' 'restart_time: 1' 1
 
 ########### Fork mode
 $pm2 kill
 
 $pm2 start bashscript.sh
-should 'should has forked app' 'fork_mode' 1
+should 'should start app in fork mode' 'fork_mode' 1
 
 ########### Auto Detective Interpreter In Fork mode
 
