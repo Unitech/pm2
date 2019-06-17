@@ -1,9 +1,9 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "4.0.0-beta-6",
+  "version": "4.0.0-beta-7",
   "engines": {
-    "embed": "12.3.1",
+    "embed": "12.4.0",
     "node": ">=8.0.0"
   },
   "directories": {
