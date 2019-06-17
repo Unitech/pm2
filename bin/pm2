@@ -967,6 +967,11 @@ commander.command('serve [path] [port]')
     pm2.serve(path, port || cmd.port, cmd, commander);
   });
 
+commander.command('autoinstall')
+  .action(function() {
+    pm2.autoinstall()
+  })
+
 commander.command('examples')
   .description('display pm2 usage examples')
   .action(() => {
