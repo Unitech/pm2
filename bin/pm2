@@ -785,6 +785,7 @@ commander.command('jlist')
   });
 
 commander.command('slist')
+  .alias('sysinfos')
   .description('list system infos in JSON')
   .action(function() {
     pm2.slist()
