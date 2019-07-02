@@ -1,6 +1,6 @@
 <div align="center">
   <br/>
-  <a href="http://pm2.io/doc/?utm_source=github" title="PM2 Keymetrics link">
+  <a href="https://pm2.keymetrics.io/" title="PM2 Keymetrics link">
     <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" alt="pm2 logo">
   </a>
   <br/>
@@ -38,7 +38,7 @@ $ pm2 start app.js
 
 PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unitech/pm2).
 
-Official website: [https://pm2.io/doc/](https://pm2.io/doc/)
+Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
 Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 4.X.
 
@@ -50,7 +50,7 @@ Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js version
 $ npm install pm2 -g
 ```
 
-*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://blog.pm2.io/2018-02-19/Installing-Node-js-with-NVM/)*
+*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://yoember.com/nodejs/the-best-way-to-install-node-js/)*
 
 ### Start an application
 
@@ -62,7 +62,7 @@ $ pm2 start app.js
 
 Your app is now daemonized, monitored and kept alive forever.
 
-[More about Process Management](https://pm2.io/doc/en/runtime/guide/process-management/?utm_source=github)
+[More about Process Management](https://pm2.keymetrics.io/docs/usage/quick-start/)
 
 ### Container Support
 
@@ -74,7 +74,7 @@ RUN npm install pm2 -g
 CMD [ "pm2-runtime", "npm", "--", "start" ]
 ```
 
-[Read More about the dedicated integration](https://pm2.io/doc/en/runtime/integration/docker/?utm_source=github)
+[Read More about the dedicated integration](https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
 ### Managing Applications
 
@@ -108,7 +108,7 @@ To monitor logs, custom metrics, application information:
 $ pm2 monit
 ```
 
-[More about Application Management](https://pm2.io/doc/en/runtime/guide/process-management/?utm_source=github)
+[More about Application Management](https://pm2.keymetrics.io/docs/usage/quick-start/)
 
 ### Cluster Mode: Node.js Load Balancing & Zero Downtime Reload
 
@@ -134,7 +134,7 @@ Seamlessly supported by all major Node.js frameworks and any Node.js application
 
 ![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
 
-[More informations about how PM2 make clustering easy](https://keymetrics.io/2015/03/26/pm2-clustering-made-easy/)
+[More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 
 ### Terminal Based Monitoring
 
@@ -167,9 +167,9 @@ $ pm2 flush               # Flush all logs
 $ pm2 reloadLogs          # Reload all logs
 ```
 
-[More about log management](https://pm2.io/doc/en/runtime/guide/log-management/?utm_source=github)
+[More about log management](https://pm2.keymetrics.io/docs/usage/log-management/)
 
-### Startup Hooks Generation
+### Startup Scripts Generation
 
 PM2 can generates and configure a Startup Script to keep PM2 and your processes alive at every server restart.
 
@@ -186,7 +186,7 @@ $ pm2 save
 $ pm2 unstartup
 ```
 
-[More about Startup Hooks](https://pm2.io/doc/en/runtime/guide/startup-hook/?utm_source=github)
+[More about Startup Scripts Generation](https://pm2.keymetrics.io/docs/usage/startup/)
 
 ### PM2 Modules
 
@@ -222,17 +222,6 @@ If you manage your NodeJS app with PM2, PM2+ makes it easy to monitor and manage
 
 Thanks in advance and we hope that you like PM2!
 
-## More about PM2
-
-- [Zero Downtime Reload](https://pm2.io/doc/en/runtime/guide/load-balancing/)
-- [Watch File & Restart](https://pm2.io/doc/en/runtime/features/watch-restart/)
-- [Restart Strategies](https://pm2.io/doc/en/runtime/features/restart-strategies/)
-- [Startup Script Generation](https://pm2.io/doc/en/runtime/guide/startup-hook/)
-- [Memory Limit Auto Reload](https://pm2.io/doc/en/runtime/features/memory-limit/)
-- [Source Map Support](https://pm2.io/doc/en/runtime/features/javascript-source-maps/)
-- [Using PM2 API](https://pm2.io/doc/en/runtime/reference/pm2-programmatic/)
-- [Graceful Shutdown](https://pm2.io/doc/en/runtime/best-practices/graceful-shutdown/)
-
 ## CHANGELOG
 
 [CHANGELOG](https://github.com/Unitech/PM2/blob/master/CHANGELOG.md)
@@ -245,5 +234,3 @@ Thanks in advance and we hope that you like PM2!
 
 PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
 For other licenses [contact us](mailto:contact@keymetrics.io).
-
-[![GA](https://ga-beacon.appspot.com/UA-51734350-7/pm2/readme?pixel&useReferer)](https://github.com/igrigorik/ga-beacon)
