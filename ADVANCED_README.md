@@ -11,7 +11,6 @@ Official Documentation: [PM2 official documentation](https://pm2.io/doc/en/runti
 - [Sticky sessions and socket.io discussion](https://github.com/Unitech/PM2/issues/637)
 - [EACCESS - understanding pm2 user/root rights](https://github.com/Unitech/PM2/issues/837)
 
-<a name="a20"/>
 ## External resources and articles
 
 - [Goodbye node-forever, hello pm2](http://devo.ps/blog/goodbye-node-forever-hello-pm2/)
