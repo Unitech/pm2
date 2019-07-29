@@ -188,7 +188,7 @@
     "shelljs": "0.8.3",
     "source-map-support": "0.5.12",
     "sprintf-js": "1.1.2",
-    "systeminformation": "4.11.4",
+    "systeminformation": "^4.14.4",
     "vizion": "~2.0.2",
     "yamljs": "0.3.0"
   },
