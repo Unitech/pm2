@@ -165,7 +165,7 @@
     "async": "^3.1.0",
     "blessed": "0.1.81",
     "chalk": "2.4.2",
-    "chokidar": "3.0.1",
+    "chokidar": "^3.0.2",
     "cli-table-redemption": "1.0.1",
     "commander": "2.15.1",
     "cron": "1.7.1",
