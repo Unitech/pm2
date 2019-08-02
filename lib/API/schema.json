@@ -277,6 +277,12 @@
     "docDefault": "NODE_APP_INSTANCE",
     "docDescription": "Rename the NODE_APP_INSTANCE environment variable"
   },
+  "expand_args": {
+    "type": "boolean",
+    "default": false,
+    "docDefault": "False",
+    "docDescription": "Whether to expands shell-style variables (e.g. $PORT) in the argument string"
+  },
   "pmx": {
     "type": "boolean",
     "default": true,

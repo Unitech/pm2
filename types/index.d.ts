@@ -313,6 +313,10 @@ export interface StartOptions {
    */
   interpreter_args?: string | string[];
   /**
+   * (Default: false) Expand shell-style variables (e.g. $PORT) in the arguments before spawning. Useful in connection with increment_
+   */
+  expand_args?: boolean;
+  /**
    * The working directory to start the process with.
    */
   cwd?: string;
