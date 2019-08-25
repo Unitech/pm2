@@ -181,17 +181,6 @@ describe('PM2 programmatic calls', function() {
       });
     });
 
-    it('should launch pm2 web API', function(done) {
-      pm2.web(function(err, ret) {
-        should(err).be.null()
-        pm2.list(function(err, ret) {
-          should(err).be.null()
-          ret.length.should.eql(9);
-          done();
-        });
-      });
-    });
-
     it('should reload all', function(done) {
       pm2.reload('all', function(err, ret) {
         should(err).be.null()

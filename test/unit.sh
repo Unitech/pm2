@@ -52,6 +52,7 @@ cd test/programmatic
 # Abort script at first error
 # set -e
 
+runUnitTest ./resurect_state.mocha.js
 runUnitTest ./programmatic.js
 runUnitTest ./instances.mocha.js
 runUnitTest ./containerizer.mocha.js
@@ -80,6 +81,7 @@ runUnitTest ./env_switching.js
 runUnitTest ./configuration.mocha.js
 runUnitTest ./id.mocha.js
 runUnitTest ./god.mocha.js
+runUnitTest ./dump.mocha.js
 
 runUnitTest ./issues/json_env_passing_4080.mocha.js
 

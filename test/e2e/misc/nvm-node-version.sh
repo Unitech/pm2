@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "feature in deprecation"
+exit 0
+
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/../include.sh"
 

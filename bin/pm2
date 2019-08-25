@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-var semver = require('semver');
-
-if (semver.satisfies(process.versions.node, '>= 6.0.0'))
-  require('v8-compile-cache');
-
 process.env.PM2_USAGE = 'CLI';
 
 var cst          = require('../constants.js');
@@ -85,7 +80,6 @@ commander.version(pkg.version)
   .option('--trace', 'enable transaction tracing with km')
   .option('--disable-trace', 'disable transaction tracing with km')
   .option('--attach', 'attach logging after your start/restart/stop/reload')
-  .option('--sort <field_name:sort>', 'sort process according to field\'s name')
   .option('--v8', 'enable v8 data collecting')
   .option('--event-loop-inspector', 'enable event-loop-inspector dump in pmx')
   .option('--deep-monitoring', 'enable all monitoring tools (equivalent to --v8 --event-loop-inspector --trace)')
@@ -290,7 +284,13 @@ commander.command('start [name|file|ecosystem|id...]')
       forEachLimit(cmd, 1, function(script, next) {
         pm2.start(script, commander, next);
       }, function(err) {
-        pm2.speedList(err ? 1 : 0);
+        if (err && err.message &&
+            (err.message.includes('Script not found') === true ||
+             err.message.includes('NOT AVAILABLE IN PATH') === true)) {
+          pm2.exitCli(1)
+        }
+        else
+          pm2.speedList(err ? 1 : 0);
       });
     }
   });
@@ -538,12 +538,7 @@ commander.command('get [key]')
 commander.command('conf [key] [value]')
   .description('get / set module config values')
   .action(function(key, value) {
-    console.log('Set pm2 configuration:')
-    console.log('$ pm2 set [key] [value]')
-    console.log('Get pm2 configuration:')
-    console.log('$ pm2 get [key]')
-    console.log()
-    pm2.get();
+    pm2.get()
   });
 
 commander.command('config <key> [value]')
@@ -630,23 +625,14 @@ commander.command('logout')
   });
 
 //
-// Web interface
-//
-commander.command('web')
-  .description('launch a health API on ' + cst.WEB_IPADDR + ':' + cst.WEB_PORT)
-  .action(function() {
-    console.log('Launching web interface on ' + cst.WEB_IPADDR + ':' + cst.WEB_PORT);
-    pm2.web();
-  });
-
-//
 // Save processes to file
 //
 commander.command('dump')
   .alias('save')
+  .option('--force', 'force deletion of dump file, even if empty')
   .description('dump all processes for resurrecting them later')
-  .action(failOnUnknown(function() {
-    pm2.dump();
+  .action(failOnUnknown(function(opts) {
+    pm2.dump(commander.force)
   }));
 
 //
@@ -797,6 +783,13 @@ commander.command('jlist')
   .action(function() {
     pm2.jlist()
   });
+
+commander.command('slist')
+  .alias('sysinfos')
+  .description('list system infos in JSON')
+  .action(function() {
+    pm2.slist()
+  })
 
 // List in prettified Json
 commander.command('prettylist')
@@ -975,6 +968,11 @@ commander.command('serve [path] [port]')
     pm2.serve(path, port || cmd.port, cmd, commander);
   });
 
+commander.command('autoinstall')
+  .action(function() {
+    pm2.autoinstall()
+  })
+
 commander.command('examples')
   .description('display pm2 usage examples')
   .action(() => {
@@ -988,7 +986,7 @@ commander.command('examples')
 //
 commander.command('*')
   .action(function() {
-    console.log(cst.PREFIX_MSG + 'Command not found\n');
+    console.log(cst.PREFIX_MSG_ERR + chalk.bold('Command not found\n'));
     displayUsage();
     // Check if it does not forget to close fds from RPC
     process.exit(cst.ERROR_EXIT);

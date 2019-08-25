@@ -1,7 +1,7 @@
 <div align="center">
   <br/>
-  <a href="https://pm2.keymetrics.io/" title="PM2 Keymetrics link">
-    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" alt="pm2 logo">
+  <a href="http://pm2.keymetrics.io/" title="PM2 Keymetrics link">
+    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/development/pres/pm2-v4.png" alt="pm2 logo">
   </a>
   <br/>
 <br/>
@@ -40,7 +40,7 @@ PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unite
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
-Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 4.X.
+Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 8.X.
 
 [![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
