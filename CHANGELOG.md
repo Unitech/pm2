@@ -1,8 +1,6 @@
 
 ## 4.0.0
 
-### beta 1
-
 - feat: make pm2 fully standalone with node embedded
 - feat: startup, npm, node system adaptation for standalone installs
 - feat: system information worker - retrieve:
@@ -12,15 +10,18 @@
            - memory usage
            - intelligent display of information (e.g. display disks > 80% cpu usage)
 - feat: listing of docker container on host machine with independent pm2 list
+- feat: upgrade of Chokidar to 3.x - Massive CPU & RAM consumption improvements for watch feature
 - r&d: manage container like pm2 processes
 - feat: intelligent display of high loaded processes in an independent pm2 list
 - feat: #4224 --ignore-watch now accepts globs (@vaskevich)
 - feat: pm2 save --force allow to force save of empty process list
 - fix: pm2 monit dashboard without leaks
+- fix: pm2 register fixed
 - refactor/fix: pm2 listing systems refactoring
 - chore: remove old legacy code for < 8 Node.js versions
 - chore: make the repo lighter
 - chore: better display when pm2-runtime is linked to on-premise
+- chore: pm2 CLI refactoring #4391
 
 ## 3.5.0
 
