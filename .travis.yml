@@ -10,7 +10,7 @@ os:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install python3
-  - sudo apt-get install php5-cli
+  - sudo apt-get install php7.0-cli
 services:
   - docker
 install:
