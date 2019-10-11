@@ -63,7 +63,6 @@ runUnitTest ./reload-locker.mocha.js
 runUnitTest ./auto_restart.mocha.js
 runUnitTest ./version.mocha.js
 runUnitTest ./exp_backoff_restart_delay.mocha.js
-runUnitTest ./internal_config.mocha.js
 runUnitTest ./api.backward.compatibility.mocha.js
 runUnitTest ./custom_action.mocha.js
 runUnitTest ./logs.js
