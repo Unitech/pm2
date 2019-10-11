@@ -46,11 +46,17 @@ Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js version
 
 ### Installing PM2
 
+With NPM:
+
 ```bash
 $ npm install pm2 -g
 ```
 
-*npm is a builtin CLI when you install Node.js - [Installing Node.js with NVM](https://yoember.com/nodejs/the-best-way-to-install-node-js/)*
+Or if you don't have Node.js installed:
+
+```bash
+wget -qO- https://getpm2.com/install.sh | bash
+```
 
 ### Start an application
 
@@ -63,18 +69,6 @@ $ pm2 start app.js
 Your app is now daemonized, monitored and kept alive forever.
 
 [More about Process Management](https://pm2.keymetrics.io/docs/usage/quick-start/)
-
-### Container Support
-
-With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a hardened production environment.
-Using it is seamless:
-
-```
-RUN npm install pm2 -g
-CMD [ "pm2-runtime", "npm", "--", "start" ]
-```
-
-[Read More about the dedicated integration](https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
 ### Managing Applications
 
@@ -135,6 +129,18 @@ Seamlessly supported by all major Node.js frameworks and any Node.js application
 ![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
 
 [More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
+
+### Container Support
+
+With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a hardened production environment.
+Using it is seamless:
+
+```
+RUN npm install pm2 -g
+CMD [ "pm2-runtime", "npm", "--", "start" ]
+```
+
+[Read More about the dedicated integration](https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
 ### Terminal Based Monitoring
 
@@ -214,9 +220,8 @@ $ pm2 update
 
 ## PM2+ Monitoring
 
-![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-ls-multi.png)
-
-If you manage your NodeJS app with PM2, PM2+ makes it easy to monitor and manage apps across servers. Feel free to try it:
+If you manage your appa with PM2, PM2+ makes it easy to monitor and manage apps across servers.
+Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.pm2.io/)
 
