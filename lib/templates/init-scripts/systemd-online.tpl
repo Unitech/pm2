@@ -1,8 +1,7 @@
 [Unit]
 Description=PM2 process manager
 Documentation=https://pm2.keymetrics.io/
-After=network.target network-online.target
-Wants=network-online.target
+After=network-online.target
 Restart=on-failure
 
 [Service]
@@ -20,4 +19,4 @@ ExecReload=%PM2_PATH% reload all
 ExecStop=%PM2_PATH% kill
 
 [Install]
-WantedBy=multi-user.target network-online.target
+WantedBy=network-online.target
