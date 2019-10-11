@@ -24,14 +24,6 @@
     {
       "name": "Antoine Bluchet",
       "email": "antoine@pm2.io"
-    },
-    {
-      "name": "Vincent Vallet",
-      "email": "vincent@pm2.io"
-    },
-    {
-      "name": "Valentin Marchaud",
-      "email": "valentin@pm2.io"
     }
   ],
   "contributors": [
@@ -160,7 +152,7 @@
   },
   "dependencies": {
     "@pm2/agent": "^0.5.26",
-    "@pm2/io": "^4.3.0",
+    "@pm2/io": "^4.3.2",
     "@pm2/js-api": "^0.5.60",
     "async": "^3.1.0",
     "blessed": "0.1.81",
