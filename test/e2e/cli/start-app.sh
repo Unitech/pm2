@@ -34,3 +34,12 @@ should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 0' 1
 cat test-conf.log | grep "test_val" 2> /dev/null
 spec "should have printed the test_val"
+
+#
+# Compile C Program
+#
+cd $file_path/c-compile
+$pm2 start "cc hello.c; ./a.out" -l c-log.log --merge-logs
+sleep 1
+cat c-log.log | grep "Hello World" &> /dev/null
+spec "should have printed undefined env var"
