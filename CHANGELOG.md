@@ -1,4 +1,8 @@
 
+## 4.0.1
+
+- chore: switch Systeminfo logging to debug
+
 ## 4.0.0
 
 - feat: make pm2 fully standalone with node embedded
