@@ -284,7 +284,7 @@ interface Pm2Env {
   /**
    * The number of running instances.
    */
-  instances?: number;
+  instances?: number | 'max';
   /**
    * The path of the script being run in this process.
    */

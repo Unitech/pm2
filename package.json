@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "4.0.0-beta-8",
+  "version": "4.1.1",
   "engines": {
     "embed": "12.4.0",
     "node": ">=8.0.0"
@@ -24,14 +24,6 @@
     {
       "name": "Antoine Bluchet",
       "email": "antoine@pm2.io"
-    },
-    {
-      "name": "Vincent Vallet",
-      "email": "vincent@pm2.io"
-    },
-    {
-      "name": "Valentin Marchaud",
-      "email": "valentin@pm2.io"
     }
   ],
   "contributors": [
@@ -40,15 +32,28 @@
       "email": "alex@kocharin.ru"
     },
     {
-      "name": "Soyuka",
+      "name": "Antoine Bluchet",
       "email": "soyuka@gmail.com"
+    },
+    {
+      "name": "Valentin Marchaud",
+      "email": "thisismac47@gmail.com"
+    },
+    {
+      "name": "Valentin Touffet",
+      "email": "contact@eywek.fr"
+    },
+    {
+      "name": "Florian Hermouet-Joscht",
+      "email": "florian@keymetrics.io"
+    },
+    {
+      "name": "Vincent Vallet",
+      "email": "wallet77@gmail.com"
     },
     {
       "name": "Joni Shkurti",
       "email": "jonishkurti90@gmail.com"
-    },
-    {
-      "name": "James Ide"
     },
     {
       "name": "Jun Tjatse",
@@ -160,12 +165,12 @@
   },
   "dependencies": {
     "@pm2/agent": "^0.5.26",
-    "@pm2/io": "^4.1.2",
+    "@pm2/io": "^4.3.2",
     "@pm2/js-api": "^0.5.60",
     "async": "^3.1.0",
     "blessed": "0.1.81",
     "chalk": "2.4.2",
-    "chokidar": "^3.0.2",
+    "chokidar": "^3.2.0",
     "cli-table-redemption": "1.0.1",
     "commander": "2.15.1",
     "cron": "1.7.1",
@@ -188,13 +193,15 @@
     "shelljs": "0.8.3",
     "source-map-support": "0.5.12",
     "sprintf-js": "1.1.2",
-    "systeminformation": "^4.14.4",
     "vizion": "~2.0.2",
     "yamljs": "0.3.0"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
     "should": "^13"
+  },
+  "optionalDependencies": {
+    "systeminformation": "^4.14.11"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"

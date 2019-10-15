@@ -16,7 +16,7 @@ describe('Wait ready / Graceful start / restart', function() {
   this.retries(2)
 
   var pm2 = new PM2.custom({
-    cwd : '../fixtures/listen-timeout/'
+    cwd : '../fixtures/listen-timeout/',
   });
 
   before(function(done) {
@@ -53,7 +53,7 @@ describe('Wait ready / Graceful start / restart', function() {
         })
       }, 1500);
     });
-
+    
     it('should have listen timeout updated', function(done) {
       pm2.list(function(err, list) {
         should(list[0].pm2_env.wait_ready).eql(true);
@@ -174,6 +174,41 @@ describe('Wait ready / Graceful start / restart', function() {
       });
     });
 
+  });
+  
+  describe('(Cluster): Wait ready feature', function () {
+    this.timeout(10000);
+  
+    after(function(done) {
+      pm2.delete('all', done);
+    });
+    
+    it('Should send SIGINT right after ready and not wait for listen timeout', function(done) {
+      const plan = new Plan(2, done);
+      
+      pm2.start({
+        script         : './wait-ready.js',
+        listen_timeout : 5000,
+        wait_ready     : true,
+        instances      : 1,
+        exec_mode      : 'cluster',
+        name           : 'echo'
+      }, (error, result) => {
+        if (error) {
+          return done(error);
+        }
+        const exec = require('shelljs').exec;
+        const oldPid = result[0].process.pid;
+        plan.ok(typeof oldPid !== 'undefined');
+        
+        pm2.reload('echo', {}, done);
+        setTimeout(function() {
+          exec(`ps -eo pid | grep -w ${oldPid}`, (err, res) => {
+            plan.ok(err === 1);
+          })
+        }, 2000);
+      });
+    });
   });
 
 });

@@ -1,7 +1,28 @@
 
-## 4.0.0
+## 4.1.1
 
-### beta 1
+- fix: #4452 disable network collection metric
+
+## 4.1.0
+
+- fix: #4270 fix ANSI escape for `pm2 ls --watch`
+- fix: `pm2 start app.js -i 1` start app in cluster mode
+- fix: #4254 add HOST environment variable on pm2 serve
+- fix: #4267 Allow usernames in uid/gid/user again
+- fix: #4376 make process.send('ready') trigger sigint
+- fix: #4443 allow pm2-runtime to auto-exit even if modules are still running
+- fix: #4364 typos
+- fix: #4288 add 'max' type in typescript definition
+
+## 4.0.2
+
+- fix: #4450 do not open sysinfo window on Windows
+
+## 4.0.1
+
+- chore: switch Systeminfo logging to debug
+
+## 4.0.0
 
 - feat: make pm2 fully standalone with node embedded
 - feat: startup, npm, node system adaptation for standalone installs
@@ -12,15 +33,18 @@
            - memory usage
            - intelligent display of information (e.g. display disks > 80% cpu usage)
 - feat: listing of docker container on host machine with independent pm2 list
+- feat: upgrade of Chokidar to 3.x - Massive CPU & RAM consumption improvements for watch feature
 - r&d: manage container like pm2 processes
 - feat: intelligent display of high loaded processes in an independent pm2 list
 - feat: #4224 --ignore-watch now accepts globs (@vaskevich)
 - feat: pm2 save --force allow to force save of empty process list
 - fix: pm2 monit dashboard without leaks
+- fix: pm2 register fixed
 - refactor/fix: pm2 listing systems refactoring
 - chore: remove old legacy code for < 8 Node.js versions
 - chore: make the repo lighter
 - chore: better display when pm2-runtime is linked to on-premise
+- chore: pm2 CLI refactoring #4391
 
 ## 3.5.0
 
@@ -1198,7 +1222,7 @@ New builtin metrics when starting a Node.js application:
 - #2631 new pm2 monit command (blessed dashboard!)
 - #2670 allow to expose a folder over http via `pm2 serve <path> <port>`
 - #2617 fix startup script generation on macosx (launchd)
-- #2650 new option to append env name to app name (used to allow the same app to be launched in different environement w/o name conflict)
+- #2650 new option to append env name to app name (used to allow the same app to be launched in different environment w/o name conflict)
 - #2671 allow to pass a delay to pm2-docker (`pm2-docker process.json --delay 10`)
 - `pm2 ecosystem simple` to generate a simple ecosystem file
 - aliasing: `pm2-dev <script>` <=> `pm2-dev start <script>`
