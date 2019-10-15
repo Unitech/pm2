@@ -1,4 +1,8 @@
 
+## 4.1.2
+
+- fix: temporarily disable system metrics retrieval
+
 ## 4.1.1
 
 - fix: #4452 disable network collection metric
