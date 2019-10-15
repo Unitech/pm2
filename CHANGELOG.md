@@ -1,4 +1,8 @@
 
+## 4.1.1
+
+- fix: #4452 disable network collection metric
+
 ## 4.1.0
 
 - fix: #4270 fix ANSI escape for `pm2 ls --watch`
