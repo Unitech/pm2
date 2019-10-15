@@ -1,4 +1,8 @@
 
+## 4.0.2
+
+- fix: #4450 do not open sysinfo window on Windows
+
 ## 4.0.1
 
 - chore: switch Systeminfo logging to debug
