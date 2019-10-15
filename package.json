@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "4.0.2",
+  "version": "4.1.0",
   "engines": {
     "embed": "12.4.0",
     "node": ">=8.0.0"
@@ -32,15 +32,28 @@
       "email": "alex@kocharin.ru"
     },
     {
-      "name": "Soyuka",
+      "name": "Antoine Bluchet",
       "email": "soyuka@gmail.com"
+    },
+    {
+      "name": "Valentin Marchaud",
+      "email": "thisismac47@gmail.com"
+    },
+    {
+      "name": "Valentin Touffet",
+      "email": "contact@eywek.fr"
+    },
+    {
+      "name": "Florian Hermouet-Joscht",
+      "email": "florian@keymetrics.io"
+    },
+    {
+      "name": "Vincent Vallet",
+      "email": "wallet77@gmail.com"
     },
     {
       "name": "Joni Shkurti",
       "email": "jonishkurti90@gmail.com"
-    },
-    {
-      "name": "James Ide"
     },
     {
       "name": "Jun Tjatse",
