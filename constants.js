@@ -45,6 +45,8 @@ var csts = {
   CODE_UNCAUGHTEXCEPTION  : 1,
 
   IS_WINDOWS              : (process.platform === 'win32' || process.platform === 'win64' || /^(msys|cygwin)$/.test(process.env.OSTYPE)),
+  MAX_ERRORED_RESTARTS    : 16,
+
   ONLINE_STATUS           : 'online',
   STOPPED_STATUS          : 'stopped',
   STOPPING_STATUS         : 'stopping',
