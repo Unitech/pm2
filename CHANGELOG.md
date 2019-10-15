@@ -1,4 +1,15 @@
 
+## 4.1.0
+
+- fix: #4270 fix ANSI escape for `pm2 ls --watch`
+- fix: `pm2 start app.js -i 1` start app in cluster mode
+- fix: #4254 add HOST environment variable on pm2 serve
+- fix: #4267 Allow usernames in uid/gid/user again
+- fix: #4376 make process.send('ready') trigger sigint
+- fix: #4443 allow pm2-runtime to auto-exit even if modules are still running
+- fix: #4364 typos
+- fix: #4288 add 'max' type in typescript definition
+
 ## 4.0.2
 
 - fix: #4450 do not open sysinfo window on Windows
