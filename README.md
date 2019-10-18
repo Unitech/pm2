@@ -106,7 +106,7 @@ $ pm2 monit
 
 ### Cluster Mode: Node.js Load Balancing & Zero Downtime Reload
 
-The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
+The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of 10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
 
 Starting a Node.js application in cluster mode that will leverage all CPUs available:
 
@@ -220,7 +220,7 @@ $ pm2 update
 
 ## PM2+ Monitoring
 
-If you manage your appa with PM2, PM2+ makes it easy to monitor and manage apps across servers.
+If you manage your app with PM2, PM2+ makes it easy to monitor and manage apps across servers.
 Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.pm2.io/)
