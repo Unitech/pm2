@@ -1,4 +1,11 @@
 
+## 4.1.3
+
+- feature: re enable & harden sysinfos feature
+- feature: `pm2 sysinfos` to display many infos about running system
+- chore: cleanup some unused files
+- chore: enforce node >= 8.10.0
+
 ## 4.1.2
 
 - fix: temporarily disable system metrics retrieval
