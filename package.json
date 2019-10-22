@@ -200,7 +200,7 @@
     "should": "^13"
   },
   "optionalDependencies": {
-    "systeminformation": "^4.14.11"
+    "systeminformation": "^4.14.16"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
