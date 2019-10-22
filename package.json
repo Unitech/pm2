@@ -3,8 +3,7 @@
   "preferGlobal": true,
   "version": "4.1.2",
   "engines": {
-    "embed": "12.4.0",
-    "node": ">=8.0.0"
+    "node": ">=8.10.0"
   },
   "directories": {
     "bin": "./bin",
