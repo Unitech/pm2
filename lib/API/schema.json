@@ -144,6 +144,11 @@
     "docDefault": 1600,
     "docDescription": "Time in ms before sending the final SIGKILL signal after SIGINT"
   },
+  "shutdown_with_message": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Shutdown an application with process.send('shutdown') instead of process.kill(pid, SIGINT)"
+  },
   "listen_timeout": {
     "type": "number",
     "docDescription": "Time in ms before forcing a reload if app is still not listening/has still note sent ready"
