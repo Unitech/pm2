@@ -85,9 +85,9 @@ $ pm2 list
 Managing apps is straightforward:
 
 ```bash
-$ pm2 stop     <app_name|id|'all'|json_conf>
-$ pm2 restart  <app_name|id|'all'|json_conf>
-$ pm2 delete   <app_name|id|'all'|json_conf>
+$ pm2 stop     <app_name|namespace|id|'all'|json_conf>
+$ pm2 restart  <app_name|namespace|id|'all'|json_conf>
+$ pm2 delete   <app_name|namespace|id|'all'|json_conf>
 ```
 
 To have more details on a specific application:
