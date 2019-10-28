@@ -13,6 +13,11 @@
   "name_prefix": {
     "type": "string"
   },
+  "namespace": {
+    "type": "string",
+    "docDefault": "default",
+    "docDescription": "Process namespace"
+  },
   "install_url": {
     "type": "string"
   },
