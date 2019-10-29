@@ -220,7 +220,7 @@ $ pm2 update
 
 ## PM2+ Monitoring
 
-If you manage your appa with PM2, PM2+ makes it easy to monitor and manage apps across servers.
+If you manage your apps with PM2, PM2+ makes it easy to monitor and manage apps across servers.
 Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.pm2.io/)
