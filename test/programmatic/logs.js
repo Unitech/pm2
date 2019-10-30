@@ -34,10 +34,10 @@ describe('Programmatic log feature test', function() {
         script: './echo.js',
         error_file : 'error-echo.log',
         out_file   : 'out-echo.log',
-        merge_logs: false
+        merge_logs: false,
+        name: 'toto'
       }, function(err, procs) {
         should(err).be.null();
-
         var out_file = procs[0].pm2_env.pm_out_log_path;
         var err_file = procs[0].pm2_env.pm_err_log_path;
 

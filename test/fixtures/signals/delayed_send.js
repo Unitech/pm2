@@ -4,8 +4,7 @@ setInterval(function() {
 }, 1000);
 
 process.on('message', function (msg) {
-  if (msg === 'SIGINT') {
-    console.log('SIGINT message received but forbid exit');
+  if (msg === 'shutdown') {
+    console.log('shutdown message received but forbid exit');
   }
 });
-
