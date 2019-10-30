@@ -54,6 +54,7 @@ cd test/programmatic
 
 runUnitTest ./resurect_state.mocha.js
 runUnitTest ./programmatic.js
+runUnitTest ./namespace.mocha.js
 runUnitTest ./instances.mocha.js
 runUnitTest ./containerizer.mocha.js
 runUnitTest ./api.mocha.js
