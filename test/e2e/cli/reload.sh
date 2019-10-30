@@ -107,3 +107,23 @@ should 'should not restart' 'restart_time: 0' 1
 #$pm2 web
 #$pm2 reload all
 $pm2 kill
+
+############### SEND() instead of KILL()
+$pm2 kill
+export PM2_KILL_USE_SEND='true'
+
+$pm2 start signal-send.js
+should 'should start processes' 'online' 1
+
+OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)',/\1/"`
+> $OUT_LOG
+
+$pm2 reload signal-send.js
+sleep 1
+
+OUT=`grep "SIGINT" "$OUT_LOG" | wc -l`
+[ $OUT -eq 1 ] || fail "Signal not received by the process name"
+success "Processes sucessfully receives the signal"
+
+unset PM2_KILL_USE_SEND
+$pm2 kill
