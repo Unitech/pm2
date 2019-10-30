@@ -2,6 +2,7 @@
 var PM2    = require('../..');
 var should = require('should');
 var path   = require('path');
+var fs     = require('fs');
 
 describe('Signal kill (+delayed)', function() {
   var proc1 = null;
@@ -203,15 +204,20 @@ describe('Signal kill (+delayed)', function() {
       });
 
     });
+
+    it('should delete all', function(done) {
+      pm2.delete('all', done)
+    })
+
   });
 
 });
 
-describe('Message kill (signal behavior override via PM2_KILL_USE_SEND, +delayed)', function() {
+describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +delayed)', function() {
   var proc1 = null;
-  var appName = 'delayed-send';
+  var appName = 'delayedsadsend';
 
-  process.env.PM2_KILL_USE_SEND = true;
+  process.env.PM2_KILL_USE_MESSAGE = true;
 
   var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures',
@@ -243,6 +249,8 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_SEND, +delayed
     it('should start a script', function(done) {
       pm2.start({
         script : './signals/delayed_send.js',
+        error_file : 'error-echo.log',
+        out_file   : 'out-echo.log',
         name : appName,
       }, function(err, data) {
         proc1 = data[0];
@@ -270,8 +278,19 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_SEND, +delayed
       pm2.stop(appName, function(err, app) {
         //done(err);
       });
-      
+
     });
+
+    it('should read shutdown message', function(done) {
+      var out_file = proc1.pm2_env.pm_out_log_path;
+      fs.readFileSync(out_file).toString().should.containEql('shutdown message');
+      done();
+    })
+
+    it('should delete all', function(done) {
+      pm2.delete('all', done)
+    })
+
   });
 
   describe('[CLUSTER MODE] with 1000ms PM2_KILL_TIMEOUT (environment variable)', function() {
@@ -331,6 +350,13 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_SEND, +delayed
       });
 
     });
+
+    it('should read shutdown message', function(done) {
+      var out_file = proc1.pm2_env.pm_out_log_path;
+      fs.readFileSync(out_file).toString().should.containEql('shutdown message');
+      done();
+    })
+
   });
 
 });

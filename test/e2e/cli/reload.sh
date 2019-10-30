@@ -104,13 +104,9 @@ $pm2 delete all
 $pm2 start no-restart.json
 should 'should not restart' 'restart_time: 0' 1
 
-#$pm2 web
-#$pm2 reload all
+############### Via ENV: SEND() instead of KILL()
 $pm2 kill
-
-############### SEND() instead of KILL()
-$pm2 kill
-export PM2_KILL_USE_SEND='true'
+export PM2_KILL_USE_MESSAGE='true'
 
 $pm2 start signal-send.js
 should 'should start processes' 'online' 1
@@ -121,9 +117,24 @@ OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)
 $pm2 reload signal-send.js
 sleep 1
 
-OUT=`grep "SIGINT" "$OUT_LOG" | wc -l`
+OUT=`grep "shutdown" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Signal not received by the process name"
 success "Processes sucessfully receives the signal"
 
-unset PM2_KILL_USE_SEND
+unset PM2_KILL_USE_MESSAGE
+
+############### VIA --shutdown-with-message
 $pm2 kill
+
+$pm2 start signal-send.js --shutdown-with-message
+should 'should start processes' 'online' 1
+
+OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)',/\1/"`
+> $OUT_LOG
+
+$pm2 reload signal-send.js
+sleep 1
+
+OUT=`grep "shutdown" "$OUT_LOG" | wc -l`
+[ $OUT -eq 1 ] || fail "Signal not received by the process name"
+success "Processes sucessfully receives the signal"
