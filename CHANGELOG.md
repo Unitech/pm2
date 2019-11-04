@@ -5,6 +5,7 @@
 - feature: `pm2 sysmonit` activate system wide monitoring && `pm2 sysinfos` display system informations
 - feature: new App Namespace feature via `namespace` attr or `pm2 start app.js --namespace <ns>` #3471 by @bvsubhash
 - feature: enforce message sending for Windows Graceful Shutdown via `pm2 start app.js --shutdown-with-message` to use message sending for specific process or via `PM2_KILL_USE_MESSAGE=true pm2 update` to default this behavior on PM2. #3561 #3691 #3555 #4469 #4470 #4474 by @aleksk and @8ai
+- feature: `pm2 ls` now display a hint when process list differ from dump file
 - fix: if id > 100 not shown in pm2 ls #4475
 - fix: display correct username by @bvsubhash
 - chore: add test on node 13.x
