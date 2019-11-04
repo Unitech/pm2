@@ -186,6 +186,7 @@
     "pm2-deploy": "^0.4.0",
     "pm2-multimeter": "^0.1.2",
     "promptly": "^2",
+    "enquirer": "^2.3.2",
     "lodash": "4.17.14",
     "ps-list": "6.3.0",
     "semver": "^5.5",
