@@ -3,7 +3,7 @@ module.exports = {
     name: 'API',
     script: 'app.js',
 
-    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+    // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     args: 'one two',
     instances: 1,
     autorestart: true,
