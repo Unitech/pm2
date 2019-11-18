@@ -5,6 +5,33 @@ source "${SRC}/../include.sh"
 
 cd $file_path
 
+PM2_WORKER_INTERVAL=1000 $pm2 update
+$pm2 delete all
+#
+#
+#
+
+$pm2 start cron.js -c "*/2 * * * * *" --no-vizion
+spec "Should cron restart echo.js"
+sleep 2
+should 'should app been restarted' 'restart_time: 0' 0
+
+$pm2 restart cron
+$pm2 reset all
+sleep 2
+should 'should app been restarted after restart' 'restart_time: 0' 0
+
+$pm2 reset cron
+$pm2 stop cron
+sleep 2
+should 'should app be started again' 'online' 1
+
+$pm2 delete cron
+sleep 2
+should 'should app not be started again' 'stopped' 0
+should 'should app not be started again' 'online' 0
+
+$pm2 delete all
 #
 # Cron
 #
@@ -42,17 +69,4 @@ cat mock.log | grep "SIGINT"
 spec "3# Should cron exit call SIGINT handler"
 
 
-exit
-
-#
-# Slow test
-#
-$pm2 start signals/delayed_sigint.js -c "1 * * * * *" -o cron.log
-spec "Should cron restart delayed sigint"
-
-sleep 100
-
-cat cron.log | grep "SIGINT cb called"
-spec "Should cron exit call SIGINT handler"
-
-should 'should app been restarted' 'restart_time: 1' 1
+# $pm2 restart cron
