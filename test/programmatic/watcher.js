@@ -1,9 +1,10 @@
 var should = require('should');
 var p = require('path');
-var fs = require('fs')
-var EventEmitter = require('events').EventEmitter
+var fs = require('fs');
+var EventEmitter = require('events').EventEmitter;
 var PM2  = require('../..');
-var extend = require('util')._extend
+var extend = require('util')._extend;
+var hasWatchArgument = require('../../lib/Utility.js').hasWatchArgument;
 
 var cwd = __dirname + '/../fixtures/watcher';
 
@@ -196,5 +197,11 @@ describe('Watcher', function() {
     })
 
     pm2.delete(paths.json, errShouldBeNull)
+  })
+
+  it('should test watch argument', function() {
+    should(hasWatchArgument([0, 0, '--watch'])).eql(true)
+    should(hasWatchArgument([0, 0, '--', '--watch'])).eql(false)
+    should(hasWatchArgument([0, 0, '--somethingelse'])).eql(false)
   })
 })
