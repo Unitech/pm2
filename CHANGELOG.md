@@ -1,4 +1,9 @@
 
+## 4.2.1
+
+- fix: col size too small for certain app name with tracing enabled
+- chore: check for pm2 updates
+
 ## 4.2.0
 
 - feature: `pm2 logs --highlight <str>` to highlight specified string when using `pm2 logs` #4013 by @bvsubhash
