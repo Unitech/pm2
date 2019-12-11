@@ -1,0 +1,9 @@
+{
+  apps : [{
+    script : 'app.js',
+    name : 'Express',
+    instances : '1'
+  }, {
+    script : 'worker.js'
+  }]
+}

@@ -1,0 +1,4 @@
+Advanced Process Manager
+PM2: Process Manager for Node.js
+
+PM2 is a Process Manager mainly for Node.js that allows to automatically increase performance and stability while enhancing the process management experience for developer and DevOps.

@@ -1,0 +1,17 @@
+{
+  "name": "init-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "apps" : [{
+    "script" : "index.js",
+    "env" : {
+      "PM2_WAIT_FOR_INIT" : 500
+    }
+  }],
+  "author": "",
+  "license": "ISC"
+}

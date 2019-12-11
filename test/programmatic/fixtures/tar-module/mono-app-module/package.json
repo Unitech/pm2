@@ -1,0 +1,11 @@
+{
+  "name": "mono-app-module",
+  "version": "0.23.0",
+  "pm2": [{
+    "name" : "mono_app",
+    "script": "http.js",
+    "env" : {
+      "PORT" : "8008"
+    }
+  }]
+}

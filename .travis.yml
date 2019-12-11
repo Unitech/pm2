@@ -1,16 +1,18 @@
-sudo: false
 language: node_js
-branches:
-  only:
-    - master
-    - development
-    - travis
 node_js:
-   - "iojs"
-   - "0.12"
-   - "0.11"
-   - "0.10"
-   - "4"
-   - "5"
+  - "13"
+  - "12"
+  - "10"
+  - "8"
+git:
+  depth: 5
 os:
   - linux
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install python3
+  - sudo apt-get install php7.0-cli
+services:
+  - docker
+install:
+  - npm install

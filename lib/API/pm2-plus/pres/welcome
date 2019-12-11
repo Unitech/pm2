@@ -1,0 +1,28 @@
+
+                -------------
+
+               PM2 Plus Edition
+
+
+       PM2 Plus is a monitoring dashboard
+        specialized for Node.js Apps.
+
+               Create an account:
+              $ pm2 plus register
+
+    Connect your local PM2 to the PM2 Plus servers:
+              $ pm2 plus connect
+
+    See our UI with your own realtime dashboard:
+              $ pm2 plus web
+
+          More details available there:
+              http://pm2.io/plus
+
+                -------------
+
+        Having complex or specific needs?
+  You can also checkout our enterprise offer at:
+            http://pm2.io/enterprise
+
+                -------------

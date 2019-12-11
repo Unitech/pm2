@@ -1,6 +1,0 @@
-{
-  "min_uptime" : "100",
-  "max_restarts" : "400", 
-  "name" : "auto-kill",
-  "script" : "./examples/killfast.js"
-}

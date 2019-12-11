@@ -1,0 +1,7 @@
+{
+  "name" : "echo-json",
+  "script" : "echo-env.js",
+  "log_date_format"    : "YYYY-MM-DD HH:mm Z",
+  "out_file" : "echo-test.log",
+  "merge_logs" : true
+}

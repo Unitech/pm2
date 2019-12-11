@@ -1,0 +1,15 @@
+[
+  {
+    "name": "web",
+    "script": "echo.js",
+    "append_env_to_name": true,
+    "env_dev": {
+      "NODE_ENV": "dev",
+      "PORT": 4000
+    },
+    "env_prod": {
+      "NODE_ENV": "prod",
+      "PORT": 3000
+    }
+  }
+]

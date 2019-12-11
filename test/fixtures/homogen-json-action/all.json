@@ -1,0 +1,11 @@
+{
+  "apps" : [{
+    "script" : "http.js",
+    "name" : "http",
+    "instances" : 4
+  }, {
+    "script" : "http.js",
+    "name" : "http2",
+    "instances" : 2
+  }]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "simple-http-server",
+  "version": "1.0.0",
+  "description": "Simple HTTP server that can be used in cluster mode",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

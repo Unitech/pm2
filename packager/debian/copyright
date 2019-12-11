@@ -1,0 +1,8 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: PM2
+Upstream-Contact: Alexandre Strzelewicz <alexandre@keymetrics.io>
+Source: http://pm2.o/
+
+Files: *
+Copyright: 2013-present, Keymetrics
+License: AGPLv3

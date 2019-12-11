@@ -4,5 +4,5 @@ setInterval(function() {
 }, 1000);
 
 process.on('SIGINT', function () {
-  console.log('SIGINT cb called');
+  console.log('SIGINT cb called but forbid exit');
 });

@@ -1,0 +1,60 @@
+[
+  {
+    "name" : "sample-normal",
+    "instances": "2",
+    "exec_mode": "cluster",
+    "script" : "sample.js",
+    "out_file": "NULL",
+    "error_file": "NULL"
+  },
+  {
+    "name" : "sample-other-instance",
+    "instances": "2",
+    "instance_var": "APP_ID",
+    "exec_mode": "cluster",
+    "script" : "sample.js",
+    "out_file": "NULL",
+    "error_file": "NULL"
+  },
+  {
+    "name" : "sample-increment",
+    "instances": "2",
+    "increment_var": "PORT",
+    "exec_mode": "cluster",
+    "script" : "sample.js",
+    "out_file": "NULL",
+    "error_file": "NULL",
+    "env": {
+      "PORT": 3000
+    }
+  },
+  {
+    "name" : "sample-normal-fork",
+    "instances": "2",
+    "exec_mode": "fork",
+    "script" : "sample.js",
+    "out_file": "NULL",
+    "error_file": "NULL"
+  },
+  {
+    "name" : "sample-other-instance-fork",
+    "instances": "2",
+    "instance_var": "APP_ID",
+    "exec_mode": "fork",
+    "script" : "sample.js",
+    "out_file": "NULL",
+    "error_file": "NULL"
+  },
+  {
+    "name" : "sample-increment-fork",
+    "instances": "2",
+    "increment_var": "PORT",
+    "exec_mode": "fork",
+    "script" : "sample.js",
+    "out_file": "NULL",
+    "error_file": "NULL",
+    "env": {
+      "PORT": 3000
+    }
+  }
+]

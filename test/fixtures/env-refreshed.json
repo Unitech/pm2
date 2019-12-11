@@ -1,5 +1,5 @@
 [{
-  "name"      : "env",
+  "name"      : "appname",
   "script"    : "./env.js",
   "out_file"  : "out-env.log",
   "merge_logs" : true,

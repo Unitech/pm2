@@ -1,6 +1,10 @@
 
+var should = require('should');
 var Config = require('../../lib/tools/Config');
-var Schema = require('../../lib/schema.json');
+var Schema = require('../../lib/API/schema.json');
+
+// Change to current folder
+process.chdir(__dirname);
 
 describe('JSON validation tests', function() {
   it('should fail when passing wrong json', function() {
@@ -64,7 +68,7 @@ describe('JSON validation tests', function() {
     });
 
     // Returned array should contain also default values
-    Object.keys(ret.config).should.containDeep(default_values);;
+    Object.keys(ret.config).should.containDeep(default_values);
     done();
   });
 

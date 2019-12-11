@@ -1,5 +1,5 @@
 
-var axm = require('pmx');
+var axm = require('@pm2/io');
 
 setInterval(function() {
   axm.emit('user:register', {

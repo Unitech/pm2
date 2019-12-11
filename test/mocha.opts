@@ -1,4 +1,3 @@
---require should
---reporter spec
---timeout 30000000
---slow 300
+--timeout 10000
+--exit
+--bail

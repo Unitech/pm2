@@ -1,0 +1,13 @@
+{
+  apps: [{
+    script : 'http.js',
+    name : 'http',
+    watch : false,
+    env : {
+      SHOULDBETHERE : 'toto'
+    },
+    env_production : {
+      SHOULDBETHERE : 'TYPEENV PRODUCTION'
+    }
+  }]
+}

@@ -1,0 +1,350 @@
+{
+  "script": {
+    "type": "string",
+    "require": true,
+    "alias" : "exec",
+    "docDescription": "Path of the script to launch, required field"
+  },
+  "name": {
+    "type": "string",
+    "docDefault": "Script filename without the extension (app for app.js)",
+    "docDescription": "Process name in the process list"
+  },
+  "name_prefix": {
+    "type": "string"
+  },
+  "namespace": {
+    "type": "string",
+    "docDefault": "default",
+    "docDescription": "Process namespace"
+  },
+  "install_url": {
+    "type": "string"
+  },
+  "cwd": {
+    "type": "string",
+    "docDefault": "CWD of the current environment (from your shell)",
+    "docDescription": "Current working directory to start the process with"
+  },
+  "args": {
+    "type": [
+      "array",
+      "string"
+    ],
+    "docDescription": "Arguments to pass to the script"
+  },
+  "exec_interpreter": {
+    "type": "string",
+    "alias": "interpreter",
+    "docDefault": "node",
+    "docDescription": "Interpreter absolute path"
+  },
+  "node_args": {
+    "type": [
+      "array",
+      "string"
+    ],
+    "alias": ["interpreterArgs", "interpreter_args"],
+    "docDescription": "Arguments to pass to the interpreter"
+  },
+  "out_file": {
+    "type": "string",
+    "alias": ["out", "output", "out_log"],
+    "docDefault": "~/.pm2/logs/<app_name>-out.log",
+    "docDescription": "File path for stdout (each line is appended to this file)"
+  },
+  "error_file": {
+    "type": "string",
+    "alias": ["error", "err", "err_file", "err_log"],
+    "docDefault": "~/.pm2/logs/<app_name>-error.err",
+    "docDescription": "File path for stderr (each line is appended to this file)"
+  },
+  "log_file": {
+    "type": [
+      "boolean",
+      "string"
+    ],
+    "alias": "log",
+    "docDefault": "/dev/null",
+    "docDescription": "File path for combined stdout and stderr (each line is appended to this file)"
+  },
+  "disable_logs": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Disable all logs storage"
+  },
+  "log_type": {
+    "type": "string",
+    "docDescription": "Define a specific log output type, possible value: json"
+  },
+  "log_date_format": {
+    "type": "string",
+    "docDescription": "Format for log timestamps in moment.js format (eg YYYY-MM-DD HH:mm Z)"
+  },
+  "time": {
+    "type": "boolean"
+  },
+  "env": {
+    "type": [
+      "object",
+      "string"
+    ],
+    "docDescription": "Specify environment variables to be injected"
+  },
+  "^env_\\S*$": {
+    "type": [
+      "object",
+      "string"
+    ],
+    "docDescription": "Specify environment variables to be injected when using --env <env_name>"
+  },
+  "max_memory_restart": {
+    "type": [
+      "string",
+      "number"
+    ],
+    "regex": "^\\d+(G|M|K)?$",
+    "ext_type": "sbyte",
+    "desc": "it should be a NUMBER - byte, \"[NUMBER]G\"(Gigabyte), \"[NUMBER]M\"(Megabyte) or \"[NUMBER]K\"(Kilobyte)",
+    "docDescription": "Restart the app if an amount of memory is exceeded (format: /[0-9](K&#124;M&#124;G)?/ K for KB, 'M' for MB, 'G' for GB, default to B)"
+  },
+  "pid_file": {
+    "type": "string",
+    "alias": "pid",
+    "docDefault": "~/.pm2/pids/app_name-id.pid",
+    "docDescription": "File path where the pid of the started process is written by pm2"
+  },
+  "restart_delay": {
+    "type" : "number",
+    "docDefault": 0,
+    "docDescription": "Time in ms to wait before restarting a crashing app"
+  },
+  "exp_backoff_restart_delay": {
+    "type": "number",
+    "docDefault": 0,
+    "docDescription": "Restart Time in ms to wait before restarting a crashing app"
+  },
+  "source_map_support": {
+    "type": "boolean",
+    "docDefault": true,
+    "docDescription": "Enable or disable the source map support"
+  },
+  "disable_source_map_support": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Enable or disable the source map support"
+  },
+  "wait_ready": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Make the process wait for a process.send('ready')"
+  },
+  "instances": {
+    "type": "number",
+    "docDefault": 1,
+    "docDescription": "Number of instances to be started in cluster mode"
+  },
+  "kill_timeout": {
+    "type": "number",
+    "docDefault": 1600,
+    "docDescription": "Time in ms before sending the final SIGKILL signal after SIGINT"
+  },
+  "shutdown_with_message": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Shutdown an application with process.send('shutdown') instead of process.kill(pid, SIGINT)"
+  },
+  "listen_timeout": {
+    "type": "number",
+    "docDescription": "Time in ms before forcing a reload if app is still not listening/has still note sent ready"
+  },
+  "cron_restart": {
+    "type": "string",
+    "alias": "cron",
+    "docDescription": "A cron pattern to restart your app"
+  },
+  "merge_logs": {
+    "type": "boolean",
+    "alias" : "combine_logs",
+    "docDefault": false,
+    "docDescription": "In cluster mode, merge each type of logs into a single file (instead of having one for each cluster)"
+  },
+  "vizion": {
+    "type": "boolean",
+    "default" : true,
+    "docDefault" : "True",
+    "docDescription": "Enable or disable the versioning metadatas (vizion library)"
+  },
+  "autorestart": {
+    "type": "boolean",
+    "default": true,
+    "docDefault": "True",
+    "docDescription": "Enable or disable auto restart after process failure"
+  },
+  "watch_delay": {
+    "type": "number",
+    "docDefault": "True",
+    "docDescription": "Restart delay on file change detected"
+  },
+  "watch": {
+    "type": [
+      "boolean",
+      "array",
+      "string"
+    ],
+    "docDefault": false,
+    "docDescription": "Enable or disable the watch mode"
+  },
+  "ignore_watch": {
+    "type": [
+      "array",
+      "string"
+    ],
+    "docDescription": "List of paths to ignore (regex)"
+  },
+  "watch_options": {
+    "type": "object",
+    "docDescription": "Object that will be used as an options with chokidar (refer to chokidar documentation)"
+  },
+  "min_uptime": {
+    "type": [
+      "number",
+      "string"
+    ],
+    "regex": "^\\d+(h|m|s)?$",
+    "desc": "it should be a NUMBER - milliseconds, \"[NUMBER]h\"(hours), \"[NUMBER]m\"(minutes) or \"[NUMBER]s\"(seconds)",
+    "min": 100,
+    "ext_type": "stime",
+    "docDefault": 1000,
+    "docDescription": "Minimum uptime of the app to be considered started (format is /[0-9]+(h&#124;m&#124;s)?/, for hours, minutes, seconds, docDefault to ms)"
+  },
+  "max_restarts": {
+    "type": "number",
+    "min": 0,
+    "docDefault": 16,
+    "docDescription": "Number of times a script is restarted when it exits in less than min_uptime"
+  },
+  "execute_command": {
+    "type": "boolean"
+  },
+  "exec_mode": {
+    "type": "string",
+    "regex": "^(cluster|fork)(_mode)?$",
+    "desc": "it should be \"cluster\"(\"cluster_mode\") or \"fork\"(\"fork_mode\") only",
+    "docDefault": "fork",
+    "docDescription": "Set the execution mode, possible values: fork&#124;cluster"
+  },
+  "force": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Start a script even if it is already running (only the script path is considered)"
+  },
+  "append_env_to_name": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Append the environment name to the app name"
+  },
+  "post_update": {
+    "type": "array",
+    "docDescription": "List of commands executed after a pull/upgrade operation performed from Keymetrics dashboard"
+  },
+  "trace": {
+    "type": [
+      "boolean"
+    ],
+    "docDefault": false,
+    "docDescription": "Enable or disable the transaction tracing"
+  },
+  "disable_trace": {
+    "type": [
+      "boolean"
+    ],
+    "docDefault": true,
+    "docDescription": "Enable or disable the transaction tracing"
+  },
+  "v8": {
+    "type": [
+      "boolean"
+    ]
+  },
+  "event_loop_inspector": {
+    "type": [
+      "boolean"
+    ]
+  },
+  "deep_monitoring": {
+    "type": [
+      "boolean"
+    ]
+  },
+  "increment_var": {
+    "type": "string",
+    "docDescription": "Specify the name of an environment variable to inject which increments for each cluster"
+  },
+  "instance_var": {
+    "type": "string",
+    "default": "NODE_APP_INSTANCE",
+    "docDefault": "NODE_APP_INSTANCE",
+    "docDescription": "Rename the NODE_APP_INSTANCE environment variable"
+  },
+  "pmx": {
+    "type": "boolean",
+    "default": true,
+    "docDefault": "True",
+    "docDescription": "Enable or disable pmx wrapping"
+  },
+  "automation": {
+    "type": "boolean",
+    "default": true,
+    "docDefault": "True",
+    "docDescription": "Enable or disable pmx wrapping"
+  },
+  "treekill": {
+    "type": "boolean",
+    "default": true,
+    "docDefault": "True",
+    "docDescription": "Only kill the main process, not detached children"
+  },
+  "port": {
+    "type": "number",
+    "docDescription": "Shortcut to inject a PORT environment variable"
+  },
+  "username" : {
+    "type": "string",
+    "docDescription": "Current user that started the process"
+  },
+  "uid": {
+    "type" : [
+      "number",
+      "string"
+    ],
+    "alias": "user",
+    "docDefault": "Current user uid",
+    "docDescription": "Set user id"
+  },
+  "gid": {
+    "type" : [
+      "number",
+      "string"
+    ],
+    "docDefault": "Current user gid",
+    "docDescription": "Set group id"
+  },
+  "windowsHide": {
+    "type": "boolean",
+    "docDefault": "True",
+    "docDescription": "Enable or disable the Windows popup when starting an app",
+    "default": true
+  },
+  "kill_retry_time": {
+    "type": "number",
+    "default" : 100
+  },
+  "write": {
+    "type": "boolean"
+  },
+  "io": {
+    "type": "object",
+    "docDescription": "Specify apm values and configuration"
+  }
+}

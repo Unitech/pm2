@@ -1,0 +1,11 @@
+{
+  "name": "pm2-plus-custom-metrics",
+  "version": "1.0.0",
+  "description": "Example that shows how to use pm2+ custom metrics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

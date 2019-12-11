@@ -1,0 +1,44 @@
+[{
+  "name" : "one-echo",
+  "script" : "one-echo.js",
+  "log_type": "json",
+  "log_file": "output.log",
+  "merge_logs": true,
+  "out_file": "NULL",
+  "error_file": "NULL",
+  "autorestart": false
+},
+{
+  "name" : "one-echo-cluster",
+  "script" : "one-echo.js",
+  "exec_mode": "cluster_mode",
+  "log_type": "json",
+  "log_file": "output.log",
+  "merge_logs": true,
+  "out_file": "NULL",
+  "error_file": "NULL",
+  "autorestart": false
+},
+{
+  "name" : "one-echo-date",
+  "script" : "one-echo.js",
+  "log_type": "json",
+  "log_file": "output.log",
+  "log_date_format": "YYYY",
+  "merge_logs": true,
+  "out_file": "NULL",
+  "error_file": "NULL",
+  "autorestart": false
+},
+{
+  "name" : "one-echo-cluster-date",
+  "script" : "one-echo.js",
+  "exec_mode": "cluster_mode",
+  "log_type": "json",
+  "log_file": "output.log",
+  "log_date_format": "YYYY",
+  "merge_logs": true,
+  "out_file": "NULL",
+  "error_file": "NULL",
+  "autorestart": false
+}]

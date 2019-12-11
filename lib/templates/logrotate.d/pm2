@@ -1,0 +1,10 @@
+%HOME_PATH%/pm2.log %HOME_PATH%/logs/*.log {
+        rotate 12
+        weekly
+        missingok
+        notifempty
+        compress
+        delaycompress
+        copytruncate
+        create 0640 %USER% %USER%
+}

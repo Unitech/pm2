@@ -1,10 +1,11 @@
 
 var should = require('should');
-var Ipm2   = require('../../lib/Interactor/pm2-interface');
-var pm2    = require('../..');
+var PM2    = require('../..');
 var Plan   = require('../helpers/plan.js');
 
-const PATH_FIXTURES = process.cwd() + '/test/interface/fixtures/';
+if (require('semver').lt(process.version, '6.0.0')) {
+  return process.exit(0)
+}
 
 var PROCESS_ARCH  = Object.keys({
   pm_id  : 0,
@@ -59,39 +60,27 @@ process.on('uncaughtException', function(e) {
 });
 
 describe('PM2 BUS / RPC', function() {
-  after(function(done) {
-
-    ipm2.disconnect();
-
-    pm2.delete('all', function(err, ret) {
-      process.nextTick(function() {
-        pm2.killDaemon(function() {
-          pm2.disconnect(function() {
-            done();
-          });
-        });
-      });
-    });
+  var pm2 = new PM2.custom({
+    cwd         : __dirname + '/../fixtures/interface'
   });
+  var pm2_bus;
 
-  var ipm2;
+  after(function(done) {
+    pm2.delete('all', () => done());
+  });
 
   before(function(done) {
     pm2.connect(function() {
-      pm2.delete('all', function(err, ret) {
-        ipm2 = Ipm2();
-
-        ipm2.once('ready', function() {
-          done();
-        });
+      pm2.launchBus(function(err, bus) {
+        pm2_bus = bus;
+        setTimeout(done, 1000);
       });
-
     });
   });
 
   describe('Events', function() {
     afterEach(function(done) {
-      ipm2.bus.off('*');
+      pm2_bus.off('*');
 
       pm2.delete('all', function(err, ret) {
         done();
@@ -101,7 +90,7 @@ describe('PM2 BUS / RPC', function() {
     it('should (process:event) when start process get online event and start event with right properties', function(done) {
       var plan = new Plan(2, done);
 
-      ipm2.bus.on('*', function(event, data) {
+      pm2_bus.on('*', function(event, data) {
         if (event == 'process:event') {
           event.should.eql('process:event');
           data.should.have.properties(PROCESS_EVENT);
@@ -110,8 +99,8 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(process.cwd() + '/test/fixtures/child.js', {}, function(err, data) {
-        should(err).be.null;
+      pm2.start('./child.js', {}, function(err, data) {
+        should(err).be.null();
       });
     });
 
@@ -154,7 +143,7 @@ describe('PM2 BUS / RPC', function() {
     it('should (log:out log:err)', function(done) {
       var plan = new Plan(2, done);
 
-      ipm2.bus.on('*', function(event, data) {
+      pm2_bus.on('*', function(event, data) {
         if (event == 'log:out') {
           event.should.eql('log:out');
 
@@ -169,15 +158,15 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'log_out.js', {}, function(err, data) {
-        should(err).be.null;
+      pm2.start('./log_out.js', {}, function(err, data) {
+        should(err).be.null();
       });
     });
 
     it('should (process:exception)', function(done) {
       var plan = new Plan(1, done);
 
-      ipm2.bus.on('*', function(event, data) {
+      pm2_bus.on('*', function(event, data) {
         if (event == 'process:exception') {
           data.should.have.properties(ERROR_EVENT);
           data.process.should.have.properties(PROCESS_ARCH);
@@ -185,14 +174,14 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'process_exception.js', {}, function(err, data) {
-        should(err).be.null;
+      pm2.start('./process_exception.js', {}, function(err, data) {
+        should(err).be.null();
       });
     });
 
     it('should (human:event)', function(done) {
 
-      ipm2.bus.on('*', function(event, data) {
+      pm2_bus.on('*', function(event, data) {
 
         if (event == 'human:event') {
           data.should.have.properties(HUMAN_EVENT);
@@ -201,26 +190,26 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'human_event.js', {}, function(err, data) {
-        should(err).be.null;
+      pm2.start('./human_event.js', {}, function(err, data) {
+        should(err).be.null();
       });
     });
 
-    it('should (transaction:http)', function(done) {
+    it('should (process:exception) with promise', function(done) {
+      var plan = new Plan(1, done);
 
-      ipm2.bus.on('*', function(event, data) {
-        if (event == 'http:transaction') {
-          data.should.have.properties(TRANSACTION_HTTP_EVENT);
+      pm2_bus.on('*', function(event, data) {
+        if (event == 'process:exception') {
+          data.should.have.properties(ERROR_EVENT);
           data.process.should.have.properties(PROCESS_ARCH);
-          done();
+          plan.ok(true);
         }
       });
 
-      pm2.start(PATH_FIXTURES + 'http_transaction.js', {}, function(err, data) {
-        should(err).be.null;
+      pm2.start('./promise_rejection.js', {}, function(err, data) {
+        should(err).be.null();
       });
     });
-
   });
 
 });
