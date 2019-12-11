@@ -107,7 +107,7 @@ describe('PM2 BUS / RPC', function() {
     it('should (process:event -> restart) when autorestart occurs', function(done) {
       var plan = new Plan(2, done);
 
-      ipm2.bus.on('*', function(event, data) {
+      pm2_bus.on('*', function(event, data) {
         if (event == 'process:event' && data.event == 'restart') {
           event.should.eql('process:event');
           data.event.should.eql('restart');
@@ -117,7 +117,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start({script : PATH_FIXTURES + 'process_exception.js', autorestart : true, max_restarts : 3}, function(err, data) {
+      pm2.start('./process_exception.js', {autorestart : true, max_restarts : 3}, function(err, data) {
         should(err).be.null;
       });
     });
@@ -125,7 +125,7 @@ describe('PM2 BUS / RPC', function() {
     it('should (process:event -> restart overlimit) when autorestart hits max_restarts', function(done) {
       var plan = new Plan(1, done);
 
-      ipm2.bus.on('*', function(event, data) {
+      pm2_bus.on('*', function(event, data) {
         if (event == 'process:event' && data.event == 'restart overlimit') {
           event.should.eql('process:event');
           data.event.should.eql('restart overlimit');
@@ -135,7 +135,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start({script : PATH_FIXTURES + 'process_exception.js', autorestart : true, max_restarts : 3}, function(err, data) {
+      pm2.start('./process_exception.js', {autorestart : true, max_restarts : 3}, function(err, data) {
         should(err).be.null;
       });
     });
