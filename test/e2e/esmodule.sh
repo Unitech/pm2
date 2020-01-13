@@ -36,6 +36,8 @@ should 'should have application in stable state' 'restart_time: 1' 1
 
 #### CLUSTER MODE
 
+cd $file_path/esmodules/mjs
+
 $pm2 delete all
 
 $pm2 start index.mjs -i 4
