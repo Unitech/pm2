@@ -35,6 +35,8 @@ if [ $SUPV = '<6' ]; then
     exit
 fi
 
+runTest ./test/e2e/esmodule.sh
+
 runTest ./test/e2e/cli/monit.sh
 runTest ./test/e2e/cli/cli-actions-1.sh
 runTest ./test/e2e/cli/cli-actions-2.sh
