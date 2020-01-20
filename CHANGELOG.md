@@ -1,4 +1,9 @@
 
+## 4.2.2
+
+- feat: Support ESM on Node 13 via .mjs file or `"type":"module"` in package.json #4540
+- fix: Fix an error for pm2 path on Windows. #4563
+
 ## 4.2.1
 
 - fix: col size too small for certain app name with tracing enabled
