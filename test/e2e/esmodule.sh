@@ -34,6 +34,14 @@ sleep 2
 should 'should have detected es module via .mjs file extension and started 1 app' 'online' 1
 should 'should have application in stable state' 'restart_time: 1' 1
 
+$pm2 save
+
+$pm2 update
+
+sleep 2
+should 'should have detected es module via .mjs file extension and started 1 app' 'online' 1
+should 'should have application in stable state' 'restart_time: 0' 1
+
 #### CLUSTER MODE
 
 cd $file_path/esmodules/mjs
