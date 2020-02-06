@@ -234,7 +234,12 @@
     "type": "number",
     "min": 0,
     "docDefault": 16,
-    "docDescription": "Number of times a script is restarted when it exits in less than min_uptime"
+    "docDescription": "Number of times a script is restarted when it exits in less than min_uptime or with an exit code > 0 (if count_exit_errors is true)"
+  },
+  "count_exit_errors": {
+    "type": "boolean",
+    "docDefault": false,
+    "docDescription": "Count exit codes greater than 0 as unstable restarts"
   },
   "execute_command": {
     "type": "boolean"
