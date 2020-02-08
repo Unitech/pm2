@@ -239,6 +239,15 @@
     "docDefault": false,
     "docDescription": "Start a script even if it is already running (only the script path is considered)"
   },
+  "filter_env": {
+    "type": [
+      "boolean",
+      "array",
+      "string"
+    ],
+    "docDefault": false,
+    "docDescription": "Enable filtering global environments"
+  },
   "append_env_to_name": {
     "type": "boolean",
     "docDefault": false,
