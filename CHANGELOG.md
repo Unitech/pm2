@@ -1,4 +1,8 @@
 
+## 4.2.3
+
+- fix: Fix an import error on Node 9.x
+
 ## 4.2.2
 
 - feat: Support ESM on Node 13 via .mjs file or `"type":"module"` in package.json #4540
