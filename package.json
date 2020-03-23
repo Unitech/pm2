@@ -183,7 +183,7 @@
     "eventemitter2": "5.0.1",
     "fclone": "1.0.11",
     "lodash": "4.17.14",
-    "mkdirp": "0.5.1",
+    "mkdirp": "^0.5.3",
     "moment": "2.24.0",
     "needle": "2.4.0",
     "pidusage": "2.0.17",
