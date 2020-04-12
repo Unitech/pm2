@@ -3,10 +3,9 @@ node_js:
   - "13"
   - "12"
   - "10"
-  - "9"
   - "8"
 git:
-  depth: 5
+  depth: 2
 os:
   - linux
 before_install:
