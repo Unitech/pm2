@@ -23,7 +23,7 @@ should 'should app been restarted after restart' 'restart_time: 0' 0
 
 $pm2 reset cron
 $pm2 stop cron
-sleep 3
+sleep 5
 should 'should app be started again' 'online' 1
 
 $pm2 delete cron
