@@ -395,6 +395,7 @@ export interface StartOptions {
    * already running). If force is set to true, pm2 will start a new instance of that script.
    */
   force?: boolean;
+  ignore_watch?: string[];
   cron?: any;
   execute_command?: any;
   write?: any;
