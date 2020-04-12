@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias mocha='../node_modules/mocha/bin/mocha'
+alias mocha='../node_modules/.bin/mocha'
 pm2="`type -P node` `pwd`/bin/pm2"
 
 function reset {
@@ -12,7 +12,7 @@ function reset {
 function runUnitTest {
     echo "[~] Starting test $1"
     START=$(date +%s)
-    mocha --exit --bail --opts ./mocha.opts $1
+    mocha --exit --bail $1
     RET=$?
 
     if [ $RET -ne 0 ];
@@ -22,7 +22,7 @@ function runUnitTest {
         echo $STR >> unit_time
 
         reset
-        mocha --bail --exit --opts ./mocha.opts $1
+        mocha --bail --exit $1
         RET=$?
 
         if [ $RET -ne 0 ];

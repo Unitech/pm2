@@ -25,7 +25,7 @@ describe('Modules programmatic testing', function() {
     });
   });
 
-  it('should run post install command', function(done) {
+  it.skip('should run post install command', function(done) {
     var fs = require('fs');
     var ec = {};
     ec.dependencies = new Array();

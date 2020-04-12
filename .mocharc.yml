@@ -1,0 +1,11 @@
+# This is an example Mocha config containing every Mocha option plus others
+allow-uncaught: false
+async-only: false
+bail: true
+color: true
+delay: false
+diff: true
+timeout: 10000
+trace-warnings: true # node flags ok
+ui: bdd
+retries: 2
