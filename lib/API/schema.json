@@ -79,7 +79,7 @@
   },
   "log_date_format": {
     "type": "string",
-    "docDescription": "Format for log timestamps in moment.js format (eg YYYY-MM-DD HH:mm Z)"
+    "docDescription": "Format for log timestamps in day.js format (eg YYYY-MM-DD HH:mm Z)"
   },
   "time": {
     "type": "boolean"
