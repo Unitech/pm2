@@ -13,6 +13,15 @@
   "name_prefix": {
     "type": "string"
   },
+  "filter_env": {
+    "type": [
+      "boolean",
+      "array",
+      "string"
+    ],
+    "docDefault": false,
+    "docDescription": "Enable filtering global environments"
+  },
   "namespace": {
     "type": "string",
     "docDefault": "default",
