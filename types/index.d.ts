@@ -101,6 +101,19 @@ export {del as delete};
 export function reload(process: string|number, errback: ErrProcCallback): void;
 
 /**
+ * Zero-downtime rolling restart. At least one process will be kept running at
+ * all times as each instance is restarted individually.
+ * Only works for scripts started in cluster mode.
+ * @param process - Can either be the name as given in the pm2.start options,
+ * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * @param options - An object containing configuration
+ * @param options.updateEnv - (Default: false) If true is passed in, pm2 will reload it’s
+ * environment from process.env before reloading your process.
+ * @param errback - called when the process is reloaded
+ */
+export function reload(process: string|number, options: ReloadOptions, errback: ErrProcCallback): void;
+
+/**
  * Kills the pm2 daemon (same as pm2 kill). Note that when the daemon is killed, all its
  * processes are also killed. Also note that you still have to explicitly disconnect
  * from the daemon even after you kill it.
@@ -405,6 +418,14 @@ export interface StartOptions {
    * The environment variables to pass on to the process.
    */
   env?: { [key: string]: string; };
+}
+
+interface ReloadOptions {
+  /**
+   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env 
+   * before reloading your process.
+   */
+  updateEnv?: boolean;
 }
 
 // Types
