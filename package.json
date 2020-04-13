@@ -177,7 +177,6 @@
     "cli-table-redemption": "1.0.1",
     "commander": "2.15.1",
     "cron": "1.8.2",
-    "date-fns": "1.30.1",
     "dayjs": "1.8.24",
     "debug": "4.1.1",
     "enquirer": "^2.3.2",
