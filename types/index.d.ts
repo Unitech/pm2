@@ -390,6 +390,10 @@ export interface StartOptions {
    */
   watch?: boolean|string[];
   /**
+   * The exponential backoff restart will increase incrementally the time between restarts, reducing the pressure on your DB or your external provider
+   */
+  exp_backoff_restart_delay?: number;
+  /**
    * (Default: false) By default, pm2 will only start a script if that script isn’t
    * already running (a script is a path to an application, not the name of an application
    * already running). If force is set to true, pm2 will start a new instance of that script.
