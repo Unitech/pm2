@@ -18,7 +18,7 @@ should 'should app been restarted' 'restart_time: 0' 0
 
 $pm2 restart cron
 $pm2 reset all
-sleep 2
+sleep 5
 should 'should app been restarted after restart' 'restart_time: 0' 0
 
 $pm2 reset cron
@@ -46,7 +46,7 @@ $pm2 delete all
 > mock.log
 
 $pm2 start cron/mock-cron.js -o mock.log
-sleep 3
+sleep 4
 should 'should app been restarted when cron in fork mode' 'restart_time: 0' 0
 cat mock.log | grep "SIGINT"
 spec "1# Should cron exit call SIGINT handler"
@@ -54,7 +54,7 @@ spec "1# Should cron exit call SIGINT handler"
 $pm2 delete all
 
 $pm2 start cron/mock-cron.js -o mock.log -i 1
-sleep 3
+sleep 4
 should 'should app been restarted when cron in cluster mode' 'restart_time: 0' 0
 cat mock.log | grep "SIGINT"
 spec "2# Should cron exit call SIGINT handler"
@@ -63,7 +63,7 @@ $pm2 delete all
 ## No exit
 
 $pm2 start cron/mock-cron-no-exit.js -o mock.log
-sleep 3
+sleep 4
 should 'should app been restarted' 'restart_time: 0' 0
 cat mock.log | grep "SIGINT"
 spec "3# Should cron exit call SIGINT handler"
