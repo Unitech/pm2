@@ -1,4 +1,24 @@
 
+## 4.3.0
+
+- feature: reduce by 1/3 pm2 package size (drop moment, lodash)
+- feature: pm2 start app.js --filter-env NODE_ENV #4596
+- feature: print logs of a particular namespace #4517 @bvsubhash
+- feature: trigger all the process using 'all' or trigger all processes in a particular namespace #4518 @bvsubhash
+- feature: support ecosystem.config.cjs #4662 @Timic3
+- fix: disable log (--error /dev/null --output /dev/null) on Windows #4560 @codpot
+- fix: pm2 install <tar_file> adaptation #4593 @adunkey
+- fix: add type for pm2.reload with optional options parameter #4615 @kevindoveton
+- fix: add `ignore_watch` to StartOptions types #4629 @jlvcm
+- fix: fix --cwd CLI option description #4639 @warpdesign
+- fix: do not require cron if not necessary in CLI
+- fix: upgrade mkdirp to 1.0.4 (sec vuln) #4638
+- chore: bump mocha to latest + drop mocha.opts + add .mocharc.yml
+- chore: pm2 init ecosyst file template changes
+- chore: pm2-deploy@1.0.2 (revert fix)
+- chore: pm2-io-apm@4.3.4 (instant trace + broadcast trace threshold + boolean metrics support)
+
+
 ## 4.2.3
 
 - fix: Fix an import error on Node 9.x
