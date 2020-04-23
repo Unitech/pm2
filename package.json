@@ -192,7 +192,6 @@
     "promptly": "^2",
     "ps-list": "6.3.0",
     "semver": "^7.2",
-    "shelljs": "shelljs/shelljs",
     "source-map-support": "0.5.16",
     "sprintf-js": "1.1.2",
     "vizion": "0.2.13",

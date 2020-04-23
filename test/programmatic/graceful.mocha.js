@@ -6,6 +6,7 @@ var should = require('should');
 var path   = require('path');
 var Plan   = require('../helpers/plan.js');
 var semver = require('semver');
+var sexec = require('../../lib/tools/sexec.js')
 
 process.chdir(__dirname);
 
@@ -53,7 +54,7 @@ describe('Wait ready / Graceful start / restart', function() {
         })
       }, 1500);
     });
-    
+
     it('should have listen timeout updated', function(done) {
       pm2.list(function(err, list) {
         should(list[0].pm2_env.wait_ready).eql(true);
@@ -175,17 +176,17 @@ describe('Wait ready / Graceful start / restart', function() {
     });
 
   });
-  
+
   describe('(Cluster): Wait ready feature', function () {
     this.timeout(10000);
-  
+
     after(function(done) {
       pm2.delete('all', done);
     });
-    
+
     it('Should send SIGINT right after ready and not wait for listen timeout', function(done) {
       const plan = new Plan(2, done);
-      
+
       pm2.start({
         script         : './wait-ready.js',
         listen_timeout : 5000,
@@ -197,13 +198,12 @@ describe('Wait ready / Graceful start / restart', function() {
         if (error) {
           return done(error);
         }
-        const exec = require('shelljs').exec;
         const oldPid = result[0].process.pid;
         plan.ok(typeof oldPid !== 'undefined');
-        
+
         pm2.reload('echo', {}, done);
         setTimeout(function() {
-          exec(`ps -eo pid | grep -w ${oldPid}`, (err, res) => {
+          sexec(`ps -eo pid | grep -w ${oldPid}`, (err, res) => {
             plan.ok(err === 1);
           })
         }, 2000);
