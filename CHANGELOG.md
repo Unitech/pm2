@@ -1,3 +1,10 @@
+## 4.4.0
+
+- feature: support Node v14.0
+
+## 4.3.1
+
+- fix: downgrade vizion
 
 ## 4.3.0
 
