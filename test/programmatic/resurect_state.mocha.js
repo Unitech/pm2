@@ -7,7 +7,7 @@ var fs     = require('fs');
 var cst = require('../../constants.js');
 var Configuration = require('../../lib/Configuration.js');
 
-describe('Keep state on pm2 update', function() {
+describe.skip('Keep state on pm2 update', function() {
   var pm2
 
   before((done) => {
