@@ -19,6 +19,7 @@ var path_structure = require('./paths.js')(process.env.OVER_HOME);
  */
 var csts = {
   PREFIX_MSG              : chalk.green('[PM2] '),
+  PREFIX_MSG_INFO         : chalk.cyan('[PM2][INFO] '),
   PREFIX_MSG_ERR          : chalk.red('[PM2][ERROR] '),
   PREFIX_MSG_MOD          : chalk.bold.green('[PM2][Module] '),
   PREFIX_MSG_MOD_ERR      : chalk.red('[PM2][Module][ERROR] '),
