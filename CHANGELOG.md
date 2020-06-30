@@ -1,4 +1,8 @@
 
+## 4.5.0
+
+- feature: On pm2 start or restart, display logs in terminal for 10 seconds #4765
+
 ## 4.4.1
 
 - feature drop: autodump fixes #4763
