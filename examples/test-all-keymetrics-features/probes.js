@@ -1,8 +1,6 @@
 
 
-var axm = require('@pm2/io');
-
-var probe = axm.probe();
+var io = require('@pm2/io');
 
 var users = {
   'alex'  : 'ok',
@@ -12,7 +10,7 @@ var users = {
 /**
  * Monitor synchronous return of functions
  */
-var rt_users = probe.metric({
+var rt_users = io.metric({
   name : 'Realtime user',
   value : function() {
     return Object.keys(users).length;
@@ -22,7 +20,7 @@ var rt_users = probe.metric({
 /**
  * Monitor value
  */
-var cheerio = probe.metric({
+var cheerio = io.metric({
   name : 'Cheerio',
   value : true
 });
@@ -30,7 +28,7 @@ var cheerio = probe.metric({
 /**
  * Meter for HTTP
  */
-var meter = probe.meter({
+var meter = io.meter({
   name    : 'req/min',
   seconds : 60
 });
@@ -46,7 +44,7 @@ http.createServer(function(req, res) {
  * Meter example
  */
 
-var meter2 = probe.meter({
+var meter2 = io.meter({
   name    : 'random',
   seconds : 1
 });
@@ -65,7 +63,7 @@ setTimeout(function() {
  * Counter
  */
 
-var counter = probe.counter({
+var counter = io.counter({
   name : 'Downloads'
 });
 
@@ -74,19 +72,10 @@ counter.dec();
 counter.inc();
 counter.inc();
 
-console.log(cheerio.val());
-setInterval(function() {
-  console.log(counter.val());
-  console.log(meter.val());
-  console.log(meter2.val());
-  console.log(rt_users.val());
-  console.log(cheerio.val());
-}, 1500);
-
 
 //axm.catchAll();
 
-axm.action('throw error', function(reply) {
+io.action('throw error', function(reply) {
   setTimeout(function() {
     console.log('log message from echo auto kill');
     throw new Error('Exitasdsadasdsda unacepted 222222 !!');
@@ -94,17 +83,17 @@ axm.action('throw error', function(reply) {
 });
 
 
-axm.action('dec', function(reply) {
+io.action('dec', function(reply) {
   counter.dec();
   reply({success : true});
 });
 
-axm.action('inc', function(reply) {
+io.action('inc', function(reply) {
   counter.inc();
   reply({success : true});
 });
 
-axm.action('do:query', function(reply) {
+io.action('do:query', function(reply) {
   var options = {
     hostname : '127.0.0.1',
     port     : 5005,
