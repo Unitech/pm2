@@ -1,4 +1,14 @@
 
+## 4.5.0
+
+- fix: creating log folder in sync mode. #4846 - PR #4844 by @QS20199
+- fix: PM2 unable to run ESM packages: ERR_UNSUPPORTED_ESM_URL_SCHEME #4839 - PR #4841 by @ox-harris
+- fix: Use opts.namespace if it was passed in. Previously, it was ignored. #4778 - PR #4791 by @sbleon
+- fix: Prevent reloadLogs command from hanging. #4781 - PR #4782 by @mbrooks and Franck Danard
+- fix: backward compatibility fix for tarball modules - PR #4767 by @ykolbin
+- fix: Operation not permitted on call setgid #2957 - PR #4681 by @guard43ru
+- chore: upgrade dependencies
+
 ## 4.4.1
 
 - feature drop: autodump fixes #4763
