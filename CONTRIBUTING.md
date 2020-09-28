@@ -86,10 +86,10 @@ This test files are located in test/programmatic/*
 Behavioral tests are runned by doing:
 
 ```
-$ bash test/pm2_behavior_tests.sh
+$ bash test/e2e.sh
 ```
 
-This test files are located in test/bash/*
+This test files are located in test/e2e/*
 
 ## File of interest
 
