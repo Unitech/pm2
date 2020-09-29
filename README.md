@@ -9,6 +9,10 @@
   <i>Runtime Edition</i>
 <br/><br/>
 
+<a href="https://img.shields.io/npm/dm/pm2" title="PM2 Tests">
+  <img src="https://img.shields.io/npm/dm/pm2" alt="Downloads per Month"/>
+</a>
+
 <a href="https://badge.fury.io/js/pm2" title="NPM Version Badge">
    <img src="https://badge.fury.io/js/pm2.svg" alt="npm version">
 </a>
@@ -20,7 +24,6 @@
 <a href="https://travis-ci.org/Unitech/pm2" title="PM2 Tests">
   <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
-
 
 <br/>
 <br/>
@@ -42,7 +45,6 @@ Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
 Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 8.X.
 
-[![NPM](https://nodei.co/npm/pm2.png?downloads=true&downloadRank=true)](https://nodei.co/npm/pm2/)
 
 ### Installing PM2
 
@@ -67,8 +69,6 @@ $ pm2 start app.js
 ```
 
 Your app is now daemonized, monitored and kept alive forever.
-
-[More about Process Management](https://pm2.keymetrics.io/docs/usage/quick-start/)
 
 ### Managing Applications
 
@@ -102,7 +102,8 @@ To monitor logs, custom metrics, application information:
 $ pm2 monit
 ```
 
-[More about Application Management](https://pm2.keymetrics.io/docs/usage/quick-start/)
+
+[More about Process Management](https://pm2.keymetrics.io/docs/usage/process-management/)
 
 ### Cluster Mode: Node.js Load Balancing & Zero Downtime Reload
 
@@ -126,7 +127,7 @@ $ pm2 reload all
 
 Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
 
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/development/pres/cluster-support.png)
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/cluster-support.png)
 
 [More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 
@@ -221,6 +222,9 @@ $ pm2 update
 ## PM2+ Monitoring
 
 If you manage your apps with PM2, PM2+ makes it easy to monitor and manage apps across servers.
+
+![https://app.pm2.io/](https://pm2.io/img/app-overview.png)
+
 Feel free to try it:
 
 [Discover the monitoring dashboard for PM2](https://app.pm2.io/)
