@@ -46,51 +46,50 @@ reset
 touch unit_time
 > unit_time
 
-cd test/programmatic
-
+D=test/programmatic
 
 # Abort script at first error
 # set -e
 
-runUnitTest ./filter_env.mocha.js
-runUnitTest ./resurect_state.mocha.js
-runUnitTest ./programmatic.js
-runUnitTest ./namespace.mocha.js
-runUnitTest ./instances.mocha.js
-runUnitTest ./containerizer.mocha.js
-runUnitTest ./api.mocha.js
-runUnitTest ./path_resolution.mocha.js
-runUnitTest ./lazy_api.mocha.js
-runUnitTest ./reload-locker.mocha.js
-runUnitTest ./auto_restart.mocha.js
-runUnitTest ./version.mocha.js
-runUnitTest ./exp_backoff_restart_delay.mocha.js
-runUnitTest ./api.backward.compatibility.mocha.js
-runUnitTest ./custom_action.mocha.js
-runUnitTest ./logs.js
-runUnitTest ./watcher.js
-runUnitTest ./max_memory_limit.js
-runUnitTest ./cluster.mocha.js
-runUnitTest ./graceful.mocha.js
-runUnitTest ./inside.mocha.js
-runUnitTest ./misc_commands.js
-runUnitTest ./signals.js
-runUnitTest ./send_data_process.mocha.js
-runUnitTest ./modules.mocha.js
-runUnitTest ./json_validation.mocha.js
-runUnitTest ./env_switching.js
-runUnitTest ./configuration.mocha.js
-runUnitTest ./id.mocha.js
-runUnitTest ./god.mocha.js
-runUnitTest ./dump.mocha.js
+runUnitTest $D/filter_env.mocha.js
+runUnitTest $D/resurect_state.mocha.js
+runUnitTest $D/programmatic.js
+runUnitTest $D/namespace.mocha.js
+runUnitTest $D/instances.mocha.js
+runUnitTest $D/containerizer.mocha.js
+runUnitTest $D/api.mocha.js
+runUnitTest $D/path_resolution.mocha.js
+runUnitTest $D/lazy_api.mocha.js
+runUnitTest $D/reload-locker.mocha.js
+runUnitTest $D/auto_restart.mocha.js
+runUnitTest $D/version.mocha.js
+runUnitTest $D/exp_backoff_restart_delay.mocha.js
+runUnitTest $D/api.backward.compatibility.mocha.js
+runUnitTest $D/custom_action.mocha.js
+runUnitTest $D/logs.js
+runUnitTest $D/watcher.js
+runUnitTest $D/max_memory_limit.js
+runUnitTest $D/cluster.mocha.js
+runUnitTest $D/graceful.mocha.js
+runUnitTest $D/inside.mocha.js
+runUnitTest $D/misc_commands.js
+runUnitTest $D/signals.js
+runUnitTest $D/send_data_process.mocha.js
+runUnitTest $D/modules.mocha.js
+runUnitTest $D/json_validation.mocha.js
+runUnitTest $D/env_switching.js
+runUnitTest $D/configuration.mocha.js
+runUnitTest $D/id.mocha.js
+runUnitTest $D/god.mocha.js
+runUnitTest $D/dump.mocha.js
 
-runUnitTest ./issues/json_env_passing_4080.mocha.js
+runUnitTest $D/issues/json_env_passing_4080.mocha.js
 
-cd ../interface
+D=test/interface
 
-runUnitTest ./bus.spec.mocha.js
-runUnitTest ./bus.fork.spec.mocha.js
-runUnitTest ./utility.mocha.js
+runUnitTest $D/bus.spec.mocha.js
+runUnitTest $D/bus.fork.spec.mocha.js
+runUnitTest $D/utility.mocha.js
 
 echo "============== unit test finished =============="
 cat unit_time
