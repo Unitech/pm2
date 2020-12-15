@@ -178,7 +178,7 @@
     "commander": "2.15.1",
     "cron": "1.8.2",
     "dayjs": "~1.8.25",
-    "debug": "^4.2.0",
+    "debug": "^4.3.0",
     "enquirer": "2.3.6",
     "eventemitter2": "5.0.1",
     "fclone": "1.0.11",
