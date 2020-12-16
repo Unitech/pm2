@@ -13,12 +13,12 @@
   <img src="https://img.shields.io/npm/dm/pm2" alt="Downloads per Month"/>
 </a>
 
-<a href="https://badge.fury.io/js/pm2" title="NPM Version Badge">
-   <img src="https://badge.fury.io/js/pm2.svg" alt="npm version">
+<a href="https://npm-stat.com/charts.html?package=pm2&from=2015-10-09&to=2020-10-09" title="PM2 Downloads">
+  <img src="https://img.shields.io/npm/dy/pm2" alt="Downloads per Year"/>
 </a>
 
-<a href="https://img.shields.io/node/v/pm2.svg" title="Node Limitation">
-   <img src="https://img.shields.io/node/v/pm2.svg" alt="node version">
+<a href="https://badge.fury.io/js/pm2" title="NPM Version Badge">
+   <img src="https://badge.fury.io/js/pm2.svg" alt="npm version">
 </a>
 
 <a href="https://travis-ci.org/Unitech/pm2" title="PM2 Tests">

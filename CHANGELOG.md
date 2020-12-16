@@ -1,4 +1,16 @@
 
+## 4.5.1
+
+- fix: cron in cluster mode was not restarting process after one pass - fixes #4834 #4733 #4307 #4834
+- fix: restore --sort <param> option on `pm2 ls` - fix #4536
+- fix: fix tests with npm7
+- fix: restore warning message about process list changed and not dumped
+- chore: alias `--cron` with `--cron-restart`
+- chore: test PM2 againt Node.js 15.x
+- chore: upgrade systeminformation and debug module to latest - PR #4892 by @AdamMajer
+- chore: drop Node 9.x from travis testing
+- chore: remove ps-list module
+
 ## 4.5.0
 
 - fix: creating log folder in sync mode. #4846 - PR #4844 by @QS20199

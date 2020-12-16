@@ -160,10 +160,10 @@
     "dev ops"
   ],
   "bin": {
-    "pm2": "./bin/pm2",
-    "pm2-dev": "./bin/pm2-dev",
-    "pm2-docker": "./bin/pm2-docker",
-    "pm2-runtime": "./bin/pm2-runtime"
+    "pm2": "bin/pm2",
+    "pm2-dev": "bin/pm2-dev",
+    "pm2-docker": "bin/pm2-docker",
+    "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
     "@pm2/agent": "~1.0.2",
@@ -202,7 +202,7 @@
     "should": "^13"
   },
   "optionalDependencies": {
-    "systeminformation": "^4.30"
+    "systeminformation": "^4.32"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
