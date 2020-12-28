@@ -1240,12 +1240,12 @@ New builtin metrics when starting a Node.js application:
 - #438 allow to override daemon config paths via env (example: `PM2_PID_FILE_PATH` to override pid file of the daemon)
 - #2849 better gentoo template for pm2 startup
 - #2868 allow tailing log with `--raw` flag
-- #452 Add `PM2_WEB_STRIP_ENV_VARS` to remove environnement vars from `pm2 web` endpoint
+- #452 Add `PM2_WEB_STRIP_ENV_VARS` to remove environment vars from `pm2 web` endpoint
 - #2890 Fix wait-ready for cluster mode
 - #2906 randomize machine name with default pm2 link
 - #2888 allow to use regex for pm2 logs
 - #2045 allow to rename NODE_APP_INSTANCE env variable
-- #2809 add `increment_var` options to ask for a environnement variable to be incremented for each application started
+- #2809 add `increment_var` options to ask for a environment variable to be incremented for each application started
 - more informations when failing to deploy on custom ecosystem file
 - fix tests for node 8
 - fix missing callback when overriding console.log
