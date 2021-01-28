@@ -1,4 +1,8 @@
 
+## 4.5.2
+
+- bump @pm2/js-api
+
 ## 4.5.1
 
 - fix: cron in cluster mode was not restarting process after one pass - fixes #4834 #4733 #4307 #4834
