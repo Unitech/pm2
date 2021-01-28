@@ -194,6 +194,7 @@
     "semver": "^7.2",
     "source-map-support": "0.5.19",
     "sprintf-js": "1.1.2",
+    "systeminformation": "^4.32",
     "vizion": "0.2.13",
     "yamljs": "0.3.0"
   },
