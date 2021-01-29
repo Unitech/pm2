@@ -166,14 +166,14 @@
     "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "~1.0.2",
+    "@pm2/agent": "~1.0.4",
     "@pm2/io": "~4.3.5",
-    "@pm2/js-api": "~0.6.0",
+    "@pm2/js-api": "~0.6.7",
     "@pm2/pm2-version-check": "latest",
     "async": "~3.2.0",
     "blessed": "0.1.81",
     "chalk": "3.0.0",
-    "chokidar": "^3.3.0",
+    "chokidar": "^3.5.1",
     "cli-tableau": "^2.0.0",
     "commander": "2.15.1",
     "cron": "1.8.2",
@@ -194,7 +194,7 @@
     "semver": "^7.2",
     "source-map-support": "0.5.19",
     "sprintf-js": "1.1.2",
-    "vizion": "~2.2.0",
+    "vizion": "~2.2.1",
     "yamljs": "0.3.0"
   },
   "devDependencies": {

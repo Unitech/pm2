@@ -9,11 +9,11 @@
   <i>Runtime Edition</i>
 <br/><br/>
 
-<a href="https://npm-stat.com/charts.html?package=pm2&from=2015-10-09&to=2020-10-09" title="PM2 Downloads">
+<a href="https://npm-stat.com/charts.html?package=pm2&from=2015-10-09" title="PM2 Downloads">
   <img src="https://img.shields.io/npm/dm/pm2" alt="Downloads per Month"/>
 </a>
 
-<a href="https://npm-stat.com/charts.html?package=pm2&from=2015-10-09&to=2020-10-09" title="PM2 Downloads">
+<a href="https://npm-stat.com/charts.html?package=pm2&from=2015-10-09" title="PM2 Downloads">
   <img src="https://img.shields.io/npm/dy/pm2" alt="Downloads per Year"/>
 </a>
 
