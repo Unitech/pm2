@@ -1,4 +1,9 @@
 
+## 4.5.3
+
+- bump vizion from 0.2.13 to 2.2.1 (Snyk CVE)
+- bump chokidar to 3.5.1
+
 ## 4.5.2
 
 - bump @pm2/js-api
