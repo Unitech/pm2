@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "4.5.3",
+  "version": "4.5.4",
   "engines": {
     "node": ">=8.10.0"
   },
@@ -194,7 +194,6 @@
     "semver": "^7.2",
     "source-map-support": "0.5.19",
     "sprintf-js": "1.1.2",
-    "systeminformation": "^4.32",
     "vizion": "2.2.1",
     "yamljs": "0.3.0"
   },
