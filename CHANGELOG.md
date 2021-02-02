@@ -1,4 +1,8 @@
 
+## 4.5.4
+
+- drop non used package
+
 ## 4.5.3
 
 - bump vizion from 0.2.13 to 2.2.1 (Snyk CVE)
