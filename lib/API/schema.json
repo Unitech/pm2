@@ -297,7 +297,7 @@
     "docDescription": "Rename the NODE_APP_INSTANCE environment variable"
   },
   "pmx": {
-    "type": "boolean",
+    "type": ["boolean", "string"],
     "default": true,
     "docDefault": "True",
     "docDescription": "Enable or disable pmx wrapping"

@@ -1,9 +1,9 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "4.5.4",
+  "version": "5.0.0",
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10.0.0"
   },
   "directories": {
     "bin": "./bin",
@@ -166,7 +166,7 @@
     "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "~1.0.4",
+    "@pm2/agent": "keymetrics/pm2-io-agent#development",
     "@pm2/io": "~4.3.5",
     "@pm2/js-api": "~0.6.7",
     "@pm2/pm2-version-check": "latest",
@@ -194,16 +194,12 @@
     "ps-list": "6.3.0",
     "semver": "^7.2",
     "source-map-support": "0.5.19",
-    "systeminformation": "^4.32",
-    "vizion": "2.2.1",
+    "vizion": "~2.2.1",
     "yamljs": "0.3.0"
   },
   "devDependencies": {
     "mocha": "^7.1.0",
     "should": "^13"
-  },
-  "optionalDependencies": {
-    "systeminformation": "^4.32"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
