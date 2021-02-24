@@ -194,6 +194,7 @@
     "semver": "^7.2",
     "source-map-support": "0.5.19",
     "sprintf-js": "1.1.2",
+    "systeminformation": "^5.4.0",
     "vizion": "2.2.1",
     "yamljs": "0.3.0"
   },
@@ -202,7 +203,7 @@
     "should": "^13"
   },
   "optionalDependencies": {
-    "systeminformation": "^4.32"
+    "systeminformation": "^5.4.0"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
