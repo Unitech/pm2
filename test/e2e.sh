@@ -77,7 +77,7 @@ runTest ./test/e2e/internals/start-consistency.sh
 # MISC
 runTest ./test/e2e/misc/inside-pm2.sh
 runTest ./test/e2e/misc/vizion.sh
-runTest ./test/e2e/misc/sysinfos.sh
+#runTest ./test/e2e/misc/sysinfos.sh
 runTest ./test/e2e/misc/misc.sh
 runTest ./test/e2e/misc/versioning-cmd.sh
 runTest ./test/e2e/misc/instance-number.sh
