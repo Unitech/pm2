@@ -408,6 +408,11 @@ export interface StartOptions {
    * already running). If force is set to true, pm2 will start a new instance of that script.
    */
   force?: boolean;
+  /**
+   * (Default: true) If false, pm2 will not attempt to restart it following successful completion or process failure.
+   * Otherwise, it will restarts endlessly, if max_restarts not set.
+   */
+  autorestart?: boolean;
   ignore_watch?: string[];
   cron?: any;
   execute_command?: any;
