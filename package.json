@@ -2,7 +2,6 @@
   "name": "pm2",
   "preferGlobal": true,
   "version": "5.0.0",
-  "version": "4.5.5",
   "engines": {
     "node": ">=10.0.0"
   },
@@ -188,7 +187,7 @@
     "needle": "2.4.0",
     "pidusage": "2.0.21",
     "pm2-axon": "~4.0.0",
-    "pm2-axon-rpc": "~0.7.0",
+    "pm2-axon-rpc": "0.7.0",
     "pm2-deploy": "~1.0.2",
     "pm2-multimeter": "^0.1.2",
     "pm2-sysmonit": "^1.2.3",
