@@ -187,7 +187,7 @@
     "needle": "2.4.0",
     "pidusage": "2.0.21",
     "pm2-axon": "~4.0.1",
-    "pm2-axon-rpc": "~0.7.0",
+    "pm2-axon-rpc": "~0.7.1",
     "pm2-deploy": "~1.0.2",
     "pm2-multimeter": "^0.1.2",
     "pm2-sysmonit": "^1.2.3",
@@ -199,8 +199,8 @@
     "yamljs": "0.3.0"
   },
   "devDependencies": {
-    "mocha": "^7.1.0",
-    "should": "^13"
+    "mocha": "^8.3.2",
+    "should": "^13.2.3"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
