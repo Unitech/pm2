@@ -214,7 +214,7 @@ $ npm install pm2@latest -g
 $ pm2 update
 ```
 
-_PM2 updates are seamless_
+*PM2 updates are seamless*
 
 ## PM2+ Monitoring
 
