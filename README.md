@@ -30,8 +30,7 @@
 <br/>
 </div>
 
-
-PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
+PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, reload them without downtime, and facilitate common system admin tasks.
 
 Starting an application in production mode is as easy as:
 
@@ -44,7 +43,6 @@ PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unite
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
 Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 8.X.
-
 
 ### Installing PM2
 
@@ -68,7 +66,7 @@ You can start any application (Node.js, Python, Ruby, binaries in $PATH...) like
 $ pm2 start app.js
 ```
 
-Your app is now daemonized, monitored and kept alive forever.
+Your app is now daemonized, monitored and remained alive forever.
 
 ### Managing Applications
 
@@ -102,12 +100,11 @@ To monitor logs, custom metrics, application information:
 $ pm2 monit
 ```
 
-
 [More about Process Management](https://pm2.keymetrics.io/docs/usage/process-management/)
 
 ### Cluster Mode: Node.js Load Balancing & Zero Downtime Reload
 
-The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
+The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increases overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
 
 Starting a Node.js application in cluster mode that will leverage all CPUs available:
 
@@ -129,7 +126,7 @@ Seamlessly supported by all major Node.js frameworks and any Node.js application
 
 ![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/cluster-support.png)
 
-[More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
+[More information about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 
 ### Container Support
 
@@ -178,7 +175,7 @@ $ pm2 reloadLogs          # Reload all logs
 
 ### Startup Scripts Generation
 
-PM2 can generates and configure a Startup Script to keep PM2 and your processes alive at every server restart.
+PM2 can generate and configure a Startup Script to keep PM2 and your processes alive at every server restart.
 
 Init Systems Supported: **systemd**, **upstart**, **launchd**, **rc.d**
 
@@ -217,7 +214,7 @@ $ npm install pm2@latest -g
 $ pm2 update
 ```
 
-*PM2 updates are seamless*
+_PM2 updates are seamless_
 
 ## PM2+ Monitoring
 
