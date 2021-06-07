@@ -1,4 +1,78 @@
 
+## 5.0.0
+
+### System Monitoring
+
+A new local system monitoring feature has been added, allowing to monitor numerous vital server metrics.
+
+Most important metrics will be displayed when doing a pm2 ls:
+
+```bash
+┌─────┬─────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id  │ name            │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├─────┼─────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 4   │ app             │ default     │ 1.0.0   │ fork    │ 164618   │ 2s     │ 1670 │ online    │ 0%       │ 41.8mb   │ unitech  │ disabled │
+└─────┴─────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 1.6% 42.9º | mem free: 52.0% | wlp0s20f3: ⇓ 0mb/s ⇑ 0mb/s | disk: ⇓ 0.199mb/s ⇑ 0mb/s /dev/nvme0n1p3 88.25% |
+```
+
+All server metrics will be available to pm2.io:
+
+```
+┌─────────────────────────────┬──────────────────────────────────┐
+│ PM2 CPU Usage               │ 0.0 %                            │
+│ PM2 Memory Usage            │ 67.4 mb                          │
+│ PM2 Agent CPU Usage         │ 0 %                              │
+│ PM2 Agent Memory Usage      │ 0 mb                             │
+│ CPU Usage                   │ 1.5 %                            │
+│ CPUs Usage                  │ 0|0|0|0|2|0|0|1|0|0|0|1|0|1|2|8  │
+│ CPU Temperature             │ 42.9 °C                          │
+│ RAM Total                   │ 15.34 gb                         │
+│ RAM Free                    │ 1.18 gb                          │
+│ RAM Active                  │ 7.35 gb                          │
+│ RAM Available               │ 7.99 gb                          │
+│ RAM Usage                   │ 47.9 %                           │
+│ FD Opened                   │ 15072                            │
+│ Disk Writes                 │ 0 mb/s                           │
+│ Disk Reads                  │ 0.24 mb/s                        │
+│ Disk Usage                  │ 88.25 %                          │
+│ Disk Size                   │ 465.60 gb                        │
+│ Total TX                    │ 0.005 mb/s                       │
+│ Total RX                    │ 0.004 mb/s                       │
+│ fs:use:/dev/nvme0n1p3       │ 88.25 %                          │
+│ fs:size:/dev/nvme0n1p3      │ 465.60 gb                        │
+│ net:tx_5:wlp0s20f3          │ 0.005 mb/s                       │
+│ net:rx_5:wlp0s20f3          │ 0.004 mb/s                       │
+│ net:rx_errors_60:wlp0s20f3  │ 0 /min                           │
+│ net:tx_errors_60:wlp0s20f3  │ 0 /min                           │
+│ net:rx_dropped_60:wlp0s20f3 │ 0 /min                           │
+│ net:tx_dropped_60:wlp0s20f3 │ 0 /min                           │
+│ graphics:mem:total          │ 3878 mb                          │
+│ graphics:mem:used           │ 1260 mb                          │
+│ graphics:temp               │ 46 °C                            │
+└─────────────────────────────┴──────────────────────────────────┘
+```
+
+#### Disabling system monitoring
+
+```
+# Disable system monitoring
+pm2 set pm2:sysmonit false
+# Enable system monitoring
+pm2 set pm2:sysmonit true
+```
+
+### PM2.io bandwidth reduction
+
+Data quantity sent from PM2 to PM2.io has been reduced by 80%, thanks for a json patch differential system. Much more data can now be exposed (metrics, actions) to PM2.io
+
+### Other fixes
+
+- feat: added args and full script path to monitoring data
+- fix: regular local ip check
+- fix: pm2 agent watchdog has been consolidated and fixes freezing issues
+- fix: modules bumped
+
 ## 4.5.6
 
 - all submodules version bumped
