@@ -1,5 +1,5 @@
 
-## 5.0.1
+## 5.0.1/5.0.2
 
 - fix npm install --no-optional pm2
 
