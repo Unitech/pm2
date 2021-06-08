@@ -1,4 +1,8 @@
 
+## 5.0.1
+
+- fix npm install --no-optional pm2
+
 ## 5.0.0
 
 ### System Monitoring
