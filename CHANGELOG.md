@@ -1,4 +1,9 @@
 
+## 5.1.0
+
+- add back Node 10.x support
+- make pm2-sysmonit module optional
+
 ## 5.0.3
 
 - skip system monitoring on Windows
