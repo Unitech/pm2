@@ -106,6 +106,42 @@ describe('PM2 BUS / RPC', function() {
       });
     });
 
+    it('should (process:event -> restart) when autorestart occurs', function(done) {
+      var plan = new Plan(2, done);
+
+      pm2_bus.on('*', function(event, data) {
+        if (event == 'process:event' && data.event == 'restart') {
+          event.should.eql('process:event');
+          data.event.should.eql('restart');
+          data.should.have.properties(PROCESS_EVENT);
+          data.process.should.have.properties(PROCESS_ARCH);
+          plan.ok(true);
+        }
+      });
+
+      pm2.start('./process_exception.js', {autorestart : true, instances : 1, max_restarts : 3}, function(err, data) {
+        should(err).be.null;
+      });
+    });
+
+    it('should (process:event -> restart overlimit) when autorestart hits max_restarts', function(done) {
+      var plan = new Plan(1, done);
+
+      pm2_bus.on('*', function(event, data) {
+        if (event == 'process:event' && data.event == 'restart overlimit') {
+          event.should.eql('process:event');
+          data.event.should.eql('restart overlimit');
+          data.should.have.properties(PROCESS_EVENT);
+          data.process.should.have.properties(PROCESS_ARCH);
+          plan.ok(true);
+        }
+      });
+
+      pm2.start('./process_exception.js', {autorestart : true, instances : 1, max_restarts : 3}, function(err, data) {
+        should(err).be.null;
+      });
+    });
+
     it('should (log:out log:err)', function(done) {
       var plan = new Plan(2, done);
 
