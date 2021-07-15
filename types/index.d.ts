@@ -197,6 +197,7 @@ export interface Proc {
   name?: string;
   vizion?: boolean;
   autorestart?: boolean;
+  stop_exit_codes?: number[];
   exec_mode?: string;
   exec_interpreter?: string;
   pm_exec_path?: string;
