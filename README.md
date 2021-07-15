@@ -22,7 +22,7 @@
    <img src="https://badge.fury.io/js/pm2.svg" alt="npm version">
 </a>
 
-<a href="https://travis-ci.org/Unitech/pm2" title="PM2 Tests">
+<a href="https://travis-ci.com/github/Unitech/pm2" title="PM2 Tests">
   <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
