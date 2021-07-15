@@ -433,9 +433,9 @@ interface ReloadOptions {
 type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status';
 type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
 
-type ErrCallback = (err: Error) => void;
-type ErrProcCallback = (err: Error, proc: Proc) => void;
-type ErrProcDescCallback = (err: Error, processDescription: ProcessDescription) => void;
-type ErrProcDescsCallback = (err: Error, processDescriptionList: ProcessDescription[]) => void;
-type ErrResultCallback = (err: Error, result: any) => void;
-type ErrBusCallback = (err: Error, bus: any) => void;
+type ErrCallback = (err: Error | null) => void;
+type ErrProcCallback = (err: Error | null, proc: Proc) => void;
+type ErrProcDescCallback = (err: Error | null, processDescription: ProcessDescription) => void;
+type ErrProcDescsCallback = (err: Error | null, processDescriptionList: ProcessDescription[]) => void;
+type ErrResultCallback = (err: Error | null, result: any) => void;
+type ErrBusCallback = (err: Error | null, bus: any) => void;
