@@ -55,11 +55,7 @@ With NPM:
 $ npm install pm2 -g
 ```
 
-Or if you don't have Node.js installed:
-
-```bash
-wget -qO- https://getpm2.com/install.sh | bash
-```
+You can install Node.js easily with [NVM](https://riptutorial.com/node-js/example/4578/using-node-version-manager--nvm-) or [ASDF](https://blog.natterstefan.me/how-to-use-multiple-node-version-with-asdf)
 
 ### Start an application
 
