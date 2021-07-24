@@ -3,10 +3,6 @@ var should = require('should');
 var PM2    = require('../..');
 var Plan   = require('../helpers/plan.js');
 
-if (require('semver').lt(process.version, '6.0.0')) {
-  return process.exit(0)
-}
-
 const PATH_FIXTURES = process.cwd() + '/test/interface/fixtures/';
 
 var PROCESS_ARCH  = Object.keys({

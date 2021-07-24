@@ -5,15 +5,11 @@ var PM2    = require('../..');
 var should = require('should');
 var path   = require('path');
 var Plan   = require('../helpers/plan.js');
-var semver = require('semver');
 var sexec = require('../../lib/tools/sexec.js')
 
 process.chdir(__dirname);
 
 describe('Wait ready / Graceful start / restart', function() {
-  if (!semver.satisfies(process.version, '>= 4.0.0'))
-    process.exit(0);
-
   this.retries(2)
 
   var pm2 = new PM2.custom({
