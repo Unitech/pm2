@@ -302,6 +302,10 @@ interface Pm2Env {
    * The path of the script being run in this process.
    */
   pm_exec_path?: string;
+  /**
+   * The arguments passed to the executable
+   */
+  args?: string;
 }
 
 export interface StartOptions {
