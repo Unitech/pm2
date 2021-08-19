@@ -1,4 +1,8 @@
 
+## 5.1.1
+
+- remove fast-printf and replace with sprintfjs
+
 ## 5.1.0
 
 - add back Node 10.x support
