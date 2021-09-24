@@ -1,4 +1,9 @@
 
+## 5.1.2
+
+- easily disable cron-restart strategy via `$ pm2 restart --cron-restart 0`
+- allow to update cron-restart on restart
+
 ## 5.1.1
 
 - remove fast-printf and replace with sprintfjs
