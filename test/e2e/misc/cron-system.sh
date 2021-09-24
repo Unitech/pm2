@@ -66,3 +66,20 @@ sleep 4
 should 'should app been restarted' 'restart_time: 0' 0
 
 $pm2 delete all
+
+#
+# Cron every sec
+#
+$pm2 start cron.js -c "* * * * * *"
+sleep 4
+should 'should app been restarted' 'restart_time: 0' 0
+
+#
+# Delete cron
+#
+$pm2 restart cron --cron-restart 0
+$pm2 reset all
+sleep 2
+should 'app stop be restarted' 'restart_time: 0' 1
+
+$pm2 delete all

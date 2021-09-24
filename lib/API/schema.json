@@ -168,7 +168,10 @@
     "docDescription": "Time in ms before forcing a reload if app is still not listening/has still note sent ready"
   },
   "cron_restart": {
-    "type": "string",
+    "type": [
+      "string",
+      "number"
+    ],
     "alias": "cron",
     "docDescription": "A cron pattern to restart your app"
   },
