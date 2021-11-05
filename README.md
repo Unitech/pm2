@@ -191,7 +191,7 @@ $ pm2 install pm2-logrotate
 
 ### Startup Scripts Generation
 
-PM2 can generates and configure a Startup Script to keep PM2 and your processes alive at every server restart.
+PM2 can generate and configure a Startup Script to keep PM2 and your processes alive at every server restart.
 
 Init Systems Supported: **systemd**, **upstart**, **launchd**, **rc.d**
 
