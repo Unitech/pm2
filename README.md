@@ -9,11 +9,12 @@
   <i>Runtime Edition</i>
 <br/><br/>
 
-<a href="https://npm-stat.com/charts.html?package=pm2&from=2015-10-09" title="PM2 Downloads">
+
+<a title="PM2 Downloads">
   <img src="https://img.shields.io/npm/dm/pm2" alt="Downloads per Month"/>
 </a>
 
-<a href="https://npm-stat.com/charts.html?package=pm2&from=2015-10-09" title="PM2 Downloads">
+<a title="PM2 Downloads">
   <img src="https://img.shields.io/npm/dy/pm2" alt="Downloads per Year"/>
 </a>
 
@@ -21,7 +22,7 @@
    <img src="https://badge.fury.io/js/pm2.svg" alt="npm version">
 </a>
 
-<a href="https://travis-ci.org/Unitech/pm2" title="PM2 Tests">
+<a href="https://travis-ci.com/github/Unitech/pm2" title="PM2 Tests">
   <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
@@ -39,7 +40,7 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 1800 tests](https://travis-ci.org/Unitech/pm2).
+PM2 is constantly assailed by [more than 1800 tests](https://app.travis-ci.com/github/Unitech/pm2).
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
@@ -54,11 +55,7 @@ With NPM:
 $ npm install pm2 -g
 ```
 
-Or if you don't have Node.js installed:
-
-```bash
-wget -qO- https://getpm2.com/install.sh | bash
-```
+You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [ASDF](https://blog.natterstefan.me/how-to-use-multiple-node-version-with-asdf).
 
 ### Start an application
 
@@ -74,7 +71,7 @@ Your app is now daemonized, monitored and kept alive forever.
 
 Once applications are started you can manage them easily:
 
-![Process listing](https://github.com/unitech/pm2/raw/master/pres/pm2-list.png)
+![Process listing](https://github.com/Unitech/pm2/raw/master/pres/pm2-ls-v2.png)
 
 To list all running applications:
 
@@ -102,12 +99,13 @@ To monitor logs, custom metrics, application information:
 $ pm2 monit
 ```
 
-
 [More about Process Management](https://pm2.keymetrics.io/docs/usage/process-management/)
 
 ### Cluster Mode: Node.js Load Balancing & Zero Downtime Reload
 
 The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
+
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/cluster.png)
 
 Starting a Node.js application in cluster mode that will leverage all CPUs available:
 
@@ -125,10 +123,6 @@ Hot Reload allows to update an application without any downtime:
 $ pm2 reload all
 ```
 
-Seamlessly supported by all major Node.js frameworks and any Node.js applications without any code change:
-
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/cluster-support.png)
-
 [More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 
 ### Container Support
@@ -142,6 +136,19 @@ CMD [ "pm2-runtime", "npm", "--", "start" ]
 ```
 
 [Read More about the dedicated integration](https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
+
+### Host monitoring speedbar
+
+PM2 allows to monitor your host/server vitals with a monitoring speedbar.
+
+To enable host monitoring:
+
+```bash
+$ pm2 set pm2:sysmonit true
+$ pm2 update
+```
+
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/vitals.png)
 
 ### Terminal Based Monitoring
 
@@ -174,6 +181,12 @@ $ pm2 flush               # Flush all logs
 $ pm2 reloadLogs          # Reload all logs
 ```
 
+To enable log rotation install the following module
+
+```bash
+$ pm2 install pm2-logrotate
+```
+
 [More about log management](https://pm2.keymetrics.io/docs/usage/log-management/)
 
 ### Startup Scripts Generation
@@ -194,19 +207,6 @@ $ pm2 unstartup
 ```
 
 [More about Startup Scripts Generation](https://pm2.keymetrics.io/docs/usage/startup/)
-
-### PM2 Modules
-
-PM2 embeds a simple and powerful module system. Installing a module is straightforward:
-
-```bash
-$ pm2 install <module_name>
-```
-
-Here are some PM2 compatible modules (standalone Node.js applications managed by PM2):
-
-[**pm2-logrotate**](https://www.npmjs.com/package/pm2-logrotate) automatically rotate logs and limit logs size<br/>
-[**pm2-server-monit**](https://www.npmjs.com/package/pm2-server-monit) monitor the current server with more than 20+ metrics and 8 actions<br/>
 
 ### Updating PM2
 
