@@ -109,4 +109,4 @@ var csts = {
 
 };
 
-module.exports = util._extend(csts, path_structure);
+module.exports = Object.assign(csts, path_structure);
