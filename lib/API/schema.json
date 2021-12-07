@@ -358,5 +358,9 @@
   "io": {
     "type": "object",
     "docDescription": "Specify apm values and configuration"
+  },
+  "stop_exit_codes": {
+    "type": "array",
+    "docDescription": "Restart except on these codes"
   }
 }
