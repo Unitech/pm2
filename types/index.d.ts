@@ -306,6 +306,10 @@ interface Pm2Env {
 
 export interface StartOptions {
   /**
+   * Enable or disable auto restart after process failure (default: true).
+   */
+  autorestart?: boolean;
+  /**
    * An arbitrary name that can be used to interact with (e.g. restart) the process
    * later in other commands. Defaults to the script name without its extension
    * (eg “testScript” for “testScript.js”)
@@ -362,6 +366,14 @@ export interface StartOptions {
    * Uses human-friendly suffixes: ‘K’ for kilobytes, ‘M’ for megabytes, ‘G’ for gigabytes’, etc. Eg “150M”.
    */
   max_memory_restart?: number | string;
+  /**
+   * Arguments to pass to the interpreter
+   */
+  node_args?: string | string[];
+  /**
+   * Prefix logs with time
+   */
+  time?: boolean;
   /**
    * This will make PM2 listen for that event. In your application you will need to add process.send('ready');
    * when you want your application to be considered as ready.
