@@ -3,10 +3,6 @@ var should = require('should');
 var PM2    = require('../..');
 var Plan   = require('../helpers/plan.js');
 
-if (require('semver').lt(process.version, '6.0.0')) {
-  return process.exit(0)
-}
-
 var PROCESS_ARCH  = Object.keys({
   pm_id  : 0,
   name   : 'app'
