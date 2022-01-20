@@ -3,11 +3,6 @@ process.chdir(__dirname);
 
 var pm2 = require('../..');
 var should = require('should');
-var semver = require('semver')
-
-if (semver.lt(process.version, '6.0.0')) {
-  return process.exit(0)
-}
 
 describe('Custom actions via CLI/API', function() {
   before(function(done) {
