@@ -126,7 +126,7 @@ install_node ()
     # Official install method of
     # https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
     # without using sudo.
-    curl -sL https://deb.nodesource.com/setup_9.x | bash - || exit 1
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - || exit 1
 }
 
 main ()
