@@ -145,7 +145,7 @@ finalize_zypper_repo ()
 
 install_node ()
 {
-    curl --silent --location https://rpm.nodesource.com/setup_9.x | bash - || exit 1
+    curl --silent --location https://rpm.nodesource.com/setup_lts.x | bash - || exit 1
 }
 
 install_pm2 ()
@@ -250,4 +250,3 @@ main ()
 }
 
 main
-
