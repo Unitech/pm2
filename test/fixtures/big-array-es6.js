@@ -19,5 +19,7 @@ setInterval(function() {
     s.add('a');
     assert.ok(s.has('a'));
     console.log('● ES6 mode'.green);
-  } catch(e) {}
+  } catch(e) {
+    // 
+  }
 })();

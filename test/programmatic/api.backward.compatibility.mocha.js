@@ -7,7 +7,7 @@ var should = require('should');
 describe('API backward compatibility checks', function() {
   describe('Backward compatibility', function() {
     it('should start pm2 in no daemon mode', function(done) {
-      PM2.connect(true, function(err) {
+      PM2.connect(true, function() {
         should(PM2.daemon_mode).be.false();
         should(PM2.Client.daemon_mode).be.false();
         done();

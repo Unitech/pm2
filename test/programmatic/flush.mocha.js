@@ -3,12 +3,8 @@ process.env.NODE_ENV = 'test';
 var PM2    = require('../..');
 var should = require('should');
 var fs     = require('fs');
-var path   = require('path');
 
 describe('Programmatic flush feature test', function() {
-  var proc1 = null;
-  var procs = [];
-
   var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures'
   });
@@ -63,7 +59,7 @@ describe('Programmatic flush feature test', function() {
             error_file : 'error-001-test.log',
             out_file   : 'out-001-test.log',
             merge_logs: false
-          }, function(err, procs, $out_file, $err_file) {
+          }, function(err, procs) {
             should(err).be.null();
             var out_file1 = procs[0].pm2_env.pm_out_log_path;
             var err_file1 = procs[0].pm2_env.pm_err_log_path;

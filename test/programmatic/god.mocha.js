@@ -1,9 +1,7 @@
 
 var PM2 = new require('../..');
 var God = require('../../lib/God');
-var numCPUs = require('os').cpus().length;
 var fs = require('fs');
-var path = require('path');
 var should = require('should');
 var Common = require('../../lib/Common');
 var eachLimit = require('async/eachLimit');
@@ -78,7 +76,7 @@ function deleteAll(data, cb) {
 describe('God', function() {
   before(function(done) {
     pm2.connect(function() {
-      deleteAll({}, function(err, dt) {
+      deleteAll({}, function() {
         done()
       });
     });
@@ -105,10 +103,10 @@ describe('God', function() {
     it('should fork one process', function(done) {
       God.prepare(getConf(), function(err, procs) {
         should(err).be.null();
-	      procs[0].pm2_env.status.should.be.equal('online');
+        procs[0].pm2_env.status.should.be.equal('online');
         var a = God.getFormatedProcesses()
-	      God.getFormatedProcesses().length.should.equal(2);
-	      done();
+        a.length.should.equal(2);
+        done();
       });
     });
   });
@@ -117,7 +115,7 @@ describe('God', function() {
     var clu, pid;
 
     before(function(done) {
-      deleteAll({}, function(err, dt) {
+      deleteAll({}, function() {
         done();
       });
     });
@@ -126,8 +124,8 @@ describe('God', function() {
         clu = procs[0];
 
         pid = clu.pid;
-	      procs[0].pm2_env.status.should.be.equal('online');
-	      done();
+        procs[0].pm2_env.status.should.be.equal('online');
+        done();
       });
     });
 
@@ -140,7 +138,7 @@ describe('God', function() {
     });
 
     it('should restart the same process and set it as state online and be up', function(done) {
-      God.restartProcessId({id:clu.pm2_env.pm_id}, function(err, dt) {
+      God.restartProcessId({id:clu.pm2_env.pm_id}, function() {
         var proc = God.findProcessById(clu.pm2_env.pm_id);
         proc.pm2_env.status.should.be.equal('online');
         God.checkProcess(proc.process.pid).should.be.equal(true);
@@ -150,8 +148,8 @@ describe('God', function() {
 
     it('should stop and delete a process id', function(done) {
       var old_pid = clu.pid;
-      God.deleteProcessId(clu.pm2_env.pm_id, function(err, dt) {
-        var proc = God.findProcessById(clu.pm2_env.pm_id);
+      God.deleteProcessId(clu.pm2_env.pm_id, function() {
+        God.findProcessById(clu.pm2_env.pm_id);
         God.checkProcess(old_pid).should.be.equal(false);
         God.getFormatedProcesses().length.should.be.equal(1);
         done();
@@ -164,14 +162,14 @@ describe('God', function() {
   describe('Reload - cluster', function() {
 
     before(function(done) {
-      deleteAll({}, function(err, dt) {
+      deleteAll({}, function() {
         done();
       });
     });
 
     it('should launch app', function(done) {
-      God.prepare(getConf2(), function(err, procs) {
-	      var processes = God.getFormatedProcesses();
+      God.prepare(getConf2(), function() {
+        var processes = God.getFormatedProcesses();
 
         setTimeout(function() {
           processes.length.should.equal(4);
@@ -187,13 +185,13 @@ describe('God', function() {
 
   describe('Multi launching', function() {
     before(function(done) {
-      deleteAll({}, function(err, dt) {
+      deleteAll({}, function() {
         done();
       });
     });
 
     afterEach(function(done) {
-      deleteAll({}, function(err, dt) {
+      deleteAll({}, function() {
         done();
       });
     });
@@ -204,7 +202,7 @@ describe('God', function() {
         name : 'child',
         instances:3
       }), function(err, procs) {
-	      God.getFormatedProcesses().length.should.equal(3);
+        God.getFormatedProcesses().length.should.equal(3);
         procs.length.should.equal(3);
         done();
       });
@@ -212,7 +210,7 @@ describe('God', function() {
 
     it('should start maximum processes depending on CPU numbers', function(done) {
       God.prepare(getConf3(), function(err, procs) {
-	      God.getFormatedProcesses().length.should.equal(10);
+        God.getFormatedProcesses().length.should.equal(10);
         procs.length.should.equal(10);
         done();
       });
@@ -238,7 +236,7 @@ describe('God', function() {
     });
 
     it('should handle arguments', function(done) {
-      God.prepare(getConf4(), function(err, procs) {
+      God.prepare(getConf4(), function() {
         setTimeout(function() {
           God.getFormatedProcesses()[0].pm2_env.restart_time.should.eql(0);
           done();

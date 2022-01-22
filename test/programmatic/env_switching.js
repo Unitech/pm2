@@ -5,7 +5,6 @@
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 
 // Change to current folder
 process.chdir(__dirname);
@@ -47,7 +46,6 @@ var json_declaration = {
 describe('PM2 programmatic calls', function() {
 
   var proc1 = null;
-  var procs = [];
   var bus   = null;
 
   var pm2 = new PM2.custom({ });
@@ -60,7 +58,7 @@ describe('PM2 programmatic calls', function() {
     pm2.connect(function() {
       pm2.launchBus(function(err, _bus) {
         bus = _bus;
-        pm2.delete('all', function(err, ret) {
+        pm2.delete('all', function() {
           done();
         });
       });
@@ -99,7 +97,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should delete all processes', function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function() {
       done();
     });
   });
@@ -125,7 +123,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should delete all processes', function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function() {
       done();
     });
   });

@@ -1,4 +1,4 @@
-var p = new Promise(function(resolve, reject) {
+var p = new Promise(function(resolve) {
   //setTimeout(function() {
   //throw new Error('fail')
   abc = asdsad;
@@ -7,5 +7,5 @@ var p = new Promise(function(resolve, reject) {
   //}, 200)
 })
 
-p.then(function(e) {
+p.then(function() {
 })

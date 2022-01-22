@@ -3,7 +3,6 @@ process.env.NODE_ENV = 'test';
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 var Plan   = require('../helpers/plan.js');
 
 process.chdir(__dirname);
@@ -27,7 +26,7 @@ describe('Cluster programmatic tests', function() {
       pm2.start({
         script    : './echo.js',
         instances : 4
-      }, function(err, data) {
+      }, function(err) {
         should(err).be.null();
 
         pm2.list(function(err, ret) {
@@ -48,7 +47,7 @@ describe('Cluster programmatic tests', function() {
     });
 
     it('should RESTART all apps', function(done) {
-      pm2.restart('all', function(err, data) {
+      pm2.restart('all', function(err) {
         should(err).be.null();
 
         pm2.list(function(err, procs) {
@@ -63,7 +62,7 @@ describe('Cluster programmatic tests', function() {
     });
 
     it('should RELOAD all apps', function(done) {
-      pm2.reload('all', function(err, data) {
+      pm2.reload('all', function(err) {
         should(err).be.null();
 
         pm2.list(function(err, procs) {
@@ -78,7 +77,7 @@ describe('Cluster programmatic tests', function() {
     });
 
     it('should GRACEFUL RELOAD all apps', function(done) {
-      pm2.reload('all', function(err, data) {
+      pm2.reload('all', function(err) {
         should(err).be.null();
 
         pm2.list(function(err, procs) {
@@ -109,7 +108,7 @@ describe('Cluster programmatic tests', function() {
     });
 
     it('should scale up application to 8', function(done) {
-      pm2.scale('child', 8, function(err, procs) {
+      pm2.scale('child', 8, function(err) {
         should(err).be.null();
 
         pm2.list(function(err, procs) {
@@ -121,7 +120,7 @@ describe('Cluster programmatic tests', function() {
     });
 
     it('should scale down application to 2', function(done) {
-      pm2.scale('child', 2, function(err, procs) {
+      pm2.scale('child', 2, function(err) {
         should(err).be.null();
 
         pm2.list(function(err, procs) {
@@ -133,7 +132,7 @@ describe('Cluster programmatic tests', function() {
     });
 
     it('should do nothing', function(done) {
-      pm2.scale('child', 2, function(err, procs) {
+      pm2.scale('child', 2, function(err) {
         should(err).not.be.null();
         done();
       });
@@ -177,7 +176,7 @@ describe('Cluster programmatic tests', function() {
         plan.ok(true);
       }, 1500);
 
-      pm2.reload('all', function(err, data) {
+      pm2.reload('all', function() {
         called = true;
         plan.ok(true);
       });
@@ -208,7 +207,7 @@ describe('Cluster programmatic tests', function() {
         done();
       }, 500);
 
-      pm2.reload('all', function(err, data) {
+      pm2.reload('all', function() {
         called = true;
       });
     });

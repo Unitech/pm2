@@ -3,7 +3,6 @@ var Containerizer = require('../../lib/API/Containerizer.js');
 var path          = require('path');
 var fs            = require('fs');
 var should        = require('should');
-var Plan          = require('../helpers/plan.js');
 
 describe('Containerizer unit tests', function() {
   var fixture_path = path.join(__dirname, '../fixtures/containerizer');

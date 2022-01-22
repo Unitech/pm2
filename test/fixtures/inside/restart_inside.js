@@ -6,6 +6,6 @@ var pm2 = new PM2.custom({
   cwd : __dirname
 });
 
-PM2.restart('echo', function(err, app) {
+PM2.restart('echo', function(err) {
   if (err) throw err;
 });

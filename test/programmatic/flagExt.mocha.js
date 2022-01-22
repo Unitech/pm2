@@ -1,3 +1,4 @@
+/* eslint "no-octal": "off" */
 
 var should = require('should');
 var f_e = require('../../lib/API/Modules/flagExt.js');
@@ -26,7 +27,7 @@ describe('Flag -ext', function() {
         should(res).not.equal(tmp_res);
     });
     it('should not crash in case, when no access for file or directory by permissions', function() {
-        var dir = fs.mkdirSync("noAccessDir", 0777);
+        fs.mkdirSync("noAccessDir", 0777);
         opts.ext = 'txt'
         var fileStream = fs.createWriteStream("noAccessDir/checkPermissions.txt");
         fileStream.write("It's a temporary file for testing flag --ext in PM2");

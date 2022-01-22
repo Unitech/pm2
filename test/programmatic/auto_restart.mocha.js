@@ -19,7 +19,7 @@ describe('PM2 auto restart on uncaughtexception', function() {
   it('should start a failing app in fork mode', function(done) {
     pm2.start({
       script: path.join(test_path, 'throw.js'),
-    }, (err, apps) => {
+    }, () => {
       setTimeout(function() {
         pm2.list((err, list) => {
           should(list[0].pm2_env.restart_time).aboveOrEqual(0)
@@ -35,7 +35,7 @@ describe('PM2 auto restart on uncaughtexception', function() {
     pm2.start({
       script: path.join(test_path, 'throw.js'),
       instances: 4
-    }, (err, apps) => {
+    }, () => {
       setTimeout(function() {
         pm2.list((err, list) => {
           should(list[0].pm2_env.restart_time).aboveOrEqual(0)

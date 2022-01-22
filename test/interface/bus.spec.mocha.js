@@ -84,7 +84,7 @@ describe('PM2 BUS / RPC', function() {
     afterEach(function(done) {
       pm2_bus.off('*');
 
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function() {
         done();
       });
     });
@@ -101,7 +101,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./child.js', {instances : 1}, function(err, data) {
+      pm2.start('./child.js', {instances : 1}, function(err) {
         should(err).be.null();
       });
     });
@@ -124,7 +124,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./log_out.js', {instances : 1}, function(err, data) {
+      pm2.start('./log_out.js', {instances : 1}, function(err) {
         should(err).be.null();
       });
     });
@@ -143,7 +143,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./process_exception.js', {instances : 1}, function(err, data) {
+      pm2.start('./process_exception.js', {instances : 1}, function(err) {
         should(err).be.null();
       });
     });
@@ -160,7 +160,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./promise_rejection.js', {instances: 1}, function(err, data) {
+      pm2.start('./promise_rejection.js', {instances: 1}, function(err) {
         should(err).be.null();
       });
     });
@@ -177,7 +177,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./human_event.js', {instances : 1}, function(err, data) {
+      pm2.start('./human_event.js', {instances : 1}, function(err) {
         should(err).be.null();
       });
     });

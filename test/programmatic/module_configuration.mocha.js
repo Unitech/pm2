@@ -3,8 +3,6 @@ process.env.NODE_ENV = 'test';
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
-var Plan   = require('../helpers/plan.js');
 var fs = require('fs');
 
 process.chdir(__dirname);

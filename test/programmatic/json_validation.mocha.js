@@ -1,5 +1,3 @@
-
-var should = require('should');
 var Config = require('../../lib/tools/Config');
 var Schema = require('../../lib/API/schema.json');
 

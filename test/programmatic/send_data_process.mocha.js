@@ -6,7 +6,6 @@
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 
 describe('PM2 programmatic calls', function() {
 
@@ -16,10 +15,9 @@ describe('PM2 programmatic calls', function() {
 
   var pm2_bus = null;
   var proc1   = null;
-  var procs   = [];
 
   after(function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function() {
       pm2.kill(done);
     });
   });
@@ -29,7 +27,7 @@ describe('PM2 programmatic calls', function() {
       pm2.launchBus(function(err, bus) {
         pm2_bus = bus;
 
-        pm2.delete('all', function(err, ret) {
+        pm2.delete('all', function() {
           done();
         });
       });
@@ -72,7 +70,7 @@ describe('PM2 programmatic calls', function() {
         some : 'data',
         hello : true
       }
-    }, function(err, res) {
+    }, function(err) {
       should(err).be.null();
     });
   });
@@ -94,7 +92,7 @@ describe('PM2 programmatic calls', function() {
         some : 'data',
         hello : true
       }
-    }, function(err, res) {
+    }, function(err) {
       should(err).be.null();
     });
   });

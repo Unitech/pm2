@@ -82,7 +82,7 @@ describe('PM2 BUS / RPC', function() {
     afterEach(function(done) {
       pm2_bus.off('*');
 
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function() {
         done();
       });
     });
@@ -99,7 +99,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./child.js', {}, function(err, data) {
+      pm2.start('./child.js', {}, function(err) {
         should(err).be.null();
       });
     });
@@ -122,7 +122,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./log_out.js', {}, function(err, data) {
+      pm2.start('./log_out.js', {}, function(err) {
         should(err).be.null();
       });
     });
@@ -138,7 +138,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./process_exception.js', {}, function(err, data) {
+      pm2.start('./process_exception.js', {}, function(err) {
         should(err).be.null();
       });
     });
@@ -154,7 +154,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./human_event.js', {}, function(err, data) {
+      pm2.start('./human_event.js', {}, function(err) {
         should(err).be.null();
       });
     });
@@ -170,7 +170,7 @@ describe('PM2 BUS / RPC', function() {
         }
       });
 
-      pm2.start('./promise_rejection.js', {}, function(err, data) {
+      pm2.start('./promise_rejection.js', {}, function(err) {
         should(err).be.null();
       });
     });

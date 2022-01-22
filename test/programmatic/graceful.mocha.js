@@ -3,7 +3,6 @@ process.env.NODE_ENV = 'test';
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 var Plan   = require('../helpers/plan.js');
 var semver = require('semver');
 var sexec = require('../../lib/tools/sexec.js')
@@ -81,7 +80,7 @@ describe('Wait ready / Graceful start / restart', function() {
         })
       }, 1500);
 
-      pm2.reload('all', function(err, data) {
+      pm2.reload('all', function() {
         called = true;
         plan.ok(true);
       });
@@ -112,7 +111,7 @@ describe('Wait ready / Graceful start / restart', function() {
         done();
       }, 500);
 
-      pm2.reload('all', function(err, data) {
+      pm2.reload('all', function() {
         called = true;
       });
     });
@@ -169,7 +168,7 @@ describe('Wait ready / Graceful start / restart', function() {
         })
       }, 1500);
 
-      pm2.reload('all', function(err, data) {
+      pm2.reload('all', function() {
         called = true;
         plan.ok(true);
       });
@@ -203,7 +202,7 @@ describe('Wait ready / Graceful start / restart', function() {
 
         pm2.reload('echo', {}, done);
         setTimeout(function() {
-          sexec(`ps -eo pid | grep -w ${oldPid}`, (err, res) => {
+          sexec(`ps -eo pid | grep -w ${oldPid}`, (err) => {
             plan.ok(err === 1);
           })
         }, 2000);
