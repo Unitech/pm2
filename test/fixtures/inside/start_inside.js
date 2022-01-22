@@ -5,6 +5,6 @@ var pm2 = new PM2.custom({
   cwd : __dirname
 });
 
-PM2.start('./echo.js', function(err, app) {
+PM2.start('./echo.js', function(err) {
   if (err) throw err;
 });

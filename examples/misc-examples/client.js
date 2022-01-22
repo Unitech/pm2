@@ -5,7 +5,7 @@ var axon = require('pm2-axon');
 
 var Module = require('module');
 Wrap.wrap(Module, '_load', function(load) {
-  return function(file) {
+  return function() {
     return load.apply(this, arguments);
   }
 });
@@ -41,11 +41,11 @@ function setupConnection() {
     console.log('Client got error', e.message);
   });
 
-  client.on('close', function(e) {
+  client.on('close', function() {
     console.log('Client got a close');
   });
 
-  client.on('reconnect attempt', function(e) {
+  client.on('reconnect attempt', function() {
     console.log('Reconnecting');
   });
 

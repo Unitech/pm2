@@ -5,8 +5,6 @@ process.env.PM2_RELOAD_LOCK_TIMEOUT = 2000;
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
-var Plan   = require('../helpers/plan.js');
 var fs = require('fs');
 var cst = require('../../constants.js');
 
@@ -29,7 +27,7 @@ describe('Reload locker system', function() {
     pm2.start({
       script    : './http.js',
       instances : 2
-    }, function(err, data) {
+    }, function(err) {
       should(err).be.null();
 
       pm2.list(function(err, ret) {

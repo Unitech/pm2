@@ -1,7 +1,6 @@
 
 const PM2 = require('../..');
 const should = require('should');
-const exec = require('child_process').exec
 const path = require('path')
 const fs = require('fs')
 
@@ -56,7 +55,7 @@ describe('Modules programmatic testing', function() {
     it('should install module', function(done) {
       pm2.install(PACKAGE_MULTI, {
         tarball: true
-      }, function(err, apps) {
+      }, function(err) {
         should(err).eql(null);
         done();
       });
@@ -92,7 +91,7 @@ describe('Modules programmatic testing', function() {
     it('should install module', function(done) {
       pm2.install(PACKAGE_MULTI, {
         tarball: true
-      }, function(err, apps) {
+      }, function(err) {
         should(err).eql(null);
         done();
       });
@@ -147,7 +146,7 @@ describe('Modules programmatic testing', function() {
 
   describe('Uninstall', () => {
     it('should uninstall multi app module', (done) => {
-      pm2.uninstall('multi-app-module', (err, data) => {
+      pm2.uninstall('multi-app-module', (err) => {
         should(err).be.null();
         done()
       })
@@ -172,7 +171,7 @@ describe('Modules programmatic testing', function() {
     it('should install module', function(done) {
       pm2.install(PACKAGE_MONO, {
         tarball: true
-      }, function(err, apps) {
+      }, function(err) {
         should(err).eql(null);
         done();
       });
@@ -202,7 +201,7 @@ describe('Modules programmatic testing', function() {
     })
 
     it('should uninstall multi app module', (done) => {
-      pm2.uninstall('mono-app-module', (err, data) => {
+      pm2.uninstall('mono-app-module', (err) => {
         should(err).be.null();
         done()
       })

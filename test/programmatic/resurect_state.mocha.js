@@ -1,17 +1,14 @@
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
-var fs     = require('fs');
 
-var cst = require('../../constants.js');
 var Configuration = require('../../lib/Configuration.js');
 
 describe.skip('Keep state on pm2 update', function() {
   var pm2
 
   before((done) => {
-    Configuration.set('pm2:autodump', 'true', function(err, data) {
+    Configuration.set('pm2:autodump', 'true', function(err) {
         pm2 = new PM2.custom({
           cwd : __dirname + '/../fixtures'
         });
@@ -22,7 +19,7 @@ describe.skip('Keep state on pm2 update', function() {
   })
 
   after((done) => {
-    Configuration.set('pm2:autodump', 'false', function(err, data) {
+    Configuration.set('pm2:autodump', 'false', function(err) {
       should.not.exists(err);
       done();
     });
@@ -43,7 +40,7 @@ describe.skip('Keep state on pm2 update', function() {
     });
 
     it('should set autodump to true', function(done) {
-      pm2.set('pm2:autodump', 'true', function(err, data) {
+      pm2.set('pm2:autodump', 'true', function(err) {
         should.not.exists(err);
         done();
       });
@@ -54,7 +51,7 @@ describe.skip('Keep state on pm2 update', function() {
         script    : './echo.js',
         instances : 4,
         name      : 'echo'
-      }, function(err, data) {
+      }, function(err) {
         should(err).be.null();
         done();
       });

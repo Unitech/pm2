@@ -2,7 +2,7 @@
 process.argv.shift();
 process.argv.shift();
 
-process.argv.forEach(function(val, index) {
+process.argv.forEach(function(val) {
   console.log(val);
 });
 

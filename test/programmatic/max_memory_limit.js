@@ -4,13 +4,11 @@ process.env.PM2_WORKER_INTERVAL = 1000;
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 
 // Change to current folder
 
 describe('Max memory restart programmatic', function() {
   var proc1 = null;
-  var procs = [];
   var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures/json-reload/'
   });
@@ -35,7 +33,7 @@ describe('Max memory restart programmatic', function() {
     it('should restart process based on memory limit (UGLY WAY)', function(done) {
       pm2.start('./big-array.js', {
         maxMemoryRestart : '10M'
-      }, function(err, data) {
+      }, function(err) {
         should(err).be.null();
 
         setTimeout(function() {
@@ -52,7 +50,7 @@ describe('Max memory restart programmatic', function() {
       pm2.start({
         script : './big-array.js',
         max_memory_restart : '10M'
-      }, function(err, data) {
+      }, function(err) {
         should(err).be.null();
 
         setTimeout(function() {
@@ -70,7 +68,7 @@ describe('Max memory restart programmatic', function() {
         script : './../big-array-listen.js',
         max_memory_restart : '10M',
         exec_mode : 'cluster'
-      }, function(err, data) {
+      }, function(err) {
         should(err).be.null();
 
         setTimeout(function() {

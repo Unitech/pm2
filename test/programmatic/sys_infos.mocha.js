@@ -1,7 +1,5 @@
 
 const Sysinfos = require('../../lib/Sysinfo/SystemInfo.js')
-const should = require('should');
-const path = require('path')
 
 describe('Sysinfos', function() {
   var sysinfo

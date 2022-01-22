@@ -7,8 +7,6 @@ var fs     = require('fs');
 var path   = require('path');
 
 describe('Programmatic log feature test', function() {
-  var proc1 = null;
-  var procs = [];
 
   var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures'
@@ -140,7 +138,9 @@ describe('Programmatic log feature test', function() {
         fs.writeFileSync(path.resolve('./test/fixtures/error-echo-disabled.log'), '');
         fs.writeFileSync(path.resolve('./test/fixtures/out-echo-disabled.log'), '');
         fs.writeFileSync(path.resolve('./test/fixtures/merged.log'), '');
-      } catch(e) {}
+      } catch(e) {
+        // 
+      }
 
       pm2.start({
         script          : './echo.js',
@@ -154,7 +154,6 @@ describe('Programmatic log feature test', function() {
 
         var out_file = procs[0].pm2_env.pm_out_log_path;
         var err_file = procs[0].pm2_env.pm_err_log_path;
-        var log_file = procs[0].pm2_env.pm_log_path;
 
         setTimeout(function() {
           fs.readFileSync(err_file).toString().should.eql('');
@@ -170,6 +169,7 @@ describe('Programmatic log feature test', function() {
         fs.writeFileSync(path.resolve('./test/fixtures/out-echo-disabled.log'), '');
         fs.writeFileSync(path.resolve('./test/fixtures/merged.log'), '');
       } catch(e) {
+        // 
       }
 
       pm2.start({

@@ -2,9 +2,6 @@ var PM2    = require('../../..');
 var should = require('should');
 
 describe('Programmatic log feature test', function() {
-  var proc1 = null;
-  var procs = [];
-
   var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures/json-env-passing'
   });

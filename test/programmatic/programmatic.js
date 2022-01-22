@@ -18,9 +18,9 @@ describe('PM2 programmatic calls', function() {
   });
 
   after(function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function() {
       // clean dump file
-      pm2.clearDump(function(err) {
+      pm2.clearDump(function() {
         pm2.kill(done);
       });
     });
@@ -30,7 +30,7 @@ describe('PM2 programmatic calls', function() {
     pm2.connect(function() {
       pm2.launchBus(function(err, _bus) {
         bus = _bus;
-        pm2.delete('all', function(err, ret) {
+        pm2.delete('all', function() {
           done();
         });
       });
@@ -100,7 +100,7 @@ describe('PM2 programmatic calls', function() {
         force : true,
         name : 'tota',
         instances : 3
-      }, function(err, data) {
+      }, function(err) {
         should.exists(err);
         done();
       });
@@ -135,7 +135,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should delete one process', function(done) {
-      pm2.delete(proc1.pm2_env.pm_id, function(err, ret) {
+      pm2.delete(proc1.pm2_env.pm_id, function(err) {
         should(err).be.null()
         pm2.list(function(err, ret) {
           should(err).be.null()
@@ -146,14 +146,14 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should save/dump all processes', function(done) {
-      pm2.dump(function(err, ret) {
+      pm2.dump(function(err) {
         should(err).be.null()
         done();
       });
     });
 
     it('should delete processes', function(done) {
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function(err) {
         should(err).be.null()
         pm2.list(function(err, ret) {
           should(err).be.null()
@@ -164,7 +164,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should resurrect processes', function(done) {
-      pm2.resurrect(function(err, ret) {
+      pm2.resurrect(function(err) {
         should(err).be.null()
         pm2.list(function(err, ret) {
           should(err).be.null()
@@ -175,21 +175,21 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should ping pm2', function(done) {
-      pm2.ping(function(err, ret) {
+      pm2.ping(function(err) {
         should(err).be.null()
         done();
       });
     });
 
     it('should reload all', function(done) {
-      pm2.reload('all', function(err, ret) {
+      pm2.reload('all', function(err) {
         should(err).be.null()
         done();
       });
     });
 
     it('should reload only one application', function(done) {
-      pm2.reload('tota', function(err, ret) {
+      pm2.reload('tota', function(err) {
         should(err).be.null()
         pm2.describe('tota', function(err, proc) {
           should(err).be.null()
@@ -211,7 +211,7 @@ describe('PM2 programmatic calls', function() {
 
   describe('Restart methods', function() {
     it('should restart all', function(done) {
-      pm2.restart('all', function(err, ret) {
+      pm2.restart('all', function(err) {
         should(err).be.null()
         pm2.describe('tota', function(err, proc) {
           should(err).be.null()
@@ -223,7 +223,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should restart process by name', function(done) {
-      pm2.restart('tota', function(err, ret) {
+      pm2.restart('tota', function(err) {
         should(err).be.null()
         pm2.describe('tota', function(err, proc) {
           should(err).be.null()
@@ -235,7 +235,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should restart process by id', function(done) {
-      pm2.restart(procs[0].pm2_env.pm_id, function(err, ret) {
+      pm2.restart(procs[0].pm2_env.pm_id, function(err) {
         should(err).be.null()
         pm2.describe(procs[0].pm2_env.pm_id, function(err, proc) {
           should(err).be.null()
@@ -249,7 +249,7 @@ describe('PM2 programmatic calls', function() {
 
   describe('Stop methods', function() {
     it('should stop process name', function(done) {
-      pm2.stop(procs[0].pm2_env.name, function(err, ret) {
+      pm2.stop(procs[0].pm2_env.name, function(err) {
         should(err).be.null()
         pm2.describe(procs[0].pm2_env.name, function(err, procs) {
           should(err).be.null()
@@ -260,7 +260,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should stop process id', function(done) {
-      pm2.stop(procs[1].pm2_env.pm_id, function(err, ret) {
+      pm2.stop(procs[1].pm2_env.pm_id, function(err) {
         should(err).be.null()
         pm2.describe(procs[1].pm2_env.pm_id, function(err, procs) {
           should(err).be.null()
@@ -271,7 +271,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should stop process all', function(done) {
-      pm2.stop('all', function(err, ret) {
+      pm2.stop('all', function(err) {
         should(err).be.null()
         pm2.describe(procs[0].pm2_env.pm_id, function(err, procs) {
           should(err).be.null()
@@ -284,7 +284,7 @@ describe('PM2 programmatic calls', function() {
 
   describe('start OR restart', function() {
     beforeEach(function(done) {
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function() {
         done();
       });
     });
@@ -294,7 +294,7 @@ describe('PM2 programmatic calls', function() {
         script : './echo.js',
         instances : 4,
         exec_mode : 'cluster'
-      }, function(err, dt) {
+      }, function(err) {
         should(err).be.null()
 
         pm2.list(function(err, ret) {
@@ -311,7 +311,7 @@ describe('PM2 programmatic calls', function() {
         script : './echo.js',
         instances : 4,
         exec_mode : 'fork'
-      }, function(err, dt) {
+      }, function(err) {
         should(err).be.null()
 
         pm2.list(function(err, ret) {
@@ -324,7 +324,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should start a JSON file', function(done) {
-      pm2.start('./all2.json', function(err, dt) {
+      pm2.start('./all2.json', function(err) {
         should(err).be.null()
 
         pm2.list(function(err, ret) {
@@ -339,7 +339,7 @@ describe('PM2 programmatic calls', function() {
 
   describe('start OR restart', function() {
     before(function(done) {
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function() {
         pm2.list(function(err, ret) {
           should(err).be.null()
           ret.length.should.eql(0);
@@ -349,7 +349,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should start', function(done) {
-      pm2._startJson('./all2.json', {}, 'restartProcessId', function(err, data) {
+      pm2._startJson('./all2.json', {}, 'restartProcessId', function(err) {
         should(err).be.null()
         pm2.list(function(err, ret) {
           should(err).be.null()
@@ -360,7 +360,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should NOW restart action', function(done) {
-      pm2._startJson('./all2.json', {}, 'restartProcessId', function(err, data) {
+      pm2._startJson('./all2.json', {}, 'restartProcessId', function(err) {
         should(err).be.null()
         pm2.list(function(err, ret) {
           should(err).be.null()
@@ -374,7 +374,7 @@ describe('PM2 programmatic calls', function() {
     });
 
     it('should reset status', function(done) {
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function() {
         done();
       });
     });
@@ -382,7 +382,7 @@ describe('PM2 programmatic calls', function() {
     it('should start with specific environment variables depending on the env type', function(done) {
       pm2._startJson('../fixtures/all2.json', {
         env : 'production'
-      }, 'restartProcessId', function(err, data) {
+      }, 'restartProcessId', function(err) {
         should(err).be.null()
         pm2.list(function(err, ret) {
           should(err).be.null();

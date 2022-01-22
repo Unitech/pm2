@@ -2,7 +2,6 @@
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 var fs     = require('fs');
 
 var cst = require('../../constants.js');
@@ -29,14 +28,14 @@ describe('Misc commands', function() {
       script    : './echo.js',
       instances : 4,
       name      : 'echo'
-    }, function(err, data) {
+    }, function(err) {
       should(err).be.null();
       done();
     });
   });
 
   it('should restart them', function(done) {
-    pm2.restart('all', function(err, data) {
+    pm2.restart('all', function(err) {
       should(err).be.null();
 
       pm2.list(function(err, procs) {
@@ -51,14 +50,14 @@ describe('Misc commands', function() {
   });
 
   it('should fail when trying to reset metadatas of unknown process', function(done) {
-    pm2.reset('allasd', function(err, data) {
+    pm2.reset('allasd', function(err) {
       should(err).not.be.null();
       done();
     });
   });
 
   it('should reset their metadatas', function(done) {
-    pm2.reset('all', function(err, data) {
+    pm2.reset('all', function(err) {
       should(err).be.null();
 
       pm2.list(function(err, procs) {
@@ -81,7 +80,7 @@ describe('Misc commands', function() {
       fs.unlinkSync(cst.DUMP_BACKUP_FILE_PATH);
     }
 
-    pm2.dump(function(err, data) {
+    pm2.dump(function(err) {
       should(fs.existsSync(cst.DUMP_FILE_PATH)).be.true();
       should(fs.existsSync(cst.DUMP_BACKUP_FILE_PATH)).be.false();
       should(err).be.null();
@@ -92,7 +91,7 @@ describe('Misc commands', function() {
   it('should back up dump and re-save process list', function(done) {
     var origDump = fs.readFileSync(cst.DUMP_FILE_PATH).toString();
 
-    pm2.dump(function(err, data) {
+    pm2.dump(function(err) {
       should(fs.existsSync(cst.DUMP_FILE_PATH)).be.true();
       should(fs.existsSync(cst.DUMP_BACKUP_FILE_PATH)).be.true();
       should(err).be.null();
@@ -105,7 +104,7 @@ describe('Misc commands', function() {
   });
 
   it('should delete child processes', function(done) {
-    pm2.delete('echo', function(err, data) {
+    pm2.delete('echo', function(err) {
       should(err).be.null();
 
       pm2.list(function(err, procs) {
@@ -117,7 +116,7 @@ describe('Misc commands', function() {
   });
 
   it('should resurrect previous processes from dump', function(done) {
-    pm2.resurrect(function(err, data) {
+    pm2.resurrect(function(err) {
       should(err).be.null();
 
       pm2.list(function(err, procs) {
@@ -131,7 +130,7 @@ describe('Misc commands', function() {
   it('should resurrect previous processes from backup if dump is broken', function(done) {
     fs.writeFileSync(cst.DUMP_FILE_PATH, '[{');
 
-    pm2.resurrect(function(err, data) {
+    pm2.resurrect(function(err) {
       should(err).be.null();
 
       pm2.list(function(err, procs) {
@@ -151,7 +150,7 @@ describe('Misc commands', function() {
       fs.unlinkSync(cst.DUMP_FILE_PATH);
     }
 
-    pm2.resurrect(function(err, data) {
+    pm2.resurrect(function(err) {
       should(err).be.null();
 
       pm2.list(function(err, procs) {

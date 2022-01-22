@@ -1,7 +1,6 @@
 
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 var fs     = require('fs');
 
 describe('Signal kill (+delayed)', function() {
@@ -12,14 +11,14 @@ describe('Signal kill (+delayed)', function() {
   });
 
   after(function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function() {
       pm2.kill(done);
     });
   });
 
   before(function(done) {
     pm2.connect(function() {
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function() {
         done();
       });
     });
@@ -59,7 +58,7 @@ describe('Signal kill (+delayed)', function() {
         });
       }, 3500);
 
-      pm2.stop('delayed-sigint', function(err, app) {
+      pm2.stop('delayed-sigint', function() {
         //done(err);
       });
 
@@ -100,7 +99,7 @@ describe('Signal kill (+delayed)', function() {
         });
       }, 1500);
 
-      pm2.stop('delayed-sigint', function(err, app) {
+      pm2.stop('delayed-sigint', function() {
         //done(err);
       });
 
@@ -142,7 +141,7 @@ describe('Signal kill (+delayed)', function() {
         });
       }, 1500);
 
-      pm2.stop('delayed-sigint', function(err, app) {
+      pm2.stop('delayed-sigint', function() {
         //done(err);
       });
 
@@ -156,7 +155,7 @@ describe('Signal kill (+delayed)', function() {
         });
       }, 1500);
 
-      pm2.reload('delayed-sigint', function(err, app) {
+      pm2.reload('delayed-sigint', function() {
         //done(err);
       });
 
@@ -199,7 +198,7 @@ describe('Signal kill (+delayed)', function() {
         });
       }, 4500);
 
-      pm2.stop('delayed-sigint', function(err, app) {
+      pm2.stop('delayed-sigint', function() {
         //done(err);
       });
 
@@ -224,14 +223,14 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
   });
 
   after(function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function() {
       pm2.kill(done);
     });
   });
 
   before(function(done) {
     pm2.connect(function() {
-      pm2.delete('all', function(err, ret) {
+      pm2.delete('all', function() {
         done();
       });
     });
@@ -275,7 +274,7 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
         });
       }, 1500);
 
-      pm2.stop(appName, function(err, app) {
+      pm2.stop(appName, function() {
         //done(err);
       });
 
@@ -330,7 +329,7 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
         });
       }, 1500);
 
-      pm2.stop(appName, function(err, app) {
+      pm2.stop(appName, function() {
         //done(err);
       });
 
@@ -345,7 +344,7 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
         });
       }, 1500);
 
-      pm2.reload(appName, function(err, app) {
+      pm2.reload(appName, function() {
         //done(err);
       });
 

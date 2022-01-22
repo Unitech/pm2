@@ -14,10 +14,10 @@ const DOCKER_IMAGE_NAME = 'pm2-test'
 var timings = {};
 
 function run(cmd, cb) {
-  exec(cmd, function(err, stdout, stderr) {
+  exec(cmd, function(err) {
     if (err) {
       console.log(`Retrying ${cmd}`)
-      return exec(cmd, function(err, stdout, stderr) {
+      return exec(cmd, function(err, stdout) {
         if (err) return cb(stdout.split('\n'));
         return cb(null);
       })

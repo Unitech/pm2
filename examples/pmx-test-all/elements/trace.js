@@ -34,7 +34,7 @@ function request(path) {
 
   var req = http.request(options, function(res) {
     res.setEncoding('utf8');
-    res.on('data', function (data) {
+    res.on('data', function () {
       //console.log(data);
     });
   });

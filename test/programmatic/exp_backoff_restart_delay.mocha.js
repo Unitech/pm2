@@ -4,7 +4,6 @@ process.env.PM2_WORKER_INTERVAL = 100
 
 const PM2 = require('../..');
 const should = require('should');
-const exec = require('child_process').exec
 const path = require('path')
 
 describe('Exponential backoff feature', function() {

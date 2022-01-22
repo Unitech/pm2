@@ -1,7 +1,6 @@
 
 const PM2 = require('../..');
 const should = require('should');
-const exec = require('child_process').exec
 const path = require('path')
 const fs = require('fs')
 
@@ -28,7 +27,7 @@ describe('Modules programmatic testing', function() {
   })
 
   it('should start app and find version', function(done) {
-    pm2.start('./version-test/index.js', (err) => {
+    pm2.start('./version-test/index.js', () => {
       pm2.list(function(err, apps) {
         should(err).be.null()
         var real_version = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures/version-test/package.json'))).version

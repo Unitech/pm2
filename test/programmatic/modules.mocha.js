@@ -50,7 +50,7 @@ describe('Modules programmatic testing', function() {
   });
 
   it('should uninstall all modules', function(done) {
-    pm2.uninstall('all', function(err, apps) {
+    pm2.uninstall('all', function() {
       done();
     });
   });

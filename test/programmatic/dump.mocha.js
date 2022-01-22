@@ -2,7 +2,6 @@
 //process.env.NODE_ENV ='test';
 var PM2    = require('../..');
 var should = require('should');
-var path   = require('path');
 
 describe('PM2 programmatic calls', function() {
   var proc1 = null;
@@ -14,9 +13,9 @@ describe('PM2 programmatic calls', function() {
   });
 
   after(function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function() {
       // clean dump file
-      pm2.clearDump(function(err) {
+      pm2.clearDump(function() {
         pm2.kill(done);
       });
     });
@@ -26,7 +25,7 @@ describe('PM2 programmatic calls', function() {
     pm2.connect(function() {
       pm2.launchBus(function(err, _bus) {
         bus = _bus;
-        pm2.delete('all', function(err, ret) {
+        pm2.delete('all', function() {
           done();
         });
       });
@@ -46,7 +45,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should save/dump all processes', function(done) {
-    pm2.dump(function(err, ret) {
+    pm2.dump(function(err) {
       should(err).be.null()
       done();
     });
@@ -54,7 +53,7 @@ describe('PM2 programmatic calls', function() {
 
 
   it('should delete processes', function(done) {
-    pm2.delete('all', function(err, ret) {
+    pm2.delete('all', function(err) {
       should(err).be.null()
       pm2.list(function(err, ret) {
         should(err).be.null()
@@ -65,21 +64,21 @@ describe('PM2 programmatic calls', function() {
   });
 
   it('should not save/dump if 0 processes', function(done) {
-    pm2.dump(function(err, ret) {
+    pm2.dump(function(err) {
       should(err).not.be.null()
       done();
     });
   });
 
   it('should save/dump if 0 processes AND --FORCE', function(done) {
-    pm2.dump(true, function(err, ret) {
+    pm2.dump(true, function(err) {
       should(err).be.null()
       done();
     });
   });
 
   it('should resurrect 0 processes', function(done) {
-    pm2.resurrect(function(err, ret) {
+    pm2.resurrect(function(err) {
       should(err).be.null()
       pm2.list(function(err, ret) {
         should(err).be.null()
