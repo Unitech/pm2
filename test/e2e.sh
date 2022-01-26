@@ -43,12 +43,16 @@ fi
 
 runTest ./test/e2e/cli/monit.sh
 runTest ./test/e2e/cli/cli-actions-1.sh
-runTest ./test/e2e/cli/cli-actions-2.sh
+if [[ ! -v GITHUB_ACTIONS ]]; then 
+    runTest ./test/e2e/cli/cli-actions-2.sh
+fi
 runTest ./test/e2e/cli/dump.sh
 runTest ./test/e2e/cli/resurrect.sh
 runTest ./test/e2e/cli/watch.sh
 runTest ./test/e2e/cli/right-exit-code.sh
-runTest ./test/e2e/cli/fork.sh
+if [[ ! -v GITHUB_ACTIONS ]]; then 
+    runTest ./test/e2e/cli/fork.sh
+fi
 runTest ./test/e2e/cli/piped-config.sh
 
 # PROCESS FILES
