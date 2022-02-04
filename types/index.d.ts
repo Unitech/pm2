@@ -1,4 +1,4 @@
-// Type definitions for pm2 2.7.1
+// Type definitions for pm2
 // Definitions by: João Portela https://www.github.com/jportela
 
 // Exported Methods
@@ -8,7 +8,7 @@
  * Once launched, the pm2 process will keep running after the script exits.
  * @param errback - Called when finished connecting to or launching the pm2 daemon process.
  */
-export function connect(errback: ErrCallback): void;
+export function connect(errback: ErrConnectCallback): void;
 /**
  * Either connects to a running pm2 daemon (“God”) or launches and daemonizes one.
  * Once launched, the pm2 process will keep running after the script exits.
@@ -18,7 +18,7 @@ export function connect(errback: ErrCallback): void;
  * If pm2 is already running, your script will link to the existing daemon but will die once your process exits.
  * @param errback - Called when finished connecting to or launching the pm2 daemon process.
  */
-export function connect(noDaemonMode:boolean, errback: ErrCallback): void;
+export function connect(noDaemonMode: boolean, errback: ErrConnectCallback): void;
 
 /**
  * Starts a script that will be managed by pm2.
@@ -61,7 +61,7 @@ export function start(script: string, jsonConfigFile: string, errback: ErrProcCa
 /**
  * Disconnects from the pm2 daemon.
  */
-export function disconnect(): void;
+export function disconnect(errback: ErrCallback): void;
 
 /**
  * Stops a process but leaves the process meta-data in pm2’s list
@@ -434,10 +434,18 @@ export interface StartOptions {
 
 interface ReloadOptions {
   /**
-   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env 
+   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env
    * before reloading your process.
    */
   updateEnv?: boolean;
+}
+
+interface ConnectMetadata {
+  daemon_mode: boolean;
+  new_pm2_instance: boolean;
+  rpc_socket_file: undefined | string | number;
+  pub_socket_file: undefined | string | number;
+  pm2_home: undefined | string;
 }
 
 // Types
@@ -445,9 +453,10 @@ interface ReloadOptions {
 type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status';
 type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
 
-type ErrCallback = (err: Error) => void;
-type ErrProcCallback = (err: Error, proc: Proc) => void;
-type ErrProcDescCallback = (err: Error, processDescription: ProcessDescription) => void;
-type ErrProcDescsCallback = (err: Error, processDescriptionList: ProcessDescription[]) => void;
-type ErrResultCallback = (err: Error, result: any) => void;
-type ErrBusCallback = (err: Error, bus: any) => void;
+type ErrCallback = (err: Error | null) => void;
+type ErrConnectCallback = (err: Error | null, meta: ConnectMetadata) => void;
+type ErrProcCallback = (err: Error | null, proc: Proc) => void;
+type ErrProcDescCallback = (err: Error | null, processDescription: ProcessDescription) => void;
+type ErrProcDescsCallback = (err: Error | null, processDescriptionList: ProcessDescription[]) => void;
+type ErrResultCallback = (err: Error | null, result: any) => void;
+type ErrBusCallback = (err: Error | null, bus: any) => void;
