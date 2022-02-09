@@ -176,7 +176,7 @@
     "chokidar": "^3.5.1",
     "cli-tableau": "^2.0.0",
     "commander": "2.15.1",
-    "node-schedule": "^2.0.0",
+    "croner": "~4.1.92",
     "cron-parser": "~3.5.0",
     "dayjs": "~1.8.25",
     "debug": "^4.3.1",
