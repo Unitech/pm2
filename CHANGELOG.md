@@ -1,4 +1,21 @@
 
+## 5.2.0
+
+- replace node-cron by croner (#5183 #5035)
+- upgrade mocha deps
+- fix pm2 report when daemon not running
+- remove semver check for legacy node.js versions
+- update node version in setup.deb.sh by using lts (#5201) + openrc
+- replace legacy util._extend by Object.assign (#5239)
+- add missing start options types (#5242)
+- recursive detection of package.json (#5267)
+- make tarball module uninstall cross-platform (#5269)
+- Fix unnecessary "ENOENT" console.error when serving a spa (#5272)
+- fix: used env variable instead of hardcode datetime format (#5277)
+- copyright update (#5278)
+- fix: remove constants import from VersionCheck (not needed) (#5279)
+- Reduce async import (#5280)
+
 ## 5.1.2
 
 - easily disable cron-restart strategy via `$ pm2 restart --cron-restart 0`
