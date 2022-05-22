@@ -1,5 +1,5 @@
 // Type definitions for pm2
-// Definitions by: João Portela https://www.github.com/jportela
+// Definitions by: João Portela https://www.github.com/jportela & Sasial https://github.com/sasial-dev
 
 // Exported Methods
 
@@ -204,6 +204,25 @@ export default class API {
 		packet: object,
 		cb: ErrResultCallback
 	): void
+
+  /**
+	 * Trigger a function in the pm2 instance.
+	 * @param process - Can either be the name as given in the pm2.start options,
+	 * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param trigger - the function to trigger
+	 * @param errback - called when the process is reloaded
+	 */
+  trigger(process: string | number, trigger: string, errback: ErrProcCallback): void
+
+  /**
+	 * Trigger a function in the pm2 instance.
+	 * @param process - Can either be the name as given in the pm2.start options,
+	 * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param trigger - the function to trigger
+	 * @param options - An object containing data
+	 * @param errback - called when the process is reloaded
+	 */
+  trigger(process: string | number, trigger: string, options: any, errback: ErrProcCallback): void
 }
 
 // Interfaces
