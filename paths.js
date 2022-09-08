@@ -70,7 +70,7 @@ module.exports = function(PM2_HOME) {
     BUILTIN_NPM_PATH         : has_node_embedded === true ? p.resolve(__dirname, './node/bin/npm') : null,
   };
 
-  // allow override of file paths via environnement
+  // allow overide of file paths via environnement
   var paths = Object.keys(pm2_file_stucture);
   paths.forEach(function (key) {
     var envKey = key.indexOf('PM2_') > -1 ? key : 'PM2_' + key;
