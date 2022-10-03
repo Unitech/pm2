@@ -11,7 +11,7 @@ arch:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install python3
-  - sudo apt-get install php7.0-cli
+  - sudo apt-get install php-cli
   - if [[ $(uname -m) == 's390x' ]]; then
       sudo apt-get install bc;
     fi
