@@ -1,4 +1,11 @@
 
+## 5.2.1
+
+- fix cluster error avoiding process restart (#5396)
+- ensure increment_var value is a number (#5435)
+- update dependencies
+- add node latest to travis testing
+
 ## 5.2.0
 
 - replace node-cron by croner (#5183 #5035)
