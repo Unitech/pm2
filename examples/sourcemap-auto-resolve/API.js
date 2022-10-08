@@ -150,7 +150,7 @@ API.prototype.connect = function(noDaemon, cb) {
       return cb(err, meta);
 
     // If new pm2 instance has been popped
-    // Lauch all modules
+    // Launch all modules
     Modularizer.launchAll(that, function(err_mod) {
       return cb(err, meta);
     });
