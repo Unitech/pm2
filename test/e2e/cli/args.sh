@@ -29,9 +29,15 @@ function hasArg {
     else
         OCCURENCES=1
     fi
-    CMD=`grep -c -- $1 args.log`
+    CMD=`grep -c -E -- "^$1$" args.log`
     [ $CMD -eq $OCCURENCES ] || fail "Arg $1 not present"
     success "Arg $1 present"
+}
+
+function shouldNotHaveArg {
+    CMD=`grep -c -E -- "^$1$" args.log`
+    [ $CMD -eq 0 ] || fail "Arg $1 present (should not be)"
+    success "Arg $1 not present (okay)"
 }
 
 sleep 2
@@ -57,3 +63,68 @@ sleep 2
 hasArg "argv1" 2
 hasArg "argv2"
 hasArg "argv3"
+
+
+## Test #3 with no-daemon params (forking code path)
+
+$pm2 delete all
+>args.log
+
+$pm2 kill  # ensure God Daemon is dead for no-daemon mode
+
+# note when specifying an env json instead of a script, 
+# pm2 ignores command line flags like -o and -e
+echo '{"script":"params_check.js", "args": "foo bar", "out_file": "args.log"}' > args.env.json
+
+$pm2 start --no-daemon args.env.json -- argv1 argv2 argv3 > /dev/null &
+PID=$!
+
+sleep 5
+kill $PID
+wait $PID 2>/dev/null
+
+shouldNotHaveArg "start"
+shouldNotHaveArg "--no-daemon"
+shouldNotHaveArg "args.env.json"
+shouldNotHaveArg "--"
+hasArg "argv1" 1
+hasArg "argv2"
+hasArg "argv3"
+hasArg "foo"
+hasArg "bar"
+
+rm args.env.json
+
+
+## Test #4 with no-daemon params (clustering code path)
+
+$pm2 delete all
+>args.log
+
+$pm2 kill  # ensure God Daemon is dead for no-daemon mode
+
+# note when specifying an env json instead of a script, 
+# pm2 ignores command line flags like -o and -e and --merge-logs
+# cluster mode changes logfile name to <logname>-<id>.log
+# merge_logs keeps all instance logs in the specified file
+echo '{"script":"params_check.js", "args": "foo bar", "out_file": "args.log", "exec_mode": "cluster", "merge_logs": true}' > args.env.json
+
+$pm2 start --no-daemon args.env.json -- argv1 argv2 argv3 > /dev/null &
+PID=$!
+
+sleep 5  # this one takes longer to launch
+kill $PID
+wait $PID 2>/dev/null
+
+shouldNotHaveArg "start"
+shouldNotHaveArg "--no-daemon"
+shouldNotHaveArg "args.env.json"
+shouldNotHaveArg "--"
+hasArg "argv1"
+hasArg "argv2"
+hasArg "argv3"
+hasArg "foo"
+hasArg "bar"
+
+rm args.env.json
+
