@@ -434,7 +434,7 @@ export interface StartOptions {
 
 interface ReloadOptions {
   /**
-   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env 
+   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env
    * before reloading your process.
    */
   updateEnv?: boolean;
@@ -446,7 +446,7 @@ type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored'
 type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
 
 type ErrCallback = (err: Error) => void;
-type ErrProcCallback = (err: Error, proc: Proc) => void;
+type ErrProcCallback = (err: Error, proc: ProcessDescription[]) => void;
 type ErrProcDescCallback = (err: Error, processDescription: ProcessDescription) => void;
 type ErrProcDescsCallback = (err: Error, processDescriptionList: ProcessDescription[]) => void;
 type ErrResultCallback = (err: Error, result: any) => void;
