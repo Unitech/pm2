@@ -434,6 +434,14 @@ export interface StartOptions {
    * The environment variables to pass on to the process.
    */
   env?: { [key: string]: string; };
+  /**
+   * NameSpace for the process
+   * @default 'default'
+   * @example 'production'
+   * @example 'development'
+   * @example 'staging'
+   */
+  namespace?: string;
 }
 
 interface ReloadOptions {
