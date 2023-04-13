@@ -23,7 +23,7 @@
 </a>
 
 <a href="https://travis-ci.com/github/Unitech/pm2" title="PM2 Tests">
-  <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
+  <img src="https://travis-ci.com/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
 <br/>
