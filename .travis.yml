@@ -1,7 +1,7 @@
 language: node_js
 dist: focal
 node_js:
-  - "19"
+  - "20"
   - "18"
   - "16"
   - "14"
