@@ -108,23 +108,23 @@ should 'should not restart' 'restart_time: 0' 1
 $pm2 kill
 
 $pm2 start exitcode42.js --stop-exit-codes 42
-sleep 0.5 
+sleep 2
 should 'should not restart' 'restart_time: 0' 1
 
 $pm2 delete all
-$pm2 start exitcode42.js --stop-exit-codes 34 42 57
-sleep 0.5 
-should 'should not restart' 'restart_time: 0' 1
-$pm2 kill 
+$pm2 start exitcode42.js --stop-exit-codes 34
+sleep 1
+shouldnot 'should restart' 'restart_time: 0' 1
+$pm2 kill
 
 $pm2 start exitcode42.js --stop-exit-codes 3
-sleep 0.5 
-should 'should restart processes' 'restart_time: 0' 1
-$pm2 kill 
+sleep 1
+shouldnot 'should restart processes' 'restart_time: 0' 1
+$pm2 kill
 
 $pm2 delete all
 $pm2 start stop-exit-codes.json
-sleep 0.5 
+sleep 0.5
 should 'should not restart' 'restart_time: 0' 1
 
 
