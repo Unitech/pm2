@@ -23,7 +23,7 @@
 </a>
 
 <a href="https://travis-ci.com/github/Unitech/pm2" title="PM2 Tests">
-  <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
+  <img src="https://travis-ci.com/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
 <br/>
@@ -40,7 +40,7 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 1800 tests](https://app.travis-ci.com/github/Unitech/pm2).
+PM2 is constantly assailed by [more than 1800 tests](https://app.travis-ci.com/github/Unitech/pm2/branches).
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 

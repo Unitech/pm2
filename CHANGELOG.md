@@ -1,4 +1,14 @@
 
+## 5.3.0
+
+- fix: replace non-working condition that blocks flush from clearing the logs #5533 @Sailboat265
+- fix: ESM script loader #5524 @BlueWater86
+
+## 5.2.2
+
+- fix: correct pm2 ls display when there is a (very) long process id (@dko-slapdash)
+- typo: corrections
+
 ## 5.2.1
 
 - fix cluster error avoiding process restart (#5396)
