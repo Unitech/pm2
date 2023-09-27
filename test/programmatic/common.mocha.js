@@ -25,4 +25,19 @@ describe('Common utilities', function () {
       should(Common.isConfigFile('lorem-ipsum.js')).be.null();
     })
   })
+
+  describe('Config file candidates', function () {
+    it('should return an array with well-known file extensions', function () {
+      var result = Common.getConfigFileCandidates('ecosystem');
+      should(result).eql([
+        'ecosystem.json',
+        'ecosystem.yml',
+        'ecosystem.yaml',
+        'ecosystem.config.js',
+        'ecosystem.config.cjs',
+        'ecosystem.config.mjs'
+      ]);
+    });
+  });
+
 })
