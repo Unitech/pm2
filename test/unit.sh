@@ -82,6 +82,7 @@ runUnitTest $D/configuration.mocha.js
 runUnitTest $D/id.mocha.js
 runUnitTest $D/god.mocha.js
 runUnitTest $D/dump.mocha.js
+runUnitTest $D/common.mocha.js
 
 runUnitTest $D/issues/json_env_passing_4080.mocha.js
 
