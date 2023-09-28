@@ -166,7 +166,7 @@
     "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "~2.0.0",
+    "@pm2/agent": "~2.0.3",
     "@pm2/io": "~5.0.0",
     "@pm2/js-api": "~0.6.7",
     "@pm2/pm2-version-check": "latest",
