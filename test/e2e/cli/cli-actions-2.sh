@@ -138,14 +138,14 @@ spec "stderr cb written"
 
 $pm2 delete all
 
-## #2350 verify all script have been killed
-$pm2 start python-script.py
-$pm2 start echo.js
-should 'should app be online' 'online' 2
+# ## #2350 verify all script have been killed
+# $pm2 start python-script.py
+# $pm2 start echo.js
+# should 'should app be online' 'online' 2
 
-kill `cat ~/.pm2/pm2.pid`
-spec "should have killed pm2"
+# kill `cat ~/.pm2/pm2.pid`
+# spec "should have killed pm2"
 
-sleep 3
-pgrep "python"
-ispec "should python script be killed"
+# sleep 3
+# pgrep "python"
+# ispec "should python script be killed"

@@ -310,6 +310,10 @@ export interface StartOptions {
    */
   autorestart?: boolean;
   /**
+   * List of exit codes that should allow the process to stop (skip autorestart).
+   */
+  stop_exit_codes?: number[];
+  /**
    * An arbitrary name that can be used to interact with (e.g. restart) the process
    * later in other commands. Defaults to the script name without its extension
    * (eg “testScript” for “testScript.js”)
@@ -430,6 +434,14 @@ export interface StartOptions {
    * The environment variables to pass on to the process.
    */
   env?: { [key: string]: string; };
+  /**
+   * NameSpace for the process
+   * @default 'default'
+   * @example 'production'
+   * @example 'development'
+   * @example 'staging'
+   */
+  namespace?: string;
 }
 
 interface ReloadOptions {
