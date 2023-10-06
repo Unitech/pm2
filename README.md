@@ -1,7 +1,8 @@
 <div align="center">
   <br/>
   <a href="http://pm2.keymetrics.io/" title="PM2 Keymetrics link">
-    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" alt="pm2 logo">
+    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png#gh-light-mode-only" alt="pm2 logo">
+    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4-dark-mode.png#gh-dark-mode-only" alt="pm2 logo">
   </a>
   <br/>
 <br/>
