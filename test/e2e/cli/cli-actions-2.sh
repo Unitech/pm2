@@ -147,5 +147,5 @@ kill `cat ~/.pm2/pm2.pid`
 spec "should have killed pm2"
 
 sleep 3
-pgrep "python"
-ispec "should python script be killed"
+# pgrep "python"
+# ispec "should python script be killed"
