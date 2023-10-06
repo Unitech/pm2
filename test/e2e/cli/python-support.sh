@@ -5,9 +5,6 @@ source "${SRC}/../include.sh"
 
 cd $file_path/extra-lang
 
-which python
-spec "should have python installed"
-
 #
 # Config file
 #

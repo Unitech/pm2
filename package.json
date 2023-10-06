@@ -99,6 +99,8 @@
   "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
+    "test:unit": "bash test/unit.sh",
+    "test:e2e": "bash test/e2e.sh",
     "test": "bash test/unit.sh && bash test/e2e.sh"
   },
   "keywords": [

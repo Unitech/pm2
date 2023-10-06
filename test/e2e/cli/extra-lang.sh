@@ -7,7 +7,7 @@ cd $file_path/extra-lang
 
 which php
 spec "should php cli be installed"
-which python
+which python3
 spec "should python cli be installed"
 
 #
@@ -53,6 +53,6 @@ $pm2 delete all
 
 $pm2 start echo.py --interpreter="/usr/bin/python3" --interpreter-args="-u" --log="cli-python.log" --merge-logs
 should 'should have started 1 app' 'onl\ine' 1
-
+sleep 1
 grep "RAWPython" cli-python.log
 spec "Python script should have written data in log file"

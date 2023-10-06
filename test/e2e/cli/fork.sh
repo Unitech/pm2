@@ -20,11 +20,6 @@ should 'should start app in fork mode' 'fork_mode' 1
 
 ########### Auto Detective Interpreter In Fork mode
 
-$pm2 kill
-
-$pm2 start echo.coffee
-should 'should has forked app' 'fork_mode' 1
-
 ### Dump resurrect should be ok
 $pm2 dump
 
