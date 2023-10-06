@@ -1,9 +1,17 @@
 <div align="center">
-  <br/>
-  <a href="http://pm2.keymetrics.io/" title="PM2 Keymetrics link">
-    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png#gh-light-mode-only" alt="pm2 logo">
-    <img width=710px src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4-dark-mode.png#gh-dark-mode-only" alt="pm2 logo">
-  </a>
+ <br/>
+<picture>
+  <source
+    srcset="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png"
+    media="(prefers-color-scheme: light)"
+  />
+  <source
+    srcset="https://raw.githubusercontent.com/Unitech/pm2/development/pres/pm2-v4-dark-mode.png"
+    media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+  />
+  <img src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" />
+</picture>
+  
   <br/>
 <br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b><br/>
