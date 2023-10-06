@@ -19,20 +19,20 @@
 <br/><br/>
 
 
-<a title="PM2 Downloads">
+<a title="Donate" href="https://explorer.kaspa.org/addresses/kaspa:qr2gxmun87mc8wt8adegy6fulvpfdjgsa8zcdxyulvzzr2utra3jv4s8txkq9">
+    <img src="https://img.shields.io/badge/donation-kaspa-green" alt="Donate"/>
+</a>
+
+<a title="PM2 Downloads" href="https://npm-stat.com/charts.html?package=pm2&from=2018-01-01&to=2023-08-01">
   <img src="https://img.shields.io/npm/dm/pm2" alt="Downloads per Month"/>
 </a>
 
-<a title="PM2 Downloads">
+<a title="PM2 Downloads" href="https://npm-stat.com/charts.html?package=pm2&from=2018-01-01&to=2023-08-01">
   <img src="https://img.shields.io/npm/dy/pm2" alt="Downloads per Year"/>
 </a>
 
 <a href="https://badge.fury.io/js/pm2" title="NPM Version Badge">
    <img src="https://badge.fury.io/js/pm2.svg" alt="npm version">
-</a>
-
-<a href="https://travis-ci.com/github/Unitech/pm2" title="PM2 Tests">
-  <img src="https://travis-ci.org/Unitech/pm2.svg?branch=master" alt="Build Status"/>
 </a>
 
 <br/>
