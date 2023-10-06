@@ -11,7 +11,7 @@
   />
   <img src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" />
 </picture>
-  
+
   <br/>
 <br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b><br/>
@@ -49,7 +49,7 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 1800 tests](https://app.travis-ci.com/github/Unitech/pm2/branches).
+PM2 is constantly assailed by [more than 1800 tests](https://github.com/Unitech/pm2/actions/workflows/node.js.yml).
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
@@ -64,7 +64,7 @@ With NPM:
 $ npm install pm2 -g
 ```
 
-You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [ASDF](https://blog.natterstefan.me/how-to-use-multiple-node-version-with-asdf).
+You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm).
 
 ### Start an application
 
