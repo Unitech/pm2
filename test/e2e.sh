@@ -16,6 +16,7 @@ runTest ./test/e2e/cli/reload.sh
 runTest ./test/e2e/cli/start-app.sh
 runTest ./test/e2e/cli/operate-regex.sh
 runTest ./test/e2e/cli/interpreter.sh
+runTest ./test/e2e/cli/bun.sh
 runTest ./test/e2e/cli/app-configuration.sh
 runTest ./test/e2e/cli/binary.sh
 runTest ./test/e2e/cli/startOrX.sh
