@@ -1,0 +1,7 @@
+- name: app-1
+  script: app.js
+  post_start_hook: post-start-hook.js
+
+- name: app-2
+  script: app.js
+  post_start_hook: post-start-hook.js
