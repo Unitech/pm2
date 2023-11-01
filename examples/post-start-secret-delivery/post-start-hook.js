@@ -4,7 +4,7 @@ const fs = require('fs').promises;
 /**
  * This is a post-start hook that will be called after an app started.
  * @param {object} info
- * @param {string} info.pid The apps PID
+ * @param {number} info.pid The apps PID
  * @param {Stream} info.stdin The apps STDIN stream
  * @param {Stream} info.stdout The apps STDOUT stream
  * @param {Stream} info.stderr The apps STDERR stream
