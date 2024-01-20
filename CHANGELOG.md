@@ -1,11 +1,12 @@
 ## 5.3.1
 
-- #5683 update badges
-- #5684 auto switch light and dark mode logos
 - #5686 Switch from Travis CI to Github Actions
 - #5680 Fixed reserved keyword for ES6 Strict Mode when Bundling @juaneth
+- #5683 update badges
+- #5684 auto switch light and dark mode logos
 - #5678 Bugfix/deploy ecosystem filename extension / esm module default ecosystem config name @TeleMediaCC
 - #5660 Fix matching logic for logs from namespace when lines = 0 @bawjensen
+- fix "vulnerabilities" in axios module
 
 ## 5.3.0
 
