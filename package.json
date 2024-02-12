@@ -184,6 +184,7 @@
     "enquirer": "2.3.6",
     "eventemitter2": "5.0.1",
     "fclone": "1.0.11",
+    "js-yaml": "^4.1.0",
     "mkdirp": "1.0.4",
     "needle": "2.4.0",
     "pidusage": "~3.0",
@@ -195,8 +196,7 @@
     "semver": "^7.2",
     "source-map-support": "0.5.21",
     "sprintf-js": "1.1.2",
-    "vizion": "~2.2.1",
-    "yamljs": "0.3.0"
+    "vizion": "~2.2.1"
   },
   "optionalDependencies": {
     "pm2-sysmonit": "^1.2.8"
