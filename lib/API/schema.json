@@ -187,6 +187,12 @@
     "docDefault" : "True",
     "docDescription": "Enable or disable the versioning metadatas (vizion library)"
   },
+  "autostart": {
+    "type": "boolean",
+    "default": true,
+    "docDefault": "True",
+    "docDescription": "Enable or disable auto start when adding process"
+  },
   "autorestart": {
     "type": "boolean",
     "default": true,
