@@ -306,6 +306,10 @@ interface Pm2Env {
 
 export interface StartOptions {
   /**
+   * Enable or disable auto start after process added (default: true).
+   */
+  autostart?: boolean;
+  /**
    * Enable or disable auto restart after process failure (default: true).
    */
   autorestart?: boolean;
@@ -446,7 +450,7 @@ export interface StartOptions {
 
 interface ReloadOptions {
   /**
-   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env 
+   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env
    * before reloading your process.
    */
   updateEnv?: boolean;
