@@ -10,6 +10,9 @@ LOG_PATH_PREFIX="${SRC}/__log-namespace__"
 rm -rf "${LOG_PATH_PREFIX}"
 mkdir "${LOG_PATH_PREFIX}"
 
+# The first operation that starts the daemon needs to be in the foreground, otherwise we risk starting multiple
+$pm2 ping
+
 LOG_FILE_PREMATURE="${LOG_PATH_PREFIX}/premature-log-out.log"
 $pm2 logs e2e-test-log-namespace > $LOG_FILE_PREMATURE & # backgrounded - will be stopped by `$pm2 delete all`
 
