@@ -258,6 +258,10 @@
     "docDefault": false,
     "docDescription": "Start a script even if it is already running (only the script path is considered)"
   },
+  "post_start_hook": {
+    "type": "string",
+    "docDescription": "Script to run after app start"
+  },
   "append_env_to_name": {
     "type": "boolean",
     "docDefault": false,
