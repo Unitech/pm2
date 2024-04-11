@@ -173,6 +173,70 @@ describe('Wait ready / Graceful start / restart', function() {
 
   });
 
+  describe('(Cluster): Launching limit feature', function () {
+    this.timeout(10000);
+
+    after(function(done) {
+      pm2.delete('all', done);
+    });
+
+    it('Should launch app processes in parallel', function(done) {
+      pm2.start({
+        script         : './wait-ready.js',
+        instances      : 3,
+        launch_limit: 2,
+        exec_mode      : 'cluster',
+        name           : 'launching-limit-1'
+      });
+
+      setTimeout(function() {
+        pm2.list(function(err, apps) {
+          should(apps[0].pm2_env.status).eql('online');
+          should(apps[1].pm2_env.status).eql('online');
+          should(apps[2].pm2_env.status).eql('online');
+          pm2.delete('all', done);
+        })
+      }, 500);
+    });
+
+    it('Should launch app processes in parallel and limit launching processes on wait ready', function(done) {
+      pm2.start({
+        script         : './wait-ready.js',
+        listen_timeout : 2000,
+        wait_ready     : true,
+        instances      : 3,
+        launch_limit: 2,
+        exec_mode      : 'cluster',
+        name           : 'launching-limit-2'
+      });
+
+      setTimeout(function() {
+        pm2.list(function(err, apps) {
+          should(apps[0].pm2_env.status).eql('launching');
+          should(apps[1].pm2_env.status).eql('launching');
+          should(apps[2]).undefined();
+        });
+      }, 500);
+
+      setTimeout(function() {
+        pm2.list(function(err, apps) {
+          should(apps[0].pm2_env.status).eql('online');
+          should(apps[1].pm2_env.status).eql('online');
+          should(apps[2].pm2_env.status).eql('launching');
+        })
+      }, 1500);
+
+      setTimeout(function() {
+        pm2.list(function(err, apps) {
+          should(apps[0].pm2_env.status).eql('online');
+          should(apps[1].pm2_env.status).eql('online');
+          should(apps[2].pm2_env.status).eql('online');
+          done();
+        })
+      }, 2500);
+    });
+  });
+
   describe('(Cluster): Wait ready feature', function () {
     this.timeout(10000);
 
