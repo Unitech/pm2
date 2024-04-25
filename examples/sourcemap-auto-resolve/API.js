@@ -299,7 +299,7 @@ API.prototype.start = function(cmd, opts, cb) {
 
   var that = this;
 
-  if (util.isArray(opts.watch) && opts.watch.length === 0)
+  if (Array.isArray(opts.watch) && opts.watch.length === 0)
     opts.watch = (opts.rawArgs ? !!~opts.rawArgs.indexOf('--watch') : !!~process.argv.indexOf('--watch')) || false;
 
   if (Common.isConfigFile(cmd) || (typeof(cmd) === 'object'))
@@ -1401,7 +1401,7 @@ API.prototype._handleAttributeUpdate = function(opts) {
 
   delete appConf.exec_mode;
 
-  if (util.isArray(appConf.watch) && appConf.watch.length === 0) {
+  if (Array.isArray(appConf.watch) && appConf.watch.length === 0) {
     if (!~opts.rawArgs.indexOf('--watch'))
       delete appConf.watch
   }
