@@ -130,6 +130,10 @@ Hot Reload allows to update an application without any downtime:
 $ pm2 reload all
 ```
 
+**Windows Load Balancing Alert ⚠️**
+
+Developers using PM2 on Windows servers, beware! While PM2's cluster mode excels in load balancing on Linux, on Windows, all requests are directed to a single instance, hindering the intended load distribution.
+
 [More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 
 ### Container Support
