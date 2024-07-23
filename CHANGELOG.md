@@ -1,3 +1,14 @@
+
+## 5.4.1
+
+- @pm2/io DeprecationWarning: The util._extend API is deprecated https://github.com/keymetrics/pm2-io-apm/issues/301 @egoroof
+
+## 5.4.0
+
+- #5782 add autostart true||false feature by @ultimate-tester
+- fix UUID deprecation
+- updates modules
+
 ## 5.3.1
 
 - #5686 Switch from Travis CI to Github Actions
