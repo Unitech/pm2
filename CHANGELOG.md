@@ -142,6 +142,9 @@ pm2 set pm2:sysmonit true
 
 Data quantity sent from PM2 to PM2.io has been reduced by 80%, thanks for a json patch differential system. Much more data can now be exposed (metrics, actions) to PM2.io
 
+### Breaking changes
+- drop support for node 8.x and 10.x
+
 ### Other fixes
 
 - feat: added args and full script path to monitoring data
