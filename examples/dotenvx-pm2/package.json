@@ -1,0 +1,23 @@
+{
+  "name": "dotenvx-pm2",
+  "version": "1.0.0",
+  "description": "Example usage of dotenvx with pm2",
+  "main": "index.js",
+  "type": "module",
+  "author": "Michael Kalygin",
+  "license": "MIT",
+  "scripts": {
+    "start:json:simple": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env -- ../../bin/pm2 start ecosystem.config.cjs",
+    "start:json:overload": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env --overload -- ../../bin/pm2 start ecosystem.config.cjs",
+    "start:pid:simple": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env -- ../../bin/pm2 start forked_app clustered_app",
+    "start:pid:overload": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env --overload -- ../../bin/pm2 start forked_app clustered_app",
+    "reload:json:simple": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env -- ../../bin/pm2 reload ecosystem.config.cjs --update-env",
+    "reload:json:overload": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env --overload -- ../../bin/pm2 reload ecosystem.config.cjs --update-env",
+    "reload:pid:simple": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env -- ../../bin/pm2 reload forked_app clustered_app --update-env",
+    "reload:pid:overload": "SH=shell SH_DE=shell SH_PM=shell SH_DE_PM=shell dotenvx run --env-file .env --overload -- ../../bin/pm2 reload forked_app clustered_app --update-env",
+    "delete": "../../bin/pm2 delete ecosystem.config.cjs"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.10.2"
+  }
+}
