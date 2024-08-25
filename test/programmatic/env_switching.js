@@ -130,14 +130,117 @@ describe('PM2 programmatic calls', function() {
     });
   });
 
-  // it('should start a script and NODE_ENV have right value', function(done) {
-  //   pm2.start(json_declaration_simple, function(err, data) {
-  //     proc1 = data[0];
-  //     should(err).be.null;
-  //     proc1.pm2_env['NODE_ENV'].should.eql(json_declaration.env.NODE_ENV);
-  //     done();
-  //   });
-  // });
+  /**
+   * Ensuring that environment update works correct when reloading with JSON config.
+   *
+   * Related issue:
+   * https://github.com/Unitech/pm2/issues/3192
+   */
+  describe('with updateEnv option', () => {
+    const env = {
+      shell: {
+        initial: {
+          SH: 'shell_initial',
+          SH_PM: 'shell_initial',
+        },
+        updated: {
+          SH: 'shell_updated',
+          SH_PM: 'shell_updated',
+        },
+      },
+      pm2: {
+        initial: {
+          PM: 'pm2_initial',
+          SH_PM: 'pm2_initia',
+        },
+        updated: {
+          PM: 'pm2_updated',
+          SH_PM: 'pm2_updated',
+        },
+      },
+    };
 
+    const configInitial = {
+      name: 'child-update-env',
+      script: './../fixtures/env-switching/child.js',
+      instances: '2',
+      env: {
+        NODE_ENV: 'test',
+        ...env.pm2.initial,
+      },
+    };
 
+    const configUpdated = {
+      ...configInitial,
+      env: {
+        NODE_ENV: 'test',
+        ...env.pm2.updated,
+      },
+    };
+
+    it('should inject shell environment, then inject config environment on start', (done) => {
+      Object.assign(process.env, env.shell.initial);
+
+      pm2.start(configInitial, (err, data) => {
+        try {
+          const pm2Env = data[0] ? data[0].pm2_env || {} : {};
+          should(err).be.null();
+          should(pm2Env.SH).eql(env.shell.initial.SH);
+          should(pm2Env.PM).eql(env.pm2.initial.PM);
+          should(pm2Env.SH_PM).eql(env.pm2.initial.SH_PM);
+          done();
+        } catch (err) {
+          done(err);
+        }
+      });
+    });
+
+    it('should inject only config environment on restart when disabled', (done) => {
+      Object.assign(process.env, env.shell.updated);
+
+      pm2.restart(configUpdated, { updateEnv: false }, (err) => {
+        should(err).be.null();
+
+        pm2.list((err, data) => {
+          try {
+            const pm2Env = data.find(proc => proc.name === configInitial.name).pm2_env;
+            should(err).be.null();
+            should(pm2Env.SH).eql(env.shell.initial.SH);
+            should(pm2Env.PM).eql(env.pm2.updated.PM);
+            should(pm2Env.SH_PM).eql(env.pm2.updated.SH_PM);
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+      });
+    });
+
+    it('should inject shell environment, then inject config environment on start when endabled', (done) => {
+      Object.assign(process.env, env.shell.updated);
+
+      pm2.restart(configUpdated, { updateEnv: true }, (err) => {
+        should(err).be.null();
+
+        pm2.list((err, data) => {
+          try {
+            const pm2Env = data.find(proc => proc.name === configInitial.name).pm2_env;
+            should(err).be.null();
+            should(pm2Env.SH).eql(env.shell.updated.SH);
+            should(pm2Env.PM).eql(env.pm2.updated.PM);
+            should(pm2Env.SH_PM).eql(env.pm2.updated.SH_PM);
+            done();
+          } catch (err) {
+            done(err);
+          }
+        });
+      });
+    });
+
+    it('should delete all processes', (done) => {
+      pm2.delete('all', (err, ret) => {
+        done();
+      });
+    });
+  });
 });
