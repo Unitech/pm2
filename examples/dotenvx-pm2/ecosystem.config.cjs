@@ -3,12 +3,19 @@ module.exports = {
     {
       name: 'forked_app',
       script: './index.js',
-      env: {
+      env_initial: {
         PORT: 8001,
-        PM: 'pm2',
-        SH_PM: 'pm2',
-        DE_PM: 'pm2',
-        SH_DE_PM: 'pm2',
+        PM: 'pm2_initial',
+        SH_PM: 'pm2_initial',
+        DE_PM: 'pm2_initial',
+        SH_DE_PM: 'pm2_initial',
+      },
+      env_updated: {
+        PORT: 8001,
+        PM: 'pm2_updated',
+        SH_PM: 'pm2_updated',
+        DE_PM: 'pm2_updated',
+        SH_DE_PM: 'pm2_updated',
       },
     },
     {
@@ -16,12 +23,19 @@ module.exports = {
       script: './index.js',
       instances: 2,
       exec_mode: 'cluster',
-      env: {
+      env_initial: {
         PORT: 8002,
-        PM: 'pm2',
-        SH_PM: 'pm2',
-        DE_PM: 'pm2',
-        SH_DE_PM: 'pm2',
+        PM: 'pm2_initial',
+        SH_PM: 'pm2_initial',
+        DE_PM: 'pm2_initial',
+        SH_DE_PM: 'pm2_initial',
+      },
+      env_updated: {
+        PORT: 8002,
+        PM: 'pm2_updated',
+        SH_PM: 'pm2_updated',
+        DE_PM: 'pm2_updated',
+        SH_DE_PM: 'pm2_updated',
       },
     },
   ],
