@@ -131,7 +131,7 @@ describe('PM2 programmatic calls', function() {
   });
 
   /**
-   * Ensuring that environment update works correct when reloading with JSON config.
+   * Ensuring that environment update works correctly when reloading with JSON config.
    *
    * Related issue:
    * https://github.com/Unitech/pm2/issues/3192
