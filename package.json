@@ -168,9 +168,12 @@
     "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.50.0",
+    "@opentelemetry/sdk-node": "^0.53.0",
     "@pm2/agent": "~2.0.0",
-    "@pm2/js-api": "~0.8.0",
     "@pm2/io": "~6.0.1",
+    "@pm2/js-api": "~0.8.0",
     "@pm2/pm2-version-check": "latest",
     "async": "~3.2.0",
     "blessed": "0.1.81",
@@ -184,6 +187,7 @@
     "enquirer": "2.3.6",
     "eventemitter2": "5.0.1",
     "fclone": "1.0.11",
+    "js-yaml": "~4.1.0",
     "mkdirp": "1.0.4",
     "needle": "2.4.0",
     "pidusage": "~3.0",
@@ -195,8 +199,7 @@
     "semver": "^7.2",
     "source-map-support": "0.5.21",
     "sprintf-js": "1.1.2",
-    "vizion": "~2.2.1",
-    "js-yaml": "~4.1.0"
+    "vizion": "~2.2.1"
   },
   "optionalDependencies": {
     "pm2-sysmonit": "^1.2.8"
