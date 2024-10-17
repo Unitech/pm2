@@ -19,6 +19,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
     - name: Install Python
       run: sudo apt install python3
     - name: Install PHP CLI
