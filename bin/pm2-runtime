@@ -1,3 +1,11 @@
-#!/usr/bin/env node
+#!/bin/bash
 
-require('../lib/binaries/Runtime4Docker.js');
+SCRIPT_PATH="$(dirname "$0")/../lib/binaries/Runtime4Docker.js"
+
+# Check if 'bun' is available, otherwise use 'node'
+if command -v bun &> /dev/null
+then
+    bun "$SCRIPT_PATH" "$@"
+else
+    node "$SCRIPT_PATH" "$@"
+fi
