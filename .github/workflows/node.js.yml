@@ -19,21 +19,29 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: sudo apt install python3
-    - run: sudo apt install php-cli
-    - run: npm install
-    - run: npm run test:e2e
-    - run: npm run test:unit
+    - name: Install Python
+      run: sudo apt install python3
+    - name: Install PHP CLI
+      run: sudo apt install php-cli
+    - name: Install Node.js dependencies
+      run: npm install
+    - name: Run end-to-end tests
+      run: npm run test:e2e
+    - name: Run unit tests
+      run: npm run test:unit
 
   bun-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: oven-sh/setup-bun@v1
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
     - name: Install dependencies using Bun
       run: bun install
+    - name: Run end-to-end tests with Bun
+      run: bun run test:e2e
     - name: Run unit tests with Bun
-    - run: bun run test:e2e
-    - run: bun run test:unit
+      run: bun run test:unit

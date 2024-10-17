@@ -39,7 +39,7 @@
 </div>
 
 
-PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
+PM2 is a production process manager for Node.js/Bun applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 
 Starting an application in production mode is as easy as:
 
@@ -51,7 +51,7 @@ PM2 is constantly assailed by [more than 1800 tests](https://github.com/Unitech/
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
-Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 12.X.
+Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 12.X and Bun since v1
 
 
 ### Installing PM2
@@ -62,11 +62,17 @@ With NPM:
 $ npm install pm2 -g
 ```
 
-You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm).
+With Bun:
+
+```bash
+$ bun install pm2 -g
+```
+
+You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm) and Bun with `curl -fsSL https://bun.sh/install | bash`
 
 ### Start an application
 
-You can start any application (Node.js, Python, Ruby, binaries in $PATH...) like that:
+You can start any application (Node.js, Bun, and also Python, Ruby, binaries in $PATH...) like that:
 
 ```bash
 $ pm2 start app.js
