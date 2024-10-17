@@ -1,13 +1,9 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Node.js CI
 
 on: [push, pull_request]
 
 jobs:
-  build:
-
+  node-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -18,7 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: oven-sh/setup-bun@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -29,3 +24,16 @@ jobs:
     - run: npm install
     - run: npm run test:e2e
     - run: npm run test:unit
+
+  bun-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: oven-sh/setup-bun@v1
+    - name: Install dependencies using Bun
+      run: bun install
+    - name: Run unit tests with Bun
+    - run: bun run test:e2e
+    - run: bun run test:unit
