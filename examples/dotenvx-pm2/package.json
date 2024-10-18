@@ -1,0 +1,18 @@
+{
+  "name": "dotenvx-pm2",
+  "version": "1.0.0",
+  "description": "Example usage of dotenvx with pm2",
+  "main": "index.js",
+  "type": "module",
+  "author": "Michael Kalygin",
+  "license": "MIT",
+  "scripts": {
+    "start:json": "SH=shell_initial SH_DE=shell_initial SH_PM=shell_initial SH_DE_PM=shell_initial dotenvx run --env-file .env.initial --overload -- ../../bin/pm2 start ecosystem.config.cjs --env initial",
+    "reload:json": "SH=shell_updated SH_DE=shell_updated SH_PM=shell_updated SH_DE_PM=shell_updated dotenvx run --env-file .env.updated --overload -- ../../bin/pm2 reload ecosystem.config.cjs --env updated --update-env",
+    "delete:json": "../../bin/pm2 delete ecosystem.config.cjs",
+    "test:json": "../../bin/pm2 update && npm run delete:json && npm run start:json && npm run reload:json"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.10.2"
+  }
+}
