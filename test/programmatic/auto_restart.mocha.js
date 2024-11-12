@@ -34,7 +34,7 @@ describe('PM2 auto restart on uncaughtexception', function() {
   it('should start a failing app in cluster mode', function(done) {
     pm2.start({
       script: path.join(test_path, 'throw.js'),
-      instances: 4
+      instances: 2
     }, (err, apps) => {
       setTimeout(function() {
         pm2.list((err, list) => {

@@ -10,7 +10,12 @@ cd $file_path/start-app
 #
 $pm2 delete all
 
-$pm2 start "node -e 'setTimeout(function() { }, 100000); console.log(process.env.TEST)'" -l test.log --merge-logs
+if [ "$IS_BUN" = true ]; then
+    $pm2 start "bun -e 'setTimeout(function() { }, 100000); console.log(process.env.TEST)'" -l test.log --merge-logs
+else
+    $pm2 start "node -e 'setTimeout(function() { }, 100000); console.log(process.env.TEST)'" -l test.log --merge-logs
+fi
+
 should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 0' 1
 
@@ -31,7 +36,12 @@ spec "should have printed undefined env var"
 #
 $pm2 delete all
 
-$pm2 start ecosystem.config.js
+if [ "$IS_BUN" = true ]; then
+    $pm2 start ecosystem-bun.config.js
+else
+    $pm2 start ecosystem.config.js
+fi
+
 should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 0' 1
 cat test-conf.log | grep "test_val" 2> /dev/null
@@ -44,4 +54,4 @@ cd $file_path/c-compile
 $pm2 start "cc hello.c; ./a.out" -l c-log.log --merge-logs
 sleep 2
 cat c-log.log | grep "Hello World" &> /dev/null
-spec "should have printed undefined env var"
+spec "should have printed compiled output"

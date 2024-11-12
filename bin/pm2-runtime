@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_PATH="$(dirname "$0")/../lib/binaries/Runtime4Docker.js"
 
 # Check if 'bun' is available, otherwise use 'node'
-if command -v bun &> /dev/null
+if command -v bun >/dev/null 2>&1
 then
     bun "$SCRIPT_PATH" "$@"
 else

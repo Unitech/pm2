@@ -31,7 +31,7 @@ spec "Module should be installed"
 
 
 # Default configuration variable in package.json (under "config" attribute)
-should 'should have default config variable via package.json' "var2: false" 4
+should 'should have default config variable via package.json' "var2: false" 4 3
 
 #
 # Should configuration variable be present two times

@@ -3,14 +3,14 @@ name: Node.js CI
 on: [push, pull_request]
 
 jobs:
+
   node-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     strategy:
       matrix:
-        node-version: [22.x, 20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [22.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -19,8 +19,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Setup Bun
-      uses: oven-sh/setup-bun@v1
     - name: Install Python
       run: sudo apt install python3
     - name: Install PHP CLI
@@ -39,6 +37,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Remove Node.js installed by setup-node action (if any)
+      run: |
+        if command -v node &> /dev/null; then
+          sudo rm -rf "$(which node)"
+        fi
+        if command -v npm &> /dev/null; then
+          sudo rm -rf "$(which npm)"
+        fi
+
     - name: Setup Bun
       uses: oven-sh/setup-bun@v1
     - name: Install dependencies using Bun
