@@ -1,3 +1,11 @@
-#!/usr/bin/env node
+#!/bin/sh
 
-require('../lib/binaries/CLI.js');
+SCRIPT_PATH="$(dirname "$0")/../lib/binaries/CLI.js"
+
+# Check if 'bun' is available, otherwise use 'node'
+if command -v bun >/dev/null 2>&1
+then
+    bun "$SCRIPT_PATH" "$@"
+else
+    node "$SCRIPT_PATH" "$@"
+fi
