@@ -1,4 +1,9 @@
 
+## 5.5.0
+
+- bun support #5893 #5774 #5682 #5675 #5777
+
+
 ## 5.4.1
 
 - @pm2/io DeprecationWarning: The util._extend API is deprecated https://github.com/keymetrics/pm2-io-apm/issues/301 @egoroof

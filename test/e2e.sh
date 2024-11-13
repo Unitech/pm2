@@ -65,7 +65,7 @@ if [ "$IS_BUN" = false ]; then
     runTest ./test/e2e/internals/wrapped-fork.sh
     runTest ./test/e2e/logs/log-json.sh
     runTest ./test/e2e/misc/inside-pm2.sh
-    runTest ./test/e2e/misc/versioning-cmd.sh
+    #runTest ./test/e2e/misc/versioning-cmd.sh
 fi
 
 runTest ./test/e2e/internals/infinite-loop.sh

@@ -58,6 +58,7 @@ var csts = {
   CLUSTER_MODE_ID         : 'cluster_mode',
   FORK_MODE_ID            : 'fork_mode',
 
+  ENABLE_GIT_PARSING      : false,
   LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
 
   MACHINE_NAME            : process.env.INSTANCE_NAME || process.env.MACHINE_NAME || process.env.PM2_MACHINE_NAME,
