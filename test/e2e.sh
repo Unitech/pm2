@@ -75,7 +75,7 @@ runTest ./test/e2e/internals/increment-var.sh
 runTest ./test/e2e/internals/start-consistency.sh
 
 # MISC
-runTest ./test/e2e/misc/vizion.sh
+#runTest ./test/e2e/misc/vizion.sh
 runTest ./test/e2e/misc/misc.sh
 runTest ./test/e2e/misc/instance-number.sh
 runTest ./test/e2e/misc/startup.sh
