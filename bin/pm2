@@ -1,11 +1,7 @@
-#!/bin/sh
+#!/bin/sh -
+':' /*-
+bun=$(bun --version 2>&1) && exec bun "$0" "$@"
+node=$(node --version 2>&1) && exec node "$0" "$@"
+*/
 
-SCRIPT_PATH="$(dirname "$0")/../lib/binaries/CLI.js"
-
-# Check if 'bun' is available, otherwise use 'node'
-if command -v bun >/dev/null 2>&1
-then
-    bun "$SCRIPT_PATH" "$@"
-else
-    node "$SCRIPT_PATH" "$@"
-fi
+require('../lib/binaries/CLI.js');
