@@ -175,7 +175,7 @@
     "@pm2/pm2-version-check": "latest",
     "async": "~3.2.6",
     "blessed": "0.1.81",
-    "chalk": "3.0.0",
+    "chalk": "4.1.2",
     "chokidar": "^3.5.3",
     "cli-tableau": "^2.0.0",
     "commander": "2.15.1",
