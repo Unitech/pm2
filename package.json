@@ -175,7 +175,7 @@
     "async": "~3.2.0",
     "blessed": "0.1.81",
     "chalk": "3.0.0",
-    "chokidar": "^3.5.3",
+    "chokidar": "^4.0.1",
     "cli-tableau": "^2.0.0",
     "commander": "2.15.1",
     "croner": "~4.1.92",
