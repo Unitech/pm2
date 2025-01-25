@@ -6,7 +6,6 @@
 - Add WEBP content type for pm2 serve #5900 @tbo47
 - Enable PM2 module update from tarball #5906 @AYOKINYA
 - Fix treekil on FreeBSD #5896 @skeyby
-- Chokidar upgrade to V4 @Jayllyz
 - fix allowing to update namespaced pm2 NPM module (@org/module-name) #5915 @endelendel
 
 ## 5.4.3
