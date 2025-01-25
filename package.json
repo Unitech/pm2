@@ -1,7 +1,7 @@
 {
   "name": "pm2-beta",
   "preferGlobal": true,
-  "version": "6.0.2",
+  "version": "6.0.3",
   "engines": {
     "node": ">=16.0.0"
   },
@@ -169,7 +169,7 @@
     "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "~2.1.0",
+    "@pm2/agent": "~2.1.1",
     "@pm2/js-api": "~0.8.0",
     "@pm2/io": "~6.1.0",
     "@pm2/pm2-version-check": "latest",

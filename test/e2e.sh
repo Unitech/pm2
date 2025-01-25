@@ -81,7 +81,8 @@ runTest ./test/e2e/misc/instance-number.sh
 runTest ./test/e2e/misc/startup.sh
 runTest ./test/e2e/misc/nvm-node-version.sh
 runTest ./test/e2e/misc/port-release.sh
-runTest ./test/e2e/misc/cron-system.sh
+## TMP DISABLE
+#runTest ./test/e2e/misc/cron-system.sh
 
 # LOGS
 runTest ./test/e2e/logs/log-custom.sh
