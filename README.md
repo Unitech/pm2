@@ -255,5 +255,5 @@ Thanks in advance and we hope that you like PM2!
 
 ## License
 
-PM2 is made available under the terms of the GNU Affero General Public License 3.0 (AGPL 3.0).
+PM2 is made available under the terms of the MIT License.
 For other licenses [contact us](mailto:contact@keymetrics.io).

@@ -213,5 +213,5 @@
     "type": "git",
     "url": "git://github.com/Unitech/pm2.git"
   },
-  "license": "AGPL-3.0"
+  "license": "MIT"
 }
