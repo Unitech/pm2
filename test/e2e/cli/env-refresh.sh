@@ -80,11 +80,15 @@ spec "should use deploy.production.env.TEST_VARIABLE"
 
 
 $pm2 kill
-$pm2 l
-NODE_PATH='/test' $pm2 start local_require.js
-should 'should have loaded the right globalPaths' 'restart_time: 0' 1
 
-$pm2 kill
-$pm2 l
-NODE_PATH='/test2' $pm2 start local_require.js -i 1
-should 'should have loaded the right globalPaths' 'restart_time: 0' 1
+# Bun edit require('module').globalPaths does not return paths
+if [ "$IS_BUN" = false ]; then
+    $pm2 l
+    NODE_PATH='/test' $pm2 start local_require.js
+    should 'should have loaded the right globalPaths' 'restart_time: 0' 1
+
+    $pm2 kill
+    $pm2 l
+    NODE_PATH='/test2' $pm2 start local_require.js -i 1
+    should 'should have loaded the right globalPaths' 'restart_time: 0' 1
+fi

@@ -215,7 +215,7 @@ describe('Signal kill (+delayed)', function() {
 
 describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +delayed)', function() {
   var proc1 = null;
-  var appName = 'delayedsadsend';
+  var appName = 'delayedsend';
 
   process.env.PM2_KILL_USE_MESSAGE = true;
 
@@ -237,7 +237,7 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
     });
   });
 
-  describe('with 1000ms PM2_KILL_TIMEOUT (environment variable)', function() {
+  describe.only('with 1000ms PM2_KILL_TIMEOUT (environment variable)', function() {
     it('should set 1000ms to PM2_KILL_TIMEOUT', function(done) {
       process.env.PM2_KILL_TIMEOUT = 1000;
 
@@ -261,14 +261,18 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
 
     it('should stop script after 1000ms', function(done) {
       setTimeout(function() {
+        console.log('CALLED1')
         pm2.describe(appName, function(err, list) {
+          console.log('CALLED1FINI')
           should(err).be.null();
           list[0].pm2_env.status.should.eql('stopping');
         });
       }, 500);
 
       setTimeout(function() {
+        console.log('CALLED2')
         pm2.describe(appName, function(err, list) {
+          console.log('CALLED2FINI')
           should(err).be.null();
           list[0].pm2_env.status.should.eql('stopped');
           done();

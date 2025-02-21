@@ -1,7 +1,7 @@
 
 var axm = require('@pm2/io');
 
-axm.catchAll();
+//axm.catchAll();
 
 setTimeout(function() {
   throw new Error('Exit');

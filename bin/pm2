@@ -1,3 +1,7 @@
-#!/usr/bin/env node
+#!/bin/sh -
+':' /*-
+bun=$(bun --version 2>&1) && exec bun "$0" "$@"
+node=$(node --version 2>&1) && exec node "$0" "$@"
+*/
 
 require('../lib/binaries/CLI.js');

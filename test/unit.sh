@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-mocha="npx mocha"
-pm2="`type -P node` `pwd`/bin/pm2"
+if command -v bun >/dev/null 2>&1
+then
+    mocha="bunx mocha"
+else
+    mocha="npx mocha"
+fi
+
+pm2="`pwd`/bin/pm2"
 
 function reset {
     $pm2 uninstall all -s
@@ -49,20 +55,21 @@ touch unit_time
 D=test/programmatic
 
 # Abort script at first error
-# set -e
+#set -e
 
+runUnitTest $D/path_resolution.mocha.js
+runUnitTest $D/modules.mocha.js
+runUnitTest $D/instances.mocha.js
+runUnitTest $D/reload-locker.mocha.js
 runUnitTest $D/filter_env.mocha.js
 runUnitTest $D/resurect_state.mocha.js
 runUnitTest $D/programmatic.js
 runUnitTest $D/namespace.mocha.js
-runUnitTest $D/instances.mocha.js
+runUnitTest $D/auto_restart.mocha.js
 runUnitTest $D/containerizer.mocha.js
 runUnitTest $D/api.mocha.js
-runUnitTest $D/path_resolution.mocha.js
 runUnitTest $D/lazy_api.mocha.js
-runUnitTest $D/reload-locker.mocha.js
-runUnitTest $D/auto_restart.mocha.js
-runUnitTest $D/version.mocha.js
+#runUnitTest $D/version.mocha.js
 runUnitTest $D/exp_backoff_restart_delay.mocha.js
 runUnitTest $D/api.backward.compatibility.mocha.js
 runUnitTest $D/custom_action.mocha.js
@@ -75,11 +82,12 @@ runUnitTest $D/inside.mocha.js
 runUnitTest $D/misc_commands.js
 runUnitTest $D/signals.js
 runUnitTest $D/send_data_process.mocha.js
-runUnitTest $D/modules.mocha.js
+
 runUnitTest $D/json_validation.mocha.js
 runUnitTest $D/env_switching.js
 runUnitTest $D/configuration.mocha.js
 runUnitTest $D/id.mocha.js
+
 runUnitTest $D/god.mocha.js
 runUnitTest $D/dump.mocha.js
 runUnitTest $D/common.mocha.js

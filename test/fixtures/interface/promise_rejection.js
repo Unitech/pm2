@@ -1,11 +1,14 @@
-var p = new Promise(function(resolve, reject) {
-  //setTimeout(function() {
-  //throw new Error('fail')
-  abc = asdsad;
+
+setTimeout(() => {
+  var p = new Promise(function(resolve, reject) {
+    //setTimeout(function() {
+    //throw new Error('fail')
+    abc = asdsad;
 
     return resolve('ok')
-  //}, 200)
-})
+    //}, 200)
+  })
 
-p.then(function(e) {
-})
+  p.then(function(e) {
+  })
+}, 100)
