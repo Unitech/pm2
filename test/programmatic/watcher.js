@@ -3,7 +3,6 @@ var p = require('path');
 var fs = require('fs')
 var EventEmitter = require('events').EventEmitter
 var PM2  = require('../..');
-var extend = require('util')._extend
 
 var cwd = __dirname + '/../fixtures/watcher';
 
@@ -91,7 +90,7 @@ describe('Watcher', function() {
   it('should be watching', function(cb) {
     testPM2Env('server-watch:online')({watch: true}, cb)
 
-    var json_app = extend(json, {watch: true});
+    var json_app = Object.assign(json, {watch: true});
     pm2.start(json_app, errShouldBeNull)
   })
 
@@ -114,19 +113,19 @@ describe('Watcher', function() {
     pm2.stop('server-watch', errShouldBeNull)
 
     // this would be better:
-    // pm2.actionFromJson('stopProcessId', extend(json, {watch: false}), errShouldBeNull)
+    // pm2.actionFromJson('stopProcessId', Object.assign(json, {watch: false}), errShouldBeNull)
     // or :
     // pm2.stop('server-watch', {watch: false}, errShouldBeNull)
   })
 
   it('should not watch', function(cb) {
     testPM2Env('server-watch:online')({watch: false}, cb)
-    pm2.restart(extend(json, {watch: false}), errShouldBeNull)
+    pm2.restart(Object.assign(json, {watch: false}), errShouldBeNull)
   })
 
   it('should watch', function(cb) {
     testPM2Env('server-watch:online')({restart_time: 3, watch: true}, cb)
-    pm2.restart(extend(json, {watch: true}), errShouldBeNull)
+    pm2.restart(Object.assign(json, {watch: true}), errShouldBeNull)
   })
 
   it('should delete process', function(cb) {
@@ -179,12 +178,12 @@ describe('Watcher', function() {
 
   it('should work with watch_delay', function(cb) {
     testPM2Env('server-watch:online')({watch: true, watch_delay: 4000}, cb);
-    pm2.start(extend(json, {watch: true, watch_delay: 4000}), errShouldBeNull);
+    pm2.start(Object.assign(json, {watch: true, watch_delay: 4000}), errShouldBeNull);
   })
 
   it('should not crash with watch_delay without watch', function(cb) {
     testPM2Env('server-watch:online')({watch_delay: 4000}, cb);
-    pm2.start(extend(json, {watch_delay: 4000}), errShouldBeNull);
+    pm2.start(Object.assign(json, {watch_delay: 4000}), errShouldBeNull);
   })
 
   /**
