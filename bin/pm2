@@ -1,7 +1,10 @@
 #!/bin/sh -
 ':' /*-
-bun=$(bun --version 2>&1) && exec bun "$0" "$@"
-node=$(node --version 2>&1) && exec node "$0" "$@"
+if [ "$OS" = "Windows_NT" ]; then
+  exec node "$0" "$@"
+else
+  bun=$(bun --version 2>&1) && exec bun "$0" "$@"
+  node=$(node --version 2>&1) && exec node "$0" "$@"
+fi
 */
-
 require('../lib/binaries/CLI.js');
