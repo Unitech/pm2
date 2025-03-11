@@ -1,7 +1,7 @@
 {
-  "name": "pm2-beta",
+  "name": "pm2-beta2",
   "preferGlobal": true,
-  "version": "6.0.4",
+  "version": "6.0.5",
   "engines": {
     "node": ">=16.0.0"
   },
