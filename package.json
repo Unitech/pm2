@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "6.0.4",
+  "version": "6.0.5",
   "engines": {
     "node": ">=16.0.0"
   },
@@ -102,7 +102,6 @@
     "test:unit": "bash test/unit.sh",
     "test:e2e": "bash test/e2e.sh",
     "test": "bash test/unit.sh && bash test/e2e.sh",
-    "preinstall": "node ./preinstall.js"
   },
   "keywords": [
     "cli",
