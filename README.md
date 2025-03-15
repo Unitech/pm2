@@ -117,7 +117,7 @@ $ pm2 monit
 
 ### Cluster Mode: Node.js Load Balancing & Zero Downtime Reload
 
-The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
+The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balances HTTP/TCP/UDP queries between them. This increases overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
 
 ![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/cluster.png)
 
