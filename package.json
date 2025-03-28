@@ -3,7 +3,7 @@
   "preferGlobal": true,
   "version": "6.0.5",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.18.0"
   },
   "directories": {
     "bin": "./bin",
@@ -174,10 +174,10 @@
     "@pm2/pm2-version-check": "latest",
     "async": "~3.2.6",
     "blessed": "0.1.81",
-    "chalk": "4.1.2",
+    "chalk": "3.0.0",
     "chokidar": "^3.5.3",
     "cli-tableau": "^2.0.0",
-    "commander": "^11.1.0",
+    "commander": "2.15.1",
     "croner": "~4.1.92",
     "dayjs": "~1.11.13",
     "debug": "^4.3.7",
