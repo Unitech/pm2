@@ -3,7 +3,7 @@ const forEachLimit = require('async/forEachLimit')
 const fs = require('fs')
 const exec = require('child_process').exec
 const path = require('path')
-const chalk = require('chalk')
+const chalk = require('ansis')
 const Table = require('cli-table-redemption');
 
 const testFolder = './test/e2e/'
