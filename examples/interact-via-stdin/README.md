@@ -15,7 +15,7 @@ $ pm2 attach 0
 Or:
 
 ```
-$ pm2 logs --attach
+$ pm2 logs --attach-input
 ```
 
 Then send a message (e.g., *Lorem Ipsum*) to the app:
