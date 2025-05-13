@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "pm2-beta",
+      "name": "pm2",
       "dependencies": {
         "@pm2/agent": "~2.1.1",
         "@pm2/io": "~6.1.0",
