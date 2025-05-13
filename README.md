@@ -55,21 +55,24 @@ Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 12.X and Bun since v1
 
 
-### Installing PM2
+## Installing PM2
 
-With NPM:
+### With NPM
 
 ```bash
 $ npm install pm2 -g
 ```
 
-With Bun:
+### With Bun
 
 ```bash
 $ bun install pm2 -g
 ```
+**Please note that you might need to symlink node to bun if you only want to use bun via `sudo ln -s /home/$USER/.bun/bin/bun /usr/bin/node`**
 
-You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm) and Bun with `curl -fsSL https://bun.sh/install | bash`
+___
+
+You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm) or install Bun with `curl -fsSL https://bun.sh/install | bash`
 
 ### Start an application
 
