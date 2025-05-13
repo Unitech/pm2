@@ -191,6 +191,47 @@ export function startup(platform: Platform, errback: ErrResultCallback): void;
  */
 export function sendDataToProcessId(proc_id: number, packet: object, cb: ErrResultCallback): void;
 
+/**
+ * Send a line to stdin of a process
+ * @param id id or name of the process
+ * @param line line to send to stdin
+ * @param cb if success, the id and the line will be returned
+ */
+export function sendLineToStdin(id: string, line: string, cb: ErrResultCallback): void
+
+/**
+ * Send a line to stdin of a process
+ * @param id id or name of the process
+ * @param line line to send to stdin
+ * @param separator separator of the line, default is '\n'
+ * @param cb if success, the id and the line will be returned
+ */
+export function sendLineToStdin(id: string, line: string, separator: string, cb: ErrResultCallback): void
+
+/**
+ * Attach to stdio of a process
+ * @param id id or name of the process
+ * @param cb if success, null will be returned
+ */
+export function attach(id: string, cb: ErrResultCallback): void
+
+/**
+ * Attach to stdio of a process
+ * @param id id or name of the process
+ * @param separator separator of the line, default is '\n'
+ * @param cb if success, null will be returned
+ */
+export function attach(id: string, separator: string, cb: ErrResultCallback): void
+
+/**
+ * Attach stdin to the client. You could use this to send commands to a process
+ *
+ * Input `<id|name> [line] ...` to send stdin to <id|name>
+ *
+ * Any error will exit the CLI
+ */
+export function attachInput(): void
+
 // Interfaces
 
 export interface Proc {
