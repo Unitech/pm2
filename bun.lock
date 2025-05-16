@@ -2,13 +2,13 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "pm2-beta",
+      "name": "pm2",
       "dependencies": {
         "@pm2/agent": "~2.1.1",
         "@pm2/io": "~6.1.0",
         "@pm2/js-api": "~0.8.0",
         "@pm2/pm2-version-check": "latest",
-        "ansis": "4.0.0",
+        "ansis": "4.0.0-node10",
         "async": "~3.2.6",
         "blessed": "0.1.81",
         "chokidar": "^3.5.3",
@@ -66,7 +66,7 @@
 
     "ansi-styles": ["ansi-styles@4.3.0", "", { "dependencies": { "color-convert": "^2.0.1" } }, ""],
 
-    "ansis": ["ansis@4.0.0", "", {}, "sha512-P8nrHI1EyW9OfBt1X7hMSwGN2vwRuqHSKJAT1gbLWZRzDa24oHjYwGHvEgHeBepupzk878yS/HBZ0NMPYtbolw=="],
+    "ansis": ["ansis@4.0.0-node10", "", {}, "sha512-BRrU0Bo1X9dFGw6KgGz6hWrqQuOlVEDOzkb0QSLZY9sXHqA7pNj7yHPVJRz7y/rj4EOJ3d/D5uxH+ee9leYgsg=="],
 
     "anymatch": ["anymatch@3.1.3", "", { "dependencies": { "normalize-path": "^3.0.0", "picomatch": "^2.0.4" } }, ""],
 
