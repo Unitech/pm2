@@ -148,6 +148,11 @@
     "docDefault": false,
     "docDescription": "Make the process wait for a process.send('ready')"
   },
+  "launch_limit": {
+    "type": "number",
+    "docDefault": 1,
+    "docDescription": "Maximum number of launching processes at a time"
+  },
   "instances": {
     "type": "number",
     "docDefault": 1,

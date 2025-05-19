@@ -388,6 +388,10 @@ export interface StartOptions {
    */
   wait_ready?: boolean;
   /**
+   * (Default: 1) Maximum number of launching processes at a time on application startup.
+   */
+  launch_limit?: number;
+  /**
    * (Default: 1600)
    * The number of milliseconds to wait after a stop or restart command issues a SIGINT signal to kill the
    * script forceably with a SIGKILL signal.
