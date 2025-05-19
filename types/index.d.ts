@@ -1,5 +1,7 @@
-// Type definitions for pm2 2.7.1
-// Definitions by: João Portela https://www.github.com/jportela
+// Type definitions for pm2 6.0.5
+// Project: https://github.com/Unitech/pm2
+// Definitions by: João Portela <https://www.github.com/jportela>
+//                 Emre Çakmak <https://github.com/emrckmk>
 
 // Exported Methods
 
@@ -64,9 +66,9 @@ export function start(script: string, jsonConfigFile: string, errback: ErrProcCa
 export function disconnect(): void;
 
 /**
- * Stops a process but leaves the process meta-data in pm2’s list
+ * Stops a process but leaves the process meta-data in pm2's list
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param errback - called when the process is stopped
  */
 export function stop(process: string|number, errback: ErrProcCallback): void;
@@ -74,16 +76,16 @@ export function stop(process: string|number, errback: ErrProcCallback): void;
 /**
  * Stops and restarts the process.
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param errback - called when the process is restarted
  */
 export function restart(process: string|number, errback: ErrProcCallback): void;
 
 /**
- * Stops the process and removes it from pm2’s list.
+ * Stops the process and removes it from pm2's list.
  * The process will no longer be accessible by its name
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param errback - called when the process is deleted
  */
 declare function del(process: string|number, errback: ErrProcCallback): void;
@@ -95,7 +97,7 @@ export {del as delete};
  * all times as each instance is restarted individually.
  * Only works for scripts started in cluster mode.
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param errback - called when the process is reloaded
  */
 export function reload(process: string|number, errback: ErrProcCallback): void;
@@ -105,9 +107,9 @@ export function reload(process: string|number, errback: ErrProcCallback): void;
  * all times as each instance is restarted individually.
  * Only works for scripts started in cluster mode.
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param options - An object containing configuration
- * @param options.updateEnv - (Default: false) If true is passed in, pm2 will reload it’s
+ * @param options.updateEnv - (Default: false) If true is passed in, pm2 will reload it's
  * environment from process.env before reloading your process.
  * @param errback - called when the process is reloaded
  */
@@ -124,7 +126,7 @@ export function killDaemon(errback: ErrProcDescCallback): void;
 /**
  * Returns various information about a process: eg what stdout/stderr and pid files are used.
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param errback
  */
 export function describe(process: string|number, errback: ErrProcDescsCallback): void;
@@ -137,7 +139,7 @@ export function list(errback: ErrProcDescsCallback): void;
 
 /**
  * Writes the process list to a json file at the path in the DUMP_FILE_PATH environment variable
- * (“~/.pm2/dump.pm2” by default).
+ * ("~/.pm2/dump.pm2" by default).
  * @param errback
  */
 export function dump(errback: ErrResultCallback): void;
@@ -145,7 +147,7 @@ export function dump(errback: ErrResultCallback): void;
 /**
  * Flushes the logs.
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param errback
  */
 export function flush(process: number|string, errback: ErrResultCallback): void;
@@ -171,7 +173,7 @@ export function launchBus(errback: ErrBusCallback): void;
 /**
  * @param signal
  * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * a process id, or the string "all" to indicate that all scripts should be restarted.
  * @param errback
  */
 export function sendSignalToProcessName(signal:string|number, process: number|string, errback: ErrResultCallback): void;
@@ -197,7 +199,7 @@ export interface Proc {
   name?: string;
   vizion?: boolean;
   autorestart?: boolean;
-  exec_mode?: string;
+  exec_mode?: 'fork' | 'cluster';
   exec_interpreter?: string;
   pm_exec_path?: string;
   pm_cwd?: string;
@@ -206,11 +208,21 @@ export interface Proc {
   pm_out_log_path?: string;
   pm_err_log_path?: string;
   pm_pid_path?: string;
-  status?: string;
+  status?: ProcessStatus;
   pm_uptime?: number;
-  axm_actions?: any[];
-  axm_monitor?: any;
-  axm_dynamic?: any;
+  axm_actions?: Array<{
+    action_name: string;
+    action_type: string;
+    arity: number;
+    opts?: Record<string, unknown>;
+  }>;
+  axm_monitor?: Record<string, {
+    value: number | string;
+    type: string;
+    unit?: string;
+    historic?: boolean;
+  }>;
+  axm_dynamic?: Record<string, unknown>;
   vizion_running?: boolean;
   created_at?: number;
   pm_id?: number;
@@ -218,16 +230,29 @@ export interface Proc {
   unstable_restarts?: number;
   started_inside?: boolean;
   command?: Command;
-  versioning?: any;
+  versioning?: {
+    type: string;
+    url: string;
+    revision: string;
+    branch: string;
+    comment: string;
+    unstaged: boolean;
+    ahead: boolean;
+    next_rev: string | null;
+    prev_rev: string | null;
+    update_time: string;
+    remote: string;
+    remotes: string[];
+  };
   exit_code?: number;
 }
 
 export interface Command {
-  locked?: boolean;
-  metadata?: any;
-  started_at?: any;
-  finished_at?: any;
-  error?: any;
+  locked: boolean;
+  metadata: Record<string, unknown>;
+  started_at: Date | null;
+  finished_at: Date | null;
+  error: Error | null;
 }
 
 /**
@@ -248,7 +273,7 @@ export interface ProcessDescription {
   pm_id?: number;
   monit?: Monit;
   /**
-   * The list of path variables in the process’s environment
+   * The list of path variables in the process's environment
    */
   pm2_env?: Pm2Env;
 }
@@ -265,7 +290,7 @@ interface Monit {
 }
 
 /**
- * The list of path variables in the process’s environment
+ * The list of path variables in the process's environment
  */
 interface Pm2Env {
   /**
@@ -320,7 +345,7 @@ export interface StartOptions {
   /**
    * An arbitrary name that can be used to interact with (e.g. restart) the process
    * later in other commands. Defaults to the script name without its extension
-   * (eg “testScript” for “testScript.js”)
+   * (eg "testScript" for "testScript.js")
    */
   name?: string;
   /**
@@ -333,8 +358,8 @@ export interface StartOptions {
   args?: string | string[];
   /**
    * A string or array of strings composed of arguments to call the interpreter process with.
-   * Eg “–harmony” or [”–harmony”,”–debug”]. Only applies if interpreter is something other
-   * than “none” (its “node” by default).
+   * Eg "–harmony" or [”–harmony”,”–debug"]. Only applies if interpreter is something other
+   * than "none" (its "node" by default).
    */
   interpreter_args?: string | string[];
   /**
@@ -342,27 +367,27 @@ export interface StartOptions {
    */
   cwd?: string;
   /**
-   * (Default: “~/.pm2/logs/app_name-out.log”) The path to a file to append stdout output to.
+   * (Default: "~/.pm2/logs/app_name-out.log") The path to a file to append stdout output to.
    * Can be the same file as error.
    */
   output?: string;
   /**
-   * (Default: “~/.pm2/logs/app_name-error.err”) The path to a file to append stderr output to. Can be the same file as output.
+   * (Default: "~/.pm2/logs/app_name-error.err") The path to a file to append stderr output to. Can be the same file as output.
    */
   error?: string;
   /**
-   * The display format for log timestamps (eg “YYYY-MM-DD HH:mm Z”). The format is a moment display format.
+   * The display format for log timestamps (eg "YYYY-MM-DD HH:mm Z"). The format is a moment display format.
    */
   log_date_format?: string;
   /**
-   * Default: “~/.pm2/logs/~/.pm2/pids/app_name-id.pid”)
+   * Default: "~/.pm2/logs/~/.pm2/pids/app_name-id.pid")
    * The path to a file to write the pid of the started process. The file will be overwritten.
    * Note that the file is not used in any way by pm2 and so the user is free to manipulate or
    * remove that file at any time. The file will be deleted when the process is stopped or the daemon killed.
    */
   pid?: string;
   /**
-   * The minimum uptime of the script before it’s considered successfully started.
+   * The minimum uptime of the script before it's considered successfully started.
    */
   min_uptime?: number;
   /**
@@ -370,8 +395,8 @@ export interface StartOptions {
    */
   max_restarts?: number;
   /**
-   * If sets and script’s memory usage goes about the configured number, pm2 restarts the script.
-   * Uses human-friendly suffixes: ‘K’ for kilobytes, ‘M’ for megabytes, ‘G’ for gigabytes’, etc. Eg “150M”.
+   * If sets and script's memory usage goes about the configured number, pm2 restarts the script.
+   * Uses human-friendly suffixes: 'K' for kilobytes, 'M' for megabytes, 'G' for gigabytes', etc. Eg "150M".
    */
   max_memory_restart?: number | string;
   /**
@@ -398,23 +423,23 @@ export interface StartOptions {
    */
   restart_delay?: number;
   /**
-   * (Default: “node”) The interpreter for your script (eg “python”, “ruby”, “bash”, etc).
-   * The value “none” will execute the ‘script’ as a binary executable.
+   * (Default: "node") The interpreter for your script (eg "python", "ruby", "bash", etc).
+   * The value "none" will execute the 'script' as a binary executable.
    */
   interpreter?: string;
   /**
-   * (Default: ‘fork’) If sets to ‘cluster’, will enable clustering
+   * (Default: 'fork') If sets to 'cluster', will enable clustering
    * (running multiple instances of the script).
    */
   exec_mode?: string;
   /**
-   * (Default: 1) How many instances of script to create. Only relevant in exec_mode ‘cluster’.
+   * (Default: 1) How many instances of script to create. Only relevant in exec_mode 'cluster'.
    */
   instances?: number;
   /**
    * (Default: false) If true, merges the log files for all instances of script into one stderr log
-   * and one stdout log. Only applies in ‘cluster’ mode. For example, if you have 4 instances of
-   * ‘test.js’ started via pm2, normally you would have 4 stdout log files and 4 stderr log files,
+   * and one stdout log. Only applies in 'cluster' mode. For example, if you have 4 instances of
+   * 'test.js' started via pm2, normally you would have 4 stdout log files and 4 stderr log files,
    * but with this option set to true you would only have one stdout file and one stderr file.
    */
   merge_logs?: boolean;
@@ -423,7 +448,7 @@ export interface StartOptions {
    */
   watch?: boolean|string[];
   /**
-   * (Default: false) By default, pm2 will only start a script if that script isn’t
+   * (Default: false) By default, pm2 will only start a script if that script isn't
    * already running (a script is a path to an application, not the name of an application
    * already running). If force is set to true, pm2 will start a new instance of that script.
    */
@@ -432,8 +457,75 @@ export interface StartOptions {
   cron?: any;
   execute_command?: any;
   write?: any;
-  source_map_support?: any;
-  disable_source_map_support?: any;
+  /**
+   * Enables source map support
+   * @default true
+   */
+  source_map_support?: boolean;
+  /**
+   * Disables source map support
+   * @default false
+   */
+  disable_source_map_support?: boolean;
+  /**
+   * Sets a specific node version to use for the app
+   * @example '14.17.0'
+   */
+  node_version?: string;
+  /**
+   * Enables or disables the vizion features
+   * @default true
+   */
+  vizion?: boolean;
+  /**
+   * Forces the application to be launched in one single instance
+   * @default false
+   */
+  force_one_instance?: boolean;
+  /**
+   * Prefix logs with custom string
+   */
+  log_prefix?: string;
+  /**
+   * Enable or disable the check for memory usage
+   * @default true
+   */
+  memory_check?: boolean;
+  /**
+   * Enable or disable the check for CPU usage
+   * @default true
+   */
+  cpu_check?: boolean;
+  /**
+   * Enable or disable the check for disk usage
+   * @default true
+   */
+  disk_check?: boolean;
+  /**
+   * Enable or disable the check for network usage
+   * @default true
+   */
+  network_check?: boolean;
+  /**
+   * Enable or disable the check for process uptime
+   * @default true
+   */
+  uptime_check?: boolean;
+  /**
+   * Enable or disable the check for process restarts
+   * @default true
+   */
+  restart_check?: boolean;
+  /**
+   * Enable or disable the check for process logs
+   * @default true
+   */
+  log_check?: boolean;
+  /**
+   * Enable or disable the check for process errors
+   * @default true
+   */
+  error_check?: boolean;
   /**
    * The environment variables to pass on to the process.
    */
@@ -450,7 +542,7 @@ export interface StartOptions {
 
 interface ReloadOptions {
   /**
-   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env
+   * (Default: false) If true is passed in, pm2 will reload it's environment from process.env
    * before reloading your process.
    */
   updateEnv?: boolean;
