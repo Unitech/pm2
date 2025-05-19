@@ -63,7 +63,7 @@ var API = module.exports = function(opts) {
   if (opts.pm2_home) {
     // Override default conf file
     this.pm2_home        = opts.pm2_home;
-    conf = util._extend(conf, path_structure(this.pm2_home));
+    conf = Object.assign(conf, path_structure(this.pm2_home));
   }
   else if (opts.independent == true && conf.IS_WINDOWS === false) {
     // Create an unique pm2 instance
@@ -75,7 +75,7 @@ var API = module.exports = function(opts) {
     // It will go as in proc
     if (typeof(opts.daemon_mode) == 'undefined')
       this.daemon_mode = false;
-    conf = util._extend(conf, path_structure(this.pm2_home));
+    conf = Object.assign(conf, path_structure(this.pm2_home));
   }
 
   this._conf = conf;
@@ -299,7 +299,7 @@ API.prototype.start = function(cmd, opts, cb) {
 
   var that = this;
 
-  if (util.isArray(opts.watch) && opts.watch.length === 0)
+  if (Array.isArray(opts.watch) && opts.watch.length === 0)
     opts.watch = (opts.rawArgs ? !!~opts.rawArgs.indexOf('--watch') : !!~process.argv.indexOf('--watch')) || false;
 
   if (Common.isConfigFile(cmd) || (typeof(cmd) === 'object'))
@@ -760,7 +760,7 @@ API.prototype._startScript = function(script, opts, cb) {
       resolved_paths.env['PM2_HOME'] = that.pm2_home;
 
       var additional_env = Modularizer.getAdditionalConf(resolved_paths.name);
-      util._extend(resolved_paths.env, additional_env);
+      Object.assign(resolved_paths.env, additional_env);
 
       // Is KM linked?
       resolved_paths.km_link = that.gl_is_km_linked;
@@ -940,7 +940,7 @@ API.prototype._startJson = function(file, opts, action, pipe, cb) {
       // Notice: if people use the same name in different apps,
       //         duplicated envs will be overrode by the last one
       var env = envs.reduce(function(e1, e2){
-        return util._extend(e1, e2);
+        return Object.assign(e1, e2);
       });
 
       // When we are processing JSON, allow to keep the new env by default
@@ -1012,7 +1012,7 @@ API.prototype._startJson = function(file, opts, action, pipe, cb) {
       resolved_paths.env['PM2_HOME'] = that.pm2_home;
 
       var additional_env = Modularizer.getAdditionalConf(resolved_paths.name);
-      util._extend(resolved_paths.env, additional_env);
+      Object.assign(resolved_paths.env, additional_env);
 
       resolved_paths.env = Common.mergeEnvironmentVariables(resolved_paths, opts.env, deployConf);
 
@@ -1226,7 +1226,7 @@ API.prototype._operate = function(action_name, process_name, envs, cb) {
           if (conf.PM2_PROGRAMMATIC == true)
             new_env = Common.safeExtend({}, process.env);
           else
-            new_env = util._extend({}, process.env);
+            new_env = Object.assign({}, process.env);
 
           Object.keys(envs).forEach(function(k) {
             new_env[k] = envs[k];
@@ -1355,7 +1355,7 @@ API.prototype._operate = function(action_name, process_name, envs, cb) {
        * if yes load configuration variables and merge with the current environment
        */
       var additional_env = Modularizer.getAdditionalConf(process_name);
-      util._extend(envs, additional_env);
+      Object.assign(envs, additional_env);
 
       return processIds(ids, cb);
     });
@@ -1401,7 +1401,7 @@ API.prototype._handleAttributeUpdate = function(opts) {
 
   delete appConf.exec_mode;
 
-  if (util.isArray(appConf.watch) && appConf.watch.length === 0) {
+  if (Array.isArray(appConf.watch) && appConf.watch.length === 0) {
     if (!~opts.rawArgs.indexOf('--watch'))
       delete appConf.watch
   }
