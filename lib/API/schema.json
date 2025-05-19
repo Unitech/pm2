@@ -363,7 +363,7 @@
   },
   "kill_retry_time": {
     "type": "number",
-    "default" : 100
+    "docDefault" : 100
   },
   "write": {
     "type": "boolean"
