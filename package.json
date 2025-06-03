@@ -1,6 +1,5 @@
 {
   "name": "@feodal-fms/pm2",
-  "private": true,
   "version": "6.0.6",
   "engines": {
     "node": ">=16.0.0"
