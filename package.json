@@ -1,6 +1,6 @@
 {
-  "name": "pm2",
-  "preferGlobal": true,
+  "name": "@feodal-fms/pm2",
+  "private": true,
   "version": "6.0.6",
   "engines": {
     "node": ">=16.0.0"
@@ -169,9 +169,10 @@
   },
   "dependencies": {
     "@pm2/agent": "~2.1.1",
-    "@pm2/js-api": "~0.8.0",
     "@pm2/io": "~6.1.0",
+    "@pm2/js-api": "~0.8.0",
     "@pm2/pm2-version-check": "latest",
+    "@socket.io/sticky": "^1.0.4",
     "ansis": "4.0.0-node10",
     "async": "~3.2.6",
     "blessed": "0.1.81",
@@ -184,6 +185,7 @@
     "enquirer": "2.3.6",
     "eventemitter2": "5.0.1",
     "fclone": "1.0.11",
+    "js-yaml": "~4.1.0",
     "mkdirp": "1.0.4",
     "needle": "2.4.0",
     "pidusage": "~3.0",
@@ -195,8 +197,7 @@
     "semver": "^7.6.2",
     "source-map-support": "0.5.21",
     "sprintf-js": "1.1.2",
-    "vizion": "~2.2.1",
-    "js-yaml": "~4.1.0"
+    "vizion": "~2.2.1"
   },
   "optionalDependencies": {
     "pm2-sysmonit": "^1.2.8"
