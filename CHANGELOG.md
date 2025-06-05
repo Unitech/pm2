@@ -1,4 +1,8 @@
 
+## 6.0.8
+
+- fix: package-lock update
+
 ## 6.0.7
 
 - fix: ansis-node10 https://github.com/Unitech/pm2/commit/99d9224e940d119a1ad5b241b4fc4e0db7c830ed @webdiscus
