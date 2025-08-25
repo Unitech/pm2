@@ -191,6 +191,12 @@ export function startup(platform: Platform, errback: ErrResultCallback): void;
  */
 export function sendDataToProcessId(proc_id: number, packet: object, cb: ErrResultCallback): void;
 
+/**
+ * - Send an set of data as object to a specific process
+ * @param packet {id: number, type: 'process:msg', topic: true, data: object}
+ */
+export function sendDataToProcessId(packet: {id: number, type: 'process:msg', topic: true, data: object}): void;
+
 // Interfaces
 
 export interface Proc {
