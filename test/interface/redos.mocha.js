@@ -2,11 +2,7 @@ process.chdir(__dirname)
 
 const config = require('../../lib/tools/Config')
 const { performance } = require('perf_hooks')
-let expect;
-before(async () => {
-  const chai = await import('chai')
-  expect = chai.expect
-})
+const { expect } = require('chai')
 
 
 describe('ReDos Test', function () {
