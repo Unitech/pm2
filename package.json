@@ -202,9 +202,9 @@
     "pm2-sysmonit": "^1.2.8"
   },
   "devDependencies": {
-    "mocha": "^10.8.0",
+    "mocha": "^11.7.0",
     "should": "^13.2.3",
-    "chai": "~6.0.1"
+    "chai": "~4.5.0"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
