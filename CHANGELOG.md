@@ -1,4 +1,12 @@
 
+## 6.0.9
+
+- updates all typescript definitions
+- upgrade github ci workflows
+- upgrade mocha dep and adapt tests
+- bump packages
+- fix:Potential ReDoS Vulnerability or Inefficient Regular Expression in Project: Need for Assessment and Mitigation #5971
+
 ## 6.0.8
 
 - fix: package-lock update
