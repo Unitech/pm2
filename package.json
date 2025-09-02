@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "6.0.9",
+  "version": "6.0.10",
   "engines": {
     "node": ">=16.0.0"
   },
@@ -203,8 +203,7 @@
   },
   "devDependencies": {
     "mocha": "^11.7.0",
-    "should": "^13.2.3",
-    "chai": "~4.5.0"
+    "should": "^13.2.3"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
