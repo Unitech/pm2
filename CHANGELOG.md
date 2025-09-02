@@ -1,4 +1,8 @@
 
+## 6.0.10
+
+- revert #5971 #6031
+
 ## 6.0.9
 
 - updates all typescript definitions
