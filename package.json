@@ -203,8 +203,7 @@
   },
   "devDependencies": {
     "mocha": "^11.7.0",
-    "should": "^13.2.3",
-    "chai": "~4.5.0"
+    "should": "^13.2.3"
   },
   "bugs": {
     "url": "https://github.com/Unitech/pm2/issues"
