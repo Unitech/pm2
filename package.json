@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "6.0.8",
+  "version": "6.0.10",
   "engines": {
     "node": ">=16.0.0"
   },
@@ -202,7 +202,7 @@
     "pm2-sysmonit": "^1.2.8"
   },
   "devDependencies": {
-    "mocha": "^10.8.0",
+    "mocha": "^11.7.0",
     "should": "^13.2.3"
   },
   "bugs": {

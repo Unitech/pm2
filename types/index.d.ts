@@ -1,4 +1,4 @@
-// Type definitions for pm2 2.7.1
+// Type definitions for pm2 6.0.8
 // Definitions by: João Portela https://www.github.com/jportela
 
 // Exported Methods
@@ -190,6 +190,126 @@ export function startup(platform: Platform, errback: ErrResultCallback): void;
  * @param cb
  */
 export function sendDataToProcessId(proc_id: number, packet: object, cb: ErrResultCallback): void;
+
+/**
+ * - Send an set of data as object to a specific process
+ * @param packet {id: number, type: 'process:msg', topic: true, data: object}
+ */
+export function sendDataToProcessId(packet: {id: number, type: 'process:msg', topic: true, data: object}): void;
+
+/**
+ * Launch system monitoring (CPU, Memory usage)
+ * @param errback - Called when monitoring is launched
+ */
+export function launchSysMonitoring(errback?: ErrCallback): void;
+
+/**
+ * Profile CPU or Memory usage
+ * @param type - 'cpu' for CPU profiling, 'mem' for memory profiling
+ * @param time - Duration in seconds (default: 10)
+ * @param errback - Called when profiling is complete
+ */
+export function profile(type: 'cpu' | 'mem', time?: number, errback?: ErrCallback): void;
+
+/**
+ * Get process environment variables
+ * @param app_id - Process name or id
+ * @param errback - Called with environment variables
+ */
+export function env(app_id: string | number, errback?: ErrCallback): void;
+
+/**
+ * Get process PID
+ * @param app_name - Process name (optional, returns all PIDs if not provided)
+ * @param errback - Called with PID information
+ */
+export function getPID(app_name?: string, errback?: ErrProcCallback): void;
+
+/**
+ * Trigger a custom action on a process
+ * @param pm_id - Process id
+ * @param action_name - Name of the action to trigger
+ * @param params - Parameters to pass to the action
+ * @param errback - Called when action completes
+ */
+export function trigger(pm_id: string | number, action_name: string, params?: any, errback?: ErrCallback): void;
+
+/**
+ * Inspect a process (debugging)
+ * @param app_name - Process name
+ * @param errback - Called with inspect information
+ */
+export function inspect(app_name: string, errback?: ErrCallback): void;
+
+/**
+ * Serve static files
+ * @param path - Path to serve files from
+ * @param port - Port number (default: 8080)
+ * @param options - Serve options
+ * @param errback - Called when server starts
+ */
+export function serve(path?: string, port?: number, options?: ServeOptions, errback?: ErrCallback): void;
+
+/**
+ * Install a PM2 module
+ * @param module_name - Name of the module to install
+ * @param options - Installation options
+ * @param errback - Called when installation completes
+ */
+export function install(module_name: string, options?: InstallOptions, errback?: ErrCallback): void;
+
+/**
+ * Uninstall a PM2 module
+ * @param module_name - Name of the module to uninstall
+ * @param errback - Called when uninstallation completes
+ */
+export function uninstall(module_name: string, errback?: ErrCallback): void;
+
+/**
+ * Send line to process stdin
+ * @param pm_id - Process id
+ * @param line - Line to send
+ * @param separator - Line separator (default: '\n')
+ * @param errback - Called when line is sent
+ */
+export function sendLineToStdin(pm_id: string | number, line: string, separator?: string, errback?: ErrCallback): void;
+
+/**
+ * Attach to process logs
+ * @param pm_id - Process id
+ * @param separator - Log separator
+ * @param errback - Called when attached
+ */
+export function attach(pm_id: string | number, separator?: string, errback?: ErrCallback): void;
+
+/**
+ * Get PM2 configuration value
+ * @param key - Configuration key (optional, returns all config if not provided)
+ * @param errback - Called with configuration value
+ */
+export function get(key?: string, errback?: ErrCallback): void;
+
+/**
+ * Set PM2 configuration value
+ * @param key - Configuration key
+ * @param value - Configuration value
+ * @param errback - Called when value is set
+ */
+export function set(key: string, value: any, errback?: ErrCallback): void;
+
+/**
+ * Set multiple PM2 configuration values
+ * @param values - Configuration values as string
+ * @param errback - Called when values are set
+ */
+export function multiset(values: string, errback?: ErrCallback): void;
+
+/**
+ * Unset PM2 configuration value
+ * @param key - Configuration key to unset
+ * @param errback - Called when value is unset
+ */
+export function unset(key: string, errback?: ErrCallback): void;
 
 // Interfaces
 
@@ -446,19 +566,152 @@ export interface StartOptions {
    * @example 'staging'
    */
   namespace?: string;
+  /**
+   * (Default: false) Exponential backoff restart delay in milliseconds.
+   * When enabled, PM2 will progressively increase restart delays after failures.
+   */
+  exp_backoff_restart_delay?: number;
+  /**
+   * Timeout for application to be ready after reload (in milliseconds).
+   */
+  listen_timeout?: number;
+  /**
+   * (Default: false) If true, shutdown the process using process.send('shutdown') instead of process.kill().
+   */
+  shutdown_with_message?: boolean;
+  /**
+   * Environment variable name that gets incremented for each cluster instance.
+   */
+  increment_var?: string;
+  /**
+   * Name of the environment variable holding the instance ID.
+   * @default 'NODE_APP_INSTANCE'
+   */
+  instance_var?: string;
+  /**
+   * Filter out specific environment variables from the process.
+   * Can be true to filter all, or array/string of specific variables.
+   */
+  filter_env?: boolean | string | string[];
+  /**
+   * (Default: false) Disable logs output.
+   */
+  disable_logs?: boolean;
+  /**
+   * Log output type.
+   */
+  log_type?: string;
+  /**
+   * (Default: false) Enable container mode.
+   */
+  container?: boolean;
+  /**
+   * (Default: false) Distribution mode for Docker.
+   */
+  dist?: boolean;
+  /**
+   * Docker image name.
+   */
+  image_name?: string;
+  /**
+   * Node.js version for Docker container.
+   */
+  node_version?: string;
+  /**
+   * (Default: false) Fresh install for Docker.
+   */
+  fresh?: boolean;
+  /**
+   * (Default: false) Docker daemon mode.
+   */
+  dockerdaemon?: boolean;
 }
 
 interface ReloadOptions {
   /**
-   * (Default: false) If true is passed in, pm2 will reload it’s environment from process.env
+   * (Default: false) If true is passed in, pm2 will reload it's environment from process.env
    * before reloading your process.
    */
   updateEnv?: boolean;
 }
 
+/**
+ * Options for serving static files
+ */
+export interface ServeOptions {
+  /**
+   * (Default: false) Single Page Application mode
+   */
+  spa?: boolean;
+  /**
+   * Basic authentication username
+   */
+  basic_auth_username?: string;
+  /**
+   * Basic authentication password
+   */
+  basic_auth_password?: string;
+  /**
+   * Monitor URL path
+   */
+  monitor?: string;
+}
+
+/**
+ * Options for Docker operations
+ */
+export interface DockerOptions {
+  /**
+   * Docker image name
+   */
+  imageName?: string;
+  /**
+   * Node.js version to use
+   */
+  nodeVersion?: string;
+  /**
+   * (Default: false) Fresh installation
+   */
+  fresh?: boolean;
+  /**
+   * (Default: false) Force operation
+   */
+  force?: boolean;
+  /**
+   * (Default: false) Docker daemon mode
+   */
+  dockerdaemon?: boolean;
+}
+
+/**
+ * Options for module installation
+ */
+export interface InstallOptions {
+  /**
+   * (Default: false) Install from tarball
+   */
+  tarball?: boolean;
+  /**
+   * (Default: true) Perform installation
+   */
+  install?: boolean;
+  /**
+   * (Default: false) Docker mode
+   */
+  docker?: boolean;
+  /**
+   * (Default: false) Use v1 API
+   */
+  v1?: boolean;
+  /**
+   * (Default: false) Safe mode installation
+   */
+  safe?: boolean | number;
+}
+
 // Types
 
-type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status';
+type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status' | 'waiting_restart';
 type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
 
 type ErrCallback = (err: Error) => void;
