@@ -1,6 +1,7 @@
 
 ## 6.0.11
 
+- #6034 replace package-lock.json by npm-shrinkwrap.json
 - #5915 fix allowing to update namespaced pm2 NPM module (@org/module-name)
 
 ## 6.0.10
