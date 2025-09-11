@@ -71,5 +71,21 @@ describe('JSON validation tests', function() {
     Object.keys(ret.config).should.containDeep(default_values);
     done();
   });
+  
+  it('should split node_args string into array', function () {
+    const cli = '--max-old-space-size=4096 --use-openssl-ca';
 
+    const expected = ['--max-old-space-size=4096', '--use-openssl-ca'];
+
+    const ret = Config.validateJSON({
+      script: 'child.js',
+      name: 'split-test',
+      node_args: cli
+    });
+
+    ret.errors.length.should.eql(0);
+
+    ret.config.node_args.should.eql(expected);
+  });
+  
 });
