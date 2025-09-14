@@ -4,20 +4,20 @@
  * can be found in the LICENSE file.
  */
 
-var debug  = require('debug')('pm2:conf');
-var p      = require('path');
-var util   = require('util');
-var chalk  = require('ansis');
+const debug  = require('debug')('pm2:conf');
+const p      = require('path');
+const util   = require('util');
+const chalk  = require('ansis');
 
 /**
  * Get PM2 path structure
  */
-var path_structure = require('./paths.js')(process.env.OVER_HOME);
+const path_structure = require('./paths.js')(process.env.OVER_HOME);
 
 /**
  * Constants variables used by PM2
  */
-var csts = {
+const csts = {
   PREFIX_MSG              : chalk.green('[PM2] '),
   PREFIX_MSG_INFO         : chalk.cyan('[PM2][INFO] '),
   PREFIX_MSG_ERR          : chalk.red('[PM2][ERROR] '),
@@ -90,7 +90,7 @@ var csts = {
 
   // Concurrent actions when doing start/restart/reload
   CONCURRENT_ACTIONS      : (function() {
-    var concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 2;
+    const concurrent_actions = parseInt(process.env.PM2_CONCURRENT_ACTIONS) || 2;
     debug('Using %d parallelism (CONCURRENT_ACTIONS)', concurrent_actions);
     return concurrent_actions;
   })(),
