@@ -1,4 +1,8 @@
 
+## 6.0.13
+
+- Fix blessed package import
+
 ## 6.0.12
 
 - #6037 Drop npm-shrinkwrap in favor of fixed dependencies versions
