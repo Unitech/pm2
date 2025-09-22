@@ -174,7 +174,7 @@
     "@pm2/pm2-version-check": "latest",
     "ansis": "4.0.0-node10",
     "async": "3.2.6",
-    "blessed": "0.1.81",
+    "@pm2/blessed": "0.1.81",
     "chokidar": "3.6.0",
     "cli-tableau": "2.0.1",
     "commander": "2.15.1",
