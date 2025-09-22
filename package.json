@@ -180,7 +180,7 @@
     "commander": "2.15.1",
     "croner": "4.1.97",
     "dayjs": "1.11.15",
-    "debug": "4.4.1",
+    "debug": "4.4.3",
     "enquirer": "2.3.6",
     "eventemitter2": "5.0.1",
     "fclone": "1.0.11",
