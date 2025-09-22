@@ -1,4 +1,9 @@
 
+## 6.0.12
+
+- #6037 Drop npm-shrinkwrap in favor of fixed dependencies versions
+- #5577 fix pm2 monit crash
+
 ## 6.0.11
 
 - #6034 replace package-lock.json by npm-shrinkwrap.json
