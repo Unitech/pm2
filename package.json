@@ -3,7 +3,7 @@
   "preferGlobal": true,
   "version": "6.0.13",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.0.0"
   },
   "directories": {
     "bin": "./bin",

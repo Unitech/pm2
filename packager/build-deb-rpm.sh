@@ -127,7 +127,7 @@ fpm --input-type dir --chdir $PACKAGE_TMPDIR \
     --before-remove packager/rhel/prerm \
     --after-remove packager/rhel/postrm \
     --architecture noarch \
-    --depends nodejs \
+    --depends "nodejs >= 22.0.0" \
     --output-type rpm .
 
 ##### Adapt files for Debian-like distro

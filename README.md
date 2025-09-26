@@ -38,7 +38,7 @@ PM2 is constantly assailed by [more than 1800 tests](https://github.com/Unitech/
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
-Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 12.X and Bun since v1
+Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 22.x and Bun since v1
 
 
 ## Installing PM2
