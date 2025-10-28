@@ -10,7 +10,7 @@ $pm2 start stdin.js -o out-rel.log --merge-logs
 
 # Send LINE\n to stdin application
 $pm2 send 0 "LINE"
-
+sleep 1
 cat out-rel.log
 grep "LINE" out-rel.log
 spec "Should have reveived line"
