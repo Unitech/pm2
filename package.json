@@ -170,7 +170,7 @@
   "dependencies": {
     "@pm2/agent": "~2.1.1",
     "@pm2/js-api": "~0.8.0",
-    "@pm2/io": "latest",
+    "@pm2/io": "github:pahann/pm2-io-apm#feat-otel-built",
     "@pm2/pm2-version-check": "latest",
     "ansis": "4.0.0-node10",
     "async": "3.2.6",
