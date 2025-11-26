@@ -196,7 +196,7 @@
     "source-map-support": "0.5.21",
     "sprintf-js": "1.1.2",
     "vizion": "~2.2.1",
-    "js-yaml": "4.1.0"
+    "js-yaml": "4.1.1"
   },
   "overrides": {
     "debug": "4.4.3"
