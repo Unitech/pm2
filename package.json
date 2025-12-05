@@ -3,7 +3,7 @@
   "preferGlobal": true,
   "version": "6.0.14",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "directories": {
     "bin": "./bin",
@@ -101,7 +101,8 @@
   "scripts": {
     "test:unit": "bash test/unit.sh",
     "test:e2e": "bash test/e2e.sh",
-    "test": "bash test/unit.sh && bash test/e2e.sh"
+    "test": "bash test/unit.sh && bash test/e2e.sh",
+    "mcp": "node lib/mcp/server.js"
   },
   "keywords": [
     "cli",
@@ -165,16 +166,18 @@
     "pm2": "bin/pm2",
     "pm2-dev": "bin/pm2-dev",
     "pm2-docker": "bin/pm2-docker",
-    "pm2-runtime": "bin/pm2-runtime"
+    "pm2-runtime": "bin/pm2-runtime",
+    "pm2-mcp": "bin/pm2-mcp"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.23.0",
     "@pm2/agent": "~2.1.1",
-    "@pm2/js-api": "~0.8.0",
+    "@pm2/blessed": "0.1.81",
     "@pm2/io": "~6.1.0",
+    "@pm2/js-api": "~0.8.0",
     "@pm2/pm2-version-check": "^1.0.4",
     "ansis": "4.0.0-node10",
     "async": "3.2.6",
-    "@pm2/blessed": "0.1.81",
     "chokidar": "3.6.0",
     "cli-tableau": "2.0.1",
     "commander": "2.15.1",
@@ -184,6 +187,7 @@
     "enquirer": "2.3.6",
     "eventemitter2": "5.0.1",
     "fclone": "1.0.11",
+    "js-yaml": "4.1.1",
     "mkdirp": "1.0.4",
     "needle": "2.4.0",
     "pidusage": "3.0.2",
@@ -191,12 +195,13 @@
     "pm2-axon-rpc": "~0.7.1",
     "pm2-deploy": "~1.0.2",
     "pm2-multimeter": "^0.1.2",
+    "pm2-server-monit": "^2.6.2",
     "promptly": "2.2.0",
     "semver": "7.7.2",
     "source-map-support": "0.5.21",
     "sprintf-js": "1.1.2",
     "vizion": "~2.2.1",
-    "js-yaml": "4.1.1"
+    "zod": "^4.1.13"
   },
   "overrides": {
     "debug": "4.4.3"
@@ -215,5 +220,6 @@
     "type": "git",
     "url": "git://github.com/Unitech/pm2.git"
   },
-  "license": "AGPL-3.0"
+  "license": "AGPL-3.0",
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
 }

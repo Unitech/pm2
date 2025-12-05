@@ -1,0 +1,105 @@
+#!/usr/bin/env node
+'use strict';
+
+const path = require('path');
+const { spawn } = require('child_process');
+const { startMcpServer } = require('../lib/mcp/server.js');
+
+function parseArgs(argv) {
+  const opts = {
+    serverOptions: {},
+    passthroughArgs: [],
+    runWithPm2: false,
+    pm2Name: 'pm2-mcp'
+  };
+
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+
+    if (arg === '--transport' && argv[i + 1]) {
+      opts.serverOptions.transportType = argv[++i];
+      opts.passthroughArgs.push('--transport', opts.serverOptions.transportType);
+      continue;
+    }
+    if (arg.startsWith('--transport=')) {
+      const [, value] = arg.split('=');
+      opts.serverOptions.transportType = value;
+      opts.passthroughArgs.push(arg);
+      continue;
+    }
+
+    if (arg === '--port' && argv[i + 1]) {
+      opts.serverOptions.port = Number(argv[++i]);
+      opts.passthroughArgs.push('--port', String(opts.serverOptions.port));
+      continue;
+    }
+    if (arg.startsWith('--port=')) {
+      const [, value] = arg.split('=');
+      opts.serverOptions.port = Number(value);
+      opts.passthroughArgs.push(arg);
+      continue;
+    }
+
+    if (arg === '--host' && argv[i + 1]) {
+      opts.serverOptions.host = argv[++i];
+      opts.passthroughArgs.push('--host', opts.serverOptions.host);
+      continue;
+    }
+    if (arg.startsWith('--host=')) {
+      const [, value] = arg.split('=');
+      opts.serverOptions.host = value;
+      opts.passthroughArgs.push(arg);
+      continue;
+    }
+
+    if (arg === '--path' && argv[i + 1]) {
+      opts.serverOptions.path = argv[++i];
+      opts.passthroughArgs.push('--path', opts.serverOptions.path);
+      continue;
+    }
+    if (arg.startsWith('--path=')) {
+      const [, value] = arg.split('=');
+      opts.serverOptions.path = value;
+      opts.passthroughArgs.push(arg);
+      continue;
+    }
+
+    if (arg === '--pm2' || arg === '--pm2-manage') {
+      opts.runWithPm2 = true;
+      continue;
+    }
+
+    if (arg === '--pm2-name' && argv[i + 1]) {
+      opts.pm2Name = argv[++i];
+      continue;
+    }
+    if (arg.startsWith('--pm2-name=')) {
+      const [, value] = arg.split('=');
+      opts.pm2Name = value;
+      continue;
+    }
+
+    opts.passthroughArgs.push(arg);
+  }
+
+  return opts;
+}
+
+async function main() {
+  const { serverOptions, passthroughArgs, runWithPm2, pm2Name } = parseArgs(process.argv.slice(2));
+
+  if (runWithPm2) {
+    const pm2Bin = path.join(__dirname, 'pm2');
+    const args = ['start', __filename, '--name', pm2Name, '--', ...passthroughArgs];
+    const child = spawn(pm2Bin, args, { stdio: 'inherit' });
+    child.on('exit', code => process.exit(code ?? 0));
+    return;
+  }
+
+  await startMcpServer(serverOptions);
+}
+
+main().catch(err => {
+  console.error('[pm2-mcp] failed to start', err);
+  process.exit(1);
+});

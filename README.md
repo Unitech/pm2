@@ -38,7 +38,7 @@ PM2 is constantly assailed by [more than 1800 tests](https://github.com/Unitech/
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
-Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 12.X and Bun since v1
+Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 22.0.0 and Bun since v1
 
 
 ## Installing PM2
@@ -221,6 +221,122 @@ $ pm2 update
 ```
 
 *PM2 updates are seamless*
+
+## MCP server
+
+PM2 now bundles an [MCP](https://modelcontextprotocol.io/specification/2025-11-25) stdio server that exposes the core process controls (list, describe, start, restart, reload, stop, delete, log flush/rotation, dump, daemon kill) plus process resources.
+
+### Quick Setup
+
+#### Claude Code (stdio)
+```bash
+# Add pm2-mcp to Claude Code
+claude mcp add pm2-mcp -- pm2-mcp
+
+# Verify it's connected
+claude mcp list
+
+# Get details
+claude mcp get pm2-mcp
+```
+
+#### Codex (stdio)
+```bash
+# Add pm2-mcp to Codex
+codex mcp add pm2-mcp -- pm2-mcp
+
+# Verify registration
+codex mcp list
+```
+
+#### HTTP Transport (for long-lived usage)
+```bash
+# Start HTTP server
+pm2-mcp --transport http --port 8849 --host 127.0.0.1 --path /mcp
+
+# Or with PM2 to keep it alive
+pm2-mcp --pm2 --pm2-name mcp-server --transport http --port 8849
+
+# Register with Claude Code (HTTP)
+claude mcp add pm2-mcp --transport http -- http://127.0.0.1:8849/mcp
+
+# Register with Codex (HTTP)
+codex mcp add pm2-mcp --transport http -- http://127.0.0.1:8849/mcp
+```
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PM2_HOME` | `~/.pm2` | PM2 home directory for sockets/logs |
+| `PM2_MCP_HOME` | - | Override PM2_HOME specifically for MCP server |
+| `PM2_MCP_TRANSPORT` | `stdio` | Transport type: `stdio`, `http`, `sse`, `streamable` |
+| `PM2_MCP_PORT` | `8849` | Port for HTTP/SSE transport |
+| `PM2_MCP_HOST` | `127.0.0.1` | Host for HTTP/SSE transport |
+| `PM2_MCP_PATH` | `/mcp` | Path for HTTP/SSE transport |
+| `PM2_MCP_NO_DAEMON` | `true` | Use PM2 no-daemon mode (recommended for sandboxed clients) |
+| `PM2_SILENT` | `true` | Silence PM2 CLI output for clean stdio |
+| `PM2_PROGRAMMATIC` | `true` | Run PM2 in programmatic mode |
+| `PM2_MCP_DEBUG` | `false` | Enable debug logging (sandbox detection, transport info) |
+| `PM2_MCP_ALLOWED_HOSTS` | - | Comma-separated list of allowed hosts for HTTP transport |
+| `PM2_MCP_ALLOWED_ORIGINS` | - | Comma-separated list of allowed origins for HTTP transport |
+| `PM2_MCP_DNS_PROTECTION` | `true` | Enable DNS rebinding protection |
+| `DEBUG` | - | Node.js debug namespace: `pm2-mcp*` for all logs, `pm2-mcp:req` for requests |
+| `CLAUDE_CODE_SANDBOX` | - | Set to `true` to indicate Claude Code sandbox environment |
+
+### Sandbox Detection
+
+The MCP server automatically detects sandboxed environments and adapts:
+
+- **Home Directory Check**: Tests if `~/.pm2` is writable
+- **Environment Detection**: Checks for `CLAUDE_CODE_SANDBOX=true`
+- **Permission Detection**: Detects UID mismatches (setuid)
+- **Fallback Locations**: Automatically tries `/tmp/pm2-mcp` and `./.pm2-mcp` in sandboxed environments
+- **Client Notifications**: Sends MCP logging notifications to clients when sandbox is detected
+
+When running in a sandboxed environment, the server will:
+1. Automatically use a writable location for PM2_HOME
+2. Send a warning notification to the MCP client with:
+   - Sandbox detection reasons
+   - Current PM2_HOME location
+   - Recommendations for optimal configuration
+3. Log sandbox status (when `PM2_MCP_DEBUG=true`)
+
+Enable `PM2_MCP_DEBUG=true` to see sandbox detection details:
+```bash
+DEBUG=pm2-mcp* PM2_MCP_DEBUG=true pm2-mcp
+```
+
+**MCP Protocol Support**: The server uses the MCP `notifications/message` logging protocol to inform clients about sandbox status and limitations. Compatible MCP clients (like Claude Code) will display these notifications automatically.
+
+### Features
+
+- Run it with `pm2-mcp` (or `npm run mcp`) and point your MCP client at that stdio command.
+- Prefer the Streamable HTTP transport for long-lived usage.
+- By default the server starts in PM2 no-daemon mode for compatibility with sandboxed MCP clients. Set `PM2_MCP_NO_DAEMON=false` to connect to an existing PM2 daemon instead.
+- PM2 CLI noise is silenced automatically to keep stdio clean for the MCP handshake; set `PM2_SILENT=false` only if you need PM2 console output.
+- Run the server under PM2 itself with `pm2-mcp --pm2 --pm2-name mcp-server --transport http --port 8849` to keep it alive across restarts.
+- Logging: set `DEBUG=pm2-mcp*` to see lifecycle/activity logs (transport selection, PM2 connects, tool calls).
+
+### Available Tools
+
+- `pm2_list_processes` - List all PM2 processes with basic metrics
+- `pm2_describe_process` - Get detailed process information
+- `pm2_start_process` - Start a new process or ecosystem file
+- `pm2_restart_process` - Restart a process by id/name
+- `pm2_reload_process` - Zero-downtime reload (cluster mode)
+- `pm2_stop_process` - Stop a process by id/name
+- `pm2_delete_process` - Delete a process from PM2
+- `pm2_flush_logs` - Flush log files for a process
+- `pm2_reload_logs` - Rotate and reopen log files
+- `pm2_dump` - Save process list to disk
+- `pm2_tail_logs` - Read last N lines from process logs
+- `pm2_kill_daemon` - Stop PM2 daemon and all processes
+
+### Available Resources
+
+- `pm2://processes` - Current PM2 process list as JSON
+- `pm2://process/{id}` - Detailed process information as JSON
 
 ## PM2+ Monitoring
 
