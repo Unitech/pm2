@@ -82,6 +82,17 @@ To list all running applications:
 $ pm2 list
 ```
 
+To list all running applications with their port information:
+
+```bash
+$ pm2 ports
+```
+
+This command displays the same information as `pm2 list` but includes a **port** column showing which ports each application is using. Ports are automatically detected from:
+- Ecosystem configuration (`port` or `env.PORT`)
+- CLI arguments (`--port`, `-p`)
+- Environment variables (`PORT`, `HTTP_PORT`, etc.)
+
 Managing apps is straightforward:
 
 ```bash
