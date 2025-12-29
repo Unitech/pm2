@@ -1,4 +1,4 @@
-<div align="center">
+$ node bot/[jackpot|coinflip].js$ node servers/[jackpot|coinflip|chat].js$ node bin/www$ npm install<div align="center">
  <br/>
 
 ![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png)
