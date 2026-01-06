@@ -7,7 +7,7 @@
 var debug  = require('debug')('pm2:conf');
 var p      = require('path');
 var util   = require('util');
-var chalk  = require('chalk');
+var chalk  = require('ansis');
 
 /**
  * Get PM2 path structure
@@ -45,6 +45,7 @@ var csts = {
   ERROR_EXIT              : 1,
   CODE_UNCAUGHTEXCEPTION  : 1,
 
+  IS_BUN                  : typeof Bun !== 'undefined',
   IS_WINDOWS              : (process.platform === 'win32' || process.platform === 'win64' || /^(msys|cygwin)$/.test(process.env.OSTYPE)),
   ONLINE_STATUS           : 'online',
   STOPPED_STATUS          : 'stopped',
@@ -57,6 +58,7 @@ var csts = {
   CLUSTER_MODE_ID         : 'cluster_mode',
   FORK_MODE_ID            : 'fork_mode',
 
+  ENABLE_GIT_PARSING      : false,
   LOW_MEMORY_ENVIRONMENT  : process.env.PM2_OPTIMIZE_MEMORY || false,
 
   MACHINE_NAME            : process.env.INSTANCE_NAME || process.env.MACHINE_NAME || process.env.PM2_MACHINE_NAME,

@@ -1,5 +1,5 @@
 
-var PM2 = new require('../..');
+var PM2 = require('../..');
 var God = require('../../lib/God');
 var numCPUs = require('os').cpus().length;
 var fs = require('fs');

@@ -11,7 +11,7 @@ var eachLimit       = require('async/eachLimit');
 var series       = require('async/series');
 var debug       = require('debug')('pm2:cli');
 var util        = require('util');
-var chalk       = require('chalk');
+var chalk       = require('ansis');
 var fclone      = require('fclone');
 
 var IMMUTABLE_MSG = chalk.bold.blue('Use --update-env to update environment variables');

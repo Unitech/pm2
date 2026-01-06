@@ -1,4 +1,11 @@
 #!/bin/bash
 
-DIR="$(dirname "$(readlink -f "$0")")"
-$DIR/node/bin/node $DIR/bin/pm2 $@
+SCRIPT_PATH="$(dirname "$0")/../lib/binaries/CLI.js"
+
+# Check if 'bun' is available, otherwise use 'node'
+if command -v bun &> /dev/null
+then
+    bun "$SCRIPT_PATH" "$@"
+else
+    node "$SCRIPT_PATH" "$@"
+fi

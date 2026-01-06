@@ -1,4 +1,95 @@
 
+## 6.0.14
+
+- Fixed version of @pm2/pm2-version-check #6055
+- CVE-2025-64718 Update js-yaml
+- replace fs.R_OK with fs.constants.T_OK #6012 #6019
+
+## 6.0.13
+
+- Fix blessed package import
+
+## 6.0.12
+
+- #6037 Drop npm-shrinkwrap in favor of fixed dependencies versions
+- #5577 fix pm2 monit crash
+
+## 6.0.11
+
+- #6034 replace package-lock.json by npm-shrinkwrap.json
+- #5915 fix allowing to update namespaced pm2 NPM module (@org/module-name)
+
+## 6.0.10
+
+- revert #5971 #6031
+
+## 6.0.9
+
+- updates all typescript definitions
+- upgrade github ci workflows
+- upgrade mocha dep and adapt tests
+- bump packages
+- fix:Potential ReDoS Vulnerability or Inefficient Regular Expression in Project: Need for Assessment and Mitigation #5971
+
+## 6.0.8
+
+- fix: package-lock update
+
+## 6.0.7
+
+- fix: ansis-node10 https://github.com/Unitech/pm2/commit/99d9224e940d119a1ad5b241b4fc4e0db7c830ed @webdiscus
+
+## 6.0.6
+
+- refactor: replace chalk with smaller alternative by @webdiscus
+
+## 6.0.5
+
+- Bun support - Fixes #5893 #5774 #5682 #5675 #5777
+- Disable git parsing by default #5909 #2182 #5801 #5051 #5696
+- Add WEBP content type for pm2 serve #5900 @tbo47
+- Enable PM2 module update from tarball #5906 @AYOKINYA
+- Fix treekil on FreeBSD #5896 @skeyby
+- fix allowing to update namespaced pm2 NPM module (@org/module-name) #5915 @endelendel
+
+## 5.4.3
+
+- Update sub packages
+
+## 5.4.2
+
+- Update sub packages
+
+## 5.4.1
+
+- @pm2/io DeprecationWarning: The util._extend API is deprecated https://github.com/keymetrics/pm2-io-apm/issues/301 @egoroof
+
+## 5.4.0
+
+- #5782 add autostart true||false feature by @ultimate-tester
+- fix UUID deprecation
+- updates modules
+
+## 5.3.1
+
+- #5686 Switch from Travis CI to Github Actions
+- #5680 Fixed reserved keyword for ES6 Strict Mode when Bundling @juaneth
+- #5683 update badges
+- #5684 auto switch light and dark mode logos
+- #5678 Bugfix/deploy ecosystem filename extension / esm module default ecosystem config name @TeleMediaCC
+- #5660 Fix matching logic for logs from namespace when lines = 0 @bawjensen
+- fix "vulnerabilities" in axios module
+
+## 5.3.0
+
+- fix: replace non-working condition that blocks flush from clearing the logs #5533 @Sailboat265
+- fix: ESM script loader #5524 @BlueWater86
+
+## 5.2.2
+
+- fix: correct pm2 ls display when there is a (very) long process id (@dko-slapdash)
+- typo: corrections
+
 ## 5.2.1
 
 - fix cluster error avoiding process restart (#5396)

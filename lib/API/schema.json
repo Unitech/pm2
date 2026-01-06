@@ -187,11 +187,24 @@
     "docDefault" : "True",
     "docDescription": "Enable or disable the versioning metadatas (vizion library)"
   },
+  "autostart": {
+    "type": "boolean",
+    "default": true,
+    "docDefault": "True",
+    "docDescription": "Enable or disable auto start when adding process"
+  },
   "autorestart": {
     "type": "boolean",
     "default": true,
     "docDefault": "True",
     "docDescription": "Enable or disable auto restart after process failure"
+  },
+  "stop_exit_codes": {
+    "type":  [
+      "array",
+      "number"
+    ],
+    "docDescription": "List of exit codes that should allow the process to stop (skip autorestart)."
   },
   "watch_delay": {
     "type": "number",

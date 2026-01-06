@@ -12,7 +12,13 @@ echo "Testing wrapped fork mode values"
 rm path-check1.txt
 rm path-check2.txt
 
-node path-check.js > path-check1.txt
+if command -v bun >/dev/null 2>&1
+then
+    bun path-check.js > path-check1.txt
+else
+    node path-check.js > path-check1.txt
+fi
+
 $pm2 start path-check.js --no-autorestart -o path-check2.txt
 sleep 1
 

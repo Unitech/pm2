@@ -7,6 +7,13 @@
 
 node="`type -P node`"
 
+if command -v bun >/dev/null 2>&1
+then
+    IS_BUN=true
+else
+    IS_BUN=false
+fi
+
 pm2_path=`pwd`/bin/pm2
 
 if [ ! -f $pm2_path ];
@@ -18,7 +25,7 @@ then
     fi
 fi
 
-pm2="$node $pm2_path"
+pm2="$pm2_path"
 
 SRC=$(cd $(dirname "$0"); pwd)
 file_path="${SRC}/../fixtures"
@@ -88,7 +95,8 @@ function should {
     sleep 0.3
     $pm2 prettylist > /tmp/tmp_out.txt
     OUT=`cat /tmp/tmp_out.txt | grep -v "npm" | grep -o "$2" | wc -l`
-    [ $OUT -eq $3 ] || fail "$1"
+    [ $OUT -eq $3 ] || { [ -n "${4+x}" ] && [ $OUT -eq $4 ]; } || fail "$1"
+    #[ $OUT -eq $3 ] || fail "$1"
     success "$1"
 }
 

@@ -10,7 +10,6 @@ test/child
 dist/
 *.deb
 *.rpm
-package-lock.json
 .DS_Store
 *.swp
 *.swo

@@ -104,6 +104,30 @@ $pm2 delete all
 $pm2 start no-restart.json
 should 'should not restart' 'restart_time: 0' 1
 
+############### STOP EXIT CODES
+$pm2 kill
+
+$pm2 start exitcode42.js --stop-exit-codes 42
+sleep 2
+should 'should not restart' 'restart_time: 0' 1
+
+$pm2 delete all
+$pm2 start exitcode42.js --stop-exit-codes 34
+sleep 1
+shouldnot 'should restart' 'restart_time: 0' 1
+$pm2 kill
+
+$pm2 start exitcode42.js --stop-exit-codes 3
+sleep 1
+shouldnot 'should restart processes' 'restart_time: 0' 1
+$pm2 kill
+
+$pm2 delete all
+$pm2 start stop-exit-codes.json
+sleep 0.5
+should 'should not restart' 'restart_time: 0' 1
+
+
 ############### Via ENV: SEND() instead of KILL()
 $pm2 kill
 export PM2_KILL_USE_MESSAGE='true'

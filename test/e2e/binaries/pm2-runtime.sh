@@ -15,7 +15,7 @@ then
     fi
 fi
 
-pm2_runtime="`type -P node` $pm2_path"
+pm2_runtime="$pm2_path"
 
 export PM2_RUNTIME_DEBUG='true'
 

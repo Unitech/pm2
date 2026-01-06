@@ -24,7 +24,8 @@ describe('PM2 instances max bound test', function() {
     }, function(err, apps) {
       should(apps.length).eql(os.cpus().length)
       should(apps[0].pm2_env.exec_mode).eql('cluster_mode')
-      should(apps[1].pm2_env.exec_mode).eql('cluster_mode')
+      if (apps.length > 1)
+        should(apps[1].pm2_env.exec_mode).eql('cluster_mode')
       done()
     })
   })
@@ -33,7 +34,8 @@ describe('PM2 instances max bound test', function() {
     setTimeout(function() {
       pm2.list(function(err, apps) {
         should(apps[0].pm2_env.restart_time).eql(0)
-        should(apps[1].pm2_env.restart_time).eql(0)
+        if (apps.length > 1)
+          should(apps[1].pm2_env.restart_time).eql(0)
         done()
       })
     }, 1000)
@@ -52,7 +54,8 @@ describe('PM2 instances max bound test', function() {
     }, function(err, apps) {
       should(apps.length).eql(os.cpus().length)
       should(apps[0].pm2_env.exec_mode).eql('cluster_mode')
-      should(apps[1].pm2_env.exec_mode).eql('cluster_mode')
+      if (apps.length > 1)
+        should(apps[1].pm2_env.exec_mode).eql('cluster_mode')
       done()
     })
   })
@@ -83,7 +86,8 @@ describe('PM2 instances max bound test', function() {
     }, function(err, apps) {
       should(apps.length).eql(os.cpus().length)
       should(apps[0].pm2_env.exec_mode).eql('fork_mode')
-      should(apps[1].pm2_env.exec_mode).eql('fork_mode')
+      if (apps.length > 1)
+        should(apps[1].pm2_env.exec_mode).eql('fork_mode')
       done()
     })
   })
@@ -92,7 +96,8 @@ describe('PM2 instances max bound test', function() {
     setTimeout(function() {
       pm2.list(function(err, apps) {
         should(apps[0].pm2_env.restart_time).eql(0)
-        should(apps[1].pm2_env.restart_time).eql(0)
+        if (apps.length > 1)
+          should(apps[1].pm2_env.restart_time).eql(0)
         done()
       })
     }, 1000)

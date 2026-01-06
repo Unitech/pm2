@@ -15,19 +15,22 @@ then
     fi
 fi
 
-pm2dev="`type -P node` $pm2_path"
+pm2dev="$pm2_path"
 
 export PM2_HOME=$HOME'/.pm2-dev'
 
 cd $file_path/pm2-dev
 
 # Test with js
-$pm2dev app.js --test-mode
+$pm2dev app.js  &
+sleep 2
 $pm2 ls
 should 'should have started 1 apps' 'online' 1
 should 'should watch be true' 'watch: true' 1
+pkill -f Daemon
 $pm2 kill
 
+echo "THEN"
 # Test with json and args
 $pm2dev start app.json --test-mode
 $pm2 ls

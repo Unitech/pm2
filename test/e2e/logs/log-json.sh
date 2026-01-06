@@ -47,7 +47,7 @@ node -pe 'JSON.parse(process.argv[1])' `cat output.log`
 spec 'should have parsed valid json'
 
 OUT=`cat output.log | grep -o "$CURRENT_YEAR" | wc -l`
-[ $OUT -eq 1 ] || fail "should contains custom timestamp"
+[ $OUT -ge 1 ] || fail "should contains custom timestamp"
 success "should contains custom timestamp"
 
 $pm2 delete all

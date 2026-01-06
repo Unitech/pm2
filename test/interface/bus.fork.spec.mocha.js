@@ -159,6 +159,7 @@ describe('PM2 BUS / RPC', function() {
       var plan = new Plan(1, done);
 
       pm2_bus.on('*', function(event, data) {
+        console.log(event)
         if (event == 'process:exception') {
           data.should.have.properties(ERROR_EVENT);
           data.process.should.have.properties(PROCESS_ARCH);
