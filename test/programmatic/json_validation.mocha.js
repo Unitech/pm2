@@ -72,4 +72,49 @@ describe('JSON validation tests', function() {
     done();
   });
 
+  it('should split args string containing dashed flags (regression #6031)', function() {
+    var ret = Config.validateJSON({
+      script: 'app.js',
+      name: 'app',
+      args: 'start -c /app/nuxt.config.ts'
+    });
+
+    ret.errors.length.should.eql(0);
+    ret.config.args.should.eql(['start', '-c', '/app/nuxt.config.ts']);
+  });
+
+  it('should preserve quoted args when splitting string args', function() {
+    var ret = Config.validateJSON({
+      script: 'app.js',
+      name: 'app',
+      args: 'run --message "hello world" --single \'foo bar\' --another="baz qux"' 
+    });
+
+    ret.errors.length.should.eql(0);
+    ret.config.args.should.eql([
+      'run',
+      '--message',
+      'hello world',
+      '--single',
+      'foo bar',
+      '--another=\"baz qux\"'
+    ]);
+  });
+
+  it('should split node_args string into array', function() {
+    const cli = '--max-old-space-size=4096 --use-openssl-ca';
+
+    const expected = ['--max-old-space-size=4096', '--use-openssl-ca'];
+
+    const ret=Config.validateJSON({
+      script: 'app.js',
+      name: 'split-test',
+      node_args: cli
+    });
+
+    ret.errors.length.should.eql(0);
+
+    ret.config.node_args.should.eql(expected);
+  });
+
 });
