@@ -204,6 +204,7 @@
       "array",
       "number"
     ],
+    "alias": ["stopExitCodes"],
     "docDescription": "List of exit codes that should allow the process to stop (skip autorestart)."
   },
   "watch_delay": {
