@@ -103,6 +103,7 @@ var csts = {
 
   WORKER_INTERVAL         : process.env.PM2_WORKER_INTERVAL || 30000,
   KILL_TIMEOUT            : process.env.PM2_KILL_TIMEOUT || 1600,
+  KILL_RETRY_TIME         : process.env.PM2_KILL_RETRY_TIME || 100,
   KILL_SIGNAL             : process.env.PM2_KILL_SIGNAL || 'SIGINT',
   KILL_USE_MESSAGE        : process.env.PM2_KILL_USE_MESSAGE || false,
 
