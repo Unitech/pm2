@@ -34,7 +34,7 @@ describe('API checks', function() {
     })
   })
 
-  it('should start app with filtered env wth array of env to be ignored', function(done) {
+  it('should start app with filtered env with array of env to be ignored', function(done) {
     PM2.start({
       script: './../fixtures/echo.js',
       filter_env: ['SHOULD_NOT_BE_THERE']

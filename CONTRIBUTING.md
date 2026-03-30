@@ -30,7 +30,7 @@ $ pm2 ls
 ├── bin      // pm2, pmd, pm2-dev, pm2-docker are there
 ├── examples // examples files
 ├── lib      // source files
-├── pres     // presentation files
+├── press     // presentation files
 ├── test     // test files
 └── types    // TypeScript definition files
 ```

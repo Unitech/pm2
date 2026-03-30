@@ -25,7 +25,7 @@ unknown_os ()
     echo "You can override the OS detection by setting os= and dist= prior to running this script."
     echo "For example, to force Ubuntu Trusty: os=ubuntu dist=trusty ./script.sh"
     echo
-    echo "For more informations, please read the documentation on http://pm2.io/"
+    echo "For more information, please read the documentation on http://pm2.io/"
     exit 1
 }
 
@@ -116,7 +116,7 @@ finalize_yum_repo ()
         echo
         echo "WARNING: "
         echo "The pygpgme package could not be installed. This means GPG verification is not possible for any RPM installed on your system. "
-        echo "To fix this, add a repository with pygpgme. Usualy, the EPEL repository for your system will have this. "
+        echo "To fix this, add a repository with pygpgme. Usually, the EPEL repository for your system will have this. "
         echo "More information: https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F"
         echo
 

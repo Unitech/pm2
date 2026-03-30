@@ -44,14 +44,14 @@ describe('Custom actions via CLI/API', function() {
     });
   });
 
-  it('should cannot trigger message if unknow id', function(done) {
+  it('should cannot trigger message if unknown id', function(done) {
     pm2.trigger(10, 'ping', function(err, ret) {
       should(err).not.be.null();
       done();
     });
   });
 
-  it('should cannot trigger message if unknow action name', function(done) {
+  it('should cannot trigger message if unknown action name', function(done) {
     pm2.trigger(0, 'XXXXXXXXXx', function(err, ret) {
       should(err).not.be.null();
       done();

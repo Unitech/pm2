@@ -510,11 +510,11 @@ export interface StartOptions {
   /**
    * (Default: 1600)
    * The number of milliseconds to wait after a stop or restart command issues a SIGINT signal to kill the
-   * script forceably with a SIGKILL signal.
+   * script forcibly with a SIGKILL signal.
    */
   kill_timeout?: number;
   /**
-   * (Default: 0) Number of millseconds to wait before restarting a script that has exited.
+   * (Default: 0) Number of milliseconds to wait before restarting a script that has exited.
    */
   restart_delay?: number;
   /**

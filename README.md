@@ -1,7 +1,7 @@
 <div align="center">
  <br/>
 
-![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png)
+![https://raw.githubusercontent.com/Unitech/pm2/master/press/pm2-logo-2.png](https://raw.githubusercontent.com/Unitech/pm2/master/press/pm2-logo-2.png)
 
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b><br/>
   <i>Runtime Edition</i>
@@ -74,7 +74,7 @@ Your app is now daemonized, monitored and kept alive forever.
 
 Once applications are started you can manage them easily:
 
-![Process listing](https://github.com/Unitech/pm2/raw/master/pres/pm2-ls-v2.png)
+![Process listing](https://github.com/Unitech/pm2/raw/master/press/pm2-ls-v2.png)
 
 To list all running applications:
 
@@ -108,7 +108,7 @@ $ pm2 monit
 
 The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
 
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/cluster.png)
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/press/cluster.png)
 
 Starting a Node.js application in cluster mode that will leverage all CPUs available:
 
@@ -126,7 +126,7 @@ Hot Reload allows to update an application without any downtime:
 $ pm2 reload all
 ```
 
-[More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
+[More information about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 
 ### Container Support
 
@@ -151,11 +151,11 @@ $ pm2 set pm2:sysmonit true
 $ pm2 update
 ```
 
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/vitals.png)
+![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/press/vitals.png)
 
 ### Terminal Based Monitoring
 
-![Monit](https://github.com/Unitech/pm2/raw/master/pres/pm2-monit.png)
+![Monit](https://github.com/Unitech/pm2/raw/master/press/pm2-monit.png)
 
 Monitor all processes launched straight from the command line:
 
@@ -171,14 +171,14 @@ To consult logs just type the command:
 $ pm2 logs
 ```
 
-Standard, Raw, JSON and formated output are available.
+Standard, Raw, JSON and formatted output are available.
 
 Examples:
 
 ```bash
 $ pm2 logs APP-NAME       # Display APP-NAME logs
 $ pm2 logs --json         # JSON output
-$ pm2 logs --format       # Formated output
+$ pm2 logs --format       # Formatted output
 
 $ pm2 flush               # Flush all logs
 $ pm2 reloadLogs          # Reload all logs

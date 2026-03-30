@@ -9,7 +9,7 @@ describe('Modules programmatic testing', function() {
     pm2.kill(done);
   });
 
-  it('should instanciate PM2', function() {
+  it('should instantiate PM2', function() {
     pm2 = new PM2.custom({
       daemon_mode : true
     });

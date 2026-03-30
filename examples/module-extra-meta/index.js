@@ -6,7 +6,7 @@ var pmx = require('pmx');
  */
 pmx.configureModule({
   human_info : [
-    [ 'Description',  'Gridcontrol is now running, tasdkkals dk als dkl askdl\nasd lsdakl kdsald asdsd\nAnd hthis like that and bla blab\nYESY!' ],
+    [ 'Description',  'Gridcontrol is now running, tasdkkals dk also dkl askdl\nasd lsdakl kdsald asdsd\nAnd hthis like that and bla blab\nYESY!' ],
     [ 'Port',  8000],
     [ 'Grid name', 'Sisi la grid']
   ]

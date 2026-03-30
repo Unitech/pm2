@@ -4,7 +4,7 @@ const r = 3;
 
 console.log(`Circle with radius ${r} has
   area: ${area(r)};
-  circunference: ${circumference(r)}`);
+  circumference: ${circumference(r)}`);
 
 setInterval(() => {
 }, 1000)

@@ -110,7 +110,7 @@ describe('Modules programmatic testing', function() {
   })
 
   describe('Re spawn PM2', () => {
-    it('should kill/resurect pm2', (done) => {
+    it('should kill/resurrect pm2', (done) => {
       pm2.update(function(err) {
         should(err).be.null();
         done()

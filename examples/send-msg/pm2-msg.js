@@ -5,7 +5,7 @@ console.log(pm2)
 
 pm2.connect(function() {
   pm2.sendDataToProcessId({
-    // id of procces from "pm2 list" command or from pm2.list(errback) method
+    // id of process from "pm2 list" command or from pm2.list(errback) method
     id   : '1',
 
     // process:msg will be send as 'message' on target process

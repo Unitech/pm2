@@ -25,7 +25,7 @@ unknown_os ()
     echo "You can override the OS detection by setting os= and dist= prior to running this script."
     echo "For example, to force Ubuntu Trusty: os=ubuntu dist=trusty ./script.sh"
     echo
-    echo "For more informations, please read the documentation on http://pm2.io/"
+    echo "For more information, please read the documentation on http://pm2.io/"
     exit 1
 }
 
@@ -96,7 +96,7 @@ detect_os ()
             os=`lsb_release -i | cut -f2 | awk '{ print tolower($1) }'`
 
         elif [ -e /etc/debian_version ]; then
-            # some Debians have jessie/sid in their /etc/debian_version
+            # some Debian's have jessie/sid in their /etc/debian_version
             # while others have '6.0.7'
             os=`cat /etc/issue | head -1 | awk '{ print tolower($1) }'`
             if grep -q '/' /etc/debian_version; then

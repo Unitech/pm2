@@ -11,7 +11,7 @@ Metrics covered are:
 
 ## What is Custom Metrics?
 
-Custom metrics is a powerfull way to get more visibility from a running application. It will allow you to monitor in realtime the current value of variables, know the number of actions being processed, measure latency and much more.
+Custom metrics is a powerful way to get more visibility from a running application. It will allow you to monitor in realtime the current value of variables, know the number of actions being processed, measure latency and much more.
 
 Once you have plugged in some custom metrics you will be able to monitor their value in realtime with
 

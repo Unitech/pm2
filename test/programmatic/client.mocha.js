@@ -5,7 +5,7 @@ var Client = require('../../lib/Client');
 describe('Client Daemon', function() {
   var client;
 
-  it('should instanciate a new client', function() {
+  it('should instantiate a new client', function() {
     client = new Client({ independent : true });
     should.exist(client.rpc_socket_file);
     should.exist(client.pub_socket_file);
@@ -42,7 +42,7 @@ describe('Client Daemon', function() {
 
   // It is the job of the CLI
   describe.skip('Custom PM2 Home location', function() {
-    it('should instanciate a PM2 on another folder', function(done) {
+    it('should instantiate a PM2 on another folder', function(done) {
       client = new Client({
         pm2_home : '/tmp/test'
       });
