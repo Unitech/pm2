@@ -24,7 +24,7 @@
         <exec_method type="method" name="refresh" exec="%PM2_PATH% reload all" timeout_seconds="60"/>
         <exec_method type="method" name="stop" exec="%PM2_PATH% kill" timeout_seconds="60"/>
         
-        <property_group name="startd" type="framework">
+        <property_group name="started" type="framework">
             <propval name="duration" type="astring" value="contract"/>
             <propval name="ignore_error" type="astring" value="core,signal"/>
         </property_group>

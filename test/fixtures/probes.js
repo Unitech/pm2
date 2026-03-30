@@ -23,7 +23,7 @@ var val = pmx.metric({
   },
   /**
    * Here we set a default value threshold, to receive a notification
-   * These options can be overriden via Keymetrics or via pm2
+   * These options can be overridden via Keymetrics or via pm2
    * More: http://bit.ly/1O02aap
    */
   alert : {

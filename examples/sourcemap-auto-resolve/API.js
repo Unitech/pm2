@@ -158,11 +158,11 @@ API.prototype.connect = function(noDaemon, cb) {
 }
 
 /**
- * Usefull when custom PM2 created with independent flag set to true
+ * Useful when custom PM2 created with independent flag set to true
  * This will cleanup the newly created instance
  * by removing folder, killing PM2 and so on
  *
- * @param {Function} cb callback once cleanup is successfull
+ * @param {Function} cb callback once cleanup is successful
  */
 API.prototype.destroy = function(cb) {
   var exec = require('shelljs').exec;

@@ -68,7 +68,7 @@ var csts = {
 
 
   PM2_BANNER       : '../lib/motd',
-  PM2_UPDATE       : '../lib/API/pm2-plus/pres/motd.update',
+  PM2_UPDATE       : '../lib/API/pm2-plus/press/motd.update',
   DEFAULT_MODULE_JSON     : 'package.json',
 
   MODULE_BASEFOLDER: 'module',

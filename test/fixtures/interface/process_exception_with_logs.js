@@ -6,7 +6,7 @@ pmx.action('exception', function(reply) {
   console.log('I will crash muhahah');
   throw new Error('CRASHED');
 
-  return reply({ sucess: true});
+  return reply({ success: true});
 });
 
 setInterval(function() {

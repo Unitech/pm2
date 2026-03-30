@@ -207,7 +207,7 @@ declare var Buffer: {
      * @param size count of octets to allocate.
      * @param fill if specified, buffer will be initialized by calling buf.fill(fill).
      *    If parameter is omitted, buffer will be filled with zeros.
-     * @param encoding encoding used for call to buf.fill while initalizing
+     * @param encoding encoding used for call to buf.fill while initializing
      */
     alloc(size: number, fill?: string | Buffer | number, encoding?: string): Buffer;
     /**
@@ -1574,7 +1574,7 @@ declare module "fs" {
     export function write(fd: number, data: any, offset: number, callback?: (err: NodeJS.ErrnoException, written: number, str: string) => void): void;
     export function write(fd: number, data: any, offset: number, encoding: string, callback?: (err: NodeJS.ErrnoException, written: number, str: string) => void): void;
     export function writeSync(fd: number, buffer: Buffer, offset: number, length: number, position?: number): number;
-    export function writeSync(fd: number, data: any, position?: number, enconding?: string): number;
+    export function writeSync(fd: number, data: any, position?: number, encoding?: string): number;
     export function read(fd: number, buffer: Buffer, offset: number, length: number, position: number, callback?: (err: NodeJS.ErrnoException, bytesRead: number, buffer: Buffer) => void): void;
     export function readSync(fd: number, buffer: Buffer, offset: number, length: number, position: number): number;
     /*
@@ -1729,7 +1729,7 @@ declare module "path" {
     /**
      * The right-most parameter is considered {to}.  Other parameters are considered an array of {from}.
      *
-     * Starting from leftmost {from} paramter, resolves {to} to an absolute path.
+     * Starting from leftmost {from} parameter, resolves {to} to an absolute path.
      *
      * If {to} isn't already absolute, {from} arguments are prepended in right to left order, until an absolute path is found. If after using all {from} paths still no absolute path is found, the current working directory is used as well. The resulting path is normalized, and trailing slashes are removed unless the path gets resolved to the root directory.
      *
@@ -2125,7 +2125,7 @@ declare module "crypto" {
         update(data: any): void;
         sign(private_key: string, output_format: string): string;
     }
-    export function createVerify(algorith: string): Verify;
+    export function createVerify(algorithm: string): Verify;
     export interface Verify extends NodeJS.WritableStream {
         update(data: any): void;
         verify(object: string, signature: string, signature_format?: string): boolean;
@@ -2307,7 +2307,7 @@ declare module "assert" {
         export function equal(actual: any, expected: any, message?: string): void;
         export function notEqual(actual: any, expected: any, message?: string): void;
         export function deepEqual(actual: any, expected: any, message?: string): void;
-        export function notDeepEqual(acutal: any, expected: any, message?: string): void;
+        export function notDeepEqual(actual: any, expected: any, message?: string): void;
         export function strictEqual(actual: any, expected: any, message?: string): void;
         export function notStrictEqual(actual: any, expected: any, message?: string): void;
         export function deepStrictEqual(actual: any, expected: any, message?: string): void;

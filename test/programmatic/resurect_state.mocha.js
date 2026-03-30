@@ -64,7 +64,7 @@ describe.skip('Keep state on pm2 update', function() {
       pm2.kill(done)
     })
 
-    it('should resurect with one process stopped', function(done) {
+    it('should resurrect with one process stopped', function(done) {
       pm2.resurrect(() => {
         pm2.list((err, dt) => {
           if (dt.length == 4)
@@ -82,7 +82,7 @@ describe.skip('Keep state on pm2 update', function() {
       pm2.kill(done)
     })
 
-    it('should resurect with one process stopped', function(done) {
+    it('should resurrect with one process stopped', function(done) {
       pm2.resurrect(() => {
         pm2.list((err, dt) => {
           if (dt.length == 4 && dt.filter(proc => proc.pm2_env.status == 'stopped').length == 1)
@@ -100,7 +100,7 @@ describe.skip('Keep state on pm2 update', function() {
       pm2.kill(done)
     })
 
-    it('should resurect with one process stopped', function(done) {
+    it('should resurrect with one process stopped', function(done) {
       pm2.resurrect(() => {
         pm2.list((err, dt) => {
           if (dt.length == 3)

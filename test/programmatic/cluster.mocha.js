@@ -140,7 +140,7 @@ describe('Cluster programmatic tests', function() {
     });
   });
 
-  // Skip Becoz Bun
+  // Skip Because Bun
   describe.skip('Listen timeout feature', function() {
     after(function(done) {
       pm2.delete('all', done);
