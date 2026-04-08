@@ -81,10 +81,14 @@ module.exports = function(PM2_HOME) {
 
   if (process.platform === 'win32' ||
       process.platform === 'win64') {
-    //@todo instead of static unique rpc/pub file custom with PM2_HOME or UID
-    pm2_file_stucture.DAEMON_RPC_PORT = '\\\\.\\pipe\\rpc.sock';
-    pm2_file_stucture.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub.sock';
-    pm2_file_stucture.INTERACTOR_RPC_PORT = '\\\\.\\pipe\\interactor.sock';
+    // Use PM2_HOME-based unique pipe names to avoid global collisions.
+    // Windows named pipes are kernel objects in a flat global namespace;
+    // hardcoded names cause EPERM when another user/session holds the pipe.
+    var crypto = require('crypto');
+    var pipeId = crypto.createHash('md5').update(PM2_HOME).digest('hex').slice(0, 8);
+    pm2_file_stucture.DAEMON_RPC_PORT = '\\\\.\\pipe\\pm2-' + pipeId + '-rpc.sock';
+    pm2_file_stucture.DAEMON_PUB_PORT = '\\\\.\\pipe\\pm2-' + pipeId + '-pub.sock';
+    pm2_file_stucture.INTERACTOR_RPC_PORT = '\\\\.\\pipe\\pm2-' + pipeId + '-interactor.sock';
   }
 
   return pm2_file_stucture;
