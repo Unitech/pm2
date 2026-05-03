@@ -1,4 +1,11 @@
 
+## 7.0.2
+
+### Bug Fixes
+
+- Fix `pm2 serve` returning 403 Forbidden on Windows — traversal guard used hardcoded `/` separator #6109
+
+
 ## 7.0.1
 
 ### Bug Fixes
