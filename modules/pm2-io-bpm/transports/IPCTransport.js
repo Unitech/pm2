@@ -86,18 +86,15 @@ class IPCTransport extends EventEmitter {
 
   send (channel, payload) {
     if (typeof process.send !== 'function') return -1
-    if (process.connected === false) {
-      console.error('Process disconnected from parent! (not connected)')
-      return process.exit(1)
-    }
+    if (process.connected === false) return -1
 
+    this.logger(`Send on channel ${channel}`)
     try {
-      this.logger(`Send on channel ${channel}`)
-      process.send({ type: channel, data: payload })
+      process.send({ type: channel, data: payload }, (err) => {
+        if (err) this.logger('async send failed: %s', err && err.code)
+      })
     } catch (err) {
-      this.logger('Process disconnected from parent !')
-      this.logger(err)
-      return process.exit(1)
+      this.logger('Process disconnected from parent: %s', err && err.message)
     }
   }
 
