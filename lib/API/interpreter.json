@@ -7,6 +7,6 @@
   ".js"     : "node",
   ".coffee" : "coffee",
   ".ls"     : "lsc",
-  ".ts"     : "bun",
-  ".tsx"    : "bun"
+  ".ts"     : "node",
+  ".tsx"    : "node"
 }
