@@ -24,7 +24,7 @@ rm err-rel.log
 $pm2 reloadLogs
 spec "Should have reloaded logs via CLI"
 
-sleep 1
+sleep 2
 
 grep "echo.js" out-rel.log
 spec "(RELOADED) Should have written the right stuff in out log in fork mode"

@@ -4,53 +4,42 @@ on: [push, pull_request]
 
 jobs:
 
-  node-tests:
+  test-node:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [18, 20, 24]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install Python
-      run: sudo apt install python3
-    - name: Install PHP CLI
-      run: sudo apt install php-cli
-    - name: Install Node.js dependencies
-      run: npm install
-    - name: Run end-to-end tests
-      run: npm run test:e2e
-    - name: Run unit tests
-      run: npm run test:unit
+    - uses: actions/checkout@v4
+    - name: Run parallel tests in Docker (Node.js ${{ matrix.node-version }})
+      run: NODE_VERSION=${{ matrix.node-version }} MAX_JOBS=6 npm run test:parallel
 
-  bun-tests:
+  test-bun:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Remove Node.js installed by setup-node action (if any)
-      run: |
-        if command -v node &> /dev/null; then
-          sudo rm -rf "$(which node)"
-        fi
-        if command -v npm &> /dev/null; then
-          sudo rm -rf "$(which npm)"
-        fi
+    - uses: actions/checkout@v4
+    - name: Run parallel tests in Docker (Bun)
+      run: RUNTIME=bun MAX_JOBS=6 npm run test:parallel
 
-    - name: Setup Bun
-      uses: oven-sh/setup-bun@v1
-    - name: Install dependencies using Bun
-      run: bun install
-    - name: Run end-to-end tests with Bun
-      run: bun run test:e2e
-    - name: Run unit tests with Bun
-      run: bun run test:unit
+  test-windows:
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    strategy:
+      matrix:
+        node-version: [18, 20, latest]
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - name: Run tests (Node.js ${{ matrix.node-version }})
+      shell: bash
+      run: bash test/windows.sh

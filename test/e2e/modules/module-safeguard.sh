@@ -17,7 +17,7 @@ $pm2 ls
 $pm2 install pm2-sample-module@2.3.5
 spec "Should have installed module"
 
-sleep 1
+sleep 2
 should 'should have started module' 'online' 1
 should 'should module be in stable state' 'restart_time: 0' 1
 #should 'should module be on the right version' "module_version: '2.3.5'" 1

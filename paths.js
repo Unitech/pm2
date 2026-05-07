@@ -1,5 +1,5 @@
 /**
- * Copyright 2013-2022 the PM2 project authors. All rights reserved.
+ * Copyright 2013-present the PM2 project authors. All rights reserved.
  * Use of this source code is governed by a license that
  * can be found in the LICENSE file.
  */
@@ -9,22 +9,19 @@ var p     = require('path');
 var fs    = require('fs')
 
 function getDefaultPM2Home() {
-  var PM2_ROOT_PATH;
-
   if (process.env.PM2_HOME)
-    PM2_ROOT_PATH = process.env.PM2_HOME;
-  else if (process.env.HOME && !process.env.HOMEPATH)
-    PM2_ROOT_PATH = p.resolve(process.env.HOME, '.pm2');
-  else if (process.env.HOME || process.env.HOMEPATH)
-    PM2_ROOT_PATH = p.resolve(process.env.HOMEDRIVE, process.env.HOME || process.env.HOMEPATH, '.pm2');
-  else {
-    console.error('[PM2][Initialization] Environment variable HOME (Linux) or HOMEPATH (Windows) are not set!');
-    console.error('[PM2][Initialization] Defaulting to /etc/.pm2');
-    PM2_ROOT_PATH = p.resolve('/etc', '.pm2');
+    return process.env.PM2_HOME;
+
+  var home = require('os').homedir();
+  if (home) {
+    var resolved = p.resolve(home, '.pm2');
+    debug('pm2 home resolved to %s', resolved);
+    return resolved;
   }
 
-  debug('pm2 home resolved to %s', PM2_ROOT_PATH, process.env.HOME);
-  return PM2_ROOT_PATH;
+  console.error('[PM2][Initialization] Could not determine home directory!');
+  console.error('[PM2][Initialization] Defaulting to /etc/.pm2');
+  return p.resolve('/etc', '.pm2');
 }
 
 module.exports = function(PM2_HOME) {

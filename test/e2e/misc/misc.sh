@@ -43,7 +43,7 @@ OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)
 
 cat /dev/null > $OUT_LOG
 
-sleep 1
+sleep 2
 
 OUT=`cat $OUT_LOG | head -n 1`
 
@@ -60,7 +60,7 @@ $pm2 start env.json
 
 cat /dev/null > $OUT_LOG
 
-sleep 1
+sleep 2
 
 OUT=`cat $OUT_LOG | head -n 1`
 
@@ -81,9 +81,11 @@ rm outmerge*
 
 $pm2 start echo.js -i 4 -o outmerge.log
 
+sleep 2
 cat outmerge.log > /dev/null
 ispec 'file outmerge.log should not exist'
 
+sleep 2
 cat outmerge-0.log > /dev/null
 spec 'file outmerge-0.log should exist'
 
@@ -96,10 +98,11 @@ $pm2 kill
 rm outmerge*
 
 $pm2 start echo.js -i 4 -o outmerge.log --merge-logs
-sleep 0.2
+sleep 2
 cat outmerge.log > /dev/null
 spec 'file outmerge.log should exist'
 
+sleep 2
 cat outmerge-0.log > /dev/null
 ispec 'file outmerge-0.log should not exist'
 

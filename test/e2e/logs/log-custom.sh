@@ -25,7 +25,7 @@ $pm2 delete all
 # CLUSTERMODE Wrong format
 $pm2 start echo.js --log-date-format "YYYY asdsd asd asd sad asd " -o out-rel.log --merge-logs
 
-sleep 1
+sleep 2
 should 'should has not restarted' 'restart_time: 0' 1
 spec "Should have not fail with random format"
 

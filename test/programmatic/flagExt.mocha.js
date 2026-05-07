@@ -26,11 +26,16 @@ describe('Flag -ext', function() {
         should(res).not.equal(tmp_res);
     });
     it('should not crash in case, when no access for file or directory by permissions', function() {
+        // Clean up from any previous failed run
+        try {
+            fs.chmodSync('noAccessDir', 0777);
+            fs.chmodSync('noAccessDir/checkPermissions.txt', 0777);
+            fs.unlinkSync('noAccessDir/checkPermissions.txt');
+            fs.rmdirSync('noAccessDir');
+        } catch (e) { /* ignore */ }
         var dir = fs.mkdirSync("noAccessDir", 0777);
         opts.ext = 'txt'
-        var fileStream = fs.createWriteStream("noAccessDir/checkPermissions.txt");
-        fileStream.write("It's a temporary file for testing flag --ext in PM2");
-        fileStream.end();
+        fs.writeFileSync("noAccessDir/checkPermissions.txt", "It's a temporary file for testing flag --ext in PM2");
         fs.chmodSync('noAccessDir/checkPermissions.txt', 0000);
         fs.chmodSync('noAccessDir', 0000);
         f_e.make_available_extension(opts, []);

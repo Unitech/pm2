@@ -8,7 +8,6 @@ cd $file_path
 #
 # Fork mode
 #
-rm sm.log
 $pm2 start source-map/main.js -e sm.log --merge-logs --disable-source-map-support
 sleep 2
 cat sm.log | grep "main.js"

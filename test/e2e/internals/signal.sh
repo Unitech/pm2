@@ -14,7 +14,7 @@ OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)
 cat /dev/null > $OUT_LOG
 
 $pm2 sendSignal SIGUSR2 signal
-sleep 1
+sleep 2
 
 OUT=`grep "SIGUSR2" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Signal not received by the process name"
@@ -25,7 +25,7 @@ $pm2 stop signal.js
 # Send a process by id
 $pm2 start signal.js
 
-sleep 1
+sleep 2
 # get the log file and the id.
 OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)',/\1/"`
 ID=`$pm2 prettylist | grep -E "pm_id:" | sed "s/.*pm_id: \([^,]*\),/\1/"`

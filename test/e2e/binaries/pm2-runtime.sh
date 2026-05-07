@@ -64,6 +64,6 @@ unset PM2_RUNTIME_DEBUG
 # Auto Exit Worker
 #
 $pm2_runtime exited_app.js 2> /dev/null
-sleep 1
+sleep 2
 pgrep "PM2"
 ispec "PM2 runtime should be killed because no app is running"

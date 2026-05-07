@@ -1,5 +1,5 @@
 
-require('@pm2/io').init({
+require('../../../modules/pm2-io-bpm').init({
   http : true
 });
 

@@ -46,7 +46,7 @@ function test {
   fi
   $pm2 kill
 
-  sleep 1
+  sleep 2
 
   rm $out_file
   rm $err_file

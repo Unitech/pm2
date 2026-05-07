@@ -35,7 +35,7 @@ CURRENT_YEAR=`date +"%Y"`
 >echo-test.log
 
 $pm2 start echo-pre.json
-sleep 1
+sleep 2
 grep $CURRENT_YEAR echo-test.log
 spec "Should have written year in log file according to format YYYY"
 grep "ok" echo-test.log
@@ -43,7 +43,7 @@ spec "Should have written new string depending on ECHO_MSG"
 
 $pm2 restart echo-post.json
 >echo-test.log
-sleep 1
+sleep 2
 
 grep $CURRENT_YEAR echo-test.log
 ispec "Should have written year in log file according to format"
@@ -54,7 +54,7 @@ spec "Should have written new string depending on ECHO_MSG"
 # Switch to production environment
 $pm2 restart echo-post.json --env production
 >echo-test.log
-sleep 1
+sleep 2
 grep "WOW" echo-test.log
 spec "Should have written new string depending on ECHO_MSG"
 
@@ -63,7 +63,7 @@ spec "Should have written new string depending on ECHO_MSG"
 #
 $pm2 reload echo-post.json --env production
 >echo-test.log
-sleep 1
+sleep 2
 grep "WOW" echo-test.log
 spec "Should have written new string depending on ECHO_MSG"
 
@@ -71,6 +71,6 @@ spec "Should have written new string depending on ECHO_MSG"
 # Go back to original environment
 #
 $pm2 restart echo-post.json
-sleep 1
+sleep 2
 grep "YAY" echo-test.log
 spec "Should have written new string depending on ECHO_MSG"

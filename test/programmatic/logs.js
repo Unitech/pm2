@@ -5,8 +5,10 @@ var PM2    = require('../..');
 var should = require('should');
 var fs     = require('fs');
 var path   = require('path');
+var DEV_NULL = process.platform === 'win32' ? 'NUL' : '/dev/null';
 
 describe('Programmatic log feature test', function() {
+  this.timeout(30000);
   var proc1 = null;
   var procs = [];
 
@@ -174,9 +176,9 @@ describe('Programmatic log feature test', function() {
 
       pm2.start({
         script          : './echo.js',
-        error_file      : '/dev/null',
-        out_file        : '/dev/null',
-        log_file        : '/dev/null',
+        error_file      : DEV_NULL,
+        out_file        : DEV_NULL,
+        log_file        : DEV_NULL,
         disable_logs    : true,
         merge_logs      : true
       }, function(err, procs) {
@@ -198,16 +200,16 @@ describe('Programmatic log feature test', function() {
     it('should not write to logs', function(done) {
       pm2.start({
         script: './echo.js',
-        error_file : '/dev/null',
-        out_file   : '/dev/null'
+        error_file : DEV_NULL,
+        out_file   : DEV_NULL
       }, function(err, procs) {
         should(err).be.null();
 
         var out_file = procs[0].pm2_env.pm_out_log_path;
         var err_file = procs[0].pm2_env.pm_err_log_path;
 
-        out_file.should.containEql('/dev/null');
-        err_file.should.containEql('/dev/null');
+        out_file.should.containEql(DEV_NULL);
+        err_file.should.containEql(DEV_NULL);
 
         setTimeout(function() {
           fs.readFileSync(out_file).toString().should.containEql('');
@@ -220,8 +222,8 @@ describe('Programmatic log feature test', function() {
     it('should write to log_file and not error_file or out_file', function(done) {
       pm2.start({
         script: './echo.js',
-        error_file : '/dev/null',
-        out_file   : '/dev/null',
+        error_file : DEV_NULL,
+        out_file   : DEV_NULL,
         log_file   : 'merged.log',
         merge_logs : true
       }, function(err, procs) {
@@ -231,8 +233,8 @@ describe('Programmatic log feature test', function() {
         var err_file = procs[0].pm2_env.pm_err_log_path;
         var log_file = procs[0].pm2_env.pm_log_path;
 
-        out_file.should.containEql('/dev/null');
-        err_file.should.containEql('/dev/null');
+        out_file.should.containEql(DEV_NULL);
+        err_file.should.containEql(DEV_NULL);
         log_file.should.containEql('merged.log');
 
         setTimeout(function() {
@@ -249,7 +251,7 @@ describe('Programmatic log feature test', function() {
       pm2.start({
         script: './echo.js',
         error_file : 'error-echo.log',
-        out_file   : '/dev/null',
+        out_file   : DEV_NULL,
         log_file   : 'merged.log',
         merge_logs : true
       }, function(err, procs) {
@@ -259,7 +261,7 @@ describe('Programmatic log feature test', function() {
         var err_file = procs[0].pm2_env.pm_err_log_path;
         var log_file = procs[0].pm2_env.pm_log_path;
 
-        out_file.should.containEql('/dev/null');
+        out_file.should.containEql(DEV_NULL);
         err_file.should.containEql('error-echo.log');
         log_file.should.containEql('merged.log');
 

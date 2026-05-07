@@ -1,0 +1,75 @@
+[
+  {
+    "name": "test_process_1",
+    "pid": 1,
+    "pm2_env": {
+      "name": "test_process_1",
+      "exec_interpreter": "node",
+      "restart_time": 0,
+      "created_at": "2017-03-16 11:17:00",
+      "exec_mode": "cluster",
+      "watch": false,
+      "pm_uptime": 10,
+      "status": "active",
+      "pm_id": 0,
+      "versioning": null,
+      "NODE_ENV": "test",
+      "axm_actions": [],
+      "axm_monitor": {},
+      "axm_options": {},
+      "dynamic": {}
+    },
+    "monit": {
+      "cpu": 10.20492,
+      "memory": 30.10023
+    }
+  },
+  {
+    "pid": 2,
+    "pm2_env": {
+      "name": "test_process_2",
+      "exec_interpreter": "node",
+      "restart_time": 0,
+      "created_at": "2017-03-16 11:18:00",
+      "exec_mode": "cluster",
+      "watch": false,
+      "pm_uptime": 10,
+      "status": "active",
+      "pm_id": 2,
+      "versioning": null,
+      "NODE_ENV": "test",
+      "axm_actions": [],
+      "axm_monitor": {},
+      "axm_options": {},
+      "dynamic": {}
+    },
+    "monit": {
+      "cpu": 10.20492,
+      "memory": 30.10023
+    }
+  },
+  {
+    "pid": 3,
+    "pm2_env": {
+      "name": "test_process_3",
+      "exec_interpreter": "node",
+      "restart_time": 0,
+      "created_at": "2017-03-16 11:18:00",
+      "exec_mode": "cluster",
+      "watch": true,
+      "pm_uptime": 10,
+      "status": "active",
+      "pm_id": 1,
+      "versioning": null,
+      "NODE_ENV": "production",
+      "axm_actions": [],
+      "axm_monitor": {},
+      "axm_options": {},
+      "dynamic": {}
+    },
+    "monit": {
+      "cpu": 12,
+      "memory": 30.10023
+    }
+  }
+]

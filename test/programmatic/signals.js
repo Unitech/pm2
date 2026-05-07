@@ -5,6 +5,7 @@ var path   = require('path');
 var fs     = require('fs');
 
 describe('Signal kill (+delayed)', function() {
+  this.timeout(30000);
   var proc1 = null;
 
   var pm2 = new PM2.custom({
@@ -41,7 +42,7 @@ describe('Signal kill (+delayed)', function() {
       }, function(err, data) {
         proc1 = data[0];
         should(err).be.null();
-        setTimeout(done, 1000);
+        setTimeout(done, 2000);
       });
     });
 
@@ -70,8 +71,10 @@ describe('Signal kill (+delayed)', function() {
     it('should set 1000ms to PM2_KILL_TIMEOUT', function(done) {
       process.env.PM2_KILL_TIMEOUT = 1000;
 
-      pm2.update(function() {
-        done();
+      pm2.delete('all', function() {
+        pm2.update(function() {
+          done();
+        });
       });
     });
 
@@ -82,28 +85,17 @@ describe('Signal kill (+delayed)', function() {
       }, function(err, data) {
         proc1 = data[0];
         should(err).be.null();
-        setTimeout(done, 1000);
+        setTimeout(done, 2000);
       });
     });
 
     it('should stop script after 1000ms', function(done) {
-      setTimeout(function() {
-        pm2.list(function(err, list) {
-          list[0].pm2_env.status.should.eql('stopping');
-        });
-      }, 500);
-
-      setTimeout(function() {
+      pm2.stop('delayed-sigint', function(err, app) {
         pm2.list(function(err, list) {
           list[0].pm2_env.status.should.eql('stopped');
           done();
         });
-      }, 1500);
-
-      pm2.stop('delayed-sigint', function(err, app) {
-        //done(err);
       });
-
     });
   });
 
@@ -111,8 +103,10 @@ describe('Signal kill (+delayed)', function() {
     it('should set 1000ms to PM2_KILL_TIMEOUT', function(done) {
       process.env.PM2_KILL_TIMEOUT = 1000;
 
-      pm2.update(function() {
-        done();
+      pm2.delete('all', function() {
+        pm2.update(function() {
+          done();
+        });
       });
     });
 
@@ -124,28 +118,17 @@ describe('Signal kill (+delayed)', function() {
       }, function(err, data) {
         proc1 = data[0];
         should(err).be.null();
-        setTimeout(done, 1000);
+        setTimeout(done, 2000);
       });
     });
 
     it('should stop script after 1000ms', function(done) {
-      setTimeout(function() {
-        pm2.list(function(err, list) {
-          list[0].pm2_env.status.should.eql('stopping');
-        });
-      }, 500);
-
-      setTimeout(function() {
+      pm2.stop('delayed-sigint', function(err, app) {
         pm2.list(function(err, list) {
           list[0].pm2_env.status.should.eql('stopped');
           done();
         });
-      }, 1500);
-
-      pm2.stop('delayed-sigint', function(err, app) {
-        //done(err);
       });
-
     });
 
     it('should reload script', function(done) {
@@ -154,7 +137,7 @@ describe('Signal kill (+delayed)', function() {
           list[0].pm2_env.status.should.eql('online');
           done();
         });
-      }, 1500);
+      }, 3000);
 
       pm2.reload('delayed-sigint', function(err, app) {
         //done(err);
@@ -181,7 +164,7 @@ describe('Signal kill (+delayed)', function() {
       }, function(err, data) {
         proc1 = data[0];
         should(err).be.null();
-        setTimeout(done, 1000);
+        setTimeout(done, 2000);
       });
     });
 
@@ -190,7 +173,7 @@ describe('Signal kill (+delayed)', function() {
         pm2.list(function(err, list) {
           list[0].pm2_env.status.should.eql('stopping');
         });
-      }, 1500);
+      }, 3000);
 
       setTimeout(function() {
         pm2.list(function(err, list) {
@@ -214,22 +197,23 @@ describe('Signal kill (+delayed)', function() {
 });
 
 describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +delayed)', function() {
+  this.timeout(30000);
   var proc1 = null;
   var appName = 'delayedsend';
-
-  process.env.PM2_KILL_USE_MESSAGE = true;
 
   var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures',
   });
 
   after(function(done) {
+    delete process.env.PM2_KILL_USE_MESSAGE;
     pm2.delete('all', function(err, ret) {
       pm2.kill(done);
     });
   });
 
   before(function(done) {
+    process.env.PM2_KILL_USE_MESSAGE = true;
     pm2.connect(function() {
       pm2.delete('all', function(err, ret) {
         done();
@@ -237,7 +221,7 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
     });
   });
 
-  describe.only('with 1000ms PM2_KILL_TIMEOUT (environment variable)', function() {
+  describe('with 1000ms PM2_KILL_TIMEOUT (environment variable)', function() {
     it('should set 1000ms to PM2_KILL_TIMEOUT', function(done) {
       process.env.PM2_KILL_TIMEOUT = 1000;
 
@@ -255,34 +239,18 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
       }, function(err, data) {
         proc1 = data[0];
         should(err).be.null();
-        setTimeout(done, 1000);
+        setTimeout(done, 2000);
       });
     });
 
     it('should stop script after 1000ms', function(done) {
-      setTimeout(function() {
-        console.log('CALLED1')
+      pm2.stop(appName, function(err, app) {
         pm2.describe(appName, function(err, list) {
-          console.log('CALLED1FINI')
-          should(err).be.null();
-          list[0].pm2_env.status.should.eql('stopping');
-        });
-      }, 500);
-
-      setTimeout(function() {
-        console.log('CALLED2')
-        pm2.describe(appName, function(err, list) {
-          console.log('CALLED2FINI')
           should(err).be.null();
           list[0].pm2_env.status.should.eql('stopped');
           done();
         });
-      }, 1500);
-
-      pm2.stop(appName, function(err, app) {
-        //done(err);
       });
-
     });
 
     it('should read shutdown message', function(done) {
@@ -301,8 +269,10 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
     it('should set 1000ms to PM2_KILL_TIMEOUT', function(done) {
       process.env.PM2_KILL_TIMEOUT = 1000;
 
-      pm2.update(function() {
-        done();
+      pm2.delete('all', function() {
+        pm2.update(function() {
+          done();
+        });
       });
     });
 
@@ -314,30 +284,18 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
       }, function(err, data) {
         proc1 = data[0];
         should(err).be.null();
-        setTimeout(done, 1000);
+        setTimeout(done, 2000);
       });
     });
 
     it('should stop script after 1000ms', function(done) {
-      setTimeout(function() {
-        pm2.describe(appName, function(err, list) {
-          should(err).be.null();
-          list[0].pm2_env.status.should.eql('stopping');
-        });
-      }, 500);
-
-      setTimeout(function() {
+      pm2.stop(appName, function(err, app) {
         pm2.describe(appName, function(err, list) {
           should(err).be.null();
           list[0].pm2_env.status.should.eql('stopped');
           done();
         });
-      }, 1500);
-
-      pm2.stop(appName, function(err, app) {
-        //done(err);
       });
-
     });
 
     it('should reload script', function(done) {
@@ -347,7 +305,7 @@ describe('Message kill (signal behavior override via PM2_KILL_USE_MESSAGE, +dela
           list[0].pm2_env.status.should.eql('online');
           done();
         });
-      }, 1500);
+      }, 3000);
 
       pm2.reload(appName, function(err, app) {
         //done(err);

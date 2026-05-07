@@ -14,7 +14,7 @@ function getInterpreter() {
 
 
 $pm2 start ecosystem.json
-sleep 1
+sleep 2
 
 OCC=$($pm2 prettylist | grep "exec_interpreter" | grep 'v4.6.0\|v6.7.0' | wc -l)
 [ $OCC -eq 2 ] || fail "Errors in setting interpreters"
@@ -28,7 +28,7 @@ OCC=$($pm2 prettylist | grep "exec_interpreter" | grep 'v4.6.0\|v6.7.0' | wc -l)
 success "Success"
 
 $pm2 restart all
-sleep 0.5
+sleep 2
 should 'should have 2 apps online' 'online' 2
 OCC=$($pm2 prettylist | grep "exec_interpreter" | grep 'v4.6.0\|v6.7.0' | wc -l)
 [ $OCC -eq 2 ] || fail "Errors in setting interpreters"
@@ -41,7 +41,7 @@ OCC=$($pm2 prettylist | grep "exec_interpreter" | grep 'v4.5.0\|v6.7.0' | wc -l)
 success "Success"
 
 $pm2 restart all
-sleep 0.5
+sleep 2
 should 'should have 2 apps online' 'online' 2
 OCC=$($pm2 prettylist | grep "exec_interpreter" | grep 'v4.5.0\|v6.7.0' | wc -l)
 [ $OCC -eq 2 ] || fail "Errors in setting interpreters"

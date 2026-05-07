@@ -13,6 +13,7 @@ $pm2 send 0 "LINE"
 
 cat out-rel.log
 grep "LINE" out-rel.log
+sleep 2
 spec "Should have reveived line"
 
-$pm2 delete all
+#$pm2 delete all

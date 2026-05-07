@@ -1,5 +1,5 @@
 /**
- * Copyright 2013-2022 the PM2 project authors. All rights reserved.
+ * Copyright 2013-present the PM2 project authors. All rights reserved.
  * Use of this source code is governed by a license that
  * can be found in the LICENSE file.
  */
@@ -7,7 +7,7 @@
 var debug  = require('debug')('pm2:conf');
 var p      = require('path');
 var util   = require('util');
-var chalk  = require('chalk');
+var chalk  = require('ansis');
 
 /**
  * Get PM2 path structure

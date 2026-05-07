@@ -3,9 +3,6 @@
 SRC=$(cd $(dirname "$0"); pwd)
 source "${SRC}/../include.sh"
 
-node -e "require('semver').lt(process.versions.node, '6.0.0') ? process.exit(0) : process.exit(1)"
-[ $? -eq 1 ] || exit 0
-
 cd $file_path
 
 $pm2 unset echo
@@ -61,10 +58,10 @@ exists 'probe Event Loop Latency exist' "Event Loop Latency p95"
 
 # Set new value for alert probe
 # $pm2 set probe-test.probes.Event\ Loop\ Latency.value 25
-# sleep 1
+# sleep 2
 
 # exists 'probe Event Loop Latency alerted' "alert: { cmp: '>', value: 25, mode: 'threshold'"
 
 # Override value for test-probe
 # $pm2 set probe-test.probes.test-probe.value 30
-# sleep 1
+# sleep 2

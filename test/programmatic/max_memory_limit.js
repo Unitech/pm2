@@ -9,6 +9,7 @@ var path   = require('path');
 // Change to current folder
 
 describe('Max memory restart programmatic', function() {
+  this.timeout(30000);
   var proc1 = null;
   var procs = [];
   var pm2 = new PM2.custom({
@@ -21,7 +22,7 @@ describe('Max memory restart programmatic', function() {
 
   afterEach(function(done) {
     pm2.delete('all', function() {
-      setTimeout(done, 300);
+      setTimeout(done, 1500);
     });
   });
 

@@ -13,11 +13,12 @@ describe('Internal PM2 configuration', function() {
     pm2.set('pm2:registry', 'http://thing.com', done)
   })
 
-  it('should new instance have the configuration', function() {
+  it('should new instance have the configuration', function(done) {
     var pm3 = new PM2.custom();
 
     pm3.connect(() => {
-      should(pm2.user_conf.registry).eql('http://thing.com')
+      should(pm3.user_conf.registry).eql('http://thing.com')
+      pm3.disconnect(() => done())
     })
   })
 })

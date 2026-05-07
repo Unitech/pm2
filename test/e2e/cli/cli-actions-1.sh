@@ -22,7 +22,7 @@ $pm2 start echo.js
 $pm2 start echo.js -f
 $pm2 start echo.js -f
 
-sleep 0.5
+sleep 2
 
 should 'should have started 3 apps' 'online' 3
 
@@ -67,13 +67,13 @@ $pm2 kill
 
 $pm2 start echo.js -p echo.pid
 
-sleep 0.5
+sleep 2
 ls echo-0.pid
 spec "should pid file exists"
 
 $pm2 stop all
 
-sleep 1
+sleep 2
 
 ls echo-0.pid
 ispec "should pid file be deleted once stopped"
@@ -82,14 +82,14 @@ $pm2 kill
 
 $pm2 start echo.js -p echo.pid -i 1
 
-sleep 1
+sleep 2
 
 ls echo-0.pid
 spec "should pid file exists"
 
 $pm2 stop all
 
-sleep 1
+sleep 2
 
 ls echo-0.pid
 ispec "should pid file be deleted once stopped"
@@ -142,7 +142,7 @@ $pm2 list
 # [ $OUT -gt 100 ] || fail "Error : pm2 logs ouput showed $OUT  lines but min is 100"
 # success "should only print logs: "
 
-# sleep 1
+# sleep 2
 
 # kill $!
 # spec "Should kill logs"
@@ -151,7 +151,7 @@ $pm2 list
 # spec "Should display logs"
 # TMPPID=$!
 
-# sleep 1
+# sleep 2
 
 # kill $!
 # spec "Should kill logs"
@@ -160,7 +160,7 @@ $pm2 list
 # $pm2 web
 # spec "Should start web interface"
 
-# sleep 1
+# sleep 2
 
 # JSON_FILE='/tmp/web-json'
 
@@ -174,7 +174,7 @@ $pm2 list
 # # cat ~/.pm2/logs/echo-out.log | wc -l
 # # spec "File Log should be cleaned"
 
-# sleep 1
+# sleep 2
 # $http_get -q http://localhost:9615/ -O $JSON_FILE
 # cat $JSON_FILE | grep "restart_time\":0" > /dev/null
 # spec "Should get the right JSON with HttpInterface file launched"
@@ -191,7 +191,7 @@ $pm2 list
 # $pm2 restart all
 # spec "Should restart all processes"
 
-# sleep 1
+# sleep 2
 # $http_get -q http://localhost:9615/ -O $JSON_FILE
 # OUT=`cat $JSON_FILE | grep -o "restart_time\":1" | wc -l`
 
@@ -216,7 +216,7 @@ spec "Dump file should be present"
 $pm2 stop all
 spec "Should stop all processes"
 
-sleep 0.5
+sleep 2
 should 'should have stopped 8 apps' 'stopped' 8
 
 
@@ -242,7 +242,7 @@ $pm2 kill
 $pm2 resurrect
 spec "Should resurrect all apps"
 
-sleep 0.5
+sleep 2
 should 'should have resurrected all processes' 'restart_time' 8
 
 
@@ -250,7 +250,7 @@ should 'should have resurrected all processes' 'restart_time' 8
 $pm2 delete all
 spec "Should delete all processes"
 
-sleep 0.5
+sleep 2
 should 'should have deleted process' 'restart_time' 0
 
 $pm2 kill

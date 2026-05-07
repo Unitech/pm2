@@ -41,7 +41,7 @@ $pm2 delete all
 echo "Start application with filename starting with a numeric"
 $pm2 start throw-string.js -l err-string.log --merge-logs --no-automation
 >err-string.log
-sleep 1
+sleep 2
 grep 'throw-string.js' err-string.log
 spec "Should have written raw stack when throwing a string"
 

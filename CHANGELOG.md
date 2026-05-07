@@ -1,5 +1,134 @@
 
-## 6.0.0
+## 7.0.2
+
+### Bug Fixes
+
+- Fix `pm2 serve` returning 403 Forbidden on Windows — traversal guard used hardcoded `/` separator #6109
+- Silence cluster worker `error` events to prevent boot crashes
+- Wrap `process.send` before BPM injection to avoid send-on-disconnected during boot
+- BPM IPC transport: log instead of `process.exit(1)` on disconnected send
+
+
+## 7.0.1
+
+### Bug Fixes
+
+- Fix Python (and other non-Node) interpreter regression on Ubuntu: bun runtime detection used a naive `includes('bun')` substring check that matched any path containing the letters "bun" — most notably `/home/ubuntu/...`. Affected paths were routed through `ProcessContainerForkBun.js` and crashed with `SyntaxError: unterminated string literal` when Python tried to parse the JS container. Anchored the match to the end of the interpreter path (`=== 'bun'` or `/bun$/`) in both `lib/God/ForkMode.js` and `lib/Common.js` #5990
+- Display `max_memory_restart` in `pm2 describe` output when set #5925
+- Add missing `port` option to `StartOptions` TypeScript declaration #6045
+- Fix incorrect file permissions on `openrc.tpl` template (0755 → 0644) #5957
+- Fix Windows cmd.exe regression: revert `bin/pm2*` launchers to `#!/usr/bin/env node` shebang (was polyglot `#!/bin/sh`). Polyglot worked on Linux/macOS but broke npm's `pm2.cmd` shim on Windows — `cmd.exe` can't interpret `/bin/sh` shebang and failed with `'"/bin/sh"' is not recognized as an internal or external command`. PowerShell's auto-generated `pm2.ps1` shim happened to call `node` directly so it kept working, masking the regression. Bun-only Linux/macOS users (no Node installed) need to symlink `node` to `bun` (`sudo ln -s $(which bun) /usr/local/bin/node`) — same workaround used in the project's bun test Dockerfile. Documented in README #6108
+
+
+## 7.0.0
+
+### Breaking Changes
+
+- Require Node.js >= 18.0.0 (dropped Node.js 16 support)
+
+### Core Refactor
+
+- Internalize pm2-axon, pm2-axon-rpc, pm2-io-bpm, pm2-io-agent, fclone as local modules (reduced supply chain surface)
+- Internalize pm2-multimeter and charm into lib/tools/multimeter (zero external deps)
+- Add Bun runtime support (ProcessContainerBun.js, ProcessContainerForkBun.js)
+- Replace `needle` with native `fetch` (CliAuth, TAR publish)
+- Replace `enquirer` with lightweight built-in prompt (boilerplate selector)
+- Replace `promptly` with built-in lib/tools/prompt
+- Replace `mkdirp` with native `fs.mkdirSync({ recursive: true })`
+- Replace `source-map-support` with native `process.setSourceMapsEnabled()`
+- Replace `sprintf-js` with template literals (Dashboard)
+- Replace `url.parse()` with native `URL` constructor (Serve, Utility, CliAuth)
+- Remove `fclone` npm dep, use internalized module
+- Drop auto source map file detection in Common.prepareAppConf
+
+### Security
+
+- CVE-2025-5891 Fix ReDoS in Config.js string-to-array split regex #6075
+- CVE-2026-27699 Update proxy-agent to 6.5.0, basic-ftp to 5.3.1 #6088
+- Fix command injection in WebAuth.js open() — replace exec() with execFile() #6089
+- Fix command injection in PM2IO.js open() — replace exec() with execFile(), validate SUDO_USER
+- Fix command injection in lib/tools/open.js — replace exec() with execFile(), validate SUDO_USER
+- Fix prototype pollution in Configuration.set/unset via __proto__ key traversal #6089
+- Fix HttpInterface env stripping never executing (WEB_STRIP_ENV_VARS) #6089
+
+### Bug Fixes
+
+- Rewrite TreeKill: single ps snapshot + in-memory tree build, eliminates race conditions. SIGKILL escalation now targets surviving child processes directly instead of re-walking a dead tree #6084
+- Fix [object Object] env vars leaked to fork mode subprocesses #6073
+- Fix Windows home path: use os.homedir() instead of HOMEPATH/HOMEDRIVE env vars #6106
+- Fix Windows TreeKill callback consistency
+- Fix missing BPM monitoring injection in Bun cluster mode (ProcessContainerBun.js)
+- Fix ReferenceError crash in Bun cluster console overrides when disable_logs is true
+- Fix CliAuth wrong credentials error displaying "undefined" instead of error message
+
+### Features
+
+- Add `--ftp` option to `pm2 serve` for directory listing (python http.server style)
+
+### Dependencies
+
+- Add OpenTelemetry tracing as direct dependencies (@opentelemetry/api, sdk-node, auto-instrumentations-node)
+- Upgrade OpenTelemetry packages to latest
+- Update pidusage from 3.0.2 to 4.0.1
+- Upgrade ws to ^8.18.0, eventemitter2 to ^6.4.9
+- Remove needle, enquirer, promptly, mkdirp, source-map-support, sprintf-js, fclone from npm dependencies
+
+### Testing
+
+- Add Docker parallel test runner with Node.js and Bun support
+- Add Windows test suite (test/windows.sh)
+- Add OpenTelemetry tracing tests
+- Add TreeKill unit tests
+- Add test scripts for internalized modules (bpm, axon, axon-rpc, io-agent)
+- Fix test compatibility for Node.js 22+ and Bun
+- CI matrix: Node.js 18, 20 + latest
+
+
+## 6.0.14
+
+- Fixed version of @pm2/pm2-version-check #6055
+- CVE-2025-64718 Update js-yaml
+- replace fs.R_OK with fs.constants.T_OK #6012 #6019
+
+## 6.0.13
+
+- Fix blessed package import
+
+## 6.0.12
+
+- #6037 Drop npm-shrinkwrap in favor of fixed dependencies versions
+- #5577 fix pm2 monit crash
+
+## 6.0.11
+
+- #6034 replace package-lock.json by npm-shrinkwrap.json
+- #5915 fix allowing to update namespaced pm2 NPM module (@org/module-name)
+
+## 6.0.10
+
+- revert #5971 #6031
+
+## 6.0.9
+
+- updates all typescript definitions
+- upgrade github ci workflows
+- upgrade mocha dep and adapt tests
+- bump packages
+- fix:Potential ReDoS Vulnerability or Inefficient Regular Expression in Project: Need for Assessment and Mitigation #5971
+
+## 6.0.8
+
+- fix: package-lock update
+
+## 6.0.7
+
+- fix: ansis-node10 https://github.com/Unitech/pm2/commit/99d9224e940d119a1ad5b241b4fc4e0db7c830ed @webdiscus
+
+## 6.0.6
+
+- refactor: replace chalk with smaller alternative by @webdiscus
+
+## 6.0.5
 
 - Bun support - Fixes #5893 #5774 #5682 #5675 #5777
 - Disable git parsing by default #5909 #2182 #5801 #5051 #5696

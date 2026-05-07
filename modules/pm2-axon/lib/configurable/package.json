@@ -1,0 +1,68 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "configurable@0.0.1",
+        "scope": null,
+        "escapedName": "configurable",
+        "name": "configurable",
+        "rawSpec": "0.0.1",
+        "spec": "0.0.1",
+        "type": "version"
+      },
+      "/home/unitech/keymetrics/pm2-axon"
+    ]
+  ],
+  "_from": "configurable@0.0.1",
+  "_id": "configurable@0.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/configurable",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "configurable@0.0.1",
+    "scope": null,
+    "escapedName": "configurable",
+    "name": "configurable",
+    "rawSpec": "0.0.1",
+    "spec": "0.0.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/configurable/-/configurable-0.0.1.tgz",
+  "_shasum": "47d75b727b51b4eb84c1dadafe3f8240313833b1",
+  "_shrinkwrap": null,
+  "_spec": "configurable@0.0.1",
+  "_where": "/home/unitech/keymetrics/pm2-axon",
+  "author": {
+    "name": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca"
+  },
+  "dependencies": {},
+  "description": "Configuration mixin",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "47d75b727b51b4eb84c1dadafe3f8240313833b1",
+    "tarball": "https://registry.npmjs.org/configurable/-/configurable-0.0.1.tgz"
+  },
+  "keywords": [
+    "configuration"
+  ],
+  "main": "index",
+  "maintainers": [
+    {
+      "name": "tjholowaychuk",
+      "email": "tj@vision-media.ca"
+    }
+  ],
+  "name": "configurable",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "0.0.1"
+}

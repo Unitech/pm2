@@ -1,9 +1,9 @@
 {
-  "name": "pm2-beta2",
+  "name": "pm2",
   "preferGlobal": true,
-  "version": "6.0.5",
+  "version": "7.0.1",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "directories": {
     "bin": "./bin",
@@ -101,7 +101,13 @@
   "scripts": {
     "test:unit": "bash test/unit.sh",
     "test:e2e": "bash test/e2e.sh",
-    "test": "bash test/unit.sh && bash test/e2e.sh"
+    "test": "bash test/unit.sh && bash test/e2e.sh",
+    "test:parallel": "bash test/docker-parallel.sh",
+    "test:bpm": "mocha 'modules/pm2-io-bpm/test/**/*.spec.js' --exit --timeout 10000",
+    "test:axon-rpc": "mocha 'modules/pm2-axon-rpc/test/' --reporter spec --exit",
+    "test:axon": "bash modules/pm2-axon/test/run modules/pm2-axon/test/test.*.js",
+    "test:io-agent": "mocha 'modules/pm2-io-agent/test/units/*.mocha.js' --reporter spec --exit",
+    "test:windows": "bash test/windows.sh"
   },
   "keywords": [
     "cli",
@@ -168,41 +174,38 @@
     "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/agent": "~2.1.1",
-    "@pm2/js-api": "~0.8.0",
-    "@pm2/io": "~6.1.0",
-    "@pm2/pm2-version-check": "latest",
-    "async": "~3.2.6",
-    "blessed": "0.1.81",
-    "chalk": "3.0.0",
-    "chokidar": "^3.5.3",
-    "cli-tableau": "^2.0.0",
+    "@pm2/js-api": "0.8.0",
+    "@pm2/pm2-version-check": "1.0.4",
+    "amp": "0.3.1",
+    "amp-message": "0.1.2",
+    "ansis": "4.0.0-node10",
+    "async": "3.2.6",
+    "@pm2/blessed": "0.1.81",
+    "chokidar": "3.6.0",
+    "cli-tableau": "2.0.1",
     "commander": "2.15.1",
-    "croner": "~4.1.92",
-    "dayjs": "~1.11.13",
-    "debug": "^4.3.7",
-    "enquirer": "2.3.6",
-    "eventemitter2": "5.0.1",
-    "fclone": "1.0.11",
-    "mkdirp": "1.0.4",
-    "needle": "2.4.0",
-    "pidusage": "~3.0",
-    "pm2-axon": "~4.0.1",
-    "pm2-axon-rpc": "~0.7.1",
-    "pm2-deploy": "~1.0.2",
-    "pm2-multimeter": "^0.1.2",
-    "promptly": "^2",
-    "semver": "^7.6.2",
-    "source-map-support": "0.5.21",
-    "sprintf-js": "1.1.2",
-    "vizion": "~2.2.1",
-    "js-yaml": "~4.1.0"
+    "croner": "4.1.97",
+    "dayjs": "1.11.15",
+    "debug": "4.4.3",
+    "eventemitter2": "6.4.9",
+    "fast-json-patch": "3.1.1",
+    "pidusage": "4.0.1",
+    "pm2-deploy": "1.0.2",
+    "proxy-agent": "6.5.0",
+    "semver": "7.7.2",
+    "vizion": "2.2.1",
+    "ws": "8.20.0",
+    "js-yaml": "4.1.1"
+  },
+  "overrides": {
+    "debug": "4.4.3"
   },
   "optionalDependencies": {
     "pm2-sysmonit": "^1.2.8"
   },
   "devDependencies": {
-    "mocha": "^10.8.0",
+    "express": "^4.21.0",
+    "mocha": "^11.7.0",
     "should": "^13.2.3"
   },
   "bugs": {

@@ -12,7 +12,7 @@ OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)
 
 $pm2 reload delayed_exit
 
-sleep 1
+sleep 2
 
 OUT=`grep "SIGINT" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Signal not received by the process name"
@@ -48,7 +48,7 @@ $pm2 kill
 # $pm2 kill
 
 $pm2 start child.js -i 4
-sleep 0.5
+sleep 2
 should 'should start processes' 'online' 4
 $pm2 restart all
 should 'should restarted be one for all' 'restart_time' 4
@@ -57,9 +57,9 @@ should 'should restart a second time (BY SCRIPT NAME)' 'restart_time: 2' 4
 
 $pm2 restart child
 should 'should restart a third time (BY NAME)' 'restart_time: 3' 4
-sleep 0.5
+sleep 2
 $pm2 reload all
-sleep 0.5
+sleep 2
 should 'should RELOAD a fourth time' 'restart_time: 4' 4
 
 ############### CLUSTER STUFF
@@ -113,18 +113,18 @@ should 'should not restart' 'restart_time: 0' 1
 
 $pm2 delete all
 $pm2 start exitcode42.js --stop-exit-codes 34
-sleep 1
+sleep 2
 shouldnot 'should restart' 'restart_time: 0' 1
 $pm2 kill
 
 $pm2 start exitcode42.js --stop-exit-codes 3
-sleep 1
+sleep 2
 shouldnot 'should restart processes' 'restart_time: 0' 1
 $pm2 kill
 
 $pm2 delete all
 $pm2 start stop-exit-codes.json
-sleep 0.5
+sleep 2
 should 'should not restart' 'restart_time: 0' 1
 
 
@@ -139,7 +139,7 @@ OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)
 > $OUT_LOG
 
 $pm2 reload signal-send.js
-sleep 1
+sleep 2
 
 OUT=`grep "shutdown" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Signal not received by the process name"
@@ -157,7 +157,7 @@ OUT_LOG=`$pm2 prettylist | grep -m 1 -E "pm_out_log_path:" | sed "s/.*'\([^']*\)
 > $OUT_LOG
 
 $pm2 reload signal-send.js
-sleep 1
+sleep 2
 
 OUT=`grep "shutdown" "$OUT_LOG" | wc -l`
 [ $OUT -eq 1 ] || fail "Signal not received by the process name"

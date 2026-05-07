@@ -26,7 +26,7 @@ spec "Right commit after start"
 
 $pm2 backward "keymetrics tuto"
 
-sleep 1
+sleep 2
 
 CUR_HASH=`$pm2 prettylist | grep "revision" | cut -d: -f2 | tr -d " ,'"`
 echo "CURRENT GIT HASH= " $CUR_HASH
@@ -41,7 +41,7 @@ spec "Right commit after backward action"
 
 $pm2 backward "keymetrics tuto"
 
-sleep 1
+sleep 2
 
 CUR_HASH=`$pm2 prettylist | grep "revision" | cut -d: -f2 | tr -d " ,'"`
 DEEP_HASH=$CUR_HASH
@@ -55,7 +55,7 @@ spec "Right commit after backward action"
 #
 $pm2 forward "keymetrics tuto"
 
-sleep 1
+sleep 2
 
 CUR_HASH=`$pm2 prettylist | grep "revision" | cut -d: -f2 | tr -d " ,'"`
 echo "CURRENT GIT HASH= " $CUR_HASH
@@ -67,7 +67,7 @@ spec "Right commit after backward action"
 # Pull to HEAD
 #
 $pm2 pull "keymetrics tuto"
-sleep 1
+sleep 2
 
 CUR_HASH=`$pm2 prettylist | grep "revision" | cut -d: -f2 | tr -d " ,'"`
 echo "CURRENT GIT HASH= " $CUR_HASH
@@ -83,7 +83,7 @@ spec "Is updated with right hash"
 # Pull to commit id
 #
 $pm2 pull "keymetrics tuto" $DEEP_HASH
-sleep 1
+sleep 2
 
 CUR_HASH=`$pm2 prettylist | grep "revision" | cut -d: -f2 | tr -d " ,'"`
 echo "CURRENT GIT HASH= " $CUR_HASH

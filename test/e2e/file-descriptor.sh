@@ -15,7 +15,7 @@ echo "################## RELOAD ###################"
 
 # $pm2 list
 
-# sleep 1
+# sleep 2
 # lsof -c PM2 > /tmp/empty_pm2_out.dat
 
 # $pm2 start echo.js -i 3

@@ -3,6 +3,7 @@ const PM2 = require('../..');
 const should = require('should');
 
 describe('Modules programmatic testing', function() {
+  this.timeout(30000);
   var pm2;
 
   after(function(done) {

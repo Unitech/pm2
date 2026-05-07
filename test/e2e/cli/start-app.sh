@@ -20,13 +20,13 @@ should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 0' 1
 
 cat test.log | grep "undefined" &> /dev/null
-sleep 1
+sleep 2
 spec "should have printed undefined env var"
 
 TEST='ok' $pm2 restart 0 --update-env
 cat test.log | grep "ok" &> /dev/null
 
-sleep 1
+sleep 2
 should 'should have started command' 'online' 1
 should 'should have not been restarted' 'restart_time: 1' 1
 spec "should have printed undefined env var"

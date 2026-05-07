@@ -1,22 +1,8 @@
 <div align="center">
  <br/>
 
-<picture>
-  <source
-    srcset="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png"
-    width=710px
-    media="(prefers-color-scheme: light)"
-  />
-  <source
-    srcset="https://raw.githubusercontent.com/Unitech/pm2/development/pres/pm2-v4-dark-mode.png"
-    width=710px
-    media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
-  />
-  <img src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" />
-</picture>
+![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png)
 
-  <br/>
-<br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b><br/>
   <i>Runtime Edition</i>
 <br/><br/>
@@ -48,28 +34,36 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [more than 1800 tests](https://github.com/Unitech/pm2/actions/workflows/node.js.yml).
+PM2 is constantly assailed by [a comprehensive test suite](https://github.com/Unitech/pm2/actions/workflows/node.js.yml).
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
-Works on Linux (stable) & macOS (stable) & Windows (stable). All Node.js versions are supported starting Node.js 12.X and Bun since v1
+Works on Linux, macOS, and Windows. Supports Node.js 18+ and Bun 1+.
 
 
-### Installing PM2
+## Installing PM2
 
-With NPM:
+### With NPM
 
 ```bash
 $ npm install pm2 -g
 ```
 
-With Bun:
+### With Bun
 
 ```bash
 $ bun install pm2 -g
 ```
 
-You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm) and Bun with `curl -fsSL https://bun.sh/install | bash`
+If you only have Bun installed (no Node.js), symlink `node` to `bun` so PM2's `#!/usr/bin/env node` shebang resolves to Bun's node-compatibility runtime:
+
+```bash
+$ sudo ln -s $(which bun) /usr/local/bin/node
+```
+
+___
+
+You can install Node.js easily with [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) or [FNM](https://github.com/Schniz/fnm) or install Bun with `curl -fsSL https://bun.sh/install | bash`
 
 ### Start an application
 
@@ -117,9 +111,9 @@ $ pm2 monit
 
 ### Cluster Mode: Node.js Load Balancing & Zero Downtime Reload
 
-The Cluster mode is a special mode when starting a Node.js application, it starts multiple processes and load-balance HTTP/TCP/UDP queries between them. This increase overall performance (by a factor of x10 on 16 cores machines) and reliability (faster socket re-balancing in case of unhandled errors).
+Cluster mode starts multiple Node.js processes and load-balances HTTP/TCP/UDP queries between them. This significantly increases throughput on multi-core machines and improves reliability (faster socket re-balancing in case of unhandled errors).
 
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/cluster.png)
+![Framework supported](https://raw.githubusercontent.com/Unitech/pm2/master/pres/cluster.png)
 
 Starting a Node.js application in cluster mode that will leverage all CPUs available:
 
@@ -137,14 +131,14 @@ Hot Reload allows to update an application without any downtime:
 $ pm2 reload all
 ```
 
-[More informations about how PM2 make clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
+[More information about how PM2 makes clustering easy](https://pm2.keymetrics.io/docs/usage/cluster-mode/)
 
 ### Container Support
 
 With the drop-in replacement command for `node`, called `pm2-runtime`, run your Node.js application in a hardened production environment.
 Using it is seamless:
 
-```
+```dockerfile
 RUN npm install pm2 -g
 CMD [ "pm2-runtime", "npm", "--", "start" ]
 ```
@@ -162,7 +156,7 @@ $ pm2 set pm2:sysmonit true
 $ pm2 update
 ```
 
-![Framework supported](https://raw.githubusercontent.com/Unitech/PM2/master/pres/vitals.png)
+![Framework supported](https://raw.githubusercontent.com/Unitech/pm2/master/pres/vitals.png)
 
 ### Terminal Based Monitoring
 
@@ -182,7 +176,7 @@ To consult logs just type the command:
 $ pm2 logs
 ```
 
-Standard, Raw, JSON and formated output are available.
+Standard, Raw, JSON and formatted output are available.
 
 Examples:
 
@@ -207,7 +201,7 @@ $ pm2 install pm2-logrotate
 
 PM2 can generate and configure a Startup Script to keep PM2 and your processes alive at every server restart.
 
-Init Systems Supported: **systemd**, **upstart**, **launchd**, **rc.d**
+Init Systems Supported: **systemd**, **upstart**, **systemv**, **openrc**, **launchd**, **rcd**, **rcd-openbsd**, **smf**
 
 ```bash
 # Generate Startup Script
@@ -247,7 +241,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## CHANGELOG
 
-[CHANGELOG](https://github.com/Unitech/PM2/blob/master/CHANGELOG.md)
+[CHANGELOG](https://github.com/Unitech/pm2/blob/master/CHANGELOG.md)
 
 ## Contributors
 

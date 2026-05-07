@@ -20,7 +20,7 @@ should 'should have started 2 apps' 'online' 2
 >php-app-out.log
 >php-error.log
 
-sleep 1
+sleep 2
 
 grep "Python" python-app.log
 spec "Python script should have written data in log file"
@@ -39,7 +39,7 @@ should 'should have started 2 apps' 'online' 2
 >php-app-out.log
 >php-error.log
 
-sleep 1
+sleep 2
 
 grep "PythonProduction" python-app.log
 spec "Python script should have written data in log file (Production mode)"
@@ -53,6 +53,6 @@ $pm2 delete all
 
 $pm2 start echo.py --interpreter="/usr/bin/python3" --interpreter-args="-u" --log="cli-python.log" --merge-logs
 should 'should have started 1 app' 'onl\ine' 1
-sleep 1
+sleep 2
 grep "RAWPython" cli-python.log
 spec "Python script should have written data in log file"

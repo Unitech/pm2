@@ -45,7 +45,7 @@ exists '1# should have config variable' "config1xxx: 'true'" 6
 
 $pm2 set 'pm2-probe:config1xxx' false
 
-sleep 1
+sleep 2
 
 exists '2# should have config variable' "config1xxx: 'false'" 4
 
@@ -93,20 +93,20 @@ $pm2 unset example-module
 
 # Install local module in development mode
 $pm2 install .
-sleep 0.5
+sleep 2
 spec 'Should have installed module'
 
 
 # # Override environment variable
 # $pm2 set example-module:var2 true
-# sleep 0.5
+# sleep 2
 # should 'should module been restarted after setting variable' 'restart_time: 1' 1
 
 # # 4 occurences because of a restart
 # should 'should have config variable modified' "var2: 'true'" 4
 
 # $pm2 set example-module:newvar true
-# sleep 0.5
+# sleep 2
 # should 'should module been restarted after setting variable' 'restart_time: 2' 1
 
 # # 4 occurences because of a restart

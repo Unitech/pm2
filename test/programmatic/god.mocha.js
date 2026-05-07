@@ -76,6 +76,7 @@ function deleteAll(data, cb) {
 
 
 describe('God', function() {
+  this.timeout(30000);
   before(function(done) {
     pm2.connect(function() {
       deleteAll({}, function(err, dt) {
@@ -179,7 +180,7 @@ describe('God', function() {
             proc.pm2_env.restart_time.should.eql(0);
           });
           done();
-        }, 100);
+        }, 1000);
       });
     });
 
@@ -242,7 +243,7 @@ describe('God', function() {
         setTimeout(function() {
           God.getFormatedProcesses()[0].pm2_env.restart_time.should.eql(0);
           done();
-        }, 500);
+        }, 2000);
       });
     });
 

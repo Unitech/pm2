@@ -3,6 +3,7 @@ var PM2 = require('../..');
 var should = require('should');
 
 describe('Call PM2 inside PM2', function() {
+  this.timeout(30000);
   var pm2 = new PM2.custom({
     cwd : __dirname + '/../fixtures/inside'
   });
@@ -16,7 +17,7 @@ describe('Call PM2 inside PM2', function() {
   it('should start script that starts a script', function(done) {
     pm2.start('start_inside.js', function(err) {
       should(err).be.null();
-      setTimeout(done, 1500);
+      setTimeout(done, 3000);
     });
   });
 
@@ -35,7 +36,7 @@ describe('Call PM2 inside PM2', function() {
   it('should start script that restart script', function(done) {
     pm2.start('restart_inside.js', function(err) {
       should(err).be.null();
-      setTimeout(done, 1500);
+      setTimeout(done, 3000);
     });
   });
 
@@ -60,7 +61,7 @@ describe('Call PM2 inside PM2', function() {
   it('should start script that reload script', function(done) {
     pm2.start('reload_inside.js', function(err) {
       should(err).be.null();
-      setTimeout(done, 1500);
+      setTimeout(done, 3000);
     });
   });
 

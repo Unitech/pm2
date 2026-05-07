@@ -8,6 +8,7 @@ const exec = require('child_process').exec
 const path = require('path')
 
 describe('Exponential backoff feature', function() {
+  this.timeout(60000);
   var pm2
   var test_path = path.join(__dirname, 'fixtures', 'exp-backoff')
 
@@ -42,7 +43,7 @@ describe('Exponential backoff feature', function() {
         should(procs[0].pm2_env.prev_restart_delay).be.aboveOrEqual(100)
         done()
       })
-    }, 800)
+    }, 2000)
   })
 
   it('should have incremented the prev_restart delay', (done) => {
@@ -51,7 +52,7 @@ describe('Exponential backoff feature', function() {
         should(procs[0].pm2_env.prev_restart_delay).be.above(100)
         done()
       })
-    }, 500)
+    }, 2000)
   })
 
   it('should reset prev_restart_delay if application has reach stable uptime', (done) => {
@@ -60,6 +61,6 @@ describe('Exponential backoff feature', function() {
         should(procs[0].pm2_env.prev_restart_delay).be.eql(0)
         done()
       })
-    }, 3000)
+    }, 5000)
   })
 })

@@ -1,7 +1,7 @@
 
 
 var Wrap = require('./wrap.js');
-var axon = require('pm2-axon');
+var axon = require('../../modules/pm2-axon');
 
 var Module = require('module');
 Wrap.wrap(Module, '_load', function(load) {

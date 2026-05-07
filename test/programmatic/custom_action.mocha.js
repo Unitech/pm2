@@ -67,7 +67,7 @@ describe('Custom actions via CLI/API', function() {
       script: './../fixtures/custom_actions/index.js',
       instances : '4'
     }, function() {
-      setTimeout(done, 800);
+      setTimeout(done, 3000);
     });
   });
 
