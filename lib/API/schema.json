@@ -175,6 +175,10 @@
     "alias": "cron",
     "docDescription": "A cron pattern to restart your app"
   },
+  "cron_timezone": {
+    "type": "string",
+    "docDescription": "Timezone in Europe/Stockholm format"
+  },
   "merge_logs": {
     "type": "boolean",
     "alias" : "combine_logs",
