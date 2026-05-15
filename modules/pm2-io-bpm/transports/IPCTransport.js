@@ -3,6 +3,7 @@
 const cluster = require('cluster')
 const Debug = require('debug')
 const EventEmitter = require('events').EventEmitter
+const { IPC_MAX_INFLIGHT } = require('../constants')
 
 class IPCTransport extends EventEmitter {
   constructor () {
@@ -11,6 +12,20 @@ class IPCTransport extends EventEmitter {
     this.logger = Debug('axm:transport:ipc')
     this.onMessage = undefined
     this.autoExitHandle = undefined
+    this._inflight = 0
+    this._dropped = 0
+    this._saturated = false
+  }
+
+  // A broken IPC channel must be observable, never silently swallowed
+  // (regression #6101/#6111). Emitting 'error' with no listener would itself
+  // crash the process, so guard with a listener count and fall back to stderr.
+  _surface (err) {
+    if (this.listenerCount('error') > 0) {
+      this.emit('error', err)
+    } else {
+      console.error('[pm2-io-bpm] IPC transport: ' + (err && err.message))
+    }
   }
 
   init (config) {
@@ -85,16 +100,44 @@ class IPCTransport extends EventEmitter {
   }
 
   send (channel, payload) {
-    if (typeof process.send !== 'function') return -1
-    if (process.connected === false) return -1
+    if (typeof process.send !== 'function') {
+      this._surface(new Error('IPC send unavailable: process.send is not a function'))
+      return -1
+    }
+    if (process.connected === false) {
+      this._surface(new Error('IPC channel disconnected (process.connected === false)'))
+      return -1
+    }
+
+    // Back-pressure guard: bound retained callbacks / queued messages so a
+    // saturated-but-connected pipe cannot grow memory unbounded (#6101).
+    if (this._inflight >= IPC_MAX_INFLIGHT) {
+      this._dropped++
+      if (this._saturated === false) {
+        this._saturated = true
+        this._surface(new Error(`IPC back-pressure: channel saturated (${this._inflight} in-flight), dropping messages`))
+      }
+      return -1
+    }
 
     this.logger(`Send on channel ${channel}`)
+    this._inflight++
     try {
       process.send({ type: channel, data: payload }, (err) => {
-        if (err) this.logger('async send failed: %s', err && err.code)
+        this._inflight--
+        if (this._saturated === true && this._inflight < IPC_MAX_INFLIGHT) {
+          this._saturated = false
+          this.logger('IPC back-pressure cleared (dropped %d total)', this._dropped)
+        }
+        if (err) {
+          this.logger('async send failed: %s', err && err.code)
+          this._surface(err)
+        }
       })
     } catch (err) {
+      this._inflight--
       this.logger('Process disconnected from parent: %s', err && err.message)
+      this._surface(err)
     }
   }
 
