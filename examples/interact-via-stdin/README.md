@@ -11,3 +11,15 @@ Then to attach to it:
 ```
 $ pm2 attach 0
 ```
+
+Or:
+
+```
+$ pm2 logs --attach-input
+```
+
+Then send a message (e.g., *Lorem Ipsum*) to the app:
+
+```
+> 0 Lorem Ipsum
+```

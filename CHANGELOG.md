@@ -4,6 +4,9 @@
 ### Bug Fixes
 
 - Fix `pm2 serve` returning 403 Forbidden on Windows — traversal guard used hardcoded `/` separator #6109
+- Silence cluster worker `error` events to prevent boot crashes
+- Wrap `process.send` before BPM injection to avoid send-on-disconnected during boot
+- BPM IPC transport: log instead of `process.exit(1)` on disconnected send
 
 
 ## 7.0.1
