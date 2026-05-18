@@ -95,6 +95,16 @@ describe('PM2 programmatic calls', function() {
       });
     });
 
+    it('should throw if cwd doesn\'t exist', function(done) {
+      pm2.start({
+        command: 'echo $PWD',
+        cwd: "./IMAGINARY_DIR",
+      }, function(err, data) {
+        should.exists(err);
+        done();
+      })
+    });
+
     it('should notice error if wrong file passed', function(done) {
       pm2.start('./UNKNOWN_SCRIPT.js', {
         force : true,
