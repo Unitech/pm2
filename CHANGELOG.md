@@ -5,6 +5,9 @@
 
 - Fix `pm2 serve` returning 403 Forbidden on Windows — traversal guard used hardcoded `/` separator #6109
 - Fix `pm2 ls` table misalignment when a username exceeds the `user` column width — cli-tableau's `truncate()` miscounts ANSI bytes, so styled usernames were cut too short and leaked bold into the `watching` column
+- `pm2 ls` host-metrics line now only lists network interfaces that are actually carrying traffic (hides idle interfaces like utun, awdl, bridge, anpi, and unused en*)
+- `pm2 ls` host-metrics line: replaced `mem free` with `ram usage` (%), added GPU memory/temperature when a GPU reports it, and per-interface network errors/drops shown only when non-zero
+- `pm2 ls` now switches to the condensed layout based on the table's actual computed width vs. the terminal width (instead of a fixed column-count threshold that ignored the dynamic name column), and caps the `name` column at 40 chars so a long process name can't overflow the table
 
 
 ## 7.0.1
