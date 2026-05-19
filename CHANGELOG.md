@@ -4,11 +4,19 @@
 ### Bug Fixes
 
 - Fix `pm2 serve` returning 403 Forbidden on Windows — traversal guard used hardcoded `/` separator #6109
-- Fix `pm2 ls` table misalignment when a username exceeds the `user` column width — cli-tableau's `truncate()` miscounts ANSI bytes, so styled usernames were cut too short and leaked bold into the `watching` column
-- `pm2 ls` host-metrics line now only lists network interfaces that are actually carrying traffic (hides idle interfaces like utun, awdl, bridge, anpi, and unused en*)
-- `pm2 ls` host-metrics line: replaced `mem free` with `ram usage` (%), added GPU memory/temperature when a GPU reports it, and per-interface network errors/drops shown only when non-zero
-- `pm2 ls` now switches to the condensed layout based on the table's actual computed width vs. the terminal width (instead of a fixed column-count threshold that ignored the dynamic name column), and caps the `name` column at 40 chars so a long process name can't overflow the table
+- Fix `pm2 ls` table misalignment when a username exceeds the `user` column width — cli-tableau's `truncate()` miscounts ANSI bytes, leaking bold into the `watching` column
+- Fix long status lines (e.g. `Applying action … on app […]`) wrapping on narrow terminals — `Common.printOut` now ANSI-aware crops single-line TTY output to terminal width (piped output unaffected)
 
+### Features
+
+- `pm2 ls` host-metrics line now shown by default`pm2 update`)
+- `pm2 ls` adaptive layout: picks the widest layout that fits the terminal — full → condensed → new ultra-compact `mini` (`id · name · status · cpu · mem`) — and caps the `name` column so long names can't overflow the table
+- `pm2 ls` host-metrics line only lists network interfaces carrying traffic (hides idle utun/awdl/bridge/anpi/unused en*)
+- `pm2 ls` host-metrics line: replaced `mem free` with `ram usage` (%), added GPU memory/temperature when reported, per-interface network errors/drops shown when non-zero
+
+### Core Refactor
+
+- Replace the bundled `pm2-sysmonit` module and `systeminformation` with `lib/tools/SysMetrics.js` (Linux/macOS); `pm2 slist`/`getSystemData` and the Docker metrics path now read this collector. Covered by `test/programmatic/sysmetrics.mocha.js`
 
 ## 7.0.1
 

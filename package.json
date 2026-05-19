@@ -1,7 +1,7 @@
 {
   "name": "pm2",
   "preferGlobal": true,
-  "version": "7.0.1",
+  "version": "7.0.2",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -194,7 +194,6 @@
     "pm2-deploy": "1.0.2",
     "proxy-agent": "6.5.0",
     "semver": "7.7.2",
-    "systeminformation": "5.31.6",
     "tx2": "1.0.5",
     "vizion": "2.2.1",
     "ws": "8.20.0"

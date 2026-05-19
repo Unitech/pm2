@@ -108,6 +108,7 @@ D=test/interface
 runUnitTest $D/bus.spec.mocha.js
 runUnitTest $D/bus.fork.spec.mocha.js
 runUnitTest $D/utility.mocha.js
+runUnitTest $D/sysmetrics.mocha.js
 
 echo "============== unit test finished =============="
 cat unit_time
