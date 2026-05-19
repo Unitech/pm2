@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 - Fix `pm2 serve` returning 403 Forbidden on Windows — traversal guard used hardcoded `/` separator #6109
+- Fix `pm2 ls` table misalignment when a username exceeds the `user` column width — cli-tableau's `truncate()` miscounts ANSI bytes, so styled usernames were cut too short and leaked bold into the `watching` column
 
 
 ## 7.0.1
