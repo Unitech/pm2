@@ -26,73 +26,23 @@
     }
   ],
   "contributors": [
-    {
-      "name": "Alex Kocharin",
-      "email": "alex@kocharin.ru"
-    },
-    {
-      "name": "Antoine Bluchet",
-      "email": "soyuka@gmail.com"
-    },
-    {
-      "name": "Subhash Burramsetty"
-    },
-    {
-      "name": "Valentin Marchaud",
-      "email": "thisismac47@gmail.com"
-    },
-    {
-      "name": "Valentin Touffet",
-      "email": "contact@eywek.fr"
-    },
-    {
-      "name": "Florian Hermouet-Joscht",
-      "email": "florian@keymetrics.io"
-    },
-    {
-      "name": "Vincent Vallet",
-      "email": "wallet77@gmail.com"
-    },
-    {
-      "name": "Joni Shkurti",
-      "email": "jonishkurti90@gmail.com"
-    },
-    {
-      "name": "Jun Tjatse",
-      "email": "thisnamemeansnothing@gmail.com"
-    },
-    {
-      "name": "Xu Jingxin",
-      "email": "sailxjx@gmail.com"
-    },
-    {
-      "name": "Ben Postlethwaite",
-      "email": "post.ben.here@gmail.com"
-    },
-    {
-      "name": "Devo.ps",
-      "email": "contact@devo.ps"
-    },
-    {
-      "name": "Bret Copeland",
-      "email": "bret@atlantisflight.org"
-    },
-    {
-      "name": "John Hurliman",
-      "email": "jhurliman@jhurliman.org"
-    },
-    {
-      "name": "TruongSinh Tran-Nguyen",
-      "email": "i@truongsinh.pro"
-    },
-    {
-      "name": "Michael Hueuberger",
-      "email": "michael.heuberger@binarykitchen.com"
-    },
-    {
-      "name": "Chris Wiggins",
-      "email": "chris@chriswiggins.co.nz"
-    }
+    "Alex Kocharin",
+    "Antoine Bluchet",
+    "Subhash Burramsetty",
+    "Valentin Marchaud",
+    "Valentin Touffet",
+    "Florian Hermouet-Joscht",
+    "Vincent Vallet",
+    "Joni Shkurti",
+    "Jun Tjatse",
+    "Xu Jingxin",
+    "Ben Postlethwaite",
+    "Devo.ps",
+    "Bret Copeland",
+    "John Hurliman",
+    "TruongSinh Tran-Nguyen",
+    "Michael Hueuberger",
+    "Chris Wiggins"
   ],
   "homepage": "http://pm2.keymetrics.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
@@ -189,13 +139,15 @@
     "debug": "4.4.3",
     "eventemitter2": "6.4.9",
     "fast-json-patch": "3.1.1",
+    "git-node-fs": "1.0.0",
+    "ini": "1.3.8",
+    "js-git": "0.7.8",
     "js-yaml": "4.1.1",
     "pidusage": "4.0.1",
     "pm2-deploy": "1.0.2",
     "proxy-agent": "6.5.0",
     "semver": "7.7.2",
     "tx2": "1.0.5",
-    "vizion": "2.2.1",
     "ws": "8.20.0"
   },
   "overrides": {
