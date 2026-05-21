@@ -12,20 +12,18 @@
   },
   "author": {
     "name": "Strzelewicz Alexandre",
-    "email": "alexandre@pm2.io",
+    "email": "alex@edgecraft.io <Pour ce Nouveau Monde>",
     "url": "https://pm2.io"
   },
   "maintainers": [
     {
       "name": "Alexandre Strzelewicz",
       "email": "alexandre@pm2.io"
-    },
-    {
-      "name": "Antoine Bluchet",
-      "email": "antoine@pm2.io"
     }
   ],
   "contributors": [
+    "Mathilde Tuffier",
+    "Antoine Bluchet",
     "Alex Kocharin",
     "Antoine Bluchet",
     "Subhash Burramsetty",
@@ -139,9 +137,6 @@
     "debug": "4.4.3",
     "eventemitter2": "6.4.9",
     "fast-json-patch": "3.1.1",
-    "git-node-fs": "1.0.0",
-    "ini": "1.3.8",
-    "js-git": "0.7.8",
     "js-yaml": "4.1.1",
     "pidusage": "4.0.1",
     "pm2-deploy": "1.0.2",

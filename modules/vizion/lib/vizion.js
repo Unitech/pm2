@@ -1,81 +1,52 @@
-var ALL = {};
-var vizion = {};
+'use strict';
 
-ALL.hg = require('./hg/hg.js');
-ALL.git = require('./git/git.js');
-ALL.svn = require('./svn/svn.js');
-// Add more revision control tools here
-var identify = require('./identify.js');
+const git = require('./git/git.js');
 
+function resolveFolder(argv) {
+  return (argv && argv.folder !== undefined) ? argv.folder : '.';
+}
 
-vizion.analyze = function(argv, cb) {
-  var _folder = (argv.folder != undefined) ? argv.folder : '.';
+// Run an async git op and deliver the result through a node-style callback.
+// Rejections become a truthy `err` (never thrown): God.js relies on this to
+// walk up parent directories when a folder is not a git repository.
+function toCallback(promise, cb) {
+  promise.then(
+    res => cb(null, res),
+    err => cb(err)
+  );
+}
 
-  identify(_folder, function(type, folder) {
-    if (ALL[type])
-      return ALL[type].parse(folder, cb);
-    else
-      return cb('Error vizion::analyze() for given folder: '+folder);
-  });
+const vizion = {};
+
+vizion.analyze = function (argv, cb) {
+  toCallback(git.parse(resolveFolder(argv)), cb);
 };
 
-vizion.isUpToDate = function(argv, cb) {
-  var _folder = (argv.folder != undefined) ? argv.folder : '.';
-
-  identify(_folder, function(type, folder) {
-    if (ALL[type])
-      return ALL[type].isUpdated(folder, cb);
-    else
-      return cb('Error vizion::isUpToDate() for given folder: '+folder);
-  });
+vizion.isUpToDate = function (argv, cb) {
+  toCallback(git.isUpdated(resolveFolder(argv)), cb);
 };
 
-vizion.update = function(argv, cb) {
-  var _folder = (argv.folder != undefined) ? argv.folder : '.';
-
-  identify(_folder, function(type, folder) {
-    if (ALL[type])
-      return ALL[type].update(folder, cb);
-    else
-      return cb('Error vizion::update() for given folder: '+folder);
-  });
+vizion.update = function (argv, cb) {
+  toCallback(git.update(resolveFolder(argv)), cb);
 };
 
-vizion.revertTo = function(argv, cb) {
-  var revision = (argv.revision) ? argv.revision : false;
-  var _folder = (argv.folder != undefined) ? argv.folder : '.';
+vizion.revertTo = function (argv, cb) {
+  const revision = (argv && argv.revision) ? argv.revision : false;
+  const folder = resolveFolder(argv);
 
-  if (!(revision && /^[A-Fa-f0-9]+$/.test(revision))) return cb({msg: 'Cannot revert to an invalid commit revision', path: _folder});
+  if (!(revision && /^[A-Fa-f0-9]+$/.test(revision))) {
+    return cb({ msg: 'Cannot revert to an invalid commit revision', path: folder });
+  }
 
-  identify(_folder, function(type, folder) {
-    if (ALL[type])
-      return ALL[type].revert({folder: folder, revision: revision}, cb);
-    else
-      return cb('Error vizion::analyze() for given folder: '+folder);
-  });
+  toCallback(git.revert({ folder, revision }), cb);
 };
 
-vizion.prev = function(argv, cb) {
-  var _folder = (argv.folder != undefined) ? argv.folder : '.';
-
-  identify(_folder, function(type, folder) {
-    if (ALL[type])
-      return ALL[type].prev(folder, cb);
-    else
-      return cb('Error vizion::prev() for given folder: '+folder);
-  });
+vizion.prev = function (argv, cb) {
+  toCallback(git.prev(resolveFolder(argv)), cb);
 };
 
-vizion.next = function(argv, cb) {
-  var _folder = (argv.folder != undefined) ? argv.folder : '.';
-
-  identify(_folder, function(type, folder) {
-    if (ALL[type])
-      return ALL[type].next(folder, cb);
-    else
-      return cb('Error vizion::next() for given folder: '+folder);
-  });
+vizion.next = function (argv, cb) {
+  toCallback(git.next(resolveFolder(argv)), cb);
 };
-
 
 module.exports = vizion;

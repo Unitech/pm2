@@ -1,330 +1,247 @@
-var fs = require('fs');
-var waterfall = require('async/waterfall');
-var exec = require('child_process').exec;
-var ini = require('ini');
-var path = require('path');
-var helper = require('../helper.js');
-var cliCommand = require('../cliCommand.js');
-var jsGitService = require('./js-git-service.js');
+'use strict';
 
-var git = {};
+const { execFile } = require('node:child_process');
+const { promisify } = require('node:util');
 
-var TIMEOUT = 5000;
-var MAXBUFFER = 1024 * 64; // 16KB
+const execFileP = promisify(execFile);
 
-git.parseGitConfig = function (folder, cb) {
-  fs.readFile(path.join(folder, '.git/config'), 'utf-8', function (err, data) {
-    if (err) {
-      return cb(err);
+const DEFAULT_TIMEOUT = 5000;
+const REMOTE_TIMEOUT = 60000;
+const MAXBUFFER = 1024 * 1024;
+const HISTORY_DEPTH = 100;
+
+// Run a git subcommand inside `folder`. No shell is spawned (execFile), so the
+// folder path and any revision argument cannot be used for shell injection.
+function runGit(folder, args, { timeout = DEFAULT_TIMEOUT } = {}) {
+  return execFileP('git', args, {
+    cwd: folder,
+    timeout,
+    maxBuffer: MAXBUFFER,
+    env: { ...process.env, LC_ALL: 'C', GIT_TERMINAL_PROMPT: '0' }
+  }).then(({ stdout }) => stdout);
+}
+
+// Throws if `folder` is not inside a git work tree. Callers turn this into a
+// truthy callback error so God.js can keep walking up parent directories.
+async function assertGitRepo(folder) {
+  const out = await runGit(folder, ['rev-parse', '--is-inside-work-tree']);
+  if (out.trim() !== 'true') {
+    throw new Error('Not a git work tree: ' + folder);
+  }
+}
+
+async function getUrl(folder, data) {
+  // Preserve legacy behavior: the url is the `origin` remote url only.
+  try {
+    const out = await runGit(folder, ['config', '--get', 'remote.origin.url']);
+    const url = out.trim();
+    if (url) data.url = url;
+  } catch (e) {
+    // no origin remote configured -> leave data.url unset (legacy: undefined)
+  }
+}
+
+async function getCommitInfo(folder, data) {
+  try {
+    const out = await runGit(folder, ['log', '-1', '--no-show-signature', '--format=%H%n%B']);
+    const nl = out.indexOf('\n');
+    if (nl === -1) {
+      data.revision = out.trim();
+      data.comment = '';
+    } else {
+      data.revision = out.slice(0, nl);
+      // git log appends a trailing newline after %B; strip exactly that one so
+      // `comment` keeps the commit body's own trailing newline (legacy shape).
+      data.comment = out.slice(nl + 1).replace(/\n$/, '');
     }
+  } catch (e) {
+    // empty repository (no commits): legacy code also continued with undefined
+    data.revision = undefined;
+    data.comment = undefined;
+  }
+}
 
-    var config = ini.parse(data);
-    cb(null, config);
-  });
+async function getStaged(folder, data) {
+  // --porcelain is the contractually-stable, config-immune scripting format
+  // (unlike -s/--short). The derived boolean is identical.
+  const out = await runGit(folder, ['status', '--porcelain']);
+  data.unstaged = out.trim() !== '';
+}
+
+async function getBranch(folder, data) {
+  const out = await runGit(folder, ['rev-parse', '--abbrev-ref', 'HEAD']);
+  // Detached HEAD resolves to the literal "HEAD" (matches legacy .git/HEAD parse).
+  data.branch = out.trim();
+}
+
+async function getRemote(folder, data) {
+  const out = await runGit(folder, ['remote']);
+  data.remotes = out.split('\n').filter(Boolean);
+  data.remote = data.remotes.indexOf('origin') === -1 ? data.remotes[0] : 'origin';
+}
+
+async function isCurrentBranchOnRemote(folder, data) {
+  if (!data.remote) {
+    data.branch_exists_on_remote = false;
+    return;
+  }
+  try {
+    await runGit(folder, [
+      'rev-parse', '--verify', '--quiet',
+      'refs/remotes/' + data.remote + '/' + data.branch
+    ]);
+    data.branch_exists_on_remote = true;
+  } catch (e) {
+    // Offline check: the local remote-tracking ref does not exist.
+    data.branch_exists_on_remote = false;
+  }
+}
+
+// Selects the ref whose first-parent history is walked, mirroring the legacy
+// js-git getCommitHistory ref selection (note: hardcoded `origin` for the
+// remote-tracking, non-HEAD case, exactly as before).
+function historyRef(data) {
+  if (data.branch === 'HEAD') {
+    return data.branch_exists_on_remote
+      ? 'refs/remotes/' + data.remote + '/HEAD'
+      : 'HEAD';
+  }
+  return data.branch_exists_on_remote
+    ? 'refs/remotes/origin/' + data.branch
+    : 'refs/heads/' + data.branch;
+}
+
+async function getPrevNext(folder, data) {
+  let history = [];
+  try {
+    const out = await runGit(folder, [
+      'rev-list', '--max-count=' + HISTORY_DEPTH, '--topo-order', historyRef(data)
+    ]);
+    history = out.split('\n').filter(Boolean); // newest -> oldest, full SHAs
+  } catch (e) {
+    // ref does not resolve -> empty history (legacy js-git returned [])
+  }
+
+  const idx = history.findIndex(h => h === data.revision);
+  if (idx === -1) {
+    data.ahead = true;
+    data.next_rev = null;
+    data.prev_rev = null;
+  } else {
+    data.ahead = false;
+    data.next_rev = idx === 0 ? null : history[idx - 1];
+    data.prev_rev = idx === history.length - 1 ? null : history[idx + 1];
+  }
+}
+
+async function getUpdateTime(folder, data) {
+  try {
+    const out = await runGit(folder, ['log', '-1', '--no-show-signature', '--format=%cI']);
+    data.update_time = out.trim(); // committer date, strict ISO-8601
+  } catch (e) {
+    data.update_time = null; // empty repository
+  }
+}
+
+async function getTags(folder, data) {
+  const out = await runGit(folder, ['tag']);
+  const tags = out.split('\n').filter(Boolean);
+  // Legacy only set `data.tags` when at least one tag existed.
+  if (tags.length) data.tags = tags.slice(0, 10);
+}
+
+const git = {};
+
+git.parse = async function (folder) {
+  await assertGitRepo(folder);
+  const data = { type: 'git' };
+  await getUrl(folder, data);
+  await getCommitInfo(folder, data);
+  await getStaged(folder, data);
+  await getBranch(folder, data);
+  await getRemote(folder, data);
+  await isCurrentBranchOnRemote(folder, data);
+  await getPrevNext(folder, data);
+  await getUpdateTime(folder, data);
+  await getTags(folder, data);
+  return data;
 };
 
-git.getUrl = function (folder, cb) {
-  git.parseGitConfig(folder, function (err, config) {
-    if (err) {
-      return cb(err);
-    }
+git.isUpdated = async function (folder) {
+  await assertGitRepo(folder);
+  const data = {};
+  await getCommitInfo(folder, data);
+  await getBranch(folder, data);
+  await getRemote(folder, data);
+  await isCurrentBranchOnRemote(folder, data);
 
-    var data = {};
+  await runGit(folder, ['remote', 'update'], { timeout: REMOTE_TIMEOUT });
 
-    data.type = 'git';
-    data.url = helper.get(config, 'remote "origin".url');
+  const ref = data.branch_exists_on_remote
+    ? 'refs/remotes/origin/' + data.branch
+    : 'refs/heads/' + data.branch;
+  const out = await runGit(folder, ['rev-parse', ref]);
+  const new_revision = out.trim();
 
-    cb(null, data);
-  });
+  return {
+    new_revision,
+    current_revision: data.revision,
+    is_up_to_date: new_revision === data.revision
+  };
 };
 
-git.getCommitInfo = function (folder, data, cb) {
-  jsGitService.getHeadCommit(folder, function (err, commit) {
-    if (err) {
-      return cb(err);
-    }
-
-    data.revision = helper.get(commit, 'hash');
-    data.comment = helper.get(commit, 'message');
-    cb(null, data);
-  });
+git.revert = async function (args) {
+  const ret = { output: '', success: true };
+  // Keep a synthetic command line first (legacy shape; pm2 prints meta.output
+  // and e2e asserts its line count).
+  ret.output += 'git reset --hard ' + args.revision + '\n';
+  try {
+    const out = await runGit(args.folder, ['reset', '--hard', args.revision]);
+    ret.output += out;
+  } catch (e) {
+    // git exited non-zero (includes the legacy `fatal:` case): not a hard
+    // error to the caller — resolve with success=false (legacy returned cb(null, ret)).
+    ret.output += (e.stdout || '') + (e.stderr || '');
+    ret.success = false;
+  }
+  return ret;
 };
 
-git.getStaged = function (folder, data, cb) {
-  exec(cliCommand(folder, 'git status -s'), {timeout: TIMEOUT, maxBuffer: MAXBUFFER},
-    function (err, stdout, stderr) {
-      if (err) {
-        return cb(err);
-      }
-
-      data.unstaged = (stdout === '') ? false : true;
-      return cb(null, data);
-    });
+git.update = async function (folder) {
+  const data = await git.isUpdated(folder);
+  if (data.is_up_to_date === true) {
+    return { success: false, current_revision: data.new_revision };
+  }
+  const dt = await git.revert({ folder, revision: data.new_revision });
+  return {
+    output: dt.output,
+    success: dt.success,
+    current_revision: dt.success ? data.new_revision : data.current_revision
+  };
 };
 
-git.getBranch = function (folder, data, cb) {
-  fs.readFile(path.join(folder, '.git/HEAD'), 'utf-8', function (err, content) {
-    if (err) {
-      return cb(err);
-    }
+async function step(folder, which) {
+  await assertGitRepo(folder);
+  const data = {};
+  await getCommitInfo(folder, data);
+  await getBranch(folder, data);
+  await getRemote(folder, data);
+  await isCurrentBranchOnRemote(folder, data);
+  await getPrevNext(folder, data);
 
-    var regex = /ref: refs\/heads\/(.*)/;
-    var match = regex.exec(content);
-    data.branch = match ? match[1] : 'HEAD';
+  const target = which === 'prev' ? data.prev_rev : data.next_rev;
+  if (target === null || target === undefined) {
+    return { success: false, current_revision: data.revision };
+  }
+  const meta = await git.revert({ folder, revision: target });
+  return {
+    output: meta.output,
+    success: meta.success,
+    current_revision: meta.success ? target : data.revision
+  };
+}
 
-    return cb(null, data);
-  });
-};
-
-
-git.getRemote = function (folder, data, cb) {
-  git.parseGitConfig(folder, function (err, config) {
-    if (err) {
-      return cb(err);
-    }
-
-    data.remotes = [];
-
-    Object.keys(config).map(function (key) {
-      var regex = /remote "(.*)"/;
-      var match = regex.exec(key);
-      if (match) {
-        data.remotes.push(match[1]);
-      }
-    });
-
-    data.remote = (data.remotes.indexOf('origin') === -1) ? data.remotes[0] : 'origin';
-
-    cb(null, data);
-  });
-};
-
-git.isCurrentBranchOnRemote = function (folder, data, cb) {
-  jsGitService.getRefHash(folder, data.branch, data.remote, function (err, hash) {
-    if (err) {
-      return cb(err);
-    }
-
-    data.branch_exists_on_remote = !!hash;
-
-    return cb(null, data);
-  });
-};
-
-git.getPrevNext = function (folder, data, cb) {
-  var remote = data.branch_exists_on_remote ? data.remote : null;
-
-  jsGitService.getCommitHistory(folder, 100, data.branch, remote, function (err, commitHistory) {
-    if (err) {
-      return cb(err);
-    }
-
-    var currentCommitIndex = commitHistory.findIndex(({ hash }) => hash === data.revision);
-
-    if (currentCommitIndex === -1) {
-      data.ahead = true;
-      data.next_rev = null;
-      data.prev_rev = null;
-    }
-    else {
-      data.ahead = false;
-      data.next_rev = (currentCommitIndex === 0) ? null : commitHistory[currentCommitIndex - 1].hash;
-      data.prev_rev = (currentCommitIndex === (commitHistory.length - 1)) ? null : commitHistory[currentCommitIndex + 1].hash;
-    }
-
-    cb(null, data);
-  });
-};
-
-git.getUpdateTime = function (folder, data, cb) {
-  fs.stat(folder + ".git", function (err, stats) {
-    if (err) {
-      return cb(err);
-    }
-
-    data.update_time = helper.trimNewLine(stats.mtime);
-    return cb(null, data);
-  });
-};
-
-git.getTags = function (folder, data, cb) {
-    exec(cliCommand(folder, 'git tag'), {timeout: TIMEOUT, maxBuffer: MAXBUFFER},
-    function (err, stdout, stderr) {
-      if (err) {
-        return cb(err);
-      }
-
-      if (stdout.length) {
-        data.tags = stdout.split('\n');
-        data.tags.pop();
-        data.tags = data.tags.slice(0, 10);
-      }
-      return cb(null, data);
-    });
-};
-
-git.parse = function (folder, cb) {
-  waterfall([
-      git.getUrl.bind(null, folder),
-      git.getCommitInfo.bind(null, folder),
-      git.getStaged.bind(null, folder),
-      git.getBranch.bind(null, folder),
-      git.getRemote.bind(null, folder),
-      git.isCurrentBranchOnRemote.bind(null, folder),
-      git.getPrevNext.bind(null, folder),
-      git.getUpdateTime.bind(null, folder),
-      git.getTags.bind(null, folder)],
-    function (err, data) {
-      if (err) {
-        return cb(err);
-      }
-
-      return cb(null, data);
-    });
-};
-
-git.isUpdated = function (folder, cb) {
-  waterfall([
-      git.getCommitInfo.bind(null, folder, {}),
-      git.getBranch.bind(null, folder),
-      git.getRemote.bind(null, folder),
-      git.isCurrentBranchOnRemote.bind(null, folder),
-    ],
-    function (err, data) {
-      if (err) {
-        return cb(err);
-      }
-
-      exec(cliCommand(folder, 'git remote update'), {timeout: 60000, maxBuffer: MAXBUFFER},
-        function (err, stdout, stderr) {
-          if (err) {
-            return cb(err);
-          }
-
-          var remote = data.branch_exists_on_remote ? data.remote : null;
-          jsGitService.getLastCommit(folder, data.branch, remote, function (err, commit) {
-            if (err) {
-              return cb(err);
-            }
-
-            var res = {
-              new_revision: commit.hash,
-              current_revision: data.revision,
-              is_up_to_date: (commit.hash === data.revision)
-            };
-            return cb(null, res);
-          });
-        });
-    });
-};
-
-git.revert = function (args, cb) {
-  var ret = {};
-  var command = cliCommand(args.folder, "git reset --hard " + args.revision);
-  ret.output = '';
-  ret.output += command + '\n';
-  ret.success = true;
-  exec(command, {timeout: TIMEOUT, maxBuffer: MAXBUFFER},
-    function (err, stdout, stderr) {
-      ret.output += stdout;
-      if (err !== null || stderr.substring(0, 6) === 'fatal:')
-        ret.success = false;
-      return cb(null, ret);
-    });
-};
-
-git.update = function (folder, cb) {
-  git.isUpdated(folder, function (err, data) {
-    if (err) {
-      return cb(err);
-    }
-
-    var res = {};
-    if (data.is_up_to_date === true) {
-      res.success = false;
-      res.current_revision = data.new_revision;
-      return cb(null, res);
-    }
-    else {
-      git.revert({folder: folder, revision: data.new_revision},
-        function (err, dt) {
-          if (err) {
-            return cb(err);
-          }
-
-          res.output = dt.output;
-          res.success = dt.success;
-          res.current_revision = (dt.success) ? data.new_revision : data.current_revision;
-          return cb(null, res);
-        });
-    }
-  });
-};
-
-git.prev = function (folder, cb) {
-  waterfall([
-    git.getCommitInfo.bind(null, folder, {}),
-    git.getBranch.bind(null, folder),
-    git.getRemote.bind(null, folder),
-    git.isCurrentBranchOnRemote.bind(null, folder),
-    git.getPrevNext.bind(null, folder),
-  ], function (err, data) {
-    if (err) {
-      return cb(err);
-    }
-
-    var res = {};
-    if (data.prev_rev !== null) {
-      git.revert({folder: folder, revision: data.prev_rev}, function (err, meta) {
-        if (err) {
-          return cb(err);
-        }
-
-        res.output = meta.output;
-        res.success = meta.success;
-        res.current_revision = (res.success) ? data.prev_rev : data.revision;
-        return cb(null, res);
-      });
-    }
-    else {
-      res.success = false;
-      res.current_revision = data.revision;
-      return cb(null, res);
-    }
-  });
-};
-
-git.next = function (folder, cb) {
-  waterfall([
-    git.getCommitInfo.bind(null, folder, {}),
-    git.getBranch.bind(null, folder),
-    git.getRemote.bind(null, folder),
-    git.isCurrentBranchOnRemote.bind(null, folder),
-    git.getPrevNext.bind(null, folder),
-  ], function (err, data) {
-    if (err) {
-      return cb(err);
-    }
-
-    var res = {};
-    if (data.next_rev !== null) {
-      git.revert({folder: folder, revision: data.next_rev}, function (err, meta) {
-        if (err) {
-          return cb(err);
-        }
-
-        res.output = meta.output;
-        res.success = meta.success;
-        res.current_revision = (res.success) ? data.next_rev : data.revision;
-        return cb(null, res);
-      });
-    }
-    else {
-      res.success = false;
-      res.current_revision = data.revision;
-      return cb(null, res);
-    }
-  });
-};
+git.prev = function (folder) { return step(folder, 'prev'); };
+git.next = function (folder) { return step(folder, 'next'); };
 
 module.exports = git;
