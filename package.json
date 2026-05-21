@@ -12,87 +12,35 @@
   },
   "author": {
     "name": "Strzelewicz Alexandre",
-    "email": "alexandre@pm2.io",
+    "email": "alex@edgecraft.io <Pour ce Nouveau Monde>",
     "url": "https://pm2.io"
   },
   "maintainers": [
     {
       "name": "Alexandre Strzelewicz",
       "email": "alexandre@pm2.io"
-    },
-    {
-      "name": "Antoine Bluchet",
-      "email": "antoine@pm2.io"
     }
   ],
   "contributors": [
-    {
-      "name": "Alex Kocharin",
-      "email": "alex@kocharin.ru"
-    },
-    {
-      "name": "Antoine Bluchet",
-      "email": "soyuka@gmail.com"
-    },
-    {
-      "name": "Subhash Burramsetty"
-    },
-    {
-      "name": "Valentin Marchaud",
-      "email": "thisismac47@gmail.com"
-    },
-    {
-      "name": "Valentin Touffet",
-      "email": "contact@eywek.fr"
-    },
-    {
-      "name": "Florian Hermouet-Joscht",
-      "email": "florian@keymetrics.io"
-    },
-    {
-      "name": "Vincent Vallet",
-      "email": "wallet77@gmail.com"
-    },
-    {
-      "name": "Joni Shkurti",
-      "email": "jonishkurti90@gmail.com"
-    },
-    {
-      "name": "Jun Tjatse",
-      "email": "thisnamemeansnothing@gmail.com"
-    },
-    {
-      "name": "Xu Jingxin",
-      "email": "sailxjx@gmail.com"
-    },
-    {
-      "name": "Ben Postlethwaite",
-      "email": "post.ben.here@gmail.com"
-    },
-    {
-      "name": "Devo.ps",
-      "email": "contact@devo.ps"
-    },
-    {
-      "name": "Bret Copeland",
-      "email": "bret@atlantisflight.org"
-    },
-    {
-      "name": "John Hurliman",
-      "email": "jhurliman@jhurliman.org"
-    },
-    {
-      "name": "TruongSinh Tran-Nguyen",
-      "email": "i@truongsinh.pro"
-    },
-    {
-      "name": "Michael Hueuberger",
-      "email": "michael.heuberger@binarykitchen.com"
-    },
-    {
-      "name": "Chris Wiggins",
-      "email": "chris@chriswiggins.co.nz"
-    }
+    "Mathilde Tuffier",
+    "Antoine Bluchet",
+    "Alex Kocharin",
+    "Antoine Bluchet",
+    "Subhash Burramsetty",
+    "Valentin Marchaud",
+    "Valentin Touffet",
+    "Florian Hermouet-Joscht",
+    "Vincent Vallet",
+    "Joni Shkurti",
+    "Jun Tjatse",
+    "Xu Jingxin",
+    "Ben Postlethwaite",
+    "Devo.ps",
+    "Bret Copeland",
+    "John Hurliman",
+    "TruongSinh Tran-Nguyen",
+    "Michael Hueuberger",
+    "Chris Wiggins"
   ],
   "homepage": "http://pm2.keymetrics.io/",
   "description": "Production process manager for Node.JS applications with a built-in load balancer.",
@@ -195,7 +143,6 @@
     "proxy-agent": "6.5.0",
     "semver": "7.7.2",
     "tx2": "1.0.5",
-    "vizion": "2.2.1",
     "ws": "8.20.1"
   },
   "overrides": {
