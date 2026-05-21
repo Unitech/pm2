@@ -3,315 +3,387 @@
 
 // Exported Methods
 
-/**
- * Either connects to a running pm2 daemon (“God”) or launches and daemonizes one.
- * Once launched, the pm2 process will keep running after the script exits.
- * @param errback - Called when finished connecting to or launching the pm2 daemon process.
- */
-export function connect(errback: ErrCallback): void;
-/**
- * Either connects to a running pm2 daemon (“God”) or launches and daemonizes one.
- * Once launched, the pm2 process will keep running after the script exits.
- * @param noDaemonMode - (Default: false) If true is passed for the first argument
- * pm2 will not be run as a daemon and will die when the related script exits.
- * By default, pm2 stays alive after your script exits.
- * If pm2 is already running, your script will link to the existing daemon but will die once your process exits.
- * @param errback - Called when finished connecting to or launching the pm2 daemon process.
- */
-export function connect(noDaemonMode:boolean, errback: ErrCallback): void;
+export class API {
+  constructor(opts?: PM2ConstructorOptions);
 
-/**
- * Starts a script that will be managed by pm2.
- * @param options - Options
- * @param errback - An errback called when the script has been started.
- * The proc parameter will be a pm2 process object.
- */
-export function start(options: StartOptions, errback: ErrProcCallback): void;
-/**
- * Starts a script that will be managed by pm2.
- * @param jsonConfigFile - The path to a JSON file that can contain the same options as the options parameter.
- * @param errback - An errback called when the script has been started.
- * The proc parameter will be a pm2 process object.
- */
-export function start(jsonConfigFile: string, errback: ErrProcCallback): void;
-/**
- * Starts a script that will be managed by pm2.
- * @param script - The path of the script to run.
- * @param errback - An errback called when the script has been started.
- * The proc parameter will be a pm2 process object.
- */
-export function start(script: string , errback: ErrProcCallback): void;
-/**
- * Starts a script that will be managed by pm2.
- * @param script - The path of the script to run.
- * @param options - Options
- * @param errback - An errback called when the script has been started.
- * The proc parameter will be a pm2 process object.
- */
-export function start(script: string, options: StartOptions, errback: ErrProcCallback): void;
-/**
- * Starts a script that will be managed by pm2.
- * @param script - The path of the script to run.
- * @param jsonConfigFile - The path to a JSON file that can contain the same options as the options parameter.
- * @param errback - An errback called when the script has been started.
- * The proc parameter will be a pm2 process object.
- */
-export function start(script: string, jsonConfigFile: string, errback: ErrProcCallback): void;
+  /**
+   * Either connects to a running pm2 daemon (“God”) or launches and daemonizes one.
+   * Once launched, the pm2 process will keep running after the script exits.
+   * @param errback - Called when finished connecting to or launching the pm2 daemon process.
+   */
+  connect(errback: ErrCallback): void;
+  /**
+   * Either connects to a running pm2 daemon (“God”) or launches and daemonizes one.
+   * Once launched, the pm2 process will keep running after the script exits.
+   * @param noDaemonMode - (Default: false) If true is passed for the first argument
+   * pm2 will not be run as a daemon and will die when the related script exits.
+   * By default, pm2 stays alive after your script exits.
+   * If pm2 is already running, your script will link to the existing daemon but will die once your process exits.
+   * @param errback - Called when finished connecting to or launching the pm2 daemon process.
+   */
+  connect(noDaemonMode: boolean, errback: ErrCallback): void;
 
-/**
- * Disconnects from the pm2 daemon.
- */
-export function disconnect(): void;
+  /**
+   * Starts a script that will be managed by pm2.
+   * @param options - Options
+   * @param errback - An errback called when the script has been started.
+   * The proc parameter will be a pm2 process object.
+   */
+  start(options: StartOptions, errback: ErrProcsCallback): void;
+  /**
+   * Starts a script that will be managed by pm2.
+   * @param jsonConfigFile - The path to a JSON file that can contain the same options as the options parameter.
+   * @param errback - An errback called when the script has been started.
+   * The proc parameter will be a pm2 process object.
+   */
+  start(jsonConfigFile: string, errback: ErrProcsCallback): void;
+  /**
+   * Starts a script that will be managed by pm2.
+   * @param script - The path of the script to run.
+   * @param errback - An errback called when the script has been started.
+   * The proc parameter will be a pm2 process object.
+   */
+  start(script: string, errback: ErrProcsCallback): void;
+  /**
+   * Starts a script that will be managed by pm2.
+   * @param script - The path of the script to run.
+   * @param options - Options
+   * @param errback - An errback called when the script has been started.
+   * The proc parameter will be a pm2 process object.
+   */
+  start(script: string, options: StartOptions, errback: ErrProcsCallback): void;
+  /**
+   * Starts a script that will be managed by pm2.
+   * @param script - The path of the script to run.
+   * @param jsonConfigFile - The path to a JSON file that can contain the same options as the options parameter.
+   * @param errback - An errback called when the script has been started.
+   * The proc parameter will be a pm2 process object.
+   */
+  start(
+    script: string,
+    jsonConfigFile: string,
+    errback: ErrProcsCallback,
+  ): void;
 
-/**
- * Stops a process but leaves the process meta-data in pm2’s list
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param errback - called when the process is stopped
- */
-export function stop(process: string|number, errback: ErrProcCallback): void;
+  /**
+   * Disconnects from the pm2 daemon.
+   */
+  disconnect(): void;
 
-/**
- * Stops and restarts the process.
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param errback - called when the process is restarted
- */
-export function restart(process: string|number, errback: ErrProcCallback): void;
+  /**
+   * Stops a process but leaves the process meta-data in pm2’s list
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param errback - called when the process is stopped
+   */
+  stop(process: string | number, errback: ErrProcCallback): void;
 
-/**
- * Stops the process and removes it from pm2’s list.
- * The process will no longer be accessible by its name
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param errback - called when the process is deleted
- */
-declare function del(process: string|number, errback: ErrProcCallback): void;
-// have to use this construct because `delete` is a reserved word
-export {del as delete};
+  /**
+   * Stops and restarts the process.
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param errback - called when the process is restarted
+   */
+  restart(process: string | number, errback: ErrProcCallback): void;
 
-/**
- * Zero-downtime rolling restart. At least one process will be kept running at
- * all times as each instance is restarted individually.
- * Only works for scripts started in cluster mode.
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param errback - called when the process is reloaded
- */
-export function reload(process: string|number, errback: ErrProcCallback): void;
+  /**
+   * Stops the process and removes it from pm2’s list.
+   * The process will no longer be accessible by its name
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param errback - called when the process is deleted
+   */
+  delete(process: string | number, errback: ErrProcCallback): void;
 
-/**
- * Zero-downtime rolling restart. At least one process will be kept running at
- * all times as each instance is restarted individually.
- * Only works for scripts started in cluster mode.
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param options - An object containing configuration
- * @param options.updateEnv - (Default: false) If true is passed in, pm2 will reload it’s
- * environment from process.env before reloading your process.
- * @param errback - called when the process is reloaded
- */
-export function reload(process: string|number, options: ReloadOptions, errback: ErrProcCallback): void;
+  /**
+   * Zero-downtime rolling restart. At least one process will be kept running at
+   * all times as each instance is restarted individually.
+   * Only works for scripts started in cluster mode.
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param errback - called when the process is reloaded
+   */
+  reload(process: string | number, errback: ErrProcCallback): void;
 
-/**
- * Kills the pm2 daemon (same as pm2 kill). Note that when the daemon is killed, all its
- * processes are also killed. Also note that you still have to explicitly disconnect
- * from the daemon even after you kill it.
- * @param errback
- */
-export function killDaemon(errback: ErrProcDescCallback): void;
+  /**
+   * Zero-downtime rolling restart. At least one process will be kept running at
+   * all times as each instance is restarted individually.
+   * Only works for scripts started in cluster mode.
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param options - An object containing configuration
+   * @param options.updateEnv - (Default: false) If true is passed in, pm2 will reload it’s
+   * environment from process.env before reloading your process.
+   * @param errback - called when the process is reloaded
+   */
+  reload(
+    process: string | number,
+    options: ReloadOptions,
+    errback: ErrProcCallback,
+  ): void;
 
-/**
- * Returns various information about a process: eg what stdout/stderr and pid files are used.
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param errback
- */
-export function describe(process: string|number, errback: ErrProcDescsCallback): void;
+  /**
+   * Kills the pm2 daemon (same as pm2 kill). Note that when the daemon is killed, all its
+   * processes are also killed. Also note that you still have to explicitly disconnect
+   * from the daemon even after you kill it.
+   * @param errback
+   */
+  killDaemon(errback: ErrProcDescCallback): void;
 
-/**
- * Gets the list of running processes being managed by pm2.
- * @param errback
- */
-export function list(errback: ErrProcDescsCallback): void;
+  /**
+   * Returns various information about a process: eg what stdout/stderr and pid files are used.
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param errback
+   */
+  describe(process: string | number, errback: ErrProcDescsCallback): void;
 
-/**
- * Writes the process list to a json file at the path in the DUMP_FILE_PATH environment variable
- * (“~/.pm2/dump.pm2” by default).
- * @param errback
- */
-export function dump(errback: ErrResultCallback): void;
+  /**
+   * Gets the list of running processes being managed by pm2.
+   * @param errback
+   */
+  list(errback: ErrProcDescsCallback): void;
 
-/**
- * Flushes the logs.
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param errback
- */
-export function flush(process: number|string, errback: ErrResultCallback): void;
+  /**
+   * Writes the process list to a json file at the path in the DUMP_FILE_PATH environment variable
+   * (“~/.pm2/dump.pm2” by default).
+   * @param errback
+   */
+  dump(errback: ErrResultCallback): void;
 
-/**
- * @param errback
- */
-export function dump(errback: ErrResultCallback): void;
+  /**
+   * Flushes the logs.
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param errback
+   */
+  flush(process: number | string, errback: ErrResultCallback): void;
 
-/**
- * Rotates the log files. The new log file will have a higher number
- * in it (the default format being ${process.name}-${out|err}-${number}.log).
- * @param errback
- */
-export function reloadLogs(errback: ErrResultCallback): void;
+  /**
+   * @param errback
+   */
+  dump(errback: ErrResultCallback): void;
 
-/**
- * Opens a message bus.
- * @param errback The bus will be an Axon Sub Emitter object used to listen to and send events.
- */
-export function launchBus(errback: ErrBusCallback): void;
+  /**
+   * Rotates the log files. The new log file will have a higher number
+   * in it (the default format being ${process.name}-${out|err}-${number}.log).
+   * @param errback
+   */
+  reloadLogs(errback: ErrResultCallback): void;
 
-/**
- * @param signal
- * @param process - Can either be the name as given in the pm2.start options,
- * a process id, or the string “all” to indicate that all scripts should be restarted.
- * @param errback
- */
-export function sendSignalToProcessName(signal:string|number, process: number|string, errback: ErrResultCallback): void;
+  /**
+   * Opens a message bus.
+   * @param errback The bus will be an Axon Sub Emitter object used to listen to and send events.
+   */
+  launchBus(errback: ErrBusCallback): void;
 
-/**
- * - Registers the script as a process that will start on machine boot. The current process list will be dumped and saved for resurrection on reboot.
- * @param platform
- * @param errback
- */
-export function startup(platform: Platform, errback: ErrResultCallback): void;
+  /**
+   * @param signal
+   * @param process - Can either be the name as given in the pm2.start options,
+   * a process id, or the string “all” to indicate that all scripts should be restarted.
+   * @param errback
+   */
+  sendSignalToProcessName(
+    signal: string | number,
+    process: number | string,
+    errback: ErrResultCallback,
+  ): void;
 
-/**
- * - Send an set of data as object to a specific process
- * @param proc_id
- * @param packet
- * @param cb
- */
-export function sendDataToProcessId(proc_id: number, packet: object, cb: ErrResultCallback): void;
+  /**
+   * - Registers the script as a process that will start on machine boot. The current process list will be dumped and saved for resurrection on reboot.
+   * @param platform
+   * @param errback
+   */
+  startup(platform: Platform, errback: ErrResultCallback): void;
 
-/**
- * - Send an set of data as object to a specific process
- * @param packet {id: number, type: 'process:msg', topic: true, data: object}
- */
-export function sendDataToProcessId(packet: {id: number, type: 'process:msg', topic: true, data: object}): void;
+  /**
+   * - Send an set of data as object to a specific process
+   * @param proc_id
+   * @param packet
+   * @param cb
+   */
+  sendDataToProcessId(
+    proc_id: number,
+    packet: object,
+    cb: ErrResultCallback,
+  ): void;
 
-/**
- * Launch system monitoring (CPU, Memory usage)
- * @param errback - Called when monitoring is launched
- */
-export function launchSysMonitoring(errback?: ErrCallback): void;
+  /**
+   * - Send an set of data as object to a specific process
+   * @param packet {id: number, type: 'process:msg', topic: true, data: object}
+   */
+  sendDataToProcessId(packet: {
+    id: number;
+    type: "process:msg";
+    topic: true;
+    data: object;
+  }): void;
 
-/**
- * Profile CPU or Memory usage
- * @param type - 'cpu' for CPU profiling, 'mem' for memory profiling
- * @param time - Duration in seconds (default: 10)
- * @param errback - Called when profiling is complete
- */
-export function profile(type: 'cpu' | 'mem', time?: number, errback?: ErrCallback): void;
+  /**
+   * Launch system monitoring (CPU, Memory usage)
+   * @param errback - Called when monitoring is launched
+   */
+  launchSysMonitoring(errback?: ErrCallback): void;
 
-/**
- * Get process environment variables
- * @param app_id - Process name or id
- * @param errback - Called with environment variables
- */
-export function env(app_id: string | number, errback?: ErrCallback): void;
+  /**
+   * Profile CPU or Memory usage
+   * @param type - 'cpu' for CPU profiling, 'mem' for memory profiling
+   * @param time - Duration in seconds (default: 10)
+   * @param errback - Called when profiling is complete
+   */
+  profile(type: "cpu" | "mem", time?: number, errback?: ErrCallback): void;
 
-/**
- * Get process PID
- * @param app_name - Process name (optional, returns all PIDs if not provided)
- * @param errback - Called with PID information
- */
-export function getPID(app_name?: string, errback?: ErrProcCallback): void;
+  /**
+   * Get process environment variables
+   * @param app_id - Process name or id
+   * @param errback - Called with environment variables
+   */
+  env(app_id: string | number, errback?: ErrCallback): void;
 
-/**
- * Trigger a custom action on a process
- * @param pm_id - Process id
- * @param action_name - Name of the action to trigger
- * @param params - Parameters to pass to the action
- * @param errback - Called when action completes
- */
-export function trigger(pm_id: string | number, action_name: string, params?: any, errback?: ErrCallback): void;
+  /**
+   * Get process PID
+   * @param app_name - Process name (optional, returns all PIDs if not provided)
+   * @param errback - Called with PID information
+   */
+  getPID(app_name?: string, errback?: ErrProcCallback): void;
 
-/**
- * Inspect a process (debugging)
- * @param app_name - Process name
- * @param errback - Called with inspect information
- */
-export function inspect(app_name: string, errback?: ErrCallback): void;
+  /**
+   * Trigger a custom action on a process
+   * @param pm_id - Process id
+   * @param action_name - Name of the action to trigger
+   * @param params - Parameters to pass to the action
+   * @param errback - Called when action completes
+   */
+  trigger(
+    pm_id: string | number,
+    action_name: string,
+    params?: any,
+    errback?: ErrCallback,
+  ): void;
 
-/**
- * Serve static files
- * @param path - Path to serve files from
- * @param port - Port number (default: 8080)
- * @param options - Serve options
- * @param errback - Called when server starts
- */
-export function serve(path?: string, port?: number, options?: ServeOptions, errback?: ErrCallback): void;
+  /**
+   * Inspect a process (debugging)
+   * @param app_name - Process name
+   * @param errback - Called with inspect information
+   */
+  inspect(app_name: string, errback?: ErrCallback): void;
 
-/**
- * Install a PM2 module
- * @param module_name - Name of the module to install
- * @param options - Installation options
- * @param errback - Called when installation completes
- */
-export function install(module_name: string, options?: InstallOptions, errback?: ErrCallback): void;
+  /**
+   * Serve static files
+   * @param path - Path to serve files from
+   * @param port - Port number (default: 8080)
+   * @param options - Serve options
+   * @param errback - Called when server starts
+   */
+  serve(
+    path?: string,
+    port?: number,
+    options?: ServeOptions,
+    errback?: ErrCallback,
+  ): void;
 
-/**
- * Uninstall a PM2 module
- * @param module_name - Name of the module to uninstall
- * @param errback - Called when uninstallation completes
- */
-export function uninstall(module_name: string, errback?: ErrCallback): void;
+  /**
+   * Install a PM2 module
+   * @param module_name - Name of the module to install
+   * @param options - Installation options
+   * @param errback - Called when installation completes
+   */
+  install(
+    module_name: string,
+    options?: InstallOptions,
+    errback?: ErrCallback,
+  ): void;
 
-/**
- * Send line to process stdin
- * @param pm_id - Process id
- * @param line - Line to send
- * @param separator - Line separator (default: '\n')
- * @param errback - Called when line is sent
- */
-export function sendLineToStdin(pm_id: string | number, line: string, separator?: string, errback?: ErrCallback): void;
+  /**
+   * Uninstall a PM2 module
+   * @param module_name - Name of the module to uninstall
+   * @param errback - Called when uninstallation completes
+   */
+  uninstall(module_name: string, errback?: ErrCallback): void;
 
-/**
- * Attach to process logs
- * @param pm_id - Process id
- * @param separator - Log separator
- * @param errback - Called when attached
- */
-export function attach(pm_id: string | number, separator?: string, errback?: ErrCallback): void;
+  /**
+   * Send line to process stdin
+   * @param pm_id - Process id
+   * @param line - Line to send
+   * @param separator - Line separator (default: '\n')
+   * @param errback - Called when line is sent
+   */
+  sendLineToStdin(
+    pm_id: string | number,
+    line: string,
+    separator?: string,
+    errback?: ErrCallback,
+  ): void;
 
-/**
- * Get PM2 configuration value
- * @param key - Configuration key (optional, returns all config if not provided)
- * @param errback - Called with configuration value
- */
-export function get(key?: string, errback?: ErrCallback): void;
+  /**
+   * Attach to process logs
+   * @param pm_id - Process id
+   * @param separator - Log separator
+   * @param errback - Called when attached
+   */
+  attach(
+    pm_id: string | number,
+    separator?: string,
+    errback?: ErrCallback,
+  ): void;
 
-/**
- * Set PM2 configuration value
- * @param key - Configuration key
- * @param value - Configuration value
- * @param errback - Called when value is set
- */
-export function set(key: string, value: any, errback?: ErrCallback): void;
+  /**
+   * Get PM2 configuration value
+   * @param key - Configuration key (optional, returns all config if not provided)
+   * @param errback - Called with configuration value
+   */
+  get(key?: string, errback?: ErrCallback): void;
 
-/**
- * Set multiple PM2 configuration values
- * @param values - Configuration values as string
- * @param errback - Called when values are set
- */
-export function multiset(values: string, errback?: ErrCallback): void;
+  /**
+   * Set PM2 configuration value
+   * @param key - Configuration key
+   * @param value - Configuration value
+   * @param errback - Called when value is set
+   */
+  set(key: string, value: any, errback?: ErrCallback): void;
 
-/**
- * Unset PM2 configuration value
- * @param key - Configuration key to unset
- * @param errback - Called when value is unset
- */
-export function unset(key: string, errback?: ErrCallback): void;
+  /**
+   * Set multiple PM2 configuration values
+   * @param values - Configuration values as string
+   * @param errback - Called when values are set
+   */
+  multiset(values: string, errback?: ErrCallback): void;
+
+  /**
+   * Unset PM2 configuration value
+   * @param key - Configuration key to unset
+   * @param errback - Called when value is unset
+   */
+  unset(key: string, errback?: ErrCallback): void;
+}
+
+declare const pm2: API;
+export default pm2;
+
+export { API as custom };
 
 // Interfaces
+
+type BasePM2ConstructorOptions = {
+  cwd?: string;
+  daemon_mode?: boolean;
+  public_key?: string;
+  secret_key?: string;
+  machine_name?: string;
+};
+
+type IndependentPM2ConstructorOptions = BasePM2ConstructorOptions & {
+  independent: true;
+  pm2_home?: never;
+};
+
+type PM2HomePM2ConstructorOptions = BasePM2ConstructorOptions & {
+  pm2_home: string;
+};
+
+type PM2ConstructorOptions =
+  | IndependentPM2ConstructorOptions
+  | PM2HomePM2ConstructorOptions;
 
 export interface Proc {
   name?: string;
@@ -417,7 +489,7 @@ interface Pm2Env {
   /**
    * The number of running instances.
    */
-  instances?: number | 'max';
+  instances?: number | "max";
   /**
    * The path of the script being run in this process.
    */
@@ -545,7 +617,7 @@ export interface StartOptions {
   /**
    * If set to true, the application will be restarted on change of the script file.
    */
-  watch?: boolean|string[];
+  watch?: boolean | string[];
   /**
    * (Default: false) By default, pm2 will only start a script if that script isn’t
    * already running (a script is a path to an application, not the name of an application
@@ -561,7 +633,7 @@ export interface StartOptions {
   /**
    * The environment variables to pass on to the process.
    */
-  env?: { [key: string]: string; };
+  env?: { [key: string]: string };
   /**
    * NameSpace for the process
    * @default 'default'
@@ -719,12 +791,33 @@ export interface InstallOptions {
 
 // Types
 
-type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status' | 'waiting_restart';
-type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
+type ProcessStatus =
+  | "online"
+  | "stopping"
+  | "stopped"
+  | "launching"
+  | "errored"
+  | "one-launch-status"
+  | "waiting_restart";
+type Platform =
+  | "ubuntu"
+  | "centos"
+  | "redhat"
+  | "gentoo"
+  | "systemd"
+  | "darwin"
+  | "amazon";
 
 type ErrCallback = (err: Error) => void;
 type ErrProcCallback = (err: Error, proc: Proc) => void;
-type ErrProcDescCallback = (err: Error, processDescription: ProcessDescription) => void;
-type ErrProcDescsCallback = (err: Error, processDescriptionList: ProcessDescription[]) => void;
+type ErrProcsCallback = (err: Error | null, procs: Proc[]) => void;
+type ErrProcDescCallback = (
+  err: Error,
+  processDescription: ProcessDescription,
+) => void;
+type ErrProcDescsCallback = (
+  err: Error,
+  processDescriptionList: ProcessDescription[],
+) => void;
 type ErrResultCallback = (err: Error, result: any) => void;
 type ErrBusCallback = (err: Error, bus: any) => void;
