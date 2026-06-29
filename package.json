@@ -123,7 +123,7 @@
   },
   "dependencies": {
     "@pm2/blessed": "0.1.81",
-    "@pm2/js-api": "0.8.0",
+    "@pm2/js-api": "0.8.1",
     "@pm2/pm2-version-check": "1.0.4",
     "amp": "0.3.1",
     "amp-message": "0.1.2",
@@ -137,13 +137,13 @@
     "debug": "4.4.3",
     "eventemitter2": "6.4.9",
     "fast-json-patch": "3.1.1",
-    "js-yaml": "4.1.1",
+    "js-yaml": "4.3.0",
     "pidusage": "4.0.1",
     "pm2-deploy": "1.0.2",
     "proxy-agent": "6.5.0",
     "semver": "7.7.2",
     "tx2": "1.0.5",
-    "ws": "8.20.0"
+    "ws": "8.21.0"
   },
   "overrides": {
     "debug": "4.4.3"

@@ -16,7 +16,14 @@
 
 ### Core Refactor
 
+- Drop old vizion module, refactor to support only git and drop 3 submodules
 - Replace the bundled `pm2-sysmonit` module and `systeminformation` with `lib/tools/SysMetrics.js` (Linux/macOS); `pm2 slist`/`getSystemData` and the Docker metrics path now read this collector. Covered by `test/programmatic/sysmetrics.mocha.js`
+
+### Security
+
+- Bump `js-yaml` 4.1.1 → 4.3.0 — fixes quadratic-complexity DoS in merge-key handling (GHSA-h67p-54hq-rp68) #6122
+- Bump `ws` 8.20.0 → 8.21.0 — fixes uninitialized-memory disclosure and tiny-fragment DoS (GHSA-58qx-3vcg-4xpx, GHSA-96hv-2xvq-fx4p) #6116
+- Bump `@pm2/js-api` 0.8.0 → 0.8.1, pulling in patched `ws@8.21.0` (its transitive `ws` was pinned to the vulnerable 7.x). Production deps are now advisory-free (`npm audit --omit=dev` clean)
 
 ## 7.0.1
 
