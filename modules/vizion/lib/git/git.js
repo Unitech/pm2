@@ -1,7 +1,7 @@
 'use strict';
 
-const { execFile } = require('node:child_process');
-const { promisify } = require('node:util');
+const { execFile } = require('child_process');
+const { promisify } = require('util');
 
 const execFileP = promisify(execFile);
 

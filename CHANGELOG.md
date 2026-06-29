@@ -1,4 +1,10 @@
 
+## 7.0.3
+
+### Bug Fixes
+
+- Fix daemon failing to boot on Node.js < 14.18 — embedded `vizion` used `node:`-scheme requires; switched to bare specifiers
+
 ## 7.0.2
 
 ### Bug Fixes
