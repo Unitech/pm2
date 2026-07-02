@@ -8,11 +8,11 @@
     media="(prefers-color-scheme: light)"
   />
   <source
-    srcset="https://raw.githubusercontent.com/Unitech/pm2/development/pres/pm2-v4-dark-mode.png"
+    srcset="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4-dark-mode.png"
     width=710px
     media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
   />
-  <img src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" />
+  <img src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" alt="PM2" />
 </picture>
 
   <br/>
@@ -22,11 +22,11 @@
 <br/><br/>
 
 
-<a title="PM2 Downloads" href="https://npm-stat.com/charts.html?package=pm2&from=2018-01-01&to=2023-08-01">
+<a title="PM2 Downloads" href="https://npm-stat.com/charts.html?package=pm2">
   <img src="https://img.shields.io/npm/dm/pm2" alt="Downloads per Month"/>
 </a>
 
-<a title="PM2 Downloads" href="https://npm-stat.com/charts.html?package=pm2&from=2018-01-01&to=2023-08-01">
+<a title="PM2 Downloads" href="https://npm-stat.com/charts.html?package=pm2">
   <img src="https://img.shields.io/npm/dy/pm2" alt="Downloads per Year"/>
 </a>
 
@@ -48,7 +48,7 @@ Starting an application in production mode is as easy as:
 $ pm2 start app.js
 ```
 
-PM2 is constantly assailed by [a comprehensive test suite](https://github.com/Unitech/pm2/actions/workflows/node.js.yml).
+PM2 is battle-tested by [a comprehensive test suite](https://github.com/Unitech/pm2/actions/workflows/node.js.yml).
 
 Official website: [https://pm2.keymetrics.io/](https://pm2.keymetrics.io/)
 
@@ -139,7 +139,7 @@ $ pm2 start api.js -i <processes>
 
 **Zero Downtime Reload**
 
-Hot Reload allows to update an application without any downtime:
+Hot Reload allows you to update an application without any downtime:
 
 ```bash
 $ pm2 reload all
@@ -161,7 +161,7 @@ CMD [ "pm2-runtime", "npm", "--", "start" ]
 
 ### Host monitoring speedbar
 
-PM2 allows to monitor your host/server vitals with a monitoring speedbar.
+PM2 allows you to monitor your host/server vitals with a monitoring speedbar.
 
 To enable host monitoring:
 
@@ -170,7 +170,7 @@ $ pm2 set pm2:sysmonit true
 $ pm2 update
 ```
 
-![Framework supported](https://raw.githubusercontent.com/Unitech/pm2/master/pres/vitals.png)
+![Host monitoring](https://raw.githubusercontent.com/Unitech/pm2/master/pres/vitals.png)
 
 ### Terminal Based Monitoring
 
@@ -197,7 +197,7 @@ Examples:
 ```bash
 $ pm2 logs APP-NAME       # Display APP-NAME logs
 $ pm2 logs --json         # JSON output
-$ pm2 logs --format       # Formated output
+$ pm2 logs --format       # Formatted output
 
 $ pm2 flush               # Flush all logs
 $ pm2 reloadLogs          # Reload all logs
@@ -259,7 +259,7 @@ Thanks in advance and we hope that you like PM2!
 
 ## Contributors
 
-[Contributors](http://pm2.keymetrics.io/hall-of-fame/)
+[Contributors](https://pm2.keymetrics.io/hall-of-fame/)
 
 ## License
 
