@@ -91,6 +91,7 @@ runUnitTest $D/id.mocha.js
 runUnitTest $D/god.mocha.js
 runUnitTest $D/dump.mocha.js
 runUnitTest $D/common.mocha.js
+runUnitTest $D/interpreter_resolution.mocha.js
 runUnitTest $D/fclone.mocha.js
 
 runUnitTest $D/issues/json_env_passing_4080.mocha.js
@@ -102,13 +103,13 @@ runUnitTest $D/issue_6075_redos.mocha.js
 runUnitTest $D/issue_6073_object_env.mocha.js
 runUnitTest $D/treekill.mocha.js
 runUnitTest $D/http_interface.mocha.js
+runUnitTest $D/sysmetrics.mocha.js
 
 D=test/interface
 
 runUnitTest $D/bus.spec.mocha.js
 runUnitTest $D/bus.fork.spec.mocha.js
 runUnitTest $D/utility.mocha.js
-runUnitTest $D/sysmetrics.mocha.js
 
 echo "============== unit test finished =============="
 cat unit_time
