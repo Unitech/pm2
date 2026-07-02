@@ -1,8 +1,22 @@
 <div align="center">
  <br/>
 
-![https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png](https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-logo-2.png)
+<picture>
+  <source
+    srcset="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png"
+    width=710px
+    media="(prefers-color-scheme: light)"
+  />
+  <source
+    srcset="https://raw.githubusercontent.com/Unitech/pm2/development/pres/pm2-v4-dark-mode.png"
+    width=710px
+    media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+  />
+  <img src="https://raw.githubusercontent.com/Unitech/pm2/master/pres/pm2-v4.png" />
+</picture>
 
+  <br/>
+<br/>
 <b>P</b>(rocess) <b>M</b>(anager) <b>2</b><br/>
   <i>Runtime Edition</i>
 <br/><br/>
