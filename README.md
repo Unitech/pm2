@@ -159,19 +159,6 @@ CMD [ "pm2-runtime", "npm", "--", "start" ]
 
 [Read More about the dedicated integration](https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/)
 
-### Host monitoring speedbar
-
-PM2 allows you to monitor your host/server vitals with a monitoring speedbar.
-
-To enable host monitoring:
-
-```bash
-$ pm2 set pm2:sysmonit true
-$ pm2 update
-```
-
-![Host monitoring](https://raw.githubusercontent.com/Unitech/pm2/master/pres/vitals.png)
-
 ### Terminal Based Monitoring
 
 ![Monit](https://github.com/Unitech/pm2/raw/master/pres/pm2-monit.png)
