@@ -38,15 +38,13 @@ var csts = {
   LOGROTATE_SCRIPT        : 'logrotate.d/pm2',
 
   DOCKERFILE_NODEJS       : 'Dockerfiles/Dockerfile-nodejs.tpl',
-  DOCKERFILE_JAVA         : 'Dockerfiles/Dockerfile-java.tpl',
-  DOCKERFILE_RUBY         : 'Dockerfiles/Dockerfile-ruby.tpl',
 
   SUCCESS_EXIT            : 0,
   ERROR_EXIT              : 1,
   CODE_UNCAUGHTEXCEPTION  : 1,
 
   IS_BUN                  : typeof Bun !== 'undefined',
-  IS_WINDOWS              : (process.platform === 'win32' || process.platform === 'win64' || /^(msys|cygwin)$/.test(process.env.OSTYPE)),
+  IS_WINDOWS              : (process.platform === 'win32' || /^(msys|cygwin)$/.test(process.env.OSTYPE)),
   ONLINE_STATUS           : 'online',
   STOPPED_STATUS          : 'stopped',
   STOPPING_STATUS         : 'stopping',

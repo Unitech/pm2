@@ -1,4 +1,18 @@
 
+## 7.0.4
+
+### Features
+
+- Start `.ts` apps with Node.js native type stripping when bun is not installed (Node.js >= 22.18 / 23.6, `--experimental-strip-types` auto-injected on 22.6+); `ts-node` fallback now resolved from the app's own dependencies
+
+### Bug Fixes
+
+- Fix `pm2 start --container` / `--container --dist` crashing with `Cannot find module` — wrong require depth in `Containerizer.js` from the v7 promptly internalization
+
+### Core Refactor
+
+- Remove dead code: `promise.min.js` polyfill (native `Promise`), `IsAbsolute.js` (native `path.isAbsolute`), unused Java/Ruby Dockerfile templates, always-false `win64` platform checks
+
 ## 7.0.3
 
 ### Bug Fixes
