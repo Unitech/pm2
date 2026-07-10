@@ -100,6 +100,7 @@ runUnitTest $D/issue_5990_bun_substring_match.mocha.js
 runUnitTest $D/issue_6089_prototype_pollution.mocha.js
 runUnitTest $D/issue_6075_redos.mocha.js
 runUnitTest $D/issue_6073_object_env.mocha.js
+runUnitTest $D/require_cluster_env.mocha.js
 runUnitTest $D/treekill.mocha.js
 runUnitTest $D/http_interface.mocha.js
 
