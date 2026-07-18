@@ -137,7 +137,7 @@
     "debug": "4.4.3",
     "eventemitter2": "6.4.9",
     "fast-json-patch": "3.1.1",
-    "js-yaml": "4.3.0",
+    "js-yaml": "4.2.0",
     "pidusage": "4.0.1",
     "pm2-deploy": "1.0.2",
     "proxy-agent": "6.5.0",
