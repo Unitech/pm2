@@ -5,9 +5,6 @@ After=network.target
 
 [Service]
 Type=forking
-LimitNOFILE=infinity
-LimitNPROC=infinity
-LimitCORE=infinity
 Environment=PATH=%NODE_PATH%:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 Environment=PM2_HOME=%HOME_PATH%
 PIDFile=%HOME_PATH%/pm2.pid
