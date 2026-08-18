@@ -89,6 +89,7 @@ D=test/interface
 runUnitTest $D/bus.spec.mocha.js
 runUnitTest $D/bus.fork.spec.mocha.js
 runUnitTest $D/utility.mocha.js
+runUnitTest $D/watcher.spec.mocha.js
 
 echo "============== unit tests finished =============="
 
