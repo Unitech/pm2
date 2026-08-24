@@ -8,6 +8,11 @@
 
 - Fix `pm2 start --container` / `--container --dist` crashing with `Cannot find module` — wrong require depth in `Containerizer.js` from the v7 promptly internalization
 - Bump `js-yaml` 4.3.0 → 4.3.1
+- Fix overlapping reloads colliding on the `_old_<pm_id>` slot and orphaning a cluster worker — a reload is now refused while one is in progress #6129
+- Ignore stale exit events from a replaced process — fixes double start on Windows with `shutdown_with_message` #6142
+- Fix `retrying in NaNms` kill log and ~1ms poll spam when `kill_retry_time` is unset — fallback to `KILL_RETRY_TIME` constant (100ms, `PM2_KILL_RETRY_TIME` overridable)
+- Fix `pm2 start`/`restart` RPC hanging forever when a cluster worker dies before its `online` event (bad `node_args`, boot OOM) — executeApp now concludes on exit-before-online
+- Surface the daemon's actual error in CLI output instead of masking everything as `Process not found`
 
 ### Core Refactor
 
