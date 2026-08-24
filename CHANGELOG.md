@@ -13,6 +13,7 @@
 - Fix `retrying in NaNms` kill log and ~1ms poll spam when `kill_retry_time` is unset — fallback to `KILL_RETRY_TIME` constant (100ms, `PM2_KILL_RETRY_TIME` overridable)
 - Fix `pm2 start`/`restart` RPC hanging forever when a cluster worker dies before its `online` event (bad `node_args`, boot OOM) — executeApp now concludes on exit-before-online
 - Surface the daemon's actual error in CLI output instead of masking everything as `Process not found`
+- Pin OpenTelemetry package versions in `pm2 install-otel` and re-emit legacy HTTP span tags (`http.method`, `http.status_code`, `http.target`) dropped by `@opentelemetry/instrumentation-http` >= 0.220
 
 ### Core Refactor
 
