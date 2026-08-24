@@ -17,11 +17,16 @@
 
 process.env.NODE_ENV = 'test';
 
+var PM2    = require('../..');
 var God    = require('../../lib/God');
 var should = require('should');
 var Common = require('../../lib/Common');
 
 process.chdir(__dirname);
+
+// Creates the ~/.pm2 file structure (logs/, pids/, module_conf.json) needed
+// by the in-process God on pristine environments like the Docker CI
+var pm2 = new PM2.custom();
 
 function isAlive(pid) {
   try {
@@ -57,6 +62,7 @@ describe('issue #6142 - stale exit event from a previous generation', function()
   });
 
   after(function(done) {
+    if (pm_id === undefined) return done();
     var db_pid = God.clusters_db[pm_id] && God.clusters_db[pm_id].process.pid;
     God.deleteProcessId(pm_id, function() {
       // also reap any duplicate the bug may have spawned

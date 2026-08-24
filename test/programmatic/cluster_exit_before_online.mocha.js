@@ -8,12 +8,17 @@
 
 process.env.NODE_ENV = 'test';
 
+var PM2     = require('../..');
 var God     = require('../../lib/God');
 var should  = require('should');
 var Common  = require('../../lib/Common');
 var cluster = require('cluster');
 
 process.chdir(__dirname);
+
+// Creates the ~/.pm2 file structure (logs/, pids/, module_conf.json) needed
+// by the in-process God on pristine environments like the Docker CI
+var pm2 = new PM2.custom();
 
 function cleanEverything(done) {
   var keys = Object.keys(God.clusters_db);
