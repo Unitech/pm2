@@ -1,4 +1,3 @@
-
 ## 7.0.4
 
 ### Features
@@ -8,6 +7,7 @@
 ### Bug Fixes
 
 - Fix `pm2 start --container` / `--container --dist` crashing with `Cannot find module` — wrong require depth in `Containerizer.js` from the v7 promptly internalization
+- Bump `js-yaml` 4.3.0 → 4.3.1
 
 ### Core Refactor
 
