@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ksh
 #
 # from /usr/ports/infrastructure/templates/rc.template
 
