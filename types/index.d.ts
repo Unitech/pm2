@@ -559,6 +559,10 @@ export interface StartOptions {
   source_map_support?: any;
   disable_source_map_support?: any;
   /**
+   * Shortcut to inject a PORT environment variable.
+   */
+  port?: number;
+  /**
    * The environment variables to pass on to the process.
    */
   env?: { [key: string]: string; };
