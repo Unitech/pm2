@@ -77,5 +77,50 @@ describe('Programmatic flush feature test', function() {
         });
       });
     });
+    it('flush logs by pm_id', function(done) {
+      pm2.start({
+        script: './echo.js',
+        name: 'first',
+        error_file : 'error-first.log',
+        out_file   : 'out-first.log',
+        merge_logs: false
+      }, function(err, procs) {
+        should(err).be.null();
+        var out_file = procs[0].pm2_env.pm_out_log_path;
+        var err_file = procs[0].pm2_env.pm_err_log_path;
+        var pm_id = String(procs[0].pm2_env.pm_id);
+        pm2.start({
+            script: './001-test.js',
+            name: 'second',
+            error_file : 'error-second.log',
+            out_file   : 'out-second.log',
+            merge_logs: false
+          }, function(err, procs) {
+            should(err).be.null();
+            var out_file1 = procs[0].pm2_env.pm_out_log_path;
+            var err_file1 = procs[0].pm2_env.pm_err_log_path;
+            pm2.flush(pm_id, function(){
+              fs.readFileSync(out_file, "utf8").toString().should.be.empty();
+              fs.readFileSync(err_file, "utf8").toString().should.be.empty();
+              fs.readFileSync(out_file1, "utf8").toString().should.not.be.empty();
+              fs.readFileSync(err_file1, "utf8").toString().should.not.be.empty();
+              done();
+        });
+        });
+      });
+    });
+    it('should return error when process not found', function(done) {
+      pm2.start({
+        script: './echo.js',
+        name: 'myapp',
+        merge_logs: false
+      }, function(err) {
+        should(err).be.null();
+        pm2.flush('nonexistent', function(err) {
+          should(err).not.be.null();
+          done();
+        });
+      });
+    });
   });
 });
