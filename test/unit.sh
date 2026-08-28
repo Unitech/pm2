@@ -62,6 +62,7 @@ runUnitTest $D/modules.mocha.js
 runUnitTest $D/instances.mocha.js
 runUnitTest $D/reload-locker.mocha.js
 runUnitTest $D/filter_env.mocha.js
+runUnitTest $D/env_override.mocha.js
 runUnitTest $D/resurect_state.mocha.js
 runUnitTest $D/programmatic.js
 runUnitTest $D/namespace.mocha.js

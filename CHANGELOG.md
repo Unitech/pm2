@@ -7,6 +7,7 @@
 
 ### Bug Fixes
 
+- Shell environment variables named like a PM2 option (`name`, `namespace`, `cron_restart`, `instances`...) no longer override the app configuration #6006 #6016 #5747 #5622 #5030 #5032 #4943 #4778 #4821 #3210
 - `pm2 monit`: align the Custom Metrics pane in columns (value right-aligned, fixed unit column, numbers rounded to 2 decimals) and shorten long metric names instead of pushing values out of the pane
 - `pm2 monit`: the footer no longer overlaps the bottom border of the Custom Metrics / Metadata panes
 - `pm2 monit`: logs, metrics and metadata panes update instantly when the selected process changes (no longer wait for the next refresh tick)
