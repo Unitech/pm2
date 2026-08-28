@@ -74,6 +74,7 @@ runUnitTest $D/exp_backoff_restart_delay.mocha.js
 runUnitTest $D/api.backward.compatibility.mocha.js
 runUnitTest $D/custom_action.mocha.js
 runUnitTest $D/logs.js
+runUnitTest $D/dashboard_log_history.mocha.js
 runUnitTest $D/watcher.js
 runUnitTest $D/max_memory_limit.js
 runUnitTest $D/cluster.mocha.js

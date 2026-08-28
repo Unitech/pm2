@@ -1,3 +1,16 @@
+## 7.0.5
+
+### Features
+
+- `pm2 monit` / `pm2 dash` now preload the last 200 lines (out + err merged) of every process from its log files, most recent first; `--lines <n>` to display more #5187
+- `pm2 monit`: Ctrl+Up / Ctrl+Down (and PageUp / PageDown) scroll the focused log pane page by page
+
+### Bug Fixes
+
+- `pm2 monit`: align the Custom Metrics pane in columns (value right-aligned, fixed unit column, numbers rounded to 2 decimals) and shorten long metric names instead of pushing values out of the pane
+- `pm2 monit`: the footer no longer overlaps the bottom border of the Custom Metrics / Metadata panes
+- `pm2 monit`: logs, metrics and metadata panes update instantly when the selected process changes (no longer wait for the next refresh tick)
+
 ## 7.0.4
 
 ### Features
