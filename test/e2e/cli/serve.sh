@@ -21,6 +21,21 @@ OUT=`cat /tmp/tmp_out.txt | grep -o "good shit" | wc -l`
 [ $OUT -eq 1 ] || fail "should have served index file under /index.html"
 success "should have served index file under /index.html"
 
+# GHSA-9prm-75wm-xpg6: malformed percent-escape must not crash the server
+CODE=`curl -s -o /dev/null -w '%{http_code}' "http://localhost:$PORT/%"`
+[ "$CODE" = "400" ] || fail "should answer 400 on malformed percent-escape (got $CODE)"
+success "should answer 400 on malformed percent-escape"
+CODE=`curl -s -o /dev/null -w '%{http_code}' "http://localhost:$PORT/%e0%a4"`
+[ "$CODE" = "400" ] || fail "should answer 400 on truncated UTF-8 escape (got $CODE)"
+success "should answer 400 on truncated UTF-8 escape"
+should 'should still be online after malformed requests' 'online' 1
+should 'should not have restarted' 'restart_time: 0' 1
+
+curl http://localhost:$PORT/index.html > /tmp/tmp_out.txt
+OUT=`cat /tmp/tmp_out.txt | grep -o "good shit" | wc -l`
+[ $OUT -eq 1 ] || fail "should still serve index file after malformed requests"
+success "should still serve index file after malformed requests"
+
 echo "Shutting down the server"
 $pm2 delete all
 

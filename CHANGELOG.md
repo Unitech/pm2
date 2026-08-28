@@ -18,6 +18,7 @@
 - `pm2 logs "/regex/" --lines 0` now streams matching apps (regex was ignored in stream-only mode); regexes with an inner `/` are no longer mangled, apps started after `pm2 logs` are picked up, and only one bus subscription is opened #5196
 - `pm2 reloadLogs` no longer crashes the app in fork mode when `out_file`/`error_file` are `NULL` and only `log_file` is set #5509
 - Logs: log streams are now flushed (`end()`) instead of destroyed on `pm2 reloadLogs` / app exit, so buffered data is no longer truncated
+- `pm2 serve`: a request with a malformed percent-escape (`GET /%`) no longer crashes the server (answers 400); handler exceptions answer 500 instead of killing the process GHSA-9prm-75wm-xpg6
 
 ## 7.0.4
 
