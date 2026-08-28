@@ -14,6 +14,7 @@
 - `@pm2/blessed` is now vendored in `modules/blessed` (one less npm dependency)
 - Logs: no more lost lines in fork mode with `--time` / `log_date_format` when an app writes more than 64KB at once (partial line at a pipe chunk boundary was dropped) #6125
 - Logs: in cluster mode with `--time`, every line of a multi-line write is now date-prefixed (not only the first)
+- `pm2 logs "/regex/" --lines 0` now streams matching apps (regex was ignored in stream-only mode); regexes with an inner `/` are no longer mangled, apps started after `pm2 logs` are picked up, and only one bus subscription is opened #5196
 - Logs: log streams are now flushed (`end()`) instead of destroyed on `pm2 reloadLogs` / app exit, so buffered data is no longer truncated
 
 ## 7.0.4
