@@ -93,6 +93,7 @@ runTest ./test/e2e/logs/log-null.sh
 
 runTest ./test/e2e/logs/log-create-not-exist-dir.sh
 runTest ./test/e2e/logs/log-namespace.sh
+runTest ./test/e2e/logs/log-integrity.sh
 
 # MODULES
 runTest ./test/e2e/modules/get-set.sh

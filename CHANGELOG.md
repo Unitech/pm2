@@ -12,6 +12,9 @@
 - `pm2 monit`: logs, metrics and metadata panes update instantly when the selected process changes (no longer wait for the next refresh tick)
 - `pm2 monit`: characters of old log lines no longer stay stuck on screen — emoji are now measured as 2 cells, and `\r`, cursor escape sequences, control chars and `{tags}` in logs are sanitized #5397
 - `@pm2/blessed` is now vendored in `modules/blessed` (one less npm dependency)
+- Logs: no more lost lines in fork mode with `--time` / `log_date_format` when an app writes more than 64KB at once (partial line at a pipe chunk boundary was dropped) #6125
+- Logs: in cluster mode with `--time`, every line of a multi-line write is now date-prefixed (not only the first)
+- Logs: log streams are now flushed (`end()`) instead of destroyed on `pm2 reloadLogs` / app exit, so buffered data is no longer truncated
 
 ## 7.0.4
 
