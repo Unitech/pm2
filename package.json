@@ -122,7 +122,6 @@
     "pm2-runtime": "bin/pm2-runtime"
   },
   "dependencies": {
-    "@pm2/blessed": "0.1.81",
     "@pm2/js-api": "0.8.1",
     "@pm2/pm2-version-check": "1.0.4",
     "amp": "0.3.1",
