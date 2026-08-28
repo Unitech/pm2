@@ -10,6 +10,8 @@
 - `pm2 monit`: align the Custom Metrics pane in columns (value right-aligned, fixed unit column, numbers rounded to 2 decimals) and shorten long metric names instead of pushing values out of the pane
 - `pm2 monit`: the footer no longer overlaps the bottom border of the Custom Metrics / Metadata panes
 - `pm2 monit`: logs, metrics and metadata panes update instantly when the selected process changes (no longer wait for the next refresh tick)
+- `pm2 monit`: characters of old log lines no longer stay stuck on screen — emoji are now measured as 2 cells, and `\r`, cursor escape sequences, control chars and `{tags}` in logs are sanitized #5397
+- `@pm2/blessed` is now vendored in `modules/blessed` (one less npm dependency)
 
 ## 7.0.4
 
