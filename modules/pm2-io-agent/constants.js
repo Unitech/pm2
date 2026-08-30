@@ -86,7 +86,7 @@ keys.forEach((key) => {
   }
 })
 
-if (process.platform === 'win32' || process.platform === 'win64') {
+if (process.platform === 'win32') {
   // @todo instead of static unique rpc/pub file custom with PM2_HOME or UID
   cst.DAEMON_RPC_PORT = '\\\\.\\pipe\\rpc.sock'
   cst.DAEMON_PUB_PORT = '\\\\.\\pipe\\pub.sock'

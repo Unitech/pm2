@@ -30,6 +30,32 @@ const ZIPKIN_SPAN_KIND_MAPPING = {
 const defaultStatusCodeTagName = 'otel.status_code'
 const defaultStatusErrorTagName = 'error'
 
+// The PM2.io backend and frontend read the pre-stable HTTP semantic convention
+// tags (http.method, http.status_code, http.target, ...). Newer
+// @opentelemetry/instrumentation-http (>= 0.220.0) only emits the stable
+// names, so we alias them back to the legacy ones.
+const LEGACY_HTTP_TAG_ALIASES = {
+  'http.request.method': 'http.method',
+  'http.response.status_code': 'http.status_code',
+  'url.full': 'http.url',
+  'url.scheme': 'http.scheme',
+}
+
+function _addLegacyHttpTags (tags) {
+  for (const stableName of Object.keys(LEGACY_HTTP_TAG_ALIASES)) {
+    const legacyName = LEGACY_HTTP_TAG_ALIASES[stableName]
+    if (tags[stableName] !== undefined && tags[legacyName] === undefined) {
+      tags[legacyName] = tags[stableName]
+    }
+  }
+  // Legacy http.target is the path with the query string
+  if (tags['url.path'] !== undefined && tags['http.target'] === undefined) {
+    tags['http.target'] = tags['url.query'] !== undefined
+      ? tags['url.path'] + '?' + tags['url.query']
+      : tags['url.path']
+  }
+}
+
 /**
  * Translate OpenTelemetry ReadableSpan to ZipkinSpan format
  * @param span Span to be translated
@@ -63,6 +89,7 @@ function _toZipkinTags (
   for (const key of Object.keys(attributes)) {
     tags[key] = String(attributes[key])
   }
+  _addLegacyHttpTags(tags)
   if (status.code !== api.SpanStatusCode.UNSET) {
     tags[statusCodeTagName] = String(api.SpanStatusCode[status.code])
   }

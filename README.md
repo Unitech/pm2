@@ -85,6 +85,8 @@ You can start any application (Node.js, Bun, and also Python, Ruby, binaries in 
 
 ```bash
 $ pm2 start app.js
+$ pm2 start app.ts
+$ pm2 start app.py
 ```
 
 Your app is now daemonized, monitored and kept alive forever.

@@ -22,6 +22,28 @@ describe('Containerizer unit tests', function() {
     fs.unlink(Dockerfile, done);
   });
 
+  it('should have every relative require resolvable (lazy requires included)', function() {
+    // dockerMode() requires lazily inside the function body, so a bad path
+    // only crashes at invocation (`pm2 start --container`), not at load
+    var source = fs.readFileSync(path.join(__dirname, '../../lib/API/Containerizer.js'), 'utf8');
+    var relative_requires = [];
+    var re = /require\(['"](\.[^'"]+)['"]\)/g;
+    var match;
+    while ((match = re.exec(source)) !== null)
+      relative_requires.push(match[1]);
+
+    should(relative_requires.length).be.above(0);
+    var unresolved = relative_requires.filter(function(req) {
+      try {
+        require.resolve(path.join(__dirname, '../../lib/API', req));
+        return false;
+      } catch (e) {
+        return true;
+      }
+    });
+    should(unresolved).eql([]);
+  });
+
   it('should generate a dockerfile', function() {
     var has_meta = false;
 
