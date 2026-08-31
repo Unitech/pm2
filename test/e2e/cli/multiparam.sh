@@ -14,6 +14,10 @@ $pm2 restart child echo server
 should 'should app be online' 'online' 3
 should 'should all script been restarted one time' 'restart_time: 1' 3
 
+## Reload
+$pm2 reload child echo server
+should 'should all script been restarted two times' 'restart_time: 2' 3
+
 ## Stop
 $pm2 stop child echo server
 should 'should app be stopped' 'stopped' 3
