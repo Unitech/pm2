@@ -720,7 +720,7 @@ export interface InstallOptions {
 // Types
 
 type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status' | 'waiting_restart';
-type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
+type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'systemd-user' | 'darwin' | 'amazon';
 
 type ErrCallback = (err: Error) => void;
 type ErrProcCallback = (err: Error, proc: Proc) => void;
