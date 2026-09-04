@@ -223,12 +223,13 @@ echo "[*] Found $TOTAL tests, running with $MAX_JOBS parallel jobs"
 [[ $SKIPPED -gt 0 ]] && echo "[*] Skipped $SKIPPED tests (require host features)"
 echo ""
 
-# Runtime commands (bunx mocha for Bun, mocha for Node)
+# Runtime commands (bunx mocha for Bun, npx mocha for Node)
+# npx resolves the mocha pinned in package.json (node_modules/.bin), not a global one
 if [[ "$RUNTIME" == "bun" ]]; then
     MOCHA="bunx mocha"
     JSRUN="bun"
 else
-    MOCHA="mocha"
+    MOCHA="npx mocha"
     JSRUN="node"
 fi
 
