@@ -22,6 +22,7 @@
 - Logs: log streams are now flushed (`end()`) instead of destroyed on `pm2 reloadLogs` / app exit, so buffered data is no longer truncated
 - `pm2 serve`: a request with a malformed percent-escape (`GET /%`) no longer crashes the server (answers 400); handler exceptions answer 500 instead of killing the process GHSA-9prm-75wm-xpg6
 - Logs: in cluster mode, output that bypasses `process.stdout.write` (pino/sonic-boom, `npm start`, children spawned with stdio `inherit`) no longer ends up in `pm2.log` — workers get piped stdio and the daemon routes it to the app log files and `pm2 logs` #3675 #4719 #4872 #4916 #4953 #5633 #4816
+- Logs: in cluster mode, the worker's stdout/stderr pipes are made blocking so a raw write bigger than the pipe buffer (`fs.writeSync(1, ...)`, native addons) is no longer silently truncated at 64 KB #4044 #4872
 - `exec_mode: cluster` on a non Node.js/Bun script (bash, python, binary) now falls back to fork mode with a warning instead of crashing with `SyntaxError: Invalid or unexpected token` (ELF) #4775
 
 ## 7.0.4

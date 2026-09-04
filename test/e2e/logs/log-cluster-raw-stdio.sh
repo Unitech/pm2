@@ -45,6 +45,21 @@ rm -f ~/.pm2/logs/raw-stdio-out.rotated.log
 
 $pm2 delete all
 
+echo ">>>>>>>>>>>>>>>>>>>> CLUSTER MODE: a raw fd write bigger than the pipe buffer is not truncated"
+
+rm -f ~/.pm2/logs/raw-burst-*.log
+
+$pm2 start raw-stdio-burst.js -i 1 --name raw-burst --merge-logs
+
+sleep 2
+
+[ "$(grep -c '^BURST-LINE' ~/.pm2/logs/raw-burst-out.log)" -eq 200 ]
+spec "all 200 lines of a 400 KB fs.writeSync(1) should be in the app out log"
+grep -q "BURST-LINE 200 x" ~/.pm2/logs/raw-burst-out.log
+spec "the last line of the burst should be in the app out log"
+
+$pm2 delete all
+
 echo ">>>>>>>>>>>>>>>>>>>> CLUSTER MODE requested for a non Node.js script falls back to fork mode"
 
 $pm2 start cluster-non-node.json
