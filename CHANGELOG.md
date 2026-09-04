@@ -20,10 +20,11 @@
 - `pm2 logs "/regex/" --lines 0` now streams matching apps (regex was ignored in stream-only mode); regexes with an inner `/` are no longer mangled, apps started after `pm2 logs` are picked up, and only one bus subscription is opened #5196
 - `pm2 reloadLogs` no longer crashes the app in fork mode when `out_file`/`error_file` are `NULL` and only `log_file` is set #5509
 - Logs: log streams are now flushed (`end()`) instead of destroyed on `pm2 reloadLogs` / app exit, so buffered data is no longer truncated
-- `pm2 serve`: a request with a malformed percent-escape (`GET /%`) no longer crashes the server (answers 400); handler exceptions answer 500 instead of killing the process GHSA-9prm-75wm-xpg6
+- `pm2 serve`: a request with a malformed percent-escape (`GET /%`) no longer crashes the server (answers 400); handler exceptions answer 500 instead of killing the process
 - Logs: in cluster mode, output that bypasses `process.stdout.write` (pino/sonic-boom, `npm start`, children spawned with stdio `inherit`) no longer ends up in `pm2.log` — workers get piped stdio and the daemon routes it to the app log files and `pm2 logs` #3675 #4719 #4872 #4916 #4953 #5633 #4816
 - Logs: in cluster mode, the worker's stdout/stderr pipes are made blocking so a raw write bigger than the pipe buffer (`fs.writeSync(1, ...)`, native addons) is no longer silently truncated at 64 KB #4044 #4872
 - `exec_mode: cluster` on a non Node.js/Bun script (bash, python, binary) now falls back to fork mode with a warning instead of crashing with `SyntaxError: Invalid or unexpected token` (ELF) #4775
+- Node.js/Bun interpreter detection now accepts atypical binary names (`node.exe`, `node64.exe`, `nodejs`, `node18`, `node@18`, `bun.exe`), so cluster mode and the fork-mode wrapper are no longer skipped for them
 
 ## 7.0.4
 
