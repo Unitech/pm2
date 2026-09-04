@@ -45,6 +45,10 @@ rm -f ~/.pm2/logs/raw-stdio-out.rotated.log
 
 $pm2 delete all
 
+# Bun has no stream._handle.setBlocking(): on Linux the worker's stdout pipe
+# stays O_NONBLOCK and fs.writeSync(1) returns short past the pipe buffer
+if [ "$IS_BUN" = false ]; then
+
 echo ">>>>>>>>>>>>>>>>>>>> CLUSTER MODE: a raw fd write bigger than the pipe buffer is not truncated"
 
 rm -f ~/.pm2/logs/raw-burst-*.log
@@ -59,6 +63,8 @@ grep -q "BURST-LINE 200 x" ~/.pm2/logs/raw-burst-out.log
 spec "the last line of the burst should be in the app out log"
 
 $pm2 delete all
+
+fi
 
 echo ">>>>>>>>>>>>>>>>>>>> CLUSTER MODE requested for a non Node.js script falls back to fork mode"
 
