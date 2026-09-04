@@ -1,0 +1,8 @@
+{
+  "apps": [{
+    "name": "bashclu",
+    "script": "./bashscript.sh",
+    "exec_mode": "cluster",
+    "instances": 2
+  }]
+}

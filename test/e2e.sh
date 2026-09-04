@@ -90,6 +90,7 @@ runTest ./test/e2e/logs/log-custom.sh
 runTest ./test/e2e/logs/log-reload.sh
 runTest ./test/e2e/logs/log-entire.sh
 runTest ./test/e2e/logs/log-null.sh
+runTest ./test/e2e/logs/log-cluster-raw-stdio.sh
 
 runTest ./test/e2e/logs/log-create-not-exist-dir.sh
 runTest ./test/e2e/logs/log-namespace.sh
