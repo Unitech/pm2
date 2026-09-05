@@ -148,6 +148,7 @@
     "debug": "4.4.3"
   },
   "devDependencies": {
+    "@nubjs/loader": "0.8.3",
     "express": "^4.21.0",
     "mocha": "^11.7.0",
     "should": "^13.2.3"
