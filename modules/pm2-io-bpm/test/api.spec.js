@@ -13,6 +13,14 @@ const launch = (fixture) => {
   })
 }
 
+// Settle the test exactly once: stop listening before killing the child so a
+// message redelivered while the IPC channel closes cannot call done() again.
+const finish = (child, done) => {
+  child.removeAllListeners('message')
+  child.kill('SIGINT')
+  done()
+}
+
 describe('API', function () {
   this.timeout(10000)
 
@@ -23,8 +31,7 @@ describe('API', function () {
       child.on('message', (msg) => {
         if (msg.data?.message === 'myNotify') {
           assert.strictEqual(msg.data.message, 'myNotify')
-          child.kill('SIGINT')
-          done()
+          finish(child, done)
         }
       })
     })
@@ -47,8 +54,7 @@ describe('API', function () {
           assert.strictEqual(res.data.metricInline.value, 11)
           assert.strictEqual(res.data.toto.value, 42)
 
-          child.kill('SIGINT')
-          return done()
+          return finish(child, done)
         }
       })
 
@@ -66,8 +72,7 @@ describe('API', function () {
         } else if (res.type === 'axm:reply') {
           assert.strictEqual(res.data.action_name, 'testAction')
           assert.strictEqual(res.data.return.data, 'testActionReply')
-          child.kill('SIGINT')
-          done()
+          finish(child, done)
         }
       })
     })
@@ -81,8 +86,7 @@ describe('API', function () {
         } else if (res.type === 'axm:reply') {
           assert.strictEqual(res.data.action_name, 'testActionWithConf')
           assert.strictEqual(res.data.return.data, 'testActionWithConfReply')
-          child.kill('SIGINT')
-          done()
+          finish(child, done)
         }
       })
     })
@@ -212,8 +216,7 @@ describe('API', function () {
           assert.strictEqual(res.data.__name, 'myEvent')
           assert.strictEqual(res.data.prop1, 'value1')
 
-          child.kill('SIGINT')
-          done()
+          finish(child, done)
         }
       })
     })
@@ -224,14 +227,15 @@ describe('API', function () {
       child.on('message', (msg) => {
         if (msg === 'expressReady') {
           const httpModule = require('http')
-          httpModule.get('http://localhost:3003/error')
+          // the child is killed as soon as the exception is reported, so the
+          // request may end with ECONNRESET; that is expected, not a failure
+          httpModule.get('http://localhost:3003/error').on('error', () => {})
         } else if (typeof msg === 'object' && msg.type === 'process:exception') {
           assert.strictEqual(msg.data.message, 'toto')
           assert.strictEqual(msg.data.metadata.http.path, '/error')
           assert.strictEqual(msg.data.metadata.http.method, 'GET')
           assert.strictEqual(msg.data.metadata.http.route, '/error')
-          child.kill('SIGINT')
-          done()
+          finish(child, done)
         }
       })
     })
@@ -265,8 +269,7 @@ describe('API', function () {
 
         if (tracingDone && metricsDone && !finished) {
           finished = true
-          child.kill('SIGINT')
-          done()
+          finish(child, done)
         }
       })
     })
@@ -343,8 +346,7 @@ describe('API', function () {
           assert.strictEqual(typeof conf.module_name, 'string')
           assert.strictEqual(conf.apm.type, 'node')
           assert.strictEqual(typeof conf.apm.version, 'string')
-          child.kill('SIGINT')
-          done()
+          finish(child, done)
         }
       })
     })

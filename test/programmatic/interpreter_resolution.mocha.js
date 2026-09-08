@@ -187,7 +187,14 @@ describe('TypeScript interpreter resolution', function () {
       realFork = cluster.fork;
       realSupportLevel = typestrip.supportLevel;
       savedExecArgv = cluster.settings.execArgv;
-      cluster.fork = function () { return new EventEmitter(); };
+      // Worker-shaped stub: nodeApp attaches StdioLogger on worker.process
+      cluster.fork = function () {
+        var worker = new EventEmitter();
+        worker.process = new EventEmitter();
+        worker.process.stdout = new EventEmitter();
+        worker.process.stderr = new EventEmitter();
+        return worker;
+      };
     });
 
     after(function () {

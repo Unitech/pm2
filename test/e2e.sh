@@ -90,9 +90,12 @@ runTest ./test/e2e/logs/log-custom.sh
 runTest ./test/e2e/logs/log-reload.sh
 runTest ./test/e2e/logs/log-entire.sh
 runTest ./test/e2e/logs/log-null.sh
+runTest ./test/e2e/logs/log-cluster-raw-stdio.sh
 
 runTest ./test/e2e/logs/log-create-not-exist-dir.sh
 runTest ./test/e2e/logs/log-namespace.sh
+runTest ./test/e2e/logs/log-integrity.sh
+runTest ./test/e2e/logs/log-regex.sh
 
 # MODULES
 runTest ./test/e2e/modules/get-set.sh
