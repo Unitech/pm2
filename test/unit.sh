@@ -98,6 +98,7 @@ runUnitTest $D/interpreter_resolution.mocha.js
 runUnitTest $D/fclone.mocha.js
 
 runUnitTest $D/issues/json_env_passing_4080.mocha.js
+runUnitTest $D/issues/dump_sync_warning_6028.mocha.js
 
 runUnitTest $D/issue_6106_windows_home.mocha.js
 runUnitTest $D/issue_5990_bun_substring_match.mocha.js
