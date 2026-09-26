@@ -34,3 +34,31 @@ spec "(RELOADED) Should have written the right stuff in err log in fork mode"
 
 rm out-rel.log
 rm err-rel.log
+
+## FORK MODE, OUT LOG SET TO /dev/null, RELOAD TWICE (issue #5509)
+
+$pm2 kill
+
+$pm2 start echo.js -o /dev/null -e err-rel.log -x --merge-logs
+
+sleep 2
+
+rm err-rel.log
+$pm2 reloadLogs
+spec "Should have reloaded logs a first time with /dev/null out log"
+
+sleep 2
+
+grep "echo.js-error" err-rel.log
+spec "(RELOADED ONCE) Should have written err log with /dev/null out log in fork mode"
+
+rm err-rel.log
+$pm2 reloadLogs
+spec "Should have reloaded logs a second time with /dev/null out log"
+
+sleep 2
+
+grep "echo.js-error" err-rel.log
+spec "(RELOADED TWICE) Should have written err log with /dev/null out log in fork mode"
+
+rm err-rel.log
