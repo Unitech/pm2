@@ -81,6 +81,7 @@ runUnitTest $D/watcher.js
 runUnitTest $D/max_memory_limit.js
 runUnitTest $D/cluster.mocha.js
 runUnitTest $D/graceful.mocha.js
+runUnitTest $D/stop_before_ready.mocha.js
 runUnitTest $D/inside.mocha.js
 runUnitTest $D/misc_commands.js
 runUnitTest $D/signals.js
