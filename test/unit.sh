@@ -107,6 +107,7 @@ runUnitTest $D/issue_6075_redos.mocha.js
 runUnitTest $D/issue_6073_object_env.mocha.js
 runUnitTest $D/treekill.mocha.js
 runUnitTest $D/cluster_log_lifecycle.mocha.js
+runUnitTest $D/stale_tree_pids.mocha.js
 runUnitTest $D/http_interface.mocha.js
 runUnitTest $D/sysmetrics.mocha.js
 

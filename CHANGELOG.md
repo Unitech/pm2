@@ -32,6 +32,7 @@
 - `pm2 reloadLogs` no longer crashes the daemon (`ERR_IPC_CHANNEL_CLOSED`) nor leaks fds when a cluster app is stopped, nor on concurrent calls
 - Explicit `exec_mode: cluster` is kept for JS/TS apps run by a custom interpreter (`tsx`, `ts-node`); fork fallback only for binaries and non-JS scripts/interpreters #4775
 - `pm2 serve`: null bytes answer 400 (`--spa` no longer crashes on `GET /x/%2500`), errors in async file handlers answer 500
+- Stale `_tree_pids` from a 7.0.0-7.0.4 dump no longer leaks into the app env nor gets an unrelated pid SIGKILLed on stop
 
 ## 7.0.4
 
