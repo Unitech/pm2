@@ -25,6 +25,8 @@
 - Logs: in cluster mode, the worker's stdout/stderr pipes are made blocking so a raw write bigger than the pipe buffer (`fs.writeSync(1, ...)`, native addons) is no longer silently truncated at 64 KB #4044 #4872
 - `exec_mode: cluster` on a non Node.js/Bun script (bash, python, binary) now falls back to fork mode with a warning instead of crashing with `SyntaxError: Invalid or unexpected token` (ELF) #4775
 - Node.js/Bun interpreter detection now accepts atypical binary names (`node.exe`, `node64.exe`, `nodejs`, `node18`, `node@18`, `bun.exe`), so cluster mode and the fork-mode wrapper are no longer skipped for them
+- Restart/stop on systems without `ps` (slim Docker images) no longer starts the app twice and crashes the daemon with `Callback was already called` #6171
+- TreeKill: no `ps` under Bun (synchronous spawn throw) falls back to killing the root pid
 
 ## 7.0.4
 
