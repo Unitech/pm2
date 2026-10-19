@@ -281,6 +281,12 @@ describe('God', function() {
           status: cst.ONLINE_STATUS
         },
         pid: f.pid
+      },
+      // online without pid (spawn failed): must not blank the others #6135
+      {
+        pm2_env: {
+          status: cst.ONLINE_STATUS
+        }
       }
     ]
 
@@ -300,6 +306,7 @@ describe('God', function() {
       procs[1].monit.memory.should.be.greaterThan(0);
       procs[2].monit.should.be.deepEqual({memory: 0, cpu: 0});
       procs[3].monit.memory.should.be.greaterThan(0);
+      procs[4].monit.should.be.deepEqual({memory: 0, cpu: 0});
       f.kill()
       done()
     })

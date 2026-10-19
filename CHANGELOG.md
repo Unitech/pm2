@@ -27,6 +27,7 @@
 - Node.js/Bun interpreter detection now accepts atypical binary names (`node.exe`, `node64.exe`, `nodejs`, `node18`, `node@18`, `bun.exe`), so cluster mode and the fork-mode wrapper are no longer skipped for them
 - Restart/stop on systems without `ps` (slim Docker images) no longer starts the app twice and crashes the daemon with `Callback was already called` #6171
 - TreeKill: no `ps` under Bun (synchronous spawn throw) falls back to killing the root pid
+- An online process without a pid (e.g. failed spawn) no longer makes pidusage fail for every app (`One of the pids provided is invalid` spam) #6134 #6135
 
 ## 7.0.4
 
