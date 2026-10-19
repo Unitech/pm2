@@ -76,6 +76,40 @@ describe('Interpreter runtime detection', function () {
       should(exec_mode_for('/usr/bin/python3')).eql('fork_mode');
       should(exec_mode_for('none')).eql('fork_mode');
     });
+
+    function exec_mode_of(script, interpreter) {
+      var app = { exec_interpreter: interpreter, exec_mode: 'cluster', instances: 2, pm_exec_path: script };
+      Common.sink.determineExecMode(app);
+      return app.exec_mode;
+    }
+
+    // ClusterMode require()s the script and ignores exec_interpreter: a TS
+    // loader or a custom name ran in cluster in 7.0.4 and must keep doing so
+    it('should keep cluster_mode for JS/TS scripts run by a TS loader or custom interpreter', function () {
+      ['tsx', 'ts-node', '/app/node_modules/.bin/tsx', 'C:\\app\\node_modules\\.bin\\ts-node.cmd', 'my-loader']
+        .forEach(function (i) {
+          ['/app/index.ts', '/app/index.mts', '/app/index.cts', '/app/index.tsx',
+           '/app/index.js', '/app/index.cjs', '/app/index.mjs', '/app/server'].forEach(function (s) {
+            should(exec_mode_of(s, i)).eql('cluster_mode', i + ' ' + s);
+          });
+        });
+    });
+
+    it('should fall back to fork_mode for scripts mapped to a non-JS interpreter', function () {
+      ['/app/run.sh', '/app/run.py', '/app/run.rb', '/app/run.php', '/app/run.pl'].forEach(function (s) {
+        should(exec_mode_of(s, 'my-loader')).eql('fork_mode', s);
+      });
+    });
+
+    it('should fall back to fork_mode for bash / python / ruby whatever the extension', function () {
+      ['bash', '/bin/sh', 'python', 'python3', '/usr/bin/python3.11', 'ruby', 'php', 'perl'].forEach(function (i) {
+        should(exec_mode_of('/app/run', i)).eql('fork_mode', i);
+        should(exec_mode_of('/app/run.js', i)).eql('fork_mode', i);
+      });
+      should(exec_mode_of('/app/bashscript.sh', 'bash')).eql('fork_mode');
+      should(exec_mode_of('/app/run.py', 'python3')).eql('fork_mode');
+      should(exec_mode_of('/usr/bin/sleep', 'none')).eql('fork_mode');
+    });
   });
 
   describe('Common.sink.determineExecMode default with -i', function () {
@@ -83,6 +117,12 @@ describe('Interpreter runtime detection', function () {
       var app = { exec_interpreter: 'node64.exe', instances: 2 };
       Common.sink.determineExecMode(app);
       should(app.exec_mode).eql('cluster_mode');
+    });
+
+    it('should keep the fork_mode default for a TS loader (as in 7.0.4)', function () {
+      var app = { exec_interpreter: 'tsx', instances: 2, pm_exec_path: '/app/index.ts' };
+      Common.sink.determineExecMode(app);
+      should(app.exec_mode).eql('fork_mode');
     });
   });
 });

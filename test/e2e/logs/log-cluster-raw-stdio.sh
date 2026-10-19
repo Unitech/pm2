@@ -100,4 +100,13 @@ should 'explicit exec_mode cluster with interpreter node20 should not fall back 
 should 'explicit exec_mode cluster with interpreter node20 should be online' 'online' 1
 
 $pm2 delete all
+
+# a TS loader (tsx, ts-node) is ignored by cluster workers: keep cluster mode
+ln -s "$node" "$ATYPICAL_BIN/tsx"
+ATYPICAL_NODE="$ATYPICAL_BIN/tsx" $pm2 start cluster-atypical-node.config.js
+should 'explicit exec_mode cluster with interpreter tsx should run in cluster mode' 'cluster_mode' 1
+should 'explicit exec_mode cluster with interpreter tsx should not fall back to fork mode' 'fork_mode' 0
+should 'explicit exec_mode cluster with interpreter tsx should be online' 'online' 1
+
+$pm2 delete all
 rm -rf "$ATYPICAL_BIN"

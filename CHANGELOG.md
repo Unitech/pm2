@@ -30,6 +30,7 @@
 - An online process without a pid (e.g. failed spawn) no longer makes pidusage fail for every app (`One of the pids provided is invalid` spam) #6134 #6135
 - Cluster mode with `uid`/`gid`: log files created by a root daemon are chowned to the app user (no more EACCES crash loop)
 - `pm2 reloadLogs` no longer crashes the daemon (`ERR_IPC_CHANNEL_CLOSED`) nor leaks fds when a cluster app is stopped, nor on concurrent calls
+- Explicit `exec_mode: cluster` is kept for JS/TS apps run by a custom interpreter (`tsx`, `ts-node`); fork fallback only for binaries and non-JS scripts/interpreters #4775
 
 ## 7.0.4
 
