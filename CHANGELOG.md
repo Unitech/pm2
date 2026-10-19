@@ -28,6 +28,8 @@
 - Restart/stop on systems without `ps` (slim Docker images) no longer starts the app twice and crashes the daemon with `Callback was already called` #6171
 - TreeKill: no `ps` under Bun (synchronous spawn throw) falls back to killing the root pid
 - An online process without a pid (e.g. failed spawn) no longer makes pidusage fail for every app (`One of the pids provided is invalid` spam) #6134 #6135
+- Cluster mode with `uid`/`gid`: log files created by a root daemon are chowned to the app user (no more EACCES crash loop)
+- `pm2 reloadLogs` no longer crashes the daemon (`ERR_IPC_CHANNEL_CLOSED`) nor leaks fds when a cluster app is stopped, nor on concurrent calls
 
 ## 7.0.4
 
