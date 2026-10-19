@@ -73,6 +73,16 @@ OUT=`cat /tmp/tmp_out.txt | wc -l`
 [ $OUT -eq 2 ] || fail "should have served file under /other.html"
 success "should have served file under /other.html"
 
+# spa fallback decodes /x/%2500 a second time into a null byte
+CODE=`curl -s -o /dev/null -w '%{http_code}' "http://localhost:$PORT/x/%2500"`
+[ "$CODE" = "400" ] || fail "spa should answer 400 on a double-encoded null byte (got $CODE)"
+success "spa should answer 400 on a double-encoded null byte"
+CODE=`curl -s -o /dev/null -w '%{http_code}' "http://localhost:$PORT/%00"`
+[ "$CODE" = "400" ] || fail "spa should answer 400 on a null byte (got $CODE)"
+success "spa should answer 400 on a null byte"
+should 'spa should still be online after null byte requests' 'online' 1
+should 'spa should not have restarted' 'restart_time: 0' 1
+
 echo "Shutting down the server"
 $pm2 delete all
 
