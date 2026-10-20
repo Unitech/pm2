@@ -34,6 +34,7 @@
 - `pm2 serve`: null bytes answer 400 (`--spa` no longer crashes on `GET /x/%2500`), errors in async file handlers answer 500
 - Fork/cluster: log files are closed once the app stdout/stderr pipes are closed, no longer on the ChildProcess `close` that sometimes never comes on Linux (2 fds leaked per app stop/restart/delete)
 - Stale `_tree_pids` from a 7.0.0-7.0.4 dump no longer leaks into the app env nor gets an unrelated pid SIGKILLed on stop
+- PM2.io agent: `PM2_PROXY` support removed with the `proxy-agent` dependency (unused, broken since 7.0.0 with `ProxyAgent is not a constructor`; drops the vulnerable get-uri/basic-ftp chain)
 - Behavior change: shell variables named like a PM2 option (`port`, `time`, `watch`...) are no longer forwarded to fork mode apps; declare them in `env:`
 - `pm2 ls` host metrics: virtual interfaces and read-only mounts are hidden
 

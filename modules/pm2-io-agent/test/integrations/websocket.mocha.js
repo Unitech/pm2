@@ -27,7 +27,6 @@ const rpc = require('../../../pm2-axon-rpc')
 const path = require('path')
 const fs = require('fs')
 const WebSocket = require('ws')
-const socks = require('simple-socks')
 
 const pm2PubEmitter = axon.socket('pub-emitter')
 const pm2Rep = axon.socket('rep')
@@ -394,72 +393,6 @@ describe('Integration test with websocket transport', _ => {
           })
         })
       }, 3000)
-    })
-  })
-  describe('with proxy', _ => {
-    let proxyServer = null
-    let proxyClients = 0
-
-    before(done => {
-      proxyServer = socks.createServer().listen(1080, done)
-
-      proxyServer.on('proxyConnect', (info) => {
-        proxyClients++
-      })
-      proxyServer.on('proxyEnd', _ => {
-        proxyClients--
-      })
-    })
-
-    it('should get endpoints through proxy', done => {
-      proxyServer.once('proxyConnect', _ => {
-        assert(proxyClients === 1)
-        done()
-      })
-      cst.PROXY = 'socks5://127.0.0.1:1080'
-      process.env.PM2_PROXY = cst.PROXY
-      InteractorClient.killInteractorDaemon(cst, _ => {
-        InteractorClient.launchAndInteract(cst, {
-          machine_name: PM2_MACHINE_NAME,
-          public_key: PM2_PUBLIC_KEY,
-          secret_key: PM2_SECRET_KEY,
-          pm2_version: PM2_VERSION,
-          info_node: KEYMETRICS_NODE
-        }, _ => {})
-      })
-    })
-
-    it('should connect ws through proxy', done => {
-      wsServer.once('connection', ws => {
-        assert(proxyClients === 2)
-        wsClient = ws
-        done()
-      })
-    })
-
-    it('should receive a message', done => {
-      wsClient.on('message', data => {
-        data = JSON.parse(data)
-        assert(data.channel === 'status')
-        let sent = data.payload
-        assert(sent.server_name === 'test')
-        assert(sent.data.process[0].pid === 1)
-        assert(sent.data.process[1].pid === 2)
-        assert(sent.data.process[2].pid === 3)
-        assert(sent.data.process[0].name === 'test_process_1')
-        assert(sent.data.process[1].name === 'test_process_2')
-        assert(sent.data.process[2].name === 'test_process_3')
-        assert(sent.data.process[0].pm_id === 0)
-        assert(sent.data.process[1].pm_id === 2)
-        assert(sent.data.process[2].pm_id === 1)
-        assert(sent.data.server.hostname !== undefined)
-        assert(sent.data.server.uptime !== undefined)
-        assert(sent.data.server.platform !== undefined)
-        assert(sent.data.server.pm2_version !== undefined)
-        assert(sent.data.server.node_version !== undefined)
-        wsClient.removeAllListeners()
-        done()
-      })
     })
   })
   after((done) => {
