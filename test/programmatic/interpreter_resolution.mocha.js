@@ -138,6 +138,9 @@ describe('TypeScript interpreter resolution', function () {
   describe('ProcessUtils.enableTypeScript', function () {
     var ProcessUtils = require('../../lib/ProcessUtils');
     var fake_app_dir;
+    var empty_app_dir;
+    var saved_exec_argv;
+    var real_console_error;
 
     before(function () {
       // Fake app with ts-node in its own node_modules, to prove ts-node is
@@ -149,15 +152,23 @@ describe('TypeScript interpreter resolution', function () {
         JSON.stringify({ name: 'ts-node', version: '0.0.0', main: 'register.js' }));
       fs.writeFileSync(path.join(ts_node_dir, 'register.js'),
         'global.__fake_ts_node_loaded = true;');
+      empty_app_dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pm2-empty-ts-app-'));
+      saved_exec_argv = process.execArgv;
+      real_console_error = console.error;
     });
 
     after(function () {
+      process.execArgv = saved_exec_argv;
+      console.error = real_console_error;
       fs.rmSync(fake_app_dir, { recursive: true, force: true });
+      fs.rmSync(empty_app_dir, { recursive: true, force: true });
       delete global.__fake_ts_node_loaded;
     });
 
     beforeEach(function () {
       delete global.__fake_ts_node_loaded;
+      process.execArgv = [];
+      console.error = real_console_error;
     });
 
     it('should be a no-op for non-TypeScript files', function () {
@@ -175,6 +186,30 @@ describe('TypeScript interpreter resolution', function () {
     it('should load ts-node from the app dependencies for .tsx', function () {
       ProcessUtils.enableTypeScript(path.join(fake_app_dir, 'app.tsx'), fake_app_dir);
       should(global.__fake_ts_node_loaded).eql(true);
+    });
+
+    it('should not request ts-node when @nubjs/loader is preloaded', function () {
+      if (process.features && process.features.typescript)
+        this.skip();
+
+      var warnings = [];
+      process.execArgv = ['--import', '@nubjs/loader'];
+      console.error = function () { warnings.push(Array.prototype.join.call(arguments, ' ')); };
+
+      ProcessUtils.enableTypeScript(path.join(empty_app_dir, 'app.ts'), empty_app_dir);
+      should(warnings).be.empty();
+    });
+
+    it('should retain the ts-node fallback without the loader preload', function () {
+      if (process.features && process.features.typescript)
+        this.skip();
+
+      var warnings = [];
+      console.error = function () { warnings.push(Array.prototype.join.call(arguments, ' ')); };
+
+      ProcessUtils.enableTypeScript(path.join(empty_app_dir, 'app.ts'), empty_app_dir);
+      should(warnings).have.length(1);
+      should(warnings[0]).match(/TypeScript support unavailable/);
     });
   });
 
