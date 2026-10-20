@@ -169,6 +169,62 @@ describe('Cluster mode log lifecycle', function() {
     });
   });
 
+  describe('log streams closed when the stdio pipes close', function() {
+    var EventEmitter = require('events');
+
+    function fakeProc() {
+      var proc = new EventEmitter();
+      proc.stdout = new EventEmitter();
+      proc.stderr = new EventEmitter();
+      return proc;
+    }
+
+    it('should not wait for the ChildProcess close (IPC close may never come)', function(done) {
+      var proc = fakeProc();
+      StdioLogger.onPipesClosed(proc, done);
+      // what was seen on Linux: exit + both pipes closed, no 'close' event
+      proc.emit('exit', 0);
+      proc.stdout.emit('close');
+      proc.stderr.emit('close');
+    });
+
+    it('should wait for both pipes', function() {
+      var proc = fakeProc(), called = 0;
+      StdioLogger.onPipesClosed(proc, function() { called++; });
+      proc.stdout.emit('close');
+      called.should.eql(0);
+      proc.stderr.emit('close');
+      called.should.eql(1);
+    });
+
+    it('should handle pipes already destroyed or missing', function() {
+      var proc = fakeProc(), called = 0;
+      proc.stdout.destroyed = true;
+      delete proc.stderr;
+      StdioLogger.onPipesClosed(proc, function() { called++; });
+      called.should.eql(1);
+    });
+
+    it('should release the log fds of deleted fork apps', function(done) {
+      var conf = getConf('fork-delete');
+      conf.exec_mode = 'fork_mode';
+      delete conf.instances;
+      God.prepare(conf, function(err, procs) {
+        should(err).be.null();
+        setTimeout(function() {
+          var fds = countFds();
+          deleteAll(function() {
+            setTimeout(function() {
+              // out + err + merged log streams released
+              countFds().should.be.below(fds);
+              done();
+            }, 1000);
+          });
+        }, 500);
+      });
+    });
+  });
+
   describe('reloadLogs on a stopped cluster app', function() {
     it('should keep the daemon alive and not leak fds', function(done) {
       God.prepare(getConf('stopped-reload'), function(err, procs) {
