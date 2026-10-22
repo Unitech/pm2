@@ -311,4 +311,48 @@ describe('God', function() {
       done()
     })
   });
+
+  it('should not leak /proc/<pid>/stat fds on overlapping getMonitorData calls', function(done) {
+    if (process.platform !== 'linux') return this.skip();
+
+    var cp = require('child_process');
+    var statFds = function() {
+      return fs.readdirSync('/proc/self/fd').filter(function(fd) {
+        try {
+          return /^\/proc\/\d+\/stat$/.test(fs.readlinkSync('/proc/self/fd/' + fd));
+        } catch(e) { return false; }
+      }).length;
+    };
+    var before = statFds();
+    var seen = 0;
+    var round = 0;
+    var g = {};
+
+    require('../../lib/God/ActionMethods.js')(g);
+
+    (function next() {
+      if (round++ === 10) {
+        // pidusage keeps at most one fd per pid (closed after 60s)
+        (statFds() - before).should.be.belowOrEqual(seen);
+        return done();
+      }
+      var kids = [0, 1, 2, 3, 4].map(function() { return cp.spawn('sleep', ['30']); });
+      var processes = kids.map(function(k) {
+        return { pm2_env: { status: cst.ONLINE_STATUS }, pid: k.pid };
+      });
+      seen += kids.length;
+      g.getFormatedProcesses = function() { return processes; };
+
+      eachLimit([0, 1, 2], 3, function(i, next) {
+        g.getMonitorData({}, function(err, procs) {
+          should(err).be.null();
+          procs[0].monit.memory.should.be.greaterThan(0);
+          next();
+        });
+      }, function() {
+        kids.forEach(function(k) { k.kill(); });
+        next();
+      });
+    })();
+  });
 });

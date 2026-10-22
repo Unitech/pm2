@@ -3,6 +3,7 @@
 ### Bug Fixes
 
 - Windows: memory is reported again when pm2 runs as a service (`pidusage` 4.1.0, wmic is used again when available) #6173
+- Linux: overlapping monitoring calls no longer leak a `/proc/<pid>/stat` fd per new pid in the daemon (grew with every restart)
 
 ## 7.1.0
 
