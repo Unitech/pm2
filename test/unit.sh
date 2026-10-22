@@ -107,6 +107,7 @@ runUnitTest $D/interpreter_runtime.mocha.js
 runUnitTest $D/issue_6089_prototype_pollution.mocha.js
 runUnitTest $D/issue_6075_redos.mocha.js
 runUnitTest $D/issue_6073_object_env.mocha.js
+runUnitTest $D/issue_6002_reconnect.mocha.js
 runUnitTest $D/treekill.mocha.js
 runUnitTest $D/cluster_log_lifecycle.mocha.js
 runUnitTest $D/stale_tree_pids.mocha.js

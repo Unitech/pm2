@@ -4,6 +4,7 @@
 
 - Windows: memory is reported again when pm2 runs as a service (`pidusage` 4.1.0, wmic is used again when available) #6173
 - Linux: overlapping monitoring calls no longer leak a `/proc/<pid>/stat` fd per new pid in the daemon (grew with every restart)
+- `pm2.connect()` right after `pm2.disconnect()` no longer crashes with `Cannot read properties of null (reading 'sock')` #6002
 
 ## 7.1.0
 
