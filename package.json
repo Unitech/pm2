@@ -141,7 +141,7 @@
     "is-glob": "4.0.3",
     "js-yaml": "4.3.2",
     "normalize-path": "3.0.0",
-    "pidusage": "4.0.1",
+    "pidusage": "4.1.0",
     "pm2-deploy": "1.0.2",
     "readdirp": "3.6.0",
     "semver": "7.7.2",
