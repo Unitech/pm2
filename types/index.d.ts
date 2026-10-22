@@ -147,8 +147,9 @@ export function dump(errback: ErrResultCallback): void;
  * @param process - Can either be the name as given in the pm2.start options,
  * a process id, or the string “all” to indicate that all scripts should be restarted.
  * @param errback
+ * @param exclusive - Optionally flush only stdout ('out') or stderr ('err').
  */
-export function flush(process: number|string, errback: ErrResultCallback): void;
+export function flush(process: number|string, errback: ErrResultCallback, exclusive?: 'out'|'err'|false): void;
 
 /**
  * @param errback

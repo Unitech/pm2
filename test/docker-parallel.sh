@@ -70,7 +70,6 @@ EXCLUDED_TESTS=(
     "test/programmatic/client.mocha.js"            # Not in unit.sh
     "test/programmatic/conf_update.mocha.js"       # Not in unit.sh
     "test/programmatic/flagExt.mocha.js"           # Not in unit.sh
-    "test/programmatic/flush.mocha.js"             # Not in unit.sh
     "test/programmatic/internal_config.mocha.js"   # Not in unit.sh
     "test/programmatic/module_configuration.mocha.js"  # Not in unit.sh
     "test/programmatic/module_tar.mocha.js"        # Not in unit.sh
