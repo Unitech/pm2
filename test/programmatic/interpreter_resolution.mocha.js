@@ -289,3 +289,147 @@ describe('TypeScript interpreter resolution', function () {
   });
 
 });
+
+describe('Node version selectors and interpreter paths (#6044)', function () {
+  var Common = require('../../lib/Common');
+  var root, savedNvm, savedPrintOut, savedPrintError;
+  var nvmEnv = cst.IS_WINDOWS ? 'NVM_HOME' : 'NVM_DIR';
+  var messages;
+  var paths;
+
+  function nvmNode(version) {
+    var nodePath = path.join(root, 'nvm', cst.IS_WINDOWS
+      ? 'v' + version + '/node.exe'
+      : 'versions/node/v' + version + '/bin/node');
+    fs.mkdirSync(path.dirname(nodePath), { recursive: true });
+    if (!fs.existsSync(nodePath))
+      fs.symlinkSync(process.execPath, nodePath);
+    return nodePath;
+  }
+
+  before(function () {
+    root = fs.mkdtempSync(path.join(os.tmpdir(), 'pm2-interpreter-at-'));
+    savedNvm = process.env[nvmEnv];
+    process.env[nvmEnv] = path.join(root, 'nvm');
+    savedPrintOut = Common.printOut;
+    savedPrintError = Common.printError;
+    Common.printOut = Common.printError = function (message) { messages.push(message); };
+    paths = [
+      path.join(root, 'me@org', 'bin', 'node'),
+      path.join(root, 'Cellar', 'node@22', '22.18.0', 'bin', 'node'),
+      path.relative(process.cwd(), path.join(root, 'relative', 'node@22', 'bin', 'node')),
+      path.join(root, 'ordinary', 'bin', 'node')
+    ];
+    paths.forEach(function (interpreterPath) {
+      fs.mkdirSync(path.dirname(interpreterPath), { recursive: true });
+      fs.symlinkSync(process.execPath, interpreterPath);
+      // Make every old, misparsed NVM target available.  A regression may
+      // select the wrong binary, but can never run an NVM installation.
+      if (interpreterPath.indexOf('@') !== -1)
+        nvmNode(interpreterPath.split('@')[1]);
+    });
+    nvmNode('20.12.2');
+    nvmNode('22/bin/missing');
+    ['python@3', 'C:\\Users\\me@org\\node.exe',
+      'C:\\Program Files\\node@22\\node.exe'].forEach(function (value) {
+      nvmNode(value.split('@')[1]);
+    });
+  });
+
+  beforeEach(function () { messages = []; });
+
+  after(function () {
+    if (savedNvm === undefined)
+      delete process.env[nvmEnv];
+    else
+      process.env[nvmEnv] = savedNvm;
+    Common.printOut = savedPrintOut;
+    Common.printError = savedPrintError;
+    fs.rmSync(root, { recursive: true, force: true });
+  });
+
+  ['resolveInterpreter', 'mergeEnvironmentVariables'].forEach(function (method) {
+    it(method + ' should preserve executable paths containing @', function () {
+      paths.forEach(function (interpreterPath) {
+        var app = { pm_exec_path: 'app.js', exec_interpreter: interpreterPath, env: {} };
+        var resolved = method === 'resolveInterpreter'
+          ? Common.sink.resolveInterpreter(app)
+          : Common.mergeEnvironmentVariables(app).current_conf;
+        should(resolved.exec_interpreter).eql(interpreterPath);
+      });
+      should(messages).eql([]);
+    });
+
+    it(method + ' should still resolve a bare node@version selector', function () {
+      var app = { pm_exec_path: 'app.js', exec_interpreter: 'node@20.12.2', env: {} };
+      var resolved = method === 'resolveInterpreter'
+        ? Common.sink.resolveInterpreter(app)
+        : Common.mergeEnvironmentVariables(app).current_conf;
+      should(resolved.exec_interpreter).eql(nvmNode('20.12.2'));
+    });
+
+    it(method + ' should keep the cluster version-selector restriction', function () {
+      var app = {
+        pm_exec_path: 'app.js', exec_interpreter: 'node@20.12.2',
+        exec_mode: 'cluster_mode', env: {}
+      };
+      if (method === 'resolveInterpreter')
+        should(function () { Common.sink.resolveInterpreter(app); }).throw(/NOT AVAILABLE/);
+      else
+        should(Common.mergeEnvironmentVariables(app).current_conf.exec_interpreter).eql('node@20.12.2');
+      should(messages.join('\n')).containEql('Choosing the Node.js version in cluster mode is not supported');
+    });
+  });
+
+  it('should report unavailable path interpreters without invoking NVM', function () {
+    var interpreterPath = path.join(root, 'node@22', 'bin', 'missing');
+    should(function () {
+      Common.sink.resolveInterpreter({
+        pm_exec_path: 'app.js', exec_interpreter: interpreterPath, env: {}
+      });
+    }).throw(new RegExp('Interpreter .*missing is NOT AVAILABLE'));
+    should(messages).eql([]);
+  });
+
+  it('should not interpret other @ commands or Windows paths as Node selectors', function () {
+    ['python@3', 'C:\\Users\\me@org\\node.exe',
+      'C:\\Program Files\\node@22\\node.exe'].forEach(function (value) {
+      should(Common.mergeEnvironmentVariables({ exec_interpreter: value, env: {} })
+        .current_conf.exec_interpreter).eql(value);
+    });
+    should(messages).eql([]);
+  });
+
+  it('should preserve the default-derived process.execPath through environment merging', function () {
+    var originalExecPath = process.execPath;
+    var scriptPath = path.join(root, 'app.custom');
+    fs.writeFileSync(scriptPath, 'setInterval(function () {}, 1000);');
+    try {
+      process.execPath = paths[0];
+      var app = Common.sink.resolveInterpreter({ pm_exec_path: scriptPath, env: {} });
+      should(app.exec_interpreter).eql(paths[0]);
+      should(Common.mergeEnvironmentVariables(app).current_conf.exec_interpreter).eql(paths[0]);
+      should(messages).eql([]);
+    } finally {
+      process.execPath = originalExecPath;
+    }
+  });
+
+  it('should keep environment precedence and unrelated current configuration', function () {
+    var interpreterPath = paths[0];
+    var app = {
+      exec_interpreter: interpreterPath, instances: 2,
+      env: { VALUE: 'base', BASE: 'kept' }, env_production: { VALUE: 'production' }
+    };
+    var result = Common.mergeEnvironmentVariables(app, 'production', {
+      production: { env: { VALUE: 'deploy', DEPLOY: 'kept' } }
+    });
+    should(result.VALUE).eql('production');
+    should(result.BASE).eql('kept');
+    should(result.DEPLOY).eql('kept');
+    should(result.current_conf.exec_interpreter).eql(interpreterPath);
+    should(result.current_conf.instances).eql(2);
+    should(app.env.VALUE).eql('base');
+    should(messages).eql([]);
+  });
+});
