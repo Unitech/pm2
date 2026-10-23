@@ -86,6 +86,7 @@ runUnitTest $D/fclone.mocha.js
 runUnitTest $D/issues/json_env_passing_4080.mocha.js
 runUnitTest $D/issue_6106_windows_home.mocha.js
 runUnitTest $D/issue_6002_reconnect.mocha.js
+runUnitTest $D/service_stop.mocha.js
 
 D=test/interface
 
