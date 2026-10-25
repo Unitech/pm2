@@ -105,6 +105,10 @@ var csts = {
   KILL_SIGNAL             : process.env.PM2_KILL_SIGNAL || 'SIGINT',
   KILL_USE_MESSAGE        : process.env.PM2_KILL_USE_MESSAGE || false,
 
+  // Drop a pub.sock subscriber once this many bytes wait for it, otherwise a `pm2 logs`
+  // suspended with Ctrl+Z or a dead ssh session grows the daemon until OOM. 0 disables
+  PUB_MAX_PENDING_BYTES   : isNaN(parseInt(process.env.PM2_PUB_MAX_PENDING_BYTES)) ? 16 * 1024 * 1024 : parseInt(process.env.PM2_PUB_MAX_PENDING_BYTES),
+
   PM2_PROGRAMMATIC        : typeof(process.env.pm_id) !== 'undefined' || process.env.PM2_PROGRAMMATIC,
   PM2_LOG_DATE_FORMAT     : process.env.PM2_LOG_DATE_FORMAT !== undefined ? process.env.PM2_LOG_DATE_FORMAT : 'YYYY-MM-DDTHH:mm:ss'
 
