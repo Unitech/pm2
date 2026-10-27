@@ -117,6 +117,8 @@ describe('Service stop guard #5000', function() {
     function runPm2(args, env) {
       var child_env = Object.assign({}, process.env);
       SERVICE_VARS.forEach(function(k) { delete child_env[k]; });
+      // the Docker test image sets PM2_SILENT, which mutes the output checked here
+      delete child_env.PM2_SILENT;
       Object.assign(child_env, env);
       return spawnSync(process.execPath, [PM2_BIN].concat(args), { env: child_env, encoding: 'utf8', timeout: 20000 });
     }
