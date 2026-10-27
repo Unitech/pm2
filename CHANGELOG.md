@@ -3,6 +3,7 @@
 ### Bug Fixes
 
 - `pm2 update` under a `pm2 startup` systemd unit no longer gets its new daemon and apps killed by `ExecStop=pm2 kill` (systemd >= 232) #5000
+- `filter_env: true` drops the shell env again, also on restart/reload `--update-env` and in cluster workers #6176
 
 ## 7.1.1
 
