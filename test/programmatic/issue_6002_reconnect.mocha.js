@@ -69,3 +69,34 @@ describe('Issue #6002 - reconnect while the previous RPC socket is closing', fun
     });
   });
 });
+
+describe('Client disconnect fallback timer', function() {
+  var EventEmitter = require('events');
+
+  // a socket that only emits 'close' after the 200ms timeout (seen under
+  // Bun): the callback must still run once
+  function slowSocket() {
+    var sock = new EventEmitter();
+    sock.connected = true;
+    sock.close = function() {
+      setTimeout(function() { sock.emit('close'); }, 300);
+    };
+    return sock;
+  }
+
+  ['disconnectRPC', 'disconnectBus'].forEach(function(method) {
+    it(method + ' should call back once when the socket closes after the timeout', function(done) {
+      var client = Object.create(Client.prototype);
+      client.client_sock = slowSocket();
+      client.sub_sock = slowSocket();
+      var calls = 0;
+
+      client[method](function() { calls++; });
+
+      setTimeout(function() {
+        calls.should.eql(1);
+        done();
+      }, 500);
+    });
+  });
+});

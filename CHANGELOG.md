@@ -5,6 +5,7 @@
 - `pm2 update` under a `pm2 startup` systemd unit no longer gets its new daemon and apps killed by `ExecStop=pm2 kill` (systemd >= 232) #5000
 - `filter_env: true` works again (ignored since 4.4.1): apps only inherit PATH, HOME, USER, locales and a few OS variables besides their `env` #6176
 - `filter_env` also applies to `--update-env` restart/reload and to cluster workers; `--filter-env` alone means `true` #6176
+- `pm2.disconnect()` no longer throws nor calls back twice when a socket takes more than 200ms to close
 
 ### Breaking change
 
