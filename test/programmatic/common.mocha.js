@@ -42,6 +42,48 @@ describe('Common utilities', function () {
     });
   });
 
+  describe('filterShellEnv', function() {
+    var pm2Keys = require('../../lib/tools/pm2-config-keys.js');
+    var env = {
+      PATH: '/bin', Path: 'C:\\bin', HOME: '/home/u', LC_ALL: 'C', SystemRoot: 'C:\\Windows',
+      NODE_ENV: 'production', AWS_SECRET: 's', ANTHROPIC_AUTH_TOKEN: 't'
+    };
+
+    it('should keep only the OS base for true', function() {
+      Object.keys(pm2Keys.filterShellEnv(env, true, 'linux')).sort()
+        .should.eql(['HOME', 'LC_ALL', 'PATH']);
+      // the string from a config file or an old dump is the same flag
+      pm2Keys.filterShellEnv(env, 'true', 'linux').should.eql(pm2Keys.filterShellEnv(env, true, 'linux'));
+    });
+
+    it('should not keep any LC_ variable, only the locale categories', function() {
+      var kept = pm2Keys.filterShellEnv({ LC_ALL: 'C', LC_DEPLOY_TOKEN: 's', lc_all: 'x' }, true, 'linux');
+      Object.keys(kept).should.eql(['LC_ALL']);
+    });
+
+    it('should match the Windows base case-insensitively on Windows only', function() {
+      Object.keys(pm2Keys.filterShellEnv(env, true, 'win32')).sort()
+        .should.eql(['PATH', 'Path', 'SystemRoot']);
+    });
+
+    it('should drop an exact name for a string and names containing a pattern for an array', function() {
+      should.not.exist(pm2Keys.filterShellEnv(env, 'AWS_SECRET').AWS_SECRET);
+      should.exist(pm2Keys.filterShellEnv(env, 'AWS').AWS_SECRET);
+      Object.keys(pm2Keys.filterShellEnv(env, ['SECRET', 'TOKEN'])).should.not.containEql('AWS_SECRET');
+      Object.keys(pm2Keys.filterShellEnv(env, ['SECRET', 'TOKEN'])).should.not.containEql('ANTHROPIC_AUTH_TOKEN');
+    });
+
+    it('should keep everything without a filter and never mutate the input', function() {
+      [undefined, false, 'false', [], ''].forEach(function(f) {
+        pm2Keys.filterShellEnv(env, f).should.equal(env);
+      });
+      [true, 'true', 'AWS_SECRET', ['SECRET']].forEach(function(f) {
+        pm2Keys.filterShellEnv(env, f);
+      });
+      Object.keys(env).length.should.eql(8);
+    });
+  });
+
   describe('filter_env', function() {
     var script = path.resolve(__dirname, '../fixtures/echo.js');
     var saved = {};
@@ -71,12 +113,12 @@ describe('Common utilities', function () {
       });
     }
 
-    it('should drop every shell variable when filter_env is true', function() {
+    it('should drop every shell variable but the OS base when filter_env is true', function() {
       var app = prepare(true);
       should(app).not.be.instanceof(Error);
       should(app.env.LEAK_ME).be.undefined();
       should(app.env.SHOULD_NOT_BE_THERE).be.undefined();
-      should(app.env.PATH).be.undefined();
+      should(app.env.PATH).eql(process.env.PATH);
       should(app.env.ONLY_THIS).eql('1');
     });
 
@@ -85,7 +127,7 @@ describe('Common utilities', function () {
       var app = prepare('true');
       should(app).not.be.instanceof(Error);
       should(app.env.LEAK_ME).be.undefined();
-      should(app.env.PATH).be.undefined();
+      should(app.env.PATH).eql(process.env.PATH);
       should(app.env.ONLY_THIS).eql('1');
     });
 

@@ -1,0 +1,8 @@
+{
+  "apps" : [{
+    "name"       : "filtered",
+    "script"     : "./../fixtures/echo.js",
+    "exec_mode"  : "cluster",
+    "instances"  : 1
+  }]
+}

@@ -593,8 +593,10 @@ export interface StartOptions {
    */
   instance_var?: string;
   /**
-   * Filter out specific environment variables from the process.
-   * Can be true to filter all, or array/string of specific variables.
+   * Filter the environment of the shell running pm2 (and, in cluster mode, of
+   * the daemon) passed to the app. true keeps only PATH, HOME, USER, LANG,
+   * LC_*, TZ, TMPDIR..., a string drops this variable, an array drops the
+   * variables whose name contains one of the strings. `env` is always passed.
    */
   filter_env?: boolean | string | string[];
   /**

@@ -3,7 +3,13 @@
 ### Bug Fixes
 
 - `pm2 update` under a `pm2 startup` systemd unit no longer gets its new daemon and apps killed by `ExecStop=pm2 kill` (systemd >= 232) #5000
-- `filter_env: true` drops the shell env again, also on restart/reload `--update-env` and in cluster workers #6176
+- `filter_env: true` works again (ignored since 4.4.1): apps only inherit PATH, HOME, USER, locales and a few OS variables besides their `env` #6176
+- `filter_env` also applies to `--update-env` restart/reload and to cluster workers; `--filter-env` alone means `true` #6176
+
+### Breaking change
+
+- `filter_env: true` apps no longer inherit other shell variables (NODE_ENV, NODE_OPTIONS, HTTP_PROXY...): declare them in `env` #6176
+- An app keeps the shell env it already received when the filter comes later (started before 7.1.2 or without `filter_env`, dump.pm2 included): `pm2 delete` it and start it again #6176
 
 ## 7.1.1
 

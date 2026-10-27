@@ -20,7 +20,7 @@
       "string"
     ],
     "docDefault": false,
-    "docDescription": "Enable filtering global environments"
+    "docDescription": "Filter the shell env (and the daemon env in cluster mode) passed to the app: true keeps only PATH, HOME, USER, LANG, LC_*, TZ, TMPDIR..., a string drops this variable, an array drops variables whose name contains one of the strings. `env` is always passed"
   },
   "namespace": {
     "type": "string",
