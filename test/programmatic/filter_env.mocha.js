@@ -65,15 +65,36 @@ describe('API checks', function() {
   })
 
   it('should start app with filtered env at true to drop all local env', function(done) {
+    process.env.LEAK_ME = '1'
     PM2.start({
       script: './../fixtures/echo.js',
-      filter_env: true
+      filter_env: true,
+      env: { ONLY_THIS: '1' }
     }, (err) => {
       should(err).be.null()
       PM2.list(function(err, list) {
         should(err).be.null()
         should(list.length).eql(1)
-        should.not.exists(list[0].pm2_env.SHOULD_NOT_BE_THERE)
+        should.not.exists(list[0].pm2_env.LEAK_ME)
+        should(list[0].pm2_env.ONLY_THIS).eql('1')
+        done()
+      })
+    })
+  })
+
+  it('should start app with filter_env string true to drop all local env', function(done) {
+    process.env.LEAK_ME = '1'
+    PM2.start({
+      script: './../fixtures/echo.js',
+      filter_env: 'true',
+      env: { ONLY_THIS: '1' }
+    }, (err) => {
+      should(err).be.null()
+      PM2.list(function(err, list) {
+        should(err).be.null()
+        should(list.length).eql(1)
+        should.not.exists(list[0].pm2_env.LEAK_ME)
+        should(list[0].pm2_env.ONLY_THIS).eql('1')
         done()
       })
     })
