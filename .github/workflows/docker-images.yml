@@ -1,0 +1,42 @@
+name: Docker images
+
+# Rebuilds the keymetrics/pm2 images (keymetrics/docker-pm2) once a release is on npm
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: pm2 version to wait for on npm (e.g. 7.1.1)
+        required: true
+
+permissions: {}
+
+jobs:
+  dispatch:
+    if: ${{ !github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      VERSION: ${{ github.event.release.tag_name || inputs.version }}
+    steps:
+    - name: Wait for the release to be the npm latest
+      # The release is usually created right before npm publish. docker-pm2 installs
+      # the npm latest, so a backport release on an older line must not trigger it.
+      run: |
+        VERSION="${VERSION#v}"
+        for _ in $(seq 1 60); do
+          if [ "$(npm view pm2 dist-tags.latest 2>/dev/null)" = "$VERSION" ]; then
+            echo "pm2@${VERSION} is the npm latest"
+            exit 0
+          fi
+          sleep 30
+        done
+        echo "::error::pm2@${VERSION} is not the npm latest after 30 minutes"
+        exit 1
+
+    - name: Rebuild keymetrics/pm2 images
+      env:
+        GH_TOKEN: ${{ secrets.DOCKER_PM2_DISPATCH_TOKEN }}
+      run: gh workflow run docker-publish.yml -R keymetrics/docker-pm2
