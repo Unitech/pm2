@@ -6,6 +6,7 @@
 - `filter_env: true` works again (ignored since 4.4.1): apps only inherit PATH, HOME, USER, locales and a few OS variables besides their `env` #6176
 - `filter_env` also applies to `--update-env` restart/reload and to cluster workers; `--filter-env` alone means `true` #6176
 - `pm2.disconnect()` no longer throws nor calls back twice when a socket takes more than 200ms to close
+- `pm2 start --container` uses `keymetrics/pm2:<node>-trixie` (was the 2018 `latest` image, and `--node-version` pointed to tags that do not exist)
 
 ### Breaking change
 

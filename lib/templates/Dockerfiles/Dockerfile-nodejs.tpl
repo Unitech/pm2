@@ -1,4 +1,4 @@
-FROM keymetrics/pm2:latest
+FROM keymetrics/pm2:latest-trixie
 
 RUN mkdir -p /var/app
 
