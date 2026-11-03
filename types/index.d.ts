@@ -61,7 +61,7 @@ export function start(script: string, jsonConfigFile: string, errback: ErrProcCa
 /**
  * Disconnects from the pm2 daemon.
  */
-export function disconnect(): void;
+export function disconnect(errback?: ErrCallback): void;
 
 /**
  * Stops a process but leaves the process meta-data in pm2’s list
@@ -78,6 +78,17 @@ export function stop(process: string|number, errback: ErrProcCallback): void;
  * @param errback - called when the process is restarted
  */
 export function restart(process: string|number, errback: ErrProcCallback): void;
+
+/**
+ * Stops and restarts the process.
+ * @param process - Can either be the name as given in the pm2.start options,
+ * a process id, or the string “all” to indicate that all scripts should be restarted.
+ * @param options - An object containing configuration
+ * @param options.updateEnv - (Default: false) If true is passed in, pm2 will reload it’s
+ * environment from process.env before restarting your process.
+ * @param errback - called when the process is restarted
+ */
+export function restart(process: string|number, options: ReloadOptions, errback: ErrProcCallback): void;
 
 /**
  * Stops the process and removes it from pm2’s list.
@@ -193,15 +204,10 @@ export function sendDataToProcessId(proc_id: number, packet: object, cb: ErrResu
 
 /**
  * - Send an set of data as object to a specific process
- * @param packet {id: number, type: 'process:msg', topic: true, data: object}
+ * @param packet {id: number, type: 'process:msg', topic: string|true, data: object}
+ * @param cb
  */
-export function sendDataToProcessId(packet: {id: number, type: 'process:msg', topic: true, data: object}): void;
-
-/**
- * Launch system monitoring (CPU, Memory usage)
- * @param errback - Called when monitoring is launched
- */
-export function launchSysMonitoring(errback?: ErrCallback): void;
+export function sendDataToProcessId(packet: {id: number, type: 'process:msg', topic: string|true, data: object}, cb: ErrResultCallback): void;
 
 /**
  * Profile CPU or Memory usage
@@ -721,7 +727,7 @@ export interface InstallOptions {
 
 // Types
 
-type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status' | 'waiting_restart';
+type ProcessStatus = 'online' | 'stopping' | 'stopped' | 'launching' | 'errored' | 'one-launch-status' | 'waiting restart';
 type Platform = 'ubuntu' | 'centos' | 'redhat' | 'gentoo' | 'systemd' | 'darwin' | 'amazon';
 
 type ErrCallback = (err: Error) => void;

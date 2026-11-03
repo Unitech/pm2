@@ -65,7 +65,7 @@
   "error_file": {
     "type": "string",
     "alias": ["error", "err", "err_file", "err_log"],
-    "docDefault": "~/.pm2/logs/<app_name>-error.err",
+    "docDefault": "~/.pm2/logs/<app_name>-error.log",
     "docDescription": "File path for stderr (each line is appended to this file)"
   },
   "log_file": {
@@ -208,7 +208,7 @@
   },
   "watch_delay": {
     "type": "number",
-    "docDefault": "True",
+    "docDefault": "0",
     "docDescription": "Restart delay on file change detected"
   },
   "watch": {
@@ -328,7 +328,7 @@
     "type": "boolean",
     "default": true,
     "docDefault": "True",
-    "docDescription": "Only kill the main process, not detached children"
+    "docDescription": "Kill the whole process tree, set to false to only kill the main process"
   },
   "port": {
     "type": "number",
