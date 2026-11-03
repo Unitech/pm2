@@ -189,8 +189,14 @@ $ pm2 logs --json         # JSON output
 $ pm2 logs --format       # Formatted output
 
 $ pm2 flush               # Flush all logs
+$ pm2 flush APP-NAME --out # Flush only stdout for APP-NAME
+$ pm2 flush APP-NAME --err # Flush only stderr for APP-NAME
 $ pm2 reloadLogs          # Reload all logs
 ```
+
+For `flush`, `--err` takes precedence when both `--out` and `--err` are supplied,
+as with `logs`. Selective flushing preserves the separate combined log file;
+if stdout and stderr share a file, selecting either stream clears that file.
 
 To enable log rotation install the following module
 

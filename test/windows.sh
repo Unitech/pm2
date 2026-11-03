@@ -65,6 +65,7 @@ runUnitTest $D/api.mocha.js
 runUnitTest $D/api.backward.compatibility.mocha.js
 runUnitTest $D/custom_action.mocha.js
 runUnitTest $D/logs.js
+runUnitTest $D/flush.mocha.js
 runUnitTest $D/watcher.js
 runUnitTest $D/brace_expansion.mocha.js
 runUnitTest $D/chokidar_vendored.mocha.js
