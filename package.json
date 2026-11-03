@@ -129,7 +129,6 @@
     "ansis": "4.0.0-node10",
     "anymatch": "3.1.3",
     "async": "3.2.6",
-    "cli-tableau": "2.0.1",
     "commander": "2.15.1",
     "croner": "4.1.97",
     "dayjs": "1.11.15",
@@ -156,6 +155,7 @@
   },
   "devDependencies": {
     "chokidar": "3.6.0",
+    "cli-tableau": "2.0.1",
     "express": "^4.21.0",
     "mocha": "^11.7.0",
     "should": "^13.2.3"

@@ -80,6 +80,7 @@ runUnitTest $D/dashboard_sanitize.mocha.js
 runUnitTest $D/watcher.js
 runUnitTest $D/brace_expansion.mocha.js
 runUnitTest $D/chokidar_vendored.mocha.js
+runUnitTest $D/cli_tableau_vendored.mocha.js
 runUnitTest $D/max_memory_limit.js
 runUnitTest $D/cluster.mocha.js
 runUnitTest $D/graceful.mocha.js

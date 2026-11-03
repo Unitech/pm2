@@ -1,3 +1,9 @@
+## 7.1.3
+
+### Bug Fixes
+
+- `cli-tableau` is now vendored in `modules/cli-tableau` with a prototype pollution fix (keymetrics/cli-tableau#13), dropping `chalk` and its 5 dependencies
+
 ## 7.1.2
 
 ### Bug Fixes
