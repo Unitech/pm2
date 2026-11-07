@@ -118,7 +118,7 @@ fpm --input-type dir --chdir $PACKAGE_TMPDIR \
     --name pm2 \
     --url https://pm2.io/ \
     --category 'Development/Languages' \
-    --license AGPLv3 \
+    --license MIT \
     --description '$(cat packager/debian/description)' \
     --vendor 'Keymetrics <tech@keymetrics.io>' \
     --maintainer 'Alexandre Strzelewicz <tech@keymetrics.io>' \
