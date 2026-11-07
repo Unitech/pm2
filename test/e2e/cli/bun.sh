@@ -29,4 +29,22 @@ sleep 1.5
 grep "Hello Typescript!" typescript.log
 spec "Should work on Typescript files in fork mode"
 
+########### cluster mode with --log-date-format keeps one entry per line
+$pm2 delete all
+
+>date-out.log
+>date-err.log
+
+$pm2 start echo-lines.ts -i 1 --log-date-format "YYYY" -o date-out.log -e date-err.log --merge-logs
+
+sleep 1.5
+
+[ "$(grep -c '^[0-9]\{4\}: line \(one\|two\)$' date-out.log)" -eq 2 ]
+spec "Should end each out log entry with a newline in cluster mode with --log-date-format"
+
+[ "$(grep -c '^[0-9]\{4\}: error \(one\|two\)$' date-err.log)" -eq 2 ]
+spec "Should end each error log entry with a newline in cluster mode with --log-date-format"
+
+rm -f date-out.log date-err.log
+
 $pm2 delete all
