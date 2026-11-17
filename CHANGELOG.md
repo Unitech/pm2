@@ -1,3 +1,67 @@
+## 7.1.2
+
+### Bug Fixes
+
+- `pm2 update` under a `pm2 startup` systemd unit no longer gets its new daemon and apps killed by `ExecStop=pm2 kill` (systemd >= 232) #5000
+- `filter_env: true` works again (ignored since 4.4.1): apps only inherit PATH, HOME, USER, locales and a few OS variables besides their `env` #6176
+- `filter_env` also applies to `--update-env` restart/reload and to cluster workers; `--filter-env` alone means `true` #6176
+- `pm2.disconnect()` no longer throws nor calls back twice when a socket takes more than 200ms to close
+- `pm2 start --container` uses `keymetrics/pm2:<node>-trixie` (was the 2018 `latest` image, and `--node-version` pointed to tags that do not exist)
+
+### Breaking change
+
+- `filter_env: true` apps no longer inherit other shell variables (NODE_ENV, NODE_OPTIONS, HTTP_PROXY...): declare them in `env` #6176
+- An app keeps the shell env it already received when the filter comes later (started before 7.1.2 or without `filter_env`, dump.pm2 included): `pm2 delete` it and start it again #6176
+
+## 7.1.1
+
+### Bug Fixes
+
+- Windows: memory is reported again when pm2 runs as a service (`pidusage` 4.1.0, wmic is used again when available) #6173
+- Linux: overlapping monitoring calls no longer leak a `/proc/<pid>/stat` fd per new pid in the daemon (grew with every restart)
+- `pm2.connect()` right after `pm2.disconnect()` no longer crashes with `Cannot read properties of null (reading 'sock')` #6002
+
+## 7.1.0
+
+### Features
+
+- `pm2 monit` / `pm2 dash` now preload the last 200 lines (out + err merged) of every process from its log files, most recent first; `--lines <n>` to display more #5187
+- `pm2 monit`: Ctrl+Up / Ctrl+Down (and PageUp / PageDown) scroll the focused log pane page by page
+
+### Bug Fixes
+
+- Shell environment variables named like a PM2 option (`name`, `namespace`, `cron_restart`, `instances`...) no longer override the app configuration #6006 #6016 #5747 #5622 #5030 #5032 #4943 #4778 #4821 #3210
+- Variables declared in `env:` and named like a PM2 option (`env: { port: 3000 }`, `time`, `watch`...) still reach the app: only the ambient shell environment is filtered, not what the user declares
+- Cluster mode: the pid list of the previous kill (`_tree_pids`, since 7.0.0) no longer leaks into the app's `process.env` after a restart, nor gets reused as the pid list of a later kill
+- `pm2 monit`: align the Custom Metrics pane in columns (value right-aligned, fixed unit column, numbers rounded to 2 decimals) and shorten long metric names instead of pushing values out of the pane
+- `pm2 monit`: the footer no longer overlaps the bottom border of the Custom Metrics / Metadata panes
+- `pm2 monit`: logs, metrics and metadata panes update instantly when the selected process changes (no longer wait for the next refresh tick)
+- `pm2 monit`: characters of old log lines no longer stay stuck on screen — emoji are now measured as 2 cells, and `\r`, cursor escape sequences, control chars and `{tags}` in logs are sanitized #5397
+- `@pm2/blessed` is now vendored in `modules/blessed` (one less npm dependency)
+- `chokidar` 3.6.0 is now vendored in `modules/chokidar` with a bounded brace expansion, dropping the vulnerable `braces` dependency (GHSA-vfj7-8cjw-p6xm, no patched version)
+- Logs: no more lost lines in fork mode with `--time` / `log_date_format` when an app writes more than 64KB at once (partial line at a pipe chunk boundary was dropped) #6125
+- Logs: in cluster mode with `--time`, every line of a multi-line write is now date-prefixed (not only the first)
+- `pm2 logs "/regex/" --lines 0` now streams matching apps (regex was ignored in stream-only mode); regexes with an inner `/` are no longer mangled, apps started after `pm2 logs` are picked up, and only one bus subscription is opened #5196
+- `pm2 reloadLogs` no longer crashes the app in fork mode when `out_file`/`error_file` are `NULL` and only `log_file` is set #5509
+- Logs: log streams are now flushed (`end()`) instead of destroyed on `pm2 reloadLogs` / app exit, so buffered data is no longer truncated
+- `pm2 serve`: a request with a malformed percent-escape (`GET /%`) no longer crashes the server (answers 400); handler exceptions answer 500 instead of killing the process
+- Logs: in cluster mode, output that bypasses `process.stdout.write` (pino/sonic-boom, `npm start`, children spawned with stdio `inherit`) no longer ends up in `pm2.log` — workers get piped stdio and the daemon routes it to the app log files and `pm2 logs` #3675 #4719 #4872 #4916 #4953 #5633 #4816
+- Logs: in cluster mode, the worker's stdout/stderr pipes are made blocking so a raw write bigger than the pipe buffer (`fs.writeSync(1, ...)`, native addons) is no longer silently truncated at 64 KB #4044 #4872
+- `exec_mode: cluster` on a non Node.js/Bun script (bash, python, binary) now falls back to fork mode with a warning instead of crashing with `SyntaxError: Invalid or unexpected token` (ELF) #4775
+- Node.js/Bun interpreter detection now accepts atypical binary names (`node.exe`, `node64.exe`, `nodejs`, `node18`, `node@18`, `bun.exe`), so cluster mode and the fork-mode wrapper are no longer skipped for them
+- Restart/stop on systems without `ps` (slim Docker images) no longer starts the app twice and crashes the daemon with `Callback was already called` #6171
+- TreeKill: no `ps` under Bun (synchronous spawn throw) falls back to killing the root pid
+- An online process without a pid (e.g. failed spawn) no longer makes pidusage fail for every app (`One of the pids provided is invalid` spam) #6134 #6135
+- Cluster mode with `uid`/`gid`: log files created by a root daemon are chowned to the app user (no more EACCES crash loop)
+- `pm2 reloadLogs` no longer crashes the daemon (`ERR_IPC_CHANNEL_CLOSED`) nor leaks fds when a cluster app is stopped, nor on concurrent calls
+- Explicit `exec_mode: cluster` is kept for JS/TS apps run by a custom interpreter (`tsx`, `ts-node`); fork fallback only for binaries and non-JS scripts/interpreters #4775
+- `pm2 serve`: null bytes answer 400 (`--spa` no longer crashes on `GET /x/%2500`), errors in async file handlers answer 500
+- Fork/cluster: log files are closed once the app stdout/stderr pipes are closed, no longer on the ChildProcess `close` that sometimes never comes on Linux (2 fds leaked per app stop/restart/delete)
+- Stale `_tree_pids` from a 7.0.0-7.0.4 dump no longer leaks into the app env nor gets an unrelated pid SIGKILLed on stop
+- PM2.io agent: `PM2_PROXY` support removed with the `proxy-agent` dependency (unused, broken since 7.0.0 with `ProxyAgent is not a constructor`; drops the vulnerable get-uri/basic-ftp chain)
+- Behavior change: shell variables named like a PM2 option (`port`, `time`, `watch`...) are no longer forwarded to fork mode apps; declare them in `env:`
+- `pm2 ls` host metrics: virtual interfaces and read-only mounts are hidden
+
 ## 7.0.4
 
 ### Features

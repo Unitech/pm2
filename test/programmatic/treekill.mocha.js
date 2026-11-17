@@ -170,6 +170,64 @@ describe('TreeKill', function () {
       })
     })
 
+    it('should call back once and kill the root pid when ps is missing (#6171)', function (done) {
+      var child = spawn('sleep', ['999'], { detached: true, stdio: 'ignore' })
+      var calls = 0
+
+      setTimeout(function () {
+        // spawn() resolves the binary synchronously: restore PATH right after
+        var path_env = process.env.PATH
+        process.env.PATH = '/nonexistent'
+        treekill(child.pid, 'SIGKILL', function (err) {
+          calls++
+          should(err).not.be.ok()
+        })
+        process.env.PATH = path_env
+
+        setTimeout(function () {
+          calls.should.eql(1)
+          checkAlive(child.pid).should.eql(false)
+          done()
+        }, 500)
+      }, 200)
+    })
+
+    it('should fall back to the root pid when spawn(ps) throws (Bun, no ps)', function (done) {
+      var child = spawn('sleep', ['999'], { detached: true, stdio: 'ignore' })
+      var cp = require('child_process')
+      var realSpawn = cp.spawn
+      var calls = 0
+      var threw = null
+
+      setTimeout(function () {
+        // Fresh copy loaded with the stub in place, whatever it captures
+        var modPath = require.resolve('../../lib/TreeKill')
+        delete require.cache[modPath]
+        cp.spawn = function () {
+          throw new Error('Executable not found in $PATH: "ps"')
+        }
+        try {
+          require(modPath)(child.pid, 'SIGKILL', function (err) {
+            calls++
+            should(err).not.be.ok()
+          })
+        } catch (e) {
+          threw = e
+        }
+        cp.spawn = realSpawn
+        delete require.cache[modPath]
+
+        setTimeout(function () {
+          var alive = checkAlive(child.pid)
+          if (alive) try { process.kill(child.pid, 'SIGKILL') } catch (e) {}
+          should(threw).be.null()
+          calls.should.eql(1)
+          alive.should.eql(false)
+          done()
+        }, 300)
+      }, 200)
+    })
+
     it('should complete in under 500ms for a normal tree', function (done) {
       var parent = spawn('bash', ['-c', 'sleep 999 & sleep 999 & sleep 999 & wait'], {
         detached: true,

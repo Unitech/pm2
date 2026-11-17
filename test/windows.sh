@@ -66,6 +66,8 @@ runUnitTest $D/api.backward.compatibility.mocha.js
 runUnitTest $D/custom_action.mocha.js
 runUnitTest $D/logs.js
 runUnitTest $D/watcher.js
+runUnitTest $D/brace_expansion.mocha.js
+runUnitTest $D/chokidar_vendored.mocha.js
 runUnitTest $D/max_memory_limit.js
 runUnitTest $D/cluster.mocha.js
 runUnitTest $D/graceful.mocha.js
@@ -83,6 +85,8 @@ runUnitTest $D/common.mocha.js
 runUnitTest $D/fclone.mocha.js
 runUnitTest $D/issues/json_env_passing_4080.mocha.js
 runUnitTest $D/issue_6106_windows_home.mocha.js
+runUnitTest $D/issue_6002_reconnect.mocha.js
+runUnitTest $D/service_stop.mocha.js
 
 D=test/interface
 

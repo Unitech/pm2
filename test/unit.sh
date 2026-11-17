@@ -62,6 +62,7 @@ runUnitTest $D/modules.mocha.js
 runUnitTest $D/instances.mocha.js
 runUnitTest $D/reload-locker.mocha.js
 runUnitTest $D/filter_env.mocha.js
+runUnitTest $D/env_override.mocha.js
 runUnitTest $D/resurect_state.mocha.js
 runUnitTest $D/programmatic.js
 runUnitTest $D/namespace.mocha.js
@@ -74,7 +75,11 @@ runUnitTest $D/exp_backoff_restart_delay.mocha.js
 runUnitTest $D/api.backward.compatibility.mocha.js
 runUnitTest $D/custom_action.mocha.js
 runUnitTest $D/logs.js
+runUnitTest $D/dashboard_log_history.mocha.js
+runUnitTest $D/dashboard_sanitize.mocha.js
 runUnitTest $D/watcher.js
+runUnitTest $D/brace_expansion.mocha.js
+runUnitTest $D/chokidar_vendored.mocha.js
 runUnitTest $D/max_memory_limit.js
 runUnitTest $D/cluster.mocha.js
 runUnitTest $D/graceful.mocha.js
@@ -99,10 +104,15 @@ runUnitTest $D/issues/json_env_passing_4080.mocha.js
 runUnitTest $D/issue_6106_windows_home.mocha.js
 runUnitTest $D/issue_5990_bun_substring_match.mocha.js
 runUnitTest $D/issue_6162_bun_top_level_await.mocha.js
+runUnitTest $D/interpreter_runtime.mocha.js
 runUnitTest $D/issue_6089_prototype_pollution.mocha.js
 runUnitTest $D/issue_6075_redos.mocha.js
 runUnitTest $D/issue_6073_object_env.mocha.js
+runUnitTest $D/issue_6002_reconnect.mocha.js
+runUnitTest $D/service_stop.mocha.js
 runUnitTest $D/treekill.mocha.js
+runUnitTest $D/cluster_log_lifecycle.mocha.js
+runUnitTest $D/stale_tree_pids.mocha.js
 runUnitTest $D/http_interface.mocha.js
 runUnitTest $D/sysmetrics.mocha.js
 

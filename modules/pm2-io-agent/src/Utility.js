@@ -3,9 +3,7 @@
 const os = require('os')
 const crypto = require('crypto')
 const dayjs = require('dayjs')
-const ProxyAgent = require('proxy-agent')
 const fclone = require('../../fclone')
-const cst = require('../constants.js')
 
 const interfaceType = {
   v4: {
@@ -342,8 +340,7 @@ class HTTPClient {
       path: parsedUrl.pathname + parsedUrl.search,
       port: parsedUrl.port,
       method: opts.method,
-      headers: opts.headers,
-      agent: cst.PROXY ? new ProxyAgent(cst.PROXY) : undefined
+      headers: opts.headers
     }
 
     if (opts.data) {

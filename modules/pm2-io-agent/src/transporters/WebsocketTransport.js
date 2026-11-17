@@ -1,7 +1,6 @@
 'use strict'
 
 const WebSocket = require('ws')
-const ProxyAgent = require('proxy-agent')
 const log = require('debug')('interactor:websocket')
 const cst = require('../../constants.js')
 const pkg = require('../../../../package.json')
@@ -59,8 +58,7 @@ module.exports = class WebsocketTransport extends Transporter {
         'X-PM2-VERSION': this.opts.PM2_VERSION || '0.0.0',
         'X-PROTOCOL-VERSION': cst.PROTOCOL_VERSION,
         'User-Agent': `PM2 Agent v${pkg.version}`
-      },
-      agent: cst.PROXY ? new ProxyAgent(cst.PROXY) : undefined
+      }
     })
 
     let onError = (err) => {

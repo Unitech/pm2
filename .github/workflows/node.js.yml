@@ -43,3 +43,16 @@ jobs:
     - name: Run tests (Node.js ${{ matrix.node-version }})
       shell: bash
       run: bash test/windows.sh
+
+  test-systemd:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - run: npm install
+    - name: Run pm2 update under a systemd unit (#5000)
+      run: bash test/systemd/update-under-unit.sh
