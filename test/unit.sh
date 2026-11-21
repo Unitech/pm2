@@ -59,6 +59,7 @@ D=test/programmatic
 
 runUnitTest $D/path_resolution.mocha.js
 runUnitTest $D/modules.mocha.js
+runUnitTest $D/module_tar_security.mocha.js
 runUnitTest $D/instances.mocha.js
 runUnitTest $D/reload-locker.mocha.js
 runUnitTest $D/filter_env.mocha.js
