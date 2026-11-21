@@ -17,7 +17,9 @@ var path   = require('path');
 var spawnSync = require('child_process').spawnSync;
 
 var PM2_BIN  = path.resolve(__dirname, '../../bin/pm2');
-var DUMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'pm2-6182-'));
+// Bun runs cluster workers without node execArgv
+var SKIP     = Boolean(process.versions.bun);
+var DUMP_DIR = SKIP ? null : fs.mkdtempSync(path.join(os.tmpdir(), 'pm2-6182-'));
 
 // one heap size per app: visible in process.execArgv, harmless to start with
 var APPS = [
@@ -72,12 +74,10 @@ function checkWorkers(done) {
 }
 
 describe('#6182 cluster workers keep the node_args of their app', function() {
-  this.timeout(30000);
+  // no hook either: the after() kill would start a daemon for nothing
+  if (SKIP) return;
 
-  // Bun runs cluster workers without node execArgv
-  before(function() {
-    if (process.versions.bun) this.skip();
-  });
+  this.timeout(30000);
 
   before(function(done) {
     PM2.delete('all', function() { done(); });

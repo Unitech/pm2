@@ -3,3 +3,4 @@
 bin/** eol=lf
 test/fixtures/** eol=lf
 modules/chokidar/** eol=lf
+modules/cli-tableau/** eol=lf
