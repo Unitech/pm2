@@ -4,6 +4,7 @@
 
 - `cli-tableau` is now vendored in `modules/cli-tableau` with a prototype pollution fix (keymetrics/cli-tableau#13), dropping `chalk` and its 5 dependencies
 - Cluster mode: apps started or reloaded together no longer give their workers each other's `node_args` (regression in 7.1.0) #6182
+- A stop, restart or reload of a `wait_ready` app still booting no longer starts it twice, and a stopped app with a restart delay no longer stays `waiting restart` #6178
 - `pm2.flush(cb)` without a process name now flushes all logs; TypeScript types fixed (`disconnect`, `restart`, `sendDataToProcessId`, `waiting restart` status)
 
 ## 7.1.2
